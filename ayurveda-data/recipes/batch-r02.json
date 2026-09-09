@@ -1,0 +1,4562 @@
+{
+  "formatVersion": "1.0",
+  "batch": "recipe-batch-r02",
+  "qualityState": "aiDraft",
+  "items": [
+    {
+      "id": "recipe.masoor-dal-tadka",
+      "name": "Masoor Dal Tadka",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomato, diced",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Rinse the red lentils; soak for 25 minutes and drain.",
+        "Simmer the pulse with turmeric and the diced tomato in the measured water until tender enough to mash easily.",
+        "Warm the ghee separately; let the cumin crackle, then stir in the ginger.",
+        "Fold the tempering into the cooked dal, add the rock salt, and simmer uncovered for five minutes.",
+        "Adjust to a ladleable consistency by stirring well, then rest covered briefly before serving."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Masoor Dal Tadka balances a thoroughly cooked pulse with a restrained aromatic tempering. Vata: serve moist with ghee. Pitta: reduce ginger and use coriander seed. Kapha: reduce fat and add black pepper if suitable.",
+      "provenance": [
+        "regional Indian dal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.toor-dal-lemon",
+      "name": "Lemon Toor Dal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro, chopped",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Rinse the toor dal; soak for 25 minutes and drain.",
+        "Simmer the pulse with turmeric in the measured water until tender enough to mash easily.",
+        "Warm the ghee separately; let the cumin crackle, then stir in the ginger.",
+        "Fold the tempering into the cooked dal, add the rock salt, and simmer uncovered for five minutes; take the pot off the heat and stir in the fresh lemon juice, chopped fresh cilantro.",
+        "Adjust to a ladleable consistency by stirring well, then rest covered briefly before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Fresh lemon is folded into this soft toor dal only after the pot leaves the heat. Vata: serve moist with ghee. Pitta: use half the lemon and emphasize cilantro. Kapha: use the full lemon and reduce ghee.",
+      "provenance": [
+        "regional Indian dal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.chana-dal-lauki",
+      "name": "Chana Dal with Bottle Gourd",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chana-dal",
+          "name": "Chana dal",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.bottle-gourd",
+          "name": "Bottle gourd, diced",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.asafoetida",
+          "name": "Asafoetida",
+          "grams": 0.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1300
+        }
+      ],
+      "steps": [
+        "Rinse the chana dal; soak for 45 minutes and drain.",
+        "Simmer the pulse with turmeric and the diced bottle gourd, asafoetida in the measured water until tender enough to mash easily.",
+        "Warm the ghee separately; let the cumin crackle, then stir in the ginger.",
+        "Fold the tempering into the cooked dal, add the rock salt, and simmer uncovered for five minutes.",
+        "Adjust to a ladleable consistency by stirring well, then rest covered briefly before serving."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chana Dal with Bottle Gourd balances a thoroughly cooked pulse with a restrained aromatic tempering. Vata: serve moist with ghee. Pitta: reduce ginger and use coriander seed. Kapha: reduce fat and add black pepper if suitable.",
+      "provenance": [
+        "regional Indian dal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.urad-dal-makhani-light",
+      "name": "Light Urad Dal (No Cream)",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 50,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Whole or split urad dal",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomato, diced",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.asafoetida",
+          "name": "Asafoetida",
+          "grams": 0.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1350
+        }
+      ],
+      "steps": [
+        "Rinse the urad dal; soak for 60 minutes and drain.",
+        "Simmer the pulse with turmeric and the diced tomato, asafoetida in the measured water until tender enough to mash easily.",
+        "Warm the ghee separately; let the cumin crackle, then stir in the ginger.",
+        "Fold the tempering into the cooked dal, add the rock salt, and simmer uncovered for five minutes.",
+        "Adjust to a ladleable consistency by stirring well, then rest covered briefly before serving."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "This urad dal is cooked until creamy from the pulse itself, without butter or cream. Vata: add a little ghee and cook very soft. Pitta: reduce tomato and ginger. Kapha: keep the stated light fat measure and take a small bowl.",
+      "provenance": [
+        "regional Indian dal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.panchmel-dal",
+      "name": "Panchmel Dal (Five-Lentil)",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.chana-dal",
+          "name": "Chana dal",
+          "grams": 50
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils",
+          "grams": 50
+        },
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 50
+        },
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Split urad dal",
+          "grams": 40
+        },
+        {
+          "dravyaId": "dravya.asafoetida",
+          "name": "Asafoetida",
+          "grams": 0.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1400
+        }
+      ],
+      "steps": [
+        "Rinse the five mixed dals; soak for 40 minutes and drain.",
+        "Simmer the pulse with turmeric and the chana dal, red lentils, toor dal, split urad dal, asafoetida in the measured water until tender enough to mash easily.",
+        "Warm the ghee separately; let the cumin crackle, then stir in the ginger.",
+        "Fold the tempering into the cooked dal, add the rock salt, and simmer uncovered for five minutes.",
+        "Adjust to a ladleable consistency by stirring well, then rest covered briefly before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Panchmel Dal (Five-Lentil) balances a thoroughly cooked pulse with a restrained aromatic tempering. Vata: serve moist with ghee. Pitta: reduce ginger and use coriander seed. Kapha: reduce fat and add black pepper if suitable.",
+      "provenance": [
+        "regional Indian dal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.simple-mung-dal",
+      "name": "Simple Yellow Mung Dal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Rinse the mung dal; soak for 25 minutes and drain.",
+        "Simmer the pulse with turmeric in the measured water until tender enough to mash easily.",
+        "Warm the ghee separately; let the cumin crackle, then stir in the ginger.",
+        "Fold the tempering into the cooked dal, add the rock salt, and simmer uncovered for five minutes.",
+        "Adjust to a ladleable consistency by stirring well, then rest covered briefly before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Simple Yellow Mung Dal balances a thoroughly cooked pulse with a restrained aromatic tempering. Vata: serve moist with ghee. Pitta: reduce ginger and use coriander seed. Kapha: reduce fat and add black pepper if suitable.",
+      "provenance": [
+        "regional Indian dal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.coriander-mung-dal",
+      "name": "Coriander Mung Dal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, crushed",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro, chopped",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Rinse the mung dal; soak for 25 minutes and drain.",
+        "Simmer the pulse with turmeric and the crushed coriander seeds in the measured water until tender enough to mash easily.",
+        "Warm the ghee separately; let the cumin crackle, then stir in the ginger.",
+        "Fold the tempering into the cooked dal, add the rock salt, and simmer uncovered for five minutes; take the pot off the heat and stir in the chopped fresh cilantro.",
+        "Adjust to a ladleable consistency by stirring well, then rest covered briefly before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -2,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Coriander Mung Dal balances a thoroughly cooked pulse with a restrained aromatic tempering. Vata: serve moist with ghee. Pitta: reduce ginger and use coriander seed. Kapha: reduce fat and add black pepper if suitable.",
+      "provenance": [
+        "regional Indian dal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.palak-mung-dal",
+      "name": "Palak Mung Dal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Rinse the mung dal; soak for 25 minutes and drain.",
+        "Simmer the pulse with turmeric and the chopped spinach in the measured water until tender enough to mash easily.",
+        "Warm the ghee separately; let the cumin crackle, then stir in the ginger.",
+        "Fold the tempering into the cooked dal, add the rock salt, and simmer uncovered for five minutes.",
+        "Adjust to a ladleable consistency by stirring well, then rest covered briefly before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "hemanta"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Palak Mung Dal balances a thoroughly cooked pulse with a restrained aromatic tempering. Vata: serve moist with ghee. Pitta: reduce ginger and use coriander seed. Kapha: reduce fat and add black pepper if suitable.",
+      "provenance": [
+        "regional Indian dal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.methi-mung-dal",
+      "name": "Fresh Methi Mung Dal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.methi-leaves",
+          "name": "Fenugreek leaves, chopped",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Rinse the mung dal; soak for 25 minutes and drain.",
+        "Simmer the pulse with turmeric and the chopped fenugreek leaves in the measured water until tender enough to mash easily.",
+        "Warm the ghee separately; let the cumin crackle, then stir in the ginger.",
+        "Fold the tempering into the cooked dal, add the rock salt, and simmer uncovered for five minutes.",
+        "Adjust to a ladleable consistency by stirring well, then rest covered briefly before serving."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Fresh Methi Mung Dal balances a thoroughly cooked pulse with a restrained aromatic tempering. Vata: serve moist with ghee. Pitta: reduce ginger and use coriander seed. Kapha: reduce fat and add black pepper if suitable.",
+      "provenance": [
+        "regional Indian dal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.lauki-mung-dal",
+      "name": "Bottle Gourd Mung Dal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.bottle-gourd",
+          "name": "Bottle gourd, diced",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Rinse the mung dal; soak for 25 minutes and drain.",
+        "Simmer the pulse with turmeric and the diced bottle gourd, fennel seeds in the measured water until tender enough to mash easily.",
+        "Warm the ghee separately; let the cumin crackle, then stir in the ginger.",
+        "Fold the tempering into the cooked dal, add the rock salt, and simmer uncovered for five minutes.",
+        "Adjust to a ladleable consistency by stirring well, then rest covered briefly before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -2,
+        "kapha": -1
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Bottle Gourd Mung Dal balances a thoroughly cooked pulse with a restrained aromatic tempering. Vata: serve moist with ghee. Pitta: reduce ginger and use coriander seed. Kapha: reduce fat and add black pepper if suitable.",
+      "provenance": [
+        "regional Indian dal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.pumpkin-mung-dal",
+      "name": "Pumpkin Mung Dal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 225
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Rinse the mung dal; soak for 25 minutes and drain.",
+        "Simmer the pulse with turmeric and the diced pumpkin, coriander seeds in the measured water until tender enough to mash easily.",
+        "Warm the ghee separately; let the cumin crackle, then stir in the ginger.",
+        "Fold the tempering into the cooked dal, add the rock salt, and simmer uncovered for five minutes.",
+        "Adjust to a ladleable consistency by stirring well, then rest covered briefly before serving."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin Mung Dal balances a thoroughly cooked pulse with a restrained aromatic tempering. Vata: serve moist with ghee. Pitta: reduce ginger and use coriander seed. Kapha: reduce fat and add black pepper if suitable.",
+      "provenance": [
+        "regional Indian dal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.carrot-mung-dal",
+      "name": "Carrot Mung Dal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Rinse the mung dal; soak for 25 minutes and drain.",
+        "Simmer the pulse with turmeric and the diced carrot, fennel seeds in the measured water until tender enough to mash easily.",
+        "Warm the ghee separately; let the cumin crackle, then stir in the ginger.",
+        "Fold the tempering into the cooked dal, add the rock salt, and simmer uncovered for five minutes.",
+        "Adjust to a ladleable consistency by stirring well, then rest covered briefly before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Carrot Mung Dal balances a thoroughly cooked pulse with a restrained aromatic tempering. Vata: serve moist with ghee. Pitta: reduce ginger and use coriander seed. Kapha: reduce fat and add black pepper if suitable.",
+      "provenance": [
+        "regional Indian dal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.beetroot-mung-dal",
+      "name": "Beetroot Mung Dal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, diced small",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Rinse the mung dal; soak for 25 minutes and drain.",
+        "Simmer the pulse with turmeric and the diced small beetroot, coriander seeds in the measured water until tender enough to mash easily.",
+        "Warm the ghee separately; let the cumin crackle, then stir in the ginger.",
+        "Fold the tempering into the cooked dal, add the rock salt, and simmer uncovered for five minutes.",
+        "Adjust to a ladleable consistency by stirring well, then rest covered briefly before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Beetroot Mung Dal balances a thoroughly cooked pulse with a restrained aromatic tempering. Vata: serve moist with ghee. Pitta: reduce ginger and use coriander seed. Kapha: reduce fat and add black pepper if suitable.",
+      "provenance": [
+        "regional Indian dal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.cabbage-mung-dal",
+      "name": "Cabbage Mung Dal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 225
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, finely sliced",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.asafoetida",
+          "name": "Asafoetida",
+          "grams": 0.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Rinse the mung dal; soak for 25 minutes and drain.",
+        "Simmer the pulse with turmeric and the finely sliced cabbage, asafoetida in the measured water until tender enough to mash easily.",
+        "Warm the ghee separately; let the cumin crackle, then stir in the ginger.",
+        "Fold the tempering into the cooked dal, add the rock salt, and simmer uncovered for five minutes.",
+        "Adjust to a ladleable consistency by stirring well, then rest covered briefly before serving."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cabbage Mung Dal balances a thoroughly cooked pulse with a restrained aromatic tempering. Vata: serve moist with ghee. Pitta: reduce ginger and use coriander seed. Kapha: reduce fat and add black pepper if suitable.",
+      "provenance": [
+        "regional Indian dal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.green-bean-mung-dal",
+      "name": "Green Bean Mung Dal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 225
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, sliced",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Rinse the mung dal; soak for 25 minutes and drain.",
+        "Simmer the pulse with turmeric and the sliced green beans in the measured water until tender enough to mash easily.",
+        "Warm the ghee separately; let the cumin crackle, then stir in the ginger.",
+        "Fold the tempering into the cooked dal, add the rock salt, and simmer uncovered for five minutes.",
+        "Adjust to a ladleable consistency by stirring well, then rest covered briefly before serving."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Green Bean Mung Dal balances a thoroughly cooked pulse with a restrained aromatic tempering. Vata: serve moist with ghee. Pitta: reduce ginger and use coriander seed. Kapha: reduce fat and add black pepper if suitable.",
+      "provenance": [
+        "regional Indian dal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.cumin-masoor-dal",
+      "name": "Cumin Masoor Dal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Additional cumin seeds, crushed",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Rinse the red lentils; soak for 25 minutes and drain.",
+        "Simmer the pulse with turmeric and the crushed additional cumin seeds in the measured water until tender enough to mash easily.",
+        "Warm the ghee separately; let the cumin crackle, then stir in the ginger.",
+        "Fold the tempering into the cooked dal, add the rock salt, and simmer uncovered for five minutes.",
+        "Adjust to a ladleable consistency by stirring well, then rest covered briefly before serving."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cumin Masoor Dal balances a thoroughly cooked pulse with a restrained aromatic tempering. Vata: serve moist with ghee. Pitta: reduce ginger and use coriander seed. Kapha: reduce fat and add black pepper if suitable.",
+      "provenance": [
+        "regional Indian dal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.tomato-masoor-dal",
+      "name": "Tomato Masoor Dal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomato, diced",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Rinse the red lentils; soak for 25 minutes and drain.",
+        "Simmer the pulse with turmeric and the diced tomato, coriander seeds in the measured water until tender enough to mash easily.",
+        "Warm the ghee separately; let the cumin crackle, then stir in the ginger.",
+        "Fold the tempering into the cooked dal, add the rock salt, and simmer uncovered for five minutes.",
+        "Adjust to a ladleable consistency by stirring well, then rest covered briefly before serving."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tomato Masoor Dal balances a thoroughly cooked pulse with a restrained aromatic tempering. Vata: serve moist with ghee. Pitta: reduce ginger and use coriander seed. Kapha: reduce fat and add black pepper if suitable.",
+      "provenance": [
+        "regional Indian dal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.spinach-masoor-dal",
+      "name": "Spinach Masoor Dal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils",
+          "grams": 235
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Rinse the red lentils; soak for 25 minutes and drain.",
+        "Simmer the pulse with turmeric and the chopped spinach in the measured water until tender enough to mash easily.",
+        "Warm the ghee separately; let the cumin crackle, then stir in the ginger.",
+        "Fold the tempering into the cooked dal, add the rock salt, and simmer uncovered for five minutes.",
+        "Adjust to a ladleable consistency by stirring well, then rest covered briefly before serving."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Spinach Masoor Dal balances a thoroughly cooked pulse with a restrained aromatic tempering. Vata: serve moist with ghee. Pitta: reduce ginger and use coriander seed. Kapha: reduce fat and add black pepper if suitable.",
+      "provenance": [
+        "regional Indian dal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.fennel-masoor-dal",
+      "name": "Fennel Masoor Dal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, crushed",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Rinse the red lentils; soak for 25 minutes and drain.",
+        "Simmer the pulse with turmeric and the crushed fennel seeds in the measured water until tender enough to mash easily.",
+        "Warm the ghee separately; let the cumin crackle, then stir in the ginger.",
+        "Fold the tempering into the cooked dal, add the rock salt, and simmer uncovered for five minutes.",
+        "Adjust to a ladleable consistency by stirring well, then rest covered briefly before serving."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Fennel Masoor Dal balances a thoroughly cooked pulse with a restrained aromatic tempering. Vata: serve moist with ghee. Pitta: reduce ginger and use coriander seed. Kapha: reduce fat and add black pepper if suitable.",
+      "provenance": [
+        "regional Indian dal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.tomato-toor-dal",
+      "name": "Tomato Toor Dal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 245
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomato, diced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Rinse the toor dal; soak for 25 minutes and drain.",
+        "Simmer the pulse with turmeric and the diced tomato, coriander seeds in the measured water until tender enough to mash easily.",
+        "Warm the ghee separately; let the cumin crackle, then stir in the ginger.",
+        "Fold the tempering into the cooked dal, add the rock salt, and simmer uncovered for five minutes.",
+        "Adjust to a ladleable consistency by stirring well, then rest covered briefly before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tomato Toor Dal balances a thoroughly cooked pulse with a restrained aromatic tempering. Vata: serve moist with ghee. Pitta: reduce ginger and use coriander seed. Kapha: reduce fat and add black pepper if suitable.",
+      "provenance": [
+        "regional Indian dal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.drumstick-toor-dal",
+      "name": "Drumstick Toor Dal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 225
+        },
+        {
+          "dravyaId": "dravya.drumstick",
+          "name": "Drumstick pods, cut into lengths",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Rinse the toor dal; soak for 25 minutes and drain.",
+        "Simmer the pulse with turmeric and the drumstick pods cut into lengths in the measured water until tender enough to mash easily.",
+        "Warm the ghee separately; let the cumin crackle, then stir in the ginger.",
+        "Fold the tempering into the cooked dal, add the rock salt, and simmer uncovered for five minutes.",
+        "Adjust to a ladleable consistency by stirring well, then rest covered briefly before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Drumstick Toor Dal balances a thoroughly cooked pulse with a restrained aromatic tempering. Vata: serve moist with ghee. Pitta: reduce ginger and use coriander seed. Kapha: reduce fat and add black pepper if suitable.",
+      "provenance": [
+        "regional Indian dal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.tamarind-toor-dal",
+      "name": "Tamarind Toor Dal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 245
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind water",
+          "grams": 35
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Rinse the toor dal; soak for 25 minutes and drain.",
+        "Simmer the pulse with turmeric in the measured water until tender enough to mash easily.",
+        "Warm the ghee separately; let the cumin crackle, then stir in the ginger.",
+        "Fold the tempering into the cooked dal, add the rock salt, and simmer uncovered for five minutes; take the pot off the heat and stir in the tamarind water, fresh cilantro.",
+        "Adjust to a ladleable consistency by stirring well, then rest covered briefly before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tamarind water gives this toor dal a clear sour finish and is added near the end. Vata: serve with soft rice and ghee. Pitta: halve the tamarind and avoid chilies. Kapha: retain the tartness and reduce ghee.",
+      "provenance": [
+        "regional Indian dal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.green-bean-toor-dal",
+      "name": "Green Bean Toor Dal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 225
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, sliced",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Rinse the toor dal; soak for 25 minutes and drain.",
+        "Simmer the pulse with turmeric and the sliced green beans in the measured water until tender enough to mash easily.",
+        "Warm the ghee separately; let the cumin crackle, then stir in the ginger.",
+        "Fold the tempering into the cooked dal, add the rock salt, and simmer uncovered for five minutes.",
+        "Adjust to a ladleable consistency by stirring well, then rest covered briefly before serving."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Green Bean Toor Dal balances a thoroughly cooked pulse with a restrained aromatic tempering. Vata: serve moist with ghee. Pitta: reduce ginger and use coriander seed. Kapha: reduce fat and add black pepper if suitable.",
+      "provenance": [
+        "regional Indian dal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.ash-gourd-chana-dal",
+      "name": "Ash Gourd Chana Dal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chana-dal",
+          "name": "Chana dal",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.ash-gourd",
+          "name": "Ash gourd, diced",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Rinse the chana dal; soak for 45 minutes and drain.",
+        "Simmer the pulse with turmeric and the diced ash gourd, fennel seeds in the measured water until tender enough to mash easily.",
+        "Warm the ghee separately; let the cumin crackle, then stir in the ginger.",
+        "Fold the tempering into the cooked dal, add the rock salt, and simmer uncovered for five minutes.",
+        "Adjust to a ladleable consistency by stirring well, then rest covered briefly before serving."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": -1
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ash Gourd Chana Dal balances a thoroughly cooked pulse with a restrained aromatic tempering. Vata: serve moist with ghee. Pitta: reduce ginger and use coriander seed. Kapha: reduce fat and add black pepper if suitable.",
+      "provenance": [
+        "regional Indian dal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.pumpkin-chana-dal",
+      "name": "Pumpkin Chana Dal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chana-dal",
+          "name": "Chana dal",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.asafoetida",
+          "name": "Asafoetida",
+          "grams": 0.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Rinse the chana dal; soak for 45 minutes and drain.",
+        "Simmer the pulse with turmeric and the diced pumpkin, asafoetida in the measured water until tender enough to mash easily.",
+        "Warm the ghee separately; let the cumin crackle, then stir in the ginger.",
+        "Fold the tempering into the cooked dal, add the rock salt, and simmer uncovered for five minutes.",
+        "Adjust to a ladleable consistency by stirring well, then rest covered briefly before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin Chana Dal balances a thoroughly cooked pulse with a restrained aromatic tempering. Vata: serve moist with ghee. Pitta: reduce ginger and use coriander seed. Kapha: reduce fat and add black pepper if suitable.",
+      "provenance": [
+        "regional Indian dal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.brown-lentil-warming-soup",
+      "name": "Warming Brown Lentil Soup",
+      "category": "classical",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-lentil",
+          "name": "Brown lentils",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.garlic",
+          "name": "Garlic, sliced",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1400
+        }
+      ],
+      "steps": [
+        "Wash and cut the brown lentils and diced carrot and sliced garlic into even pieces so they cook at the same pace.",
+        "Warm the ghee; bloom the cumin and ginger without browning.",
+        "Add the prepared ingredients and water, bring to a boil, then simmer until everything is fully tender.",
+        "Blend or mash just enough to make a light, unified soup; return it to low heat and add the rock salt.",
+        "Rest covered for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": -2
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Brown lentils, garlic, and cumin make this a warming winter pulse soup. Vata: cook very soft and add ghee. Pitta: omit garlic and add coriander seed. Kapha: retain the warming spices and light texture.",
+      "provenance": [
+        "North Indian winter pulse-soup tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.tomato-rasam-light",
+      "name": "Light Tomato Rasam",
+      "category": "classical",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Ripe tomato, chopped",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 10
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the toor dal and simmer it in part of the water until soft; whisk it into a thin suspension.",
+        "Crush the cumin and black pepper coarsely, keeping the mixture textured rather than powdered.",
+        "Add the tamarind, chopped ripe tomato, fresh cilantro, turmeric, salt, and remaining water; simmer until the raw sour aroma softens.",
+        "Stir in the dal liquid and heat only until the surface becomes foamy, without a prolonged hard boil.",
+        "Warm the ghee, pop the mustard seeds, and crisp the curry leaves; pour this tempering over the rasam before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Light Tomato Rasam is a thin, sour-spiced broth intended for a modest portion. Vata: pair with soft rice and extra ghee. Pitta: reduce pepper and tamarind. Kapha: use the full pepper measure and little added fat.",
+      "provenance": [
+        "South Indian rasam tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.pepper-rasam",
+      "name": "Pepper Rasam (Milagu)",
+      "category": "classical",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.garlic",
+          "name": "Garlic, lightly crushed",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 10
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the toor dal and simmer it in part of the water until soft; whisk it into a thin suspension.",
+        "Crush the cumin and black pepper coarsely, keeping the mixture textured rather than powdered.",
+        "Add the tamarind, lightly crushed garlic, turmeric, salt, and remaining water; simmer until the raw sour aroma softens.",
+        "Stir in the dal liquid and heat only until the surface becomes foamy, without a prolonged hard boil.",
+        "Warm the ghee, pop the mustard seeds, and crisp the curry leaves; pour this tempering over the rasam before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": -2
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pepper Rasam (Milagu) is a thin, sour-spiced broth intended for a modest portion. Vata: pair with soft rice and extra ghee. Pitta: reduce pepper and tamarind. Kapha: use the full pepper measure and little added fat.",
+      "provenance": [
+        "South Indian rasam tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.cumin-coriander-rasam",
+      "name": "Cumin-Coriander Rasam",
+      "category": "classical",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, crushed",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 10
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the toor dal and simmer it in part of the water until soft; whisk it into a thin suspension.",
+        "Crush the cumin and black pepper coarsely, keeping the mixture textured rather than powdered.",
+        "Add the tamarind, crushed coriander seeds, fresh cilantro, turmeric, salt, and remaining water; simmer until the raw sour aroma softens.",
+        "Stir in the dal liquid and heat only until the surface becomes foamy, without a prolonged hard boil.",
+        "Warm the ghee, pop the mustard seeds, and crisp the curry leaves; pour this tempering over the rasam before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cumin-Coriander Rasam is a thin, sour-spiced broth intended for a modest portion. Vata: pair with soft rice and extra ghee. Pitta: reduce pepper and tamarind. Kapha: use the full pepper measure and little added fat.",
+      "provenance": [
+        "South Indian rasam tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.lemon-rasam",
+      "name": "Lemon Rasam",
+      "category": "classical",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Thin lemon zest strips",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 10
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the toor dal and simmer it in part of the water until soft; whisk it into a thin suspension.",
+        "Crush the cumin and black pepper coarsely, keeping the mixture textured rather than powdered.",
+        "Add the tamarind, thin lemon zest strips, fresh cilantro, turmeric, salt, and remaining water; simmer until the raw sour aroma softens.",
+        "Stir in the dal liquid and heat only until the surface becomes foamy, without a prolonged hard boil.",
+        "Warm the ghee, pop the mustard seeds, and crisp the curry leaves; pour this tempering over the rasam before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Lemon Rasam is a thin, sour-spiced broth intended for a modest portion. Vata: pair with soft rice and extra ghee. Pitta: reduce pepper and tamarind. Kapha: use the full pepper measure and little added fat.",
+      "provenance": [
+        "South Indian rasam tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.garlic-pepper-rasam",
+      "name": "Garlic Pepper Rasam",
+      "category": "classical",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.garlic",
+          "name": "Garlic, crushed",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 10
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the toor dal and simmer it in part of the water until soft; whisk it into a thin suspension.",
+        "Crush the cumin and black pepper coarsely, keeping the mixture textured rather than powdered.",
+        "Add the tamarind, crushed garlic, turmeric, salt, and remaining water; simmer until the raw sour aroma softens.",
+        "Stir in the dal liquid and heat only until the surface becomes foamy, without a prolonged hard boil.",
+        "Warm the ghee, pop the mustard seeds, and crisp the curry leaves; pour this tempering over the rasam before serving."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 1,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Garlic Pepper Rasam is a thin, sour-spiced broth intended for a modest portion. Vata: pair with soft rice and extra ghee. Pitta: reduce pepper and tamarind. Kapha: use the full pepper measure and little added fat.",
+      "provenance": [
+        "South Indian rasam tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.coriander-leaf-rasam",
+      "name": "Coriander Leaf Rasam",
+      "category": "classical",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro, chopped",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 10
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the toor dal and simmer it in part of the water until soft; whisk it into a thin suspension.",
+        "Crush the cumin and black pepper coarsely, keeping the mixture textured rather than powdered.",
+        "Add the tamarind, chopped fresh cilantro, coriander seeds, turmeric, salt, and remaining water; simmer until the raw sour aroma softens.",
+        "Stir in the dal liquid and heat only until the surface becomes foamy, without a prolonged hard boil.",
+        "Warm the ghee, pop the mustard seeds, and crisp the curry leaves; pour this tempering over the rasam before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Coriander Leaf Rasam is a thin, sour-spiced broth intended for a modest portion. Vata: pair with soft rice and extra ghee. Pitta: reduce pepper and tamarind. Kapha: use the full pepper measure and little added fat.",
+      "provenance": [
+        "South Indian rasam tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.fenugreek-rasam",
+      "name": "Fenugreek Rasam",
+      "category": "classical",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.fenugreek-seed",
+          "name": "Fenugreek seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 10
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the toor dal and simmer it in part of the water until soft; whisk it into a thin suspension.",
+        "Crush the cumin and black pepper coarsely, keeping the mixture textured rather than powdered.",
+        "Add the tamarind, fenugreek seeds, fresh cilantro, turmeric, salt, and remaining water; simmer until the raw sour aroma softens.",
+        "Stir in the dal liquid and heat only until the surface becomes foamy, without a prolonged hard boil.",
+        "Warm the ghee, pop the mustard seeds, and crisp the curry leaves; pour this tempering over the rasam before serving."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Fenugreek Rasam is a thin, sour-spiced broth intended for a modest portion. Vata: pair with soft rice and extra ghee. Pitta: reduce pepper and tamarind. Kapha: use the full pepper measure and little added fat.",
+      "provenance": [
+        "South Indian rasam tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.ginger-rasam",
+      "name": "Fresh Ginger Rasam",
+      "category": "classical",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, julienned",
+          "grams": 10
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 10
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the toor dal and simmer it in part of the water until soft; whisk it into a thin suspension.",
+        "Crush the cumin and black pepper coarsely, keeping the mixture textured rather than powdered.",
+        "Add the tamarind, julienned fresh ginger, fresh cilantro, turmeric, salt, and remaining water; simmer until the raw sour aroma softens.",
+        "Stir in the dal liquid and heat only until the surface becomes foamy, without a prolonged hard boil.",
+        "Warm the ghee, pop the mustard seeds, and crisp the curry leaves; pour this tempering over the rasam before serving."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 1,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Fresh Ginger Rasam is a thin, sour-spiced broth intended for a modest portion. Vata: pair with soft rice and extra ghee. Pitta: reduce pepper and tamarind. Kapha: use the full pepper measure and little added fat.",
+      "provenance": [
+        "South Indian rasam tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.mint-rasam",
+      "name": "Mint Rasam",
+      "category": "classical",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint leaves",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 10
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 10
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the toor dal and simmer it in part of the water until soft; whisk it into a thin suspension.",
+        "Crush the cumin and black pepper coarsely, keeping the mixture textured rather than powdered.",
+        "Add the tamarind, fresh mint leaves, fresh cilantro, turmeric, salt, and remaining water; simmer until the raw sour aroma softens.",
+        "Stir in the dal liquid and heat only until the surface becomes foamy, without a prolonged hard boil.",
+        "Warm the ghee, pop the mustard seeds, and crisp the curry leaves; pour this tempering over the rasam before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "grishma",
+        "varsha"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mint Rasam is a thin, sour-spiced broth intended for a modest portion. Vata: pair with soft rice and extra ghee. Pitta: reduce pepper and tamarind. Kapha: use the full pepper measure and little added fat.",
+      "provenance": [
+        "South Indian rasam tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.carrot-rasam",
+      "name": "Carrot Rasam",
+      "category": "classical",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, finely diced",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 10
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the toor dal and simmer it in part of the water until soft; whisk it into a thin suspension.",
+        "Crush the cumin and black pepper coarsely, keeping the mixture textured rather than powdered.",
+        "Add the tamarind, finely diced carrot, coriander seeds, turmeric, salt, and remaining water; simmer until the raw sour aroma softens.",
+        "Stir in the dal liquid and heat only until the surface becomes foamy, without a prolonged hard boil.",
+        "Warm the ghee, pop the mustard seeds, and crisp the curry leaves; pour this tempering over the rasam before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Carrot Rasam is a thin, sour-spiced broth intended for a modest portion. Vata: pair with soft rice and extra ghee. Pitta: reduce pepper and tamarind. Kapha: use the full pepper measure and little added fat.",
+      "provenance": [
+        "South Indian rasam tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.lauki-soup",
+      "name": "Bottle Gourd Soup",
+      "category": "classical",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.bottle-gourd",
+          "name": "Bottle gourd, diced",
+          "grams": 520
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Wash and cut the diced bottle gourd and fennel seeds into even pieces so they cook at the same pace.",
+        "Warm the ghee; bloom the cumin without browning.",
+        "Add the prepared ingredients and water, bring to a boil, then simmer until everything is fully tender.",
+        "Blend or mash just enough to make a light, unified soup; return it to low heat and add the rock salt.",
+        "Rest covered for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Bottle Gourd Soup is kept lightly seasoned and smoothly cooked. Vata: add ghee and avoid serving it cold. Pitta: use fennel or coriander in place of extra ginger. Kapha: leave some texture and keep the fat modest.",
+      "provenance": [
+        "Ayurvedic-influenced Indian vegetable soup tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.barley-vegetable-soup",
+      "name": "Barley Vegetable Soup",
+      "category": "classical",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.celery",
+          "name": "Celery, sliced",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1350
+        }
+      ],
+      "steps": [
+        "Wash and cut the pearled barley and diced carrot and sliced celery into even pieces so they cook at the same pace.",
+        "Warm the ghee; bloom the cumin and ginger without browning.",
+        "Add the prepared ingredients and water, bring to a boil, then simmer until everything is fully tender.",
+        "Blend or mash just enough to make a light, unified soup; return it to low heat and add the rock salt.",
+        "Rest covered for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Barley Vegetable Soup is kept lightly seasoned and smoothly cooked. Vata: add ghee and avoid serving it cold. Pitta: use fennel or coriander in place of extra ginger. Kapha: leave some texture and keep the fat modest.",
+      "provenance": [
+        "Ayurvedic-influenced Indian vegetable soup tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.carrot-mung-soup",
+      "name": "Carrot Mung Soup",
+      "category": "classical",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1350
+        }
+      ],
+      "steps": [
+        "Wash and cut the split mung dal and diced carrot and coriander seeds into even pieces so they cook at the same pace.",
+        "Warm the ghee; bloom the cumin and ginger without browning.",
+        "Add the prepared ingredients and water, bring to a boil, then simmer until everything is fully tender.",
+        "Blend or mash just enough to make a light, unified soup; return it to low heat and add the rock salt.",
+        "Rest covered for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Carrot Mung Soup is kept lightly seasoned and smoothly cooked. Vata: add ghee and avoid serving it cold. Pitta: use fennel or coriander in place of extra ginger. Kapha: leave some texture and keep the fat modest.",
+      "provenance": [
+        "Ayurvedic-influenced Indian vegetable soup tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.pumpkin-mung-soup",
+      "name": "Pumpkin Mung Soup",
+      "category": "classical",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 145
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1350
+        }
+      ],
+      "steps": [
+        "Wash and cut the split mung dal and diced pumpkin and fennel seeds into even pieces so they cook at the same pace.",
+        "Warm the ghee; bloom the cumin and ginger without browning.",
+        "Add the prepared ingredients and water, bring to a boil, then simmer until everything is fully tender.",
+        "Blend or mash just enough to make a light, unified soup; return it to low heat and add the rock salt.",
+        "Rest covered for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin Mung Soup is kept lightly seasoned and smoothly cooked. Vata: add ghee and avoid serving it cold. Pitta: use fennel or coriander in place of extra ginger. Kapha: leave some texture and keep the fat modest.",
+      "provenance": [
+        "Ayurvedic-influenced Indian vegetable soup tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.ash-gourd-coriander-soup",
+      "name": "Ash Gourd Coriander Soup",
+      "category": "classical",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.ash-gourd",
+          "name": "Ash gourd, diced",
+          "grams": 480
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Wash and cut the diced ash gourd and coriander seeds and fresh cilantro into even pieces so they cook at the same pace.",
+        "Warm the ghee; bloom the cumin without browning.",
+        "Add the prepared ingredients and water, bring to a boil, then simmer until everything is fully tender.",
+        "Blend or mash just enough to make a light, unified soup; return it to low heat and add the rock salt.",
+        "Rest covered for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": -1
+      },
+      "seasons": [
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ash Gourd Coriander Soup is kept lightly seasoned and smoothly cooked. Vata: add ghee and avoid serving it cold. Pitta: use fennel or coriander in place of extra ginger. Kapha: leave some texture and keep the fat modest.",
+      "provenance": [
+        "Ayurvedic-influenced Indian vegetable soup tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.classic-vegetable-sambar",
+      "name": "Classic Mixed Vegetable Sambar",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.fenugreek-seed",
+          "name": "Fenugreek seeds",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1400
+        }
+      ],
+      "steps": [
+        "Rinse and soak the toor dal for 25 minutes, then simmer it with turmeric until collapsing-soft.",
+        "Toast the coriander, cumin, and fenugreek gently; cool and grind them to a coarse sambar spice.",
+        "Cook the diced carrot and green beans cut and diced pumpkin in the tamarind water until just tender.",
+        "Whisk the dal, combine it with the vegetables and ground spice, add salt, and simmer for eight minutes.",
+        "Warm the ghee, pop the mustard seeds, and crisp the curry leaves; fold this tempering through and serve while the vegetables still hold their shape."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Classic Mixed Vegetable Sambar combines soft toor dal, vegetables, tamarind, and a freshly toasted spice blend. Vata: serve with soft rice and a little more ghee. Pitta: use less tamarind and fenugreek. Kapha: favor a vegetable-heavy bowl and reduce ghee.",
+      "provenance": [
+        "South Indian sambar tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.drumstick-sambar",
+      "name": "Drumstick Sambar",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.drumstick",
+          "name": "Drumstick pods, cut into lengths",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomato, chopped",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.fenugreek-seed",
+          "name": "Fenugreek seeds",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1400
+        }
+      ],
+      "steps": [
+        "Rinse and soak the toor dal for 25 minutes, then simmer it with turmeric until collapsing-soft.",
+        "Toast the coriander, cumin, and fenugreek gently; cool and grind them to a coarse sambar spice.",
+        "Cook the drumstick pods cut into lengths and chopped tomato in the tamarind water until just tender.",
+        "Whisk the dal, combine it with the vegetables and ground spice, add salt, and simmer for eight minutes.",
+        "Warm the ghee, pop the mustard seeds, and crisp the curry leaves; fold this tempering through and serve while the vegetables still hold their shape."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Drumstick Sambar combines soft toor dal, vegetables, tamarind, and a freshly toasted spice blend. Vata: serve with soft rice and a little more ghee. Pitta: use less tamarind and fenugreek. Kapha: favor a vegetable-heavy bowl and reduce ghee.",
+      "provenance": [
+        "South Indian sambar tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.pumpkin-sambar",
+      "name": "Pumpkin Sambar",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomato, chopped",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.fenugreek-seed",
+          "name": "Fenugreek seeds",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1400
+        }
+      ],
+      "steps": [
+        "Rinse and soak the toor dal for 25 minutes, then simmer it with turmeric until collapsing-soft.",
+        "Toast the coriander, cumin, and fenugreek gently; cool and grind them to a coarse sambar spice.",
+        "Cook the diced pumpkin and chopped tomato in the tamarind water until just tender.",
+        "Whisk the dal, combine it with the vegetables and ground spice, add salt, and simmer for eight minutes.",
+        "Warm the ghee, pop the mustard seeds, and crisp the curry leaves; fold this tempering through and serve while the vegetables still hold their shape."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin Sambar combines soft toor dal, vegetables, tamarind, and a freshly toasted spice blend. Vata: serve with soft rice and a little more ghee. Pitta: use less tamarind and fenugreek. Kapha: favor a vegetable-heavy bowl and reduce ghee.",
+      "provenance": [
+        "South Indian sambar tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.bottle-gourd-sambar",
+      "name": "Bottle Gourd Sambar",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.bottle-gourd",
+          "name": "Bottle gourd, diced",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomato, chopped",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.fenugreek-seed",
+          "name": "Fenugreek seeds",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1400
+        }
+      ],
+      "steps": [
+        "Rinse and soak the toor dal for 25 minutes, then simmer it with turmeric until collapsing-soft.",
+        "Toast the coriander, cumin, and fenugreek gently; cool and grind them to a coarse sambar spice.",
+        "Cook the diced bottle gourd and chopped tomato in the tamarind water until just tender.",
+        "Whisk the dal, combine it with the vegetables and ground spice, add salt, and simmer for eight minutes.",
+        "Warm the ghee, pop the mustard seeds, and crisp the curry leaves; fold this tempering through and serve while the vegetables still hold their shape."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Bottle Gourd Sambar combines soft toor dal, vegetables, tamarind, and a freshly toasted spice blend. Vata: serve with soft rice and a little more ghee. Pitta: use less tamarind and fenugreek. Kapha: favor a vegetable-heavy bowl and reduce ghee.",
+      "provenance": [
+        "South Indian sambar tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.green-bean-carrot-sambar",
+      "name": "Green Bean Carrot Sambar",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.fenugreek-seed",
+          "name": "Fenugreek seeds",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1400
+        }
+      ],
+      "steps": [
+        "Rinse and soak the toor dal for 25 minutes, then simmer it with turmeric until collapsing-soft.",
+        "Toast the coriander, cumin, and fenugreek gently; cool and grind them to a coarse sambar spice.",
+        "Cook the green beans cut and diced carrot in the tamarind water until just tender.",
+        "Whisk the dal, combine it with the vegetables and ground spice, add salt, and simmer for eight minutes.",
+        "Warm the ghee, pop the mustard seeds, and crisp the curry leaves; fold this tempering through and serve while the vegetables still hold their shape."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Green Bean Carrot Sambar combines soft toor dal, vegetables, tamarind, and a freshly toasted spice blend. Vata: serve with soft rice and a little more ghee. Pitta: use less tamarind and fenugreek. Kapha: favor a vegetable-heavy bowl and reduce ghee.",
+      "provenance": [
+        "South Indian sambar tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.cabbage-sambar",
+      "name": "Cabbage Sambar",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, chopped",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomato, chopped",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.fenugreek-seed",
+          "name": "Fenugreek seeds",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1400
+        }
+      ],
+      "steps": [
+        "Rinse and soak the toor dal for 25 minutes, then simmer it with turmeric until collapsing-soft.",
+        "Toast the coriander, cumin, and fenugreek gently; cool and grind them to a coarse sambar spice.",
+        "Cook the chopped cabbage and chopped tomato in the tamarind water until just tender.",
+        "Whisk the dal, combine it with the vegetables and ground spice, add salt, and simmer for eight minutes.",
+        "Warm the ghee, pop the mustard seeds, and crisp the curry leaves; fold this tempering through and serve while the vegetables still hold their shape."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cabbage Sambar combines soft toor dal, vegetables, tamarind, and a freshly toasted spice blend. Vata: serve with soft rice and a little more ghee. Pitta: use less tamarind and fenugreek. Kapha: favor a vegetable-heavy bowl and reduce ghee.",
+      "provenance": [
+        "South Indian sambar tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.spinach-sambar",
+      "name": "Spinach Sambar",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomato, chopped",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.fenugreek-seed",
+          "name": "Fenugreek seeds",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1400
+        }
+      ],
+      "steps": [
+        "Rinse and soak the toor dal for 25 minutes, then simmer it with turmeric until collapsing-soft.",
+        "Toast the coriander, cumin, and fenugreek gently; cool and grind them to a coarse sambar spice.",
+        "Cook the chopped spinach and chopped tomato in the tamarind water until just tender.",
+        "Whisk the dal, combine it with the vegetables and ground spice, add salt, and simmer for eight minutes.",
+        "Warm the ghee, pop the mustard seeds, and crisp the curry leaves; fold this tempering through and serve while the vegetables still hold their shape."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Spinach Sambar combines soft toor dal, vegetables, tamarind, and a freshly toasted spice blend. Vata: serve with soft rice and a little more ghee. Pitta: use less tamarind and fenugreek. Kapha: favor a vegetable-heavy bowl and reduce ghee.",
+      "provenance": [
+        "South Indian sambar tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.radish-sambar",
+      "name": "Radish Sambar",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.radish",
+          "name": "Radish, sliced",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomato, chopped",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.fenugreek-seed",
+          "name": "Fenugreek seeds",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1400
+        }
+      ],
+      "steps": [
+        "Rinse and soak the toor dal for 25 minutes, then simmer it with turmeric until collapsing-soft.",
+        "Toast the coriander, cumin, and fenugreek gently; cool and grind them to a coarse sambar spice.",
+        "Cook the sliced radish and chopped tomato in the tamarind water until just tender.",
+        "Whisk the dal, combine it with the vegetables and ground spice, add salt, and simmer for eight minutes.",
+        "Warm the ghee, pop the mustard seeds, and crisp the curry leaves; fold this tempering through and serve while the vegetables still hold their shape."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": -2
+      },
+      "seasons": [
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Radish Sambar combines soft toor dal, vegetables, tamarind, and a freshly toasted spice blend. Vata: serve with soft rice and a little more ghee. Pitta: use less tamarind and fenugreek. Kapha: favor a vegetable-heavy bowl and reduce ghee.",
+      "provenance": [
+        "South Indian sambar tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.sweet-potato-sambar",
+      "name": "Sweet Potato Sambar",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, diced",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.fenugreek-seed",
+          "name": "Fenugreek seeds",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1400
+        }
+      ],
+      "steps": [
+        "Rinse and soak the toor dal for 25 minutes, then simmer it with turmeric until collapsing-soft.",
+        "Toast the coriander, cumin, and fenugreek gently; cool and grind them to a coarse sambar spice.",
+        "Cook the diced sweet potato and green beans cut in the tamarind water until just tender.",
+        "Whisk the dal, combine it with the vegetables and ground spice, add salt, and simmer for eight minutes.",
+        "Warm the ghee, pop the mustard seeds, and crisp the curry leaves; fold this tempering through and serve while the vegetables still hold their shape."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sweet Potato Sambar combines soft toor dal, vegetables, tamarind, and a freshly toasted spice blend. Vata: serve with soft rice and a little more ghee. Pitta: use less tamarind and fenugreek. Kapha: favor a vegetable-heavy bowl and reduce ghee.",
+      "provenance": [
+        "South Indian sambar tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    }
+  ]
+}

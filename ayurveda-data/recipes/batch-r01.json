@@ -1,0 +1,4127 @@
+{
+  "formatVersion": "1.0",
+  "batch": "recipe-batch-r01",
+  "qualityState": "aiDraft",
+  "items": [
+    {
+      "id": "recipe.classic-mung-kitchari",
+      "name": "Classic Mung Kitchari",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1450
+        }
+      ],
+      "steps": [
+        "Rinse the rice and mung dal until the draining water is mostly clear; soak for 20 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "This soft rice-and-mung kitchari is balanced for regular use when appetite is steady. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.vata-soothing-kitchari",
+      "name": "Vata-Soothing Mung Kitchari",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.asafoetida",
+          "name": "Asafoetida",
+          "grams": 0.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1450
+        }
+      ],
+      "steps": [
+        "Rinse the rice and mung dal until the draining water is mostly clear; soak for 20 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains and the prepared fennel seeds, asafoetida; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "A softer texture, generous ghee, fennel, and asafoetida make this the vata-oriented version. Vata: serve very soft with the full ghee measure. Pitta: reduce ginger if heat is unwelcome. Kapha: reduce ghee and use a smaller bowl.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.pitta-cooling-kitchari",
+      "name": "Pitta-Cooling Coriander Kitchari",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1450
+        }
+      ],
+      "steps": [
+        "Rinse the rice and mung dal until the draining water is mostly clear; soak for 20 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin and turmeric just until fragrant.",
+        "Add the drained grains and the prepared coriander seeds, fennel seeds, fresh cilantro; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Coriander and fennel keep this mild kitchari oriented toward pitta balance. Vata: add a little extra ghee. Pitta: keep the seasoning exactly mild and omit pepper. Kapha: reduce ghee and serve at midday.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.kapha-light-barley-kitchari",
+      "name": "Kapha-Light Barley Mung Kitchari",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.fenugreek-seed",
+          "name": "Fenugreek seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-dry",
+          "name": "Dry ginger",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1550
+        }
+      ],
+      "steps": [
+        "Rinse the barley and mung dal until the draining water is mostly clear; soak for 40 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains and the prepared black pepper, fenugreek seeds; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 40–45 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Barley, a lighter fat measure, and warming spices make this the kapha-oriented kitchari. Vata: add ghee and cook until very soft. Pitta: reduce pepper and dry ginger. Kapha: retain the stated light texture and portion.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.vasanta-barley-mung-kitchari",
+      "name": "Vasanta Barley-Mung Kitchari",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-dry",
+          "name": "Dry ginger",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1550
+        }
+      ],
+      "steps": [
+        "Rinse the barley and mung dal until the draining water is mostly clear; soak for 35 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains and the prepared mustard seeds, black pepper; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vasanta Barley-Mung Kitchari is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.grishma-fennel-kitchari",
+      "name": "Grishma Fennel-Coconut Kitchari",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 35
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 15
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1450
+        }
+      ],
+      "steps": [
+        "Rinse the rice and mung dal until the draining water is mostly clear; soak for 20 minutes and drain.",
+        "Warm the Coconut oil in a heavy pot; bloom the cumin and turmeric just until fragrant.",
+        "Add the drained grains and the prepared fennel seeds, grated fresh coconut, fresh cilantro; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -2,
+        "kapha": 1
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Grishma Fennel-Coconut Kitchari is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.varsha-dry-ginger-kitchari",
+      "name": "Varsha Dry-Ginger Kitchari",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.asafoetida",
+          "name": "Asafoetida",
+          "grams": 0.5
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-dry",
+          "name": "Dry ginger",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1450
+        }
+      ],
+      "steps": [
+        "Rinse the rice and mung dal until the draining water is mostly clear; soak for 20 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains and the prepared asafoetida, black pepper; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "varsha"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Varsha Dry-Ginger Kitchari is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.sharad-coriander-kitchari",
+      "name": "Sharad Coriander Kitchari",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1450
+        }
+      ],
+      "steps": [
+        "Rinse the rice and mung dal until the draining water is mostly clear; soak for 20 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin and turmeric just until fragrant.",
+        "Add the drained grains and the prepared coriander seeds, fennel seeds; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sharad Coriander Kitchari is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.hemanta-urad-rice-kitchari",
+      "name": "Hemanta Urad-Rice Kitchari",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Split urad dal",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.asafoetida",
+          "name": "Asafoetida",
+          "grams": 0.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1500
+        }
+      ],
+      "steps": [
+        "Rinse the rice and urad dal until the draining water is mostly clear; soak for 20 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains and the prepared black pepper, asafoetida; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 2
+      },
+      "seasons": [
+        "hemanta"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Urad and a generous ghee measure make this a substantial early-winter kitchari. Vata: serve fully cooked and warm. Pitta: keep pepper modest. Kapha: choose a small portion or prefer mung.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.shishira-sesame-kitchari",
+      "name": "Shishira Sesame Kitchari",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1450
+        }
+      ],
+      "steps": [
+        "Rinse the rice and mung dal until the draining water is mostly clear; soak for 20 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains and the prepared sesame seeds, black pepper; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 1,
+        "kapha": 1
+      },
+      "seasons": [
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Shishira Sesame Kitchari is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.daliya-khichdi",
+      "name": "Daliya Khichdi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Coarsely cracked whole wheat",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1500
+        }
+      ],
+      "steps": [
+        "Rinse the cracked wheat and mung dal until the draining water is mostly clear; soak for 25 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains and the prepared diced carrot, green peas; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Daliya Khichdi is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.bajra-khichdi",
+      "name": "Bajra Khichdi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.bajra",
+          "name": "Pearl millet",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1600
+        }
+      ],
+      "steps": [
+        "Rinse the pearl millet and mung dal until the draining water is mostly clear; soak for 45 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 40–45 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Bajra Khichdi is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.jowar-khichdi",
+      "name": "Jowar Khichdi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.jowar",
+          "name": "Cracked sorghum",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1550
+        }
+      ],
+      "steps": [
+        "Rinse the cracked sorghum and mung dal until the draining water is mostly clear; soak for 40 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Jowar Khichdi is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.masala-khichdi",
+      "name": "Masala Vegetable Khichdi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, sliced",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1450
+        }
+      ],
+      "steps": [
+        "Rinse the rice and mung dal until the draining water is mostly clear; soak for 20 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains and the prepared diced carrot, sliced green beans, green peas, coriander seeds, black pepper; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "varsha"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Masala Vegetable Khichdi is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.bisi-bele-bath",
+      "name": "Bisi Bele Bath",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, sliced",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.fenugreek-seed",
+          "name": "Fenugreek seeds",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1650
+        }
+      ],
+      "steps": [
+        "Rinse the rice and toor dal until the draining water is mostly clear; soak for 20 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains and the prepared diced carrot, sliced green beans, tamarind pulp, coriander seeds, fenugreek seeds; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "varsha"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Bisi Bele Bath is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "Karnataka bisi bele bath tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.millet-pongal",
+      "name": "Millet Pongal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Coarsely crushed black pepper",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.cashew",
+          "name": "Cashews",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1550
+        }
+      ],
+      "steps": [
+        "Rinse the millet and mung dal until the draining water is mostly clear; soak for 20 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains and the prepared coarsely crushed black pepper, cashews; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Millet Pongal is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "South Indian pongal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.varsha-light-khichdi",
+      "name": "Varsha Light Khichdi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.asafoetida",
+          "name": "Asafoetida",
+          "grams": 0.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-dry",
+          "name": "Dry ginger",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1550
+        }
+      ],
+      "steps": [
+        "Rinse the rice and mung dal until the draining water is mostly clear; soak for 20 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains and the prepared asafoetida; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "varsha"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Varsha Light Khichdi is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.hemanta-strength-bowl",
+      "name": "Hemanta Strength Bowl",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Split urad dal",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Cracked whole wheat",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 36
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery",
+          "grams": 38
+        },
+        {
+          "dravyaId": "dravya.ginger-dry",
+          "name": "Dry ginger",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the urad dal and cracked wheat separately; soak both for 30 minutes and drain.",
+        "Warm half the ghee in a heavy pot and toast the drained wheat for two minutes.",
+        "Add the urad dal, dry ginger, and water; simmer covered until both grains are very soft.",
+        "Stir in the jaggery and remaining ghee only after the grains are cooked; continue until the bowl is cohesive.",
+        "Finish with crushed cardamom, rest covered, and serve warm in modest portions."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 2
+      },
+      "seasons": [
+        "hemanta"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "This substantial urad-and-wheat bowl reflects the building foods traditionally favored in early winter. Vata: serve warm and well cooked. Pitta: use less dry ginger and jaggery. Kapha: choose mung kitchari instead when lightness is preferred.",
+      "provenance": [
+        "ritucharya-inspired hemanta household food tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.grishma-cooling-plate",
+      "name": "Grishma Cooling Plate",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.buttermilk",
+          "name": "Plain buttermilk",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, diced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint",
+          "grams": 15
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 620
+        }
+      ],
+      "steps": [
+        "Rinse and soak the rice for 15 minutes, then drain.",
+        "Cook the rice with the measured water until tender; rest covered for eight minutes and fluff gently.",
+        "Whisk the buttermilk with toasted cumin and half the rock salt.",
+        "Fold the cucumber and mint together with the remaining salt just before serving.",
+        "Arrange warm rice, the cucumber-mint portion, and buttermilk separately on each plate so diners combine small mouthfuls as desired."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm rice with cucumber, mint, and churned buttermilk makes a mild hot-season midday plate. Vata: keep the rice warm and reduce raw cucumber. Pitta: retain the mild seasoning and avoid chilies. Kapha: reduce rice and emphasize the diluted buttermilk.",
+      "provenance": [
+        "ritucharya-inspired grishma meal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.sharad-pitta-soother",
+      "name": "Sharad Pitta-Soothing Bowl",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.pomegranate",
+          "name": "Sweet pomegranate arils",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 650
+        }
+      ],
+      "steps": [
+        "Rinse and soak the rice for 15 minutes, then drain.",
+        "Cook the rice with the water until tender; rest covered for eight minutes.",
+        "Warm the ghee with lightly crushed fennel and fold it through the rice.",
+        "Let the rice cool from hot to pleasantly warm, then scatter over the pomegranate and a very light dusting of rock sugar.",
+        "Serve at midday without pungent accompaniments."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "This mild autumn bowl uses sweet, cooling accents and avoids pungent seasoning. Vata: serve the rice warmer and add a little ghee. Pitta: retain the gentle fennel and small sweet garnish. Kapha: omit the rock sugar and take a smaller rice portion.",
+      "provenance": [
+        "ritucharya-inspired sharad meal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.vasanta-kapha-clearer",
+      "name": "Vasanta Kapha-Clearing Meal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.bitter-gourd",
+          "name": "Bitter gourd, sliced",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.ginger-dry",
+          "name": "Dry ginger",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.honey",
+          "name": "Raw honey",
+          "grams": 12
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Rinse and soak the barley for 35 minutes, then drain.",
+        "Simmer the barley in the water until tender and separate; drain any excess water.",
+        "Warm the ghee, add the bitter gourd, dry ginger, pepper, and rock salt, and cook until tender with dry edges.",
+        "Arrange the warm barley and bitter gourd together, then let the plate cool until no longer hot.",
+        "Drizzle the raw honey lightly over the barley only after cooling below hot serving temperature."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Barley, bitter gourd, and restrained fat give this spring plate a deliberately light character. Vata: add a little ghee and cook the barley softer. Pitta: reduce pepper and omit honey if the bitter-sweet contrast is unwelcome. Kapha: retain the dry texture and small honey measure.",
+      "provenance": [
+        "ritucharya-inspired vasanta meal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.carrot-mung-kitchari",
+      "name": "Carrot Mung Kitchari",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1450
+        }
+      ],
+      "steps": [
+        "Rinse the rice and mung dal until the draining water is mostly clear; soak for 20 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains and the prepared diced carrot, coriander seeds; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Carrot Mung Kitchari is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.lauki-mung-kitchari",
+      "name": "Bottle Gourd Mung Kitchari",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.bottle-gourd",
+          "name": "Bottle gourd, diced",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1450
+        }
+      ],
+      "steps": [
+        "Rinse the rice and mung dal until the draining water is mostly clear; soak for 20 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains and the prepared diced bottle gourd, fennel seeds; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -2,
+        "kapha": -1
+      },
+      "seasons": [
+        "grishma",
+        "varsha"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Bottle Gourd Mung Kitchari is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.pumpkin-mung-kitchari",
+      "name": "Pumpkin Mung Kitchari",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1450
+        }
+      ],
+      "steps": [
+        "Rinse the rice and mung dal until the draining water is mostly clear; soak for 20 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains and the prepared diced pumpkin, coriander seeds; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "sharad",
+        "hemanta"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin Mung Kitchari is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.spinach-mung-kitchari",
+      "name": "Spinach Mung Kitchari",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1450
+        }
+      ],
+      "steps": [
+        "Rinse the rice and mung dal until the draining water is mostly clear; soak for 20 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains and the prepared chopped spinach, coriander seeds; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "hemanta"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Spinach Mung Kitchari is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.beet-mung-kitchari",
+      "name": "Beetroot Mung Kitchari",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, diced small",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1450
+        }
+      ],
+      "steps": [
+        "Rinse the rice and mung dal until the draining water is mostly clear; soak for 20 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains and the prepared diced small beetroot, fennel seeds; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "sharad",
+        "hemanta"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Beetroot Mung Kitchari is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.green-bean-mung-kitchari",
+      "name": "Green Bean Mung Kitchari",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, sliced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1450
+        }
+      ],
+      "steps": [
+        "Rinse the rice and mung dal until the draining water is mostly clear; soak for 20 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains and the prepared sliced green beans, coriander seeds; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Green Bean Mung Kitchari is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.zucchini-mung-kitchari",
+      "name": "Zucchini Mung Kitchari",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1450
+        }
+      ],
+      "steps": [
+        "Rinse the rice and mung dal until the draining water is mostly clear; soak for 20 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains and the prepared diced zucchini, fennel seeds; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "grishma",
+        "varsha"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Zucchini Mung Kitchari is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.methi-mung-kitchari",
+      "name": "Fresh Methi Mung Kitchari",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.methi-leaves",
+          "name": "Fresh fenugreek leaves, chopped",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1450
+        }
+      ],
+      "steps": [
+        "Rinse the rice and mung dal until the draining water is mostly clear; soak for 20 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains and the prepared chopped fresh fenugreek leaves, coriander seeds; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Fresh Methi Mung Kitchari is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.amaranth-mung-kitchari",
+      "name": "Amaranth Mung Kitchari",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1500
+        }
+      ],
+      "steps": [
+        "Rinse the amaranth and mung dal until the draining water is mostly clear; soak for 20 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Amaranth Mung Kitchari is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.barley-mung-kitchari",
+      "name": "Simple Barley Mung Kitchari",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1550
+        }
+      ],
+      "steps": [
+        "Rinse the barley and mung dal until the draining water is mostly clear; soak for 40 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Simple Barley Mung Kitchari is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.brown-rice-mung-kitchari",
+      "name": "Brown Rice Mung Kitchari",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1650
+        }
+      ],
+      "steps": [
+        "Rinse the brown rice and mung dal until the draining water is mostly clear; soak for 45 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 42–48 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Brown Rice Mung Kitchari is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.urad-rice-kitchari",
+      "name": "Urad Rice Kitchari",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Split urad dal",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.asafoetida",
+          "name": "Asafoetida",
+          "grams": 0.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1500
+        }
+      ],
+      "steps": [
+        "Rinse the rice and urad dal until the draining water is mostly clear; soak for 20 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains and the prepared asafoetida; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 2
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Urad Rice Kitchari is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.toor-rice-kitchari",
+      "name": "Toor Dal Rice Kitchari",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 175
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1500
+        }
+      ],
+      "steps": [
+        "Rinse the rice and toor dal until the draining water is mostly clear; soak for 20 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains and the prepared coriander seeds; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Toor Dal Rice Kitchari is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.masoor-rice-kitchari",
+      "name": "Masoor Rice Kitchari",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils",
+          "grams": 175
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1450
+        }
+      ],
+      "steps": [
+        "Rinse the rice and red lentils until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains and the prepared coriander seeds; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Masoor Rice Kitchari is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.chana-dal-rice-kitchari",
+      "name": "Chana Dal Rice Kitchari",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.chana-dal",
+          "name": "Chana dal",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.asafoetida",
+          "name": "Asafoetida",
+          "grams": 0.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1600
+        }
+      ],
+      "steps": [
+        "Rinse the rice and chana dal until the draining water is mostly clear; soak for 45 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains and the prepared asafoetida; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 40–45 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chana Dal Rice Kitchari is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.panchmel-rice-khichdi",
+      "name": "Panchmel Rice Khichdi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils",
+          "grams": 40
+        },
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 40
+        },
+        {
+          "dravyaId": "dravya.chana-dal",
+          "name": "Chana dal",
+          "grams": 35
+        },
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Split urad dal",
+          "grams": 25
+        },
+        {
+          "dravyaId": "dravya.asafoetida",
+          "name": "Asafoetida",
+          "grams": 0.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1650
+        }
+      ],
+      "steps": [
+        "Rinse the rice and mixed dals until the draining water is mostly clear; soak for 40 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains and the prepared red lentils, toor dal, chana dal, split urad dal, asafoetida; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Panchmel Rice Khichdi is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "krisara and khichari cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.manda",
+      "name": "Manda (Thin Rice Water)",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 3
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1800
+        }
+      ],
+      "steps": [
+        "Rinse the rice thoroughly and place it in a deep pot with the measured water.",
+        "Bring to a boil, then cook at a gentle simmer until the grains are extremely soft and the liquid turns cloudy.",
+        "Pour through a fine strainer without pressing hard; reserve the thin, starchy liquid and discard or repurpose the grains.",
+        "Season the strained liquid lightly with rock salt and serve it warm in small bowls."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Manda is the strained, thinnest rice preparation in the classical gruel sequence. Vata: serve warm and optionally add a trace of ghee. Pitta: keep it plain and lightly salted. Kapha: take a small serving with dry ginger only if desired.",
+      "provenance": [
+        "classical manda preparation tradition"
+      ],
+      "confidence": {
+        "ayur": 0.9
+      }
+    },
+    {
+      "id": "recipe.peya",
+      "name": "Peya (Thin Gruel)",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 125
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, sliced",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 3
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1350
+        }
+      ],
+      "steps": [
+        "Rinse the rice well; soak for 15 minutes, then drain.",
+        "Bring the measured water to a boil and stir in the grain with sliced fresh ginger.",
+        "Lower the heat and simmer uncovered, stirring from time to time, until the grains are broken and suspended in ample broth.",
+        "Add the rock salt, whisk briefly to even the texture, and serve warm without reheating repeatedly."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Peya (Thin Gruel) uses prolonged cooking and ample moisture for a gentle texture. Vata: take it warm and add ghee only if desired. Pitta: serve plain or with coriander. Kapha: keep the serving small and season with dry ginger.",
+      "provenance": [
+        "classical peya preparation tradition"
+      ],
+      "confidence": {
+        "ayur": 0.9
+      }
+    },
+    {
+      "id": "recipe.vilepi",
+      "name": "Vilepi (Thick Gruel)",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 3
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Rinse the rice well; soak for 15 minutes, then drain.",
+        "Bring the measured water to a boil and stir in the grain.",
+        "Lower the heat and simmer uncovered, stirring from time to time, until the grains are very soft and the gruel holds a spoon trail.",
+        "Add the rock salt, whisk briefly to even the texture, and serve warm without reheating repeatedly."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vilepi (Thick Gruel) uses prolonged cooking and ample moisture for a gentle texture. Vata: take it warm and add ghee only if desired. Pitta: serve plain or with coriander. Kapha: keep the serving small and season with dry ginger.",
+      "provenance": [
+        "classical vilepi preparation tradition"
+      ],
+      "confidence": {
+        "ayur": 0.9
+      }
+    },
+    {
+      "id": "recipe.yavagu-spiced",
+      "name": "Spiced Yavagu",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 145
+        },
+        {
+          "dravyaId": "dravya.ginger-dry",
+          "name": "Dry ginger",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.pippali",
+          "name": "Long pepper",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 3
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1350
+        }
+      ],
+      "steps": [
+        "Rinse the rice well; soak for 15 minutes, then drain.",
+        "Bring the measured water to a boil and stir in the grain with dry ginger and long pepper and cumin seeds.",
+        "Lower the heat and simmer uncovered, stirring from time to time, until the grains are broken and suspended in ample broth.",
+        "Add the rock salt, whisk briefly to even the texture, and serve warm without reheating repeatedly."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Spiced Yavagu uses prolonged cooking and ample moisture for a gentle texture. Vata: take it warm and add ghee only if desired. Pitta: serve plain or with coriander. Kapha: keep the serving small and season with dry ginger.",
+      "provenance": [
+        "classical yavagu gruel tradition"
+      ],
+      "confidence": {
+        "ayur": 0.88
+      }
+    },
+    {
+      "id": "recipe.ginger-peya",
+      "name": "Fresh Ginger Peya",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, julienned",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 3
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1350
+        }
+      ],
+      "steps": [
+        "Rinse the rice well; soak for 15 minutes, then drain.",
+        "Bring the measured water to a boil and stir in the grain with julienned fresh ginger and cumin seeds.",
+        "Lower the heat and simmer uncovered, stirring from time to time, until the grains are broken and suspended in ample broth.",
+        "Add the rock salt, whisk briefly to even the texture, and serve warm without reheating repeatedly."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "varsha",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Fresh Ginger Peya uses prolonged cooking and ample moisture for a gentle texture. Vata: take it warm and add ghee only if desired. Pitta: serve plain or with coriander. Kapha: keep the serving small and season with dry ginger.",
+      "provenance": [
+        "classical manda, peya, vilepi, and yavagu gruel tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.coriander-peya",
+      "name": "Coriander Rice Peya",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 3
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1350
+        }
+      ],
+      "steps": [
+        "Rinse the rice well; soak for 15 minutes, then drain.",
+        "Bring the measured water to a boil and stir in the grain with crushed coriander seeds and fresh cilantro.",
+        "Lower the heat and simmer uncovered, stirring from time to time, until the grains are broken and suspended in ample broth.",
+        "Add the rock salt, whisk briefly to even the texture, and serve warm without reheating repeatedly."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -2,
+        "kapha": -1
+      },
+      "seasons": [
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Coriander Rice Peya uses prolonged cooking and ample moisture for a gentle texture. Vata: take it warm and add ghee only if desired. Pitta: serve plain or with coriander. Kapha: keep the serving small and season with dry ginger.",
+      "provenance": [
+        "classical manda, peya, vilepi, and yavagu gruel tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.cumin-vilepi",
+      "name": "Cumin Rice Vilepi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 3
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Rinse the rice well; soak for 15 minutes, then drain.",
+        "Bring the measured water to a boil and stir in the grain with cumin seeds and ghee.",
+        "Lower the heat and simmer uncovered, stirring from time to time, until the grains are very soft and the gruel holds a spoon trail.",
+        "Add the rock salt, whisk briefly to even the texture, and serve warm without reheating repeatedly."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cumin Rice Vilepi uses prolonged cooking and ample moisture for a gentle texture. Vata: take it warm and add ghee only if desired. Pitta: serve plain or with coriander. Kapha: keep the serving small and season with dry ginger.",
+      "provenance": [
+        "classical manda, peya, vilepi, and yavagu gruel tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.mung-peya",
+      "name": "Mung-Rice Peya",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 110
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 3
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1500
+        }
+      ],
+      "steps": [
+        "Rinse the rice and mung well; soak for 15 minutes, then drain.",
+        "Bring the measured water to a boil and stir in the grain with split mung dal and turmeric.",
+        "Lower the heat and simmer uncovered, stirring from time to time, until the grains are broken and suspended in ample broth.",
+        "Add the rock salt, whisk briefly to even the texture, and serve warm without reheating repeatedly."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mung-Rice Peya uses prolonged cooking and ample moisture for a gentle texture. Vata: take it warm and add ghee only if desired. Pitta: serve plain or with coriander. Kapha: keep the serving small and season with dry ginger.",
+      "provenance": [
+        "classical manda, peya, vilepi, and yavagu gruel tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.mung-yusha",
+      "name": "Classical Mung Yusha",
+      "category": "classical",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, sliced",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1500
+        }
+      ],
+      "steps": [
+        "Rinse the mung dal and soak it for 25 minutes; drain well.",
+        "Combine the pulse, turmeric, and water in a pot; bring to a boil and skim any foam from the surface.",
+        "Add cumin, and ginger; simmer until the pulse is completely tender.",
+        "Whisk the soup to loosen some of the cooked pulse while keeping the broth pourable, then add the rock salt.",
+        "Rest covered for three minutes and ladle into warm bowls."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Classical Mung Yusha is prepared as a pourable pulse broth rather than a heavy stew. Vata: add a small spoon of ghee at the table. Pitta: omit extra chilies and emphasize coriander. Kapha: increase dry spice modestly and keep the broth thin.",
+      "provenance": [
+        "classical mudga yusha tradition"
+      ],
+      "confidence": {
+        "ayur": 0.92
+      }
+    },
+    {
+      "id": "recipe.vegetable-yusha",
+      "name": "Vegetable Yusha",
+      "category": "classical",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 135
+        },
+        {
+          "dravyaId": "dravya.bottle-gourd",
+          "name": "Bottle gourd, diced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 110
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, sliced",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1500
+        }
+      ],
+      "steps": [
+        "Rinse the mung dal and soak it for 25 minutes; drain well.",
+        "Combine the pulse, turmeric, and water in a pot; bring to a boil and skim any foam from the surface.",
+        "Add diced diced bottle gourd carrot, cumin, and ginger; simmer until the pulse is completely tender.",
+        "Whisk the soup to loosen some of the cooked pulse while keeping the broth pourable, then add the rock salt.",
+        "Rest covered for three minutes and ladle into warm bowls."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vegetable Yusha is prepared as a pourable pulse broth rather than a heavy stew. Vata: add a small spoon of ghee at the table. Pitta: omit extra chilies and emphasize coriander. Kapha: increase dry spice modestly and keep the broth thin.",
+      "provenance": [
+        "classical yusha pulse-soup tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.masoor-yusha",
+      "name": "Masoor Yusha",
+      "category": "classical",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, sliced",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1500
+        }
+      ],
+      "steps": [
+        "Rinse the red lentils and soak it for 15 minutes; drain well.",
+        "Combine the pulse, turmeric, and water in a pot; bring to a boil and skim any foam from the surface.",
+        "Add coriander seeds, cumin, and ginger; simmer until the pulse is completely tender.",
+        "Whisk the soup to loosen some of the cooked pulse while keeping the broth pourable, then add the rock salt.",
+        "Rest covered for three minutes and ladle into warm bowls."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Masoor Yusha is prepared as a pourable pulse broth rather than a heavy stew. Vata: add a small spoon of ghee at the table. Pitta: omit extra chilies and emphasize coriander. Kapha: increase dry spice modestly and keep the broth thin.",
+      "provenance": [
+        "classical yusha pulse-soup tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.barley-mung-yusha",
+      "name": "Barley Mung Yusha",
+      "category": "classical",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, sliced",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1600
+        }
+      ],
+      "steps": [
+        "Rinse the mung dal and soak it for 35 minutes; drain well.",
+        "Combine the pulse, turmeric, and water in a pot; bring to a boil and skim any foam from the surface.",
+        "Add pearled barley, coriander seeds, cumin, and ginger; simmer until the pulse is completely tender.",
+        "Whisk the soup to loosen some of the cooked pulse while keeping the broth pourable, then add the rock salt.",
+        "Rest covered for three minutes and ladle into warm bowls."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Barley Mung Yusha is prepared as a pourable pulse broth rather than a heavy stew. Vata: add a small spoon of ghee at the table. Pitta: omit extra chilies and emphasize coriander. Kapha: increase dry spice modestly and keep the broth thin.",
+      "provenance": [
+        "classical yusha pulse-soup tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.carrot-coriander-yusha",
+      "name": "Carrot Coriander Mung Yusha",
+      "category": "classical",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, sliced",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1500
+        }
+      ],
+      "steps": [
+        "Rinse the mung dal and soak it for 25 minutes; drain well.",
+        "Combine the pulse, turmeric, and water in a pot; bring to a boil and skim any foam from the surface.",
+        "Add diced carrot, coriander seeds, fresh cilantro, cumin, and ginger; simmer until the pulse is completely tender.",
+        "Whisk the soup to loosen some of the cooked pulse while keeping the broth pourable, then add the rock salt.",
+        "Rest covered for three minutes and ladle into warm bowls."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Carrot Coriander Mung Yusha is prepared as a pourable pulse broth rather than a heavy stew. Vata: add a small spoon of ghee at the table. Pitta: omit extra chilies and emphasize coriander. Kapha: increase dry spice modestly and keep the broth thin.",
+      "provenance": [
+        "classical yusha pulse-soup tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    }
+  ]
+}

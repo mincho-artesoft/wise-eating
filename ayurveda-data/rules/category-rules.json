@@ -1,0 +1,2424 @@
+{
+ "rulesVersion": 1,
+ "scale": "vpk = [vata, pitta, kapha]; -2 pacifies strongly ... +2 aggravates strongly",
+ "appliesTo": "estimated tier: any store food with no classical binding and no derived crosswalk row; matched on the FIRST entry of FoodItem.category",
+ "confidence": {
+  "ayur": 0.25
+ },
+ "qualityState": "aiDraft",
+ "default": {
+  "vpk": [
+   0,
+   0,
+   0
+  ],
+  "virya": "neutral",
+  "gunas": [],
+  "note": "reached only for unknown future categories; validator forbids it for the current store"
+ },
+ "categories": [
+  {
+   "category": "American Indian/Alaska Native Foods",
+   "vpk": [
+    0,
+    0,
+    0
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "dense"
+   ],
+   "note": "Heterogeneous traditional foods (game, fish, wild plants); neutral placeholder — name modifiers do most of the work."
+  },
+  {
+   "category": "Apple juice",
+   "vpk": [
+    0,
+    -1,
+    0
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "liquid"
+   ]
+  },
+  {
+   "category": "Apples",
+   "vpk": [
+    1,
+    -1,
+    -1
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "light",
+    "rough"
+   ],
+   "note": "Raw apple is astringent-sweet and rough; aggravates vata unless cooked."
+  },
+  {
+   "category": "Baby Foods",
+   "vpk": [
+    -1,
+    0,
+    0
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "soft"
+   ],
+   "note": "Cooked, mashed, mild — easy to digest."
+  },
+  {
+   "category": "Baby food: cereals",
+   "vpk": [
+    -1,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "soft"
+   ]
+  },
+  {
+   "category": "Baby food: fruit",
+   "vpk": [
+    0,
+    -1,
+    0
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "soft"
+   ]
+  },
+  {
+   "category": "Baby food: meat and dinners",
+   "vpk": [
+    -1,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "heavy",
+    "soft"
+   ]
+  },
+  {
+   "category": "Baby food: mixtures",
+   "vpk": [
+    -1,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "soft"
+   ]
+  },
+  {
+   "category": "Baby food: snacks and sweets",
+   "vpk": [
+    0,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "soft"
+   ]
+  },
+  {
+   "category": "Baby food: vegetables",
+   "vpk": [
+    0,
+    -1,
+    0
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "soft"
+   ]
+  },
+  {
+   "category": "Baby food: yogurt",
+   "vpk": [
+    -1,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Baby juice",
+   "vpk": [
+    0,
+    -1,
+    0
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "liquid"
+   ]
+  },
+  {
+   "category": "Baby water",
+   "vpk": [
+    0,
+    -1,
+    0
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "liquid"
+   ]
+  },
+  {
+   "category": "Bacon",
+   "vpk": [
+    0,
+    2,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "oily",
+    "heavy",
+    "sharp"
+   ],
+   "note": "Cured, salted, fatty — strongly heating."
+  },
+  {
+   "category": "Bagels and English muffins",
+   "vpk": [
+    1,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "heavy",
+    "dense"
+   ]
+  },
+  {
+   "category": "Baked Products",
+   "vpk": [
+    1,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "heavy",
+    "dry"
+   ],
+   "note": "Refined-flour baked goods; dry and heavy."
+  },
+  {
+   "category": "Bananas",
+   "vpk": [
+    -1,
+    0,
+    2
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "heavy",
+    "smooth"
+   ],
+   "note": "Classical kadali: builds tissue, strongly kapha-aggravating."
+  },
+  {
+   "category": "Bean",
+   "vpk": [
+    1,
+    0,
+    -1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "light",
+    "dry"
+   ]
+  },
+  {
+   "category": "Beans",
+   "vpk": [
+    1,
+    0,
+    -1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "light",
+    "dry"
+   ],
+   "note": "Astringent legumes; gas-forming for vata unless well spiced."
+  },
+  {
+   "category": "Beef",
+   "vpk": [
+    -1,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy",
+    "dense"
+   ]
+  },
+  {
+   "category": "Beef Products",
+   "vpk": [
+    -1,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy",
+    "dense"
+   ],
+   "note": "No classical beef dravya authored (gomamsa deliberately unbound); the whole category is estimated-tier."
+  },
+  {
+   "category": "Beer",
+   "vpk": [
+    0,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "liquid",
+    "heavy"
+   ],
+   "note": "Fermented; dulls agni."
+  },
+  {
+   "category": "Beverages",
+   "vpk": [
+    0,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "liquid"
+   ],
+   "note": "Mixed commercial beverages; sweetened modifier usually fires."
+  },
+  {
+   "category": "Biscuits",
+   "vpk": [
+    0,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "heavy",
+    "oily"
+   ]
+  },
+  {
+   "category": "Blueberries and other berries",
+   "vpk": [
+    0,
+    -1,
+    0
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "light"
+   ]
+  },
+  {
+   "category": "Bottled water",
+   "vpk": [
+    0,
+    -1,
+    0
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "liquid"
+   ]
+  },
+  {
+   "category": "Breakfast Cereals",
+   "vpk": [
+    1,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "dry",
+    "light"
+   ],
+   "note": "Extruded/flaked processed grains."
+  },
+  {
+   "category": "Broccoli",
+   "vpk": [
+    1,
+    -1,
+    -1
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "light",
+    "rough"
+   ]
+  },
+  {
+   "category": "Burgers",
+   "vpk": [
+    0,
+    1,
+    2
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy",
+    "oily"
+   ]
+  },
+  {
+   "category": "Burritos and tacos",
+   "vpk": [
+    0,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Butter and animal fats",
+   "vpk": [
+    -1,
+    0,
+    2
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "oily",
+    "heavy"
+   ],
+   "note": "Butter cooling; rendered animal fats slightly heating."
+  },
+  {
+   "category": "Cabbage",
+   "vpk": [
+    1,
+    -1,
+    -1
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "light",
+    "rough"
+   ]
+  },
+  {
+   "category": "Cakes and pies",
+   "vpk": [
+    0,
+    0,
+    2
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Candy containing chocolate",
+   "vpk": [
+    0,
+    1,
+    2
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Candy not containing chocolate",
+   "vpk": [
+    0,
+    0,
+    2
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Carrots",
+   "vpk": [
+    -1,
+    1,
+    -1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "light"
+   ]
+  },
+  {
+   "category": "Cereal Grains and Pasta",
+   "vpk": [
+    -1,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "heavy"
+   ],
+   "note": "Whole cooked grains nourish and ground."
+  },
+  {
+   "category": "Cereal bars",
+   "vpk": [
+    1,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "dry",
+    "dense"
+   ]
+  },
+  {
+   "category": "Cheese",
+   "vpk": [
+    -1,
+    1,
+    2
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy",
+    "oily",
+    "dense"
+   ],
+   "note": "Aged cheese: sour, heavy, channel-clogging."
+  },
+  {
+   "category": "Cheese sandwiches",
+   "vpk": [
+    0,
+    1,
+    2
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Chicken",
+   "vpk": [
+    -1,
+    1,
+    0
+   ],
+   "virya": "heating",
+   "gunas": [
+    "light"
+   ]
+  },
+  {
+   "category": "Chicken fillet sandwiches",
+   "vpk": [
+    0,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Chicken patties",
+   "vpk": [
+    0,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy",
+    "oily"
+   ]
+  },
+  {
+   "category": "Citrus fruits",
+   "vpk": [
+    -1,
+    1,
+    0
+   ],
+   "virya": "heating",
+   "gunas": [
+    "liquid"
+   ],
+   "note": "Sour rasa pacifies vata, aggravates pitta."
+  },
+  {
+   "category": "Citrus juice",
+   "vpk": [
+    -1,
+    1,
+    0
+   ],
+   "virya": "heating",
+   "gunas": [
+    "liquid"
+   ]
+  },
+  {
+   "category": "Coffee",
+   "vpk": [
+    1,
+    1,
+    -1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "light",
+    "sharp"
+   ],
+   "note": "Bitter stimulant; scatters vata, heats pitta, cuts kapha."
+  },
+  {
+   "category": "Cold cuts and cured meats",
+   "vpk": [
+    0,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy",
+    "dense"
+   ]
+  },
+  {
+   "category": "Coleslaw",
+   "vpk": [
+    1,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "rough",
+    "oily"
+   ]
+  },
+  {
+   "category": "Cookies and brownies",
+   "vpk": [
+    0,
+    0,
+    2
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "heavy",
+    "dry"
+   ]
+  },
+  {
+   "category": "Corn",
+   "vpk": [
+    1,
+    0,
+    -1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "light",
+    "dry"
+   ]
+  },
+  {
+   "category": "Cottage/ricotta cheese",
+   "vpk": [
+    -1,
+    0,
+    1
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "soft",
+    "heavy"
+   ],
+   "note": "Fresh unaged cheese — far gentler than aged."
+  },
+  {
+   "category": "Crackers",
+   "vpk": [
+    1,
+    0,
+    -1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "dry",
+    "light"
+   ]
+  },
+  {
+   "category": "Cream and cream substitutes",
+   "vpk": [
+    -1,
+    0,
+    2
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "oily",
+    "heavy"
+   ]
+  },
+  {
+   "category": "Cream cheese",
+   "vpk": [
+    -1,
+    0,
+    2
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "oily",
+    "heavy"
+   ]
+  },
+  {
+   "category": "Dairy and Egg Products",
+   "vpk": [
+    -1,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Deli and cured meat sandwiches",
+   "vpk": [
+    0,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Diet soft drinks",
+   "vpk": [
+    1,
+    0,
+    0
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "liquid"
+   ],
+   "note": "Artificial sweeteners + carbonation; ungrounding."
+  },
+  {
+   "category": "Diet sport and energy drinks",
+   "vpk": [
+    1,
+    0,
+    0
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "liquid"
+   ]
+  },
+  {
+   "category": "Dips",
+   "vpk": [
+    0,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "heavy",
+    "oily"
+   ]
+  },
+  {
+   "category": "Doughnuts",
+   "vpk": [
+    0,
+    1,
+    2
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy",
+    "oily"
+   ]
+  },
+  {
+   "category": "Dried fruits",
+   "vpk": [
+    1,
+    -1,
+    0
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "dry",
+    "light"
+   ],
+   "note": "Rehydrate/soak to pacify vata."
+  },
+  {
+   "category": "Egg rolls",
+   "vpk": [
+    0,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy",
+    "oily"
+   ]
+  },
+  {
+   "category": "Egg/breakfast sandwiches",
+   "vpk": [
+    0,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Eggs and omelets",
+   "vpk": [
+    -1,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy",
+    "oily"
+   ]
+  },
+  {
+   "category": "Enhanced water",
+   "vpk": [
+    0,
+    0,
+    0
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "liquid"
+   ]
+  },
+  {
+   "category": "Fast Foods",
+   "vpk": [
+    1,
+    1,
+    2
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy",
+    "oily"
+   ],
+   "note": "Processed, fried, salty — aggravates all doshas; worst for kapha."
+  },
+  {
+   "category": "Fats and Oils",
+   "vpk": [
+    -1,
+    0,
+    2
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "oily",
+    "heavy",
+    "smooth"
+   ]
+  },
+  {
+   "category": "Finfish and Shellfish Products",
+   "vpk": [
+    -1,
+    1,
+    0
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Fish",
+   "vpk": [
+    -1,
+    1,
+    0
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Flavored milk",
+   "vpk": [
+    -1,
+    0,
+    2
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "heavy",
+    "liquid"
+   ]
+  },
+  {
+   "category": "Flavored or carbonated water",
+   "vpk": [
+    1,
+    0,
+    0
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "liquid"
+   ],
+   "note": "Carbonation aggravates vata."
+  },
+  {
+   "category": "Formula",
+   "vpk": [
+    -1,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "liquid",
+    "heavy"
+   ]
+  },
+  {
+   "category": "Frankfurter sandwiches",
+   "vpk": [
+    0,
+    1,
+    2
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Frankfurters",
+   "vpk": [
+    0,
+    1,
+    2
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy",
+    "dense"
+   ]
+  },
+  {
+   "category": "French fries and other fried white potatoes",
+   "vpk": [
+    0,
+    1,
+    2
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy",
+    "oily"
+   ]
+  },
+  {
+   "category": "Fried rice and lo/chow mein",
+   "vpk": [
+    0,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy",
+    "oily"
+   ]
+  },
+  {
+   "category": "Fried vegetables",
+   "vpk": [
+    0,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy",
+    "oily"
+   ]
+  },
+  {
+   "category": "Fruit drinks",
+   "vpk": [
+    0,
+    0,
+    1
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "liquid"
+   ],
+   "note": "Sugar-sweetened fruit-flavored drinks."
+  },
+  {
+   "category": "Fruits and Fruit Juices",
+   "vpk": [
+    0,
+    -1,
+    0
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "light",
+    "liquid"
+   ]
+  },
+  {
+   "category": "Gelatins",
+   "vpk": [
+    0,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "smooth"
+   ]
+  },
+  {
+   "category": "Grapes",
+   "vpk": [
+    -1,
+    -1,
+    0
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "smooth",
+    "light"
+   ],
+   "note": "Classical draksha — the best of fruits; pacifies vata and pitta."
+  },
+  {
+   "category": "Grits and other cooked cereals",
+   "vpk": [
+    -1,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "soft",
+    "heavy"
+   ]
+  },
+  {
+   "category": "Ground beef",
+   "vpk": [
+    -1,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy",
+    "dense"
+   ]
+  },
+  {
+   "category": "Ice cream and frozen dairy desserts",
+   "vpk": [
+    1,
+    -1,
+    2
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "heavy",
+    "dense"
+   ],
+   "note": "Frozen + sweet + heavy: kapha-forming, agni-dousing; cold aggravates vata."
+  },
+  {
+   "category": "Jams",
+   "vpk": [
+    0,
+    0,
+    2
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "heavy",
+    "smooth"
+   ]
+  },
+  {
+   "category": "Lamb",
+   "vpk": [
+    -1,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy",
+    "oily"
+   ]
+  },
+  {
+   "category": "Legumes and Legume Products",
+   "vpk": [
+    1,
+    0,
+    -1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "light",
+    "dry"
+   ]
+  },
+  {
+   "category": "Lettuce and lettuce salads",
+   "vpk": [
+    1,
+    -1,
+    -1
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "light",
+    "rough"
+   ]
+  },
+  {
+   "category": "Liquor and cocktails",
+   "vpk": [
+    1,
+    2,
+    -1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "sharp",
+    "light"
+   ],
+   "note": "Alcohol: sharp, hot, subtle — strongly pitta-aggravating."
+  },
+  {
+   "category": "Liver and organ meats",
+   "vpk": [
+    -1,
+    1,
+    0
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy",
+    "dense"
+   ]
+  },
+  {
+   "category": "Macaroni and cheese",
+   "vpk": [
+    -1,
+    0,
+    2
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "heavy",
+    "oily"
+   ]
+  },
+  {
+   "category": "Mango and papaya",
+   "vpk": [
+    -1,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "heavy",
+    "smooth"
+   ],
+   "note": "Ripe mango nourishes; papaya slightly heating."
+  },
+  {
+   "category": "Margarine",
+   "vpk": [
+    0,
+    0,
+    2
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "oily",
+    "heavy"
+   ],
+   "note": "Hydrogenated fat — poor-quality; kin to vanaspati (engine-excluded as dravya)."
+  },
+  {
+   "category": "Mashed potatoes and white potato mixtures",
+   "vpk": [
+    0,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "soft",
+    "heavy"
+   ]
+  },
+  {
+   "category": "Mayonnaise",
+   "vpk": [
+    -1,
+    1,
+    2
+   ],
+   "virya": "heating",
+   "gunas": [
+    "oily",
+    "heavy"
+   ]
+  },
+  {
+   "category": "Meals",
+   "vpk": [
+    1,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "heavy"
+   ],
+   "note": "Frozen/packaged complete meals."
+  },
+  {
+   "category": "Meat and BBQ sandwiches",
+   "vpk": [
+    0,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Meat mixed dishes",
+   "vpk": [
+    -1,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Melons",
+   "vpk": [
+    0,
+    -1,
+    1
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "heavy",
+    "liquid"
+   ],
+   "note": "Eat alone — classical incompatibility with other foods."
+  },
+  {
+   "category": "Milk",
+   "vpk": [
+    -1,
+    -1,
+    1
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "heavy",
+    "smooth",
+    "liquid"
+   ]
+  },
+  {
+   "category": "Milk shakes and other dairy drinks",
+   "vpk": [
+    0,
+    -1,
+    2
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "heavy",
+    "liquid"
+   ]
+  },
+  {
+   "category": "Mustard and other condiments",
+   "vpk": [
+    0,
+    1,
+    0
+   ],
+   "virya": "heating",
+   "gunas": [
+    "sharp"
+   ]
+  },
+  {
+   "category": "Nachos",
+   "vpk": [
+    0,
+    1,
+    2
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy",
+    "oily"
+   ]
+  },
+  {
+   "category": "Not included in a food category",
+   "vpk": [
+    0,
+    0,
+    0
+   ],
+   "virya": "neutral",
+   "gunas": [],
+   "note": "True fallback; lowest confidence."
+  },
+  {
+   "category": "Nut and Seed Products",
+   "vpk": [
+    -1,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "oily",
+    "heavy"
+   ]
+  },
+  {
+   "category": "Nutrition bars",
+   "vpk": [
+    0,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "dense",
+    "dry"
+   ]
+  },
+  {
+   "category": "Nutritional beverages",
+   "vpk": [
+    0,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "liquid"
+   ]
+  },
+  {
+   "category": "Nuts and seeds",
+   "vpk": [
+    -1,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "oily",
+    "heavy"
+   ]
+  },
+  {
+   "category": "Oatmeal",
+   "vpk": [
+    -1,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "soft",
+    "heavy",
+    "smooth"
+   ]
+  },
+  {
+   "category": "Olives",
+   "vpk": [
+    -1,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "oily"
+   ]
+  },
+  {
+   "category": "Onions",
+   "vpk": [
+    0,
+    1,
+    0
+   ],
+   "virya": "heating",
+   "gunas": [
+    "sharp"
+   ],
+   "note": "Raw onion pungent-heating; cooking sweetens it."
+  },
+  {
+   "category": "Other Mexican mixed dishes",
+   "vpk": [
+    0,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Other dark green vegetables",
+   "vpk": [
+    1,
+    -1,
+    -1
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "light",
+    "rough"
+   ]
+  },
+  {
+   "category": "Other diet drinks",
+   "vpk": [
+    1,
+    0,
+    0
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "liquid"
+   ]
+  },
+  {
+   "category": "Other fruit juice",
+   "vpk": [
+    0,
+    -1,
+    0
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "liquid"
+   ]
+  },
+  {
+   "category": "Other fruits and fruit salads",
+   "vpk": [
+    0,
+    -1,
+    0
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "light"
+   ]
+  },
+  {
+   "category": "Other red and orange vegetables",
+   "vpk": [
+    0,
+    0,
+    -1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "light"
+   ]
+  },
+  {
+   "category": "Other starchy vegetables",
+   "vpk": [
+    -1,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Other vegetables and combinations",
+   "vpk": [
+    0,
+    0,
+    0
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "light"
+   ]
+  },
+  {
+   "category": "Pancakes",
+   "vpk": [
+    0,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "heavy",
+    "soft"
+   ]
+  },
+  {
+   "category": "Pasta",
+   "vpk": [
+    -1,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "soft",
+    "heavy"
+   ]
+  },
+  {
+   "category": "Pasta mixed dishes",
+   "vpk": [
+    0,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Pasta sauces",
+   "vpk": [
+    0,
+    1,
+    0
+   ],
+   "virya": "heating",
+   "gunas": [
+    "liquid"
+   ],
+   "note": "Tomato base: sour, heating."
+  },
+  {
+   "category": "Peaches and nectarines",
+   "vpk": [
+    -1,
+    0,
+    0
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "soft"
+   ]
+  },
+  {
+   "category": "Peanut butter and jelly sandwiches",
+   "vpk": [
+    0,
+    0,
+    2
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "heavy",
+    "oily"
+   ]
+  },
+  {
+   "category": "Pears",
+   "vpk": [
+    0,
+    -1,
+    0
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "light"
+   ]
+  },
+  {
+   "category": "Pineapple",
+   "vpk": [
+    0,
+    1,
+    0
+   ],
+   "virya": "heating",
+   "gunas": [
+    "liquid",
+    "sharp"
+   ]
+  },
+  {
+   "category": "Pizza",
+   "vpk": [
+    0,
+    1,
+    2
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy",
+    "oily"
+   ]
+  },
+  {
+   "category": "Plant-based milk",
+   "vpk": [
+    -1,
+    0,
+    1
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "liquid"
+   ]
+  },
+  {
+   "category": "Plant-based yogurt",
+   "vpk": [
+    0,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Popcorn",
+   "vpk": [
+    2,
+    0,
+    -1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "dry",
+    "light",
+    "rough"
+   ],
+   "note": "Puffed dry grain — archetypal vata aggravator."
+  },
+  {
+   "category": "Pork",
+   "vpk": [
+    -1,
+    1,
+    2
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy",
+    "oily"
+   ]
+  },
+  {
+   "category": "Pork Products",
+   "vpk": [
+    -1,
+    1,
+    2
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy",
+    "oily"
+   ]
+  },
+  {
+   "category": "Potato chips",
+   "vpk": [
+    1,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "dry",
+    "oily",
+    "light"
+   ]
+  },
+  {
+   "category": "Poultry Products",
+   "vpk": [
+    -1,
+    1,
+    0
+   ],
+   "virya": "heating",
+   "gunas": [
+    "light"
+   ]
+  },
+  {
+   "category": "Poultry mixed dishes",
+   "vpk": [
+    0,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Pretzels/snack mix",
+   "vpk": [
+    1,
+    1,
+    0
+   ],
+   "virya": "heating",
+   "gunas": [
+    "dry",
+    "light"
+   ]
+  },
+  {
+   "category": "Protein and nutritional powders",
+   "vpk": [
+    1,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "dry",
+    "dense"
+   ]
+  },
+  {
+   "category": "Pudding",
+   "vpk": [
+    -1,
+    0,
+    2
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "heavy",
+    "soft",
+    "smooth"
+   ]
+  },
+  {
+   "category": "Ramen and Asian broth-based soups",
+   "vpk": [
+    -1,
+    1,
+    0
+   ],
+   "virya": "heating",
+   "gunas": [
+    "liquid"
+   ],
+   "note": "Warm and soupy but very salty."
+  },
+  {
+   "category": "Ready-to-eat cereal",
+   "vpk": [
+    1,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "dry",
+    "light"
+   ]
+  },
+  {
+   "category": "Restaurant Foods",
+   "vpk": [
+    0,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Rice",
+   "vpk": [
+    -1,
+    -1,
+    1
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "soft",
+    "smooth"
+   ],
+   "note": "Classical shali."
+  },
+  {
+   "category": "Rice mixed dishes",
+   "vpk": [
+    0,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Rolls and buns",
+   "vpk": [
+    0,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "soft",
+    "heavy"
+   ]
+  },
+  {
+   "category": "Salad dressings and vegetable oils",
+   "vpk": [
+    -1,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "oily",
+    "liquid"
+   ]
+  },
+  {
+   "category": "Saltine crackers",
+   "vpk": [
+    1,
+    1,
+    -1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "dry",
+    "light"
+   ]
+  },
+  {
+   "category": "Sauces",
+   "vpk": [
+    0,
+    1,
+    0
+   ],
+   "virya": "heating",
+   "gunas": [
+    "liquid"
+   ]
+  },
+  {
+   "category": "Sausages",
+   "vpk": [
+    0,
+    1,
+    2
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy",
+    "oily"
+   ]
+  },
+  {
+   "category": "Sausages and Luncheon Meats",
+   "vpk": [
+    0,
+    1,
+    2
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy",
+    "oily"
+   ]
+  },
+  {
+   "category": "Seafood mixed dishes",
+   "vpk": [
+    0,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Seafood sandwiches",
+   "vpk": [
+    0,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Shellfish",
+   "vpk": [
+    -1,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Smoothies and grain drinks",
+   "vpk": [
+    0,
+    -1,
+    2
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "heavy",
+    "liquid"
+   ]
+  },
+  {
+   "category": "Snacks",
+   "vpk": [
+    1,
+    1,
+    0
+   ],
+   "virya": "heating",
+   "gunas": [
+    "dry",
+    "light"
+   ]
+  },
+  {
+   "category": "Soft drinks",
+   "vpk": [
+    1,
+    0,
+    1
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "liquid"
+   ],
+   "note": "Cold, carbonated, intensely sweet."
+  },
+  {
+   "category": "Soups",
+   "vpk": [
+    -1,
+    0,
+    0
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "liquid",
+    "soft"
+   ],
+   "note": "Warm and liquid — generally vata-friendly."
+  },
+  {
+   "category": "Soy and meat-alternative products",
+   "vpk": [
+    1,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "heavy",
+    "dense"
+   ],
+   "note": "Highly processed; hard to digest."
+  },
+  {
+   "category": "Soy-based condiments",
+   "vpk": [
+    0,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "liquid",
+    "sharp"
+   ],
+   "note": "Fermented and very salty."
+  },
+  {
+   "category": "Spices and Herbs",
+   "vpk": [
+    -1,
+    1,
+    -1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "light",
+    "sharp"
+   ],
+   "note": "Generic pungent-aromatic profile; classical spices are dravya-bound."
+  },
+  {
+   "category": "Spinach",
+   "vpk": [
+    0,
+    1,
+    -1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "light",
+    "rough"
+   ]
+  },
+  {
+   "category": "Sport and energy drinks",
+   "vpk": [
+    1,
+    1,
+    0
+   ],
+   "virya": "heating",
+   "gunas": [
+    "liquid"
+   ]
+  },
+  {
+   "category": "Stir-fry and soy-based sauce mixtures",
+   "vpk": [
+    0,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Strawberries",
+   "vpk": [
+    0,
+    1,
+    0
+   ],
+   "virya": "heating",
+   "gunas": [
+    "light"
+   ]
+  },
+  {
+   "category": "String beans",
+   "vpk": [
+    1,
+    -1,
+    -1
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "light"
+   ]
+  },
+  {
+   "category": "Sugar substitutes",
+   "vpk": [
+    1,
+    0,
+    0
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "light"
+   ],
+   "note": "Artificial; no rasa nourishment."
+  },
+  {
+   "category": "Sugars and honey",
+   "vpk": [
+    0,
+    0,
+    2
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "heavy",
+    "smooth"
+   ],
+   "note": "Refined sugar; classical honey/jaggery are dravya-bound."
+  },
+  {
+   "category": "Sweets",
+   "vpk": [
+    0,
+    0,
+    2
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Tap water",
+   "vpk": [
+    0,
+    -1,
+    0
+   ],
+   "virya": "cooling",
+   "gunas": [
+    "liquid"
+   ]
+  },
+  {
+   "category": "Tea",
+   "vpk": [
+    1,
+    0,
+    -1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "light",
+    "dry"
+   ],
+   "note": "Astringent; drying in excess."
+  },
+  {
+   "category": "Tomato-based condiments",
+   "vpk": [
+    0,
+    1,
+    0
+   ],
+   "virya": "heating",
+   "gunas": [
+    "liquid",
+    "sharp"
+   ]
+  },
+  {
+   "category": "Tomatoes",
+   "vpk": [
+    0,
+    1,
+    0
+   ],
+   "virya": "heating",
+   "gunas": [
+    "light"
+   ],
+   "note": "Nightshade; sour-heating."
+  },
+  {
+   "category": "Tortilla",
+   "vpk": [
+    1,
+    0,
+    0
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "dry",
+    "light"
+   ]
+  },
+  {
+   "category": "Tortillas",
+   "vpk": [
+    1,
+    0,
+    0
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "dry",
+    "light"
+   ]
+  },
+  {
+   "category": "Turkey",
+   "vpk": [
+    -1,
+    1,
+    0
+   ],
+   "virya": "heating",
+   "gunas": [
+    "light"
+   ]
+  },
+  {
+   "category": "Turnovers and other grain-based items",
+   "vpk": [
+    0,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy",
+    "oily"
+   ]
+  },
+  {
+   "category": "Vegetable dishes",
+   "vpk": [
+    0,
+    0,
+    0
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "light"
+   ]
+  },
+  {
+   "category": "Vegetable juice",
+   "vpk": [
+    0,
+    0,
+    -1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "liquid",
+    "light"
+   ]
+  },
+  {
+   "category": "Vegetable sandwiches/burgers",
+   "vpk": [
+    0,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "heavy"
+   ]
+  },
+  {
+   "category": "Vegetables and Vegetable Products",
+   "vpk": [
+    0,
+    0,
+    -1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "light"
+   ]
+  },
+  {
+   "category": "Vegetables on a sandwich",
+   "vpk": [
+    0,
+    0,
+    -1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "light"
+   ]
+  },
+  {
+   "category": "White potatoes",
+   "vpk": [
+    1,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "heavy",
+    "dry"
+   ],
+   "note": "Nightshade; dry-heavy, aggravates vata."
+  },
+  {
+   "category": "Wine",
+   "vpk": [
+    0,
+    1,
+    0
+   ],
+   "virya": "heating",
+   "gunas": [
+    "liquid",
+    "sharp"
+   ],
+   "note": "Small quantities aid agni (draksharishta parallel); excess aggravates pitta."
+  },
+  {
+   "category": "Yeast breads",
+   "vpk": [
+    0,
+    0,
+    1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "soft",
+    "heavy"
+   ]
+  },
+  {
+   "category": "Yogurt",
+   "vpk": [
+    -1,
+    1,
+    2
+   ],
+   "virya": "heating",
+   "gunas": [
+    "heavy"
+   ],
+   "note": "Classical dadhi: never at night, never heated."
+  },
+  {
+   "category": "peas",
+   "vpk": [
+    1,
+    0,
+    -1
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "light",
+    "dry"
+   ]
+  },
+  {
+   "category": "syrups",
+   "vpk": [
+    0,
+    0,
+    2
+   ],
+   "virya": "neutral",
+   "gunas": [
+    "heavy",
+    "smooth",
+    "liquid"
+   ]
+  }
+ ]
+}

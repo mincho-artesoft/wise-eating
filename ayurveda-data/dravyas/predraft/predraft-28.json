@@ -1,0 +1,695 @@
+{
+  "predraftVersion": "1.0",
+  "batch": "predraft-28",
+  "items": [
+    {
+      "id": "dravya.malabar-spinach",
+      "name": "Malabar spinach (poi)",
+      "sanskrit": "Upodika",
+      "aliases": [
+        "poi"
+      ],
+      "category": "leafy-green",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling",
+        "note": "classical unctuous green"
+      },
+      "usda": [
+        {
+          "fdcId": 6855,
+          "name": "Malabar spinach, cooked",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 35
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.dill-greens",
+      "name": "Dill greens (suva)",
+      "sanskrit": "Shatapushpa Shaka",
+      "aliases": [
+        "suva"
+      ],
+      "category": "leafy-green",
+      "canonHints": {
+        "vpk": [
+          -2,
+          0,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 9279,
+          "name": "Dill weed, fresh",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 35
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.radish-greens",
+      "name": "Radish greens",
+      "sanskrit": "Mulaka Patra",
+      "aliases": [],
+      "category": "leafy-green",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -2
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 35
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: radish greens; mulaka patra."
+    },
+    {
+      "id": "dravya.lettuce",
+      "name": "Lettuce",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "leafy-green",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 4185,
+          "name": "Lettuce, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 35
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.spring-garlic-greens",
+      "name": "Spring garlic greens",
+      "sanskrit": "Rasona Patra",
+      "aliases": [],
+      "category": "leafy-green",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -2
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 35
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: spring garlic greens; rasona patra."
+    },
+    {
+      "id": "dravya.haak",
+      "name": "Haak (Kashmiri collard)",
+      "sanskrit": null,
+      "aliases": [
+        "Kashmiri collard"
+      ],
+      "category": "leafy-green",
+      "canonHints": {
+        "vpk": [
+          0,
+          0,
+          -1
+        ],
+        "virya": "neutral"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 35
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: haak."
+    },
+    {
+      "id": "dravya.agathi-leaf",
+      "name": "Agathi leaf",
+      "sanskrit": "Agastya Patra",
+      "aliases": [],
+      "category": "leafy-green",
+      "canonHints": {
+        "vpk": [
+          1,
+          -1,
+          -2
+        ],
+        "virya": "cooling",
+        "note": "bitter; monthly ritual use in south"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 35
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: agathi leaf; agastya patra."
+    },
+    {
+      "id": "dravya.ponnanganni",
+      "name": "Dwarf copperleaf (ponnanganni)",
+      "sanskrit": "Matsyakshi",
+      "aliases": [
+        "ponnanganni"
+      ],
+      "category": "leafy-green",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling",
+        "note": "classical eye-nourishing green"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 35
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: dwarf copperleaf; matsyakshi; ponnanganni."
+    },
+    {
+      "id": "dravya.manathakkali-greens",
+      "name": "Black nightshade greens",
+      "sanskrit": "Kakamachi",
+      "aliases": [],
+      "category": "leafy-green",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          -1
+        ],
+        "virya": "heating",
+        "note": "classical ulcer-soothing green"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 35
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: black nightshade greens; kakamachi; manathakkali greens."
+    },
+    {
+      "id": "dravya.pumpkin-tendril",
+      "name": "Pumpkin tendrils and leaves",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "leafy-green",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 35
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: pumpkin tendrils and leaves; pumpkin tendril."
+    },
+    {
+      "id": "dravya.taro-tender-leaf",
+      "name": "Tender taro leaf (patra use)",
+      "sanskrit": null,
+      "aliases": [
+        "patra use"
+      ],
+      "category": "leafy-green",
+      "canonHints": {
+        "vpk": [
+          1,
+          0,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 12478,
+          "name": "Taro leaf (dried, aromatic)",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 35
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.chakramarda-greens",
+      "name": "Chakvad greens (cassia tora)",
+      "sanskrit": "Chakramarda",
+      "aliases": [
+        "cassia tora"
+      ],
+      "category": "leafy-green",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -2
+        ],
+        "virya": "heating",
+        "note": "monsoon wild green"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 35
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: chakvad greens; chakramarda; chakramarda greens."
+    },
+    {
+      "id": "dravya.dry-dates",
+      "name": "Dry dates (chhuara)",
+      "sanskrit": "Kharjura (shushka)",
+      "aliases": [
+        "chhuara"
+      ],
+      "category": "dry-fruit-nut",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 5729,
+          "name": "Dates, medjool",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 oz",
+          "grams": 28
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.soft-dates",
+      "name": "Soft dates (khajur)",
+      "sanskrit": "Kharjura",
+      "aliases": [
+        "khajur"
+      ],
+      "category": "dry-fruit-nut",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 oz",
+          "grams": 28
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: soft dates; kharjura."
+    },
+    {
+      "id": "dravya.dry-fig",
+      "name": "Dry fig (anjeer)",
+      "sanskrit": "Anjira (shushka)",
+      "aliases": [
+        "anjeer"
+      ],
+      "category": "dry-fruit-nut",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 3630,
+          "name": "Fig, dried",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 oz",
+          "grams": 28
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.dried-water-chestnut",
+      "name": "Dried water chestnut",
+      "sanskrit": "Shringataka (shushka)",
+      "aliases": [],
+      "category": "dry-fruit-nut",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 oz",
+          "grams": 28
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: dried water chestnut; shringataka."
+    },
+    {
+      "id": "dravya.dried-cranberry",
+      "name": "Dried cranberry",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "dry-fruit-nut",
+      "canonHints": {
+        "vpk": [
+          0,
+          0,
+          -1
+        ],
+        "virya": "heating",
+        "note": "modern adoption"
+      },
+      "usda": [
+        {
+          "fdcId": 3628,
+          "name": "Cranberries, dried",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 oz",
+          "grams": 28
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.kamal-gatta-dry",
+      "name": "Dried lotus seed (kamal gatta)",
+      "sanskrit": "Kamala Beeja (shushka)",
+      "aliases": [
+        "kamal gatta"
+      ],
+      "category": "dry-fruit-nut",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 oz",
+          "grams": 28
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: dried lotus seed; kamala beeja; kamal gatta dry."
+    },
+    {
+      "id": "dravya.panchmeva",
+      "name": "Panchmeva (five dry fruits)",
+      "sanskrit": "Panchameva",
+      "aliases": [
+        "five dry fruits"
+      ],
+      "category": "dry-fruit-nut",
+      "canonHints": {
+        "vpk": [
+          -2,
+          -1,
+          1
+        ],
+        "virya": "neutral",
+        "note": "almond+raisin+chhuara+coconut+chironji (traditions vary)"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 oz",
+          "grams": 28
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: panchmeva; panchameva."
+    },
+    {
+      "id": "dravya.white-sesame",
+      "name": "White sesame seed",
+      "sanskrit": "Shveta Tila",
+      "aliases": [],
+      "category": "seed",
+      "canonHints": {
+        "vpk": [
+          -2,
+          1,
+          1
+        ],
+        "virya": "heating",
+        "note": "tila — head of classical oilseeds; winter staple"
+      },
+      "usda": [
+        {
+          "fdcId": 12428,
+          "name": "White sesame",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 10
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.black-sesame",
+      "name": "Black sesame seed",
+      "sanskrit": "Krishna Tila",
+      "aliases": [],
+      "category": "seed",
+      "canonHints": {
+        "vpk": [
+          -2,
+          1,
+          1
+        ],
+        "virya": "heating",
+        "note": "classically superior tila"
+      },
+      "usda": [
+        {
+          "fdcId": 12429,
+          "name": "Black sesame",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 10
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.sabja-seed",
+      "name": "Sweet basil seed (sabja)",
+      "sanskrit": "Tukmaria",
+      "aliases": [
+        "sabja"
+      ],
+      "category": "seed",
+      "canonHints": {
+        "vpk": [
+          0,
+          -2,
+          0
+        ],
+        "virya": "cooling",
+        "note": "falooda seed; summer coolant"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 10
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: sweet basil seed; tukmaria; sabja seed."
+    },
+    {
+      "id": "dravya.muskmelon-seed",
+      "name": "Muskmelon seed",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "seed",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 10
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: muskmelon seed."
+    },
+    {
+      "id": "dravya.cucumber-seed",
+      "name": "Cucumber seed (magaz)",
+      "sanskrit": null,
+      "aliases": [
+        "magaz"
+      ],
+      "category": "seed",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 10
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: cucumber seed."
+    },
+    {
+      "id": "dravya.garden-cress-seed",
+      "name": "Garden cress seed (halim/aliv)",
+      "sanskrit": "Chandrashura",
+      "aliases": [
+        "halim/aliv"
+      ],
+      "category": "seed",
+      "canonHints": {
+        "vpk": [
+          -2,
+          1,
+          -1
+        ],
+        "virya": "heating",
+        "note": "classical postpartum seed"
+      },
+      "usda": [
+        {
+          "fdcId": 12567,
+          "name": "Garden cress seed",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 10
+        }
+      ],
+      "_facetsPending": true
+    }
+  ]
+}

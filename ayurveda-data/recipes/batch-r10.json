@@ -1,0 +1,4384 @@
+{
+  "formatVersion": "1.0",
+  "batch": "recipe-batch-r10",
+  "qualityState": "aiDraft",
+  "items": [
+    {
+      "id": "recipe.intl-quinoa-carrot-chickpea-bowl",
+      "name": "Warm Quinoa Carrot Chickpea Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the quinoa and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced carrot and cooked chickpeas and fresh cilantro and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Quinoa Carrot Chickpea Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-quinoa-beet-walnut-bowl",
+      "name": "Warm Quinoa Beet Walnut Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, diced",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the quinoa and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced beetroot and walnuts and fresh dill and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Quinoa Beet Walnut Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-quinoa-zucchini-tofu-bowl",
+      "name": "Warm Quinoa Zucchini Tofu Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the quinoa and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced zucchini and cubed firm tofu and fresh mint and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Quinoa Zucchini Tofu Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-quinoa-pumpkin-adzuki-bowl",
+      "name": "Warm Quinoa Pumpkin Adzuki Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa",
+          "grams": 245
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.adzuki",
+          "name": "Cooked adzuki beans",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the quinoa and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced pumpkin and cooked adzuki beans and fennel seeds and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Quinoa Pumpkin Adzuki Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-quinoa-broccoli-mung-bowl",
+      "name": "Warm Quinoa Broccoli Mung Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa",
+          "grams": 245
+        },
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli florets",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Cooked mung beans",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the quinoa and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the broccoli florets and cooked mung beans and fresh parsley and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Quinoa Broccoli Mung Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-quinoa-sweet-potato-black-bean-bowl",
+      "name": "Warm Quinoa Sweet Potato Black Bean Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, diced",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.black-beans",
+          "name": "Cooked black beans",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the quinoa and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced sweet potato and cooked black beans and fresh cilantro and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Quinoa Sweet Potato Black Bean Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-quinoa-asparagus-pea-bowl",
+      "name": "Warm Quinoa Asparagus Pea Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.asparagus",
+          "name": "Asparagus, cut",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the quinoa and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the asparagus cut and green peas and fresh dill and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Quinoa Asparagus Pea Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-quinoa-cauliflower-chickpea-bowl",
+      "name": "Warm Quinoa Cauliflower Chickpea Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa",
+          "grams": 245
+        },
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower florets",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the quinoa and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the cauliflower florets and cooked chickpeas and fresh mint and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Quinoa Cauliflower Chickpea Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-quinoa-green-bean-almond-bowl",
+      "name": "Warm Quinoa Green Bean Almond Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 42
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the quinoa and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the green beans cut and chopped almonds and fresh parsley and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Quinoa Green Bean Almond Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-quinoa-spinach-tempeh-bowl",
+      "name": "Warm Quinoa Spinach Tempeh Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.tempeh",
+          "name": "Tempeh, cubed",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the quinoa and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the chopped spinach and cubed tempeh and coriander seeds and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Quinoa Spinach Tempeh Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-millet-carrot-pea-bowl",
+      "name": "Warm Millet Carrot Pea Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Rinse the proso millet and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced carrot and green peas and fresh cilantro and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Millet Carrot Pea Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-millet-pumpkin-chickpea-bowl",
+      "name": "Warm Millet Pumpkin Chickpea Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet",
+          "grams": 245
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Rinse the proso millet and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced pumpkin and cooked chickpeas and fennel seeds and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Millet Pumpkin Chickpea Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-millet-beet-mung-bowl",
+      "name": "Warm Millet Beet Mung Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet",
+          "grams": 245
+        },
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, diced",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Cooked mung beans",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Rinse the proso millet and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced beetroot and cooked mung beans and fresh dill and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Millet Beet Mung Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-millet-zucchini-tofu-bowl",
+      "name": "Warm Millet Zucchini Tofu Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet",
+          "grams": 245
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Rinse the proso millet and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced zucchini and cubed firm tofu and fresh mint and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Millet Zucchini Tofu Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-millet-cabbage-adzuki-bowl",
+      "name": "Warm Millet Cabbage Adzuki Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, chopped",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.adzuki",
+          "name": "Cooked adzuki beans",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Rinse the proso millet and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the chopped cabbage and cooked adzuki beans and coriander seeds and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Millet Cabbage Adzuki Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-millet-sweet-potato-peanut-bowl",
+      "name": "Warm Millet Sweet Potato Peanut Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, diced",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.peanut",
+          "name": "Peanuts, toasted",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Rinse the proso millet and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced sweet potato and toasted peanuts and fresh cilantro and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Millet Sweet Potato Peanut Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-millet-broccoli-black-bean-bowl",
+      "name": "Warm Millet Broccoli Black Bean Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli florets",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.black-beans",
+          "name": "Cooked black beans",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Rinse the proso millet and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the broccoli florets and cooked black beans and fresh parsley and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Millet Broccoli Black Bean Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-millet-spinach-chickpea-bowl",
+      "name": "Warm Millet Spinach Chickpea Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Rinse the proso millet and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the chopped spinach and cooked chickpeas and fennel seeds and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Millet Spinach Chickpea Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-millet-turnip-mung-bowl",
+      "name": "Warm Millet Turnip Mung Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet",
+          "grams": 245
+        },
+        {
+          "dravyaId": "dravya.turnip",
+          "name": "Turnip, diced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Cooked mung beans",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Rinse the proso millet and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced turnip and cooked mung beans and fresh parsley and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Millet Turnip Mung Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-millet-eggplant-lentil-bowl",
+      "name": "Warm Millet Eggplant Lentil Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.eggplant",
+          "name": "Eggplant, diced",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.brown-lentil",
+          "name": "Cooked brown lentils",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Rinse the proso millet and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced eggplant and cooked brown lentils and fresh mint and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Millet Eggplant Lentil Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-brown-rice-kale-chickpea-bowl",
+      "name": "Warm Brown Rice Kale Chickpea Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.kale",
+          "name": "Kale, chopped",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Rinse the brown rice and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the chopped kale and cooked chickpeas and fresh parsley and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Brown Rice Kale Chickpea Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-brown-rice-broccoli-tofu-bowl",
+      "name": "Warm Brown Rice Broccoli Tofu Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli florets",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Rinse the brown rice and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the broccoli florets and cubed firm tofu and fresh dill and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Brown Rice Broccoli Tofu Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-white-rice-zucchini-mint-bowl",
+      "name": "Warm Rice Zucchini Mint Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Cooked mung beans",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white basmati rice and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced zucchini and cooked mung beans and fresh mint and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Rice Zucchini Mint Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-white-rice-beet-pea-bowl",
+      "name": "Warm Rice Beet Pea Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, diced",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white basmati rice and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced beetroot and green peas and fresh dill and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Rice Beet Pea Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-brown-rice-pumpkin-walnut-bowl",
+      "name": "Warm Brown Rice Pumpkin Walnut Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Rinse the brown rice and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced pumpkin and walnuts and fennel seeds and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Brown Rice Pumpkin Walnut Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-white-rice-spinach-sprout-bowl",
+      "name": "Warm Rice Spinach Sprout Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.mung-sprouts",
+          "name": "Mung sprouts, steamed",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white rice and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the chopped spinach and steamed mung sprouts and fresh cilantro and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Rice Spinach Sprout Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-brown-rice-sweet-potato-tempeh-bowl",
+      "name": "Warm Brown Rice Sweet Potato Tempeh Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice",
+          "grams": 245
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, diced",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.tempeh",
+          "name": "Tempeh, cubed",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Rinse the brown rice and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced sweet potato and cubed tempeh and fresh parsley and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Brown Rice Sweet Potato Tempeh Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-white-rice-green-bean-coconut-bowl",
+      "name": "Warm Rice Green Bean Coconut Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Fresh lime juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white rice and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the green beans cut and grated fresh coconut and curry leaves and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the Coconut oil, Fresh lime juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Rice Green Bean Coconut Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-brown-rice-cauliflower-lentil-bowl",
+      "name": "Warm Brown Rice Cauliflower Lentil Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice",
+          "grams": 245
+        },
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower florets",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.brown-lentil",
+          "name": "Cooked brown lentils",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Rinse the brown rice and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the cauliflower florets and cooked brown lentils and fresh mint and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Brown Rice Cauliflower Lentil Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-white-rice-asparagus-pea-bowl",
+      "name": "Warm Rice Asparagus Pea Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.asparagus",
+          "name": "Asparagus, cut",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white basmati rice and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the asparagus cut and green peas and fresh dill and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Rice Asparagus Pea Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-barley-carrot-celery-bowl",
+      "name": "Warm Barley Carrot Celery Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.celery",
+          "name": "Celery, sliced",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1000
+        }
+      ],
+      "steps": [
+        "Rinse the pearled barley and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced carrot and sliced celery and cooked chickpeas and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Barley Carrot Celery Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-barley-beet-cabbage-bowl",
+      "name": "Warm Barley Beet Cabbage Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, diced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, chopped",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1000
+        }
+      ],
+      "steps": [
+        "Rinse the pearled barley and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced beetroot and chopped cabbage and fresh dill and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Barley Beet Cabbage Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-barley-mushroom-tofu-bowl",
+      "name": "Warm Barley Mushroom Tofu Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley",
+          "grams": 245
+        },
+        {
+          "dravyaId": "dravya.white-mushroom",
+          "name": "White mushrooms, sliced",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1000
+        }
+      ],
+      "steps": [
+        "Rinse the pearled barley and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the sliced white mushrooms and cubed firm tofu and fresh thyme and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Barley Mushroom Tofu Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-barley-pumpkin-kale-bowl",
+      "name": "Warm Barley Pumpkin Kale Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley",
+          "grams": 245
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.kale",
+          "name": "Kale, chopped",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1000
+        }
+      ],
+      "steps": [
+        "Rinse the pearled barley and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced pumpkin and chopped kale and fresh parsley and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Barley Pumpkin Kale Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-barley-broccoli-pea-bowl",
+      "name": "Warm Barley Broccoli Pea Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley",
+          "grams": 245
+        },
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli florets",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1000
+        }
+      ],
+      "steps": [
+        "Rinse the pearled barley and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the broccoli florets and green peas and fresh dill and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Barley Broccoli Pea Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-barley-turnip-parsley-bowl",
+      "name": "Warm Barley Turnip Parsley Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.turnip",
+          "name": "Turnip, diced",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Cooked mung beans",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1000
+        }
+      ],
+      "steps": [
+        "Rinse the pearled barley and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced turnip and cooked mung beans and fresh parsley and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Barley Turnip Parsley Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-barley-sweet-potato-black-bean-bowl",
+      "name": "Warm Barley Sweet Potato Black Bean Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, diced",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.black-beans",
+          "name": "Cooked black beans",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1000
+        }
+      ],
+      "steps": [
+        "Rinse the pearled barley and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced sweet potato and cooked black beans and fresh cilantro and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Barley Sweet Potato Black Bean Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-barley-zucchini-chickpea-bowl",
+      "name": "Warm Barley Zucchini Chickpea Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley",
+          "grams": 245
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1000
+        }
+      ],
+      "steps": [
+        "Rinse the pearled barley and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced zucchini and cooked chickpeas and fresh mint and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Barley Zucchini Chickpea Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-barley-cauliflower-walnut-bowl",
+      "name": "Warm Barley Cauliflower Walnut Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower florets",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1000
+        }
+      ],
+      "steps": [
+        "Rinse the pearled barley and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the cauliflower florets and walnuts and fresh parsley and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Barley Cauliflower Walnut Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-barley-spinach-adzuki-bowl",
+      "name": "Warm Barley Spinach Adzuki Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.adzuki",
+          "name": "Cooked adzuki beans",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1000
+        }
+      ],
+      "steps": [
+        "Rinse the pearled barley and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the chopped spinach and cooked adzuki beans and fennel seeds and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Barley Spinach Adzuki Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-buckwheat-cabbage-carrot-bowl",
+      "name": "Warm Buckwheat Cabbage Carrot Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat groats",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, chopped",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 820
+        }
+      ],
+      "steps": [
+        "Rinse the buckwheat groats and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the chopped cabbage and diced carrot and fresh dill and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Buckwheat Cabbage Carrot Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-buckwheat-mushroom-tofu-bowl",
+      "name": "Warm Buckwheat Mushroom Tofu Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat groats",
+          "grams": 245
+        },
+        {
+          "dravyaId": "dravya.white-mushroom",
+          "name": "White mushrooms, sliced",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 820
+        }
+      ],
+      "steps": [
+        "Rinse the buckwheat groats and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the sliced white mushrooms and cubed firm tofu and fresh thyme and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Buckwheat Mushroom Tofu Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-amaranth-pumpkin-chickpea-bowl",
+      "name": "Warm Amaranth Pumpkin Chickpea Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain",
+          "grams": 235
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 880
+        }
+      ],
+      "steps": [
+        "Rinse the amaranth grain and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced pumpkin and cooked chickpeas and fennel seeds and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Amaranth Pumpkin Chickpea Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-amaranth-beet-mung-bowl",
+      "name": "Warm Amaranth Beet Mung Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain",
+          "grams": 235
+        },
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, diced",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Cooked mung beans",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 880
+        }
+      ],
+      "steps": [
+        "Rinse the amaranth grain and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced beetroot and cooked mung beans and fresh dill and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Amaranth Beet Mung Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-oat-spinach-tofu-bowl",
+      "name": "Savory Warm Oat Spinach Tofu Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Steel-cut oats",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 820
+        }
+      ],
+      "steps": [
+        "Rinse the steel-cut oats and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the chopped spinach and cubed firm tofu and fresh parsley and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Savory Warm Oat Spinach Tofu Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-oat-carrot-pea-bowl",
+      "name": "Savory Warm Oat Carrot Pea Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Steel-cut oats",
+          "grams": 235
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 820
+        }
+      ],
+      "steps": [
+        "Rinse the steel-cut oats and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced carrot and green peas and fresh dill and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Savory Warm Oat Carrot Pea Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-sorghum-eggplant-chickpea-bowl",
+      "name": "Warm Sorghum Eggplant Chickpea Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.jowar",
+          "name": "Sorghum grain",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.eggplant",
+          "name": "Eggplant, diced",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1000
+        }
+      ],
+      "steps": [
+        "Rinse the sorghum grain and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced eggplant and cooked chickpeas and fresh mint and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Sorghum Eggplant Chickpea Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-sorghum-sweet-potato-black-bean-bowl",
+      "name": "Warm Sorghum Sweet Potato Black Bean Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.jowar",
+          "name": "Sorghum grain",
+          "grams": 235
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, diced",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.black-beans",
+          "name": "Cooked black beans",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1000
+        }
+      ],
+      "steps": [
+        "Rinse the sorghum grain and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced sweet potato and cooked black beans and fresh cilantro and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Sorghum Sweet Potato Black Bean Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-ragi-zucchini-mung-bowl",
+      "name": "Warm Ragi Zucchini Mung Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.ragi",
+          "name": "Finger millet grain",
+          "grams": 235
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Cooked mung beans",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 900
+        }
+      ],
+      "steps": [
+        "Rinse the finger millet grain and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced zucchini and cooked mung beans and coriander seeds and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Ragi Zucchini Mung Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-quinoa-turnip-adzuki-bowl",
+      "name": "Warm Quinoa Turnip Adzuki Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa",
+          "grams": 245
+        },
+        {
+          "dravyaId": "dravya.turnip",
+          "name": "Turnip, diced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.adzuki",
+          "name": "Cooked adzuki beans",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the quinoa and cook it with the water until tender; rest covered for eight minutes.",
+        "Prepare the diced turnip and cooked adzuki beans and fresh parsley and cook any raw vegetable topping until just tender.",
+        "Toast the cumin, then whisk it with the olive oil, fresh lemon juice, and rock salt.",
+        "Divide the warm grain among bowls and arrange the toppings over it.",
+        "Spoon over the dressing immediately and serve the bowl warm, not chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Quinoa Turnip Adzuki Bowl is assembled and served warm, with oil-citrus dressing added at the end. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-grain-bowl recipe"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    }
+  ]
+}

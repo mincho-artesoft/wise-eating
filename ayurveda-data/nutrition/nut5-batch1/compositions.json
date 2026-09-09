@@ -1,0 +1,455 @@
+{
+  "_meta": {
+    "authored": "2026-08-04",
+    "purpose": "Ingredient proportions for placeholder dravyas that are compositions of foods already in the catalogue. build_seed.py computes the panel from these the same way it computes recipe nutrition; nothing here is a nutrient value.",
+    "schema": {
+      "dravyaId": "the placeholder dravya being composed",
+      "yieldG": "finished weight of the batch, after cooking losses",
+      "ingredients": "[{ dravyaId, grams }] — raw weight going in",
+      "waterG": "water added, counted in the batch weight but contributing nothing",
+      "basis": "where the proportions come from",
+      "note": "anything a reviewer needs in order to disagree with me"
+    },
+    "rules": [
+      "Every referenced ingredient must itself have a panel, or the whole composition yields null. Partial is not allowed — a dish computed from half its ingredients understates every nutrient and looks authoritative doing it.",
+      "yieldG accounts for evaporation. Rice absorbs water and gains weight; a reduced milk sweet loses it. Getting this wrong rescales every value in the row.",
+      "Water is carried as waterG rather than as an ingredient because no water dravya exists, and because it contributes nothing but mass.",
+      "Salt is included at realistic culinary levels because sodium is a displayed nutrient and omitting it would understate it materially."
+    ],
+    "excluded_deliberately": {
+      "strained infusions": "jeera-water, ajwain-water, saunf-water, dhania-water, methi-water, ccf-tea, barley-water, tulsi-tea, lemongrass-tea, herbal-kadha, khus-sherbet. The solids are strained out and the extraction fraction into the water is not published. Computing them from whole seed weight would overstate every nutrient by roughly an order of magnitude. These stay null.",
+      "plain water": "warm-water, copper-water. Water. Mark not-applicable rather than asserting zeros.",
+      "fermented with unmeasured transformation": "gundruk, sinki, kinema, hawaijar, khalpi, black-carrot-kanji, neera. Fermentation changes composition in ways we have no measurement for.",
+      "unmeasurable losses": "besan-pakora, medu-vada, urad-papad (fried — oil uptake is not known), mango-pickle (long cure, brine exchange)."
+    },
+    "count": 34
+  },
+
+  "compositions": [
+    {
+      "dravyaId": "dravya.aam-panna",
+      "yieldG": 960, "waterG": 800,
+      "ingredients": [
+        { "dravyaId": "dravya.raw-mango-vegetable", "grams": 200 },
+        { "dravyaId": "dravya.jaggery", "grams": 40 },
+        { "dravyaId": "dravya.cumin", "grams": 3 },
+        { "dravyaId": "dravya.black-salt", "grams": 4 },
+        { "dravyaId": "dravya.mint", "grams": 6 }
+      ],
+      "basis": "The dravya's own preparation text: roasted green mango pulp squeezed into water with cumin, mint, black salt and a little jaggery. Four cups from two medium green mangoes.",
+      "note": "Whole pulp is consumed, not strained, so this is a genuine composition rather than an infusion. Verify dravya.mint exists; if the catalogue slug differs, substitute it rather than dropping mint."
+    },
+    {
+      "dravyaId": "dravya.kitchari-mung-rice",
+      "yieldG": 800, "waterG": 700,
+      "ingredients": [
+        { "dravyaId": "dravya.white-rice", "grams": 100 },
+        { "dravyaId": "dravya.mung-dal-split", "grams": 100 },
+        { "dravyaId": "dravya.ghee", "grams": 15 },
+        { "dravyaId": "dravya.cumin", "grams": 3 },
+        { "dravyaId": "dravya.turmeric", "grams": 2 },
+        { "dravyaId": "dravya.rock-salt", "grams": 4 }
+      ],
+      "basis": "Classical 1:1 rice to split mung, cooked soft in roughly 6 parts water. Yield after absorption and evaporation is about 4x the dry weight.",
+      "note": "The 1:1 ratio is the standard kitchari formula; thinner peya versions use more water and are separate entries."
+    },
+    {
+      "dravyaId": "dravya.kitchari-tridoshic",
+      "yieldG": 800, "waterG": 700,
+      "ingredients": [
+        { "dravyaId": "dravya.white-rice", "grams": 100 },
+        { "dravyaId": "dravya.mung-dal-split", "grams": 100 },
+        { "dravyaId": "dravya.ghee", "grams": 15 },
+        { "dravyaId": "dravya.cumin", "grams": 2 },
+        { "dravyaId": "dravya.coriander-seed", "grams": 2 },
+        { "dravyaId": "dravya.fennel-seed", "grams": 2 },
+        { "dravyaId": "dravya.turmeric", "grams": 2 },
+        { "dravyaId": "dravya.rock-salt", "grams": 4 }
+      ],
+      "basis": "As mung-rice kitchari with the CCF trio in place of plain cumin, per the dravya's own text."
+    },
+    {
+      "dravyaId": "dravya.khichadi-vegetable",
+      "yieldG": 1000, "waterG": 700,
+      "ingredients": [
+        { "dravyaId": "dravya.white-rice", "grams": 100 },
+        { "dravyaId": "dravya.mung-dal-split", "grams": 100 },
+        { "dravyaId": "dravya.carrot", "grams": 80 },
+        { "dravyaId": "dravya.green-peas", "grams": 60 },
+        { "dravyaId": "dravya.ghee", "grams": 15 },
+        { "dravyaId": "dravya.cumin", "grams": 3 },
+        { "dravyaId": "dravya.turmeric", "grams": 2 },
+        { "dravyaId": "dravya.rock-salt", "grams": 5 }
+      ],
+      "basis": "Kitchari base with seasonal vegetables added mid-simmer, per the dravya's text. Carrot and peas stand for 'seasonal'.",
+      "note": "If dravya.green-peas does not exist under that slug, use the catalogue's fresh pea row. Do not silently drop the vegetables — they are what distinguishes this row from plain kitchari."
+    },
+    {
+      "dravyaId": "dravya.curd-rice",
+      "yieldG": 620, "waterG": 300,
+      "ingredients": [
+        { "dravyaId": "dravya.white-rice", "grams": 100 },
+        { "dravyaId": "dravya.yogurt", "grams": 200 },
+        { "dravyaId": "dravya.milk-cow", "grams": 50 },
+        { "dravyaId": "dravya.mustard-seed", "grams": 2 },
+        { "dravyaId": "dravya.ginger-fresh", "grams": 5 },
+        { "dravyaId": "dravya.curry-leaf", "grams": 2 },
+        { "dravyaId": "dravya.rock-salt", "grams": 3 }
+      ],
+      "basis": "Soft-cooked rice folded with fresh curd and a little milk, tempered — the dravya's own description. Rice roughly triples in cooked weight."
+    },
+    {
+      "dravyaId": "dravya.coconut-rice",
+      "yieldG": 480, "waterG": 200,
+      "ingredients": [
+        { "dravyaId": "dravya.white-rice", "grams": 100 },
+        { "dravyaId": "dravya.coconut-fresh", "grams": 60 },
+        { "dravyaId": "dravya.ghee", "grams": 12 },
+        { "dravyaId": "dravya.urad-dal", "grams": 5 },
+        { "dravyaId": "dravya.mustard-seed", "grams": 2 },
+        { "dravyaId": "dravya.curry-leaf", "grams": 2 },
+        { "dravyaId": "dravya.rock-salt", "grams": 3 }
+      ],
+      "basis": "Fresh grated coconut folded into cooked rice with a ghee tempering of urad dal, mustard and curry leaves."
+    },
+    {
+      "dravyaId": "dravya.lemon-rice",
+      "yieldG": 470, "waterG": 200,
+      "ingredients": [
+        { "dravyaId": "dravya.white-rice", "grams": 100 },
+        { "dravyaId": "dravya.sesame-oil", "grams": 12 },
+        { "dravyaId": "dravya.chana-dal", "grams": 8 },
+        { "dravyaId": "dravya.urad-dal", "grams": 5 },
+        { "dravyaId": "dravya.mustard-seed", "grams": 2 },
+        { "dravyaId": "dravya.turmeric", "grams": 1 },
+        { "dravyaId": "dravya.lemon", "grams": 30 },
+        { "dravyaId": "dravya.curry-leaf", "grams": 2 },
+        { "dravyaId": "dravya.rock-salt", "grams": 3 }
+      ],
+      "basis": "Cooked rice tossed in a turmeric-mustard-chana dal tempering, finished off-heat with lemon juice. 30 g is the juice of about half a lemon."
+    },
+    {
+      "dravyaId": "dravya.tamarind-rice",
+      "yieldG": 500, "waterG": 200,
+      "ingredients": [
+        { "dravyaId": "dravya.white-rice", "grams": 100 },
+        { "dravyaId": "dravya.tamarind", "grams": 25 },
+        { "dravyaId": "dravya.sesame-oil", "grams": 18 },
+        { "dravyaId": "dravya.chana-dal", "grams": 10 },
+        { "dravyaId": "dravya.jaggery", "grams": 8 },
+        { "dravyaId": "dravya.red-chili", "grams": 3 },
+        { "dravyaId": "dravya.curry-leaf", "grams": 2 },
+        { "dravyaId": "dravya.rock-salt", "grams": 4 }
+      ],
+      "basis": "Rice mixed with pulikachal — tamarind simmered thick with sesame oil, chana dal, chilies and jaggery. Sesame oil is high in this dish and matters for the fat figure."
+    },
+    {
+      "dravyaId": "dravya.veg-pulao",
+      "yieldG": 620, "waterG": 250,
+      "ingredients": [
+        { "dravyaId": "dravya.white-rice", "grams": 150 },
+        { "dravyaId": "dravya.carrot", "grams": 60 },
+        { "dravyaId": "dravya.green-peas", "grams": 50 },
+        { "dravyaId": "dravya.onion", "grams": 40 },
+        { "dravyaId": "dravya.ghee", "grams": 20 },
+        { "dravyaId": "dravya.cardamom", "grams": 1 },
+        { "dravyaId": "dravya.black-pepper", "grams": 1 },
+        { "dravyaId": "dravya.rock-salt", "grams": 5 }
+      ],
+      "basis": "Basmati sautéed in ghee with whole spices and seasonal vegetables, then steamed."
+    },
+    {
+      "dravyaId": "dravya.dal-tadka-mung",
+      "yieldG": 800, "waterG": 700,
+      "ingredients": [
+        { "dravyaId": "dravya.mung-dal-split", "grams": 150 },
+        { "dravyaId": "dravya.ghee", "grams": 15 },
+        { "dravyaId": "dravya.cumin", "grams": 3 },
+        { "dravyaId": "dravya.asafoetida", "grams": 0.5 },
+        { "dravyaId": "dravya.ginger-fresh", "grams": 8 },
+        { "dravyaId": "dravya.turmeric", "grams": 2 },
+        { "dravyaId": "dravya.rock-salt", "grams": 5 }
+      ],
+      "basis": "Split mung cooked soft in about 5 parts water, finished with a ghee tempering."
+    },
+    {
+      "dravyaId": "dravya.dal-fry-toor",
+      "yieldG": 800, "waterG": 700,
+      "ingredients": [
+        { "dravyaId": "dravya.toor-dal", "grams": 150 },
+        { "dravyaId": "dravya.ghee", "grams": 18 },
+        { "dravyaId": "dravya.cumin", "grams": 3 },
+        { "dravyaId": "dravya.asafoetida", "grams": 0.5 },
+        { "dravyaId": "dravya.garlic", "grams": 8 },
+        { "dravyaId": "dravya.turmeric", "grams": 2 },
+        { "dravyaId": "dravya.rock-salt", "grams": 5 }
+      ],
+      "basis": "Toor dal pressure-cooked soft then tempered with ghee, cumin, hing, garlic and turmeric."
+    },
+    {
+      "dravyaId": "dravya.kadhi",
+      "yieldG": 900, "waterG": 500,
+      "ingredients": [
+        { "dravyaId": "dravya.buttermilk", "grams": 400 },
+        { "dravyaId": "dravya.chana-dal", "grams": 40 },
+        { "dravyaId": "dravya.ghee", "grams": 15 },
+        { "dravyaId": "dravya.mustard-seed", "grams": 2 },
+        { "dravyaId": "dravya.cumin", "grams": 2 },
+        { "dravyaId": "dravya.asafoetida", "grams": 0.5 },
+        { "dravyaId": "dravya.turmeric", "grams": 2 },
+        { "dravyaId": "dravya.curry-leaf", "grams": 2 },
+        { "dravyaId": "dravya.rock-salt", "grams": 5 }
+      ],
+      "basis": "Sour buttermilk whisked with besan and simmered. Besan is milled chana dal — same material, so chana dal stands in for it.",
+      "note": "The besan substitution is a milling difference, not a species one. Flag it in _review so it is visible."
+    },
+    {
+      "dravyaId": "dravya.rasam",
+      "yieldG": 900, "waterG": 800,
+      "ingredients": [
+        { "dravyaId": "dravya.tamarind", "grams": 20 },
+        { "dravyaId": "dravya.tomato", "grams": 80 },
+        { "dravyaId": "dravya.toor-dal", "grams": 25 },
+        { "dravyaId": "dravya.black-pepper", "grams": 3 },
+        { "dravyaId": "dravya.cumin", "grams": 3 },
+        { "dravyaId": "dravya.coriander-seed", "grams": 3 },
+        { "dravyaId": "dravya.asafoetida", "grams": 0.5 },
+        { "dravyaId": "dravya.curry-leaf", "grams": 2 },
+        { "dravyaId": "dravya.rock-salt", "grams": 5 }
+      ],
+      "basis": "Thin tamarind broth with rasam powder, tomato and hing.",
+      "note": "Rasam is drunk with its solids suspended rather than strained clear, so this is a composition. If the catalogue treats it as strained, move it to the excluded list instead of guessing an extraction fraction."
+    },
+    {
+      "dravyaId": "dravya.rice-gruel",
+      "yieldG": 800, "waterG": 750,
+      "ingredients": [
+        { "dravyaId": "dravya.white-rice", "grams": 80 },
+        { "dravyaId": "dravya.rock-salt", "grams": 2 }
+      ],
+      "basis": "Rice cooked in roughly 10 parts water — the mid-point of the 6-to-14 range in the dravya's own text, i.e. peya rather than manda or vilepi.",
+      "note": "The text spans three classical consistencies. This encodes peya. If the catalogue wants manda and vilepi as distinct rows they need separate entries, not a single average."
+    },
+    {
+      "dravyaId": "dravya.pakhala",
+      "yieldG": 700, "waterG": 400,
+      "ingredients": [
+        { "dravyaId": "dravya.white-rice", "grams": 100 },
+        { "dravyaId": "dravya.rock-salt", "grams": 3 }
+      ],
+      "basis": "Cooked rice soaked overnight in water. The ferment is mild and short; unlike gundruk or kinema the substrate is not transformed beyond recognition.",
+      "note": "Fermentation does change this row somewhat. Mark _review as derived-approximate so a reviewer can challenge it."
+    },
+    {
+      "dravyaId": "dravya.ambali",
+      "yieldG": 800, "waterG": 550,
+      "ingredients": [
+        { "dravyaId": "dravya.ragi", "grams": 80 },
+        { "dravyaId": "dravya.buttermilk", "grams": 200 },
+        { "dravyaId": "dravya.rock-salt", "grams": 3 }
+      ],
+      "basis": "Ragi porridge cooked, fermented overnight, thinned with buttermilk and salted.",
+      "note": "Same fermentation caveat as pakhala."
+    },
+    {
+      "dravyaId": "dravya.ragi-malt",
+      "yieldG": 700, "waterG": 500,
+      "ingredients": [
+        { "dravyaId": "dravya.ragi", "grams": 60 },
+        { "dravyaId": "dravya.milk-cow", "grams": 150 },
+        { "dravyaId": "dravya.jaggery", "grams": 25 }
+      ],
+      "basis": "Ragi flour cooked to a pourable porridge, finished sweet with milk and jaggery. The dravya's text gives a salty buttermilk variant too; this encodes the sweet form.",
+      "note": "Name the variant in _review so the choice is visible rather than implied."
+    },
+    {
+      "dravyaId": "dravya.sattu-drink",
+      "yieldG": 480, "waterG": 400,
+      "ingredients": [
+        { "dravyaId": "dravya.chana-dal", "grams": 40 },
+        { "dravyaId": "dravya.rock-salt", "grams": 2 },
+        { "dravyaId": "dravya.lemon", "grams": 10 }
+      ],
+      "basis": "2-3 tbsp roasted chana sattu whisked into a cup of water, seasoned salty. Chana dal stands for sattu.",
+      "note": "Sattu is ROASTED gram flour. Roasting drives off moisture and concentrates every nutrient by roughly 8-10% relative to raw dal. Using raw chana dal understates this row. Either apply a measured moisture correction or mark it derived-approximate — do not present it as measured."
+    },
+    {
+      "dravyaId": "dravya.lassi-digestive",
+      "yieldG": 720, "waterG": 480,
+      "ingredients": [
+        { "dravyaId": "dravya.yogurt", "grams": 240 },
+        { "dravyaId": "dravya.cumin", "grams": 3 },
+        { "dravyaId": "dravya.rock-salt", "grams": 3 }
+      ],
+      "basis": "1 part yogurt to 2 parts water with roasted cumin and rock salt, exactly as the dravya's text specifies. The dilution is the defining feature."
+    },
+    {
+      "dravyaId": "dravya.lassi-sweet",
+      "yieldG": 600, "waterG": 300,
+      "ingredients": [
+        { "dravyaId": "dravya.yogurt", "grams": 300 },
+        { "dravyaId": "dravya.white-sugar", "grams": 30 }
+      ],
+      "basis": "Yogurt blended with water and sugar; sweet lassi is thicker than the digestive form."
+    },
+    {
+      "dravyaId": "dravya.shrikhand",
+      "yieldG": 300,
+      "ingredients": [
+        { "dravyaId": "dravya.yogurt", "grams": 600 },
+        { "dravyaId": "dravya.white-sugar", "grams": 90 },
+        { "dravyaId": "dravya.cardamom", "grams": 1 },
+        { "dravyaId": "dravya.saffron", "grams": 0.1 }
+      ],
+      "basis": "Curd hung until roughly half its weight drains away as whey, then whisked with sugar. The yield figure carries the drainage and is the single most important number in this entry.",
+      "note": "Hung curd loses whey — water, lactose and whey protein. Yield 300 g from 600 g curd plus 90 g sugar means real solids are retained while the drained fraction leaves. This is an approximation of a separation, not a simple mixture; mark it derived-approximate."
+    },
+    {
+      "dravyaId": "dravya.basundi",
+      "yieldG": 400,
+      "ingredients": [
+        { "dravyaId": "dravya.milk-cow", "grams": 1000 },
+        { "dravyaId": "dravya.white-sugar", "grams": 60 },
+        { "dravyaId": "dravya.cardamom", "grams": 1 }
+      ],
+      "basis": "Milk simmered down to less than half, sweetened. Reduction is pure water loss, so every non-water nutrient concentrates by the yield ratio — which the pipeline handles correctly as long as yieldG is right."
+    },
+    {
+      "dravyaId": "dravya.rabri",
+      "yieldG": 300,
+      "ingredients": [
+        { "dravyaId": "dravya.milk-cow", "grams": 1000 },
+        { "dravyaId": "dravya.white-sugar", "grams": 70 },
+        { "dravyaId": "dravya.cardamom", "grams": 1 }
+      ],
+      "basis": "Milk reduced further than basundi, to roughly a third, with the cream layers gathered in."
+    },
+    {
+      "dravyaId": "dravya.badam-milk",
+      "yieldG": 500,
+      "ingredients": [
+        { "dravyaId": "dravya.milk-cow", "grams": 480 },
+        { "dravyaId": "dravya.almond", "grams": 30 },
+        { "dravyaId": "dravya.white-sugar", "grams": 20 },
+        { "dravyaId": "dravya.cardamom", "grams": 0.5 },
+        { "dravyaId": "dravya.saffron", "grams": 0.05 }
+      ],
+      "basis": "Soaked peeled almonds ground and simmered into milk with saffron and cardamom."
+    },
+    {
+      "dravyaId": "dravya.rose-milk",
+      "yieldG": 500,
+      "ingredients": [
+        { "dravyaId": "dravya.milk-cow", "grams": 460 },
+        { "dravyaId": "dravya.white-sugar", "grams": 35 }
+      ],
+      "basis": "Rose syrup stirred into boiled-and-cooled milk. Rose syrup is carried as its sugar content because no rose-syrup row exists and the syrup's non-sugar contribution is negligible.",
+      "note": "State the syrup approximation in _review."
+    },
+    {
+      "dravyaId": "dravya.masala-chai",
+      "yieldG": 700, "waterG": 400,
+      "ingredients": [
+        { "dravyaId": "dravya.milk-cow", "grams": 300 },
+        { "dravyaId": "dravya.white-sugar", "grams": 20 }
+      ],
+      "basis": "Milk and water roughly 3:4 with modest sugar. The tea leaves and whole spices are simmered and strained, so they are excluded rather than counted — including them at whole weight would be the infusion error.",
+      "note": "This row is honest about milk and sugar and silent about the spices. Say so in _review."
+    },
+    {
+      "dravyaId": "dravya.thandai",
+      "yieldG": 700, "waterG": 200,
+      "ingredients": [
+        { "dravyaId": "dravya.milk-cow", "grams": 450 },
+        { "dravyaId": "dravya.almond", "grams": 20 },
+        { "dravyaId": "dravya.white-sugar", "grams": 35 },
+        { "dravyaId": "dravya.fennel-seed", "grams": 4 },
+        { "dravyaId": "dravya.black-pepper", "grams": 0.5 },
+        { "dravyaId": "dravya.cardamom", "grams": 1 },
+        { "dravyaId": "dravya.saffron", "grams": 0.05 }
+      ],
+      "basis": "The seed-spice paste is ground and whisked into sweetened milk, then strained. The paste solids are largely retained in suspension, so unlike chai they are counted.",
+      "note": "Plain food form only. The bhang variant is explicitly a different substance and must not inherit this panel."
+    },
+    {
+      "dravyaId": "dravya.halwa-carrot",
+      "yieldG": 500,
+      "ingredients": [
+        { "dravyaId": "dravya.carrot", "grams": 500 },
+        { "dravyaId": "dravya.milk-cow", "grams": 300 },
+        { "dravyaId": "dravya.white-sugar", "grams": 80 },
+        { "dravyaId": "dravya.ghee", "grams": 40 },
+        { "dravyaId": "dravya.cashew", "grams": 20 },
+        { "dravyaId": "dravya.cardamom", "grams": 1 }
+      ],
+      "basis": "Grated carrot reduced slowly in milk, finished with ghee, sugar and nuts. Heavy reduction — yield is well under the input weight."
+    },
+    {
+      "dravyaId": "dravya.sooji-halwa",
+      "yieldG": 600, "waterG": 300,
+      "ingredients": [
+        { "dravyaId": "dravya.semolina", "grams": 120 },
+        { "dravyaId": "dravya.ghee", "grams": 80 },
+        { "dravyaId": "dravya.white-sugar", "grams": 100 },
+        { "dravyaId": "dravya.cardamom", "grams": 1 }
+      ],
+      "basis": "The classical 1:1:1 sooji-ghee-sugar by volume works out near these weights; ghee is lighter per volume than both.",
+      "note": "Ghee is high here and it is not an error — sheera is a rich dish and understating the fat would misrepresent it."
+    },
+    {
+      "dravyaId": "dravya.payasam-mung",
+      "yieldG": 900, "waterG": 500,
+      "ingredients": [
+        { "dravyaId": "dravya.mung-dal-split", "grams": 100 },
+        { "dravyaId": "dravya.jaggery", "grams": 120 },
+        { "dravyaId": "dravya.coconut-fresh", "grams": 80 },
+        { "dravyaId": "dravya.ghee", "grams": 20 },
+        { "dravyaId": "dravya.cashew", "grams": 15 },
+        { "dravyaId": "dravya.cardamom", "grams": 1 }
+      ],
+      "basis": "Roasted split mung cooked soft, jaggery melted in, finished with coconut milk and cardamom. Fresh coconut stands for the coconut milk pressed from it."
+    },
+    {
+      "dravyaId": "dravya.pongal-sweet",
+      "yieldG": 800, "waterG": 300,
+      "ingredients": [
+        { "dravyaId": "dravya.white-rice", "grams": 100 },
+        { "dravyaId": "dravya.mung-dal-split", "grams": 40 },
+        { "dravyaId": "dravya.milk-cow", "grams": 200 },
+        { "dravyaId": "dravya.jaggery", "grams": 120 },
+        { "dravyaId": "dravya.ghee", "grams": 40 },
+        { "dravyaId": "dravya.cashew", "grams": 20 },
+        { "dravyaId": "dravya.cardamom", "grams": 1 }
+      ],
+      "basis": "Rice and mung cooked in milk-water, jaggery folded in, finished with ghee-fried cashews."
+    },
+    {
+      "dravyaId": "dravya.til-ladoo",
+      "yieldG": 320,
+      "ingredients": [
+        { "dravyaId": "dravya.sesame-seed", "grams": 200 },
+        { "dravyaId": "dravya.jaggery", "grams": 150 }
+      ],
+      "basis": "Roasted sesame bound in melted jaggery, roughly 4:3 by weight. Yield is slightly under the input because roasting and boiling drive off moisture."
+    },
+    {
+      "dravyaId": "dravya.peanut-chikki",
+      "yieldG": 320,
+      "ingredients": [
+        { "dravyaId": "dravya.peanut-roasted", "grams": 200 },
+        { "dravyaId": "dravya.jaggery", "grams": 150 }
+      ],
+      "basis": "Roasted peanuts set in hard jaggery brittle, roughly 4:3. Uses the roasted peanut row directly, so no roasting correction is needed."
+    },
+    {
+      "dravyaId": "dravya.jowar-bhakri",
+      "yieldG": 220, "waterG": 120,
+      "ingredients": [
+        { "dravyaId": "dravya.jowar", "grams": 150 },
+        { "dravyaId": "dravya.rock-salt", "grams": 2 }
+      ],
+      "basis": "Sorghum flour and water patted flat and roasted; some of the added water bakes off.",
+      "note": "Uses the jowar grain row for jowar flour. Milling whole sorghum to flour does not change composition materially, unlike refining."
+    }
+  ]
+}

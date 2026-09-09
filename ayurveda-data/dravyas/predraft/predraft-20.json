@@ -1,0 +1,655 @@
+{
+  "predraftVersion": "1.0",
+  "batch": "predraft-20",
+  "items": [
+    {
+      "id": "dravya.filter-coffee",
+      "name": "South Indian filter coffee",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          1,
+          1,
+          -1
+        ],
+        "virya": "heating",
+        "note": "with milk — softer than black"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: south indian filter coffee; filter coffee."
+    },
+    {
+      "id": "dravya.mosambi-juice",
+      "name": "Sweet lime juice",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: sweet lime juice; mosambi juice."
+    },
+    {
+      "id": "dravya.pomegranate-juice",
+      "name": "Pomegranate juice",
+      "sanskrit": "Dadima Svarasa",
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 3750,
+          "name": "Pomegranate juice, 100%",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.orange-juice",
+      "name": "Orange juice",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          0
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 3612,
+          "name": "Orange juice, 100%, NFS",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.ash-gourd-juice",
+      "name": "Ash gourd juice",
+      "sanskrit": "Kushmanda Svarasa",
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -2,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: ash gourd juice; kushmanda svarasa."
+    },
+    {
+      "id": "dravya.bottle-gourd-juice",
+      "name": "Bottle gourd juice",
+      "sanskrit": "Alabu Svarasa",
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling",
+        "note": "never bitter — taste before drinking"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: bottle gourd juice; alabu svarasa."
+    },
+    {
+      "id": "dravya.carrot-juice",
+      "name": "Carrot juice",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 4089,
+          "name": "Carrot juice, 100%",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.beet-juice",
+      "name": "Beetroot juice",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 4088,
+          "name": "Beet juice",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.herbal-kadha",
+      "name": "Herbal kadha",
+      "sanskrit": "Kvatha",
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -2
+        ],
+        "virya": "heating",
+        "note": "classical kvatha decoction"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: herbal kadha; kvatha."
+    },
+    {
+      "id": "dravya.saunf-water",
+      "name": "Fennel water",
+      "sanskrit": "Mishreya Jala",
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          -1
+        ],
+        "virya": "cooling",
+        "note": "tridoshic infusion"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: fennel water; mishreya jala; saunf water."
+    },
+    {
+      "id": "dravya.jeera-water",
+      "name": "Cumin water",
+      "sanskrit": "Jiraka Jala",
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: cumin water; jiraka jala; jeera water."
+    },
+    {
+      "id": "dravya.ajwain-water",
+      "name": "Ajwain water",
+      "sanskrit": "Yavani Jala",
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -2,
+          1,
+          -2
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: ajwain water; yavani jala."
+    },
+    {
+      "id": "dravya.methi-water",
+      "name": "Fenugreek water",
+      "sanskrit": "Methika Jala",
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -2
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: fenugreek water; methika jala; methi water."
+    },
+    {
+      "id": "dravya.dhania-water",
+      "name": "Coriander seed water",
+      "sanskrit": "Dhanyaka Hima",
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -2,
+          -1
+        ],
+        "virya": "cooling",
+        "note": "classical hima (cold infusion) for pitta"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: coriander seed water; dhanyaka hima; dhania water."
+    },
+    {
+      "id": "dravya.ragi-malt",
+      "name": "Ragi malt (beverage)",
+      "sanskrit": null,
+      "aliases": [
+        "beverage"
+      ],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: ragi malt."
+    },
+    {
+      "id": "dravya.black-carrot-kanji",
+      "name": "Black carrot kanji",
+      "sanskrit": "Kanjika",
+      "aliases": [],
+      "category": "fermented",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating",
+        "note": "classical kanjika; winter probiotic"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: black carrot kanji; kanjika."
+    },
+    {
+      "id": "dravya.pakhala",
+      "name": "Fermented rice water-rice (pakhala)",
+      "sanskrit": null,
+      "aliases": [
+        "pakhala"
+      ],
+      "category": "fermented",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          0
+        ],
+        "virya": "cooling",
+        "note": "Odia summer staple"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: fermented rice water rice; pakhala."
+    },
+    {
+      "id": "dravya.ambali",
+      "name": "Fermented ragi porridge (ambali)",
+      "sanskrit": null,
+      "aliases": [
+        "ambali"
+      ],
+      "category": "fermented",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: fermented ragi porridge; ambali."
+    },
+    {
+      "id": "dravya.gundruk",
+      "name": "Gundruk (fermented greens)",
+      "sanskrit": null,
+      "aliases": [
+        "fermented greens"
+      ],
+      "category": "fermented",
+      "canonHints": {
+        "vpk": [
+          0,
+          1,
+          -2
+        ],
+        "virya": "heating",
+        "note": "Himalayan"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: gundruk."
+    },
+    {
+      "id": "dravya.sinki",
+      "name": "Sinki (fermented radish)",
+      "sanskrit": null,
+      "aliases": [
+        "fermented radish"
+      ],
+      "category": "fermented",
+      "canonHints": {
+        "vpk": [
+          0,
+          1,
+          -2
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: sinki."
+    },
+    {
+      "id": "dravya.soibum",
+      "name": "Fermented bamboo shoot (soibum)",
+      "sanskrit": null,
+      "aliases": [
+        "soibum"
+      ],
+      "category": "fermented",
+      "canonHints": {
+        "vpk": [
+          1,
+          1,
+          -1
+        ],
+        "virya": "heating",
+        "note": "Manipuri"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: fermented bamboo shoot; soibum."
+    },
+    {
+      "id": "dravya.kinema",
+      "name": "Kinema (fermented soybean)",
+      "sanskrit": null,
+      "aliases": [
+        "fermented soybean"
+      ],
+      "category": "fermented",
+      "canonHints": {
+        "vpk": [
+          0,
+          1,
+          -1
+        ],
+        "virya": "heating",
+        "note": "Eastern Himalayan"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: kinema."
+    },
+    {
+      "id": "dravya.hawaijar",
+      "name": "Hawaijar (fermented soybean)",
+      "sanskrit": null,
+      "aliases": [
+        "fermented soybean"
+      ],
+      "category": "fermented",
+      "canonHints": {
+        "vpk": [
+          0,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: hawaijar."
+    },
+    {
+      "id": "dravya.neera",
+      "name": "Neera (fresh palm sap)",
+      "sanskrit": "Tala Rasa",
+      "aliases": [],
+      "category": "fermented",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          0
+        ],
+        "virya": "cooling",
+        "note": "unfermented; ferments within hours"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: neera; tala rasa."
+    },
+    {
+      "id": "dravya.khalpi",
+      "name": "Khalpi (fermented cucumber)",
+      "sanskrit": null,
+      "aliases": [
+        "fermented cucumber"
+      ],
+      "category": "fermented",
+      "canonHints": {
+        "vpk": [
+          0,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: khalpi."
+    }
+  ]
+}

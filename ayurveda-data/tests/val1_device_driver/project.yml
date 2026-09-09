@@ -1,0 +1,33 @@
+name: VAL1DeviceDriver
+options:
+  bundleIdPrefix: com.ayurvedaasanayoga.validation
+settings:
+  base:
+    DEVELOPMENT_TEAM: 8293TNMX6S
+    CODE_SIGN_STYLE: Automatic
+    IPHONEOS_DEPLOYMENT_TARGET: "26.0"
+targets:
+  VAL1DeviceDriver:
+    type: application
+    platform: iOS
+    sources:
+      - path: Host
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ayurvedaasanayoga.validation.VAL1DeviceDriver
+        GENERATE_INFOPLIST_FILE: true
+        INFOPLIST_KEY_UILaunchScreen_Generation: true
+        SUPPORTS_MACCATALYST: false
+  VAL1DeviceDriverUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: UITests
+    dependencies:
+      - target: VAL1DeviceDriver
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ayurvedaasanayoga.validation.VAL1DeviceDriverUITests
+        GENERATE_INFOPLIST_FILE: true
+        TEST_TARGET_NAME: VAL1DeviceDriver
+        SUPPORTS_MACCATALYST: false

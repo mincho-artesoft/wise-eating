@@ -1,0 +1,4226 @@
+{
+  "formatVersion": "1.0",
+  "batch": "recipe-batch-r03",
+  "qualityState": "aiDraft",
+  "items": [
+    {
+      "id": "recipe.lauki-sabzi",
+      "name": "Lauki Sabzi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.bottle-gourd",
+          "name": "Bottle gourd, diced",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 90
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the diced bottle gourd into even pieces.",
+        "Warm the ghee in a wide pan; bloom the cumin seeds, then add turmeric.",
+        "Add the vegetables and coriander seeds; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Lauki Sabzi is a softly cooked, moderately seasoned vegetable dish. Vata: cook it fully and add a touch more ghee. Pitta: keep chilies absent and favor coriander. Kapha: reduce fat and leave the finish drier.",
+      "provenance": [
+        "regional Indian sabzi tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.karela-sabzi",
+      "name": "Karela Sabzi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.bitter-gourd",
+          "name": "Bitter gourd, thinly sliced",
+          "grams": 520
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.amchur",
+          "name": "Amchur",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.fenugreek-seed",
+          "name": "Fenugreek seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 55
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the thinly sliced bitter gourd into even pieces.",
+        "Warm the ghee in a wide pan; bloom the fenugreek seeds and ginger, then add turmeric.",
+        "Add the vegetables and coriander seeds, amchur; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": 1,
+        "pitta": -2,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Karela Sabzi is a softly cooked, moderately seasoned vegetable dish. Vata: cook it fully and add a touch more ghee. Pitta: keep chilies absent and favor coriander. Kapha: reduce fat and leave the finish drier.",
+      "provenance": [
+        "regional Indian sabzi tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.bhindi-sabzi",
+      "name": "Bhindi Sabzi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.okra",
+          "name": "Okra, sliced",
+          "grams": 560
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 30
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the sliced okra into even pieces.",
+        "Warm the ghee in a wide pan; bloom the cumin seeds and ginger, then add turmeric.",
+        "Add the vegetables and coriander seeds; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Bhindi Sabzi is a softly cooked, moderately seasoned vegetable dish. Vata: cook it fully and add a touch more ghee. Pitta: keep chilies absent and favor coriander. Kapha: reduce fat and leave the finish drier.",
+      "provenance": [
+        "regional Indian sabzi tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.methi-aloo",
+      "name": "Methi Aloo",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potato, diced",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.methi-leaves",
+          "name": "Fresh fenugreek leaves, chopped",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 90
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the diced potato and chopped fresh fenugreek leaves into even pieces.",
+        "Warm the ghee in a wide pan; bloom the cumin seeds and ginger, then add turmeric.",
+        "Add the vegetables and coriander seeds; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Methi Aloo is a softly cooked, moderately seasoned vegetable dish. Vata: cook it fully and add a touch more ghee. Pitta: keep chilies absent and favor coriander. Kapha: reduce fat and leave the finish drier.",
+      "provenance": [
+        "regional Indian sabzi tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.palak-paneer-light",
+      "name": "Light Palak Paneer",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 520
+        },
+        {
+          "dravyaId": "dravya.paneer",
+          "name": "Paneer, cut into small cubes",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 140
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the chopped spinach and paneer cut into small cubes into even pieces.",
+        "Warm the ghee in a wide pan; bloom the cumin seeds and ginger, then add turmeric.",
+        "Add the vegetables and coriander seeds; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "This palak paneer uses more spinach than paneer and no cream, keeping the sauce light. Vata: serve warm with the paneer tender. Pitta: keep ginger and salt modest. Kapha: reduce the paneer portion and do not add cream.",
+      "provenance": [
+        "regional Indian sabzi tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.baingan-bharta",
+      "name": "Baingan Bharta",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.eggplant",
+          "name": "Large eggplant",
+          "grams": 700
+        },
+        {
+          "dravyaId": "dravya.onion",
+          "name": "Onion, finely chopped",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomato, chopped",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Pierce the eggplant and roast it whole until the skin darkens and the flesh collapses.",
+        "Cool just enough to handle, peel away the charred skin, and mash the flesh coarsely.",
+        "Warm the ghee, bloom the cumin and ginger, then soften the onion without deeply browning it.",
+        "Add tomato, turmeric, and rock salt; cook until the tomato loses its raw edge.",
+        "Fold in the mashed eggplant and cook uncovered for eight minutes, stirring until the bharta is soft and cohesive."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Roasting gives this eggplant bharta a soft texture and smoky depth without excessive oil. Vata: add a little ghee and cook the onion fully. Pitta: reduce tomato and ginger. Kapha: retain the light oil measure and serve a modest portion.",
+      "provenance": [
+        "North Indian baingan bharta tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.pumpkin-sabzi-sweet",
+      "name": "Sweet Pumpkin Sabzi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 650
+        },
+        {
+          "dravyaId": "dravya.fenugreek-seed",
+          "name": "Fenugreek seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery, grated",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 80
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the diced pumpkin into even pieces.",
+        "Warm the ghee in a wide pan; bloom the cumin seeds and ginger, then add turmeric.",
+        "Add the vegetables and fenugreek seeds, grated jaggery; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sweet Pumpkin Sabzi is a softly cooked, moderately seasoned vegetable dish. Vata: cook it fully and add a touch more ghee. Pitta: keep chilies absent and favor coriander. Kapha: reduce fat and leave the finish drier.",
+      "provenance": [
+        "North Indian khatta-meetha pumpkin tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.beans-poriyal",
+      "name": "Beans Poriyal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 14,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, finely cut",
+          "grams": 560
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cut the finely cut green beans small and evenly so the pieces steam quickly.",
+        "Warm the coconut oil; let the mustard seeds pop, then add the curry leaves and turmeric.",
+        "Add the vegetables, salt, and water; cover and steam over low heat until just tender.",
+        "Remove the lid, fold in the grated coconut, and cook for two minutes without browning it.",
+        "Take the pan off the heat while the vegetables retain their color and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Beans Poriyal follows the gently steamed vegetable-and-coconut style of southern India. Vata: serve warm and increase coconut slightly. Pitta: keep mustard modest and use the stated coconut. Kapha: reduce coconut and finish the vegetables fairly dry.",
+      "provenance": [
+        "South Indian poriyal and thoran tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.cabbage-thoran",
+      "name": "Cabbage Thoran",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 14,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, finely shredded",
+          "grams": 600
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cut the finely shredded cabbage small and evenly so the pieces steam quickly.",
+        "Warm the coconut oil; let the mustard seeds pop, then add the curry leaves and turmeric.",
+        "Add the vegetables, salt, and water; cover and steam over low heat until just tender.",
+        "Remove the lid, fold in the grated coconut, and cook for two minutes without browning it.",
+        "Take the pan off the heat while the vegetables retain their color and serve warm."
+      ],
+      "dosha": {
+        "vata": 1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cabbage Thoran follows the gently steamed vegetable-and-coconut style of southern India. Vata: serve warm and increase coconut slightly. Pitta: keep mustard modest and use the stated coconut. Kapha: reduce coconut and finish the vegetables fairly dry.",
+      "provenance": [
+        "Kerala thoran tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.beetroot-poriyal",
+      "name": "Beetroot Poriyal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 14,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, diced small",
+          "grams": 560
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cut the beetroot into small, even dice so the pieces steam quickly.",
+        "Warm the coconut oil; let the mustard seeds pop, then add the curry leaves and turmeric.",
+        "Add the vegetables, salt, and water; cover and steam over low heat until just tender.",
+        "Remove the lid, fold in the grated coconut, and cook for two minutes without browning it.",
+        "Take the pan off the heat while the vegetables retain their color and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Beetroot Poriyal follows the gently steamed vegetable-and-coconut style of southern India. Vata: serve warm and increase coconut slightly. Pitta: keep mustard modest and use the stated coconut. Kapha: reduce coconut and finish the vegetables fairly dry.",
+      "provenance": [
+        "South Indian poriyal and thoran tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.drumstick-curry",
+      "name": "Drumstick Curry",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.drumstick",
+          "name": "Drumstick pods, cut into lengths",
+          "grams": 520
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomato, chopped",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 260
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the drumstick pods cut into lengths and chopped tomato into even pieces.",
+        "Warm the ghee in a wide pan; bloom the cumin seeds and ginger, then add turmeric.",
+        "Add the vegetables and tamarind pulp, coriander seeds; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Drumstick Curry is a softly cooked, moderately seasoned vegetable dish. Vata: cook it fully and add a touch more ghee. Pitta: keep chilies absent and favor coriander. Kapha: reduce fat and leave the finish drier.",
+      "provenance": [
+        "South Indian drumstick curry tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.suran-sabzi",
+      "name": "Suran (Yam) Sabzi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.yam",
+          "name": "Yam, peeled and diced",
+          "grams": 600
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.amchur",
+          "name": "Amchur",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 130
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the peeled and diced yam into even pieces.",
+        "Warm the ghee in a wide pan; bloom the cumin seeds and ginger, then add turmeric.",
+        "Add the vegetables and ajwain seeds, amchur; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Suran (Yam) Sabzi is a softly cooked, moderately seasoned vegetable dish. Vata: cook it fully and add a touch more ghee. Pitta: keep chilies absent and favor coriander. Kapha: reduce fat and leave the finish drier.",
+      "provenance": [
+        "regional Indian sabzi tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.aloo-jeera",
+      "name": "Aloo Jeera",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potato, diced",
+          "grams": 650
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Additional cumin seeds, lightly crushed",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 65
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the diced potato into even pieces.",
+        "Warm the ghee in a wide pan; bloom the cumin seeds and ginger, then add turmeric.",
+        "Add the vegetables and lightly crushed additional cumin seeds, fresh cilantro; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": 1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Aloo Jeera is a softly cooked, moderately seasoned vegetable dish. Vata: cook it fully and add a touch more ghee. Pitta: keep chilies absent and favor coriander. Kapha: reduce fat and leave the finish drier.",
+      "provenance": [
+        "regional Indian sabzi tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.mixed-veg-korma-light",
+      "name": "Light Vegetable Korma",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower florets",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.cashew",
+          "name": "Cashews",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 420
+        }
+      ],
+      "steps": [
+        "Soak the cashews for 15 minutes, then grind them with coconut, coriander, and part of the water to a smooth paste.",
+        "Warm the ghee, bloom the cumin and ginger, and add the carrot, beans, and cauliflower.",
+        "Turn the vegetables for two minutes, add the remaining water and rock salt, and cook covered until nearly tender.",
+        "Stir in the coconut-cashew paste and simmer gently for five minutes without boiling hard.",
+        "Remove from the heat while the vegetables hold their shape and the sauce remains light."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "This vegetable korma uses a restrained coconut-cashew paste and no cream. Vata: serve warm with soft rice. Pitta: keep ginger modest and favor coriander. Kapha: reduce the nut paste and take more vegetables than sauce.",
+      "provenance": [
+        "Indian vegetable korma tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.avial",
+      "name": "Avial",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 24,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.plantain-green",
+          "name": "Green plantain, batons",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, batons",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.ash-gourd",
+          "name": "Ash gourd, batons",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.yogurt",
+          "name": "Plain yogurt, whisked",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 280
+        }
+      ],
+      "steps": [
+        "Cut all vegetables into even batons so they cook together.",
+        "Cook the plantain, carrot, beans, and ash gourd with turmeric, salt, and water until just tender.",
+        "Grind the coconut and cumin with a little cooking liquid to a coarse paste and fold it into the vegetables.",
+        "Lower the heat completely, stir in the whisked yogurt, and warm gently without allowing it to boil.",
+        "Finish with coconut oil and curry leaves, cover for three minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Avial combines tender vegetables with coconut and gently warmed yogurt. Vata: serve warm and keep the vegetables soft. Pitta: use mild yogurt and avoid chilies. Kapha: use less coconut and take a smaller portion.",
+      "provenance": [
+        "Kerala avial tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      },
+      "reviewNote": "Avial vegetable combinations and the use of yogurt versus raw mango vary by Kerala lineage; this version uses yogurt and only verified linked vegetables."
+    },
+    {
+      "id": "recipe.olan",
+      "name": "Olan",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.ash-gourd",
+          "name": "Ash gourd, thinly sliced",
+          "grams": 520
+        },
+        {
+          "fdcId": 10549,
+          "name": "Dried black-eyed peas",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Soak the black-eyed peas for six hours, drain, and simmer them in fresh water until tender.",
+        "Blend the grated coconut with part of the measured water and strain to make fresh coconut milk.",
+        "Cook the ash gourd with the remaining water and rock salt until translucent and tender.",
+        "Fold in the cooked peas and coconut milk; warm gently for four minutes without a hard boil.",
+        "Finish with coconut oil and curry leaves, cover briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Olan is a mild ash-gourd and black-eyed-pea preparation enriched with fresh coconut milk. Vata: serve warm and slightly thicker. Pitta: retain the mild seasoning and gentle heat. Kapha: use less coconut milk and a smaller pea portion.",
+      "provenance": [
+        "Kerala olan tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.kootu",
+      "name": "Kootu",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.ridge-gourd",
+          "name": "Ridge gourd, diced",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Rinse the pulse and simmer it with turmeric until it begins to soften.",
+        "Add the diced ridge gourd and continue cooking until both pulse and vegetables are tender.",
+        "Grind the coconut and cumin with a little cooking liquid to a coarse paste.",
+        "Stir the coconut paste and salt into the pot; simmer gently for four minutes without reducing it heavily.",
+        "Warm the coconut oil with curry leaves, fold this through the kootu, and rest covered before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kootu is a mild vegetable-and-pulse preparation thickened with fresh coconut. Vata: serve soft with rice. Pitta: keep the cumin gentle and avoid chilies. Kapha: use less coconut and a smaller serving.",
+      "provenance": [
+        "South Indian kootu tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      },
+      "reviewNote": "Kootu is made with many local gourds; ridge gourd is used here because the canon's snake-gourd key has no exact dravya or store binding."
+    },
+    {
+      "id": "recipe.undhiyu-light",
+      "name": "Light Undhiyu",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.yam",
+          "name": "Yam, diced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.plantain-green",
+          "name": "Green plantain, diced",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, diced",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.methi-leaves",
+          "name": "Fresh fenugreek leaves",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 35
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 180
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the diced yam and green beans cut and diced green plantain and diced sweet potato into even pieces.",
+        "Warm the Sesame oil in a wide pan; bloom the cumin seeds and ginger, then add turmeric.",
+        "Add the vegetables and fresh fenugreek leaves, grated fresh coconut, coriander seeds; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Light Undhiyu is a softly cooked, moderately seasoned vegetable dish. Vata: cook it fully and add a touch more ghee. Pitta: keep chilies absent and favor coriander. Kapha: reduce fat and leave the finish drier.",
+      "provenance": [
+        "Gujarati undhiyu tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      },
+      "reviewNote": "Undhiyu ingredients vary by region and market; this lighter version omits fried dumplings and uses linked green beans in place of unavailable broad beans."
+    },
+    {
+      "id": "recipe.sarson-ka-saag",
+      "name": "Sarson Ka Saag",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mustard-greens",
+          "name": "Mustard greens, chopped",
+          "grams": 520
+        },
+        {
+          "fdcId": 6700,
+          "name": "Fresh bathua (lambsquarters), chopped",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.garlic",
+          "name": "Garlic",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.corn",
+          "name": "Fine cornmeal",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 380
+        }
+      ],
+      "steps": [
+        "Wash the mustard greens, bathua, and spinach thoroughly and chop them.",
+        "Simmer the greens with ginger, garlic, salt, and water until completely tender.",
+        "Mash the greens to a rustic puree, leaving a little texture.",
+        "Sprinkle in the cornmeal and cook on low heat for eight minutes, stirring so it does not catch.",
+        "Finish with warm ghee and serve the saag hot."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": -2
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Long-cooked winter greens and a little cornmeal give sarson ka saag its characteristic body. Vata: serve with ghee and a soft grain. Pitta: reduce ginger and garlic. Kapha: retain the greens-forward portion and modest ghee.",
+      "provenance": [
+        "Punjabi sarson ka saag tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.ridge-gourd-cumin-sabzi",
+      "name": "Ridge Gourd Cumin Sabzi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.ridge-gourd",
+          "name": "Ridge gourd, sliced",
+          "grams": 600
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 75
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the sliced ridge gourd into even pieces.",
+        "Warm the ghee in a wide pan; bloom the cumin seeds and ginger, then add turmeric.",
+        "Add the vegetables and coriander seeds; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "grishma",
+        "varsha"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ridge Gourd Cumin Sabzi is a softly cooked, moderately seasoned vegetable dish. Vata: cook it fully and add a touch more ghee. Pitta: keep chilies absent and favor coriander. Kapha: reduce fat and leave the finish drier.",
+      "provenance": [
+        "regional Indian sabzi tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.ash-gourd-fennel-sabzi",
+      "name": "Ash Gourd Fennel Sabzi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.ash-gourd",
+          "name": "Ash gourd, diced",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 80
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the diced ash gourd into even pieces.",
+        "Warm the ghee in a wide pan; bloom the cumin seeds, then add turmeric.",
+        "Add the vegetables and fennel seeds; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": -1
+      },
+      "seasons": [
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ash Gourd Fennel Sabzi is a softly cooked, moderately seasoned vegetable dish. Vata: cook it fully and add a touch more ghee. Pitta: keep chilies absent and favor coriander. Kapha: reduce fat and leave the finish drier.",
+      "provenance": [
+        "regional Indian sabzi tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.zucchini-dill-sabzi",
+      "name": "Zucchini Dill Sabzi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill, chopped",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 45
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the diced zucchini into even pieces.",
+        "Warm the ghee in a wide pan; bloom the cumin seeds, then add turmeric.",
+        "Add the vegetables and chopped fresh dill; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Zucchini Dill Sabzi is a softly cooked, moderately seasoned vegetable dish. Vata: cook it fully and add a touch more ghee. Pitta: keep chilies absent and favor coriander. Kapha: reduce fat and leave the finish drier.",
+      "provenance": [
+        "regional Indian sabzi tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.cauliflower-cumin-sabzi",
+      "name": "Cauliflower Cumin Sabzi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower florets",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 85
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the cauliflower florets into even pieces.",
+        "Warm the ghee in a wide pan; bloom the cumin seeds and ginger, then add turmeric.",
+        "Add the vegetables and coriander seeds; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": 1,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cauliflower Cumin Sabzi is a softly cooked, moderately seasoned vegetable dish. Vata: cook it fully and add a touch more ghee. Pitta: keep chilies absent and favor coriander. Kapha: reduce fat and leave the finish drier.",
+      "provenance": [
+        "regional Indian sabzi tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.cabbage-peas-sabzi",
+      "name": "Cabbage and Peas Sabzi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, shredded",
+          "grams": 460
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.asafoetida",
+          "name": "Asafoetida",
+          "grams": 0.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the shredded cabbage and green peas into even pieces.",
+        "Warm the ghee in a wide pan; bloom the cumin seeds and ginger, then add turmeric.",
+        "Add the vegetables and asafoetida; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": 1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cabbage and Peas Sabzi is a softly cooked, moderately seasoned vegetable dish. Vata: cook it fully and add a touch more ghee. Pitta: keep chilies absent and favor coriander. Kapha: reduce fat and leave the finish drier.",
+      "provenance": [
+        "regional Indian sabzi tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.carrot-fennel-sabzi",
+      "name": "Carrot Fennel Sabzi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, sliced",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 80
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the sliced carrot into even pieces.",
+        "Warm the ghee in a wide pan; bloom the cumin seeds, then add turmeric.",
+        "Add the vegetables and fennel seeds; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Carrot Fennel Sabzi is a softly cooked, moderately seasoned vegetable dish. Vata: cook it fully and add a touch more ghee. Pitta: keep chilies absent and favor coriander. Kapha: reduce fat and leave the finish drier.",
+      "provenance": [
+        "regional Indian sabzi tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.beetroot-cumin-sabzi",
+      "name": "Beetroot Cumin Sabzi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, diced",
+          "grams": 600
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 100
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the diced beetroot into even pieces.",
+        "Warm the ghee in a wide pan; bloom the cumin seeds and ginger, then add turmeric.",
+        "Add the vegetables and coriander seeds; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Beetroot Cumin Sabzi is a softly cooked, moderately seasoned vegetable dish. Vata: cook it fully and add a touch more ghee. Pitta: keep chilies absent and favor coriander. Kapha: reduce fat and leave the finish drier.",
+      "provenance": [
+        "regional Indian sabzi tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.turnip-ginger-sabzi",
+      "name": "Turnip Ginger Sabzi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.turnip",
+          "name": "Turnip, diced",
+          "grams": 600
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 100
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the diced turnip into even pieces.",
+        "Warm the ghee in a wide pan; bloom the cumin seeds and ginger, then add turmeric.",
+        "Add the vegetables and coriander seeds; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Turnip Ginger Sabzi is a softly cooked, moderately seasoned vegetable dish. Vata: cook it fully and add a touch more ghee. Pitta: keep chilies absent and favor coriander. Kapha: reduce fat and leave the finish drier.",
+      "provenance": [
+        "regional Indian sabzi tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.radish-spinach-sabzi",
+      "name": "Radish Spinach Sabzi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.radish",
+          "name": "Radish, sliced",
+          "grams": 350
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.asafoetida",
+          "name": "Asafoetida",
+          "grams": 0.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 80
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the sliced radish and chopped spinach into even pieces.",
+        "Warm the ghee in a wide pan; bloom the cumin seeds and ginger, then add turmeric.",
+        "Add the vegetables and asafoetida; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Radish Spinach Sabzi is a softly cooked, moderately seasoned vegetable dish. Vata: cook it fully and add a touch more ghee. Pitta: keep chilies absent and favor coriander. Kapha: reduce fat and leave the finish drier.",
+      "provenance": [
+        "regional Indian sabzi tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.sweet-potato-sesame-sabzi",
+      "name": "Sweet Potato Sesame Sabzi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, diced",
+          "grams": 600
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 110
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the diced sweet potato into even pieces.",
+        "Warm the ghee in a wide pan; bloom the cumin seeds and ginger, then add turmeric.",
+        "Add the vegetables and sesame seeds; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sweet Potato Sesame Sabzi is a softly cooked, moderately seasoned vegetable dish. Vata: cook it fully and add a touch more ghee. Pitta: keep chilies absent and favor coriander. Kapha: reduce fat and leave the finish drier.",
+      "provenance": [
+        "regional Indian sabzi tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.taro-ajwain-sabzi",
+      "name": "Taro Ajwain Sabzi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.taro",
+          "name": "Taro root, peeled and diced",
+          "grams": 580
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.amchur",
+          "name": "Amchur",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the peeled and diced taro root into even pieces.",
+        "Warm the ghee in a wide pan; bloom the cumin seeds and ginger, then add turmeric.",
+        "Add the vegetables and ajwain seeds, amchur; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Taro Ajwain Sabzi is a softly cooked, moderately seasoned vegetable dish. Vata: cook it fully and add a touch more ghee. Pitta: keep chilies absent and favor coriander. Kapha: reduce fat and leave the finish drier.",
+      "provenance": [
+        "regional Indian sabzi tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.yam-fenugreek-sabzi",
+      "name": "Yam Fenugreek Sabzi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.yam",
+          "name": "Yam, diced",
+          "grams": 580
+        },
+        {
+          "dravyaId": "dravya.fenugreek-seed",
+          "name": "Fenugreek seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.amchur",
+          "name": "Amchur",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the diced yam into even pieces.",
+        "Warm the ghee in a wide pan; bloom the cumin seeds and ginger, then add turmeric.",
+        "Add the vegetables and fenugreek seeds, amchur; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "hemanta"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Yam Fenugreek Sabzi is a softly cooked, moderately seasoned vegetable dish. Vata: cook it fully and add a touch more ghee. Pitta: keep chilies absent and favor coriander. Kapha: reduce fat and leave the finish drier.",
+      "provenance": [
+        "regional Indian sabzi tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.plantain-curry-leaf-sabzi",
+      "name": "Green Plantain Curry-Leaf Sabzi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.plantain-green",
+          "name": "Green plantain, diced",
+          "grams": 580
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the diced green plantain into even pieces.",
+        "Warm the Coconut oil in a wide pan; bloom the mustard seeds and ginger, then add turmeric.",
+        "Add the vegetables and curry leaves, grated fresh coconut; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Green Plantain Curry-Leaf Sabzi is a softly cooked, moderately seasoned vegetable dish. Vata: cook it fully and add a touch more ghee. Pitta: keep chilies absent and favor coriander. Kapha: reduce fat and leave the finish drier.",
+      "provenance": [
+        "regional Indian sabzi tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.amaranth-leaf-sabzi",
+      "name": "Amaranth Leaf Sabzi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-leaves",
+          "name": "Amaranth leaves, chopped",
+          "grams": 600
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Soaked split mung dal",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 100
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the chopped amaranth leaves into even pieces.",
+        "Warm the ghee in a wide pan; bloom the cumin seeds and ginger, then add turmeric.",
+        "Add the vegetables and soaked split mung dal; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Amaranth Leaf Sabzi is a softly cooked, moderately seasoned vegetable dish. Vata: cook it fully and add a touch more ghee. Pitta: keep chilies absent and favor coriander. Kapha: reduce fat and leave the finish drier.",
+      "provenance": [
+        "regional Indian sabzi tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.spinach-sesame-sabzi",
+      "name": "Spinach Sesame Sabzi",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 26
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 55
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the chopped spinach into even pieces.",
+        "Warm the ghee in a wide pan; bloom the cumin seeds, then add turmeric.",
+        "Add the vegetables and sesame seeds; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Spinach Sesame Sabzi is a softly cooked, moderately seasoned vegetable dish. Vata: cook it fully and add a touch more ghee. Pitta: keep chilies absent and favor coriander. Kapha: reduce fat and leave the finish drier.",
+      "provenance": [
+        "regional Indian sabzi tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.mustard-greens-mung-sabzi",
+      "name": "Mustard Greens with Mung",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mustard-greens",
+          "name": "Mustard greens, chopped",
+          "grams": 520
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Soaked split mung dal",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.garlic",
+          "name": "Garlic, sliced",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 170
+        }
+      ],
+      "steps": [
+        "Wash, trim, and cut the chopped mustard greens into even pieces.",
+        "Warm the ghee in a wide pan; bloom the cumin seeds and ginger, then add turmeric.",
+        "Add the vegetables and soaked split mung dal, sliced garlic; turn them carefully through the seasoning.",
+        "Sprinkle in the water and rock salt, cover, and cook on low heat until tender but not waterlogged.",
+        "Uncover for the final minutes, folding gently until excess moisture evaporates and the seasoning clings."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": -2
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mustard Greens with Mung is a softly cooked, moderately seasoned vegetable dish. Vata: cook it fully and add a touch more ghee. Pitta: keep chilies absent and favor coriander. Kapha: reduce fat and leave the finish drier.",
+      "provenance": [
+        "regional Indian sabzi tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.carrot-poriyal",
+      "name": "Carrot Poriyal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 14,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced small",
+          "grams": 580
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cut the carrot into small, even dice so the pieces steam quickly.",
+        "Warm the coconut oil; let the mustard seeds pop, then add the curry leaves and turmeric.",
+        "Add the vegetables, salt, and water; cover and steam over low heat until just tender.",
+        "Remove the lid, fold in the grated coconut, and cook for two minutes without browning it.",
+        "Take the pan off the heat while the vegetables retain their color and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Carrot Poriyal follows the gently steamed vegetable-and-coconut style of southern India. Vata: serve warm and increase coconut slightly. Pitta: keep mustard modest and use the stated coconut. Kapha: reduce coconut and finish the vegetables fairly dry.",
+      "provenance": [
+        "South Indian poriyal and thoran tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.pumpkin-poriyal",
+      "name": "Pumpkin Poriyal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 14,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced small",
+          "grams": 600
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cut the pumpkin into small, even dice so the pieces steam quickly.",
+        "Warm the coconut oil; let the mustard seeds pop, then add the curry leaves and turmeric.",
+        "Add the vegetables, salt, and water; cover and steam over low heat until just tender.",
+        "Remove the lid, fold in the grated coconut, and cook for two minutes without browning it.",
+        "Take the pan off the heat while the vegetables retain their color and serve warm."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin Poriyal follows the gently steamed vegetable-and-coconut style of southern India. Vata: serve warm and increase coconut slightly. Pitta: keep mustard modest and use the stated coconut. Kapha: reduce coconut and finish the vegetables fairly dry.",
+      "provenance": [
+        "South Indian poriyal and thoran tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.zucchini-poriyal",
+      "name": "Zucchini Poriyal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 14,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced",
+          "grams": 600
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cut the diced zucchini small and evenly so the pieces steam quickly.",
+        "Warm the coconut oil; let the mustard seeds pop, then add the curry leaves and turmeric.",
+        "Add the vegetables, salt, and water; cover and steam over low heat until just tender.",
+        "Remove the lid, fold in the grated coconut, and cook for two minutes without browning it.",
+        "Take the pan off the heat while the vegetables retain their color and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Zucchini Poriyal follows the gently steamed vegetable-and-coconut style of southern India. Vata: serve warm and increase coconut slightly. Pitta: keep mustard modest and use the stated coconut. Kapha: reduce coconut and finish the vegetables fairly dry.",
+      "provenance": [
+        "South Indian poriyal and thoran tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.okra-coconut-poriyal",
+      "name": "Okra Coconut Poriyal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 14,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.okra",
+          "name": "Okra, sliced",
+          "grams": 560
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cut the sliced okra small and evenly so the pieces steam quickly.",
+        "Warm the coconut oil; let the mustard seeds pop, then add the curry leaves and turmeric.",
+        "Add the vegetables, salt, and water; cover and steam over low heat until just tender.",
+        "Remove the lid, fold in the grated coconut, and cook for two minutes without browning it.",
+        "Take the pan off the heat while the vegetables retain their color and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Okra Coconut Poriyal follows the gently steamed vegetable-and-coconut style of southern India. Vata: serve warm and increase coconut slightly. Pitta: keep mustard modest and use the stated coconut. Kapha: reduce coconut and finish the vegetables fairly dry.",
+      "provenance": [
+        "South Indian poriyal and thoran tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.spinach-coconut-thoran",
+      "name": "Spinach Coconut Thoran",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 14,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, finely chopped",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cut the finely chopped spinach small and evenly so the pieces steam quickly.",
+        "Warm the coconut oil; let the mustard seeds pop, then add the curry leaves and turmeric.",
+        "Add the vegetables, salt, and water; cover and steam over low heat until just tender.",
+        "Remove the lid, fold in the grated coconut, and cook for two minutes without browning it.",
+        "Take the pan off the heat while the vegetables retain their color and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Spinach Coconut Thoran follows the gently steamed vegetable-and-coconut style of southern India. Vata: serve warm and increase coconut slightly. Pitta: keep mustard modest and use the stated coconut. Kapha: reduce coconut and finish the vegetables fairly dry.",
+      "provenance": [
+        "Kerala thoran tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.ash-gourd-poriyal",
+      "name": "Ash Gourd Poriyal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 14,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.ash-gourd",
+          "name": "Ash gourd, diced small",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cut the ash gourd into small, even dice so the pieces steam quickly.",
+        "Warm the coconut oil; let the mustard seeds pop, then add the curry leaves and turmeric.",
+        "Add the vegetables, salt, and water; cover and steam over low heat until just tender.",
+        "Remove the lid, fold in the grated coconut, and cook for two minutes without browning it.",
+        "Take the pan off the heat while the vegetables retain their color and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ash Gourd Poriyal follows the gently steamed vegetable-and-coconut style of southern India. Vata: serve warm and increase coconut slightly. Pitta: keep mustard modest and use the stated coconut. Kapha: reduce coconut and finish the vegetables fairly dry.",
+      "provenance": [
+        "South Indian poriyal and thoran tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.plantain-poriyal",
+      "name": "Green Plantain Poriyal",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 14,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.plantain-green",
+          "name": "Green plantain, diced small",
+          "grams": 560
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cut the green plantain into small, even dice so the pieces steam quickly.",
+        "Warm the coconut oil; let the mustard seeds pop, then add the curry leaves and turmeric.",
+        "Add the vegetables, salt, and water; cover and steam over low heat until just tender.",
+        "Remove the lid, fold in the grated coconut, and cook for two minutes without browning it.",
+        "Take the pan off the heat while the vegetables retain their color and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Green Plantain Poriyal follows the gently steamed vegetable-and-coconut style of southern India. Vata: serve warm and increase coconut slightly. Pitta: keep mustard modest and use the stated coconut. Kapha: reduce coconut and finish the vegetables fairly dry.",
+      "provenance": [
+        "South Indian poriyal and thoran tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.bottle-gourd-kootu",
+      "name": "Bottle Gourd Kootu",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.bottle-gourd",
+          "name": "Bottle gourd, diced",
+          "grams": 440
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Rinse the pulse and simmer it with turmeric until it begins to soften.",
+        "Add the diced bottle gourd and continue cooking until both pulse and vegetables are tender.",
+        "Grind the coconut and cumin with a little cooking liquid to a coarse paste.",
+        "Stir the coconut paste and salt into the pot; simmer gently for four minutes without reducing it heavily.",
+        "Warm the coconut oil with curry leaves, fold this through the kootu, and rest covered before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Bottle Gourd Kootu is a mild vegetable-and-pulse preparation thickened with fresh coconut. Vata: serve soft with rice. Pitta: keep the cumin gentle and avoid chilies. Kapha: use less coconut and a smaller serving.",
+      "provenance": [
+        "South Indian kootu tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.ash-gourd-kootu",
+      "name": "Ash Gourd Kootu",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.ash-gourd",
+          "name": "Ash gourd, diced",
+          "grams": 440
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Rinse the pulse and simmer it with turmeric until it begins to soften.",
+        "Add the diced ash gourd and continue cooking until both pulse and vegetables are tender.",
+        "Grind the coconut and cumin with a little cooking liquid to a coarse paste.",
+        "Stir the coconut paste and salt into the pot; simmer gently for four minutes without reducing it heavily.",
+        "Warm the coconut oil with curry leaves, fold this through the kootu, and rest covered before serving."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ash Gourd Kootu is a mild vegetable-and-pulse preparation thickened with fresh coconut. Vata: serve soft with rice. Pitta: keep the cumin gentle and avoid chilies. Kapha: use less coconut and a smaller serving.",
+      "provenance": [
+        "South Indian kootu tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.pumpkin-kootu",
+      "name": "Pumpkin Kootu",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Rinse the pulse and simmer it with turmeric until it begins to soften.",
+        "Add the diced pumpkin and continue cooking until both pulse and vegetables are tender.",
+        "Grind the coconut and cumin with a little cooking liquid to a coarse paste.",
+        "Stir the coconut paste and salt into the pot; simmer gently for four minutes without reducing it heavily.",
+        "Warm the coconut oil with curry leaves, fold this through the kootu, and rest covered before serving."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin Kootu is a mild vegetable-and-pulse preparation thickened with fresh coconut. Vata: serve soft with rice. Pitta: keep the cumin gentle and avoid chilies. Kapha: use less coconut and a smaller serving.",
+      "provenance": [
+        "South Indian kootu tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.spinach-kootu",
+      "name": "Spinach Kootu",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 400
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Rinse the pulse and simmer it with turmeric until it begins to soften.",
+        "Add the chopped spinach and continue cooking until both pulse and vegetables are tender.",
+        "Grind the coconut and cumin with a little cooking liquid to a coarse paste.",
+        "Stir the coconut paste and salt into the pot; simmer gently for four minutes without reducing it heavily.",
+        "Warm the coconut oil with curry leaves, fold this through the kootu, and rest covered before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Spinach Kootu is a mild vegetable-and-pulse preparation thickened with fresh coconut. Vata: serve soft with rice. Pitta: keep the cumin gentle and avoid chilies. Kapha: use less coconut and a smaller serving.",
+      "provenance": [
+        "South Indian kootu tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.cabbage-kootu",
+      "name": "Cabbage Kootu",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, chopped",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Rinse the pulse and simmer it with turmeric until it begins to soften.",
+        "Add the chopped cabbage and continue cooking until both pulse and vegetables are tender.",
+        "Grind the coconut and cumin with a little cooking liquid to a coarse paste.",
+        "Stir the coconut paste and salt into the pot; simmer gently for four minutes without reducing it heavily.",
+        "Warm the coconut oil with curry leaves, fold this through the kootu, and rest covered before serving."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cabbage Kootu is a mild vegetable-and-pulse preparation thickened with fresh coconut. Vata: serve soft with rice. Pitta: keep the cumin gentle and avoid chilies. Kapha: use less coconut and a smaller serving.",
+      "provenance": [
+        "South Indian kootu tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.green-bean-kootu",
+      "name": "Green Bean Kootu",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Rinse the pulse and simmer it with turmeric until it begins to soften.",
+        "Add the green beans cut and continue cooking until both pulse and vegetables are tender.",
+        "Grind the coconut and cumin with a little cooking liquid to a coarse paste.",
+        "Stir the coconut paste and salt into the pot; simmer gently for four minutes without reducing it heavily.",
+        "Warm the coconut oil with curry leaves, fold this through the kootu, and rest covered before serving."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Green Bean Kootu is a mild vegetable-and-pulse preparation thickened with fresh coconut. Vata: serve soft with rice. Pitta: keep the cumin gentle and avoid chilies. Kapha: use less coconut and a smaller serving.",
+      "provenance": [
+        "South Indian kootu tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.ridge-gourd-kootu",
+      "name": "Ridge Gourd Kootu",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.ridge-gourd",
+          "name": "Ridge gourd, diced",
+          "grams": 440
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Rinse the pulse and simmer it with turmeric until it begins to soften.",
+        "Add the diced ridge gourd and continue cooking until both pulse and vegetables are tender.",
+        "Grind the coconut and cumin with a little cooking liquid to a coarse paste.",
+        "Stir the coconut paste and salt into the pot; simmer gently for four minutes without reducing it heavily.",
+        "Warm the coconut oil with curry leaves, fold this through the kootu, and rest covered before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ridge Gourd Kootu is a mild vegetable-and-pulse preparation thickened with fresh coconut. Vata: serve soft with rice. Pitta: keep the cumin gentle and avoid chilies. Kapha: use less coconut and a smaller serving.",
+      "provenance": [
+        "South Indian kootu tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.beetroot-kootu",
+      "name": "Beetroot Coconut Kootu",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split yellow mung dal",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, diced small",
+          "grams": 400
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Rinse the pulse and simmer it with turmeric until it begins to soften.",
+        "Add the diced small beetroot and continue cooking until both pulse and vegetables are tender.",
+        "Grind the coconut and cumin with a little cooking liquid to a coarse paste.",
+        "Stir the coconut paste and salt into the pot; simmer gently for four minutes without reducing it heavily.",
+        "Warm the coconut oil with curry leaves, fold this through the kootu, and rest covered before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Beetroot Coconut Kootu is a mild vegetable-and-pulse preparation thickened with fresh coconut. Vata: serve soft with rice. Pitta: keep the cumin gentle and avoid chilies. Kapha: use less coconut and a smaller serving.",
+      "provenance": [
+        "South Indian kootu tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    }
+  ]
+}

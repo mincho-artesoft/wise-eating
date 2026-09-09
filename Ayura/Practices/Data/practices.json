@@ -1,0 +1,6693 @@
+[
+ {
+  "id": "eb57ed3c-4922-5737-a223-bf22cec1d569",
+  "catalogNumber": 810000,
+  "slug": "so-hum-breath",
+  "kind": "meditation",
+  "title": "So Hum",
+  "sanskrit": "So'ham",
+  "desc": "The oldest mantra in the tradition is the sound the breath already makes. Nothing is added — you listen for what is there and let it hold your attention.",
+  "technique": "mantra-on-breath",
+  "sourceTradition": "Upanishadic; Isha and Hamsa traditions",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 420,
+  "durationOptions": [
+   420,
+   720,
+   1320
+  ],
+  "goals": [
+   "anxiety",
+   "focus"
+  ],
+  "themes": [
+   "restlessness",
+   "overthinking",
+   "grounding"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": -3,
+   "pitta": -1,
+   "kapha": 0
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "dawn",
+   "evening",
+   "night"
+  ],
+  "season": [
+   "sharad",
+   "hemanta",
+   "shishira"
+  ],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit so that the weight of your upper body drops straight down into the floor. Let the hands rest where they fall.",
+    "hold": 8
+   },
+   {
+    "atSeconds": 22,
+    "text": "Do nothing to the breath. Let it be as short or as shallow as it wants to be for now.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 50,
+    "text": "Notice that the in-breath makes a faint sound at the back of the throat. Something like so.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 72,
+    "text": "And the out-breath makes a different one. Something like hum.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 91,
+    "text": "So on the way in. Hum on the way out. You are not saying it. You are noticing that it is already being said.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 126,
+    "text": "If the breath is too quiet to hear, imagine the sound instead. It works the same way.",
+    "hold": 18
+   },
+   {
+    "atSeconds": 154,
+    "text": "So. Hum. Nothing else to do with it.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 200,
+    "text": "When you notice you have gone somewhere else — and you will — that noticing is not a failure. It is the practice. Come back to so.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 247,
+    "text": "So on the way in. Hum on the way out.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 313,
+    "text": "Let the mantra go. Sit with whatever is left.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 364,
+    "text": "Let the breath come back under its own management. Feel the floor again.",
+    "hold": 15
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "deep-wooden-drone",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "64403144-e6fb-50b8-b8ef-03a49d2233c8",
+  "catalogNumber": 810001,
+  "slug": "counting-the-exhale",
+  "kind": "meditation",
+  "title": "Counting the Exhale",
+  "sanskrit": "Sankhya Pranadharana",
+  "desc": "Counting only the out-breath, ten at a time. The narrowest possible task, which is why it works on a mind too busy for anything wider.",
+  "technique": "breath-counting",
+  "sourceTradition": "Common to Yogic and Chan/Zen practice",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 450,
+  "durationOptions": [
+   450,
+   750,
+   1350
+  ],
+  "goals": [
+   "anxiety",
+   "focus",
+   "sleep"
+  ],
+  "themes": [
+   "racing-thoughts",
+   "overwhelm"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": -3,
+   "pitta": -1,
+   "kapha": 0
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "morning",
+   "afternoon",
+   "evening"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit upright but not stiff. The spine long, the shoulders heavy.",
+    "hold": 10
+   },
+   {
+    "atSeconds": 17,
+    "text": "Breathe in without counting. Then, as the breath leaves, count one.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 36,
+    "text": "In again, no count. Out — two.",
+    "hold": 14
+   },
+   {
+    "atSeconds": 54,
+    "text": "Only the out-breath carries a number. The in-breath is free.",
+    "hold": 16
+   },
+   {
+    "atSeconds": 77,
+    "text": "Go up to ten, then begin again at one.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 127,
+    "text": "If you find yourself at fifteen, the mind has gone for a walk. No matter. Start again at one.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 179,
+    "text": "If you lose the number entirely, start again at one. Beginning again is not starting over.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 249,
+    "text": "Keep counting. One to ten, then one again.",
+    "hold": 90
+   },
+   {
+    "atSeconds": 344,
+    "text": "Now let the counting fall away and just breathe.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 390,
+    "text": "Notice whether the breath is different from when you began. It usually is.",
+    "hold": 20
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "cedar-room",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "122888ae-a4c3-5712-980c-b7a1873f4f54",
+  "catalogNumber": 810002,
+  "slug": "the-pause-between-breaths",
+  "kind": "meditation",
+  "title": "The Pause Between Breaths",
+  "sanskrit": "Kumbhaka Dharana",
+  "desc": "Between the breath going out and the breath coming in there is a gap. The instruction is simply to be awake inside it. Nothing is held or forced.",
+  "technique": "attention-on-the-gap",
+  "sourceTradition": "Vijñāna Bhairava Tantra — the technique of attending to the turn of the breath",
+  "seatAsanaId": "74d0be60-ea50-5c3d-aaa8-abfd372369cd",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 480,
+  "durationOptions": [
+   480,
+   780,
+   1380
+  ],
+  "goals": [
+   "focus",
+   "anxiety"
+  ],
+  "themes": [
+   "stillness",
+   "concentration"
+  ],
+  "level": 2,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Do not hold or lengthen the breath. If you have a respiratory condition, high blood pressure, or are pregnant, observe the pause without altering it."
+  ],
+  "dosha": {
+   "vata": -2,
+   "pitta": -1,
+   "kapha": -1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "dawn",
+   "morning",
+   "evening"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit where you will not need to move for a while.",
+    "hold": 10
+   },
+   {
+    "atSeconds": 17,
+    "text": "Let the breath find its own rhythm. This practice never asks you to change it.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 46,
+    "text": "Follow one breath all the way out. Notice that at the very end, before the next one starts, there is a pause.",
+    "hold": 18
+   },
+   {
+    "atSeconds": 78,
+    "text": "It might be half a second. It does not matter how long it is. Only that you are awake inside it.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 112,
+    "text": "Rest your attention there. At the bottom of the breath, in the turn.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 165,
+    "text": "There is a second gap, at the top, after the in-breath completes. Find that one too.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 205,
+    "text": "Two still points in every breath. Nothing is being held. You are only noticing what was always there.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 276,
+    "text": "If the breath starts to feel effortful, you are interfering. Let it go entirely for three breaths, then return.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 328,
+    "text": "Stay with the turn of the breath.",
+    "hold": 90
+   },
+   {
+    "atSeconds": 423,
+    "text": "Let the attention widen again. Feel the whole body breathing.",
+    "hold": 25
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "temple-bowls",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "b867c595-1052-51b3-bfb2-fb7d0b7fe36e",
+  "catalogNumber": 810003,
+  "slug": "cooling-attention",
+  "kind": "meditation",
+  "title": "Cooling Attention",
+  "sanskrit": "Shita Dharana",
+  "desc": "For heat — in the body, in the temper, in the hour after an argument. Attention rests on the coolest sensations available and lets the rest follow.",
+  "technique": "thermal-awareness",
+  "sourceTradition": "Ayurvedic sitali principle, adapted as attention rather than breath technique",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 450,
+  "durationOptions": [
+   450,
+   750,
+   1350
+  ],
+  "goals": [
+   "anger",
+   "stress"
+  ],
+  "themes": [
+   "irritability",
+   "heat",
+   "overwork"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": 0,
+   "pitta": -3,
+   "kapha": 1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "midday",
+   "afternoon"
+  ],
+  "season": [
+   "grishma",
+   "sharad"
+  ],
+  "agni": "cools",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit somewhere you are not too warm. Loosen anything tight at the neck or waist.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 21,
+    "text": "Take one slow breath in through the nose and notice something specific: the air is cooler going in than coming out.",
+    "hold": 18
+   },
+   {
+    "atSeconds": 53,
+    "text": "Find that coolness at the rim of the nostrils. It is faint. Look for it anyway.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 83,
+    "text": "Every in-breath brings it back. Stay at the nostrils and let the coolness arrive again and again.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 139,
+    "text": "Now widen a little. Where else is the body cool? The palms, perhaps. The skin behind the ears.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 175,
+    "text": "Do not go looking for heat. Only for the cool places, and rest there.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 224,
+    "text": "If a hot thought arrives — something someone said, something unfinished — notice where it lands in the body, and then return to the coolest place you can find.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 277,
+    "text": "Cool air at the nostrils. Cool skin at the palms. Nothing to solve.",
+    "hold": 75
+   },
+   {
+    "atSeconds": 360,
+    "text": "Let the whole face soften. The jaw, the space between the eyebrows.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 398,
+    "text": "Come back slowly. Heat does not leave in a hurry, and it does not need to.",
+    "hold": 20
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "still-water",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "a18be320-217b-5ab4-92e0-4ef9aa85e5f2",
+  "catalogNumber": 810004,
+  "slug": "weight-and-contact",
+  "kind": "meditation",
+  "title": "Weight and Contact",
+  "sanskrit": "Sparsha Dharana",
+  "desc": "Attention on the places where the body meets the floor. The most reliable practice for a mind that will not settle, because weight cannot be argued with.",
+  "technique": "body-anchoring",
+  "sourceTradition": "Vijñāna Bhairava Tantra — attention on the point of contact",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 480,
+  "durationOptions": [
+   480,
+   780,
+   1380
+  ],
+  "goals": [
+   "anxiety",
+   "sleep"
+  ],
+  "themes": [
+   "grounding",
+   "dissociation",
+   "restlessness"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Attention on bodily sensation can be destabilising during a dissociative episode. If the body starts to feel unreal rather than heavy, open the eyes and name three things in the room instead."
+  ],
+  "dosha": {
+   "vata": -3,
+   "pitta": 0,
+   "kapha": 1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "evening",
+   "night"
+  ],
+  "season": [
+   "sharad",
+   "hemanta"
+  ],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit or lie down. Whichever lets you be heaviest.",
+    "hold": 10
+   },
+   {
+    "atSeconds": 16,
+    "text": "Find where the body touches the floor. The sitting bones, the backs of the legs, the heels.",
+    "hold": 18
+   },
+   {
+    "atSeconds": 44,
+    "text": "Do not describe it. Just feel it. The pressure, the temperature, the exact edge where you stop and the floor begins.",
+    "hold": 22
+   },
+   {
+    "atSeconds": 80,
+    "text": "Now let weight go into those places. As if you were slightly heavier than you thought.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 115,
+    "text": "The floor is holding all of it. It has been the whole time.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 163,
+    "text": "Move to the hands. Wherever they rest, feel the contact — the weight of them, the warmth underneath.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 204,
+    "text": "Now the whole underside of the body at once. Every place that is being supported.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 274,
+    "text": "If the mind lifts off into planning, it will. Come back to weight. Weight is always here and it is never interesting, which is exactly what makes it useful.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 337,
+    "text": "Heavy, supported, still.",
+    "hold": 90
+   },
+   {
+    "atSeconds": 429,
+    "text": "Before you move, notice the difference between the body you sat down with and this one.",
+    "hold": 20
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "deep-wooden-drone",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "baaec035-fae4-538d-b440-9921268ba714",
+  "catalogNumber": 810005,
+  "slug": "rotation-of-awareness",
+  "kind": "meditation",
+  "title": "Rotation of Awareness",
+  "sanskrit": "Chidakasha Dharana",
+  "desc": "Attention moves through the body in a fixed order, resting a moment in each place. The order never changes, which is what makes it restful — there is nothing to decide.",
+  "technique": "body-rotation",
+  "sourceTradition": "Yoga Nidra lineage; the 61-point rotation, shortened",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": false,
+  "posture": "supine",
+  "eyes": "closed",
+  "durationSeconds": 510,
+  "durationOptions": [
+   510,
+   810,
+   1410
+  ],
+  "goals": [
+   "sleep",
+   "anxiety",
+   "recovery"
+  ],
+  "themes": [
+   "tension",
+   "insomnia"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Sustained inward attention can be destabilising for people with PTSD or dissociative symptoms. Keep the eyes softly open, or stop, if it becomes uncomfortable."
+  ],
+  "dosha": {
+   "vata": -3,
+   "pitta": -1,
+   "kapha": 1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "evening",
+   "night"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Lie on your back, arms a little away from the sides, palms up.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 20,
+    "text": "We will move through the body in a fixed order. You do not have to remember it. Just follow.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 44,
+    "text": "Right hand thumb. Second finger. Third. Fourth. Fifth. The palm. The back of the hand. The wrist.",
+    "hold": 8
+   },
+   {
+    "atSeconds": 63,
+    "text": "The forearm. The elbow. The upper arm. The shoulder. The armpit. The right side of the waist. The right hip.",
+    "hold": 8
+   },
+   {
+    "atSeconds": 84,
+    "text": "The right thigh. The knee. The calf. The ankle. The heel. The sole of the right foot. The right big toe.",
+    "hold": 10
+   },
+   {
+    "atSeconds": 107,
+    "text": "Now the same on the left. Left hand thumb. Second finger. Third. Fourth. Fifth. The palm. The wrist.",
+    "hold": 8
+   },
+   {
+    "atSeconds": 126,
+    "text": "The forearm. The elbow. The upper arm. The shoulder. The left side of the waist. The left hip.",
+    "hold": 8
+   },
+   {
+    "atSeconds": 146,
+    "text": "The left thigh. The knee. The calf. The ankle. The heel. The sole of the left foot. The left big toe.",
+    "hold": 10
+   },
+   {
+    "atSeconds": 169,
+    "text": "Now the back of the body. The right shoulder blade. The left. The whole spine, from the base to the neck.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 194,
+    "text": "The back of the head. The crown. The forehead. The right eyebrow. The left. The space between them.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 217,
+    "text": "The right eyelid. The left. The right cheek. The left. The upper lip. The lower lip. The chin. The throat.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 242,
+    "text": "The chest. The stomach. The navel. The whole front of the body at once.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 271,
+    "text": "Now the whole body at once. Every part you just visited, all together.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 339,
+    "text": "Stay here. Nothing to do.",
+    "hold": 90
+   },
+   {
+    "atSeconds": 432,
+    "text": "When you are ready, let one hand move. Then the other. Take your time coming back.",
+    "hold": 25
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "ocean-floor",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "11f298bf-bdd7-5344-bf34-11c9c9404817",
+  "catalogNumber": 810006,
+  "slug": "silent-mantra",
+  "kind": "meditation",
+  "title": "Silent Repetition",
+  "sanskrit": "Manasika Japa",
+  "desc": "A single word or syllable, repeated inwardly at the pace of the breath. The word matters less than the repetition, which is the whole method.",
+  "technique": "mantra",
+  "sourceTradition": "Japa yoga; the three grades of repetition, of which the silent is the highest",
+  "seatAsanaId": "ffdc53da-6cd0-5a15-92e4-b86cdcebad00",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 540,
+  "durationOptions": [
+   540,
+   840,
+   1440
+  ],
+  "goals": [
+   "focus",
+   "anxiety"
+  ],
+  "themes": [
+   "devotion",
+   "concentration"
+  ],
+  "level": 2,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": -2,
+   "pitta": -1,
+   "kapha": -1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "dawn",
+   "morning",
+   "evening"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit with the spine upright and the hands still.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 18,
+    "text": "Choose one word. Om, if nothing else comes. Or peace. Or a name that means something to you.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 49,
+    "text": "Say it once out loud, so the body knows the shape of it.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 72,
+    "text": "Now say it under the breath, barely moving the lips. Ten times, at whatever pace feels natural.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 123,
+    "text": "Now stop moving the lips altogether. Say it only inwardly.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 149,
+    "text": "Let it settle onto the breath. One repetition as the breath goes out, or one on each breath. Let it find its own place.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 224,
+    "text": "The word will change texture. It will get faster, or lose its meaning, or seem to say itself. All of that is fine.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 284,
+    "text": "When you lose it, pick it up again without comment.",
+    "hold": 90
+   },
+   {
+    "atSeconds": 380,
+    "text": "Now let the word stop. Do not replace it with anything.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 447,
+    "text": "Sit in what is left of it.",
+    "hold": 45
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "morning-raga",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "739d2aee-b90c-5f3f-a1c4-3d5718fe5e12",
+  "catalogNumber": 810007,
+  "slug": "om-resonance",
+  "kind": "meditation",
+  "title": "The Sound and Its Ending",
+  "sanskrit": "Pranava Dhyana",
+  "desc": "Chanting Om aloud and then attending to the silence it leaves behind. Rousing rather than sedating, which makes it a morning practice.",
+  "technique": "sound-and-silence",
+  "sourceTradition": "Mandukya Upanishad — the three sounds of Om and the fourth, the silence after",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 450,
+  "durationOptions": [
+   450,
+   750,
+   1350
+  ],
+  "goals": [
+   "energy",
+   "focus"
+  ],
+  "themes": [
+   "heaviness",
+   "morning",
+   "clearing"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": 0,
+   "pitta": 0,
+   "kapha": -3
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "dawn",
+   "morning"
+  ],
+  "season": [
+   "shishira",
+   "vasanta"
+  ],
+  "agni": "kindles",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit upright. This one is loud, so choose your moment.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 18,
+    "text": "Take a full breath in, and on the way out let a long low sound come from the chest. Aaaa.",
+    "hold": 16
+   },
+   {
+    "atSeconds": 47,
+    "text": "Again. Feel where it vibrates — low in the body, behind the breastbone.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 75,
+    "text": "Now the second sound, higher, in the throat and mouth. Ooooo.",
+    "hold": 18
+   },
+   {
+    "atSeconds": 100,
+    "text": "And the third, with the lips closed, in the nose and the skull. Mmmmm.",
+    "hold": 18
+   },
+   {
+    "atSeconds": 127,
+    "text": "Now all three, joined, on one breath. A into O into M.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 160,
+    "text": "Again. Let it be long. Let the M go on until the breath is gone.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 199,
+    "text": "Three more, at your own pace. Notice that the sound gets quieter each time without being told to.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 270,
+    "text": "Now stop. Do not chant. Listen to what the sound left behind.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 338,
+    "text": "That silence is the fourth part. It is the only part the text says is the real one.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 394,
+    "text": "Come back when the silence has thinned out.",
+    "hold": 20
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "temple-bowls",
+   "loop": true,
+   "defaultVolume": 0.28
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "bdd570a8-6958-5113-a3e6-0b586169d8aa",
+  "catalogNumber": 810008,
+  "slug": "the-fading-bell",
+  "kind": "meditation",
+  "title": "The Fading Bell",
+  "sanskrit": "Nada Dharana",
+  "desc": "Follow one sound all the way down until you cannot say whether it is still there. The mind that follows a decay cannot also be arguing with anyone.",
+  "technique": "sound-decay",
+  "sourceTradition": "Vijñāna Bhairava Tantra — attending to a struck sound as it dies away",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 450,
+  "durationOptions": [
+   450,
+   750,
+   1350
+  ],
+  "goals": [
+   "focus",
+   "anger"
+  ],
+  "themes": [
+   "listening",
+   "subtlety"
+  ],
+  "level": 2,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": -1,
+   "pitta": -3,
+   "kapha": 0
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "afternoon",
+   "evening"
+  ],
+  "season": [],
+  "agni": "cools",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit still. If you have a bowl or a bell, have it within reach. If not, the recording will do.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 28,
+    "text": "Strike it once, softly.",
+    "hold": 6
+   },
+   {
+    "atSeconds": 36,
+    "text": "Follow the sound. Not the strike — what comes after it.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 63,
+    "text": "It is getting quieter. Stay with it as it goes.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 94,
+    "text": "At some point you will not be able to say whether you are hearing it or remembering it. Stay there. That place is the practice.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 140,
+    "text": "When it is entirely gone, wait in the silence. Do not strike again yet.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 189,
+    "text": "Strike it again. Follow it down.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 253,
+    "text": "Again, if you like. Each time, the ear gets finer.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 319,
+    "text": "Now stop striking. Listen to the room instead — whatever is there. Follow the quietest thing you can find.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 391,
+    "text": "Let the listening go.",
+    "hold": 30
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "temple-bowls",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "9790a109-aae8-5273-b936-e1719b83af54",
+  "catalogNumber": 810009,
+  "slug": "witness-of-thought",
+  "kind": "meditation",
+  "title": "Watching Thought Arrive",
+  "sanskrit": "Sakshi Bhava",
+  "desc": "Not stopping thoughts, which cannot be done. Noticing that there is something present that is not the thought, and staying with that instead.",
+  "technique": "open-awareness",
+  "sourceTradition": "Sankhya and Vedanta — the witness distinct from what it observes",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 540,
+  "durationOptions": [
+   540,
+   840,
+   1440
+  ],
+  "goals": [
+   "stress",
+   "focus"
+  ],
+  "themes": [
+   "rumination",
+   "self-criticism",
+   "perspective"
+  ],
+  "level": 3,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": -1,
+   "pitta": -2,
+   "kapha": -1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "morning",
+   "afternoon",
+   "evening"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit comfortably. This one asks for a little patience.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 18,
+    "text": "Do not try to have a quiet mind. Let it do what it does.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 52,
+    "text": "A thought will arrive. When it does, notice the arriving rather than the content.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 90,
+    "text": "Where did it come from? You did not decide to have it. It appeared.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 124,
+    "text": "Watch the next one appear the same way. Not what it says. That it came.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 179,
+    "text": "Now notice something else: whatever is doing the watching did not arrive. It was already here.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 224,
+    "text": "Rest as the thing that was already here. Let the thoughts pass in front of it like weather.",
+    "hold": 75
+   },
+   {
+    "atSeconds": 310,
+    "text": "If you get pulled into a thought and forget — and you will — the moment you notice, you are back. There is no penalty.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 366,
+    "text": "Weather in front. Sky behind. Stay as the sky.",
+    "hold": 90
+   },
+   {
+    "atSeconds": 462,
+    "text": "Let all of it go, including the image of the sky.",
+    "hold": 45
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "open-sky",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "dc03f19f-7723-50cb-a8ce-ce13591b010b",
+  "catalogNumber": 810010,
+  "slug": "loving-kindness",
+  "kind": "meditation",
+  "title": "Wishing Well",
+  "sanskrit": "Metta Bhavana",
+  "desc": "Four wishes, offered in a fixed order that always begins with yourself. The order is not sentimental — starting anywhere else tends not to work.",
+  "technique": "heart-cultivation",
+  "sourceTradition": "Metta Sutta and the Visuddhimagga's fourfold order",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 540,
+  "durationOptions": [
+   540,
+   840,
+   1440
+  ],
+  "goals": [
+   "anger",
+   "grief",
+   "connection"
+  ],
+  "themes": [
+   "resentment",
+   "loneliness",
+   "self-criticism"
+  ],
+  "level": 2,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": -1,
+   "pitta": -3,
+   "kapha": 0
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "evening",
+   "night"
+  ],
+  "season": [],
+  "agni": "cools",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit however you can be comfortable for ten minutes.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 18,
+    "text": "Bring to mind the phrase: may I be safe. Say it inwardly and see whether anything answers.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 53,
+    "text": "May I be well. May I be at ease. May I live with some kindness toward myself.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 99,
+    "text": "If that feels false, it often does at first. Say it anyway. It is a direction, not a claim.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 141,
+    "text": "Now bring to mind someone easy. Someone you are simply glad exists.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 169,
+    "text": "May you be safe. May you be well. May you be at ease.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 217,
+    "text": "Now someone neutral. Someone you see and do not think about — a neighbour, someone behind a counter.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 253,
+    "text": "May you be safe. May you be well. May you be at ease. They have a whole life you know nothing about.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 307,
+    "text": "Now, only if you are willing, someone difficult. Not the hardest person. Start further down the list.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 348,
+    "text": "May you be safe. May you be well. You are not excusing anything. You are declining to carry it.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 405,
+    "text": "Now let it go outward with no particular object. Whoever is nearby. Whoever is awake right now.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 461,
+    "text": "Come back to yourself, and end where you began. May I be well.",
+    "hold": 30
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "snowfall",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "7b34d8bd-4ff2-55cb-841a-0227918c4922",
+  "catalogNumber": 810011,
+  "slug": "fire-at-the-navel",
+  "kind": "meditation",
+  "title": "The Fire at the Navel",
+  "sanskrit": "Agni Dharana",
+  "desc": "Attention on the warmth below the navel — the classical seat of digestion. Warming and mildly rousing, so it belongs in the morning and not before sleep.",
+  "technique": "visualisation-internal",
+  "sourceTradition": "Ayurvedic agni and the manipura chakra of the tantric body",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 480,
+  "durationOptions": [
+   480,
+   780,
+   1380
+  ],
+  "goals": [
+   "digestion",
+   "energy"
+  ],
+  "themes": [
+   "sluggishness",
+   "cold",
+   "heaviness"
+  ],
+  "level": 2,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Not during acute heartburn, gastritis, ulcer, or in the first hours after a large meal. Not in pregnancy. If you run hot, use Cooling Attention instead."
+  ],
+  "dosha": {
+   "vata": -1,
+   "pitta": 1,
+   "kapha": -3
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "morning",
+   "midday"
+  ],
+  "season": [
+   "hemanta",
+   "shishira",
+   "varsha"
+  ],
+  "agni": "kindles",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit upright, with the belly free — nothing tight at the waist.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 23,
+    "text": "Rest one hand two fingers below the navel. Feel the warmth of the hand through the cloth.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 53,
+    "text": "Breathe normally and notice that the belly moves under your hand. Do not push it.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 88,
+    "text": "Now find the warmth underneath. Not the hand's warmth. The body's.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 125,
+    "text": "It is faint. It is always there. This is the fire the texts call agni, and everything you eat passes through it.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 164,
+    "text": "On each in-breath, imagine air reaching it. On each out-breath, imagine it glowing a little steadier.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 219,
+    "text": "Not bigger. Steadier. A fire that is too big digests the wrong things.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 267,
+    "text": "Stay with the warmth below the navel. Breath feeding it, quietly.",
+    "hold": 75
+   },
+   {
+    "atSeconds": 349,
+    "text": "Now take the hand away and see whether you can still find the warmth without it.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 399,
+    "text": "Let it be. It will keep going without your attention, as it has all your life.",
+    "hold": 25
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "hearth",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "e6c9249c-e739-55c4-a474-43494435649d",
+  "catalogNumber": 810012,
+  "slug": "the-forest-floor",
+  "kind": "visualisation",
+  "title": "The Forest Floor",
+  "sanskrit": "Prithvi Dharana",
+  "desc": "Deep woodland, old ground, roots under everything. The heaviest of the five scenes, and the one to reach for when nothing will stay still.",
+  "technique": "element-visualisation",
+  "sourceTradition": "Pancha mahabhuta — earth",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "any",
+  "eyes": "closed",
+  "durationSeconds": 510,
+  "durationOptions": [
+   510,
+   810,
+   1410
+  ],
+  "goals": [
+   "anxiety",
+   "sleep"
+  ],
+  "themes": [
+   "grounding",
+   "overwhelm",
+   "travel"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": -3,
+   "pitta": 0,
+   "kapha": 1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "evening",
+   "night"
+  ],
+  "season": [
+   "sharad",
+   "hemanta"
+  ],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Settle, and let the eyes close.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 16,
+    "text": "Put yourself on the floor of an old forest. Not a path through it — the floor itself.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 47,
+    "text": "Under you, a deep layer of leaves that has been building for longer than you have been alive.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 84,
+    "text": "Below that, roots. Not one tree's roots but every tree's, crossing and holding each other in the dark.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 125,
+    "text": "Nothing here is in a hurry. The tree above you has been at it for two hundred years and will be here after.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 174,
+    "text": "Smell the ground. Cold, mineral, faintly sweet.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 209,
+    "text": "Feel the weight of your own body pressing into the leaf litter, and the ground pressing evenly back.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 265,
+    "text": "Somewhere above, the canopy is moving. Down here it is entirely still.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 333,
+    "text": "Let yourself be one more heavy thing on the forest floor. Nothing is required of you.",
+    "hold": 90
+   },
+   {
+    "atSeconds": 433,
+    "text": "The forest carries on. Let it. Come back slowly.",
+    "hold": 25
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "cedar-room",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": "scene-forest-floor"
+ },
+ {
+  "id": "2845b12f-d556-5cf9-b23a-214f70ec5882",
+  "catalogNumber": 810013,
+  "slug": "the-still-lake",
+  "kind": "visualisation",
+  "title": "The Still Lake",
+  "sanskrit": "Jala Dharana",
+  "desc": "A lake at dusk, no wind. The classical image for a mind that has stopped being disturbed, and the coolest of the five scenes.",
+  "technique": "element-visualisation",
+  "sourceTradition": "Pancha mahabhuta — water",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "any",
+  "eyes": "closed",
+  "durationSeconds": 480,
+  "durationOptions": [
+   480,
+   780,
+   1380
+  ],
+  "goals": [
+   "anger",
+   "stress"
+  ],
+  "themes": [
+   "heat",
+   "irritability",
+   "clarity"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": -1,
+   "pitta": -3,
+   "kapha": 0
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "afternoon",
+   "evening"
+  ],
+  "season": [
+   "grishma",
+   "sharad"
+  ],
+  "agni": "cools",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Let the eyes close and the shoulders drop.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 17,
+    "text": "A lake, late in the day. The light has gone flat and orange. There is no wind at all.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 54,
+    "text": "The surface is completely unbroken. It is holding the whole sky upside down without effort.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 94,
+    "text": "Notice that the water is not doing anything to be still. It has simply stopped being disturbed.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 139,
+    "text": "Something touches the surface — an insect, a leaf. Rings go out.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 172,
+    "text": "Watch them travel, get wider, get fainter. Watch the surface close over again.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 220,
+    "text": "This is the whole teaching. The lake does not mind being disturbed. It just returns.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 270,
+    "text": "Let a thought be a leaf landing. Rings out, rings fading, surface closing.",
+    "hold": 75
+   },
+   {
+    "atSeconds": 353,
+    "text": "The light is going. The water is getting darker and even more still.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 421,
+    "text": "Leave the lake there. It will be like that all night.",
+    "hold": 25
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "still-water",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": "scene-still-lake"
+ },
+ {
+  "id": "86587d52-0751-5a13-9232-2921c18f7d5f",
+  "catalogNumber": 810014,
+  "slug": "the-hearth",
+  "kind": "visualisation",
+  "title": "The Hearth",
+  "sanskrit": "Agni Dharana (bahya)",
+  "desc": "A fire in a grate on a cold evening. Warming and gently rousing, which makes it the scene for heaviness and cold rather than for agitation.",
+  "technique": "element-visualisation",
+  "sourceTradition": "Pancha mahabhuta — fire",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "any",
+  "eyes": "closed",
+  "durationSeconds": 480,
+  "durationOptions": [
+   480,
+   780,
+   1380
+  ],
+  "goals": [
+   "energy",
+   "grief"
+  ],
+  "themes": [
+   "cold",
+   "heaviness",
+   "comfort"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": -2,
+   "pitta": 2,
+   "kapha": -3
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "evening"
+  ],
+  "season": [
+   "hemanta",
+   "shishira"
+  ],
+  "agni": "kindles",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit, and let the eyes close.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 16,
+    "text": "A small fire in a grate. A cold room otherwise, and one warm side of you.",
+    "hold": 22
+   },
+   {
+    "atSeconds": 48,
+    "text": "The heat is only on the front of the body. Your back is still cool. Feel both at once.",
+    "hold": 28
+   },
+   {
+    "atSeconds": 88,
+    "text": "Watch what the fire actually does. It is never the same shape twice, and it never stops.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 134,
+    "text": "A log settles. A shower of sparks goes up and disappears.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 171,
+    "text": "There is no effort in it. Nothing is being achieved. It is simply burning because that is what it is.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 223,
+    "text": "Let the warmth on your face be the only thing you are attending to.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 292,
+    "text": "If you are tired or low, let the fire be doing the work for a while. You do not have to.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 365,
+    "text": "The fire is getting lower now, and steadier. Less flame, more heat.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 418,
+    "text": "Leave it burning down. Come back to the room.",
+    "hold": 25
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "hearth",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": "scene-hearth"
+ },
+ {
+  "id": "107a5be0-0c89-5977-bd18-a4a1d7f05540",
+  "catalogNumber": 810015,
+  "slug": "wind-through-grass",
+  "kind": "visualisation",
+  "title": "Wind Through Grass",
+  "sanskrit": "Vayu Dharana",
+  "desc": "An open hillside with wind moving across it. Light and clearing, for the days when everything feels thick and slow.",
+  "technique": "element-visualisation",
+  "sourceTradition": "Pancha mahabhuta — air",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "any",
+  "eyes": "closed",
+  "durationSeconds": 480,
+  "durationOptions": [
+   480,
+   780,
+   1380
+  ],
+  "goals": [
+   "energy",
+   "focus"
+  ],
+  "themes": [
+   "stagnation",
+   "dullness",
+   "clearing"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": 2,
+   "pitta": -1,
+   "kapha": -3
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "morning",
+   "midday"
+  ],
+  "season": [
+   "vasanta",
+   "grishma"
+  ],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit upright. This one wants a little lift in the spine.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 22,
+    "text": "An open hillside, high up, nothing but long grass in every direction.",
+    "hold": 22
+   },
+   {
+    "atSeconds": 52,
+    "text": "The wind is steady and not cold. It arrives in waves.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 83,
+    "text": "Watch a gust cross the field. You can see it coming before it reaches you — a line of movement travelling over the grass.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 134,
+    "text": "It arrives. It passes. Another one is already on its way.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 171,
+    "text": "Feel it on the skin. On the arms, the back of the neck, moving the hair.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 216,
+    "text": "Nothing here is heavy. Nothing here is stuck.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 266,
+    "text": "Let a breath in feel like the wind arriving, and a breath out like it passing on.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 336,
+    "text": "Waves of it, crossing and crossing. The field never stops moving and never goes anywhere.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 406,
+    "text": "Come down off the hill slowly.",
+    "hold": 25
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "glass-meadow",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": "scene-wind-grass"
+ },
+ {
+  "id": "8762705b-8055-59d3-a739-816b0036c770",
+  "catalogNumber": 810016,
+  "slug": "the-night-sky",
+  "kind": "visualisation",
+  "title": "The Night Sky",
+  "sanskrit": "Akasha Dharana",
+  "desc": "Lying under an unlit sky. The most spacious of the five and the one that most reliably puts a problem back in proportion.",
+  "technique": "element-visualisation",
+  "sourceTradition": "Pancha mahabhuta — ether; the classical vastness meditations",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": false,
+  "posture": "supine",
+  "eyes": "closed",
+  "durationSeconds": 510,
+  "durationOptions": [
+   510,
+   810,
+   1410
+  ],
+  "goals": [
+   "stress",
+   "grief",
+   "perspective"
+  ],
+  "themes": [
+   "perspective",
+   "smallness",
+   "awe"
+  ],
+  "level": 2,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Vastness practices can be unsettling if you are prone to derealisation. Use The Forest Floor instead if this feels ungrounding."
+  ],
+  "dosha": {
+   "vata": 1,
+   "pitta": -2,
+   "kapha": -1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "night"
+  ],
+  "season": [
+   "sharad",
+   "hemanta"
+  ],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Lie on your back if you can. Let the arms fall wherever they want.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 24,
+    "text": "You are outside, somewhere with no lights, on your back on the ground.",
+    "hold": 22
+   },
+   {
+    "atSeconds": 54,
+    "text": "Above you the sky is completely open. No cloud, no moon. Just depth.",
+    "hold": 28
+   },
+   {
+    "atSeconds": 90,
+    "text": "Let the eyes adjust in the way they do. More and more of it appears the longer you look.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 137,
+    "text": "Everything you can see is at a different distance. It only looks flat because we are so far from all of it.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 186,
+    "text": "You are lying on the outside of a planet, held on by nothing you can feel, looking out.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 243,
+    "text": "Whatever you were worrying about is still true. It is just a different size from up here.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 298,
+    "text": "Stay with the openness. There is nothing to reach and nowhere to get to.",
+    "hold": 90
+   },
+   {
+    "atSeconds": 397,
+    "text": "Feel the ground at your back again — the one solid thing in all of it.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 447,
+    "text": "Come back in your own time.",
+    "hold": 25
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "ocean-floor",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": "scene-night-sky"
+ },
+ {
+  "id": "97629f8e-a31c-5424-82b8-877bf6bfa69b",
+  "catalogNumber": 810017,
+  "slug": "complete-rest",
+  "kind": "relaxation",
+  "title": "Complete Rest",
+  "sanskrit": "Shavasana",
+  "desc": "Doing nothing, structured so the mind has something to follow. The practice most people skip and most people need.",
+  "technique": "progressive-release",
+  "sourceTradition": "Hatha Yoga Pradipika — shavasana, with a modern tension-release order",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": false,
+  "posture": "supine",
+  "eyes": "closed",
+  "durationSeconds": 660,
+  "durationOptions": [
+   660,
+   960,
+   1560
+  ],
+  "goals": [
+   "recovery",
+   "sleep",
+   "stress"
+  ],
+  "themes": [
+   "exhaustion",
+   "after-practice"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Late pregnancy: lie on the left side rather than flat on the back."
+  ],
+  "dosha": {
+   "vata": -3,
+   "pitta": -2,
+   "kapha": 1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "afternoon",
+   "evening",
+   "night"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Lie down on your back. Feet apart, arms away from the body, palms up.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 24,
+    "text": "Take one breath in through the nose, and let the next one out through the mouth with a sound.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 51,
+    "text": "Two more like that. Each one, let a little more of your weight go into the floor.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 87,
+    "text": "Now let the breath go back to normal and stop managing it.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 119,
+    "text": "Squeeze the right fist tight. Tighter. Hold it. Now let it go completely.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 147,
+    "text": "Notice the difference between the two hands. That difference is what we are after everywhere else.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 182,
+    "text": "Squeeze the left fist. Hold. Release.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 206,
+    "text": "Now the shoulders — lift them toward the ears. Hold. Drop them.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 234,
+    "text": "Screw up the whole face. Hold it. Let it fall apart.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 261,
+    "text": "Press the backs of the legs into the floor. Hold. Release.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 288,
+    "text": "Now nothing. No part of the body has a job.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 354,
+    "text": "If a thought arrives, let it. You are not meditating. You are resting.",
+    "hold": 90
+   },
+   {
+    "atSeconds": 452,
+    "text": "Let the body be as heavy as it wants to be.",
+    "hold": 120
+   },
+   {
+    "atSeconds": 579,
+    "text": "Start with the fingers. Then the toes. Take a bigger breath. Come back without hurrying.",
+    "hold": 30
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "snowfall",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "b0631b37-d8a3-5eac-91c2-dbcbea902b4e",
+  "catalogNumber": 810018,
+  "slug": "yoga-nidra-short",
+  "kind": "relaxation",
+  "title": "Yogic Sleep, Short Form",
+  "sanskrit": "Yoga Nidra",
+  "desc": "The classical four-stage form — intention, rotation, breath count, return. Done lying down, at the edge of sleep without crossing into it.",
+  "technique": "nidra",
+  "sourceTradition": "Yoga Nidra lineage — intention, rotation, breath count, return",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": false,
+  "posture": "supine",
+  "eyes": "closed",
+  "durationSeconds": 720,
+  "durationOptions": [
+   720,
+   1020,
+   1620
+  ],
+  "goals": [
+   "sleep",
+   "anxiety",
+   "recovery"
+  ],
+  "themes": [
+   "insomnia",
+   "burnout"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Sustained inward attention can be destabilising for people with PTSD or dissociative symptoms. Stop if it becomes uncomfortable rather than pushing through."
+  ],
+  "dosha": {
+   "vata": -3,
+   "pitta": -2,
+   "kapha": 1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "evening",
+   "night"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Lie on your back and get comfortable enough that you will not need to move.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 29,
+    "text": "The rule of this practice is one thing only: try to stay awake. Not alert. Awake.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 60,
+    "text": "Bring to mind one short intention. Something plainly true that you would like more of. Say it inwardly three times.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 112,
+    "text": "Now let it go. It has been planted and does not need attention.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 145,
+    "text": "Bring attention to the right hand. The thumb, each finger, the palm, the wrist, the arm, the shoulder.",
+    "hold": 14
+   },
+   {
+    "atSeconds": 171,
+    "text": "The right side of the body, down to the right foot and the right big toe.",
+    "hold": 14
+   },
+   {
+    "atSeconds": 195,
+    "text": "The left hand. The thumb, each finger, the palm, the wrist, the arm, the shoulder.",
+    "hold": 14
+   },
+   {
+    "atSeconds": 218,
+    "text": "The left side of the body, down to the left foot and the left big toe.",
+    "hold": 14
+   },
+   {
+    "atSeconds": 242,
+    "text": "The whole back. The whole front. The head and the face.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 269,
+    "text": "The whole body at once.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 318,
+    "text": "Now the breath. Count backwards from twenty-seven, one number per out-breath.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 355,
+    "text": "If you lose the count, begin again at twenty-seven. Losing it is expected.",
+    "hold": 120
+   },
+   {
+    "atSeconds": 483,
+    "text": "Let the counting stop. Rest in whatever this is.",
+    "hold": 120
+   },
+   {
+    "atSeconds": 608,
+    "text": "Bring the intention back once, in the same words.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 644,
+    "text": "Feel the floor, the room, the sounds outside. Move slowly when you move.",
+    "hold": 30
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "ocean-floor",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "98056850-8d5f-529e-9ee3-ef388a83a694",
+  "catalogNumber": 810019,
+  "slug": "three-part-breath",
+  "kind": "pranayama",
+  "title": "Three-Part Breath",
+  "sanskrit": "Dirgha Pranayama",
+  "desc": "Filling the belly, then the ribs, then the upper chest, in that order. The foundation every other breath practice is built on.",
+  "technique": "breath-lengthening",
+  "sourceTradition": "Classical dirgha; the complete yogic breath",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 450,
+  "durationOptions": [
+   450,
+   750,
+   1350
+  ],
+  "goals": [
+   "anxiety",
+   "focus"
+  ],
+  "themes": [
+   "grounding",
+   "beginner"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Stop and breathe normally if you feel dizzy, tingling in the hands, or any tightness in the chest.",
+   "Keep it gentle in pregnancy — no forcing of the belly."
+  ],
+  "dosha": {
+   "vata": -3,
+   "pitta": -1,
+   "kapha": 0
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "morning",
+   "evening"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit upright with the belly free of anything tight.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 18,
+    "text": "Put one hand on the belly and one on the ribs.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 37,
+    "text": "Breathe in and let only the lower hand move. The belly rises. Nothing else.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 70,
+    "text": "Do that four or five times. Belly only.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 111,
+    "text": "Now add the ribs. Belly first, then the ribs widen sideways under the second hand.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 150,
+    "text": "Four or five of those. Belly, then ribs.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 195,
+    "text": "Now the third part. Belly, ribs, and last a little into the upper chest, under the collarbones.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 236,
+    "text": "Out in the same order, or simply let it all go at once. Whichever is smoother.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 281,
+    "text": "Ten breaths like this, at your own pace. It should never feel like effort.",
+    "hold": 90
+   },
+   {
+    "atSeconds": 380,
+    "text": "Let it go entirely and breathe normally. Notice the difference.",
+    "hold": 30
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "cedar-room",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null,
+  "supersedesAsanaSlug": "three-part-breath"
+ },
+ {
+  "id": "a25948c8-5c05-5ace-95ce-1c270eeed8ba",
+  "catalogNumber": 810020,
+  "slug": "victorious-breath",
+  "kind": "pranayama",
+  "title": "Victorious Breath",
+  "sanskrit": "Ujjayi Pranayama",
+  "desc": "A soft narrowing at the throat that gives the breath an audible, oceanic sound. The sound is the point: it gives attention something to hold.",
+  "technique": "glottal-restriction",
+  "sourceTradition": "Hatha Yoga Pradipika, chapter 2",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 480,
+  "durationOptions": [
+   480,
+   780,
+   1380
+  ],
+  "goals": [
+   "focus",
+   "anxiety"
+  ],
+  "themes": [
+   "steadiness",
+   "practice-breath"
+  ],
+  "level": 2,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Stop and breathe normally if you feel dizzy, tingling in the hands, or any tightness in the chest.",
+   "Not with a sore throat or active respiratory infection."
+  ],
+  "dosha": {
+   "vata": -2,
+   "pitta": -1,
+   "kapha": -1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "morning",
+   "afternoon"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit tall. The chin very slightly down, the throat soft.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 21,
+    "text": "Open the mouth and breathe out as if fogging a window. Feel where that happens — at the back of the throat.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 60,
+    "text": "Do it twice more. Learn the sensation.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 90,
+    "text": "Now close the mouth and make the same shape at the throat while breathing out through the nose.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 131,
+    "text": "There should be a quiet sound, like distant surf. Not a rasp, not a snore.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 170,
+    "text": "Now do it on the in-breath too. Both directions, same soft sound.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 218,
+    "text": "The sound tells you the pace. If it gets rough, you are working too hard.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 273,
+    "text": "Twenty breaths. Let the sound be the only thing you are listening to.",
+    "hold": 120
+   },
+   {
+    "atSeconds": 401,
+    "text": "Release the throat and breathe normally. The sound stops. Listen to the silence it leaves.",
+    "hold": 40
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "ocean-floor",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null,
+  "supersedesAsanaSlug": "victorious-breath"
+ },
+ {
+  "id": "ab10a784-a0a0-51b6-8d18-2771cf13b215",
+  "catalogNumber": 810021,
+  "slug": "alternate-nostril-breath",
+  "kind": "pranayama",
+  "title": "Alternate Nostril Breath",
+  "sanskrit": "Nadi Shodhana",
+  "desc": "Breathing through one nostril at a time in a fixed cycle. The most balancing of the breath practices and the safest place to start with retention.",
+  "technique": "nostril-alternation",
+  "sourceTradition": "Hatha Yoga Pradipika; the channel-purifying breath",
+  "seatAsanaId": "ffdc53da-6cd0-5a15-92e4-b86cdcebad00",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 540,
+  "durationOptions": [
+   540,
+   840,
+   1440
+  ],
+  "goals": [
+   "anxiety",
+   "focus"
+  ],
+  "themes": [
+   "balance",
+   "before-meditation"
+  ],
+  "level": 2,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Stop and breathe normally if you feel dizzy, tingling in the hands, or any tightness in the chest.",
+   "Skip if the nose is blocked — never force air through a congested side.",
+   "No retention in pregnancy or with high blood pressure."
+  ],
+  "dosha": {
+   "vata": -3,
+   "pitta": -2,
+   "kapha": -1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "dawn",
+   "morning",
+   "evening"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit upright. Rest the left hand on the knee.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 21,
+    "text": "With the right hand, fold the index and middle fingers into the palm. The thumb and ring finger do the work.",
+    "hold": 22
+   },
+   {
+    "atSeconds": 56,
+    "text": "Close the right nostril with the thumb. Breathe out through the left.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 79,
+    "text": "Breathe in through the left.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 94,
+    "text": "Close the left with the ring finger, release the thumb, and breathe out through the right.",
+    "hold": 18
+   },
+   {
+    "atSeconds": 122,
+    "text": "Breathe in through the right. Close it. Out through the left. That is one round.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 156,
+    "text": "Keep going. In left, out right. In right, out left. Let the hand do it without your attention.",
+    "hold": 90
+   },
+   {
+    "atSeconds": 258,
+    "text": "Aim for the two sides to feel the same. They will not, at first. That is what the practice is for.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 331,
+    "text": "Ten more rounds at your own pace.",
+    "hold": 120
+   },
+   {
+    "atSeconds": 455,
+    "text": "Let the hand come down. Breathe through both nostrils and notice whether they feel more even.",
+    "hold": 40
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "morning-raga",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null,
+  "supersedesAsanaSlug": "alternate-nostril-breath"
+ },
+ {
+  "id": "297f7e9a-f0fc-5c36-8d0d-418f2c57a935",
+  "catalogNumber": 810022,
+  "slug": "cooling-breath",
+  "kind": "pranayama",
+  "title": "Cooling Breath",
+  "sanskrit": "Sitali Pranayama",
+  "desc": "Breathing in over a curled tongue, which cools the air on the way past. The classical answer to heat, in the body and in the temper.",
+  "technique": "cooling-inhalation",
+  "sourceTradition": "Hatha Yoga Pradipika; the cooling breaths",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 450,
+  "durationOptions": [
+   450,
+   750,
+   1350
+  ],
+  "goals": [
+   "anger",
+   "stress"
+  ],
+  "themes": [
+   "heat",
+   "summer",
+   "irritability"
+  ],
+  "level": 2,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Stop and breathe normally if you feel dizzy, tingling in the hands, or any tightness in the chest.",
+   "Not in cold weather or with a chest infection — it cools too effectively.",
+   "Skip if you cannot curl the tongue; use Hissing Breath instead."
+  ],
+  "dosha": {
+   "vata": 1,
+   "pitta": -3,
+   "kapha": 1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "midday",
+   "afternoon"
+  ],
+  "season": [
+   "grishma",
+   "sharad"
+  ],
+  "agni": "cools",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit comfortably somewhere you are not cold.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 16,
+    "text": "Stick out the tongue and curl the edges up to make a tube. If it will not curl, use the hissing breath instead.",
+    "hold": 22
+   },
+   {
+    "atSeconds": 53,
+    "text": "Breathe in slowly through that tube. The air will feel distinctly cool.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 81,
+    "text": "Draw the tongue in, close the mouth, and breathe out through the nose.",
+    "hold": 18
+   },
+   {
+    "atSeconds": 107,
+    "text": "Again. In over the tongue, out through the nose.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 142,
+    "text": "Notice where the cool goes — the tongue, the throat, and then further down.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 191,
+    "text": "Twelve rounds, unhurried. If you start to feel chilled, stop.",
+    "hold": 120
+   },
+   {
+    "atSeconds": 318,
+    "text": "Now close the mouth and breathe normally. See whether the coolness is still there.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 371,
+    "text": "Let it settle. Heat leaves slowly and does not need chasing.",
+    "hold": 30
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "still-water",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null,
+  "supersedesAsanaSlug": "cooling-breath"
+ },
+ {
+  "id": "cf1e6761-e3aa-5365-9e09-7027cdcf26f8",
+  "catalogNumber": 810023,
+  "slug": "humming-bee-breath",
+  "kind": "pranayama",
+  "title": "Humming Bee Breath",
+  "sanskrit": "Bhramari Pranayama",
+  "desc": "A long hum on every out-breath with the ears closed. The vibration fills the skull and leaves very little room for anything else.",
+  "technique": "vocal-vibration",
+  "sourceTradition": "Hatha Yoga Pradipika; the bee breath",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 510,
+  "durationOptions": [
+   510,
+   810,
+   1410
+  ],
+  "goals": [
+   "anxiety",
+   "anger",
+   "sleep"
+  ],
+  "themes": [
+   "racing-thoughts",
+   "before-sleep"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Stop and breathe normally if you feel dizzy, tingling in the hands, or any tightness in the chest.",
+   "Not with an ear infection. Do not press hard on the eyes if using that variant."
+  ],
+  "dosha": {
+   "vata": -2,
+   "pitta": -3,
+   "kapha": 0
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "evening",
+   "night"
+  ],
+  "season": [],
+  "agni": "cools",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit upright somewhere you will not be overheard, or where you do not mind being.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 24,
+    "text": "Breathe in through the nose, ordinarily.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 40,
+    "text": "On the way out, hum. Mouth closed, a low steady sound, all the way to the end of the breath.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 78,
+    "text": "Again. Let the hum be lower than feels natural. Low vibrates more.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 115,
+    "text": "Now close the ears with the thumbs, fingers resting lightly on the head.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 144,
+    "text": "Hum again. With the ears closed the sound is suddenly inside the skull.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 182,
+    "text": "Stay with it. Feel where it vibrates — the face, the teeth, the crown.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 236,
+    "text": "Ten more, each one as long as the breath allows.",
+    "hold": 120
+   },
+   {
+    "atSeconds": 362,
+    "text": "Take the hands down. Do not hum. Listen.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 427,
+    "text": "The quiet after bhramari is the reason for the noise.",
+    "hold": 30
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "temple-bowls",
+   "loop": true,
+   "defaultVolume": 0.25
+  },
+  "sceneImageName": null,
+  "supersedesAsanaSlug": "humming-bee-breath"
+ },
+ {
+  "id": "c9ad166f-ac6c-591d-af76-a301b0c5d328",
+  "catalogNumber": 810024,
+  "slug": "hissing-breath",
+  "kind": "pranayama",
+  "title": "Hissing Breath",
+  "sanskrit": "Sitkari Pranayama",
+  "desc": "The cooling breath for people who cannot curl the tongue. Air drawn in through the teeth, which cools it the same way.",
+  "technique": "cooling-inhalation",
+  "sourceTradition": "Hatha Yoga Pradipika; the cooling breaths",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 360,
+  "durationOptions": [
+   360,
+   660,
+   1260
+  ],
+  "goals": [
+   "anger",
+   "stress"
+  ],
+  "themes": [
+   "heat",
+   "summer"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Stop and breathe normally if you feel dizzy, tingling in the hands, or any tightness in the chest.",
+   "Skip with sensitive teeth or exposed roots — cold air on them is unpleasant.",
+   "Not in cold weather."
+  ],
+  "dosha": {
+   "vata": 1,
+   "pitta": -3,
+   "kapha": 0
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "midday",
+   "afternoon"
+  ],
+  "season": [
+   "grishma"
+  ],
+  "agni": "cools",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit comfortably. Let the jaw be loose.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 16,
+    "text": "Bring the top and bottom teeth lightly together and part the lips, as if grimacing.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 46,
+    "text": "Breathe in through the teeth. There will be a hissing sound and the air will feel cold.",
+    "hold": 22
+   },
+   {
+    "atSeconds": 79,
+    "text": "Close the mouth and breathe out slowly through the nose.",
+    "hold": 18
+   },
+   {
+    "atSeconds": 103,
+    "text": "Again. In through the teeth, out through the nose.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 139,
+    "text": "Ten rounds. Stop before you feel chilled — this cools faster than it seems.",
+    "hold": 100
+   },
+   {
+    "atSeconds": 247,
+    "text": "Now close the mouth. Breathe normally.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 296,
+    "text": "Notice the difference in the mouth and throat.",
+    "hold": 30
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "still-water",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null,
+  "supersedesAsanaSlug": "hissing-breath"
+ },
+ {
+  "id": "383eae47-9c2c-50fc-8e67-146381682058",
+  "catalogNumber": 810025,
+  "slug": "equal-breath",
+  "kind": "pranayama",
+  "title": "Equal Breath",
+  "sanskrit": "Sama Vritti",
+  "desc": "In for four, out for four. The simplest ratio and the one to use when the breath is ragged and nothing else will settle it.",
+  "technique": "ratio-breathing",
+  "sourceTradition": "Classical sama vritti",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 480,
+  "durationOptions": [
+   480,
+   780,
+   1380
+  ],
+  "goals": [
+   "anxiety",
+   "focus"
+  ],
+  "themes": [
+   "panic",
+   "steadying",
+   "beginner"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Stop and breathe normally if you feel dizzy, tingling in the hands, or any tightness in the chest."
+  ],
+  "dosha": {
+   "vata": -3,
+   "pitta": -1,
+   "kapha": 0
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "morning",
+   "afternoon",
+   "evening"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit or stand. This one works anywhere and nobody can tell you are doing it.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 24,
+    "text": "Breathe in and count silently. One, two, three, four.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 45,
+    "text": "Breathe out for the same count. One, two, three, four.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 66,
+    "text": "If four is too long, use three. If it is too short, use five. Find the number that is comfortable and stay there.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 106,
+    "text": "The point is not the number. The point is that both halves are the same.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 145,
+    "text": "Ten rounds. Equal in, equal out.",
+    "hold": 90
+   },
+   {
+    "atSeconds": 239,
+    "text": "If the count slips, that is information — the breath wanted to be a different length. Adjust and carry on.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 297,
+    "text": "Ten more.",
+    "hold": 90
+   },
+   {
+    "atSeconds": 388,
+    "text": "Stop counting. Let the breath choose its own length again.",
+    "hold": 40
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "cedar-room",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null,
+  "supersedesAsanaSlug": "equal-breath"
+ },
+ {
+  "id": "6b776998-0eba-5d36-9ea8-d4b86031fa4f",
+  "catalogNumber": 810026,
+  "slug": "extended-exhale",
+  "kind": "pranayama",
+  "title": "Extended Exhale",
+  "sanskrit": "Visama Vritti",
+  "desc": "Out for twice as long as in. The one breath practice with a direct, measurable calming effect, and the best thing to do at two in the morning.",
+  "technique": "ratio-breathing",
+  "sourceTradition": "Classical visama vritti",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": false,
+  "posture": "any",
+  "eyes": "closed",
+  "durationSeconds": 570,
+  "durationOptions": [
+   570,
+   870,
+   1470
+  ],
+  "goals": [
+   "sleep",
+   "anxiety"
+  ],
+  "themes": [
+   "insomnia",
+   "panic",
+   "before-sleep"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Stop and breathe normally if you feel dizzy, tingling in the hands, or any tightness in the chest.",
+   "If lengthening the out-breath makes you gasp on the next one in, the ratio is too steep. Shorten it."
+  ],
+  "dosha": {
+   "vata": -3,
+   "pitta": -2,
+   "kapha": 1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "evening",
+   "night"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit or lie down. This works lying in the dark, which is often when it is needed.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 26,
+    "text": "Breathe in for a count of four.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 42,
+    "text": "Breathe out for a count of six. Slower than feels natural, but not strained.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 71,
+    "text": "Again. In for four, out for six.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 100,
+    "text": "When six is easy, go to eight. In for four, out for eight.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 144,
+    "text": "Never force the in-breath to be short. Only let the out-breath be long.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 192,
+    "text": "Ten rounds. The out-breath is where the nervous system settles, which is why we spend longer there.",
+    "hold": 120
+   },
+   {
+    "atSeconds": 323,
+    "text": "Keep going for as long as you like. If you fall asleep doing this, it has worked.",
+    "hold": 150
+   },
+   {
+    "atSeconds": 483,
+    "text": "If you are coming back rather than sleeping, let the ratio even out first.",
+    "hold": 40
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "snowfall",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null,
+  "supersedesAsanaSlug": "extended-exhale"
+ },
+ {
+  "id": "b174d62c-b1cb-5c73-8b72-4a8bb5f6baf7",
+  "catalogNumber": 810027,
+  "slug": "bellows-breath",
+  "kind": "pranayama",
+  "title": "Bellows Breath",
+  "sanskrit": "Bhastrika",
+  "desc": "Forceful breathing in and out through the nose at speed. Strongly heating and strongly rousing. The most contraindicated practice in the library.",
+  "technique": "forceful-breathing",
+  "sourceTradition": "Hatha Yoga Pradipika; bhastrika",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 450,
+  "durationOptions": [
+   450,
+   750,
+   1350
+  ],
+  "goals": [
+   "energy"
+  ],
+  "themes": [
+   "cold",
+   "lethargy",
+   "morning"
+  ],
+  "level": 3,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Do not practise in pregnancy.",
+   "Do not practise with high blood pressure, heart disease, epilepsy, glaucoma, hernia, ulcer, or during menstruation.",
+   "Not within two hours of eating.",
+   "Stop immediately at any dizziness.",
+   "Also avoid with detached retina. If you are new to it, do ten breaths, not thirty."
+  ],
+  "dosha": {
+   "vata": 1,
+   "pitta": 2,
+   "kapha": -3
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "rajasic",
+  "timeOfDay": [
+   "morning"
+  ],
+  "season": [
+   "hemanta",
+   "shishira"
+  ],
+  "agni": "kindles",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Read the cautions before starting this one. It is not for everyone and not for every day.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 31,
+    "text": "Sit upright, spine straight, hands on the knees.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 51,
+    "text": "Take two ordinary breaths first.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 69,
+    "text": "Now breathe in forcefully through the nose and out forcefully through the nose, at about one per second.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 105,
+    "text": "Both directions are active. The belly moves like a bellows.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 132,
+    "text": "Ten of those. Then stop and breathe normally.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 182,
+    "text": "Notice what happened. Heat, alertness, possibly a little light-headedness. If it is more than a little, stop here.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 233,
+    "text": "A second round of ten, if the first was comfortable.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 284,
+    "text": "Now stop entirely and let the breath find its own rhythm. Do not chase another round.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 354,
+    "text": "Sit still for a minute. The stillness after is as much the practice as the breathing.",
+    "hold": 45
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "first-light",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null,
+  "supersedesAsanaSlug": "bellows-breath"
+ },
+ {
+  "id": "57a22a05-a052-5ac8-9b15-9b5e3aeb4c79",
+  "catalogNumber": 810028,
+  "slug": "skull-shining-breath",
+  "kind": "kriya",
+  "title": "Skull-Shining Breath",
+  "sanskrit": "Kapalabhati",
+  "desc": "Sharp exhalations from the belly with passive inhalations between. A cleansing practice rather than a breath practice, and classified that way in the texts.",
+  "technique": "forceful-exhalation",
+  "sourceTradition": "Gheranda Samhita; one of the six shatkarma",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 450,
+  "durationOptions": [
+   450,
+   750,
+   1350
+  ],
+  "goals": [
+   "energy",
+   "digestion"
+  ],
+  "themes": [
+   "sluggishness",
+   "morning",
+   "clearing"
+  ],
+  "level": 3,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Do not practise in pregnancy.",
+   "Do not practise with high blood pressure, heart disease, epilepsy, glaucoma, hernia, ulcer, or during menstruation.",
+   "Not within two hours of eating.",
+   "Stop immediately at any dizziness.",
+   "Stop at any pain in the abdomen."
+  ],
+  "dosha": {
+   "vata": 1,
+   "pitta": 1,
+   "kapha": -3
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "rajasic",
+  "timeOfDay": [
+   "morning"
+  ],
+  "season": [
+   "shishira",
+   "vasanta"
+  ],
+  "agni": "kindles",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Read the cautions. This one has real ones.",
+    "hold": 18
+   },
+   {
+    "atSeconds": 23,
+    "text": "Sit upright with the belly free. Rest one hand below the navel.",
+    "hold": 18
+   },
+   {
+    "atSeconds": 49,
+    "text": "The whole practice is this: a sharp pull inward of the belly, which pushes the air out through the nose.",
+    "hold": 22
+   },
+   {
+    "atSeconds": 83,
+    "text": "The in-breath is not done. It happens by itself when the belly releases.",
+    "hold": 22
+   },
+   {
+    "atSeconds": 113,
+    "text": "Try one. Sharp out. Let the in happen.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 139,
+    "text": "Now twenty, at about one per second. Only the out-breath is active.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 191,
+    "text": "Stop. Breathe normally and notice the effect.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 236,
+    "text": "A second round of twenty, if that was comfortable. Never push past comfortable.",
+    "hold": 50
+   },
+   {
+    "atSeconds": 294,
+    "text": "Stop, and sit completely still. Do not go for a third round on the first day.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 364,
+    "text": "The clarity afterwards is what the texts are describing. Sit in it.",
+    "hold": 45
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "first-light",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null,
+  "supersedesAsanaSlug": "skull-shining-breath"
+ },
+ {
+  "id": "ec278895-1ba8-521f-8937-e229a9676597",
+  "catalogNumber": 810029,
+  "slug": "breath-of-fire",
+  "kind": "pranayama",
+  "title": "Breath of Fire",
+  "sanskrit": "Agni Pran",
+  "desc": "Rapid even breathing through the nose, in and out at the same strength. Warming, and gentler than bhastrika, but still not a beginner's practice.",
+  "technique": "rapid-diaphragmatic",
+  "sourceTradition": "Kundalini tradition; agni pran",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 390,
+  "durationOptions": [
+   390,
+   690,
+   1290
+  ],
+  "goals": [
+   "energy"
+  ],
+  "themes": [
+   "cold",
+   "lethargy"
+  ],
+  "level": 3,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Do not practise in pregnancy.",
+   "Do not practise with high blood pressure, heart disease, epilepsy, glaucoma, hernia, ulcer, or during menstruation.",
+   "Not within two hours of eating.",
+   "Stop immediately at any dizziness."
+  ],
+  "dosha": {
+   "vata": 1,
+   "pitta": 1,
+   "kapha": -3
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "rajasic",
+  "timeOfDay": [
+   "morning"
+  ],
+  "season": [],
+  "agni": "kindles",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit upright. Read the cautions if you have not.",
+    "hold": 18
+   },
+   {
+    "atSeconds": 24,
+    "text": "Unlike bhastrika, in and out are equal here — same speed, same strength, no emphasis on either.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 59,
+    "text": "Start slowly. In, out, in, out, through the nose, belly moving.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 91,
+    "text": "Now let it speed up until it is about two per second, still even.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 130,
+    "text": "Thirty seconds. If it becomes ragged, slow down rather than stopping.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 182,
+    "text": "Stop. Breathe normally. Feel the heat.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 231,
+    "text": "One more round of thirty seconds.",
+    "hold": 50
+   },
+   {
+    "atSeconds": 285,
+    "text": "Stop and sit. Let the breath come all the way back to normal before you move.",
+    "hold": 60
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "hearth",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null,
+  "supersedesAsanaSlug": "breath-of-fire"
+ },
+ {
+  "id": "965b72c9-b80e-5316-a178-450f16bb2ad8",
+  "catalogNumber": 810030,
+  "slug": "standing-deep-breathing",
+  "kind": "pranayama",
+  "title": "Standing Deep Breathing",
+  "sanskrit": "Pranayama (standing)",
+  "desc": "Full breaths taken standing, with the arms. The practice to use when sitting still is not going to happen — first thing, or at a desk after too long.",
+  "technique": "breath-with-movement",
+  "sourceTradition": "Modern hatha opening sequence",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": false,
+  "posture": "standing",
+  "eyes": "soft-open",
+  "durationSeconds": 390,
+  "durationOptions": [
+   390,
+   690,
+   1290
+  ],
+  "goals": [
+   "energy",
+   "focus"
+  ],
+  "themes": [
+   "morning",
+   "desk",
+   "waking-up"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Stop and breathe normally if you feel dizzy, tingling in the hands, or any tightness in the chest.",
+   "Lower the arms if you have a shoulder injury; the breath matters, not the reach."
+  ],
+  "dosha": {
+   "vata": 0,
+   "pitta": 0,
+   "kapha": -3
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "dawn",
+   "morning",
+   "midday"
+  ],
+  "season": [],
+  "agni": "kindles",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Stand with the feet under the hips. Let the arms hang.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 22,
+    "text": "Breathe out completely first. Empty before you fill.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 42,
+    "text": "Now breathe in and let the arms float out and up, overhead.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 70,
+    "text": "Breathe out and let them come down the same way.",
+    "hold": 18
+   },
+   {
+    "atSeconds": 94,
+    "text": "The arms are following the breath, not leading it. If they arrive first, slow them down.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 129,
+    "text": "Ten of those, unhurried.",
+    "hold": 90
+   },
+   {
+    "atSeconds": 222,
+    "text": "Now the same breath without the arms. Just standing.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 272,
+    "text": "Feel the floor under both feet, and the breath moving the whole torso.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 325,
+    "text": "Stand still for a moment before you go back to what you were doing.",
+    "hold": 30
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "open-sky",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null,
+  "supersedesAsanaSlug": "standing-deep-breathing"
+ },
+ {
+  "id": "ab6c6b16-f33e-562a-8b1f-2b40a18a85bc",
+  "catalogNumber": 810031,
+  "slug": "the-standing-stone",
+  "kind": "visualisation",
+  "title": "The Standing Stone",
+  "sanskrit": "Prithvi Dharana",
+  "desc": "A single upright stone in an empty field, weathered and unmoved. For the days when everything is in motion and nothing is holding.",
+  "technique": "element-visualisation",
+  "sourceTradition": "Pancha mahabhuta — earth",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "any",
+  "eyes": "closed",
+  "durationSeconds": 420,
+  "durationOptions": [
+   420,
+   720,
+   1320
+  ],
+  "goals": [
+   "anxiety"
+  ],
+  "themes": [
+   "grounding",
+   "steadiness"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": -3,
+   "pitta": 0,
+   "kapha": 1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "afternoon",
+   "evening"
+  ],
+  "season": [
+   "sharad",
+   "hemanta"
+  ],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Close the eyes and let the breath settle.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 17,
+    "text": "A field, open in every direction, and one standing stone in it.",
+    "hold": 22
+   },
+   {
+    "atSeconds": 47,
+    "text": "Taller than you. Older than anything you can name.",
+    "hold": 22
+   },
+   {
+    "atSeconds": 74,
+    "text": "Somebody put it there. Everyone who knew why is gone, and the stone is still standing.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 114,
+    "text": "Weather has been arriving at it for four thousand years. Rain, frost, sun, snow.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 153,
+    "text": "None of it moved the stone. It only changed the surface.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 195,
+    "text": "Put your hand flat on it. Cold, rough, absolutely solid.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 242,
+    "text": "Stand next to it for a while. Nothing is asked of you here.",
+    "hold": 75
+   },
+   {
+    "atSeconds": 325,
+    "text": "The stone will be there tomorrow whether you come back or not.",
+    "hold": 40
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "deep-wooden-drone",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": "scene-standing-stone"
+ },
+ {
+  "id": "5bf6a744-c563-5210-8f0c-62a8e987e42d",
+  "catalogNumber": 810032,
+  "slug": "the-root-system",
+  "kind": "visualisation",
+  "title": "What Is Under the Field",
+  "sanskrit": "Prithvi Dharana",
+  "desc": "The hidden half of a meadow — the roots, deeper than the grass is tall. For when the visible part of your life feels thin.",
+  "technique": "element-visualisation",
+  "sourceTradition": "Pancha mahabhuta — earth",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "any",
+  "eyes": "closed",
+  "durationSeconds": 390,
+  "durationOptions": [
+   390,
+   690,
+   1290
+  ],
+  "goals": [
+   "anxiety",
+   "grief"
+  ],
+  "themes": [
+   "grounding",
+   "depletion"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": -3,
+   "pitta": -1,
+   "kapha": 1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "evening",
+   "night"
+  ],
+  "season": [
+   "hemanta",
+   "shishira"
+  ],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Let the eyes close.",
+    "hold": 10
+   },
+   {
+    "atSeconds": 13,
+    "text": "A meadow at the end of summer. Grass to the knee, moving slightly.",
+    "hold": 22
+   },
+   {
+    "atSeconds": 43,
+    "text": "Now go under it. Below the surface, into the dark.",
+    "hold": 22
+   },
+   {
+    "atSeconds": 71,
+    "text": "The roots go down further than the grass goes up. Much further.",
+    "hold": 28
+   },
+   {
+    "atSeconds": 107,
+    "text": "They are threaded through each other, holding the whole field together from underneath.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 145,
+    "text": "This is where the field survives the winter. Everything above it will die back and none of this will.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 197,
+    "text": "Stay down here where it is dark and cool and dense.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 264,
+    "text": "Whatever is visible about your life is the grass. This is the rest of it.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 318,
+    "text": "Come back up slowly, through the soil, into the light.",
+    "hold": 30
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "cedar-room",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": "scene-root-system"
+ },
+ {
+  "id": "72c216c1-7466-5a5a-84d0-0d1ded7f547f",
+  "catalogNumber": 810033,
+  "slug": "rain-on-the-roof",
+  "kind": "visualisation",
+  "title": "Rain on the Roof",
+  "sanskrit": "Jala Dharana",
+  "desc": "Inside, dry and warm, with rain coming down steadily outside. The most reliably comforting image in the set.",
+  "technique": "element-visualisation",
+  "sourceTradition": "Pancha mahabhuta — water",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "any",
+  "eyes": "closed",
+  "durationSeconds": 420,
+  "durationOptions": [
+   420,
+   720,
+   1320
+  ],
+  "goals": [
+   "sleep",
+   "stress"
+  ],
+  "themes": [
+   "comfort",
+   "shelter",
+   "sleep"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": -2,
+   "pitta": -2,
+   "kapha": 0
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "evening",
+   "night"
+  ],
+  "season": [
+   "varsha",
+   "sharad"
+  ],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Lie down or sit back. Get properly comfortable.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 20,
+    "text": "You are inside. It is raining, and has been for a while.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 48,
+    "text": "Listen to it on the roof. Not a downpour. Steady, unhurried, going on all evening.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 87,
+    "text": "Every now and then the wind changes and it comes harder against one window.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 126,
+    "text": "Nothing out there needs you. Nothing is expected.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 166,
+    "text": "The rain will keep going whether you sleep or not.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 217,
+    "text": "Warm, dry, indoors, and the sound of water on the roof.",
+    "hold": 90
+   },
+   {
+    "atSeconds": 314,
+    "text": "Let the listening go soft. Let the sound take over.",
+    "hold": 60
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "rain-on-stone",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": "scene-rain-roof"
+ },
+ {
+  "id": "3bd5dc35-7200-585b-b423-8011c4e75209",
+  "catalogNumber": 810034,
+  "slug": "the-slow-river",
+  "kind": "visualisation",
+  "title": "The Slow River",
+  "sanskrit": "Jala Dharana",
+  "desc": "A wide river moving too slowly to see, carrying everything downstream without effort. For letting go of something you have been holding.",
+  "technique": "element-visualisation",
+  "sourceTradition": "Pancha mahabhuta — water",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "any",
+  "eyes": "closed",
+  "durationSeconds": 450,
+  "durationOptions": [
+   450,
+   750,
+   1350
+  ],
+  "goals": [
+   "grief",
+   "anger"
+  ],
+  "themes": [
+   "letting-go",
+   "acceptance"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": -1,
+   "pitta": -3,
+   "kapha": -1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "afternoon",
+   "evening"
+  ],
+  "season": [
+   "grishma",
+   "varsha"
+  ],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit or lie down. Let the eyes close.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 17,
+    "text": "A wide river, deep and slow. So slow that from the bank it looks still.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 52,
+    "text": "It is not still. A leaf on the surface proves it — going, but taking its time.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 92,
+    "text": "Everything the river carries, it carries without any effort. It does not lift or push. It simply moves and things move with it.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 147,
+    "text": "Put something on the water. Something you have been carrying and are tired of.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 191,
+    "text": "You do not have to throw it. Just set it down on the surface and let go of the edge.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 243,
+    "text": "Watch it move away. Slowly. It may take a long time to be out of sight.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 313,
+    "text": "The river does not know what it is carrying and does not need to.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 382,
+    "text": "Come back to the bank when you are ready.",
+    "hold": 30
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "still-water",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": "scene-slow-river"
+ },
+ {
+  "id": "f135b2d0-1c43-5f75-84d7-0f71c64504b8",
+  "catalogNumber": 810035,
+  "slug": "the-candle",
+  "kind": "visualisation",
+  "title": "One Candle",
+  "sanskrit": "Agni Dharana",
+  "desc": "A single flame in a dark room, upright and unmoving. The classical concentration image, done with the eyes closed rather than open.",
+  "technique": "element-visualisation",
+  "sourceTradition": "Pancha mahabhuta — fire",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "any",
+  "eyes": "closed",
+  "durationSeconds": 390,
+  "durationOptions": [
+   390,
+   690,
+   1290
+  ],
+  "goals": [
+   "focus"
+  ],
+  "themes": [
+   "concentration",
+   "steadiness"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": -1,
+   "pitta": 1,
+   "kapha": -2
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "evening",
+   "night"
+  ],
+  "season": [],
+  "agni": "kindles",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit upright, and let the eyes close.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 16,
+    "text": "One candle, in a room with no other light and no draught.",
+    "hold": 22
+   },
+   {
+    "atSeconds": 46,
+    "text": "The flame is perfectly upright. Bright at the tip, blue at the base, still.",
+    "hold": 28
+   },
+   {
+    "atSeconds": 83,
+    "text": "It does not flicker, because nothing is disturbing it.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 114,
+    "text": "Look at the darkest part, just above the wick. That is where the flame is not yet flame.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 160,
+    "text": "If the image slips or fades, that is expected. Bring it back. That bringing back is the practice.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 211,
+    "text": "One flame. Upright. Steady.",
+    "hold": 90
+   },
+   {
+    "atSeconds": 304,
+    "text": "Now let the flame go out and stay with the after-image in the dark.",
+    "hold": 45
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "hearth",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": "scene-candle"
+ },
+ {
+  "id": "0d1e521f-9de0-57ee-942d-4a98efeaa3d9",
+  "catalogNumber": 810036,
+  "slug": "first-light-on-snow",
+  "kind": "visualisation",
+  "title": "First Light on Snow",
+  "sanskrit": "Agni Dharana",
+  "desc": "Sunrise reaching a snowfield — cold ground, warm light. Rousing without heat, which makes it the morning scene for someone who runs hot.",
+  "technique": "element-visualisation",
+  "sourceTradition": "Pancha mahabhuta — fire",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "any",
+  "eyes": "closed",
+  "durationSeconds": 420,
+  "durationOptions": [
+   420,
+   720,
+   1320
+  ],
+  "goals": [
+   "energy"
+  ],
+  "themes": [
+   "morning",
+   "clarity",
+   "heaviness"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": -1,
+   "pitta": -1,
+   "kapha": -3
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "dawn",
+   "morning"
+  ],
+  "season": [
+   "shishira",
+   "hemanta"
+  ],
+  "agni": "kindles",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit upright. The spine long, the head level.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 20,
+    "text": "A wide snowfield before dawn. Blue, silent, absolutely cold.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 51,
+    "text": "The light is coming but has not arrived. The sky is getting paler at one edge.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 91,
+    "text": "Then the first of the sun touches the top of the snow, and that edge turns gold.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 137,
+    "text": "Watch the line of light move down the field toward you. Slowly. It takes minutes.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 186,
+    "text": "The snow does not melt. It is still cold. But it is lit now, and that is a different thing.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 244,
+    "text": "The light reaches where you are standing.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 308,
+    "text": "Warmth on the face, cold underfoot, both entirely clear.",
+    "hold": 60
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "first-light",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": "scene-first-light-snow"
+ },
+ {
+  "id": "bd05aedf-ba38-59f7-8560-da2f15f41b7b",
+  "catalogNumber": 810037,
+  "slug": "high-cloud",
+  "kind": "visualisation",
+  "title": "High Cloud",
+  "sanskrit": "Vayu Dharana",
+  "desc": "Cloud moving fast across a sky, seen from below. For a mind that is already moving quickly and does not need slowing so much as widening.",
+  "technique": "element-visualisation",
+  "sourceTradition": "Pancha mahabhuta — air",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "any",
+  "eyes": "closed",
+  "durationSeconds": 420,
+  "durationOptions": [
+   420,
+   720,
+   1320
+  ],
+  "goals": [
+   "stress",
+   "focus"
+  ],
+  "themes": [
+   "perspective",
+   "restlessness"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": 1,
+   "pitta": -2,
+   "kapha": -2
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "midday",
+   "afternoon"
+  ],
+  "season": [
+   "vasanta",
+   "varsha"
+  ],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Lie back if you can, or sit and tip the head slightly.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 23,
+    "text": "A bright day with high cloud moving fast. Not storm cloud. The thin high kind.",
+    "hold": 28
+   },
+   {
+    "atSeconds": 60,
+    "text": "It is going somewhere at speed, and it is completely silent about it.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 98,
+    "text": "Down here nothing is moving. The speed is all up there.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 140,
+    "text": "Watch one piece of cloud cross the whole sky and go.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 192,
+    "text": "Another one is already coming. There is always another one.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 238,
+    "text": "Let your thoughts be the cloud. Fast, silent, passing, and none of them yours to hold.",
+    "hold": 75
+   },
+   {
+    "atSeconds": 324,
+    "text": "The sky does not go anywhere. Only what crosses it.",
+    "hold": 60
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "open-sky",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": "scene-high-cloud"
+ },
+ {
+  "id": "d8e2c21c-80cb-5454-bc58-f5feea4e91e1",
+  "catalogNumber": 810038,
+  "slug": "the-open-window",
+  "kind": "visualisation",
+  "title": "The Open Window",
+  "sanskrit": "Vayu Dharana",
+  "desc": "A window opened onto a spring morning, and the first air of the year coming in. For rooms and days that have gone stale.",
+  "technique": "element-visualisation",
+  "sourceTradition": "Pancha mahabhuta — air",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "any",
+  "eyes": "closed",
+  "durationSeconds": 390,
+  "durationOptions": [
+   390,
+   690,
+   1290
+  ],
+  "goals": [
+   "energy",
+   "focus"
+  ],
+  "themes": [
+   "stagnation",
+   "spring",
+   "clearing"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": 1,
+   "pitta": -1,
+   "kapha": -3
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "morning"
+  ],
+  "season": [
+   "vasanta"
+  ],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit upright near where you imagine the window to be.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 21,
+    "text": "A room that has been closed all winter. You can smell that it has.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 55,
+    "text": "Now the window opens. The first air of the year comes in.",
+    "hold": 28
+   },
+   {
+    "atSeconds": 91,
+    "text": "It is colder than the room and much cleaner. You can feel exactly where it reaches.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 136,
+    "text": "The curtain moves. Dust turns over in the light.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 172,
+    "text": "Breathe that air. It has come a long way and touched nothing on the way.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 226,
+    "text": "The room is changing while you sit in it. The staleness is going out the same window.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 297,
+    "text": "Leave it open.",
+    "hold": 45
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "glass-meadow",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": "scene-open-window"
+ },
+ {
+  "id": "04665a9b-0c86-5223-8435-741a8e659e2a",
+  "catalogNumber": 810039,
+  "slug": "the-empty-room",
+  "kind": "visualisation",
+  "title": "The Empty Room",
+  "sanskrit": "Akasha Dharana",
+  "desc": "A room with nothing in it. Not abandoned, not waiting — simply empty, and large. For when everything is too full.",
+  "technique": "element-visualisation",
+  "sourceTradition": "Pancha mahabhuta — ether",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "any",
+  "eyes": "closed",
+  "durationSeconds": 420,
+  "durationOptions": [
+   420,
+   720,
+   1320
+  ],
+  "goals": [
+   "stress"
+  ],
+  "themes": [
+   "overwhelm",
+   "clutter",
+   "space"
+  ],
+  "level": 2,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "If emptiness reads as loneliness rather than spaciousness, use Rain on the Roof instead."
+  ],
+  "dosha": {
+   "vata": 0,
+   "pitta": -2,
+   "kapha": -2
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "afternoon",
+   "evening"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit, and let the eyes close.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 16,
+    "text": "A large room with nothing in it. Bare floor, tall windows, white walls.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 49,
+    "text": "No furniture. Nothing on the walls. Nothing to do in here.",
+    "hold": 28
+   },
+   {
+    "atSeconds": 84,
+    "text": "It is not abandoned. It is clean and light and simply empty.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 122,
+    "text": "Notice that the room is not lacking anything. It is complete as it is.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 170,
+    "text": "Walk to the middle of it and stand there.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 221,
+    "text": "Your footsteps sound different in an empty room. Listen to that.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 273,
+    "text": "Nothing here needs arranging, deciding, or finishing.",
+    "hold": 75
+   },
+   {
+    "atSeconds": 352,
+    "text": "Leave it empty when you go.",
+    "hold": 40
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "open-sky",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": "scene-empty-room"
+ },
+ {
+  "id": "655e5246-aba5-554f-bc13-f9fccc691fe2",
+  "catalogNumber": 810040,
+  "slug": "before-the-sound",
+  "kind": "visualisation",
+  "title": "Before the Sound",
+  "sanskrit": "Akasha Dharana",
+  "desc": "The silence a sound comes out of, rather than the one it leaves behind. The subtlest scene in the set and the one that repays repetition.",
+  "technique": "element-visualisation",
+  "sourceTradition": "Pancha mahabhuta — ether",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "any",
+  "eyes": "closed",
+  "durationSeconds": 450,
+  "durationOptions": [
+   450,
+   750,
+   1350
+  ],
+  "goals": [
+   "focus",
+   "stress"
+  ],
+  "themes": [
+   "subtlety",
+   "listening"
+  ],
+  "level": 3,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": 0,
+   "pitta": -2,
+   "kapha": -1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "night"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit upright somewhere genuinely quiet.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 18,
+    "text": "Listen to the room. Whatever is there — a fridge, traffic, your own ears.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 57,
+    "text": "Now listen underneath all of it, for whatever is left when you subtract each one.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 106,
+    "text": "There is something there that sounds arrive into. It is not silence exactly. It is more like room.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 163,
+    "text": "Every sound you have ever heard came out of that and went back into it.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 217,
+    "text": "Do not try to hear it. Just stop excluding it.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 284,
+    "text": "Stay there.",
+    "hold": 90
+   },
+   {
+    "atSeconds": 375,
+    "text": "Let the ordinary sounds come back. They were never in the way.",
+    "hold": 40
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "temple-bowls",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": "scene-before-sound"
+ },
+ {
+  "id": "3760a886-0344-5ff9-bea8-79990bdcfcdd",
+  "catalogNumber": 810041,
+  "slug": "eye-cleansing-gaze",
+  "kind": "meditation",
+  "title": "Steady Gazing",
+  "sanskrit": "Trataka",
+  "desc": "Looking at one point without blinking until the eyes water, then closing them and watching the after-image. Rousing, and the strongest concentration practice here.",
+  "technique": "fixed-gaze",
+  "sourceTradition": "Gheranda Samhita; trataka",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "open",
+  "durationSeconds": 510,
+  "durationOptions": [
+   510,
+   810,
+   1410
+  ],
+  "goals": [
+   "focus",
+   "energy"
+  ],
+  "themes": [
+   "concentration",
+   "dullness"
+  ],
+  "level": 3,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Not with glaucoma, recent eye surgery, or epilepsy — a flickering flame can be a trigger.",
+   "Use a steady object rather than a candle if you wear contact lenses.",
+   "Stop if the eyes hurt rather than simply water."
+  ],
+  "dosha": {
+   "vata": -1,
+   "pitta": 1,
+   "kapha": -3
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "evening"
+  ],
+  "season": [],
+  "agni": "kindles",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Set a candle, or any small steady object, at arm's length and level with the eyes.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 30,
+    "text": "Sit upright. The head does not move for the next few minutes.",
+    "hold": 18
+   },
+   {
+    "atSeconds": 56,
+    "text": "Look at it. Not at the whole flame — at one point, the base of it.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 91,
+    "text": "Do not blink if you can help it. When the eyes water, that is the practice working, not failing.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 138,
+    "text": "Keep looking. Thirty seconds to a minute is plenty at first.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 205,
+    "text": "Now close the eyes. There will be an after-image.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 230,
+    "text": "Watch it. It will drift and change colour and slowly go.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 282,
+    "text": "When it is gone, open the eyes and look again.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 329,
+    "text": "Three rounds is enough. Concentration built this way is unusually stable.",
+    "hold": 90
+   },
+   {
+    "atSeconds": 426,
+    "text": "Finish with the eyes closed. Let them rest.",
+    "hold": 45
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "hearth",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null,
+  "supersedesAsanaSlug": "eye-cleansing-gaze"
+ },
+ {
+  "id": "246ebcf7-cdbe-5d71-b892-aa4b0cb50aa4",
+  "catalogNumber": 810042,
+  "slug": "neti-neti",
+  "kind": "meditation",
+  "title": "Not This, Not This",
+  "sanskrit": "Neti Neti",
+  "desc": "Setting aside everything you can observe, on the grounds that whatever is observing cannot be the thing observed. The most demanding practice here.",
+  "technique": "inquiry",
+  "sourceTradition": "Brihadaranyaka Upanishad",
+  "seatAsanaId": "74d0be60-ea50-5c3d-aaa8-abfd372369cd",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 510,
+  "durationOptions": [
+   510,
+   810,
+   1410
+  ],
+  "goals": [
+   "perspective",
+   "stress"
+  ],
+  "themes": [
+   "identity",
+   "inquiry",
+   "self-criticism"
+  ],
+  "level": 3,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Inquiry into the sense of self can be destabilising if you are already feeling unreal or detached. Use a grounding practice instead on those days."
+  ],
+  "dosha": {
+   "vata": 0,
+   "pitta": -2,
+   "kapha": -2
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "morning",
+   "afternoon"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit upright. This one is more like thinking than like resting.",
+    "hold": 18
+   },
+   {
+    "atSeconds": 25,
+    "text": "Notice your hands. You can feel them, so they are something you are aware of.",
+    "hold": 28
+   },
+   {
+    "atSeconds": 62,
+    "text": "Whatever is aware of your hands cannot be your hands. Set the hands aside. Not this.",
+    "hold": 32
+   },
+   {
+    "atSeconds": 105,
+    "text": "Notice the breath. You can observe it. So it too is being observed. Not this.",
+    "hold": 32
+   },
+   {
+    "atSeconds": 146,
+    "text": "Notice a sound. Observed, therefore not the observer. Not this.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 182,
+    "text": "Notice a thought. You saw it arrive. Not this either.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 224,
+    "text": "Notice a feeling, and the same is true of it. Not this.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 266,
+    "text": "Now look for the one doing the noticing. You will not find it as an object, because it is not one.",
+    "hold": 50
+   },
+   {
+    "atSeconds": 329,
+    "text": "Rest in not finding. That is not a failure of the method. It is the method.",
+    "hold": 90
+   },
+   {
+    "atSeconds": 430,
+    "text": "Come back gently. Pick the hands back up.",
+    "hold": 30
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "open-sky",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "4cfbec4e-cf36-5e21-b804-65b192b89e91",
+  "catalogNumber": 810043,
+  "slug": "the-heart-space",
+  "kind": "meditation",
+  "title": "The Space in the Heart",
+  "sanskrit": "Hridaya Akasha",
+  "desc": "Attention resting in the middle of the chest, in the space the texts call the inner ether. Steadying without being heavy.",
+  "technique": "interior-space",
+  "sourceTradition": "Chandogya Upanishad",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 540,
+  "durationOptions": [
+   540,
+   840,
+   1440
+  ],
+  "goals": [
+   "grief",
+   "anxiety"
+  ],
+  "themes": [
+   "heartache",
+   "steadiness",
+   "loss"
+  ],
+  "level": 2,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": -2,
+   "pitta": -2,
+   "kapha": 0
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "evening",
+   "night"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit or lie down. Rest one hand on the centre of the chest.",
+    "hold": 18
+   },
+   {
+    "atSeconds": 26,
+    "text": "Feel the hand rise and fall. Do not change the breath to make it clearer.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 61,
+    "text": "Now find the space under the hand. Not the heartbeat — the room around it.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 100,
+    "text": "The texts say there is a space in there the size of a thumb, and that it contains everything.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 147,
+    "text": "You do not have to believe that. Just look for the space.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 185,
+    "text": "Breathe into it. Not literally — direct attention there on the in-breath and leave it there on the out.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 242,
+    "text": "If there is grief in the chest, it will show up here. Let it be in the space rather than pushing it out.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 301,
+    "text": "The space is bigger than what is in it. That is the whole point of the image.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 372,
+    "text": "Stay as long as you like.",
+    "hold": 75
+   },
+   {
+    "atSeconds": 451,
+    "text": "Take the hand away and see if the space stays findable without it.",
+    "hold": 40
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "snowfall",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "2270cfc2-745b-560c-ad98-7a2e23a5e858",
+  "catalogNumber": 810044,
+  "slug": "listening-to-the-room",
+  "kind": "meditation",
+  "title": "Listening to the Room",
+  "sanskrit": "Shravana Dharana",
+  "desc": "No object, no mantra, no breath. Only whatever the ears are already doing. The easiest practice to do anywhere and the hardest to do for long.",
+  "technique": "open-listening",
+  "sourceTradition": "Vijñāna Bhairava Tantra",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "soft-open",
+  "durationSeconds": 510,
+  "durationOptions": [
+   510,
+   810,
+   1410
+  ],
+  "goals": [
+   "focus",
+   "stress"
+  ],
+  "themes": [
+   "presence",
+   "anywhere",
+   "beginner"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": -1,
+   "pitta": -2,
+   "kapha": -1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "morning",
+   "afternoon",
+   "evening"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit however you are. The eyes can be open or closed.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 22,
+    "text": "Do not do anything to the breath. Leave it entirely alone.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 49,
+    "text": "Listen. Not for anything. Just listen.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 78,
+    "text": "Notice the loudest thing first, whatever it is.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 113,
+    "text": "Now notice something quieter behind it. Something you were not attending to a moment ago.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 157,
+    "text": "And something quieter than that.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 200,
+    "text": "Stop hunting and let the ears do what they do without direction. Everything at once, nothing chosen.",
+    "hold": 50
+   },
+   {
+    "atSeconds": 261,
+    "text": "Sound is arriving whether you attend to it or not. The practice is only to stop filtering.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 332,
+    "text": "If a sound annoys you, that is fine. Annoyance is also arriving. Let that be heard too.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 388,
+    "text": "Stay open for as long as it holds.",
+    "hold": 90
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "rain-on-stone",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "fd23722b-f3d6-5a74-b3ec-e17227846746",
+  "catalogNumber": 810045,
+  "slug": "compassion",
+  "kind": "meditation",
+  "title": "For Someone in Difficulty",
+  "sanskrit": "Karuna Bhavana",
+  "desc": "Turning toward suffering rather than away from it, with a wish rather than a plan. The practice for helplessness in the face of someone else's trouble.",
+  "technique": "heart-cultivation",
+  "sourceTradition": "The second of the four brahmaviharas",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 480,
+  "durationOptions": [
+   480,
+   780,
+   1380
+  ],
+  "goals": [
+   "grief",
+   "connection"
+  ],
+  "themes": [
+   "helplessness",
+   "caregiving",
+   "compassion-fatigue"
+  ],
+  "level": 2,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "If you are in the middle of a crisis of your own, do Wishing Well first. Compassion practice draws on reserves you may not have today."
+  ],
+  "dosha": {
+   "vata": -1,
+   "pitta": -2,
+   "kapha": 0
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "evening"
+  ],
+  "season": [],
+  "agni": "cools",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit comfortably and let the breath settle.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 19,
+    "text": "Start with yourself, and something in your own life that is genuinely hard.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 53,
+    "text": "Say inwardly: this is difficult, and I wish it were lighter.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 90,
+    "text": "Not fixing it. Only acknowledging it, which most of us skip.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 132,
+    "text": "Now bring to mind someone you know who is struggling.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 163,
+    "text": "May your pain be less. May you have some ease in it.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 210,
+    "text": "Notice the pull to solve it. Let that go. The wish is the practice; the solving is a different activity.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 268,
+    "text": "Widen it. Everyone awake right now for the same reason you sometimes are.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 321,
+    "text": "May it be lighter. For all of them.",
+    "hold": 75
+   },
+   {
+    "atSeconds": 401,
+    "text": "Come back to your own breath. Let it be enough to have wished it.",
+    "hold": 40
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "snowfall",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "44fc7146-87db-5df0-800c-bb198472bbb9",
+  "catalogNumber": 810046,
+  "slug": "sympathetic-joy",
+  "kind": "meditation",
+  "title": "Gladness at Another's Luck",
+  "sanskrit": "Mudita Bhavana",
+  "desc": "The least practised of the four and the most useful in an envious month. Being pleased about something good that happened to someone else.",
+  "technique": "heart-cultivation",
+  "sourceTradition": "The third of the four brahmaviharas",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 480,
+  "durationOptions": [
+   480,
+   780,
+   1380
+  ],
+  "goals": [
+   "connection"
+  ],
+  "themes": [
+   "envy",
+   "comparison",
+   "resentment"
+  ],
+  "level": 2,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": -1,
+   "pitta": -3,
+   "kapha": -1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "morning",
+   "evening"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit comfortably.",
+    "hold": 12
+   },
+   {
+    "atSeconds": 13,
+    "text": "Bring to mind something good that happened to someone you love. Something recent.",
+    "hold": 28
+   },
+   {
+    "atSeconds": 49,
+    "text": "Let yourself be pleased about it. Say inwardly: I am glad that happened to you.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 94,
+    "text": "Notice how easy that is when you love the person.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 130,
+    "text": "Now someone you barely know, who has had some luck. A colleague, an acquaintance.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 169,
+    "text": "May it continue. May there be more of it.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 215,
+    "text": "Now, if you can, someone whose good fortune you found difficult. Something that made you feel behind.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 266,
+    "text": "May it continue. Their having it does not take it from you — that is the belief this practice is aimed at.",
+    "hold": 50
+   },
+   {
+    "atSeconds": 329,
+    "text": "Sit with whatever came up. Envy is not a moral failure, only a place attention gets stuck.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 400,
+    "text": "Finish with the first person again. The easy one.",
+    "hold": 40
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "first-light",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "a47b8c8c-bfac-544e-ac75-f2178a6633bb",
+  "catalogNumber": 810047,
+  "slug": "equanimity",
+  "kind": "meditation",
+  "title": "What Is Not Mine to Carry",
+  "sanskrit": "Upekkha Bhavana",
+  "desc": "The last of the four, and the one that keeps the other three from becoming exhausting. Caring without taking responsibility for the outcome.",
+  "technique": "heart-cultivation",
+  "sourceTradition": "The fourth of the four brahmaviharas",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 510,
+  "durationOptions": [
+   510,
+   810,
+   1410
+  ],
+  "goals": [
+   "stress",
+   "connection"
+  ],
+  "themes": [
+   "burnout",
+   "caregiving",
+   "boundaries"
+  ],
+  "level": 3,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": -2,
+   "pitta": -2,
+   "kapha": 0
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "evening"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit upright, and let the shoulders come down.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 20,
+    "text": "Bring to mind someone whose situation you have been carrying.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 51,
+    "text": "Notice where in the body you are holding it. Most people find the jaw, the shoulders, or the gut.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 98,
+    "text": "Say inwardly: I care about what happens to you, and it is not mine to decide.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 148,
+    "text": "Both halves are true. Dropping either one is how people burn out or go cold.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 198,
+    "text": "Again: I care about what happens to you. And it is not mine to decide.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 252,
+    "text": "Notice whether the holding place softened at all. It may not have yet.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 301,
+    "text": "Everyone is walking a road you did not build and cannot see the end of. Including you.",
+    "hold": 50
+   },
+   {
+    "atSeconds": 361,
+    "text": "Rest there. Caring, and not carrying.",
+    "hold": 75
+   },
+   {
+    "atSeconds": 440,
+    "text": "Come back and check the shoulders again.",
+    "hold": 30
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "still-water",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "18972f4a-afc5-54dd-8982-cef76c47d477",
+  "catalogNumber": 810048,
+  "slug": "walking-meditation",
+  "kind": "meditation",
+  "title": "Walking",
+  "sanskrit": "Chankramanam",
+  "desc": "Ten paces one way, turn, ten paces back, at a quarter of normal speed. The practice for a body too restless to sit and a mind too busy to close its eyes.",
+  "technique": "movement-attention",
+  "sourceTradition": "Chankramanam; cankama in the Pali sources",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": false,
+  "posture": "walking",
+  "eyes": "open",
+  "durationSeconds": 510,
+  "durationOptions": [
+   510,
+   810,
+   1410
+  ],
+  "goals": [
+   "anxiety",
+   "focus"
+  ],
+  "themes": [
+   "restlessness",
+   "after-eating",
+   "cannot-sit-still"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Balance is reduced when walking this slowly. Use a wall or a rail if you need one."
+  ],
+  "dosha": {
+   "vata": -2,
+   "pitta": -1,
+   "kapha": -2
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "morning",
+   "midday",
+   "afternoon"
+  ],
+  "season": [],
+  "agni": "kindles",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Find a stretch of floor about ten paces long. Indoors is fine.",
+    "hold": 18
+   },
+   {
+    "atSeconds": 26,
+    "text": "Stand at one end. Let the arms hang or clasp them behind you.",
+    "hold": 18
+   },
+   {
+    "atSeconds": 52,
+    "text": "Look at the floor a few paces ahead. Not at your feet.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 79,
+    "text": "Now walk, at about a quarter of your normal speed.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 106,
+    "text": "Feel each foot: the heel arriving, the weight rolling forward, the toes leaving.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 149,
+    "text": "At the end, stop completely. Stand still for one breath before you turn.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 187,
+    "text": "Turn slowly and go back. The turn is part of it, not a gap between the parts.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 233,
+    "text": "Keep going. Ten paces, stop, turn, ten paces.",
+    "hold": 120
+   },
+   {
+    "atSeconds": 358,
+    "text": "When the mind wanders — and it does, even walking — come back to the sole of whichever foot is on the floor.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 432,
+    "text": "Finish standing still at one end. Feel both feet at once.",
+    "hold": 40
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "glass-meadow",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null,
+  "supersedesAsanaSlug": "walking-meditation"
+ },
+ {
+  "id": "56891424-bbf4-52c2-a1ae-e24d190ecb8b",
+  "catalogNumber": 810049,
+  "slug": "eating-with-attention",
+  "kind": "meditation",
+  "title": "The First Three Mouthfuls",
+  "sanskrit": "Ahara Dharana",
+  "desc": "Three mouthfuls eaten with full attention at the start of a meal. Ayurveda treats how you eat as seriously as what you eat, and this is why.",
+  "technique": "sensory-attention",
+  "sourceTradition": "Caraka Samhita on the manner of eating; sadvritta",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "open",
+  "durationSeconds": 450,
+  "durationOptions": [
+   450
+  ],
+  "goals": [
+   "digestion"
+  ],
+  "themes": [
+   "eating",
+   "agni",
+   "habit"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "If you have a history of disordered eating, close attention to food can be counterproductive. Speak to someone who knows your history before using this."
+  ],
+  "dosha": {
+   "vata": -2,
+   "pitta": -1,
+   "kapha": -1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "morning",
+   "midday",
+   "evening"
+  ],
+  "season": [],
+  "agni": "kindles",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "This one is done at the table, with food in front of you, before you start.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 30,
+    "text": "Put down the phone. Turn off whatever is playing. The texts are unusually firm about this.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 65,
+    "text": "Look at the food for a moment. Notice that you are about to eat, which most meals skip entirely.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 107,
+    "text": "Take the first mouthful. Do not chew yet.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 132,
+    "text": "Notice temperature first, then texture, then taste. In that order.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 174,
+    "text": "Which of the six tastes is here? Sweet, sour, salty, pungent, bitter, astringent. Usually more than one.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 224,
+    "text": "Now chew, and keep chewing past the point where you would normally swallow.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 268,
+    "text": "Second mouthful. Same attention. Notice the taste has already changed because the first one is still there.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 318,
+    "text": "Third mouthful. Then put the fork down for one breath before you carry on normally.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 368,
+    "text": "Three mouthfuls is enough. The rest of the meal will be different anyway.",
+    "hold": 30
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "hearth",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "818726f9-a4fd-5009-b9c5-0041818ac170",
+  "catalogNumber": 810050,
+  "slug": "sense-withdrawal",
+  "kind": "meditation",
+  "title": "Drawing the Senses In",
+  "sanskrit": "Pratyahara",
+  "desc": "Deliberately taking attention back from each sense in turn. The hinge between the outward limbs of yoga and the inward ones.",
+  "technique": "sense-withdrawal",
+  "sourceTradition": "Yoga Sutras 2.54–55; the fifth limb",
+  "seatAsanaId": "ffdc53da-6cd0-5a15-92e4-b86cdcebad00",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 510,
+  "durationOptions": [
+   510,
+   810,
+   1410
+  ],
+  "goals": [
+   "focus"
+  ],
+  "themes": [
+   "overstimulation",
+   "before-meditation",
+   "screens"
+  ],
+  "level": 2,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": -2,
+   "pitta": -1,
+   "kapha": 0
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "evening"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit upright, eyes closed, somewhere reasonably quiet.",
+    "hold": 15
+   },
+   {
+    "atSeconds": 19,
+    "text": "Start with sight, which is already handled — the eyes are closed. Notice what is left of it. Usually not nothing.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 68,
+    "text": "Now hearing. Do not block the sounds. Just stop going out to meet them.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 117,
+    "text": "Let sound arrive at the ear and stop there instead of travelling on into your attention.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 167,
+    "text": "Now smell. Whatever is in the room, let it be at the nose and no further.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 212,
+    "text": "Now taste. The mouth has a taste in it. Leave it in the mouth.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 256,
+    "text": "Now touch. The clothes, the seat, the air. All of it can stay at the skin.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 306,
+    "text": "Nothing has been shut out. You have only stopped sending attention outward to collect it.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 360,
+    "text": "Notice how much is left when the senses stop reporting. It is more than most people expect.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 431,
+    "text": "Come back out through the same doors, one at a time. Touch, taste, smell, hearing, sight.",
+    "hold": 45
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "deep-wooden-drone",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null,
+  "supersedesAsanaSlug": "sense-withdrawal"
+ },
+ {
+  "id": "037896f2-b746-5c48-9825-7a92f10cbcac",
+  "catalogNumber": 810051,
+  "slug": "mantra-repetition",
+  "kind": "meditation",
+  "title": "Repetition on Beads",
+  "sanskrit": "Japa Mala",
+  "desc": "One repetition per bead, once round the mala. The beads keep the count so the mind does not have to, which is more of a relief than it sounds.",
+  "technique": "mantra-with-beads",
+  "sourceTradition": "Japa yoga; the 108-bead mala",
+  "seatAsanaId": "ffdc53da-6cd0-5a15-92e4-b86cdcebad00",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 630,
+  "durationOptions": [
+   630,
+   930,
+   1530
+  ],
+  "goals": [
+   "focus",
+   "anxiety"
+  ],
+  "themes": [
+   "devotion",
+   "structure",
+   "counting"
+  ],
+  "level": 2,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": -3,
+   "pitta": -1,
+   "kapha": -1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "dawn",
+   "evening"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit upright with a mala in the right hand, or any string of beads.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 29,
+    "text": "Hold it over the middle finger. The thumb moves the beads. The index finger stays off it.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 65,
+    "text": "Find the larger bead — the meru. You start next to it and you do not cross it.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 101,
+    "text": "Choose your word. Om, or a name, or a short phrase.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 133,
+    "text": "One repetition, one bead. Say it inwardly, then move the thumb.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 170,
+    "text": "The pace is whatever lets the word be complete. Not fast.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 222,
+    "text": "Keep going. The hand will find its own rhythm and stop needing you.",
+    "hold": 120
+   },
+   {
+    "atSeconds": 350,
+    "text": "When you reach the meru, do not cross it. Turn the mala and come back the other way, or stop.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 408,
+    "text": "A hundred and eight is a long time and that is the point.",
+    "hold": 120
+   },
+   {
+    "atSeconds": 536,
+    "text": "Put the mala down. Sit for a moment with the word still going without the beads.",
+    "hold": 45
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "morning-raga",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null,
+  "supersedesAsanaSlug": "mantra-repetition"
+ },
+ {
+  "id": "7c99d8d5-f8b2-5cb7-97e0-e12bc16c9b8f",
+  "catalogNumber": 810052,
+  "slug": "the-borrowed-body",
+  "kind": "meditation",
+  "title": "Nothing Here Is Permanent",
+  "sanskrit": "Anitya Bhavana",
+  "desc": "A clear-eyed look at the fact that the body is on loan. Sobering rather than morbid, and it makes ordinary days noticeably better.",
+  "technique": "contemplation",
+  "sourceTradition": "The classical impermanence contemplations",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 510,
+  "durationOptions": [
+   510,
+   810,
+   1410
+  ],
+  "goals": [
+   "perspective",
+   "grief"
+  ],
+  "themes": [
+   "mortality",
+   "gratitude",
+   "priorities"
+  ],
+  "level": 3,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Not during acute grief or when you are unwell. This contemplation needs a steady day to be useful rather than frightening."
+  ],
+  "dosha": {
+   "vata": 0,
+   "pitta": -2,
+   "kapha": -2
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "evening"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit comfortably. This one asks for a steady day.",
+    "hold": 18
+   },
+   {
+    "atSeconds": 24,
+    "text": "Feel the body. Warm, breathing, working.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 52,
+    "text": "None of the material in it was yours ten years ago. Almost all of it has been replaced.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 99,
+    "text": "It came out of food, which came out of soil and light, and it is going back.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 145,
+    "text": "This is not a sad fact. It is only a fact, and it is true of everyone who has ever lived.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 198,
+    "text": "Consider that the body will end. Not today. But it will, and you will not be consulted about when.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 255,
+    "text": "Now notice that it is working perfectly well at this moment.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 302,
+    "text": "Both things are true at once. That is the whole contemplation.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 354,
+    "text": "Ask what, given that, actually matters this week. Do not answer quickly.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 421,
+    "text": "Come back to the breath. Borrowed, working, here now.",
+    "hold": 40
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "ocean-floor",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "32ad54f0-eca3-5539-94f9-4e0e3b373e4f",
+  "catalogNumber": 810053,
+  "slug": "morning-intention",
+  "kind": "meditation",
+  "title": "Before the Day Starts",
+  "sanskrit": "Sankalpa",
+  "desc": "Three minutes before anything else — before the phone, before the kettle. The classical daily routine puts intention first for a reason.",
+  "technique": "contemplation",
+  "sourceTradition": "Dinacharya; the sankalpa of the yogic morning routine",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 390,
+  "durationOptions": [
+   390,
+   600
+  ],
+  "goals": [
+   "focus"
+  ],
+  "themes": [
+   "morning",
+   "routine",
+   "dinacharya"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": -2,
+   "pitta": -1,
+   "kapha": -2
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "dawn",
+   "morning"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit on the edge of the bed if that is where you are. This works before you have properly woken up.",
+    "hold": 22
+   },
+   {
+    "atSeconds": 35,
+    "text": "Do not look at the phone yet. Whatever is on it will still be there.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 70,
+    "text": "Notice the body first. How it slept. Whether it is heavy or light this morning.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 114,
+    "text": "That reading is useful — a heavy dull morning is kapha and wants movement; a wired restless one is vata and wants warmth and slowness.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 170,
+    "text": "Now one intention for the day. One. Short enough to remember at four in the afternoon.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 220,
+    "text": "Not a task. A quality. How you would like to meet whatever comes.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 268,
+    "text": "Say it inwardly three times.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 306,
+    "text": "Now let it go and stand up. It has been set.",
+    "hold": 30
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "morning-raga",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "3ce7c82a-5637-52fd-9a39-fd57e3072e6b",
+  "catalogNumber": 810054,
+  "slug": "the-six-tastes",
+  "kind": "meditation",
+  "title": "The Six Tastes",
+  "sanskrit": "Shad Rasa Dharana",
+  "desc": "A short contemplation of what a balanced meal actually contains, done before eating. It changes what you reach for more reliably than a rule does.",
+  "technique": "contemplation",
+  "sourceTradition": "Caraka Samhita; the six rasas",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "open",
+  "durationSeconds": 420,
+  "durationOptions": [
+   420
+  ],
+  "goals": [
+   "digestion"
+  ],
+  "themes": [
+   "eating",
+   "balance",
+   "agni"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "If you have a history of disordered eating, skip contemplations that focus on food."
+  ],
+  "dosha": {
+   "vata": -1,
+   "pitta": -1,
+   "kapha": -1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "midday",
+   "evening"
+  ],
+  "season": [],
+  "agni": "kindles",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit in front of the meal without starting it.",
+    "hold": 18
+   },
+   {
+    "atSeconds": 24,
+    "text": "Ayurveda counts six tastes, not four food groups. Sweet, sour, salty, pungent, bitter, astringent.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 63,
+    "text": "A complete meal has all six, weighted toward the ones your constitution needs.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 106,
+    "text": "Look at what is in front of you and find them. Sweet is easy — grains, root vegetables, dairy.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 153,
+    "text": "Sour? Lemon, yoghurt, anything fermented. Salty is usually obvious.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 193,
+    "text": "Pungent — ginger, pepper, mustard, onion. Bitter — greens, turmeric. Astringent — lentils, beans, unripe fruit.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 244,
+    "text": "Which ones are missing? Most Western meals are short on bitter and astringent, which is why they sit heavily.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 296,
+    "text": "You do not have to fix it now. Just notice.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 337,
+    "text": "Eat. The noticing will change next week's shopping more than a rule would.",
+    "hold": 30
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "hearth",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "b1457ca6-9271-5319-9dee-9d8a366f7b3e",
+  "catalogNumber": 810055,
+  "slug": "the-turn-of-the-season",
+  "kind": "meditation",
+  "title": "The Turn of the Season",
+  "sanskrit": "Ritu Sandhi",
+  "desc": "A contemplation for the fortnight either side of a seasonal change — the period classical texts single out as the most destabilising of the year.",
+  "technique": "contemplation",
+  "sourceTradition": "Ritucharya; the ritu sandhi",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": true,
+  "posture": "seated",
+  "eyes": "closed",
+  "durationSeconds": 450,
+  "durationOptions": [
+   450,
+   750,
+   1350
+  ],
+  "goals": [
+   "perspective"
+  ],
+  "themes": [
+   "seasons",
+   "ritucharya",
+   "transition"
+  ],
+  "level": 2,
+  "minimalAgeMonths": 96,
+  "contraindications": [],
+  "dosha": {
+   "vata": -2,
+   "pitta": -1,
+   "kapha": -1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "morning",
+   "evening"
+  ],
+  "season": [
+   "vasanta",
+   "grishma",
+   "varsha",
+   "sharad",
+   "hemanta",
+   "shishira"
+  ],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Sit somewhere you can see or hear outside, if that is possible.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 28,
+    "text": "Bring to mind what season it actually is. Not the date — the weather.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 66,
+    "text": "Classical Ayurveda pays particular attention to the fortnight either side of a seasonal change.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 110,
+    "text": "That junction is when illness arrives, because the body is still running the last season's habits.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 160,
+    "text": "So: what is different outside now from a month ago? Light, temperature, damp, wind.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 209,
+    "text": "And what are you still doing that belonged to the last season? Eating cold food into autumn. Staying up as if it were still light at nine.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 271,
+    "text": "Pick one thing to change. Only one. The texts recommend changing gradually at a junction, not all at once.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 328,
+    "text": "Sit with the season as it actually is for a moment, rather than the one you had got used to.",
+    "hold": 60
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "cedar-room",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "85622612-bd65-528d-9ce7-b7438c3ba270",
+  "catalogNumber": 810056,
+  "slug": "evening-review",
+  "kind": "meditation",
+  "title": "Going Back Over the Day",
+  "sanskrit": "Sadvritta Anusmriti",
+  "desc": "Retracing the day backwards, without judging any of it. Clears the mind before sleep better than trying not to think.",
+  "technique": "contemplation",
+  "sourceTradition": "Caraka Samhita's sadvritta, recalled at day's end",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": false,
+  "posture": "any",
+  "eyes": "closed",
+  "durationSeconds": 510,
+  "durationOptions": [
+   510,
+   810,
+   1410
+  ],
+  "goals": [
+   "sleep"
+  ],
+  "themes": [
+   "evening",
+   "rumination",
+   "closure"
+  ],
+  "level": 2,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "If the review turns into self-criticism rather than recollection, stop and do Wishing Well instead. That is a different practice doing a different job."
+  ],
+  "dosha": {
+   "vata": -2,
+   "pitta": -1,
+   "kapha": 0
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "night"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Lie down or sit back. This is the last thing before sleep.",
+    "hold": 18
+   },
+   {
+    "atSeconds": 26,
+    "text": "Start at now and work backwards. What happened in the last hour?",
+    "hold": 30
+   },
+   {
+    "atSeconds": 63,
+    "text": "Do not evaluate it. Just recall it, the way you would recall a film.",
+    "hold": 35
+   },
+   {
+    "atSeconds": 107,
+    "text": "Back further. The evening. The end of the afternoon.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 153,
+    "text": "If you find yourself arguing with something that happened, notice that and keep moving backwards.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 202,
+    "text": "The middle of the day. The meal. The morning.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 253,
+    "text": "All the way back to waking up.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 297,
+    "text": "Now notice one thing from the day you are glad about. It can be very small.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 347,
+    "text": "And let the whole day go. It is finished, whatever it was.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 415,
+    "text": "Nothing left to review. Sleep from here.",
+    "hold": 60
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "snowfall",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "6f42a738-760d-5e5a-ae25-ed1e6a275011",
+  "catalogNumber": 810057,
+  "slug": "abhyanga-awareness",
+  "kind": "meditation",
+  "title": "Oiling the Body",
+  "sanskrit": "Abhyanga",
+  "desc": "Attention during the classical self-massage, which the texts prescribe daily and almost nobody does. Deeply pacifying for vata.",
+  "technique": "touch-attention",
+  "sourceTradition": "Dinacharya; abhyanga, the daily self-massage",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": false,
+  "posture": "standing",
+  "eyes": "open",
+  "durationSeconds": 540,
+  "durationOptions": [
+   540,
+   900
+  ],
+  "goals": [
+   "anxiety",
+   "recovery"
+  ],
+  "themes": [
+   "self-care",
+   "dinacharya",
+   "touch"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Not over broken skin, an acute injury, or a fever. Not during acute indigestion.",
+   "Do not oil the body during the first days of menstruation, per classical guidance."
+  ],
+  "dosha": {
+   "vata": -3,
+   "pitta": -1,
+   "kapha": 1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "morning",
+   "evening"
+  ],
+  "season": [
+   "sharad",
+   "hemanta",
+   "shishira"
+  ],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Warm the oil first — sesame for vata, coconut for pitta, mustard or none for kapha.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 35,
+    "text": "Start at the head if you are washing your hair, or at the feet if you are not.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 71,
+    "text": "Long strokes along the limbs. Circles at the joints. That is the whole technique.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 110,
+    "text": "Go slowly enough that you can feel the hand as well as the skin. Both ends of the touch.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 162,
+    "text": "The arms, one at a time. Shoulder to hand, circles at the elbow and the wrist.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 217,
+    "text": "The chest and belly, clockwise. Then the back as far as you reach.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 271,
+    "text": "The legs. Long strokes down, circles at knee and ankle.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 322,
+    "text": "The feet last, and give them longer than feels necessary. The texts are insistent about the feet.",
+    "hold": 50
+   },
+   {
+    "atSeconds": 383,
+    "text": "Now sit or stand for a few minutes and let the oil stay on before you wash.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 453,
+    "text": "The word for oil and the word for love share a root in Sanskrit. That is not a coincidence.",
+    "hold": 40
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "cedar-room",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null
+ },
+ {
+  "id": "d0313433-c62d-5513-a159-72e7c6b159be",
+  "catalogNumber": 810058,
+  "slug": "yogic-sleep",
+  "kind": "relaxation",
+  "title": "Yogic Sleep, Full Form",
+  "sanskrit": "Yoga Nidra",
+  "desc": "The complete form: intention, body rotation, breath, opposite sensations, brief imagery, and the intention again. The deepest rest in the library.",
+  "technique": "nidra",
+  "sourceTradition": "Yoga Nidra lineage — the full form with sankalpa, rotation, opposites and visualisation",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": false,
+  "posture": "supine",
+  "eyes": "closed",
+  "durationSeconds": 1080,
+  "durationOptions": [
+   1080,
+   1380,
+   1980
+  ],
+  "goals": [
+   "sleep",
+   "anxiety",
+   "recovery"
+  ],
+  "themes": [
+   "insomnia",
+   "burnout",
+   "deep-rest"
+  ],
+  "level": 2,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Sustained inward attention can be destabilising for people with PTSD or dissociative symptoms. Keep the eyes softly open, or stop, if it becomes uncomfortable.",
+   "Not a substitute for sleep, and not to be done driving or operating anything."
+  ],
+  "dosha": {
+   "vata": -3,
+   "pitta": -2,
+   "kapha": 1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "afternoon",
+   "evening",
+   "night"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Lie on your back. A pillow under the knees if the lower back asks for one. Get it right now, because you will not move again.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 41,
+    "text": "The only instruction is to stay awake. Not alert — awake.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 73,
+    "text": "Bring to mind a short intention. Present tense, positive, plainly true. Say it inwardly three times.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 128,
+    "text": "Now let it go completely.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 162,
+    "text": "Awareness to the right hand thumb, second finger, third, fourth, fifth. Palm. Back of the hand. Wrist. Elbow. Shoulder.",
+    "hold": 16
+   },
+   {
+    "atSeconds": 190,
+    "text": "Right armpit, right waist, right hip, thigh, knee, calf, ankle, heel, sole, right big toe.",
+    "hold": 16
+   },
+   {
+    "atSeconds": 215,
+    "text": "Left hand thumb, second finger, third, fourth, fifth. Palm. Back of the hand. Wrist. Elbow. Shoulder.",
+    "hold": 16
+   },
+   {
+    "atSeconds": 241,
+    "text": "Left armpit, left waist, left hip, thigh, knee, calf, ankle, heel, sole, left big toe.",
+    "hold": 16
+   },
+   {
+    "atSeconds": 267,
+    "text": "The back of the body. Right shoulder blade, left shoulder blade, the whole spine, the buttocks, the backs of both legs.",
+    "hold": 18
+   },
+   {
+    "atSeconds": 298,
+    "text": "The front. The forehead, both eyebrows, the space between them, both eyelids, both cheeks, the lips, the chin, the throat, the chest, the navel.",
+    "hold": 20
+   },
+   {
+    "atSeconds": 333,
+    "text": "The whole body at once. Every part you have just visited.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 400,
+    "text": "Now the breath. Count backwards from twenty-seven, one number for each breath out.",
+    "hold": 40
+   },
+   {
+    "atSeconds": 448,
+    "text": "If you lose it, begin again at twenty-seven.",
+    "hold": 150
+   },
+   {
+    "atSeconds": 603,
+    "text": "Let the counting go. Now feel heaviness — the whole body heavy, sinking.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 672,
+    "text": "And now lightness. The whole body light, floating, barely touching the floor.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 739,
+    "text": "Both at once, if you can. Heavy and light together.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 805,
+    "text": "Now an image, held loosely: a still lake at dusk, holding the whole sky.",
+    "hold": 75
+   },
+   {
+    "atSeconds": 889,
+    "text": "Let the image go. Bring the intention back, in the same words as before.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 943,
+    "text": "Feel the floor. The room. Sounds outside. The breath moving on its own.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 996,
+    "text": "Move one finger. Then one toe. Come back in your own time, and slowly.",
+    "hold": 40
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "ocean-floor",
+   "loop": true,
+   "defaultVolume": 0.35
+  },
+  "sceneImageName": null,
+  "supersedesAsanaSlug": "yogic-sleep"
+ },
+ {
+  "id": "da89f760-baa9-5a7e-b382-9b16e7810c92",
+  "catalogNumber": 810059,
+  "slug": "descent-into-sleep",
+  "kind": "relaxation",
+  "title": "Falling Asleep",
+  "sanskrit": "Nidra Pravesha",
+  "desc": "Designed to be abandoned partway through. There is no ending, nothing to return from, and no chime.",
+  "technique": "sleep-onset",
+  "sourceTradition": "Modern synthesis of the yogic and clinical sleep-onset methods",
+  "seatAsanaId": "98d021d6-e6e9-5ba8-8949-99f17519f6a1",
+  "seatFlexible": false,
+  "posture": "supine",
+  "eyes": "closed",
+  "durationSeconds": 1050,
+  "durationOptions": [
+   1050,
+   1350,
+   1950
+  ],
+  "goals": [
+   "sleep"
+  ],
+  "themes": [
+   "insomnia",
+   "night-waking",
+   "bedtime"
+  ],
+  "level": 1,
+  "minimalAgeMonths": 96,
+  "contraindications": [
+   "Do not listen while driving or doing anything else."
+  ],
+  "dosha": {
+   "vata": -3,
+   "pitta": -2,
+   "kapha": 1
+  },
+  "doshaProvenance": "classical-technique/modern-synthesis",
+  "guna": "sattvic",
+  "timeOfDay": [
+   "night"
+  ],
+  "season": [],
+  "agni": "neutral",
+  "script": [
+   {
+    "atSeconds": 0,
+    "text": "Lie however you sleep. This one is meant to be left unfinished.",
+    "hold": 25
+   },
+   {
+    "atSeconds": 33,
+    "text": "You do not have to stay awake for this. If you go, you go.",
+    "hold": 30
+   },
+   {
+    "atSeconds": 71,
+    "text": "Let the out-breath be a little longer than the in. Do not count. Just let it lean that way.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 128,
+    "text": "Now let the jaw be heavy. The tongue loose in the mouth.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 181,
+    "text": "The space between the eyebrows, soft.",
+    "hold": 45
+   },
+   {
+    "atSeconds": 230,
+    "text": "The shoulders, further down than they were.",
+    "hold": 50
+   },
+   {
+    "atSeconds": 284,
+    "text": "The hands, open.",
+    "hold": 50
+   },
+   {
+    "atSeconds": 336,
+    "text": "The belly, doing its own breathing without any help.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 402,
+    "text": "The legs, heavy all the way to the feet.",
+    "hold": 60
+   },
+   {
+    "atSeconds": 467,
+    "text": "Nothing left to hold. Nothing left to check.",
+    "hold": 90
+   },
+   {
+    "atSeconds": 563,
+    "text": "The bed is doing all the work now.",
+    "hold": 120
+   },
+   {
+    "atSeconds": 688,
+    "text": "Heavy. Warm. Nowhere to be.",
+    "hold": 150
+   },
+   {
+    "atSeconds": 841,
+    "text": "Nothing more. Sleep from here.",
+    "hold": 180
+   }
+  ],
+  "narration": {
+   "audioAssetName": null,
+   "ttsVoiceHint": "calm-female",
+   "wordsPerMinute": 95
+  },
+  "ambience": {
+   "trackId": "ocean-floor",
+   "loop": true,
+   "defaultVolume": 0.25
+  },
+  "sceneImageName": null
+ }
+]

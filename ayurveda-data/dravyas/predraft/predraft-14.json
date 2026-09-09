@@ -1,0 +1,683 @@
+{
+  "predraftVersion": "1.0",
+  "batch": "predraft-14",
+  "items": [
+    {
+      "id": "dravya.broad-bean",
+      "name": "Broad bean pod (sem)",
+      "sanskrit": "Shimbi",
+      "aliases": [
+        "sem"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          1,
+          0,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: broad bean pod; shimbi; broad bean."
+    },
+    {
+      "id": "dravya.flat-bean",
+      "name": "Flat bean (papdi)",
+      "sanskrit": null,
+      "aliases": [
+        "papdi"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          1,
+          0,
+          -1
+        ],
+        "virya": "neutral"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: flat bean."
+    },
+    {
+      "id": "dravya.kohlrabi",
+      "name": "Kohlrabi (knol-khol)",
+      "sanskrit": null,
+      "aliases": [
+        "knol-khol"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          1,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 5954,
+          "name": "Kohlrabi, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.green-capsicum",
+      "name": "Green capsicum",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 7744,
+          "name": "Peppers, sweet, green, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.red-yellow-capsicum",
+      "name": "Red/yellow capsicum",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 7495,
+          "name": "Peppers, sweet, red, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.sweet-corn-fresh",
+      "name": "Sweet corn (fresh)",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          1,
+          0,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 6068,
+          "name": "Corn, sweet, white, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.baby-corn",
+      "name": "Baby corn",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          1,
+          0,
+          -1
+        ],
+        "virya": "neutral"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: baby corn."
+    },
+    {
+      "id": "dravya.button-mushroom",
+      "name": "Button mushroom",
+      "sanskrit": "Chatraka",
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          1,
+          0,
+          1
+        ],
+        "virya": "cooling",
+        "note": "tamasic classification; heavy"
+      },
+      "usda": [
+        {
+          "fdcId": 6707,
+          "name": "Mushrooms, white, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.oyster-mushroom",
+      "name": "Oyster mushroom",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          1,
+          0,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 6110,
+          "name": "Mushrooms, oyster, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.bamboo-shoot",
+      "name": "Bamboo shoot",
+      "sanskrit": "Vamsha Karira",
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          1,
+          1,
+          -1
+        ],
+        "virya": "cooling",
+        "note": "process before use"
+      },
+      "usda": [
+        {
+          "fdcId": 6666,
+          "name": "Bamboo shoots, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.banana-flower",
+      "name": "Banana flower",
+      "sanskrit": "Kadali Pushpa",
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: banana flower; kadali pushpa."
+    },
+    {
+      "id": "dravya.banana-stem",
+      "name": "Banana stem",
+      "sanskrit": "Kadali Kanda",
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling",
+        "note": "classical for urinary channels"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: banana stem; kadali kanda."
+    },
+    {
+      "id": "dravya.jackfruit-seed",
+      "name": "Jackfruit seed",
+      "sanskrit": "Panasa Beeja",
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          1,
+          -1,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: jackfruit seed; panasa beeja."
+    },
+    {
+      "id": "dravya.celery-stalk",
+      "name": "Celery stalk",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling",
+        "note": "modern adoption"
+      },
+      "usda": [
+        {
+          "fdcId": 7375,
+          "name": "Celery, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.kachnar-buds",
+      "name": "Kachnar buds",
+      "sanskrit": "Kanchanara",
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -2
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: kachnar buds; kanchanara."
+    },
+    {
+      "id": "dravya.moringa-flower",
+      "name": "Moringa flower",
+      "sanskrit": "Shigru Pushpa",
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -2
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: moringa flower; shigru pushpa."
+    },
+    {
+      "id": "dravya.ash-gourd-strips",
+      "name": "Ash gourd (tender, for sabzi)",
+      "sanskrit": "Bala Kushmanda",
+      "aliases": [
+        "tender, for sabzi"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: ash gourd; bala kushmanda; ash gourd strips."
+    },
+    {
+      "id": "dravya.green-chili-fresh",
+      "name": "Green chili (vegetable use)",
+      "sanskrit": null,
+      "aliases": [
+        "vegetable use"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          -1,
+          2,
+          -2
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 12270,
+          "name": "Green chili",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.ginger-tender",
+      "name": "Tender ginger (sabzi/pickle)",
+      "sanskrit": "Bala Ardraka",
+      "aliases": [
+        "sabzi/pickle"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          -2,
+          1,
+          -2
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: tender ginger; bala ardraka; ginger tender."
+    },
+    {
+      "id": "dravya.arrowroot",
+      "name": "Arrowroot (fresh)",
+      "sanskrit": "Tavakshira",
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          0
+        ],
+        "virya": "cooling",
+        "note": "convalescent starch"
+      },
+      "usda": [
+        {
+          "fdcId": 6020,
+          "name": "Arrowroot, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.yam-lesser",
+      "name": "Lesser yam",
+      "sanskrit": "Kshudralu",
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          0,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: lesser yam; kshudralu; yam lesser."
+    },
+    {
+      "id": "dravya.colocasia-stem",
+      "name": "Colocasia stem",
+      "sanskrit": "Pindalu Nala",
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          1,
+          0,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: colocasia stem; pindalu nala."
+    },
+    {
+      "id": "dravya.pumpkin-flower",
+      "name": "Pumpkin flower",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 6726,
+          "name": "Pumpkin flowers, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.agathi-flower",
+      "name": "Agathi flower",
+      "sanskrit": "Agastya Pushpa",
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -2
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: agathi flower; agastya pushpa."
+    },
+    {
+      "id": "dravya.breadfruit",
+      "name": "Breadfruit",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          1,
+          0,
+          0
+        ],
+        "virya": "neutral"
+      },
+      "usda": [
+        {
+          "fdcId": 8840,
+          "name": "Breadfruit, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+    "schemaVersion": 1,
+    "assets": [
+        {
+            "filename": "Ayura/Food/frame_index.json",
+      "sha256": "b972b6fe6961bbb4bd25c2e34ea478de45d129d2cce731dc729942484dbc80ae",
+      "byteSize": 640799,
+            "frameCount": null,
+            "producingCommit": "bbf30cb71b793568f4e079440c2d1b947992f272"
+        },
+        {
+            "filename": "Ayura/Food/food_archive_144.mp4",
+      "sha256": "4c740aed1a2ed2e1ddbf27d9d620282c3830d7464e00b29599adb98fd8115b6c",
+      "byteSize": 43843110,
+      "frameCount": 14479,
+            "producingCommit": "bbf30cb71b793568f4e079440c2d1b947992f272"
+        },
+        {
+            "filename": "Ayura/Food/food_archive_480.mp4",
+      "sha256": "888ec3220faf1ea9ff38b5841598a42c1016a61a240696664b5ed7f3dcd128bf",
+      "byteSize": 85697754,
+      "frameCount": 14479,
+            "producingCommit": "bbf30cb71b793568f4e079440c2d1b947992f272"
+        },
+        {
+            "filename": "Ayura/Food/food_archive_1024.mp4.gz.part-aa",
+      "sha256": "6814aa7b8dc654bcebb0989fb0a56cbf2046496cbf5a79e481da6896355ee3fd",
+            "byteSize": 73400320,
+            "frameCount": null,
+            "restoredFilename": "Ayura/Food/food_archive_1024.mp4",
+      "restoredSha256": "eb528aa141a8464f84b680eb53f979778ab96a2b6716861a12958da0cd8cb5f8",
+      "restoredByteSize": 352139375,
+            "producingCommit": "bbf30cb71b793568f4e079440c2d1b947992f272"
+        },
+        {
+            "filename": "Ayura/Food/food_archive_1024.mp4.gz.part-ab",
+      "sha256": "d9746efedd0b48db7ebe388263052c38f0a84367e164008411e99e0d2fd4d43f",
+            "byteSize": 73400320,
+            "frameCount": null,
+            "restoredFilename": "Ayura/Food/food_archive_1024.mp4",
+      "restoredSha256": "eb528aa141a8464f84b680eb53f979778ab96a2b6716861a12958da0cd8cb5f8",
+      "restoredByteSize": 352139375,
+            "producingCommit": "bbf30cb71b793568f4e079440c2d1b947992f272"
+        },
+        {
+            "filename": "Ayura/Food/food_archive_1024.mp4.gz.part-ac",
+      "sha256": "b4415b340f74e577ff7dbe2e45caaa8ff94e4e96d4a222b1e54f822c1c1dc45a",
+            "byteSize": 73400320,
+            "frameCount": null,
+            "restoredFilename": "Ayura/Food/food_archive_1024.mp4",
+      "restoredSha256": "eb528aa141a8464f84b680eb53f979778ab96a2b6716861a12958da0cd8cb5f8",
+      "restoredByteSize": 352139375,
+            "producingCommit": "bbf30cb71b793568f4e079440c2d1b947992f272"
+        },
+        {
+            "filename": "Ayura/Food/food_archive_1024.mp4.gz.part-ad",
+      "sha256": "fb347c1e2017e50efc299784e29ba84f78ed9d9f2a7e715f2f8f916dce3d864b",
+            "byteSize": 73400320,
+            "frameCount": null,
+            "restoredFilename": "Ayura/Food/food_archive_1024.mp4",
+      "restoredSha256": "eb528aa141a8464f84b680eb53f979778ab96a2b6716861a12958da0cd8cb5f8",
+      "restoredByteSize": 352139375,
+            "producingCommit": "bbf30cb71b793568f4e079440c2d1b947992f272"
+        },
+        {
+            "filename": "Ayura/Food/food_archive_1024.mp4.gz.part-ae",
+      "sha256": "981d1d9f48ae0f7947813e3fa6af3ace1ed6f152216bc4091e7c5ba5a506305b",
+      "byteSize": 58459119,
+            "frameCount": null,
+            "restoredFilename": "Ayura/Food/food_archive_1024.mp4",
+      "restoredSha256": "eb528aa141a8464f84b680eb53f979778ab96a2b6716861a12958da0cd8cb5f8",
+      "restoredByteSize": 352139375,
+            "producingCommit": "bbf30cb71b793568f4e079440c2d1b947992f272"
+        }
+    ]
+}

@@ -1,0 +1,636 @@
+import SwiftUI
+import SwiftData
+
+struct AIDailyTrainingGeneratorView: View {
+    @Environment(\.modelContext) private var modelContext
+    @ObservedObject private var effectManager = EffectManager.shared
+    @ObservedObject private var aiManager = AIManager.shared
+    @Query private var userSettingsArray: [UserSettings]   // 👈 ДОБАВИ ТОВА
+    private var isAIButtonEnabledGlobally: Bool {
+        userSettingsArray.first?.isAIButtonEnabled ?? true
+    }
+    // MARK: - Input
+    let profile: Profile
+    let date: Date
+    let onJobScheduled: () -> Void
+    let onDismiss: () -> Void
+    @State private var isAITapOnCooldown: Bool = false
+    @State private var selectedTrainingNames: Set<String>
+    @State private var trainingsForDay: [Training]
+    
+    // MARK: - Prompt State & Navigation
+    @Query(sort: \Prompt.creationDate, order: .reverse) private var allPrompts: [Prompt]
+    @State private var selectedPromptIDs: Set<Prompt.ID> = []
+    @State private var path = NavigationPath()
+    private enum NavigationTarget: Hashable {
+        case promptEditor
+        case editPrompt(Prompt)
+    }
+    private enum OpenMenu { case none, promptSelector }
+    @State private var openMenu: OpenMenu = .none
+    @State private var promptToDelete: Prompt? = nil
+    @State private var isShowingDeletePromptConfirmation = false
+    private let selectedPromptsKey = "AIDailyTrainingGenerator_SelectedPrompts"
+    
+    // --- AI Floating Button State ---
+    @State private var isAIButtonVisible: Bool = true
+    @State private var aiButtonOffset: CGSize = .zero
+    @State private var aiIsDragging: Bool = false
+    @GestureState private var aiGestureDragOffset: CGSize = .zero
+    @State private var aiIsPressed: Bool = false
+    private let aiButtonPositionKey = "floatingDailyTrainingAIGenButtonPosition"
+    
+    // --- Toast Notification State ---
+    @State private var showAIGenerationToast = false
+    @State private var toastTimer: Timer? = nil
+    @State private var toastProgress: Double = 0.0
+    
+    init(profile: Profile, date: Date, trainings: [Training], onJobScheduled: @escaping () -> Void, onDismiss: @escaping () -> Void) {
+        self.profile = profile
+        self.date = date
+        self.onJobScheduled = onJobScheduled
+        self.onDismiss = onDismiss
+        
+        let trainingsForDisplay = trainings.sorted { $0.startTime < $1.startTime }
+        
+        self._trainingsForDay = State(initialValue: trainingsForDisplay)
+        self._selectedTrainingNames = State(initialValue: Set(trainingsForDisplay.map { $0.name }))
+    }
+    
+    private var isAIButtonCurrentlyVisible: Bool {
+        return !showAIGenerationToast &&
+        openMenu == .none &&
+        isAIButtonEnabledGlobally
+    }
+    
+    var body: some View {
+        NavigationStack(path: $path) {
+            ZStack {
+                ThemeBackgroundView().ignoresSafeArea()
+                
+                VStack(spacing: 0) {
+                    toolbar
+                    ScrollView(showsIndicators: false) {
+                        mainContent
+                    }
+                }
+            }
+            .overlay {
+                GeometryReader { geometry in
+                    Group {
+                        if isAIButtonCurrentlyVisible {
+                            AIButton(geometry: geometry)
+                        }
+                        if showAIGenerationToast {
+                            aiGenerationToast
+                        }
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                }
+            }
+            .overlay {
+                if openMenu != .none {
+                    bottomSheetPanel
+                }
+            }
+            .onAppear(perform: loadSelectedPromptIDs)
+            .onAppear(perform: loadAIButtonPosition)
+            .onChange(of: selectedPromptIDs, perform: saveSelectedPromptIDs)
+            .navigationDestination(for: NavigationTarget.self) { target in
+                switch target {
+                case .promptEditor:
+                    PromptEditorView(promptType: .trainingViewМealPlan) { newPrompt in
+                        path.removeLast()
+                        if let newPrompt = newPrompt {
+                            selectedPromptIDs.insert(newPrompt.id)
+                        }
+                    }
+                    
+                case .editPrompt(let prompt):
+                    PromptEditorView(promptType: .trainingViewМealPlan, promptToEdit: prompt) { editedPrompt in
+                        if let editedPrompt = editedPrompt, !selectedPromptIDs.contains(editedPrompt.id) {
+                            selectedPromptIDs.insert(editedPrompt.id)
+                        }
+                        path.removeLast()
+                    }
+                }
+            }
+            .confirmationDialog(
+                "Delete Prompt?", isPresented: $isShowingDeletePromptConfirmation, presenting: promptToDelete
+            ) { prompt in
+                Button("Delete", role: .destructive) {
+                    modelContext.delete(prompt)
+                    selectedPromptIDs.remove(prompt.id)
+                }
+                Button("Cancel", role: .cancel) {
+                    promptToDelete = nil
+                }
+            } message: { _ in Text("Are you sure you want to delete this prompt? This action cannot be undone.") }
+        }
+    }
+    
+    private var toolbar: some View {
+        HStack {
+            Button("Cancel", action: onDismiss)
+                .padding(.horizontal, 10).padding(.vertical, 5)
+                .glassCardStyle(cornerRadius: 20)
+            
+            Spacer()
+            Text("Generate Daily Workouts").font(.headline)
+            Spacer()
+            
+            Button("Cancel") {}.hidden()
+                .padding(.horizontal, 10).padding(.vertical, 5)
+        }
+        .foregroundColor(effectManager.currentGlobalAccentColor)
+        .padding()
+    }
+    
+    private var mainContent: some View {
+        VStack(spacing: 20) {
+            let planPrompts = allPrompts.filter { $0.type == .trainingViewМealPlan }
+            
+            if GlobalState.aiAvailability != .deviceNotEligible && isAIButtonEnabledGlobally{
+                VStack(spacing: 12) {
+                    if !planPrompts.isEmpty {
+                        promptsSection
+                            .padding(.horizontal)
+                    }
+                    Button {
+                        path.append(NavigationTarget.promptEditor)
+                    } label: {
+                        Label("New Prompt", systemImage: "plus.bubble")
+                            .font(.subheadline.weight(.semibold))
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    }
+                    .padding(.vertical, 10)
+                    .glassCardStyle(cornerRadius: 20)
+                    .foregroundColor(effectManager.currentGlobalAccentColor)
+                    .padding(.horizontal)
+                }
+                .padding(.vertical)
+                .glassCardStyle(cornerRadius: 20)
+            }
+            VStack(spacing: 12) {
+                ForEach(trainingsForDay) { training in
+                    trainingSelectionCard(for: training)
+                }
+            }
+            .padding()
+        }
+        .padding()
+    }
+    
+    @ViewBuilder
+    private var promptsSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Prompts")
+                .font(.headline)
+                .foregroundStyle(effectManager.currentGlobalAccentColor)
+            
+            let planPrompts = allPrompts.filter { $0.type == .trainingViewМealPlan }
+            
+            MultiSelectButton(
+                selection: $selectedPromptIDs,
+                items: planPrompts,
+                label: { $0.text },
+                prompt: "Select a prompt...",
+                isExpanded: openMenu == .promptSelector
+            )
+            .contentShape(Rectangle())
+            .onTapGesture {
+                withAnimation {
+                    openMenu = .promptSelector
+                }
+            }
+            .padding(.vertical, 5)
+            .padding(.horizontal, 10)
+            .font(.system(size: 16))
+            .glassCardStyle(cornerRadius: 20)
+        }
+    }
+    
+    @ViewBuilder
+    private var bottomSheetPanel: some View {
+        ZStack(alignment: .bottom) {
+            if effectManager.isLightRowTextColor {
+                Color.black.opacity(0.4).ignoresSafeArea()
+                    .transition(.opacity)
+                    .onTapGesture { withAnimation { openMenu = .none } }
+            } else {
+                Color.white.opacity(0.4).ignoresSafeArea()
+                    .transition(.opacity)
+                    .onTapGesture { withAnimation { openMenu = .none } }
+            }
+            
+            VStack(spacing: 8) {
+                HStack {
+                    Text("Select Prompts")
+                        .font(.headline)
+                        .foregroundColor(effectManager.currentGlobalAccentColor)
+                    
+                    Spacer()
+                    
+                    Button("Done") {
+                        withAnimation {
+                            openMenu = .none
+                        }
+                    }
+                    .foregroundColor(effectManager.currentGlobalAccentColor)
+                    .padding(.horizontal, 10).padding(.vertical, 5)
+                    .glassCardStyle(cornerRadius: 20)
+                }
+                .padding(.horizontal).frame(height: 35)
+                
+                dropDownLayer
+            }
+            .padding(.top)
+            .background {
+                Rectangle()
+                    .fill(.ultraThinMaterial)
+                    .environment(\.colorScheme, effectManager.appColorScheme) // Следва темата на приложението
+            }
+            .cornerRadius(20, corners: [.topLeft, .topRight])
+            .frame(maxHeight: UIScreen.main.bounds.height * 0.55)
+        }
+        .ignoresSafeArea(.container, edges: .bottom)
+        .zIndex(1)
+        .transition(.move(edge: .bottom).animation(.easeInOut(duration: 0.3)))
+    }
+    
+    @ViewBuilder
+    private var dropDownLayer: some View {
+        let planPrompts = allPrompts.filter { $0.type == .trainingViewМealPlan }
+        DropdownMenu(
+            selection: $selectedPromptIDs,
+            items: planPrompts,
+            label: { $0.text },
+            selectAllBtn: false,
+            isEditable: true,
+            isDeletable: true,
+            onEdit: { prompt in
+                openMenu = .none
+                path.append(NavigationTarget.editPrompt(prompt))
+            },
+            onDelete: { prompt in
+                if #available(iOS 26.0, *) {
+                    modelContext.delete(prompt)
+                    selectedPromptIDs.remove(prompt.id)
+                } else {
+                    promptToDelete = prompt
+                    isShowingDeletePromptConfirmation = true
+                }
+            }
+        )
+    }
+    
+    @ViewBuilder
+    private func trainingSelectionCard(for training: Training) -> some View {
+        let isSelected = selectedTrainingNames.contains(training.name)
+        
+        // 1. Заменяме Button с HStack като основен елемент.
+        HStack {
+            VStack(alignment: .leading) {
+                Text(training.name)
+                    .font(.headline)
+                Text("\(training.startTime.formatted(date: .omitted, time: .shortened))")
+                    .font(.caption)
+                    .opacity(0.8)
+            }
+            Spacer()
+            Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+                .font(.title2)
+        }
+        // 2. Прилагаме всички стилове директно към HStack.
+        .padding()
+        .foregroundStyle(effectManager.currentGlobalAccentColor)
+        .glassCardStyle(cornerRadius: 15)
+        .overlay(
+            RoundedRectangle(cornerRadius: 15)
+                .stroke(isSelected ? effectManager.currentGlobalAccentColor : .clear, lineWidth: 2)
+        )
+        // 3. Дефинираме цялата правоъгълна област като интерактивна.
+        .contentShape(Rectangle())
+        // 4. Добавяме действието при докосване с .onTapGesture.
+        .onTapGesture {
+            withAnimation(.spring()) {
+                if isSelected {
+                    selectedTrainingNames.remove(training.name)
+                } else {
+                    selectedTrainingNames.insert(training.name)
+                }
+            }
+        }
+    }
+    
+    private func aiBottomPadding(for geometry: GeometryProxy) -> CGFloat {
+        let size = geometry.size
+        guard size.width > 0 else { return 75 }
+        let aspectRatio = size.height / size.width
+        return aspectRatio > 1.9 ? 75 : 95
+    }
+    
+    private func aiTrailingPadding(for geometry: GeometryProxy) -> CGFloat { 45 }
+    
+    private func aiDragGesture(geometry: GeometryProxy) -> some Gesture {
+        let buttonSize: CGFloat = 60
+        let radius = buttonSize / 2
+        
+        return DragGesture(minimumDistance: 0)
+            .updating($aiGestureDragOffset) { value, state, _ in
+                // Жив превод по време на drag – без анимация
+                state = value.translation
+            }
+            .onChanged { value in
+                let distance = max(abs(value.translation.width), abs(value.translation.height))
+                
+                if distance > 6 {
+                    // Вече влачим – махаме "pressed" и маркираме "dragging"
+                    if !aiIsDragging {
+                        aiIsDragging = true
+                        aiIsPressed = false
+                    }
+                } else {
+                    // Малко мърдане = натиснат бутон
+                    aiIsPressed = true
+                }
+            }
+            .onEnded { value in
+                let safeArea = geometry.safeAreaInsets
+                let size = geometry.size
+                
+                // Базова позиция (дясно-долу) спрямо размера + твоите padding-и
+                let baseX = size.width  - aiTrailingPadding(for: geometry) - radius
+                let baseY = size.height - aiBottomPadding(for: geometry)   - radius
+                
+                // Центърът, ако приложим текущия offset + преместеното
+                let rawCenterX = baseX + aiButtonOffset.width  + value.translation.width
+                let rawCenterY = baseY + aiButtonOffset.height + value.translation.height
+                
+                // Ограничаваме центъра ВЪТРЕ в екрана
+                let minX = radius
+                let maxX = size.width  - radius
+                let minY = radius + safeArea.top
+                let maxY = size.height - radius - safeArea.bottom
+                
+                let clampedCenterX = min(max(rawCenterX, minX), maxX)
+                let clampedCenterY = min(max(rawCenterY, minY), maxY)
+                
+                // Новият offset е просто разлика спрямо базовата позиция
+                let newOffset = CGSize(
+                    width:  clampedCenterX - baseX,
+                    height: clampedCenterY - baseY
+                )
+                
+                if aiIsDragging {
+                    aiButtonOffset = newOffset
+                    saveAIButtonPosition()
+                } else {
+                    // Тап (без реален drag)
+                    handleAITap()
+                }
+                
+                aiIsDragging = false
+                aiIsPressed = false
+            }
+    }
+    
+    // MARK: - AI & Ads Logic
+    
+    /// Тази функция стартира същинската работа на AI за генериране на дневен план.
+    /// Извиква се само след успешна проверка на абонамент или изгледана реклама.
+    private func startAIGeneration() {
+        guard !selectedTrainingNames.isEmpty else { return }
+        
+        let workoutsToFill: [Int: [String]] = [1: Array(selectedTrainingNames)]
+        let selectedPrompts = allPrompts.filter { selectedPromptIDs.contains($0.id) }.map { $0.text }
+        
+        let existingWorkouts = trainingsForDay
+            .filter { !$0.exercises(using: modelContext).isEmpty }
+            .map { training -> TrainingPlanWorkoutDraft in
+                let exercises = training.exercises(using: modelContext).map { (item, duration) in
+                    TrainingPlanExerciseDraft(exerciseName: item.name, durationSeconds: duration)
+                }
+                return TrainingPlanWorkoutDraft(workoutName: training.name, exercises: exercises)
+            }
+        let existingWorkoutsDict: [Int: [TrainingPlanWorkoutDraft]]? = existingWorkouts.isEmpty ? nil : [1: existingWorkouts]
+        
+        if aiManager.startTrainingPlanGeneration(
+            for: profile,
+            prompts: selectedPrompts.isEmpty ? [] : selectedPrompts,
+            workoutsToFill: workoutsToFill,
+            existingWorkouts: existingWorkoutsDict,
+            jobType: .dailyTreiningPlan
+        ) != nil {
+            triggerAIGenerationToast()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                onJobScheduled()
+                onDismiss()
+            }
+        } else {
+            print("❌ Failed to start AI training generation job from daily generator.")
+            onDismiss()
+        }
+    }
+    
+    /// Основният handler на бутона. Управлява потокa: Абонамент -> Реклама -> AI.
+    private func handleAITap() {
+        if isAITapOnCooldown {
+            return
+        }
+        
+        // 1. Веднага активираме cooldown за да предотвратим спам/двойни кликове
+        isAITapOnCooldown = true
+        Task { @MainActor in
+            // Тук можеш да смениш 1.5 на 1.0 или 2.0 според това, което искаш
+            try? await Task.sleep(for: .seconds(1.5))
+            isAITapOnCooldown = false
+        }
+        
+        NotificationCenter.default.post(name: .snoozeAds, object: nil)
+        
+        // 1. Проверка дали има избрани тренировки (преди рекламите, за да не ги хабим напразно)
+        guard !selectedTrainingNames.isEmpty else { return }
+        
+        // 2. Проверка за АБОНАМЕНТ
+        // Ако потребителят е на платен план (не е Base), пропускаме рекламите.
+        if !AdsConfiguration.shouldShowAds {
+            print("💎 Premium user: Skipping ad.")
+            startAIGeneration()
+            return
+        }
+        
+        // 3. Логика за реклами (Base Plan)
+        print("📺 Free user: Checking for ads...")
+        
+        // Опит 1: Видео с награда (Rewarded) - Приоритет
+        if RewardedAdManager.shared.isReady {
+            print("📺 Showing Rewarded Ad...")
+            RewardedAdManager.shared.showIfAvailable { amount, type in
+                // Този код се изпълнява САМО ако рекламата е изгледана докрай и наградата е получена
+                print("✅ Ad watched! Starting generation.")
+                self.startAIGeneration()
+            }
+            // Ако потребителят затвори видеото преждевременно, startAIGeneration НЯМА да се извика.
+        }
+        // Опит 2: Цял екран (Interstitial) - Резервен вариант
+        else if InterstitialAdManager.shared.isReady {
+            print("⚠️ Rewarded not ready. Showing Interstitial fallback...")
+            InterstitialAdManager.shared.showIfAvailable {
+                // Извиква се, когато потребителят затвори рекламата (хиксчето)
+                print("✅ Interstitial closed. Starting generation.")
+                self.startAIGeneration()
+            }
+        }
+        // Опит 3: Няма никакви реклами (Graceful degradation)
+        else {
+            print("⚠️ No ads available. Proceeding graciously.")
+            // Пускаме услугата, за да не ядосваме потребителя, че няма реклами
+            startAIGeneration()
+            
+            // Опитваме да заредим за следващия път
+            Task {
+                await RewardedAdManager.shared.loadAd()
+                await InterstitialAdManager.shared.loadAd()
+            }
+        }
+    }
+    
+    private func saveAIButtonPosition() {
+        let d = UserDefaults.standard
+        d.set(aiButtonOffset.width, forKey: "\(aiButtonPositionKey)_width")
+        d.set(aiButtonOffset.height, forKey: "\(aiButtonPositionKey)_height")
+    }
+    
+    private func loadAIButtonPosition() {
+        let d = UserDefaults.standard
+        let w = d.double(forKey: "\(aiButtonPositionKey)_width")
+        let h = d.double(forKey: "\(aiButtonPositionKey)_height")
+        self.aiButtonOffset = CGSize(width: w, height: h)
+    }
+    
+    @ViewBuilder
+    private func AIButton(geometry: GeometryProxy) -> some View {
+        let buttonSize: CGFloat = 60
+        let radius = buttonSize / 2
+        let safeArea = geometry.safeAreaInsets
+        let size = geometry.size
+        
+        // Базова позиция (дясно-долу) с твоите "маржове"
+        let baseX = size.width  - aiTrailingPadding(for: geometry) - radius
+        let baseY = size.height - aiBottomPadding(for: geometry)   - radius
+        
+        // Център със запазения offset + текущия drag
+        let rawCenterX = baseX + aiButtonOffset.width  + aiGestureDragOffset.width
+        let rawCenterY = baseY + aiButtonOffset.height + aiGestureDragOffset.height
+        
+        // Ограничаваме центъра ВЪТРЕ в екрана (и safe area)
+        let minX = radius
+        let maxX = size.width  - radius
+        let minY = radius + safeArea.top
+        let maxY = size.height - radius - safeArea.bottom
+        
+        let centerX = min(max(rawCenterX, minX), maxX)
+        let centerY = min(max(rawCenterY, minY), maxY)
+        
+        let scale = aiIsDragging ? 1.05 : (aiIsPressed ? 0.92 : 1.0)
+        
+        ZStack {
+            Image("aiGenerate_icon")
+                .resizable()
+                .renderingMode(.template)
+                .scaledToFit()
+                .frame(width: 36, height: 36)
+                .foregroundStyle(effectManager.currentGlobalAccentColor)
+        }
+        .frame(width: buttonSize, height: buttonSize)
+        .glassCardStyle(cornerRadius: buttonSize / 2 + 2)
+        .scaleEffect(scale)
+        .animation(.spring(response: 0.25, dampingFraction: 0.8), value: aiIsPressed)
+        .animation(.spring(response: 0.25, dampingFraction: 0.8), value: aiIsDragging)
+        .contentShape(Circle())                     // само кръгчето е кликаемо
+        .position(x: centerX, y: centerY)           // абсолютна позиция, вече clamp-ната
+        .opacity(isAIButtonVisible ? (isAITapOnCooldown ? 0.5 : 1.0) : 0)
+        .disabled(!isAIButtonVisible || isAITapOnCooldown)
+        .gesture(aiDragGesture(geometry: geometry)) // жестът е върху 60x60, не върху цял екран
+        .transition(.scale.combined(with: .opacity))
+    }
+    
+    @ViewBuilder
+    private var aiGenerationToast: some View {
+        VStack {
+            HStack(spacing: 12) {
+                Image(systemName: "sparkles")
+                    .font(.title2)
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Generation Scheduled")
+                        .fontWeight(.bold)
+                    Text("You'll be notified when your plan is ready.")
+                        .font(.caption)
+                    
+                    ProgressView(value: min(max(toastProgress, 0.0), 1.0), total: 1.0)
+                        .progressViewStyle(LinearProgressViewStyle(tint: effectManager.currentGlobalAccentColor))
+                        .animation(.linear, value: toastProgress)
+                }
+                
+                Spacer()
+                
+                Button("OK") {
+                    toastTimer?.invalidate()
+                    toastTimer = nil
+                    withAnimation {
+                        showAIGenerationToast = false
+                    }
+                }
+                .buttonStyle(.borderless)
+                .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
+            }
+            .foregroundStyle(effectManager.currentGlobalAccentColor)
+            .padding()
+            .glassCardStyle(cornerRadius: 20)
+            .padding()
+            .transition(.move(edge: .top).combined(with: .opacity))
+            
+            Spacer()
+        }
+        .frame(maxHeight: .infinity, alignment: .top)
+        .ignoresSafeArea(.keyboard)
+    }
+    
+    private func triggerAIGenerationToast() {
+        toastTimer?.invalidate()
+        toastProgress = 0.0
+        withAnimation {
+            showAIGenerationToast = true
+        }
+        
+        let totalDuration = 5.0
+        let updateInterval = 0.1
+        let progressIncrement = updateInterval / totalDuration
+        
+        toastTimer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { timer in
+            DispatchQueue.main.async {
+                self.toastProgress = min(1.0, self.toastProgress + progressIncrement)
+                if self.toastProgress >= 1.0 {
+                    timer.invalidate()
+                    self.toastTimer = nil
+                    withAnimation {
+                        self.showAIGenerationToast = false
+                    }
+                }
+            }
+        }
+    }
+    
+    private func saveSelectedPromptIDs(_ ids: Set<UUID>) {
+        let idStrings = ids.map { $0.uuidString }
+        UserDefaults.standard.set(idStrings, forKey: selectedPromptsKey)
+    }
+    
+    private func loadSelectedPromptIDs() {
+        guard let idStrings = UserDefaults.standard.stringArray(forKey: selectedPromptsKey) else { return }
+        let ids = idStrings.compactMap { UUID(uuidString: $0) }
+        self.selectedPromptIDs = Set(ids)
+    }
+}

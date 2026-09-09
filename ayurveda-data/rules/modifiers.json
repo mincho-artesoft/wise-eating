@@ -1,0 +1,259 @@
+{
+ "modifiersVersion": 1,
+ "appliesTo": "derived and estimated tiers only (classical exact/near links show the dravya profile untouched)",
+ "matching": "phrases are matched as contiguous token sequences against the full normalized food name (lowercase, parentheticals stripped, split on whitespace/hyphen/slash/apostrophe); each modifier fires at most once; deltas sum onto the base vpk, then clamp to [-2,2]; gunas are unioned; virya unchanged",
+ "modifiers": [
+  {
+   "id": "fried",
+   "label": "fried",
+   "phrases": [
+    "fried",
+    "french fries",
+    "batter dipped",
+    "breaded"
+   ],
+   "vpk": [
+    0,
+    1,
+    1
+   ],
+   "gunas": [
+    "oily",
+    "heavy"
+   ],
+   "note": "deep/pan/stir-fried; token match excludes 'refried'"
+  },
+  {
+   "id": "dry-heat",
+   "label": "roasted/grilled",
+   "phrases": [
+    "roasted",
+    "toasted",
+    "grilled",
+    "broiled"
+   ],
+   "vpk": [
+    1,
+    1,
+    -1
+   ],
+   "gunas": [
+    "dry"
+   ]
+  },
+  {
+   "id": "raw",
+   "label": "raw",
+   "phrases": [
+    "raw",
+    "uncooked"
+   ],
+   "vpk": [
+    1,
+    0,
+    -1
+   ],
+   "gunas": [
+    "rough"
+   ]
+  },
+  {
+   "id": "dried",
+   "label": "dried",
+   "phrases": [
+    "dried",
+    "dehydrated"
+   ],
+   "vpk": [
+    1,
+    0,
+    -1
+   ],
+   "gunas": [
+    "dry",
+    "light"
+   ]
+  },
+  {
+   "id": "canned",
+   "label": "canned",
+   "phrases": [
+    "canned"
+   ],
+   "vpk": [
+    1,
+    0,
+    0
+   ],
+   "gunas": [],
+   "note": "stale/processed - reduced prana"
+  },
+  {
+   "id": "frozen",
+   "label": "frozen",
+   "phrases": [
+    "frozen"
+   ],
+   "vpk": [
+    1,
+    0,
+    0
+   ],
+   "gunas": []
+  },
+  {
+   "id": "fermented-sour",
+   "label": "pickled/fermented",
+   "phrases": [
+    "pickled",
+    "fermented",
+    "brine",
+    "vinegar",
+    "sauerkraut",
+    "kimchi"
+   ],
+   "vpk": [
+    -1,
+    1,
+    1
+   ],
+   "gunas": [
+    "sharp"
+   ]
+  },
+  {
+   "id": "cured",
+   "label": "cured/smoked/salted",
+   "phrases": [
+    "cured",
+    "smoked",
+    "salted"
+   ],
+   "vpk": [
+    0,
+    1,
+    1
+   ],
+   "gunas": [],
+   "note": "token match excludes 'unsalted'"
+  },
+  {
+   "id": "sweetened",
+   "label": "sweetened",
+   "phrases": [
+    "sweetened",
+    "syrup",
+    "sugar",
+    "candied",
+    "glazed",
+    "chocolate",
+    "frosted"
+   ],
+   "vpk": [
+    0,
+    0,
+    1
+   ],
+   "gunas": [
+    "heavy"
+   ],
+   "note": "token match excludes 'unsweetened'"
+  },
+  {
+   "id": "rich",
+   "label": "creamy/buttery",
+   "phrases": [
+    "cream",
+    "creamed",
+    "cheese sauce",
+    "butter",
+    "alfredo"
+   ],
+   "vpk": [
+    -1,
+    0,
+    1
+   ],
+   "gunas": [
+    "heavy",
+    "oily"
+   ]
+  },
+  {
+   "id": "pungent",
+   "label": "spicy",
+   "phrases": [
+    "spicy",
+    "jalapeno",
+    "sriracha",
+    "buffalo",
+    "curry"
+   ],
+   "vpk": [
+    0,
+    1,
+    -1
+   ],
+   "gunas": [
+    "sharp"
+   ]
+  },
+  {
+   "id": "lowfat",
+   "label": "reduced fat",
+   "phrases": [
+    "nonfat",
+    "fat free",
+    "skim",
+    "reduced fat",
+    "low fat",
+    "lowfat"
+   ],
+   "vpk": [
+    1,
+    0,
+    -1
+   ],
+   "gunas": [
+    "light"
+   ]
+  },
+  {
+   "id": "moist-heat",
+   "label": "boiled/steamed",
+   "phrases": [
+    "boiled",
+    "steamed",
+    "stewed",
+    "braised",
+    "simmered",
+    "poached"
+   ],
+   "vpk": [
+    -1,
+    0,
+    0
+   ],
+   "gunas": [
+    "soft"
+   ]
+  },
+  {
+   "id": "processed",
+   "label": "instant/packaged",
+   "phrases": [
+    "instant",
+    "ready to heat",
+    "ready to eat",
+    "from dry mix",
+    "mix"
+   ],
+   "vpk": [
+    1,
+    0,
+    0
+   ],
+   "gunas": []
+  }
+ ]
+}

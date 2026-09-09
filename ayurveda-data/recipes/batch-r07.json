@@ -1,0 +1,4273 @@
+{
+  "formatVersion": "1.0",
+  "batch": "recipe-batch-r07",
+  "qualityState": "aiDraft",
+  "items": [
+    {
+      "id": "recipe.everyday-mung-lauki-dal",
+      "name": "Everyday Mung and Lauki Dal",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.bottle-gourd",
+          "name": "Bottle gourd, diced",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the split mung dal and soak it for 25 minutes; drain well.",
+        "Simmer the pulse with turmeric and water until it begins to soften.",
+        "Add the diced bottle gourd and continue cooking until both pulse and vegetables are tender.",
+        "Warm the ghee, bloom the cumin, coriander, and ginger, then fold the tempering into the pot with rock salt.",
+        "Simmer uncovered for five minutes, stir to an even consistency, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Everyday Mung and Lauki Dal pairs a thoroughly cooked pulse with vegetables for an everyday one-bowl main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian dal-and-vegetable cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-masoor-carrot-dal",
+      "name": "Masoor Carrot Dal",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the red lentils and soak it for 25 minutes; drain well.",
+        "Simmer the pulse with turmeric and water until it begins to soften.",
+        "Add the diced carrot and continue cooking until both pulse and vegetables are tender.",
+        "Warm the ghee, bloom the cumin, coriander, and ginger, then fold the tempering into the pot with rock salt.",
+        "Simmer uncovered for five minutes, stir to an even consistency, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Masoor Carrot Dal pairs a thoroughly cooked pulse with vegetables for an everyday one-bowl main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian dal-and-vegetable cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-toor-pumpkin-dal",
+      "name": "Toor Dal with Pumpkin",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the toor dal and soak it for 25 minutes; drain well.",
+        "Simmer the pulse with turmeric and water until it begins to soften.",
+        "Add the diced pumpkin and continue cooking until both pulse and vegetables are tender.",
+        "Warm the ghee, bloom the cumin, coriander, and ginger, then fold the tempering into the pot with rock salt.",
+        "Simmer uncovered for five minutes, stir to an even consistency, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Toor Dal with Pumpkin pairs a thoroughly cooked pulse with vegetables for an everyday one-bowl main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian dal-and-vegetable cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-chana-spinach-dal",
+      "name": "Chana Dal with Spinach",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chana-dal",
+          "name": "Chana dal",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the chana dal and soak it for 45 minutes; drain well.",
+        "Simmer the pulse with turmeric and water until it begins to soften.",
+        "Add the chopped spinach and continue cooking until both pulse and vegetables are tender.",
+        "Warm the ghee, bloom the cumin, coriander, and ginger, then fold the tempering into the pot with rock salt.",
+        "Simmer uncovered for five minutes, stir to an even consistency, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chana Dal with Spinach pairs a thoroughly cooked pulse with vegetables for an everyday one-bowl main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian dal-and-vegetable cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-urad-cabbage-dal",
+      "name": "Urad Dal with Cabbage",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Split urad dal",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, chopped",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.asafoetida",
+          "name": "Asafoetida",
+          "grams": 0.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the split urad dal and soak it for 45 minutes; drain well.",
+        "Simmer the pulse with turmeric and water until it begins to soften.",
+        "Add the chopped cabbage and asafoetida and continue cooking until both pulse and vegetables are tender.",
+        "Warm the ghee, bloom the cumin, coriander, and ginger, then fold the tempering into the pot with rock salt.",
+        "Simmer uncovered for five minutes, stir to an even consistency, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Urad Dal with Cabbage pairs a thoroughly cooked pulse with vegetables for an everyday one-bowl main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian dal-and-vegetable cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-mung-zucchini-dal",
+      "name": "Mung Dal with Zucchini",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the split mung dal and soak it for 25 minutes; drain well.",
+        "Simmer the pulse with turmeric and water until it begins to soften.",
+        "Add the diced zucchini and continue cooking until both pulse and vegetables are tender.",
+        "Warm the ghee, bloom the cumin, coriander, and ginger, then fold the tempering into the pot with rock salt.",
+        "Simmer uncovered for five minutes, stir to an even consistency, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mung Dal with Zucchini pairs a thoroughly cooked pulse with vegetables for an everyday one-bowl main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian dal-and-vegetable cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-masoor-beet-dal",
+      "name": "Masoor Beetroot Dal",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, diced small",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the red lentils and soak it for 25 minutes; drain well.",
+        "Simmer the pulse with turmeric and water until it begins to soften.",
+        "Add the diced small beetroot and continue cooking until both pulse and vegetables are tender.",
+        "Warm the ghee, bloom the cumin, coriander, and ginger, then fold the tempering into the pot with rock salt.",
+        "Simmer uncovered for five minutes, stir to an even consistency, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Masoor Beetroot Dal pairs a thoroughly cooked pulse with vegetables for an everyday one-bowl main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian dal-and-vegetable cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-toor-drumstick-dal",
+      "name": "Toor Dal with Drumstick",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.drumstick",
+          "name": "Drumstick pods, cut",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the toor dal and soak it for 25 minutes; drain well.",
+        "Simmer the pulse with turmeric and water until it begins to soften.",
+        "Add the drumstick pods cut and continue cooking until both pulse and vegetables are tender.",
+        "Warm the ghee, bloom the cumin, coriander, and ginger, then fold the tempering into the pot with rock salt.",
+        "Simmer uncovered for five minutes, stir to an even consistency, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "varsha"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Toor Dal with Drumstick pairs a thoroughly cooked pulse with vegetables for an everyday one-bowl main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian dal-and-vegetable cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-chana-sweet-potato-dal",
+      "name": "Chana Dal with Sweet Potato",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chana-dal",
+          "name": "Chana dal",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, diced",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the chana dal and soak it for 45 minutes; drain well.",
+        "Simmer the pulse with turmeric and water until it begins to soften.",
+        "Add the diced sweet potato and continue cooking until both pulse and vegetables are tender.",
+        "Warm the ghee, bloom the cumin, coriander, and ginger, then fold the tempering into the pot with rock salt.",
+        "Simmer uncovered for five minutes, stir to an even consistency, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chana Dal with Sweet Potato pairs a thoroughly cooked pulse with vegetables for an everyday one-bowl main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian dal-and-vegetable cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-mung-methi-dal",
+      "name": "Mung Dal with Fresh Methi",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.methi-leaves",
+          "name": "Fresh fenugreek leaves",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the split mung dal and soak it for 25 minutes; drain well.",
+        "Simmer the pulse with turmeric and water until it begins to soften.",
+        "Add the fresh fenugreek leaves and continue cooking until both pulse and vegetables are tender.",
+        "Warm the ghee, bloom the cumin, coriander, and ginger, then fold the tempering into the pot with rock salt.",
+        "Simmer uncovered for five minutes, stir to an even consistency, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mung Dal with Fresh Methi pairs a thoroughly cooked pulse with vegetables for an everyday one-bowl main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian dal-and-vegetable cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-masoor-green-bean-dal",
+      "name": "Masoor Dal with Green Beans",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, sliced",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the red lentils and soak it for 25 minutes; drain well.",
+        "Simmer the pulse with turmeric and water until it begins to soften.",
+        "Add the sliced green beans and continue cooking until both pulse and vegetables are tender.",
+        "Warm the ghee, bloom the cumin, coriander, and ginger, then fold the tempering into the pot with rock salt.",
+        "Simmer uncovered for five minutes, stir to an even consistency, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Masoor Dal with Green Beans pairs a thoroughly cooked pulse with vegetables for an everyday one-bowl main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian dal-and-vegetable cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-toor-ash-gourd-dal",
+      "name": "Toor Dal with Ash Gourd",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 215
+        },
+        {
+          "dravyaId": "dravya.ash-gourd",
+          "name": "Ash gourd, diced",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the toor dal and soak it for 25 minutes; drain well.",
+        "Simmer the pulse with turmeric and water until it begins to soften.",
+        "Add the diced ash gourd and continue cooking until both pulse and vegetables are tender.",
+        "Warm the ghee, bloom the cumin, coriander, and ginger, then fold the tempering into the pot with rock salt.",
+        "Simmer uncovered for five minutes, stir to an even consistency, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Toor Dal with Ash Gourd pairs a thoroughly cooked pulse with vegetables for an everyday one-bowl main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian dal-and-vegetable cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-chana-cauliflower-dal",
+      "name": "Chana Dal with Cauliflower",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chana-dal",
+          "name": "Chana dal",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower florets",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the chana dal and soak it for 45 minutes; drain well.",
+        "Simmer the pulse with turmeric and water until it begins to soften.",
+        "Add the cauliflower florets and continue cooking until both pulse and vegetables are tender.",
+        "Warm the ghee, bloom the cumin, coriander, and ginger, then fold the tempering into the pot with rock salt.",
+        "Simmer uncovered for five minutes, stir to an even consistency, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chana Dal with Cauliflower pairs a thoroughly cooked pulse with vegetables for an everyday one-bowl main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian dal-and-vegetable cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-mung-okra-dal",
+      "name": "Mung Dal with Okra",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 215
+        },
+        {
+          "dravyaId": "dravya.okra",
+          "name": "Okra, sliced",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the split mung dal and soak it for 25 minutes; drain well.",
+        "Simmer the pulse with turmeric and water until it begins to soften.",
+        "Add the sliced okra and continue cooking until both pulse and vegetables are tender.",
+        "Warm the ghee, bloom the cumin, coriander, and ginger, then fold the tempering into the pot with rock salt.",
+        "Simmer uncovered for five minutes, stir to an even consistency, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mung Dal with Okra pairs a thoroughly cooked pulse with vegetables for an everyday one-bowl main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian dal-and-vegetable cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-masoor-eggplant-dal",
+      "name": "Masoor Dal with Eggplant",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils",
+          "grams": 215
+        },
+        {
+          "dravyaId": "dravya.eggplant",
+          "name": "Eggplant, diced",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the red lentils and soak it for 25 minutes; drain well.",
+        "Simmer the pulse with turmeric and water until it begins to soften.",
+        "Add the diced eggplant and continue cooking until both pulse and vegetables are tender.",
+        "Warm the ghee, bloom the cumin, coriander, and ginger, then fold the tempering into the pot with rock salt.",
+        "Simmer uncovered for five minutes, stir to an even consistency, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Masoor Dal with Eggplant pairs a thoroughly cooked pulse with vegetables for an everyday one-bowl main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian dal-and-vegetable cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-toor-spinach-dal",
+      "name": "Toor Dal with Spinach",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the toor dal and soak it for 25 minutes; drain well.",
+        "Simmer the pulse with turmeric and water until it begins to soften.",
+        "Add the chopped spinach and continue cooking until both pulse and vegetables are tender.",
+        "Warm the ghee, bloom the cumin, coriander, and ginger, then fold the tempering into the pot with rock salt.",
+        "Simmer uncovered for five minutes, stir to an even consistency, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Toor Dal with Spinach pairs a thoroughly cooked pulse with vegetables for an everyday one-bowl main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian dal-and-vegetable cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-chana-ridge-gourd-dal",
+      "name": "Chana Dal with Ridge Gourd",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chana-dal",
+          "name": "Chana dal",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.ridge-gourd",
+          "name": "Ridge gourd, diced",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the chana dal and soak it for 45 minutes; drain well.",
+        "Simmer the pulse with turmeric and water until it begins to soften.",
+        "Add the diced ridge gourd and continue cooking until both pulse and vegetables are tender.",
+        "Warm the ghee, bloom the cumin, coriander, and ginger, then fold the tempering into the pot with rock salt.",
+        "Simmer uncovered for five minutes, stir to an even consistency, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chana Dal with Ridge Gourd pairs a thoroughly cooked pulse with vegetables for an everyday one-bowl main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian dal-and-vegetable cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-mung-amaranth-leaf-dal",
+      "name": "Mung Dal with Amaranth Leaves",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 215
+        },
+        {
+          "dravyaId": "dravya.amaranth-leaves",
+          "name": "Amaranth leaves, chopped",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the split mung dal and soak it for 25 minutes; drain well.",
+        "Simmer the pulse with turmeric and water until it begins to soften.",
+        "Add the chopped amaranth leaves and continue cooking until both pulse and vegetables are tender.",
+        "Warm the ghee, bloom the cumin, coriander, and ginger, then fold the tempering into the pot with rock salt.",
+        "Simmer uncovered for five minutes, stir to an even consistency, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mung Dal with Amaranth Leaves pairs a thoroughly cooked pulse with vegetables for an everyday one-bowl main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian dal-and-vegetable cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-brown-lentil-carrot-dal",
+      "name": "Brown Lentil Carrot-Celery Dal",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-lentil",
+          "name": "Brown lentils",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.celery",
+          "name": "Celery, sliced",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Rinse the brown lentils and soak it for 35 minutes; drain well.",
+        "Simmer the pulse with turmeric and water until it begins to soften.",
+        "Add the diced carrot and sliced celery and continue cooking until both pulse and vegetables are tender.",
+        "Warm the ghee, bloom the cumin, coriander, and ginger, then fold the tempering into the pot with rock salt.",
+        "Simmer uncovered for five minutes, stir to an even consistency, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Brown Lentil Carrot-Celery Dal pairs a thoroughly cooked pulse with vegetables for an everyday one-bowl main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian dal-and-vegetable cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-rajma-pumpkin-dal",
+      "name": "Rajma Pumpkin Pot",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 55,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.rajma",
+          "name": "Kidney beans",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1350
+        }
+      ],
+      "steps": [
+        "Rinse the kidney beans and soak it for 8 hours minutes; drain well.",
+        "Simmer the pulse with turmeric and water until it begins to soften.",
+        "Add the diced pumpkin and continue cooking until both pulse and vegetables are tender.",
+        "Warm the ghee, bloom the cumin, coriander, and ginger, then fold the tempering into the pot with rock salt.",
+        "Simmer uncovered for five minutes, stir to an even consistency, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Rajma Pumpkin Pot pairs a thoroughly cooked pulse with vegetables for an everyday one-bowl main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian dal-and-vegetable cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-chickpea-potato-curry",
+      "name": "Chickpea Potato Curry",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potato, diced",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 320
+        }
+      ],
+      "steps": [
+        "Wash and cut the cooked chickpeas and diced potato into even pieces.",
+        "Warm the ghee; bloom the cumin, ginger, and turmeric until aromatic.",
+        "Add the main ingredients and coriander seeds; turn them through the seasoning for two minutes.",
+        "Pour in the water, add the rock salt, and cook covered until every component is tender and the sauce lightly coats it.",
+        "Uncover for the final minutes, adjust the texture by stirring gently, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chickpea Potato Curry is a practical home-style main with a moist, fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian everyday cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-adzuki-pumpkin-curry",
+      "name": "Adzuki Pumpkin Curry",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.adzuki",
+          "name": "Cooked adzuki beans",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 320
+        }
+      ],
+      "steps": [
+        "Wash and cut the cooked adzuki beans and diced pumpkin into even pieces.",
+        "Warm the ghee; bloom the cumin, ginger, and turmeric until aromatic.",
+        "Add the main ingredients and fennel seeds; turn them through the seasoning for two minutes.",
+        "Pour in the water, add the rock salt, and cook covered until every component is tender and the sauce lightly coats it.",
+        "Uncover for the final minutes, adjust the texture by stirring gently, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Adzuki Pumpkin Curry is a practical home-style main with a moist, fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian everyday cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-rajma-spinach-curry",
+      "name": "Rajma Spinach Curry",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.rajma",
+          "name": "Cooked kidney beans",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 320
+        }
+      ],
+      "steps": [
+        "Wash and cut the cooked kidney beans and chopped spinach into even pieces.",
+        "Warm the ghee; bloom the cumin, ginger, and turmeric until aromatic.",
+        "Add the main ingredients and coriander seeds; turn them through the seasoning for two minutes.",
+        "Pour in the water, add the rock salt, and cook covered until every component is tender and the sauce lightly coats it.",
+        "Uncover for the final minutes, adjust the texture by stirring gently, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Rajma Spinach Curry is a practical home-style main with a moist, fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian everyday cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-black-bean-sweet-potato-masala",
+      "name": "Black Bean Sweet Potato Masala",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.black-beans",
+          "name": "Cooked black beans",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, diced",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 320
+        }
+      ],
+      "steps": [
+        "Wash and cut the cooked black beans and diced sweet potato into even pieces.",
+        "Warm the ghee; bloom the cumin, ginger, and turmeric until aromatic.",
+        "Add the main ingredients and coriander seeds; turn them through the seasoning for two minutes.",
+        "Pour in the water, add the rock salt, and cook covered until every component is tender and the sauce lightly coats it.",
+        "Uncover for the final minutes, adjust the texture by stirring gently, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Black Bean Sweet Potato Masala is a practical home-style main with a moist, fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian everyday cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-cauliflower-pea-curry",
+      "name": "Cauliflower Pea Curry",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower florets",
+          "grams": 480
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 320
+        }
+      ],
+      "steps": [
+        "Wash and cut the cauliflower florets and green peas into even pieces.",
+        "Warm the ghee; bloom the cumin, ginger, and turmeric until aromatic.",
+        "Add the main ingredients and coriander seeds; turn them through the seasoning for two minutes.",
+        "Pour in the water, add the rock salt, and cook covered until every component is tender and the sauce lightly coats it.",
+        "Uncover for the final minutes, adjust the texture by stirring gently, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cauliflower Pea Curry is a practical home-style main with a moist, fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian everyday cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-cabbage-carrot-pea-curry",
+      "name": "Cabbage Carrot Pea Curry",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, chopped",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.asafoetida",
+          "name": "Asafoetida",
+          "grams": 0.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 320
+        }
+      ],
+      "steps": [
+        "Wash and cut the chopped cabbage and diced carrot and green peas into even pieces.",
+        "Warm the ghee; bloom the cumin, ginger, and turmeric until aromatic.",
+        "Add the main ingredients and asafoetida; turn them through the seasoning for two minutes.",
+        "Pour in the water, add the rock salt, and cook covered until every component is tender and the sauce lightly coats it.",
+        "Uncover for the final minutes, adjust the texture by stirring gently, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cabbage Carrot Pea Curry is a practical home-style main with a moist, fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian everyday cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-okra-potato-curry",
+      "name": "Okra Potato Curry",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.okra",
+          "name": "Okra, sliced",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potato, diced small",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 160
+        }
+      ],
+      "steps": [
+        "Wash and cut the sliced okra and diced small potato into even pieces.",
+        "Warm the ghee; bloom the cumin, ginger, and turmeric until aromatic.",
+        "Add the main ingredients and coriander seeds; turn them through the seasoning for two minutes.",
+        "Pour in the water, add the rock salt, and cook covered until every component is tender and the sauce lightly coats it.",
+        "Uncover for the final minutes, adjust the texture by stirring gently, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Okra Potato Curry is a practical home-style main with a moist, fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian everyday cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-eggplant-chickpea-curry",
+      "name": "Eggplant Chickpea Curry",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.eggplant",
+          "name": "Eggplant, diced",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 320
+        }
+      ],
+      "steps": [
+        "Wash and cut the diced eggplant and cooked chickpeas into even pieces.",
+        "Warm the ghee; bloom the cumin, ginger, and turmeric until aromatic.",
+        "Add the main ingredients and coriander seeds; turn them through the seasoning for two minutes.",
+        "Pour in the water, add the rock salt, and cook covered until every component is tender and the sauce lightly coats it.",
+        "Uncover for the final minutes, adjust the texture by stirring gently, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Eggplant Chickpea Curry is a practical home-style main with a moist, fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian everyday cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-tofu-spinach-curry",
+      "name": "Tofu Spinach Curry",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 320
+        }
+      ],
+      "steps": [
+        "Wash and cut the cubed firm tofu and chopped spinach into even pieces.",
+        "Warm the ghee; bloom the cumin, ginger, and turmeric until aromatic.",
+        "Add the main ingredients and coriander seeds; turn them through the seasoning for two minutes.",
+        "Pour in the water, add the rock salt, and cook covered until every component is tender and the sauce lightly coats it.",
+        "Uncover for the final minutes, adjust the texture by stirring gently, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tofu Spinach Curry is a practical home-style main with a moist, fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian everyday cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-paneer-zucchini-curry",
+      "name": "Paneer Zucchini Curry",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.paneer",
+          "name": "Paneer, cubed",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 320
+        }
+      ],
+      "steps": [
+        "Wash and cut the cubed paneer and diced zucchini into even pieces.",
+        "Warm the ghee; bloom the cumin, ginger, and turmeric until aromatic.",
+        "Add the main ingredients and fennel seeds; turn them through the seasoning for two minutes.",
+        "Pour in the water, add the rock salt, and cook covered until every component is tender and the sauce lightly coats it.",
+        "Uncover for the final minutes, adjust the texture by stirring gently, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Paneer Zucchini Curry is a practical home-style main with a moist, fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian everyday cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-paneer-tomato-curry",
+      "name": "Paneer Tomato Curry",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.paneer",
+          "name": "Paneer, cubed",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomato, chopped",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 320
+        }
+      ],
+      "steps": [
+        "Wash and cut the cubed paneer and chopped tomato into even pieces.",
+        "Warm the ghee; bloom the cumin, ginger, and turmeric until aromatic.",
+        "Add the main ingredients and coriander seeds; turn them through the seasoning for two minutes.",
+        "Pour in the water, add the rock salt, and cook covered until every component is tender and the sauce lightly coats it.",
+        "Uncover for the final minutes, adjust the texture by stirring gently, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [
+        "cheese combined with tomato (traditional viruddha)"
+      ],
+      "guidance": "This familiar paneer-tomato curry is flagged because it combines cheese with tomato. Vata: serve warm with soft rice. Pitta: reduce tomato and ginger. Kapha: use a smaller paneer portion. Compliant variant: replace the paneer with firm tofu while keeping the same cooked sauce.",
+      "provenance": [
+        "contemporary Indian everyday cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-mushroom-pea-curry",
+      "name": "Mushroom Pea Curry",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-mushroom",
+          "name": "White mushrooms, sliced",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 320
+        }
+      ],
+      "steps": [
+        "Wash and cut the sliced white mushrooms and green peas into even pieces.",
+        "Warm the ghee; bloom the cumin, ginger, and turmeric until aromatic.",
+        "Add the main ingredients and coriander seeds; turn them through the seasoning for two minutes.",
+        "Pour in the water, add the rock salt, and cook covered until every component is tender and the sauce lightly coats it.",
+        "Uncover for the final minutes, adjust the texture by stirring gently, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mushroom Pea Curry is a practical home-style main with a moist, fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian everyday cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-taro-spinach-curry",
+      "name": "Taro Spinach Curry",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.taro",
+          "name": "Taro root, diced",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 420
+        }
+      ],
+      "steps": [
+        "Wash and cut the diced taro root and chopped spinach into even pieces.",
+        "Warm the ghee; bloom the cumin, ginger, and turmeric until aromatic.",
+        "Add the main ingredients and ajwain seeds; turn them through the seasoning for two minutes.",
+        "Pour in the water, add the rock salt, and cook covered until every component is tender and the sauce lightly coats it.",
+        "Uncover for the final minutes, adjust the texture by stirring gently, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Taro Spinach Curry is a practical home-style main with a moist, fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian everyday cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-yam-green-bean-curry",
+      "name": "Yam Green Bean Curry",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.yam",
+          "name": "Yam, diced",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 320
+        }
+      ],
+      "steps": [
+        "Wash and cut the diced yam and green beans cut into even pieces.",
+        "Warm the ghee; bloom the cumin, ginger, and turmeric until aromatic.",
+        "Add the main ingredients and coriander seeds; turn them through the seasoning for two minutes.",
+        "Pour in the water, add the rock salt, and cook covered until every component is tender and the sauce lightly coats it.",
+        "Uncover for the final minutes, adjust the texture by stirring gently, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Yam Green Bean Curry is a practical home-style main with a moist, fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian everyday cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-plantain-chickpea-curry",
+      "name": "Green Plantain Chickpea Curry",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.plantain-green",
+          "name": "Green plantain, diced",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 320
+        }
+      ],
+      "steps": [
+        "Wash and cut the diced green plantain and cooked chickpeas into even pieces.",
+        "Warm the Coconut oil; bloom the cumin, ginger, and turmeric until aromatic.",
+        "Add the main ingredients and curry leaves; turn them through the seasoning for two minutes.",
+        "Pour in the water, add the rock salt, and cook covered until every component is tender and the sauce lightly coats it.",
+        "Uncover for the final minutes, adjust the texture by stirring gently, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Green Plantain Chickpea Curry is a practical home-style main with a moist, fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian everyday cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-carrot-pea-pulao",
+      "name": "Everyday Carrot Pea Pulao",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.bay-leaf",
+          "name": "Indian bay leaf",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white basmati rice until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the ghee in a heavy pot and bloom the cumin.",
+        "Add the diced carrot, green peas, indian bay leaf and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Everyday Carrot Pea Pulao is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-beetroot-pulao",
+      "name": "Everyday Beetroot Pulao",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, diced small",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white basmati rice until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the ghee in a heavy pot and bloom the cumin.",
+        "Add the diced small beetroot, fennel seeds and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Everyday Beetroot Pulao is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-pumpkin-rice-pot",
+      "name": "Pumpkin Rice Pot",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white rice until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the ghee in a heavy pot and bloom the cumin.",
+        "Add the diced pumpkin, coriander seeds and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin Rice Pot is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-spinach-rice",
+      "name": "Everyday Spinach Rice",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white basmati rice until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the ghee in a heavy pot and bloom the cumin.",
+        "Add the chopped spinach, coriander seeds and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Everyday Spinach Rice is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-chickpea-rice-pot",
+      "name": "Chickpea Rice Pot",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 800
+        }
+      ],
+      "steps": [
+        "Rinse the white rice until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the ghee in a heavy pot and bloom the cumin.",
+        "Add the cooked chickpeas, diced carrot and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chickpea Rice Pot is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-brown-rice-masoor-pot",
+      "name": "Brown Rice Masoor Pot",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Rinse the brown rice until the draining water is mostly clear; soak for 35 minutes and drain.",
+        "Warm the ghee in a heavy pot and bloom the cumin.",
+        "Add the red lentils, diced carrot and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Brown Rice Masoor Pot is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-barley-vegetable-pilaf",
+      "name": "Barley Vegetable Pilaf",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1050
+        }
+      ],
+      "steps": [
+        "Rinse the pearled barley until the draining water is mostly clear; soak for 30 minutes and drain.",
+        "Warm the ghee in a heavy pot and bloom the cumin.",
+        "Add the diced carrot, green beans cut and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Barley Vegetable Pilaf is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-jowar-vegetable-pot",
+      "name": "Jowar Vegetable Pot",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.jowar",
+          "name": "Cracked sorghum",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1050
+        }
+      ],
+      "steps": [
+        "Rinse the cracked sorghum until the draining water is mostly clear; soak for 30 minutes and drain.",
+        "Warm the ghee in a heavy pot and bloom the cumin.",
+        "Add the diced diced zucchini carrot and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Jowar Vegetable Pot is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-bajra-spinach-pot",
+      "name": "Bajra Spinach Pot",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.bajra",
+          "name": "Cracked pearl millet",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.ginger-dry",
+          "name": "Dry ginger",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Rinse the cracked pearl millet until the draining water is mostly clear; soak for 35 minutes and drain.",
+        "Warm the ghee in a heavy pot and bloom the cumin.",
+        "Add the chopped spinach, dry ginger and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Bajra Spinach Pot is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-amaranth-vegetable-pot",
+      "name": "Amaranth Vegetable Pot",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 110
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Rinse the amaranth grain until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the ghee in a heavy pot and bloom the cumin.",
+        "Add the diced carrot, green peas and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Amaranth Vegetable Pot is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-quinoa-masala-pot",
+      "name": "Everyday Quinoa Masala Pot",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Additional turmeric",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the quinoa until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the ghee in a heavy pot and bloom the cumin.",
+        "Add the diced carrot, green beans cut, additional turmeric and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Everyday Quinoa Masala Pot is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original Indian-spiced quinoa adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-brown-rice-green-bean-pilaf",
+      "name": "Brown Rice Green Bean Pilaf",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 980
+        }
+      ],
+      "steps": [
+        "Rinse the brown rice until the draining water is mostly clear; soak for 35 minutes and drain.",
+        "Warm the ghee in a heavy pot and bloom the cumin.",
+        "Add the green beans cut, coriander seeds and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Brown Rice Green Bean Pilaf is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-sweet-potato-millet-pot",
+      "name": "Sweet Potato Millet Pot",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, diced small",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 900
+        }
+      ],
+      "steps": [
+        "Rinse the proso millet until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the ghee in a heavy pot and bloom the cumin.",
+        "Add the diced small sweet potato, fennel seeds and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sweet Potato Millet Pot is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-tofu-pea-rice",
+      "name": "Tofu Pea Rice",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed small",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 800
+        }
+      ],
+      "steps": [
+        "Rinse the white basmati rice until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the ghee in a heavy pot and bloom the cumin.",
+        "Add the cubed small firm tofu, green peas, coriander seeds and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tofu Pea Rice is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-coconut-mint-rice",
+      "name": "Coconut Mint Rice",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 50
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint, chopped",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white basmati rice until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the Coconut oil in a heavy pot and bloom the cumin.",
+        "Add the grated fresh coconut, chopped fresh mint, curry leaves and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Coconut Mint Rice is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    }
+  ]
+}

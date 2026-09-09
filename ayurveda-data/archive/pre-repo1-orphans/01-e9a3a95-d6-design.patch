@@ -1,0 +1,332 @@
+From e9a3a95afc55cf8d530eed13fc50c630f1165b64 Mon Sep 17 00:00:00 2001
+From: Fable Director <mmilev@wynshop.com>
+Date: Tue, 21 Jul 2026 23:50:06 +0300
+Subject: [PATCH] D6 design: schema+seeder architecture (DESIGN-D6) + Codex
+ dispatch packet (TASK-D6); PROGRESS updated
+
+---
+ ayurveda-data/DESIGN-D6.md | 191 +++++++++++++++++++++++++++++++++++++
+ ayurveda-data/PROGRESS.md  |   7 +-
+ ayurveda-data/TASK-D6.md   |  97 +++++++++++++++++++
+ 3 files changed, 292 insertions(+), 3 deletions(-)
+ create mode 100644 ayurveda-data/DESIGN-D6.md
+ create mode 100644 ayurveda-data/TASK-D6.md
+
+diff --git a/ayurveda-data/DESIGN-D6.md b/ayurveda-data/DESIGN-D6.md
+new file mode 100644
+index 0000000..a8f4359
+--- /dev/null
++++ b/ayurveda-data/DESIGN-D6.md
+@@ -0,0 +1,191 @@
++# D6 Design — Ayurveda Schema + Seeder (Director)
++
++*Status: APPROVED FOR DISPATCH · 2026-07-21 · Design authority: RESTART-PLAN.md D6,
++ayurveda-data/README.md "Seeding strategy". Implementation: Codex packet `TASK-D6.md`.*
++
++## Objective
++
++Make the completed content layer — **714 dravyas + 1,500 recipes, validator green** —
++live in the app database, additively, without touching any existing model or store row.
++
++Out of scope: all UI (D8), the D3 generic crosswalk and D4 category rules (schema here
++is forward-compatible with both), expert review promotion.
++
++## Data reality (measured 2026-07-21)
++
++| Fact | Value |
++|---|---|
++| Preseeded store | 12,601 foods, `ZID` 1–12,601, 0 recipes |
++| Dravyas | 714; **381 USDA-bound** (287 primary `exact`, 94 primary `near`), **333 unbound** |
++| Distinct bound fdcIds | 336; **40 contested** by >1 dravya (e.g. 10962 ← mung-bean/mung-whole/mung-dal-split) |
++| Recipe ingredients | 9,366 `dravyaId` refs + 1,205 `fdcId` refs — all resolve |
++| A3 simulated (director) | 331 primary foods · **383 placeholders** (333 unbound + 50 contested losers) · 336 links |
++| Engine exclusions | `dravya.betel-nut`, `dravya.vanaspati` (flagged in `reviewNote` prose only — must become a structured flag) |
++| User-added id scheme | `nextFoodId() = max(id)+1` → existing users occupy 12,602+ |
++| Xcode project | objectVersion 77, fileSystemSynchronized — new files under `WiseEating/` join the target automatically |
++| Recipe instructions | live in `FoodItem.itemDescription` (no structured steps field) |
++| Search index | `SearchIndexStore.rebuildIndexIfNeeded` auto-rebuilds when food count drifts >5 |
++
++## Decisions
++
++**A1 — One additive model, FK by Int, zero changes to FoodItem.**
++`AyurvedaProfile` is a new `@Model` holding all Ayurvedic facets for both dravyas and
++recipes (`kind` discriminator). It references its `FoodItem` by `foodId: Int` — **no
++`@Relationship` and no new property on `FoodItem`** — so the existing store migrates
++with zero risk and the preseeded copy path is untouched.
++
++**A2 — `AyurvedaLink` carries the fdcId → dravya map.**
++One row per bound fdcId (336 now): `fdcId` (unique), `dravyaProfileId`, `tier`
++(`exact`/`near`). This is the derived-tier lookup table; D3's crosswalk.csv later
++appends rows with tier `derived` through the same model, no schema change. D4 rules
++stay bundle-side (computed at lookup, nothing stored for 12.6k rows).
++
++**A3 — Primary food assignment.**
++Each dravya needs exactly one `foodId`:
++1. Per contested fdcId, the winner is the best-tier claimant (`exact` > `near`);
++   ties (two `exact` claimants, e.g. fdcId 6686 garlic) go to the lexicographically
++   smaller dravya id. Each dravya then takes its first binding (exact before near)
++   that it actually won — losers fall back to their next free binding.
++2. Dravyas with no won binding and the 333 unbound dravyas get a **placeholder
++   FoodItem** (band below),
++   `isUserAdded=false, isRecipe=false`, no nutrition (panels show empty — correct,
++   these are items like shilajit/ushira with no USDA analogue).
++All 40 contested fdcIds and every placeholder are listed in the build report.
++
++**A4 — ID bands (collision-proof by construction).**
++- Dravya placeholders: `900000 + ordinal` (dravyas sorted by id; only those needing one).
++- Recipes: `1000000 + ordinal` (recipes sorted by id; 1000001–1001500).
++- Upgraded installs have user ids at 12,602+ (max+1 scheme) — reaching 900,000 would
++  require ~887k user-created foods; the seeder still **verifies the bands are free**
++  and aborts with a report rather than overwrite. After seeding, `nextFoodId()`
++  continues from 1,001,501 — harmless (Int).
++
++**A5 — Seed bundle.**
++`ayurveda-data/build_seed.py` packs everything into one deterministic artifact,
++`WiseEating/ayurveda_seed.json.gz` (auto-included as a bundle resource by the
++synchronized project):
++
++```json
++{
++  "seedVersion": 1,
++  "generatedAt": "…",
++  "counts": {"dravyas": 714, "recipes": 1500, "links": 336, "placeholders": N},
++  "dravyas":  [ { …batch item fields…, "foodId": 4558, "foodIsPlaceholder": false,
++                  "engineExcluded": false, "qualityState": "aiDraft" } ],
++  "recipes":  [ { …batch item fields…, "foodId": 1000001,
++                  "ingredients": [{"foodId": 6372, "grams": 180, "name": "…"}] } ],
++  "links":    [ {"fdcId": 4558, "dravyaId": "dravya.ghee", "tier": "exact"} ]
++}
++```
++The script performs A3/A4 resolution at build time so the Swift seeder does **no
++matching logic** — it only inserts what it reads. Engine exclusion is set from an
++explicit id list in the script (`dravya.betel-nut`, `dravya.vanaspati`).
++
++**A6 — Seeder: one-time, versioned, ordered after foods.**
++`SeedManager.seedAyurvedaIfNeeded(context:)` called from `seedIfNeeded` immediately
++after `seedFoodsIfNeeded`. Guards, in order: `AyurvedaProfile` table empty **and**
++`UserDefaults "ayurvedaSeedVersion" < bundle seedVersion` (the key enables future
++content updates as re-seeds). Loads the gz with the existing `ZlibGzip.decompress`,
++inserts in batched transactions (~200 rows) with autosave already disabled by
++`seedIfNeeded`. On success writes the version key; on any thrown error rolls back,
++does **not** write the key, logs, and leaves the app fully functional without
++Ayurveda data (fail-open).
++
++**A7 — Recipes ride the existing machinery.**
++Per recipe: `FoodItem(id: band, name:, isRecipe: true, isUserAdded: false)`,
++`prepTimeMinutes = prep + cook`, `itemDescription` = numbered steps + blank line +
++guidance (the app's only instruction surface today; structured `steps` are also kept
++on the profile for D8). One `IngredientLink(food:, grams:)` per ingredient —
++`dravyaId` → that dravya's `foodId` (placeholder included: contributes zero nutrition
++by existing `aggregatedNutrition` semantics, correctly), `fdcId` → itself. Nutrition,
++calories, and search all work unmodified; the +2,214 food count change triggers the
++index rebuild automatically.
++
++**A8 — Warn, don't block** (approved decision 3): `viruddha`/`viruddhaFlags` and
++`engineExcluded` are seeded as data; enforcement is D8 UI + engine work. Nothing is
++hidden or dropped.
++
++**A9 — Read API for D8.** A small `AyurvedaResolver` ships with D6 so D8 has one entry
++point: `resolve(for foodItem)` → `.classical(profile)` (profile by foodId, kind
++dravya) / `.recipe(profile)` / `.derived(profile, via: link)` (AyurvedaLink by fdcId)
++/ `.estimated` (stub returning nil until D4) / `nil`. Includes the fetch-descriptor
++indexes to make these lookups cheap.
++
++## Model definitions (normative)
++
++```swift
++@Model public final class AyurvedaProfile {
++    #Index<AyurvedaProfile>([\.foodId], [\.kind])
++    @Attribute(.unique) public var id: String   // "dravya.ghee" | "recipe.classic-mung-kitchari"
++    public var kind: String                     // "dravya" | "recipe"
++    public var foodId: Int                      // FoodItem.id (FK by value, A1)
++    public var foodIsPlaceholder: Bool = false
++    public var name: String
++    public var category: String                 // dravya category | recipe category
++    // Shared facets
++    public var doshaVata: Int; public var doshaPitta: Int; public var doshaKapha: Int
++    public var seasons: [String]; public var timeOfDay: [String]
++    public var viruddha: [String]               // recipes: viruddhaFlags
++    public var provenance: [String]
++    public var confidenceAyur: Double; public var confidenceSci: Double?
++    public var qualityState: String = "aiDraft"
++    public var reviewNote: String?
++    public var engineExcluded: Bool = false
++    public var seedVersion: Int
++    // Dravya-only (nil/empty for recipes)
++    public var sanskrit: String?; public var aliases: [String] = []
++    public var rasa: [String] = []; public var virya: String?; public var vipaka: String?
++    public var gunas: [String] = []; public var prabhava: String?
++    public var agniEffect: Int?; public var digestibility: Int?
++    public var combinations: [String] = []; public var contraindications: [String] = []
++    public var preparation: String?
++    public var servingsJSON: String?            // [{label, grams}] encoded; no new model needed
++    // Recipe-only
++    public var meal: String?; public var servingsCount: Int?
++    public var prepMinutes: Int?; public var cookMinutes: Int?
++    public var steps: [String] = []; public var guidance: String?
++    // init: memberwise, all fields
++}
++
++@Model public final class AyurvedaLink {
++    #Index<AyurvedaLink>([\.fdcId])
++    @Attribute(.unique) public var fdcId: Int
++    public var dravyaProfileId: String
++    public var tier: String                     // "exact" | "near" | (D3: "derived")
++    // init
++}
++```
++
++Both types are appended to `mainTypes` in `DatabaseSetup.createContainer()` — the only
++edit to an existing file besides `SeedManager`. Additive ⇒ lightweight migration.
++
++## Acceptance gates (all must pass before report)
++
++1. `build_seed.py` deterministic: two runs → byte-identical gz (fixed key order, no
++   timestamps inside item records); counts match the table above; 0 unresolved
++   ingredients; exactly 2 `engineExcluded`.
++2. Swift: profiles inserted = 2,214 (714 + 1,500); links = 336; recipe FoodItems =
++   1,500 with ≥1 IngredientLink each and every `link.food != nil`; placeholder count
++   matches build report.
++3. Idempotence: second call of `seedAyurvedaIfNeeded` inserts 0 rows.
++4. Spot values (director will verify): kitchari (recipe.classic-mung-kitchari)
++   aggregated kcal in 1,400–2,100 for the whole recipe; ghee profile vata −2/pitta −2/
++   kapha +1; betel nut & vanaspati `engineExcluded == true`.
++5. `validate.py --store` still green (content untouched).
++6. Founder gate (Mac, outside sandbox): clean build, fresh-install boot seeds within
++   acceptable first-launch time, upgrade-simulated boot (existing default.store) seeds
++   without duplicating foods; existing app flows unaffected.
++
++## Risks
++
++- **First-launch cost**: ~2.2k profiles + 1.5k FoodItems + ~10.5k links in one pass;
++  batched transactions keep memory flat; measured on Mac at founder gate. Fallback:
++  move seeding behind an async splash task (already the SeedManager pattern).
++- **SwiftData `#Index` on new models** with existing store: additive index creation is
++  lightweight-safe; verified at founder gate.
++- **Contested fdcIds** (40): resolution rule is deterministic but semantically curated
++  only by tier + name order; expert review pass may re-point primaries — that's a
++  content update via seedVersion bump, not a code change.
++- **Placeholder foods in search**: 333 nutrition-less items become searchable. Accepted
++  (they're real catalog items); D8 badges them. If founder objects, a
++  `foodIsPlaceholder` filter in search ranking is a one-line D8 tweak.
+diff --git a/ayurveda-data/PROGRESS.md b/ayurveda-data/PROGRESS.md
+index 8c03851..6a83ede 100644
+--- a/ayurveda-data/PROGRESS.md
++++ b/ayurveda-data/PROGRESS.md
+@@ -66,9 +66,10 @@ Current status: **714 dravyas, 1,500 recipes — all checks pass.**
+ 
+ 1. **D3 crosswalk** — USDA fdcId → dravya mapping (name-match script + review file).
+ 2. **D4 category rules** — estimated-tier dosha values for unmatched processed foods.
+-3. **D6 Swift** — `AyurvedaProfile` SwiftData model (additive), recipes seeded as
+-   `FoodItem(isRecipe)` + `IngredientLink`, one-time seeder from bundled
+-   `ayurveda_seed.json.gz`. Design by director, implementation dispatchable to Codex.
++3. **D6 Swift** — DESIGNED & DISPATCHABLE: `DESIGN-D6.md` (director design) +
++   `TASK-D6.md` (Codex packet). `AyurvedaProfile` + `AyurvedaLink` models (additive),
++   recipes as `FoodItem(isRecipe)` + `IngredientLink`, one-time versioned seeder from
++   bundled `ayurveda_seed.json.gz`. Say "verify D6" when Codex reports.
+ 4. **Expert review** — work through aiDraft content, resolve reviewNotes, promote
+    to reviewed; optional batch-31 top-up to 750.
+ 
+diff --git a/ayurveda-data/TASK-D6.md b/ayurveda-data/TASK-D6.md
+new file mode 100644
+index 0000000..ad2e6fd
+--- /dev/null
++++ b/ayurveda-data/TASK-D6.md
+@@ -0,0 +1,97 @@
++# TASK-D6 — Implement Ayurveda schema + one-time seeder (executor packet)
++
++*Dispatched by director per `DESIGN-D6.md` (normative — read it first, follow it
++exactly). Repo: wise-eating. Do not push. Touch only the files listed below.*
++
++## Deliverables
++
++| # | File | Action |
++|---|---|---|
++| 1 | `ayurveda-data/build_seed.py` | create |
++| 2 | `WiseEating/ayurveda_seed.json.gz` | generate via #1, commit |
++| 3 | `WiseEating/Ayurveda/AyurvedaProfile.swift` | create (both models, per DESIGN §Model definitions, verbatim field set) |
++| 4 | `WiseEating/Ayurveda/AyurvedaResolver.swift` | create (A9) |
++| 5 | `WiseEating/Main/DBSeed/AyurvedaSeeder.swift` | create (the insert pass) |
++| 6 | `WiseEating/Main/DBSeed/SeedManager.swift` | edit: add `await seedAyurvedaIfNeeded(context: ctx)` directly after `seedFoodsIfNeeded` |
++| 7 | `WiseEating/Main/DBSeed/DatabaseSetup.swift` | edit: append `AyurvedaProfile.self, AyurvedaLink.self` to `mainTypes` |
++| 8 | `ayurveda-data/REPORT-D6.md` | create (format below) |
++
++No other file may change. `git diff --stat` in the report must show exactly these.
++
++## 1. build_seed.py
++
++Inputs: `dravyas/batch-*.json`, `recipes/batch-*.json`, the preseeded store
++(`--store` arg, same convention as `validate.py`). Steps:
++
++1. Load all items; fail on duplicate ids.
++2. **Primary food resolution (DESIGN A3)** — two passes. Pass 1: per distinct
++   fdcId, winner = best-tier claimant (`exact` > `near`), tie → lexicographically
++   smaller dravya id. Pass 2: each dravya takes its first binding (exact before
++   near) that it won; if it won none (or has no bindings) it gets a placeholder:
++   `900000 + ordinal` over the id-sorted list of placeholder-needing dravyas,
++   `foodIsPlaceholder: true`. Verify every chosen fdcId exists in the store
++   (`ZFOODITEM.ZID`).
++3. Recipe foodIds: `1000000 + ordinal` over id-sorted recipes.
++4. Resolve every recipe ingredient to a concrete `foodId` (`dravyaId` → that
++   dravya's foodId; `fdcId` → verified against store). Zero unresolved allowed.
++5. Links: one row per distinct bound fdcId → the A3-winning dravya, with its tier.
++6. `engineExcluded: true` for exactly `dravya.betel-nut` and `dravya.vanaspati`.
++7. Emit the JSON envelope from DESIGN A5 (sorted keys, `sort_keys=True`,
++   `generatedAt` allowed only in the envelope header), gzip with `mtime=0` so the
++   artifact is **byte-deterministic**; write to `WiseEating/ayurveda_seed.json.gz`.
++8. Print a summary block (counts, contested-fdcId table, placeholder list) — paste
++   it into the report.
++
++Gate: run twice, `sha256sum` identical; counts = 714 dravyas / 1500 recipes /
++336 links / **383 placeholders / 331 primaries** (director-simulated — deviation
++means your resolution differs; stop and report); unresolved ingredients = 0;
++excluded = 2.
++
++## 2. Swift
++
++- Models: copy the DESIGN definitions exactly (field names/types are normative).
++  Memberwise inits with defaults matching the declarations.
++- `AyurvedaSeeder.swift`: `@MainActor enum AyurvedaSeeder { static func run(context:) throws }`
++  - Decode bundle resource `ayurveda_seed` (`.json.gz`) via `ZlibGzip.decompress`
++    into plain `Decodable` structs (do not decode into @Model types).
++  - **Band check first**: fetch any existing FoodItem ids in `900000..<1002000`;
++    if non-empty → print diagnostic and `throw` (fail-open, DESIGN A6).
++  - Insert order, batched `context.transaction` every ~200 items:
++    (a) placeholder FoodItems, (b) dravya profiles, (c) links,
++    (d) recipe FoodItems + IngredientLinks (build an `[Int: FoodItem]` map of the
++    12,601 store foods + placeholders **once** with one fetch, not per-ingredient
++    fetches), (e) recipe profiles.
++  - Recipe FoodItem: name, `isRecipe: true`, `isUserAdded: false`,
++    `prepTimeMinutes = prep + cook`, `itemDescription` = `"1. …\n2. …\n\n" + guidance`.
++  - No writes to UserDefaults here; the version key is SeedManager's job.
++- `SeedManager.seedAyurvedaIfNeeded`: guard `databaseIsEmpty(AyurvedaProfile.self)`
++  **and** `UserDefaults.standard.integer(forKey: "ayurvedaSeedVersion") < seedVersion`;
++  call the seeder; on success `set(seedVersion)`; on catch: log, do not set the key,
++  return normally.
++- `AyurvedaResolver`: enum result `.classical/.recipe/.derived/.none` per DESIGN A9
++  (`.estimated` as a documented stub returning `.none` until D4). One
++  `FetchDescriptor` per lookup, using the indexed fields.
++
++## 3. Verification you must run (sandbox has no Xcode — these are the substitutes)
++
++1. `python3 ayurveda-data/validate.py --store /tmp/pre` — still green.
++2. build_seed determinism + counts gate (above).
++3. A Python re-check that reads the generated gz and asserts: every profile foodId
++   is unique within its kind, every recipe ingredient foodId exists among
++   (store ids ∪ placeholder ids ∪ recipe ids is NOT allowed — ingredients may not
++   reference other recipes in v1; assert none do), kitchari total ingredient grams
++   ≈ 1852.
++4. Swift files: no force-unwraps except decode of a malformed-bundle fatal path;
++   no changes to `FoodItem.swift`; `swift-format`-clean if available, otherwise
++   match surrounding style.
++
++Compilation and device behavior are checked at the founder gate (Mac) — say so in
++the report rather than claiming a build passed.
++
++## 4. REPORT-D6.md format
++
++Sections: Summary · build_seed output block · Contested fdcIds (40 rows: fdcId,
++winner, tier, losers) · Placeholder dravyas (count + full id list) · Gate results
++(each gate, pass/fail, evidence) · Files changed (`git diff --stat`) · Open items
++for founder gate. Commit message: `D6: Ayurveda schema + seeder (models, seed bundle, SeedManager hook)`.
++One commit per deliverable group is fine; do not push.

@@ -1,0 +1,620 @@
+{
+  "predraftVersion": "1.0",
+  "batch": "predraft-19",
+  "items": [
+    {
+      "id": "dravya.chhurpi",
+      "name": "Chhurpi (Himalayan hard cheese)",
+      "sanskrit": null,
+      "aliases": [
+        "Himalayan hard cheese"
+      ],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          1
+        ],
+        "virya": "heating",
+        "note": "yak/cow milk"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 oz",
+          "grams": 28
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: chhurpi."
+    },
+    {
+      "id": "dravya.yak-milk",
+      "name": "Yak milk",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          2
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: yak milk."
+    },
+    {
+      "id": "dravya.yak-butter",
+      "name": "Yak butter",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          -2,
+          -1,
+          2
+        ],
+        "virya": "cooling",
+        "note": "butter tea base"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: yak butter."
+    },
+    {
+      "id": "dravya.kharvas",
+      "name": "Kharvas (colostrum pudding)",
+      "sanskrit": "Piyusha Paka",
+      "aliases": [
+        "colostrum pudding"
+      ],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          2
+        ],
+        "virya": "heating",
+        "note": "Maharashtrian delicacy"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: kharvas; piyusha paka."
+    },
+    {
+      "id": "dravya.panta-bhat",
+      "name": "Panta bhat",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          0
+        ],
+        "virya": "cooling",
+        "note": "Bengali fermented rice; same family as pakhala"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: panta bhat."
+    },
+    {
+      "id": "dravya.singhara-atta-halwa",
+      "name": "Singhara flour halwa",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "neutral",
+        "note": "fasting sweet"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: singhara flour halwa; singhara atta halwa."
+    },
+    {
+      "id": "dravya.til-oil-pickle",
+      "name": "Gingelly oil pickle base",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating",
+        "note": "South Indian pickle tradition"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: gingelly oil pickle base; til oil pickle."
+    },
+    {
+      "id": "dravya.warm-water",
+      "name": "Warm boiled water",
+      "sanskrit": "Ushnodaka",
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          -1
+        ],
+        "virya": "heating",
+        "note": "classical ushnodaka — first daily drink"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: warm boiled water; ushnodaka; warm water."
+    },
+    {
+      "id": "dravya.copper-water",
+      "name": "Copper-stored water",
+      "sanskrit": "Tamra Jala",
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          0,
+          0,
+          -1
+        ],
+        "virya": "neutral",
+        "note": "overnight copper vessel tradition"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: copper stored water; tamra jala; copper water."
+    },
+    {
+      "id": "dravya.sugarcane-juice",
+      "name": "Sugarcane juice",
+      "sanskrit": "Ikshu Rasa",
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: sugarcane juice; ikshu rasa."
+    },
+    {
+      "id": "dravya.sweet-nimbu-pani",
+      "name": "Sweet lime water",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: sweet lime water; sweet nimbu pani."
+    },
+    {
+      "id": "dravya.salted-nimbu-pani",
+      "name": "Salted lime water",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -2,
+          1,
+          0
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: salted lime water; salted nimbu pani."
+    },
+    {
+      "id": "dravya.jaljeera",
+      "name": "Jaljeera",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          -1
+        ],
+        "virya": "heating",
+        "note": "digestive cumin cooler"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: jaljeera."
+    },
+    {
+      "id": "dravya.aam-panna",
+      "name": "Aam panna",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          -1
+        ],
+        "virya": "cooling",
+        "note": "classical summer heat-stroke guard"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: aam panna."
+    },
+    {
+      "id": "dravya.bel-sherbet",
+      "name": "Bael sherbet",
+      "sanskrit": "Bilva Panaka",
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: bael sherbet; bilva panaka; bel sherbet."
+    },
+    {
+      "id": "dravya.kokum-sherbet",
+      "name": "Kokum sherbet",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: kokum sherbet."
+    },
+    {
+      "id": "dravya.khus-sherbet",
+      "name": "Khus sherbet",
+      "sanskrit": "Ushira Panaka",
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          0,
+          -2,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: khus sherbet; ushira panaka."
+    },
+    {
+      "id": "dravya.rose-sherbet",
+      "name": "Rose sherbet",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -2,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: rose sherbet."
+    },
+    {
+      "id": "dravya.gond-katira-drink",
+      "name": "Gond katira cooler",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -2,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: gond katira cooler; gond katira drink."
+    },
+    {
+      "id": "dravya.thandai",
+      "name": "Thandai",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -2,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: thandai."
+    },
+    {
+      "id": "dravya.badam-milk",
+      "name": "Badam milk",
+      "sanskrit": "Vatada Ksheera",
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -2,
+          -1,
+          1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: badam milk; vatada ksheera."
+    },
+    {
+      "id": "dravya.rose-milk",
+      "name": "Rose milk",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -2,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: rose milk."
+    },
+    {
+      "id": "dravya.masala-chai",
+      "name": "Masala chai",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: masala chai."
+    },
+    {
+      "id": "dravya.tulsi-tea",
+      "name": "Tulsi tea",
+      "sanskrit": "Tulasi Phanta",
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -2
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: tulsi tea; tulasi phanta."
+    },
+    {
+      "id": "dravya.lemongrass-tea",
+      "name": "Lemongrass tea",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "beverage",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: lemongrass tea."
+    }
+  ]
+}

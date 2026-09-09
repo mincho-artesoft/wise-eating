@@ -1,0 +1,56 @@
+--- a/ayurveda-data/build_seed.py
++++ b/ayurveda-data/build_seed.py
+@@ -- inside build_envelope(), the dravya output loop --
+         output = dict(dravya)
+         edible, inedible_reason = dravya_edibility(dravya)
+         output["edible"] = edible
+         output["inedibleReason"] = inedible_reason if not edible else None
+         output["foodId"], output["foodIsPlaceholder"] = assignments[dravya["id"]]
+         output["engineExcluded"] = dravya["id"] in ENGINE_EXCLUDED_IDS
++        output["nutrition"] = dravya_nutrition_payload(
++            output["foodId"], output["foodIsPlaceholder"], nutrition_by_id
++        )
+         output["safety"] = derive_dravya_safety(
+             dravya,
+             output["foodId"],
+             source_safety_by_id,
+             age_rules,
+         )
+         dravya_safety[dravya["id"]] = output["safety"]
+         output_dravyas.append(output)
+
+@@ -- new helper, place next to derive_recipe_nutrition --
++def dravya_nutrition_payload(
++    food_id: int,
++    is_placeholder: bool,
++    nutrition_by_id: dict[int, dict[str, float]],
++) -> dict[str, Any] | None:
++    """Emit a measured panel for a placeholder dravya, or None.
++
++    A dravya bound to a real USDA row already carries that row's nutrition on
++    the food itself, so only placeholders need a panel emitted here. Panels
++    arrive from dravya_foods.json via merge_placeholder_nutrition, which has
++    already dropped every nutrient whose value is null. An empty panel means
++    the substance is unsourced, and unsourced must stay absent — never zero.
++    """
++    if not is_placeholder:
++        return None
++    panel = nutrition_by_id.get(food_id)
++    if not panel:
++        return None
++    per_100g = {
++        nutrient: rounded(panel[nutrient])
++        for nutrient in NUTRIENT_CATALOG
++        if nutrient in panel
++    }
++    if not per_100g:
++        return None
++    return {
++        "status": "measured",
++        "per100g": per_100g,
++        "units": {
++            nutrient: unit
++            for nutrient, (_section, unit) in NUTRIENT_CATALOG.items()
++            if nutrient in per_100g
++        },
++    }

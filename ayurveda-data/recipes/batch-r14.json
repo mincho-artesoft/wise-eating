@@ -1,0 +1,3794 @@
+{
+  "formatVersion": "1.0",
+  "batch": "recipe-batch-r14",
+  "qualityState": "aiDraft",
+  "items": [
+    {
+      "id": "recipe.continental-zucchini-herb-pasta",
+      "name": "Whole-Wheat Pasta with Zucchini Herbs",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 25,
+      "ingredients": [
+        {
+          "fdcId": 7159,
+          "name": "Dry whole-wheat pasta",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Bring the water to a boil, add part of the rock salt, and cook the dry whole-wheat pasta until tender but intact.",
+        "Reserve a little cooking water, drain the pasta, and keep it warm.",
+        "Warm the olive oil and cook the diced zucchini with oregano until fully tender.",
+        "Fold in the pasta and fresh parsley, adding reserved water only as needed for a light sauce.",
+        "Adjust the remaining rock salt and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Whole-Wheat Pasta with Zucchini Herbs uses a vegetable-forward sauce and a moderate pasta portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original continental lacto-vegetarian pasta adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-mushroom-thyme-pasta",
+      "name": "Whole-Wheat Mushroom Thyme Pasta",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 25,
+      "ingredients": [
+        {
+          "fdcId": 7159,
+          "name": "Dry whole-wheat pasta",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.white-mushroom",
+          "name": "White mushrooms, sliced",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Bring the water to a boil, add part of the rock salt, and cook the dry whole-wheat pasta until tender but intact.",
+        "Reserve a little cooking water, drain the pasta, and keep it warm.",
+        "Warm the olive oil and cook the sliced white mushrooms with oregano until fully tender.",
+        "Fold in the pasta and fresh thyme, adding reserved water only as needed for a light sauce.",
+        "Adjust the remaining rock salt and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Whole-Wheat Mushroom Thyme Pasta uses a vegetable-forward sauce and a moderate pasta portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original continental lacto-vegetarian pasta adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-broccoli-almond-pasta",
+      "name": "Whole-Wheat Broccoli Almond Pasta",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 25,
+      "ingredients": [
+        {
+          "fdcId": 7159,
+          "name": "Dry whole-wheat pasta",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli florets",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, finely chopped",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Bring the water to a boil, add part of the rock salt, and cook the dry whole-wheat pasta until tender but intact.",
+        "Reserve a little cooking water, drain the pasta, and keep it warm.",
+        "Warm the olive oil and cook the broccoli florets with oregano until fully tender.",
+        "Fold in the pasta and finely chopped almonds, fresh parsley, adding reserved water only as needed for a light sauce.",
+        "Adjust the remaining rock salt and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Whole-Wheat Broccoli Almond Pasta uses a vegetable-forward sauce and a moderate pasta portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original continental lacto-vegetarian pasta adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-cauliflower-parsley-pasta",
+      "name": "Whole-Wheat Cauliflower Parsley Pasta",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 25,
+      "ingredients": [
+        {
+          "fdcId": 7159,
+          "name": "Dry whole-wheat pasta",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower florets",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Bring the water to a boil, add part of the rock salt, and cook the dry whole-wheat pasta until tender but intact.",
+        "Reserve a little cooking water, drain the pasta, and keep it warm.",
+        "Warm the olive oil and cook the cauliflower florets with oregano until fully tender.",
+        "Fold in the pasta and fresh parsley, adding reserved water only as needed for a light sauce.",
+        "Adjust the remaining rock salt and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Whole-Wheat Cauliflower Parsley Pasta uses a vegetable-forward sauce and a moderate pasta portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original continental lacto-vegetarian pasta adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-pumpkin-rosemary-pasta",
+      "name": "Whole-Wheat Pumpkin Rosemary Pasta",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 25,
+      "ingredients": [
+        {
+          "fdcId": 7159,
+          "name": "Dry whole-wheat pasta",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced small",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.rosemary",
+          "name": "Fresh rosemary",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Bring the water to a boil, add part of the rock salt, and cook the dry whole-wheat pasta until tender but intact.",
+        "Reserve a little cooking water, drain the pasta, and keep it warm.",
+        "Warm the olive oil and cook the diced small pumpkin with oregano until fully tender.",
+        "Fold in the pasta and fresh rosemary, adding reserved water only as needed for a light sauce.",
+        "Adjust the remaining rock salt and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Whole-Wheat Pumpkin Rosemary Pasta uses a vegetable-forward sauce and a moderate pasta portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original continental lacto-vegetarian pasta adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-spinach-walnut-pasta",
+      "name": "Whole-Wheat Spinach Walnut Pasta",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 25,
+      "ingredients": [
+        {
+          "fdcId": 7159,
+          "name": "Dry whole-wheat pasta",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts, chopped",
+          "grams": 50
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Bring the water to a boil, add part of the rock salt, and cook the dry whole-wheat pasta until tender but intact.",
+        "Reserve a little cooking water, drain the pasta, and keep it warm.",
+        "Warm the olive oil and cook the chopped spinach with oregano until fully tender.",
+        "Fold in the pasta and chopped walnuts, adding reserved water only as needed for a light sauce.",
+        "Adjust the remaining rock salt and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Whole-Wheat Spinach Walnut Pasta uses a vegetable-forward sauce and a moderate pasta portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original continental lacto-vegetarian pasta adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-beet-dill-pasta",
+      "name": "Whole-Wheat Beet Dill Pasta",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 25,
+      "ingredients": [
+        {
+          "fdcId": 7159,
+          "name": "Dry whole-wheat pasta",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, diced small",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Bring the water to a boil, add part of the rock salt, and cook the dry whole-wheat pasta until tender but intact.",
+        "Reserve a little cooking water, drain the pasta, and keep it warm.",
+        "Warm the olive oil and cook the diced small beetroot with oregano until fully tender.",
+        "Fold in the pasta and fresh dill, adding reserved water only as needed for a light sauce.",
+        "Adjust the remaining rock salt and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Whole-Wheat Beet Dill Pasta uses a vegetable-forward sauce and a moderate pasta portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original continental lacto-vegetarian pasta adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-asparagus-pea-pasta",
+      "name": "Whole-Wheat Asparagus Pea Pasta",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 25,
+      "ingredients": [
+        {
+          "fdcId": 7159,
+          "name": "Dry whole-wheat pasta",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.asparagus",
+          "name": "Asparagus, cut",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Bring the water to a boil, add part of the rock salt, and cook the dry whole-wheat pasta until tender but intact.",
+        "Reserve a little cooking water, drain the pasta, and keep it warm.",
+        "Warm the olive oil and cook the asparagus cut and green peas with oregano until fully tender.",
+        "Fold in the pasta and fresh parsley, adding reserved water only as needed for a light sauce.",
+        "Adjust the remaining rock salt and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Whole-Wheat Asparagus Pea Pasta uses a vegetable-forward sauce and a moderate pasta portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original continental lacto-vegetarian pasta adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-eggplant-tomato-pasta",
+      "name": "Whole-Wheat Eggplant Tomato Pasta",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 25,
+      "ingredients": [
+        {
+          "fdcId": 7159,
+          "name": "Dry whole-wheat pasta",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.eggplant",
+          "name": "Eggplant, diced",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, chopped",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.basil-sweet",
+          "name": "Fresh basil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Bring the water to a boil, add part of the rock salt, and cook the dry whole-wheat pasta until tender but intact.",
+        "Reserve a little cooking water, drain the pasta, and keep it warm.",
+        "Warm the olive oil and cook the diced eggplant and chopped tomatoes with oregano until fully tender.",
+        "Fold in the pasta and fresh basil, adding reserved water only as needed for a light sauce.",
+        "Adjust the remaining rock salt and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 2,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Whole-Wheat Eggplant Tomato Pasta uses a vegetable-forward sauce and a moderate pasta portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original continental lacto-vegetarian pasta adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-red-pepper-tomato-pasta",
+      "name": "Whole-Wheat Red Pepper Tomato Pasta",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 25,
+      "ingredients": [
+        {
+          "fdcId": 7159,
+          "name": "Dry whole-wheat pasta",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.red-bell-pepper",
+          "name": "Red bell pepper, diced",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, chopped",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.basil-sweet",
+          "name": "Fresh basil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Bring the water to a boil, add part of the rock salt, and cook the dry whole-wheat pasta until tender but intact.",
+        "Reserve a little cooking water, drain the pasta, and keep it warm.",
+        "Warm the olive oil and cook the diced red bell pepper and chopped tomatoes with oregano until fully tender.",
+        "Fold in the pasta and fresh basil, adding reserved water only as needed for a light sauce.",
+        "Adjust the remaining rock salt and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 2,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Whole-Wheat Red Pepper Tomato Pasta uses a vegetable-forward sauce and a moderate pasta portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original continental lacto-vegetarian pasta adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-tomato-aged-cheese-pasta",
+      "name": "Tomato Aged Cheese Pasta",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 25,
+      "ingredients": [
+        {
+          "fdcId": 7159,
+          "name": "Dry whole-wheat pasta",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, chopped",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.aged-cheese",
+          "name": "Aged cheese, finely grated",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.basil-sweet",
+          "name": "Fresh basil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Bring the water to a boil, add part of the rock salt, and cook the dry whole-wheat pasta until tender but intact.",
+        "Reserve a little cooking water, drain the pasta, and keep it warm.",
+        "Warm the olive oil and cook the chopped tomatoes with oregano until fully tender.",
+        "Fold in the pasta and finely grated aged cheese, fresh basil, adding reserved water only as needed for a light sauce.",
+        "Adjust the remaining rock salt and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 2,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [
+        "cheese combined with tomato (traditional viruddha)"
+      ],
+      "guidance": "This tomato pasta is flagged because aged cheese is folded into the sauce. Vata: serve warm and keep the sauce moist. Pitta: reduce tomato and oregano. Kapha: use less cheese and pasta. Compliant variant: omit the cheese and finish with ground walnuts or sesame.",
+      "provenance": [
+        "original continental lacto-vegetarian pasta adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-tomato-cottage-cheese-pasta",
+      "name": "Tomato Cottage Cheese Pasta",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 25,
+      "ingredients": [
+        {
+          "fdcId": 7159,
+          "name": "Dry whole-wheat pasta",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, chopped",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.cottage-cheese",
+          "name": "Cottage cheese",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Bring the water to a boil, add part of the rock salt, and cook the dry whole-wheat pasta until tender but intact.",
+        "Reserve a little cooking water, drain the pasta, and keep it warm.",
+        "Warm the olive oil and cook the chopped tomatoes and diced zucchini with oregano until fully tender.",
+        "Fold in the pasta and cottage cheese, adding reserved water only as needed for a light sauce.",
+        "Adjust the remaining rock salt and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 2,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [
+        "cheese combined with tomato (traditional viruddha)"
+      ],
+      "guidance": "This creamy tomato pasta is flagged for combining cottage cheese with tomato. Vata: serve warm with a soft texture. Pitta: reduce tomato. Kapha: reduce cottage cheese. Compliant variant: replace cottage cheese with blended tofu.",
+      "provenance": [
+        "original continental lacto-vegetarian pasta adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-tomato-paneer-basil-pasta",
+      "name": "Tomato Paneer Basil Pasta",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 25,
+      "ingredients": [
+        {
+          "fdcId": 7159,
+          "name": "Dry whole-wheat pasta",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, chopped",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.paneer",
+          "name": "Paneer, crumbled",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.basil-sweet",
+          "name": "Fresh basil",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Bring the water to a boil, add part of the rock salt, and cook the dry whole-wheat pasta until tender but intact.",
+        "Reserve a little cooking water, drain the pasta, and keep it warm.",
+        "Warm the olive oil and cook the chopped tomatoes with oregano until fully tender.",
+        "Fold in the pasta and crumbled paneer, fresh basil, adding reserved water only as needed for a light sauce.",
+        "Adjust the remaining rock salt and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 2,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [
+        "cheese combined with tomato (traditional viruddha)"
+      ],
+      "guidance": "This fusion pasta is flagged because paneer is combined with tomato. Vata: serve warm and moist. Pitta: reduce tomato and omit pepper. Kapha: use less paneer. Compliant variant: replace paneer with crumbled firm tofu.",
+      "provenance": [
+        "original continental lacto-vegetarian pasta adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-mushroom-aged-cheese-pasta",
+      "name": "Mushroom Aged Cheese Pasta",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 25,
+      "ingredients": [
+        {
+          "fdcId": 7159,
+          "name": "Dry whole-wheat pasta",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.white-mushroom",
+          "name": "White mushrooms, sliced",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.aged-cheese",
+          "name": "Aged cheese, finely grated",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Bring the water to a boil, add part of the rock salt, and cook the dry whole-wheat pasta until tender but intact.",
+        "Reserve a little cooking water, drain the pasta, and keep it warm.",
+        "Warm the olive oil and cook the sliced white mushrooms with oregano until fully tender.",
+        "Fold in the pasta and finely grated aged cheese, fresh thyme, adding reserved water only as needed for a light sauce.",
+        "Adjust the remaining rock salt and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mushroom Aged Cheese Pasta uses a vegetable-forward sauce and a moderate pasta portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original continental lacto-vegetarian pasta adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-spinach-cottage-cheese-pasta",
+      "name": "Spinach Cottage Cheese Pasta",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 25,
+      "ingredients": [
+        {
+          "fdcId": 7159,
+          "name": "Dry whole-wheat pasta",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.cottage-cheese",
+          "name": "Cottage cheese",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Bring the water to a boil, add part of the rock salt, and cook the dry whole-wheat pasta until tender but intact.",
+        "Reserve a little cooking water, drain the pasta, and keep it warm.",
+        "Warm the olive oil and cook the chopped spinach with oregano until fully tender.",
+        "Fold in the pasta and cottage cheese, fresh dill, adding reserved water only as needed for a light sauce.",
+        "Adjust the remaining rock salt and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Spinach Cottage Cheese Pasta uses a vegetable-forward sauce and a moderate pasta portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original continental lacto-vegetarian pasta adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-broccoli-paneer-pasta",
+      "name": "Broccoli Paneer Pasta",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 25,
+      "ingredients": [
+        {
+          "fdcId": 7159,
+          "name": "Dry whole-wheat pasta",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli florets",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.paneer",
+          "name": "Paneer, crumbled",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Bring the water to a boil, add part of the rock salt, and cook the dry whole-wheat pasta until tender but intact.",
+        "Reserve a little cooking water, drain the pasta, and keep it warm.",
+        "Warm the olive oil and cook the broccoli florets with oregano until fully tender.",
+        "Fold in the pasta and crumbled paneer, fresh parsley, adding reserved water only as needed for a light sauce.",
+        "Adjust the remaining rock salt and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Broccoli Paneer Pasta uses a vegetable-forward sauce and a moderate pasta portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original continental lacto-vegetarian pasta adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-carrot-fennel-pasta",
+      "name": "Carrot Fennel Whole-Wheat Pasta",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 25,
+      "ingredients": [
+        {
+          "fdcId": 7159,
+          "name": "Dry whole-wheat pasta",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, cut thin",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, sliced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Bring the water to a boil, add part of the rock salt, and cook the dry whole-wheat pasta until tender but intact.",
+        "Reserve a little cooking water, drain the pasta, and keep it warm.",
+        "Warm the olive oil and cook the carrot cut thin and sliced fennel bulb with oregano until fully tender.",
+        "Fold in the pasta and fennel seeds, adding reserved water only as needed for a light sauce.",
+        "Adjust the remaining rock salt and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Carrot Fennel Whole-Wheat Pasta uses a vegetable-forward sauce and a moderate pasta portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original continental lacto-vegetarian pasta adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-sweet-potato-rosemary-pasta",
+      "name": "Sweet Potato Rosemary Pasta",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 25,
+      "ingredients": [
+        {
+          "fdcId": 7159,
+          "name": "Dry whole-wheat pasta",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, diced small",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.rosemary",
+          "name": "Fresh rosemary",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Bring the water to a boil, add part of the rock salt, and cook the dry whole-wheat pasta until tender but intact.",
+        "Reserve a little cooking water, drain the pasta, and keep it warm.",
+        "Warm the olive oil and cook the diced small sweet potato with oregano until fully tender.",
+        "Fold in the pasta and fresh rosemary, adding reserved water only as needed for a light sauce.",
+        "Adjust the remaining rock salt and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sweet Potato Rosemary Pasta uses a vegetable-forward sauce and a moderate pasta portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original continental lacto-vegetarian pasta adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-artichoke-leek-pasta",
+      "name": "Artichoke Leek Whole-Wheat Pasta",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 25,
+      "ingredients": [
+        {
+          "fdcId": 7159,
+          "name": "Dry whole-wheat pasta",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.artichoke",
+          "name": "Artichoke hearts, chopped",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.leek",
+          "name": "Leek, sliced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Bring the water to a boil, add part of the rock salt, and cook the dry whole-wheat pasta until tender but intact.",
+        "Reserve a little cooking water, drain the pasta, and keep it warm.",
+        "Warm the olive oil and cook the chopped artichoke hearts and sliced leek with oregano until fully tender.",
+        "Fold in the pasta and fresh parsley, adding reserved water only as needed for a light sauce.",
+        "Adjust the remaining rock salt and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Artichoke Leek Whole-Wheat Pasta uses a vegetable-forward sauce and a moderate pasta portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original continental lacto-vegetarian pasta adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-cabbage-pea-pasta",
+      "name": "Cabbage Pea Whole-Wheat Pasta",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 25,
+      "ingredients": [
+        {
+          "fdcId": 7159,
+          "name": "Dry whole-wheat pasta",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, sliced",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Bring the water to a boil, add part of the rock salt, and cook the dry whole-wheat pasta until tender but intact.",
+        "Reserve a little cooking water, drain the pasta, and keep it warm.",
+        "Warm the olive oil and cook the sliced cabbage and green peas with oregano until fully tender.",
+        "Fold in the pasta and fresh dill, adding reserved water only as needed for a light sauce.",
+        "Adjust the remaining rock salt and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cabbage Pea Whole-Wheat Pasta uses a vegetable-forward sauce and a moderate pasta portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original continental lacto-vegetarian pasta adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-potato-leek-cottage-gratin",
+      "name": "Potato Leek Cottage Cheese Gratin",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 45,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potatoes, sliced thin",
+          "grams": 560
+        },
+        {
+          "dravyaId": "dravya.leek",
+          "name": "Leek, sliced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.cottage-cheese",
+          "name": "Cottage cheese",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Cut the sliced thin potatoes and sliced leek into even pieces and place them in a wide bowl.",
+        "Add the olive oil, oregano, and rock salt; toss until every piece is lightly coated.",
+        "Arrange the mixture in a shallow baking dish and distribute the cottage cheese and fresh thyme evenly.",
+        "Bake until the vegetables are tender and the top is lightly browned without becoming dry.",
+        "Rest for five minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Potato Leek Cottage Cheese Gratin is baked until tender and served warm in a moderate portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-bake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-sweet-potato-spinach-paneer-gratin",
+      "name": "Sweet Potato Spinach Paneer Gratin",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 44,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potatoes, sliced",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.paneer",
+          "name": "Paneer, crumbled",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Cut the sliced sweet potatoes and chopped spinach into even pieces and place them in a wide bowl.",
+        "Add the olive oil, oregano, and rock salt; toss until every piece is lightly coated.",
+        "Arrange the mixture in a shallow baking dish and distribute the crumbled paneer evenly.",
+        "Bake until the vegetables are tender and the top is lightly browned without becoming dry.",
+        "Rest for five minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sweet Potato Spinach Paneer Gratin is baked until tender and served warm in a moderate portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-bake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-cauliflower-aged-cheese-gratin",
+      "name": "Cauliflower Aged Cheese Gratin",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower florets",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.aged-cheese",
+          "name": "Aged cheese, grated",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Cut the cauliflower florets into even pieces and place them in a wide bowl.",
+        "Add the olive oil, oregano, and rock salt; toss until every piece is lightly coated.",
+        "Arrange the mixture in a shallow baking dish and distribute the grated aged cheese and fresh parsley evenly.",
+        "Bake until the vegetables are tender and the top is lightly browned without becoming dry.",
+        "Rest for five minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cauliflower Aged Cheese Gratin is baked until tender and served warm in a moderate portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-bake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-broccoli-cottage-gratin",
+      "name": "Broccoli Cottage Cheese Gratin",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli florets",
+          "grams": 600
+        },
+        {
+          "dravyaId": "dravya.cottage-cheese",
+          "name": "Cottage cheese",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Cut the broccoli florets into even pieces and place them in a wide bowl.",
+        "Add the olive oil, oregano, and rock salt; toss until every piece is lightly coated.",
+        "Arrange the mixture in a shallow baking dish and distribute the cottage cheese and fresh dill evenly.",
+        "Bake until the vegetables are tender and the top is lightly browned without becoming dry.",
+        "Rest for five minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Broccoli Cottage Cheese Gratin is baked until tender and served warm in a moderate portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-bake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-zucchini-tomato-cheese-gratin",
+      "name": "Zucchini Tomato Cheese Gratin",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, sliced",
+          "grams": 440
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, sliced",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.aged-cheese",
+          "name": "Aged cheese, grated",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Cut the sliced zucchini and sliced tomatoes into even pieces and place them in a wide bowl.",
+        "Add the olive oil, oregano, and rock salt; toss until every piece is lightly coated.",
+        "Arrange the mixture in a shallow baking dish and distribute the grated aged cheese evenly.",
+        "Bake until the vegetables are tender and the top is lightly browned without becoming dry.",
+        "Rest for five minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 2,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [
+        "cheese combined with tomato (traditional viruddha)"
+      ],
+      "guidance": "This gratin is flagged because aged cheese is baked with tomato. Vata: serve warm and tender. Pitta: reduce tomato. Kapha: reduce cheese and oil. Compliant variant: replace cheese with ground sesame and crumbled tofu.",
+      "provenance": [
+        "original international vegetable-bake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-eggplant-tomato-cheese-gratin",
+      "name": "Eggplant Tomato Cheese Gratin",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.eggplant",
+          "name": "Eggplant, sliced",
+          "grams": 440
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, sliced",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.aged-cheese",
+          "name": "Aged cheese, grated",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.basil-sweet",
+          "name": "Fresh basil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Cut the sliced eggplant and sliced tomatoes into even pieces and place them in a wide bowl.",
+        "Add the olive oil, oregano, and rock salt; toss until every piece is lightly coated.",
+        "Arrange the mixture in a shallow baking dish and distribute the grated aged cheese and fresh basil evenly.",
+        "Bake until the vegetables are tender and the top is lightly browned without becoming dry.",
+        "Rest for five minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 2,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [
+        "cheese combined with tomato (traditional viruddha)"
+      ],
+      "guidance": "This eggplant gratin is flagged because cheese and tomato are layered together. Vata: cook the eggplant very soft. Pitta: reduce tomato and oregano. Kapha: use less cheese. Compliant variant: replace cheese with crumbled tofu and walnuts.",
+      "provenance": [
+        "original international vegetable-bake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-mushroom-spinach-cheese-bake",
+      "name": "Mushroom Spinach Cheese Bake",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-mushroom",
+          "name": "White mushrooms, sliced",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.aged-cheese",
+          "name": "Aged cheese, grated",
+          "grams": 110
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Cut the sliced white mushrooms and chopped spinach into even pieces and place them in a wide bowl.",
+        "Add the olive oil, oregano, and rock salt; toss until every piece is lightly coated.",
+        "Arrange the mixture in a shallow baking dish and distribute the grated aged cheese and fresh thyme evenly.",
+        "Bake until the vegetables are tender and the top is lightly browned without becoming dry.",
+        "Rest for five minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mushroom Spinach Cheese Bake is baked until tender and served warm in a moderate portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-bake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-pumpkin-walnut-bake",
+      "name": "Pumpkin Walnut Herb Bake",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 600
+        },
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts, chopped",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.rosemary",
+          "name": "Fresh rosemary",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Cut the diced pumpkin into even pieces and place them in a wide bowl.",
+        "Add the olive oil, oregano, and rock salt; toss until every piece is lightly coated.",
+        "Arrange the mixture in a shallow baking dish and distribute the chopped walnuts and fresh rosemary evenly.",
+        "Bake until the vegetables are tender and the top is lightly browned without becoming dry.",
+        "Rest for five minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin Walnut Herb Bake is baked until tender and served warm in a moderate portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-bake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-cabbage-lentil-bake",
+      "name": "Cabbage Lentil Bake",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, chopped",
+          "grams": 440
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.brown-lentil",
+          "name": "Cooked brown lentils",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Cut the chopped cabbage and diced carrot into even pieces and place them in a wide bowl.",
+        "Add the olive oil, oregano, and rock salt; toss until every piece is lightly coated.",
+        "Arrange the mixture in a shallow baking dish and distribute the cooked brown lentils and fresh thyme evenly.",
+        "Bake until the vegetables are tender and the top is lightly browned without becoming dry.",
+        "Rest for five minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cabbage Lentil Bake is baked until tender and served warm in a moderate portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-bake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-carrot-quinoa-bake",
+      "name": "Carrot Quinoa Herb Bake",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, sliced",
+          "grams": 440
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Cooked quinoa",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Cut the sliced carrots and diced zucchini into even pieces and place them in a wide bowl.",
+        "Add the olive oil, oregano, and rock salt; toss until every piece is lightly coated.",
+        "Arrange the mixture in a shallow baking dish and distribute the cooked quinoa and fresh parsley evenly.",
+        "Bake until the vegetables are tender and the top is lightly browned without becoming dry.",
+        "Rest for five minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Carrot Quinoa Herb Bake is baked until tender and served warm in a moderate portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-bake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-beet-buckwheat-bake",
+      "name": "Beet Buckwheat Dill Bake",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, diced small",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Cooked buckwheat",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Cut the diced small beetroot and diced carrot into even pieces and place them in a wide bowl.",
+        "Add the olive oil, oregano, and rock salt; toss until every piece is lightly coated.",
+        "Arrange the mixture in a shallow baking dish and distribute the cooked buckwheat and fresh dill evenly.",
+        "Bake until the vegetables are tender and the top is lightly browned without becoming dry.",
+        "Rest for five minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Beet Buckwheat Dill Bake is baked until tender and served warm in a moderate portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-bake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-asparagus-pea-tofu-bake",
+      "name": "Asparagus Pea Tofu Bake",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.asparagus",
+          "name": "Asparagus, cut",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, crumbled",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Cut the asparagus cut and green peas into even pieces and place them in a wide bowl.",
+        "Add the olive oil, oregano, and rock salt; toss until every piece is lightly coated.",
+        "Arrange the mixture in a shallow baking dish and distribute the crumbled firm tofu and fresh dill evenly.",
+        "Bake until the vegetables are tender and the top is lightly browned without becoming dry.",
+        "Rest for five minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Asparagus Pea Tofu Bake is baked until tender and served warm in a moderate portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-bake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-artichoke-potato-bake",
+      "name": "Artichoke Potato Rosemary Bake",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.artichoke",
+          "name": "Artichoke hearts, quartered",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potatoes, diced",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.rosemary",
+          "name": "Fresh rosemary",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Cut the quartered artichoke hearts and diced potatoes into even pieces and place them in a wide bowl.",
+        "Add the olive oil, oregano, and rock salt; toss until every piece is lightly coated.",
+        "Arrange the mixture in a shallow baking dish and distribute the fresh rosemary evenly.",
+        "Bake until the vegetables are tender and the top is lightly browned without becoming dry.",
+        "Rest for five minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Artichoke Potato Rosemary Bake is baked until tender and served warm in a moderate portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-bake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-tomato-pepper-paneer-bake",
+      "name": "Tomato Pepper Paneer Bake",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, chopped",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.red-bell-pepper",
+          "name": "Red bell pepper, sliced",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.paneer",
+          "name": "Paneer, crumbled",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Cut the chopped tomatoes and sliced red bell pepper into even pieces and place them in a wide bowl.",
+        "Add the olive oil, oregano, and rock salt; toss until every piece is lightly coated.",
+        "Arrange the mixture in a shallow baking dish and distribute the crumbled paneer evenly.",
+        "Bake until the vegetables are tender and the top is lightly browned without becoming dry.",
+        "Rest for five minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 2,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [
+        "cheese combined with tomato (traditional viruddha)"
+      ],
+      "guidance": "This pepper bake is flagged because paneer is combined with tomato. Vata: serve warm with soft grain. Pitta: reduce both tomato and pepper. Kapha: use less paneer. Compliant variant: replace paneer with crumbled firm tofu.",
+      "provenance": [
+        "original international vegetable-bake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-cauliflower-tomato-cottage-bake",
+      "name": "Cauliflower Tomato Cottage Cheese Gratin",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower florets",
+          "grams": 440
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, chopped",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.cottage-cheese",
+          "name": "Cottage cheese",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Cut the cauliflower florets and chopped tomatoes into even pieces and place them in a wide bowl.",
+        "Add the olive oil, oregano, and rock salt; toss until every piece is lightly coated.",
+        "Arrange the mixture in a shallow baking dish and distribute the cottage cheese evenly.",
+        "Bake until the vegetables are tender and the top is lightly browned without becoming dry.",
+        "Rest for five minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 2,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [
+        "cheese combined with tomato (traditional viruddha)"
+      ],
+      "guidance": "This cauliflower gratin is flagged because cottage cheese is combined with tomato. Vata: serve warm and fully tender. Pitta: reduce tomato. Kapha: use less cottage cheese. Compliant variant: replace cottage cheese with mashed chickpeas.",
+      "provenance": [
+        "original international vegetable-bake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-mixed-root-roast",
+      "name": "Mixed Root Vegetable Roast",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, cut",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.turnip",
+          "name": "Turnips, cut",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, cut",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.rosemary",
+          "name": "Fresh rosemary",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Heat the oven and cut the carrots cut and turnips cut and sweet potato cut into evenly sized pieces.",
+        "Toss with the olive oil, fresh rosemary, rock salt.",
+        "Spread in one layer on a wide tray so steam can escape.",
+        "Roast until the centers are tender and the edges are browned, turning once midway.",
+        "Rest for three minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mixed Root Vegetable Roast is roasted until tender and served warm rather than as a cold side. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-vegetable adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-potato-carrot-rosemary-roast",
+      "name": "Potato Carrot Rosemary Roast",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potatoes, cut",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, cut",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.rosemary",
+          "name": "Fresh rosemary",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Heat the oven and cut the potatoes cut and carrots cut into evenly sized pieces.",
+        "Toss with the olive oil, fresh rosemary, rock salt.",
+        "Spread in one layer on a wide tray so steam can escape.",
+        "Roast until the centers are tender and the edges are browned, turning once midway.",
+        "Rest for three minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Potato Carrot Rosemary Roast is roasted until tender and served warm rather than as a cold side. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-vegetable adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-beet-fennel-roast",
+      "name": "Beet Fennel Roast",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, cut",
+          "grams": 460
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, cut",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Heat the oven and cut the beetroot cut and fennel bulb cut into evenly sized pieces.",
+        "Toss with the olive oil, Fresh thyme, rock salt.",
+        "Spread in one layer on a wide tray so steam can escape.",
+        "Roast until the centers are tender and the edges are browned, turning once midway.",
+        "Rest for three minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Beet Fennel Roast is roasted until tender and served warm rather than as a cold side. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-vegetable adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-cauliflower-chickpea-roast",
+      "name": "Cauliflower Chickpea Roast",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower florets",
+          "grams": 460
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas, dried well",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.rosemary",
+          "name": "Fresh rosemary",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Heat the oven and cut the cauliflower florets and well-dried cooked chickpeas into evenly sized pieces.",
+        "Toss with the olive oil, fresh rosemary, rock salt, and coriander seeds.",
+        "Spread in one layer on a wide tray so steam can escape.",
+        "Roast until the centers are tender and the edges are browned, turning once midway.",
+        "Rest for three minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cauliflower Chickpea Roast is roasted until tender and served warm rather than as a cold side. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-vegetable adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-broccoli-tofu-roast",
+      "name": "Broccoli Tofu Roast",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli florets",
+          "grams": 440
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Heat the oven and cut the broccoli florets and cubed firm tofu into evenly sized pieces.",
+        "Toss with the olive oil, Fresh thyme, rock salt.",
+        "Spread in one layer on a wide tray so steam can escape.",
+        "Roast until the centers are tender and the edges are browned, turning once midway.",
+        "Rest for three minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Broccoli Tofu Roast is roasted until tender and served warm rather than as a cold side. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-vegetable adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-zucchini-mushroom-roast",
+      "name": "Zucchini Mushroom Roast",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cut",
+          "grams": 400
+        },
+        {
+          "dravyaId": "dravya.white-mushroom",
+          "name": "White mushrooms",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Heat the oven and cut the zucchini cut and white mushrooms into evenly sized pieces.",
+        "Toss with the olive oil, Fresh thyme, rock salt.",
+        "Spread in one layer on a wide tray so steam can escape.",
+        "Roast until the centers are tender and the edges are browned, turning once midway.",
+        "Rest for three minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Zucchini Mushroom Roast is roasted until tender and served warm rather than as a cold side. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-vegetable adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-eggplant-chickpea-roast",
+      "name": "Eggplant Chickpea Roast",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.eggplant",
+          "name": "Eggplant, cut",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas, dried well",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Heat the oven and cut the eggplant cut and well-dried cooked chickpeas into evenly sized pieces.",
+        "Toss with the olive oil, Dried oregano, rock salt.",
+        "Spread in one layer on a wide tray so steam can escape.",
+        "Roast until the centers are tender and the edges are browned, turning once midway.",
+        "Rest for three minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Eggplant Chickpea Roast is roasted until tender and served warm rather than as a cold side. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-vegetable adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-pumpkin-lentil-roast",
+      "name": "Pumpkin Lentil Tray Roast",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, cut",
+          "grams": 460
+        },
+        {
+          "dravyaId": "dravya.brown-lentil",
+          "name": "Cooked brown lentils, drained",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.rosemary",
+          "name": "Fresh rosemary",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Heat the oven and cut the pumpkin cut and drained cooked brown lentils into evenly sized pieces.",
+        "Toss with the olive oil, fresh rosemary, rock salt.",
+        "Spread in one layer on a wide tray so steam can escape.",
+        "Roast until the centers are tender and the edges are browned, turning once midway.",
+        "Rest for three minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin Lentil Tray Roast is roasted until tender and served warm rather than as a cold side. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-vegetable adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-sweet-potato-black-bean-roast",
+      "name": "Sweet Potato Black Bean Tray Roast",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, cut",
+          "grams": 440
+        },
+        {
+          "dravyaId": "dravya.black-beans",
+          "name": "Cooked black beans, drained",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Heat the oven and cut the sweet potato cut and drained cooked black beans into evenly sized pieces.",
+        "Toss with the olive oil, Dried oregano, rock salt.",
+        "Spread in one layer on a wide tray so steam can escape.",
+        "Roast until the centers are tender and the edges are browned, turning once midway.",
+        "Rest for three minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sweet Potato Black Bean Tray Roast is roasted until tender and served warm rather than as a cold side. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-vegetable adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-asparagus-tofu-roast",
+      "name": "Asparagus Tofu Roast",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.asparagus",
+          "name": "Asparagus, cut",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Heat the oven and cut the asparagus cut and cubed firm tofu into evenly sized pieces.",
+        "Toss with the olive oil, Fresh dill, rock salt.",
+        "Spread in one layer on a wide tray so steam can escape.",
+        "Roast until the centers are tender and the edges are browned, turning once midway.",
+        "Rest for three minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Asparagus Tofu Roast is roasted until tender and served warm rather than as a cold side. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-vegetable adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-artichoke-potato-roast",
+      "name": "Artichoke Potato Tray Roast",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.artichoke",
+          "name": "Artichoke hearts",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potatoes, cut",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Heat the oven and cut the artichoke hearts and potatoes cut into evenly sized pieces.",
+        "Toss with the olive oil, Fresh parsley, rock salt.",
+        "Spread in one layer on a wide tray so steam can escape.",
+        "Roast until the centers are tender and the edges are browned, turning once midway.",
+        "Rest for three minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Artichoke Potato Tray Roast is roasted until tender and served warm rather than as a cold side. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-vegetable adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-cabbage-adzuki-roast",
+      "name": "Cabbage Adzuki Tray Roast",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage wedges",
+          "grams": 440
+        },
+        {
+          "dravyaId": "dravya.adzuki",
+          "name": "Cooked adzuki beans, drained",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Heat the oven and cut the cabbage wedges and drained cooked adzuki beans into evenly sized pieces.",
+        "Toss with the olive oil, Fresh thyme, rock salt.",
+        "Spread in one layer on a wide tray so steam can escape.",
+        "Roast until the centers are tender and the edges are browned, turning once midway.",
+        "Rest for three minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cabbage Adzuki Tray Roast is roasted until tender and served warm rather than as a cold side. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-vegetable adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-green-bean-almond-roast",
+      "name": "Green Bean Almond Roast",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Heat the oven and cut the green beans into evenly sized pieces.",
+        "Toss with the olive oil, Fresh dill, rock salt, and chopped almonds.",
+        "Spread in one layer on a wide tray so steam can escape.",
+        "Roast until the centers are tender and the edges are browned, turning once midway.",
+        "Rest for three minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Green Bean Almond Roast is roasted until tender and served warm rather than as a cold side. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-vegetable adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-turnip-mung-roast",
+      "name": "Turnip Mung Tray Roast",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.turnip",
+          "name": "Turnips, cut",
+          "grams": 440
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Cooked mung beans, drained",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Heat the oven and cut the turnips cut and drained cooked mung beans into evenly sized pieces.",
+        "Toss with the olive oil, Fresh parsley, rock salt.",
+        "Spread in one layer on a wide tray so steam can escape.",
+        "Roast until the centers are tender and the edges are browned, turning once midway.",
+        "Rest for three minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Turnip Mung Tray Roast is roasted until tender and served warm rather than as a cold side. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-vegetable adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.continental-red-pepper-tofu-roast",
+      "name": "Red Pepper Tofu Roast",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.red-bell-pepper",
+          "name": "Red bell peppers, cut",
+          "grams": 400
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.basil-sweet",
+          "name": "Fresh basil",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Heat the oven and cut the red bell peppers cut and cubed firm tofu into evenly sized pieces.",
+        "Toss with the olive oil, Fresh basil, rock salt.",
+        "Spread in one layer on a wide tray so steam can escape.",
+        "Roast until the centers are tender and the edges are browned, turning once midway.",
+        "Rest for three minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Red Pepper Tofu Roast is roasted until tender and served warm rather than as a cold side. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-vegetable adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    }
+  ]
+}

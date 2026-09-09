@@ -1,0 +1,3896 @@
+{
+  "formatVersion": "1.0",
+  "batch": "recipe-batch-r04",
+  "qualityState": "aiDraft",
+  "items": [
+    {
+      "id": "recipe.ven-pongal-ghee",
+      "name": "Ghee Ven Pongal",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, coarsely crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.cashew",
+          "name": "Cashews",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1500
+        }
+      ],
+      "steps": [
+        "Rinse the rice and mung dal until the draining water is mostly clear; soak for 20 minutes and drain.",
+        "Warm the ghee in a heavy pot; bloom the cumin, ginger, and turmeric just until fragrant.",
+        "Add the drained grains and the prepared coarsely crushed black pepper, cashews; turn them through the spiced fat for one minute.",
+        "Pour in the water, add the rock salt, and bring to a lively boil; lower the heat and cook covered for 30–35 minutes.",
+        "Stir and lightly press the grains to a cohesive, spoon-soft texture; rest covered for five minutes before serving warm."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ghee Ven Pongal is a soft one-pot grain-and-pulse preparation suited to a freshly cooked meal. Vata: serve warm with a little extra ghee. Pitta: favor coriander or fennel and keep pungent seasoning mild. Kapha: use a lighter portion and sharpen gently with dry ginger or black pepper.",
+      "provenance": [
+        "South Indian ven pongal tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.vegetable-upma",
+      "name": "Vegetable Upma",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.semolina",
+          "name": "Semolina",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced small",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Prepare the semolina and cut the diced small carrot and green peas and curry leaves evenly.",
+        "Warm the ghee and bloom the cumin and ginger until aromatic.",
+        "Add the main ingredient and vegetables, stir for one minute, then pour in the water.",
+        "Cook at a steady simmer until tender and cohesive; stir more often as the mixture thickens.",
+        "Season with rock salt, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vegetable Upma is served freshly cooked and warm as a grain-based morning meal. Vata: make it softer and use a little extra ghee. Pitta: favor cooling aromatics and moderate sour garnish. Kapha: keep it light, dry, and modestly spiced.",
+      "provenance": [
+        "Indian breakfast grain tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.rava-idli",
+      "name": "Rava Idli",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 55,
+      "cookMinutes": 18,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.semolina",
+          "name": "Semolina",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, sliced",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.yogurt",
+          "name": "Plain yogurt",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the molds",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 230
+        }
+      ],
+      "steps": [
+        "Prepare the semolina as a thick, smooth batter with the water and yogurt.",
+        "Fold in the mustard seeds, sliced curry leaves, grated fresh ginger and rock salt; cover and rest for 45 minutes.",
+        "Grease the steaming molds lightly with ghee and fill each hollow no more than three-quarters full.",
+        "Steam over steady heat until the cakes are set through and spring back when touched.",
+        "Rest for two minutes, loosen the edges, and serve the steamed cakes warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Rava Idli is steamed rather than fried and is best eaten freshly made. Vata: serve warm with ghee and a moist accompaniment. Pitta: pair with a mild coconut or coriander chutney. Kapha: keep the cakes small and the accompaniment light.",
+      "provenance": [
+        "South Indian idli tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      },
+      "reviewNote": "Rava-idli leavening varies; this version relies on a well-rested yogurt batter and omits modern chemical raising agents that lack a verified ingredient link."
+    },
+    {
+      "id": "recipe.pesarattu",
+      "name": "Pesarattu (Mung Dosa)",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 35,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Whole mung beans",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.green-chili",
+          "name": "Green chili, finely chopped",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 420
+        }
+      ],
+      "steps": [
+        "Rinse the whole mung beans if whole, or sift it if flour; soak whole grains or pulses until pliable, then grind or whisk with the measured water to a smooth batter.",
+        "Stir in the cumin, ginger, rock salt, and finely chopped green chili, fresh cilantro; rest the batter for 20 minutes after grinding.",
+        "Heat a heavy griddle and spread a thin film of ghee.",
+        "Pour and spread each pancake; cook until the surface sets, then turn and cook the second side.",
+        "Serve immediately while the center is tender and the edges are lightly crisp."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pesarattu (Mung Dosa) is a griddle-cooked breakfast made from a rested grain or pulse batter. Vata: make smaller, softer pancakes and add ghee. Pitta: omit chilies and add coriander. Kapha: spread thinly and use minimal fat.",
+      "provenance": [
+        "Andhra pesarattu tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.adai",
+      "name": "Adai (Mixed-Dal Dosa)",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 45,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.chana-dal",
+          "name": "Chana dal",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Toor dal",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Urad dal",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, sliced",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 520
+        }
+      ],
+      "steps": [
+        "Rinse the white rice if whole, or sift it if flour; soak whole grains or pulses until pliable, then grind or whisk with the measured water to a smooth batter.",
+        "Stir in the cumin, ginger, rock salt, and chana dal, toor dal, urad dal, sliced curry leaves; rest the batter for 30 minutes after grinding.",
+        "Heat a heavy griddle and spread a thin film of ghee.",
+        "Pour and spread each pancake; cook until the surface sets, then turn and cook the second side.",
+        "Serve immediately while the center is tender and the edges are lightly crisp."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Adai (Mixed-Dal Dosa) is a griddle-cooked breakfast made from a rested grain or pulse batter. Vata: make smaller, softer pancakes and add ghee. Pitta: omit chilies and add coriander. Kapha: spread thinly and use minimal fat.",
+      "provenance": [
+        "Tamil adai tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.besan-chilla",
+      "name": "Besan Chilla",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.besan",
+          "name": "Chickpea flour",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro, chopped",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 420
+        }
+      ],
+      "steps": [
+        "Rinse the chickpea flour if whole, or sift it if flour; soak whole grains or pulses until pliable, then grind or whisk with the measured water to a smooth batter.",
+        "Stir in the cumin, ginger, rock salt, and chopped fresh cilantro, ajwain seeds; rest the batter for 15 minutes.",
+        "Heat a heavy griddle and spread a thin film of ghee.",
+        "Pour and spread each pancake; cook until the surface sets, then turn and cook the second side.",
+        "Serve immediately while the center is tender and the edges are lightly crisp."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Besan Chilla is a griddle-cooked breakfast made from a rested grain or pulse batter. Vata: make smaller, softer pancakes and add ghee. Pitta: omit chilies and add coriander. Kapha: spread thinly and use minimal fat.",
+      "provenance": [
+        "North Indian chilla tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.moong-chilla",
+      "name": "Moong Chilla",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 35,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 420
+        }
+      ],
+      "steps": [
+        "Rinse the split mung dal if whole, or sift it if flour; soak whole grains or pulses until pliable, then grind or whisk with the measured water to a smooth batter.",
+        "Stir in the cumin, ginger, rock salt, and fresh cilantro; rest the batter for 20 minutes after grinding.",
+        "Heat a heavy griddle and spread a thin film of ghee.",
+        "Pour and spread each pancake; cook until the surface sets, then turn and cook the second side.",
+        "Serve immediately while the center is tender and the edges are lightly crisp."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Moong Chilla is a griddle-cooked breakfast made from a rested grain or pulse batter. Vata: make smaller, softer pancakes and add ghee. Pitta: omit chilies and add coriander. Kapha: spread thinly and use minimal fat.",
+      "provenance": [
+        "North Indian moong chilla tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.vermicelli-upma",
+      "name": "Vermicelli Upma",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.semolina",
+          "name": "Semolina vermicelli",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced small",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 620
+        }
+      ],
+      "steps": [
+        "Prepare the semolina vermicelli and cut the diced small carrot and green peas and curry leaves evenly.",
+        "Warm the ghee and bloom the cumin and ginger until aromatic.",
+        "Add the main ingredient and vegetables, stir for one minute, then pour in the water.",
+        "Cook at a steady simmer until tender and cohesive; stir more often as the mixture thickens.",
+        "Season with rock salt, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vermicelli Upma is served freshly cooked and warm as a grain-based morning meal. Vata: make it softer and use a little extra ghee. Pitta: favor cooling aromatics and moderate sour garnish. Kapha: keep it light, dry, and modestly spiced.",
+      "provenance": [
+        "Indian breakfast grain tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.aloo-paratha-light",
+      "name": "Aloo Paratha",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Cooked potato, mashed",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro, chopped",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 210
+        }
+      ],
+      "steps": [
+        "Combine the whole-wheat flour, ajwain, rock salt, and mashed cooked potato, chopped fresh cilantro.",
+        "Add the water gradually and knead to a soft dough; cover and rest for 15 minutes.",
+        "Divide into equal portions and roll each one evenly, dusting only as needed.",
+        "Cook on a hot griddle until both sides show brown speckles, brushing lightly with ghee as they finish.",
+        "Stack under a clean cloth and serve warm rather than holding them until dry."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Aloo Paratha is a freshly cooked griddle bread with restrained fat. Vata: serve soft with ghee and a moist accompaniment. Pitta: keep pungent fillings mild. Kapha: make it thin and use less finishing ghee.",
+      "provenance": [
+        "regional Indian flatbread tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.methi-paratha",
+      "name": "Methi Paratha",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.methi-leaves",
+          "name": "Fresh fenugreek leaves, chopped",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 230
+        }
+      ],
+      "steps": [
+        "Combine the whole-wheat flour, ajwain, rock salt, and chopped fresh fenugreek leaves.",
+        "Add the water gradually and knead to a soft dough; cover and rest for 15 minutes.",
+        "Divide into equal portions and roll each one evenly, dusting only as needed.",
+        "Cook on a hot griddle until both sides show brown speckles, brushing lightly with ghee as they finish.",
+        "Stack under a clean cloth and serve warm rather than holding them until dry."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Methi Paratha is a freshly cooked griddle bread with restrained fat. Vata: serve soft with ghee and a moist accompaniment. Pitta: keep pungent fillings mild. Kapha: make it thin and use less finishing ghee.",
+      "provenance": [
+        "regional Indian flatbread tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.stuffed-lauki-paratha",
+      "name": "Lauki Paratha",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.bottle-gourd",
+          "name": "Bottle gourd, grated and squeezed",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 150
+        }
+      ],
+      "steps": [
+        "Combine the whole-wheat flour, ajwain, rock salt, and grated and squeezed bottle gourd, fresh cilantro.",
+        "Add the water gradually and knead to a soft dough; cover and rest for 15 minutes.",
+        "Divide into equal portions and roll each one evenly, dusting only as needed.",
+        "Cook on a hot griddle until both sides show brown speckles, brushing lightly with ghee as they finish.",
+        "Stack under a clean cloth and serve warm rather than holding them until dry."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Lauki Paratha is a freshly cooked griddle bread with restrained fat. Vata: serve soft with ghee and a moist accompaniment. Pitta: keep pungent fillings mild. Kapha: make it thin and use less finishing ghee.",
+      "provenance": [
+        "regional Indian flatbread tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.poha-lemon",
+      "name": "Lemon Poha",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 14,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "Thick flattened white rice (poha)",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 180
+        }
+      ],
+      "steps": [
+        "Rinse the flattened rice briefly, drain, and rest it for five minutes so the flakes soften without becoming soggy.",
+        "Warm the ghee, pop the mustard seeds, and crisp the curry leaves.",
+        "Add the green peas, turmeric, and water; cover until the peas are tender.",
+        "Fold in the softened poha and rock salt and steam on low heat for four minutes.",
+        "Remove from the heat, add the lemon juice, and fluff gently before serving warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "This poha is moistened gently and finished with lemon off the heat. Vata: use a little more ghee and keep the flakes soft. Pitta: halve the lemon and omit chilies. Kapha: retain the lemon and modest ghee.",
+      "provenance": [
+        "Western Indian poha tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      },
+      "reviewNote": "Flattened rice is linked to its parent white-rice dravya because no standalone poha dravya or exact store item is available."
+    },
+    {
+      "id": "recipe.ragi-porridge",
+      "name": "Ragi Porridge",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 18,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.ragi",
+          "name": "Finger millet flour",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.buttermilk",
+          "name": "Plain buttermilk",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 3
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 650
+        }
+      ],
+      "steps": [
+        "Whisk the finger millet flour with part of the water to make a lump-free slurry.",
+        "Bring the remaining water to a simmer and whisk in the slurry gradually.",
+        "Cook on low heat, stirring continuously, until the porridge loses its raw flour aroma and thickens.",
+        "Take the pot off the heat and let the porridge cool until lukewarm.",
+        "Whisk in the buttermilk, toasted cumin, and rock salt and serve immediately."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cooked ragi is cooled to lukewarm before buttermilk is added for a savory summer porridge. Vata: serve slightly warmer and use less buttermilk. Pitta: retain the mild cumin and room-temperature serving. Kapha: dilute a little more and keep the portion moderate.",
+      "provenance": [
+        "South Indian ragi ambali tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.oats-spiced-porridge",
+      "name": "Spiced Oats Porridge",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 24
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Prepare the rolled oats and cut the cinnamon evenly.",
+        "Warm the ghee and bloom the cardamom until aromatic.",
+        "Add the main ingredient and vegetables, stir for one minute, then pour in the water.",
+        "Cook at a steady simmer until tender and cohesive; stir more often as the mixture thickens.",
+        "Season with rock sugar, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Spiced Oats Porridge is served freshly cooked and warm as a grain-based morning meal. Vata: make it softer and use a little extra ghee. Pitta: favor cooling aromatics and moderate sour garnish. Kapha: keep it light, dry, and modestly spiced.",
+      "provenance": [
+        "Ayurvedic-influenced spiced porridge tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.dalia-porridge",
+      "name": "Dalia (Broken Wheat) Porridge",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Broken whole wheat",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 650
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 450
+        }
+      ],
+      "steps": [
+        "Rinse the broken wheat and drain well.",
+        "Warm the ghee in a heavy pot and toast the wheat until it smells nutty.",
+        "Add the water and simmer covered until the grains are nearly tender.",
+        "Pour in the milk and cook gently, stirring often, until the porridge is soft and creamy.",
+        "Stir in the rock sugar and cardamom, rest for three minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Broken wheat is cooked first in water and then with milk for a soft breakfast porridge. Vata: retain the ghee and serve quite soft. Pitta: use less sugar and emphasize cardamom. Kapha: take a small portion and reduce ghee.",
+      "provenance": [
+        "North Indian dalia porridge tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.thalipeeth",
+      "name": "Thalipeeth (Multigrain)",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.jowar",
+          "name": "Sorghum flour",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.besan",
+          "name": "Chickpea flour",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.onion",
+          "name": "Onion, finely chopped",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 300
+        }
+      ],
+      "steps": [
+        "Combine the sorghum flour, ajwain, rock salt, and chickpea flour, whole-wheat flour, finely chopped onion, fresh cilantro.",
+        "Add the water gradually and knead to a soft dough; cover and rest for 15 minutes.",
+        "Divide into equal portions and roll each one evenly, dusting only as needed.",
+        "Cook on a hot griddle until both sides show brown speckles, brushing lightly with ghee as they finish.",
+        "Stack under a clean cloth and serve warm rather than holding them until dry."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Thalipeeth (Multigrain) is a freshly cooked griddle bread with restrained fat. Vata: serve soft with ghee and a moist accompaniment. Pitta: keep pungent fillings mild. Kapha: make it thin and use less finishing ghee.",
+      "provenance": [
+        "Maharashtrian thalipeeth tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.ragi-roti",
+      "name": "Ragi Roti",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.ragi",
+          "name": "Finger millet flour",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.onion",
+          "name": "Onion, finely chopped",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, finely sliced",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 330
+        }
+      ],
+      "steps": [
+        "Combine the finger millet flour, ajwain, rock salt, and finely chopped onion, finely sliced curry leaves.",
+        "Add the water gradually and knead to a soft dough; cover and rest for 15 minutes.",
+        "Divide into equal portions and roll each one evenly, dusting only as needed.",
+        "Cook on a hot griddle until both sides show brown speckles, brushing lightly with ghee as they finish.",
+        "Stack under a clean cloth and serve warm rather than holding them until dry."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ragi Roti is a freshly cooked griddle bread with restrained fat. Vata: serve soft with ghee and a moist accompaniment. Pitta: keep pungent fillings mild. Kapha: make it thin and use less finishing ghee.",
+      "provenance": [
+        "Karnataka ragi rotti tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.bajra-roti-gud-ghee",
+      "name": "Bajra Roti with Gud-Ghee",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.bajra",
+          "name": "Pearl millet flour",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 32
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery, grated",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 3
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 300
+        }
+      ],
+      "steps": [
+        "Combine the pearl millet flour and rock salt and add warm water gradually to form a soft dough.",
+        "Divide the dough and pat each portion between the palms or on a damp board into an even round.",
+        "Cook each roti on a hot griddle, turning carefully until both sides are cooked and lightly spotted.",
+        "Mix the jaggery with half the ghee to make a soft gud-ghee accompaniment.",
+        "Brush the rotis with the remaining ghee and serve warm with only a small dab of gud-ghee."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm bajra roti is paired with a deliberately small amount of gud-ghee in cold weather. Vata: retain the ghee and serve with a moist dal. Pitta: use less jaggery. Kapha: take one thin roti and omit extra gud-ghee.",
+      "provenance": [
+        "North Indian winter bajra-roti tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.akki-roti",
+      "name": "Akki Roti",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "fdcId": 7135,
+          "name": "White rice flour",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, grated and squeezed",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill, chopped",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 270
+        }
+      ],
+      "steps": [
+        "Combine the white rice flour, ajwain, rock salt, and grated and squeezed cucumber, chopped fresh dill.",
+        "Add the water gradually and knead to a soft dough; cover and rest for 15 minutes.",
+        "Divide into equal portions and roll each one evenly, dusting only as needed.",
+        "Cook on a hot griddle until both sides show brown speckles, brushing lightly with ghee as they finish.",
+        "Stack under a clean cloth and serve warm rather than holding them until dry."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Akki Roti is a freshly cooked griddle bread with restrained fat. Vata: serve soft with ghee and a moist accompaniment. Pitta: keep pungent fillings mild. Kapha: make it thin and use less finishing ghee.",
+      "provenance": [
+        "Karnataka akki rotti tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.missi-roti",
+      "name": "Missi Roti",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.besan",
+          "name": "Chickpea flour",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 285
+        }
+      ],
+      "steps": [
+        "Combine the chickpea flour, ajwain, rock salt, and whole-wheat flour, fresh cilantro.",
+        "Add the water gradually and knead to a soft dough; cover and rest for 15 minutes.",
+        "Divide into equal portions and roll each one evenly, dusting only as needed.",
+        "Cook on a hot griddle until both sides show brown speckles, brushing lightly with ghee as they finish.",
+        "Stack under a clean cloth and serve warm rather than holding them until dry."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Missi Roti is a freshly cooked griddle bread with restrained fat. Vata: serve soft with ghee and a moist accompaniment. Pitta: keep pungent fillings mild. Kapha: make it thin and use less finishing ghee.",
+      "provenance": [
+        "North Indian missi roti tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.fasting-kuttu-roti",
+      "name": "Kuttu Roti (Fasting)",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat flour",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Cooked potato, mashed",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 210
+        }
+      ],
+      "steps": [
+        "Combine the buckwheat flour, ajwain, rock salt, and mashed cooked potato.",
+        "Add the water gradually and knead to a soft dough; cover and rest for 15 minutes.",
+        "Divide into equal portions and roll each one evenly, dusting only as needed.",
+        "Cook on a hot griddle until both sides show brown speckles, brushing lightly with ghee as they finish.",
+        "Stack under a clean cloth and serve warm rather than holding them until dry."
+      ],
+      "dosha": {
+        "vata": 1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kuttu Roti (Fasting) is a freshly cooked griddle bread with restrained fat. Vata: serve soft with ghee and a moist accompaniment. Pitta: keep pungent fillings mild. Kapha: make it thin and use less finishing ghee.",
+      "provenance": [
+        "North Indian fasting-food tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.jeera-rice",
+      "name": "Jeera Rice",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 25,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.bay-leaf",
+          "name": "Indian bay leaf",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white basmati rice until the water runs nearly clear; soak for 15 minutes and drain.",
+        "Warm the ghee; bloom the cumin and gently cook the indian bay leaf for one minute.",
+        "Add the drained grain, measured water, and rock salt; bring to a boil.",
+        "Cover and cook on low heat until the liquid is absorbed and the grains are tender.",
+        "Rest off the heat for eight minutes, then lift the grains gently with a fork before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Jeera Rice is a lightly seasoned grain dish served freshly cooked. Vata: add ghee and pair with a moist dal. Pitta: keep sour and pungent garnish modest. Kapha: reduce ghee and favor a vegetable-rich portion.",
+      "provenance": [
+        "regional Indian seasoned-rice tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.peas-pulao",
+      "name": "Peas Pulao",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 25,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.bay-leaf",
+          "name": "Indian bay leaf",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white basmati rice until the water runs nearly clear; soak for 15 minutes and drain.",
+        "Warm the ghee; bloom the cumin and gently cook the green peas and indian bay leaf and green cardamom for one minute.",
+        "Add the drained grain, measured water, and rock salt; bring to a boil.",
+        "Cover and cook on low heat until the liquid is absorbed and the grains are tender.",
+        "Rest off the heat for eight minutes, then lift the grains gently with a fork before serving."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Peas Pulao is a lightly seasoned grain dish served freshly cooked. Vata: add ghee and pair with a moist dal. Pitta: keep sour and pungent garnish modest. Kapha: reduce ghee and favor a vegetable-rich portion.",
+      "provenance": [
+        "regional Indian seasoned-rice tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.mint-rice",
+      "name": "Mint Rice",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 25,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint, chopped",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 35
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white basmati rice until the water runs nearly clear; soak for 15 minutes and drain.",
+        "Warm the Coconut oil; bloom the cumin and gently cook the chopped fresh mint and grated fresh coconut for one minute.",
+        "Add the drained grain, measured water, and rock salt; bring to a boil.",
+        "Cover and cook on low heat until the liquid is absorbed and the grains are tender.",
+        "Rest off the heat for eight minutes, then lift the grains gently with a fork before serving."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mint Rice is a lightly seasoned grain dish served freshly cooked. Vata: add ghee and pair with a moist dal. Pitta: keep sour and pungent garnish modest. Kapha: reduce ghee and favor a vegetable-rich portion.",
+      "provenance": [
+        "regional Indian seasoned-rice tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.raw-mango-rice",
+      "name": "Raw Mango Rice",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 25,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 300
+        },
+        {
+          "fdcId": 3668,
+          "name": "Raw green mango, grated",
+          "grams": 110
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white rice until the water runs nearly clear; soak for 15 minutes and drain.",
+        "Warm the Sesame oil; bloom the cumin and gently cook the grated raw green mango and mustard seeds and curry leaves for one minute.",
+        "Add the drained grain, measured water, and rock salt; bring to a boil.",
+        "Cover and cook on low heat until the liquid is absorbed and the grains are tender.",
+        "Rest off the heat for eight minutes, then lift the grains gently with a fork before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Raw Mango Rice is a lightly seasoned grain dish served freshly cooked. Vata: add ghee and pair with a moist dal. Pitta: keep sour and pungent garnish modest. Kapha: reduce ghee and favor a vegetable-rich portion.",
+      "provenance": [
+        "South Indian raw-mango rice tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.sesame-rice",
+      "name": "Sesame Rice",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 25,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds, toasted",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white rice until the water runs nearly clear; soak for 15 minutes and drain.",
+        "Warm the Sesame oil; bloom the cumin and gently cook the toasted sesame seeds and curry leaves for one minute.",
+        "Add the drained grain, measured water, and rock salt; bring to a boil.",
+        "Cover and cook on low heat until the liquid is absorbed and the grains are tender.",
+        "Rest off the heat for eight minutes, then lift the grains gently with a fork before serving."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sesame Rice is a lightly seasoned grain dish served freshly cooked. Vata: add ghee and pair with a moist dal. Pitta: keep sour and pungent garnish modest. Kapha: reduce ghee and favor a vegetable-rich portion.",
+      "provenance": [
+        "regional Indian seasoned-rice tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.bagara-khichdi-bajra",
+      "name": "Millet-Curd Rice (Cooling)",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.yogurt",
+          "name": "Plain yogurt",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, diced small",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 10
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 780
+        }
+      ],
+      "steps": [
+        "Rinse the millet and cook it with the water until soft; spread it in a wide bowl to cool until lukewarm.",
+        "Whisk the yogurt with the rock salt until smooth.",
+        "Fold the yogurt and cucumber through the lukewarm millet.",
+        "Warm the coconut oil, pop the mustard seeds, and crisp the curry leaves.",
+        "Pour the tempering over the millet-curd mixture and serve at cool room temperature, never ice-cold."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Soft millet is cooled before yogurt and cucumber are folded in for this hot-season grain bowl. Vata: serve closer to warm and reduce cucumber. Pitta: retain the mild seasoning. Kapha: increase the millet-to-yogurt dilution and keep the portion small.",
+      "provenance": [
+        "South Indian curd-grain tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      },
+      "reviewNote": "Regional millet-curd preparations use little, barnyard, or other small millets; proso millet is used because it has an exact dravya link."
+    },
+    {
+      "id": "recipe.curd-oats-bowl",
+      "name": "Curd Oats Bowl",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 14,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.yogurt",
+          "name": "Plain yogurt",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 10
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 3
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 520
+        }
+      ],
+      "steps": [
+        "Cook the oats with the water and rock salt until soft but not gluey.",
+        "Spread the oats in a bowl and let them cool until lukewarm.",
+        "Whisk the yogurt smooth and fold it through the oats.",
+        "Warm the ghee, pop the mustard seeds, and crisp the cumin and curry leaves.",
+        "Pour the tempering over the bowl and serve at room temperature."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Yogurt is folded into fully cooked, cooled oats for a savory breakfast bowl. Vata: serve less cool and add a little ghee. Pitta: keep spices mild. Kapha: use more water in the oats and a smaller yogurt portion.",
+      "provenance": [
+        "South Indian curd-grain adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.navratri-kuttu-thali",
+      "name": "Navratri Fasting Thali",
+      "category": "classical",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 30,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat flour",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potato, diced",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.yogurt",
+          "name": "Plain yogurt",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, diced",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 6
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 300
+        }
+      ],
+      "steps": [
+        "Mix the buckwheat flour with half the rock salt and enough water to make a soft dough; rest for ten minutes.",
+        "Shape small flatbreads and cook them on a griddle with half the ghee.",
+        "Warm the remaining ghee and cumin, add the potato and remaining salt, and cook covered with a splash of water until tender.",
+        "Whisk the yogurt and fold in the cucumber to make a plain raita.",
+        "Serve one warm buckwheat flatbread with the cumin potato and a small separate spoonful of raita."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "This fasting plate combines buckwheat bread, cumin potato, and a simple cucumber raita in moderate portions. Vata: serve the bread soft with ghee and reduce raw cucumber. Pitta: keep cumin mild and favor the raita. Kapha: take more buckwheat and less potato and yogurt.",
+      "provenance": [
+        "Navratri fasting-food tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.roasted-makhana",
+      "name": "Ghee-Roasted Makhana",
+      "category": "classical",
+      "meal": "snack",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.lotus-seed",
+          "name": "Lotus seeds (makhana)",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Prepare the lotus seeds (makhana) in small, even pieces.",
+        "Warm the ghee with cumin until aromatic.",
+        "Add the prepared ingredients and rock salt; cook over medium-low heat, turning frequently.",
+        "Continue until heated through with a dry, lightly crisp exterior, taking care not to scorch the spices.",
+        "Serve warm in a modest portion."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ghee-Roasted Makhana is a warm, simply seasoned snack rather than a cold or deeply fried preparation. Vata: choose a small soft portion and add ghee if dry. Pitta: keep pepper and sour garnish low. Kapha: use minimal ghee and emphasize the toasted finish.",
+      "provenance": [
+        "Indian household snack tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.sprout-salad-steamed",
+      "name": "Warm Sprout Salad",
+      "category": "classical",
+      "meal": "snack",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 8,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-sprouts",
+          "name": "Mung bean sprouts",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro, chopped",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 3
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 80
+        }
+      ],
+      "steps": [
+        "Rinse the mung sprouts and spread them in a steamer basket.",
+        "Steam until warmed through and just tender, about five minutes.",
+        "Warm the ghee with toasted cumin and fold it through the sprouts with rock salt.",
+        "Remove from the heat and add the lemon juice and cilantro.",
+        "Serve immediately while warm, not as a raw chilled salad."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Brief steaming makes this sprout salad warmer and softer than a raw version. Vata: steam longer and add a little ghee. Pitta: use less lemon. Kapha: keep the light texture and full cilantro.",
+      "provenance": [
+        "classical Indian household cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.corn-chaat-warm",
+      "name": "Warm Corn Chaat",
+      "category": "classical",
+      "meal": "snack",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.corn",
+          "name": "Fresh corn kernels",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.black-salt",
+          "name": "Black salt",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 8
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 100
+        }
+      ],
+      "steps": [
+        "Steam the corn kernels with the water until tender and drain well.",
+        "Warm the ghee with the toasted cumin and add the corn.",
+        "Toss for two minutes until the kernels are evenly hot.",
+        "Take the pan off the heat and fold in the black salt, lemon juice, and cilantro.",
+        "Serve warm in small bowls."
+      ],
+      "dosha": {
+        "vata": 1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "varsha"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "This corn chaat is steamed and served warm, with sour seasoning added only after cooking. Vata: cook the corn very tender and add ghee. Pitta: halve the lemon and black salt. Kapha: retain the light ghee measure and warm serving.",
+      "provenance": [
+        "classical Indian household cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.roasted-chana-jor",
+      "name": "Roasted Chana Snack",
+      "category": "classical",
+      "meal": "snack",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas, well dried",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.black-salt",
+          "name": "Black salt",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.amchur",
+          "name": "Amchur",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 10
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Prepare the well-dried cooked chickpeas and black salt and amchur in small, even pieces.",
+        "Warm the ghee with cumin until aromatic.",
+        "Add the prepared ingredients and rock salt; cook over medium-low heat, turning frequently.",
+        "Continue until heated through with a dry, lightly crisp exterior, taking care not to scorch the spices.",
+        "Serve warm in a modest portion."
+      ],
+      "dosha": {
+        "vata": 1,
+        "pitta": -1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Roasted Chana Snack is a warm, simply seasoned snack rather than a cold or deeply fried preparation. Vata: choose a small soft portion and add ghee if dry. Pitta: keep pepper and sour garnish low. Kapha: use minimal ghee and emphasize the toasted finish.",
+      "provenance": [
+        "Indian household snack tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.baked-vegetable-cutlet",
+      "name": "Baked Vegetable Cutlet",
+      "category": "classical",
+      "meal": "snack",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potato, cooked and mashed",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, grated",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, cooked",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "Thick flattened rice, ground",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Combine the mashed potato, carrot, peas, ground rice flakes, cilantro, cumin, and rock salt.",
+        "Rest the mixture for ten minutes so the rice flakes absorb excess moisture.",
+        "Shape into small flat cutlets and brush both sides lightly with ghee.",
+        "Bake on a heated tray, turning once, until the surfaces are golden and the centers are hot.",
+        "Rest for three minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "These vegetable cutlets are bound with ground rice flakes and baked rather than deep-fried. Vata: serve with a moist chutney and do not overbake. Pitta: pair with coriander chutney without chili. Kapha: keep the cutlets small and lightly brushed.",
+      "provenance": [
+        "classical Indian household cooking tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      },
+      "reviewNote": "Flattened rice is linked to its parent white-rice dravya because no standalone poha binding is available."
+    },
+    {
+      "id": "recipe.plain-semolina-upma",
+      "name": "Plain Semolina Upma",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.semolina",
+          "name": "Semolina",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Prepare the semolina and cut the curry leaves and mustard seeds evenly.",
+        "Warm the ghee and bloom the cumin and ginger until aromatic.",
+        "Add the main ingredient and vegetables, stir for one minute, then pour in the water.",
+        "Cook at a steady simmer until tender and cohesive; stir more often as the mixture thickens.",
+        "Season with rock salt, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Plain Semolina Upma is served freshly cooked and warm as a grain-based morning meal. Vata: make it softer and use a little extra ghee. Pitta: favor cooling aromatics and moderate sour garnish. Kapha: keep it light, dry, and modestly spiced.",
+      "provenance": [
+        "Indian breakfast grain tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.carrot-upma",
+      "name": "Carrot Upma",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.semolina",
+          "name": "Semolina",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced small",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 780
+        }
+      ],
+      "steps": [
+        "Prepare the semolina and cut the diced small carrot and curry leaves evenly.",
+        "Warm the ghee and bloom the cumin and ginger until aromatic.",
+        "Add the main ingredient and vegetables, stir for one minute, then pour in the water.",
+        "Cook at a steady simmer until tender and cohesive; stir more often as the mixture thickens.",
+        "Season with rock salt, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Carrot Upma is served freshly cooked and warm as a grain-based morning meal. Vata: make it softer and use a little extra ghee. Pitta: favor cooling aromatics and moderate sour garnish. Kapha: keep it light, dry, and modestly spiced.",
+      "provenance": [
+        "Indian breakfast grain tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.green-pea-upma",
+      "name": "Green Pea Upma",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.semolina",
+          "name": "Semolina",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 780
+        }
+      ],
+      "steps": [
+        "Prepare the semolina and cut the green peas and curry leaves evenly.",
+        "Warm the ghee and bloom the cumin and ginger until aromatic.",
+        "Add the main ingredient and vegetables, stir for one minute, then pour in the water.",
+        "Cook at a steady simmer until tender and cohesive; stir more often as the mixture thickens.",
+        "Season with rock salt, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Green Pea Upma is served freshly cooked and warm as a grain-based morning meal. Vata: make it softer and use a little extra ghee. Pitta: favor cooling aromatics and moderate sour garnish. Kapha: keep it light, dry, and modestly spiced.",
+      "provenance": [
+        "Indian breakfast grain tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.millet-upma",
+      "name": "Proso Millet Upma",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced small",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, finely cut",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Prepare the proso millet and cut the diced small carrot and finely cut green beans and curry leaves evenly.",
+        "Warm the ghee and bloom the cumin and ginger until aromatic.",
+        "Add the main ingredient and vegetables, stir for one minute, then pour in the water.",
+        "Cook at a steady simmer until tender and cohesive; stir more often as the mixture thickens.",
+        "Season with rock salt, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Proso Millet Upma is served freshly cooked and warm as a grain-based morning meal. Vata: make it softer and use a little extra ghee. Pitta: favor cooling aromatics and moderate sour garnish. Kapha: keep it light, dry, and modestly spiced.",
+      "provenance": [
+        "Indian breakfast grain tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.barley-vegetable-breakfast",
+      "name": "Barley Vegetable Breakfast Bowl",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, grated",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1000
+        }
+      ],
+      "steps": [
+        "Prepare the pearled barley and cut the diced carrot and green peas evenly.",
+        "Warm the ghee and bloom the cumin and ginger until aromatic.",
+        "Add the main ingredient and vegetables, stir for one minute, then pour in the water.",
+        "Cook at a steady simmer until tender and cohesive; stir more often as the mixture thickens.",
+        "Season with rock salt, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Barley Vegetable Breakfast Bowl is served freshly cooked and warm as a grain-based morning meal. Vata: make it softer and use a little extra ghee. Pitta: favor cooling aromatics and moderate sour garnish. Kapha: keep it light, dry, and modestly spiced.",
+      "provenance": [
+        "Indian breakfast grain tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.rice-mung-idli",
+      "name": "Rice-Mung Steamed Idli",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 55,
+      "cookMinutes": 18,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, soaked",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal, soaked",
+          "grams": 110
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the molds",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 360
+        }
+      ],
+      "steps": [
+        "Prepare the soaked white rice as a thick, smooth batter with the water.",
+        "Fold in the soaked split mung dal, cumin seeds and rock salt; cover and rest for 40 minutes after grinding.",
+        "Grease the steaming molds lightly with ghee and fill each hollow no more than three-quarters full.",
+        "Steam over steady heat until the cakes are set through and spring back when touched.",
+        "Rest for two minutes, loosen the edges, and serve the steamed cakes warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Rice-Mung Steamed Idli is steamed rather than fried and is best eaten freshly made. Vata: serve warm with ghee and a moist accompaniment. Pitta: pair with a mild coconut or coriander chutney. Kapha: keep the cakes small and the accompaniment light.",
+      "provenance": [
+        "South Indian idli tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.carrot-rava-idli",
+      "name": "Carrot Rava Idli",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 55,
+      "cookMinutes": 18,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.semolina",
+          "name": "Semolina",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, finely grated",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.yogurt",
+          "name": "Plain yogurt",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the molds",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 220
+        }
+      ],
+      "steps": [
+        "Prepare the semolina as a thick, smooth batter with the water and yogurt.",
+        "Fold in the finely grated carrot, mustard seeds, curry leaves and rock salt; cover and rest for 45 minutes.",
+        "Grease the steaming molds lightly with ghee and fill each hollow no more than three-quarters full.",
+        "Steam over steady heat until the cakes are set through and spring back when touched.",
+        "Rest for two minutes, loosen the edges, and serve the steamed cakes warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Carrot Rava Idli is steamed rather than fried and is best eaten freshly made. Vata: serve warm with ghee and a moist accompaniment. Pitta: pair with a mild coconut or coriander chutney. Kapha: keep the cakes small and the accompaniment light.",
+      "provenance": [
+        "South Indian idli tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.spinach-mung-chilla",
+      "name": "Spinach Mung Chilla",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 35,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, finely chopped",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 15
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 420
+        }
+      ],
+      "steps": [
+        "Rinse the split mung dal if whole, or sift it if flour; soak whole grains or pulses until pliable, then grind or whisk with the measured water to a smooth batter.",
+        "Stir in the cumin, ginger, rock salt, and finely chopped spinach, fresh cilantro; rest the batter for 15 minutes.",
+        "Heat a heavy griddle and spread a thin film of ghee.",
+        "Pour and spread each pancake; cook until the surface sets, then turn and cook the second side.",
+        "Serve immediately while the center is tender and the edges are lightly crisp."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Spinach Mung Chilla is a griddle-cooked breakfast made from a rested grain or pulse batter. Vata: make smaller, softer pancakes and add ghee. Pitta: omit chilies and add coriander. Kapha: spread thinly and use minimal fat.",
+      "provenance": [
+        "Indian dosa and chilla tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.masoor-chilla",
+      "name": "Masoor Dal Chilla",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 35,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 420
+        }
+      ],
+      "steps": [
+        "Rinse the red lentils if whole, or sift it if flour; soak whole grains or pulses until pliable, then grind or whisk with the measured water to a smooth batter.",
+        "Stir in the cumin, ginger, rock salt, and fresh cilantro, coriander seeds; rest the batter for 15 minutes.",
+        "Heat a heavy griddle and spread a thin film of ghee.",
+        "Pour and spread each pancake; cook until the surface sets, then turn and cook the second side.",
+        "Serve immediately while the center is tender and the edges are lightly crisp."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Masoor Dal Chilla is a griddle-cooked breakfast made from a rested grain or pulse batter. Vata: make smaller, softer pancakes and add ghee. Pitta: omit chilies and add coriander. Kapha: spread thinly and use minimal fat.",
+      "provenance": [
+        "Indian dosa and chilla tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.ragi-dosa",
+      "name": "Ragi Dosa",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.ragi",
+          "name": "Finger millet flour",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, finely sliced",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 560
+        }
+      ],
+      "steps": [
+        "Rinse the finger millet flour if whole, or sift it if flour; soak whole grains or pulses until pliable, then grind or whisk with the measured water to a smooth batter.",
+        "Stir in the cumin, ginger, rock salt, and finely sliced curry leaves; rest the batter for 15 minutes.",
+        "Heat a heavy griddle and spread a thin film of ghee.",
+        "Pour and spread each pancake; cook until the surface sets, then turn and cook the second side.",
+        "Serve immediately while the center is tender and the edges are lightly crisp."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ragi Dosa is a griddle-cooked breakfast made from a rested grain or pulse batter. Vata: make smaller, softer pancakes and add ghee. Pitta: omit chilies and add coriander. Kapha: spread thinly and use minimal fat.",
+      "provenance": [
+        "Indian dosa and chilla tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.jowar-dosa",
+      "name": "Jowar Dosa",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.jowar",
+          "name": "Sorghum flour",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 540
+        }
+      ],
+      "steps": [
+        "Rinse the sorghum flour if whole, or sift it if flour; soak whole grains or pulses until pliable, then grind or whisk with the measured water to a smooth batter.",
+        "Stir in the cumin, ginger, rock salt, and fresh cilantro; rest the batter for 15 minutes.",
+        "Heat a heavy griddle and spread a thin film of ghee.",
+        "Pour and spread each pancake; cook until the surface sets, then turn and cook the second side.",
+        "Serve immediately while the center is tender and the edges are lightly crisp."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Jowar Dosa is a griddle-cooked breakfast made from a rested grain or pulse batter. Vata: make smaller, softer pancakes and add ghee. Pitta: omit chilies and add coriander. Kapha: spread thinly and use minimal fat.",
+      "provenance": [
+        "Indian dosa and chilla tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.rice-flour-dosa",
+      "name": "Rice Flour Dosa",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "fdcId": 7135,
+          "name": "White rice flour",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, finely sliced",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 590
+        }
+      ],
+      "steps": [
+        "Rinse the white rice flour if whole, or sift it if flour; soak whole grains or pulses until pliable, then grind or whisk with the measured water to a smooth batter.",
+        "Stir in the cumin, ginger, rock salt, and finely sliced curry leaves; rest the batter for 15 minutes.",
+        "Heat a heavy griddle and spread a thin film of ghee.",
+        "Pour and spread each pancake; cook until the surface sets, then turn and cook the second side.",
+        "Serve immediately while the center is tender and the edges are lightly crisp."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Rice Flour Dosa is a griddle-cooked breakfast made from a rested grain or pulse batter. Vata: make smaller, softer pancakes and add ghee. Pitta: omit chilies and add coriander. Kapha: spread thinly and use minimal fat.",
+      "provenance": [
+        "Indian dosa and chilla tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.barley-cinnamon-porridge",
+      "name": "Barley Cinnamon Porridge",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Cracked barley",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 24
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Prepare the cracked barley and cut the cinnamon evenly.",
+        "Warm the ghee and bloom the cardamom until aromatic.",
+        "Add the main ingredient and vegetables, stir for one minute, then pour in the water.",
+        "Cook at a steady simmer until tender and cohesive; stir more often as the mixture thickens.",
+        "Season with rock sugar, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Barley Cinnamon Porridge is served freshly cooked and warm as a grain-based morning meal. Vata: make it softer and use a little extra ghee. Pitta: favor cooling aromatics and moderate sour garnish. Kapha: keep it light, dry, and modestly spiced.",
+      "provenance": [
+        "Indian breakfast grain tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.amaranth-cardamom-porridge",
+      "name": "Amaranth Cardamom Porridge",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 24
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 900
+        }
+      ],
+      "steps": [
+        "Prepare the amaranth grain and cut the fennel seeds evenly.",
+        "Warm the ghee and bloom the cardamom until aromatic.",
+        "Add the main ingredient and vegetables, stir for one minute, then pour in the water.",
+        "Cook at a steady simmer until tender and cohesive; stir more often as the mixture thickens.",
+        "Season with rock sugar, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Amaranth Cardamom Porridge is served freshly cooked and warm as a grain-based morning meal. Vata: make it softer and use a little extra ghee. Pitta: favor cooling aromatics and moderate sour garnish. Kapha: keep it light, dry, and modestly spiced.",
+      "provenance": [
+        "Indian breakfast grain tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.bajra-winter-porridge",
+      "name": "Bajra Winter Porridge",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.bajra",
+          "name": "Cracked pearl millet",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ginger-dry",
+          "name": "Dry ginger",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 24
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 980
+        }
+      ],
+      "steps": [
+        "Prepare the cracked pearl millet and cut the cinnamon and dry ginger evenly.",
+        "Warm the ghee and bloom the cardamom until aromatic.",
+        "Add the main ingredient and vegetables, stir for one minute, then pour in the water.",
+        "Cook at a steady simmer until tender and cohesive; stir more often as the mixture thickens.",
+        "Season with rock sugar, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Bajra Winter Porridge is served freshly cooked and warm as a grain-based morning meal. Vata: make it softer and use a little extra ghee. Pitta: favor cooling aromatics and moderate sour garnish. Kapha: keep it light, dry, and modestly spiced.",
+      "provenance": [
+        "Indian breakfast grain tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.puffed-rice-morning-chivda",
+      "name": "Warm Puffed Rice Morning Chivda",
+      "category": "classical",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "fdcId": 10657,
+          "name": "Plain puffed rice",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.peanut",
+          "name": "Peanuts",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Warm the ghee in a wide pan and pop the mustard seeds.",
+        "Add the peanuts and curry leaves and cook until the peanuts smell toasted.",
+        "Stir in the turmeric and rock salt, then immediately add the puffed rice.",
+        "Turn continuously over low heat until every grain is warm and lightly crisp.",
+        "Serve at once before the chivda loses its fresh crunch."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "This puffed-rice chivda is warmed in a small amount of ghee and served fresh. Vata: add a moist accompaniment and keep the portion small. Pitta: omit extra chilies. Kapha: retain the crisp texture and modest peanut amount.",
+      "provenance": [
+        "Western Indian chivda tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    }
+  ]
+}

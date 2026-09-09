@@ -1,0 +1,104 @@
+From 3ba69eb242424fae8f0bb32f057b240fdd21d240 Mon Sep 17 00:00:00 2001
+From: Mincho Milev <mincho.milev@gmail.com>
+Date: Wed, 22 Jul 2026 11:05:14 +0300
+Subject: [PATCH] Run 6 fix: ObserversHub type-check budget, mechanical split
+ only
+
+---
+ WiseEating/Main/RootView/ObserversHub.swift | 69 +++++++++++++++------
+ 1 file changed, 49 insertions(+), 20 deletions(-)
+
+diff --git a/WiseEating/Main/RootView/ObserversHub.swift b/WiseEating/Main/RootView/ObserversHub.swift
+index 95fae18..79918c0 100644
+--- a/WiseEating/Main/RootView/ObserversHub.swift
++++ b/WiseEating/Main/RootView/ObserversHub.swift
+@@ -4,7 +4,6 @@ import Combine
+ 
+ struct ObserversHub: View {
+     
+-    @ObservedObject private var aiManager = AIManager.shared
+     @Binding var isAIGenerating: Bool
+     
+     // MARK: – Входни данни
+@@ -166,25 +165,7 @@ struct ObserversHub: View {
+     }
+ 
+     private var aiStatusObserver: some View {
+-            Color.clear
+-                .onChange(of: aiManager.jobs) { _, newJobs in
+-                    let isGenerating = newJobs.contains { $0.status == .pending || $0.status == .running }
+-                    if self.isAIGenerating != isGenerating {
+-                        self.isAIGenerating = isGenerating
+-                    }
+-                }
+-                .onAppear {
+-                    let isGenerating = aiManager.isGenerating
+-                    if self.isAIGenerating != isGenerating {
+-                        self.isAIGenerating = isGenerating
+-                    }
+-                }
+-                .onReceive(NotificationCenter.default.publisher(for: .aiJobStatusDidChange)) { _ in
+-                    let isGenerating = aiManager.isGenerating
+-                    if self.isAIGenerating != isGenerating {
+-                        self.isAIGenerating = isGenerating
+-                    }
+-                }
++        AIStatusObserver(isAIGenerating: $isAIGenerating)
+     }
+ 
+     private var tabChangeObserver: some View {
+@@ -317,6 +298,54 @@ struct ObserversHub: View {
+ 
+ // MARK: - Small, focused observers
+ 
++private struct AIStatusObserver: View {
++    @ObservedObject private var aiManager = AIManager.shared
++    @Binding var isAIGenerating: Bool
++
++    var body: some View {
++        Group {
++            jobsObserver
++            appearanceObserver
++            notificationObserver
++        }
++    }
++
++    private var jobsObserver: some View {
++        Color.clear
++            .onChange(of: hasActiveJobs) { _, newValue in
++                syncAIGenerating(newValue)
++            }
++    }
++
++    private var appearanceObserver: some View {
++        Color.clear
++            .onAppear {
++                syncAIGenerating(aiManager.isGenerating)
++            }
++    }
++
++    private var notificationObserver: some View {
++        Color.clear
++            .onReceive(NotificationCenter.default.publisher(for: .aiJobStatusDidChange)) { _ in
++                syncAIGenerating(aiManager.isGenerating)
++            }
++    }
++
++    private func syncAIGenerating(_ newValue: Bool) {
++        if isAIGenerating != newValue {
++            isAIGenerating = newValue
++        }
++    }
++
++    private var hasActiveJobs: Bool {
++        aiManager.jobs.contains(where: isActiveJob)
++    }
++
++    private func isActiveJob(_ job: AIGenerationJob) -> Bool {
++        job.status == .pending || job.status == .running
++    }
++}
++
+ private struct TabChangeObserver: View {
+     @Binding var selectedTab: AppTab
+     @Binding var hasNewNutrition: Bool

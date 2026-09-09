@@ -1,0 +1,216 @@
+{
+  "engine": "SmartFoodSearch3.searchCompact",
+  "limit": 5,
+  "queries": [
+    {
+      "kind": "legacy",
+      "query": "tomato",
+      "baseline": ["Tomato powder", "Tomato Chickpea Stew", "Tomato chili sauce", "Tomato juice cocktail", "Tomato juice, 100%"],
+      "after": ["Tomato powder", "Tomato Chickpea Stew", "Tomato chili sauce", "Tomato juice cocktail", "Tomato juice, 100%"]
+    },
+    {
+      "kind": "legacy",
+      "query": "tomatoes low fat",
+      "baseline": [],
+      "after": []
+    },
+    {
+      "kind": "legacy",
+      "query": "rice",
+      "baseline": ["Rice, white, medium-grain, cooked, unenriched", "Rice, white, medium-grain, enriched, cooked", "Rice, white, medium-grain, raw, enriched", "Rice, white, medium-grain, raw, unenriched", "Rice, white, short-grain, cooked, unenriched"],
+      "after": ["Rice, white, medium-grain, cooked, unenriched", "Rice, white, medium-grain, enriched, cooked", "Rice, white, medium-grain, raw, enriched", "Rice, white, medium-grain, raw, unenriched", "Rice, white, short-grain, cooked, unenriched"]
+    },
+    {
+      "kind": "legacy",
+      "query": "brown rice",
+      "baseline": ["Bread, gluten-free, whole grain, made with tapioca starch and brown rice flour", "Rolls, gluten-free, whole grain, made with tapioca starch and brown rice flour", "Rice, brown, long-grain, cooked (Includes foods for USDA's Food Distribution Program)", "Rice, brown, long-grain, raw (Includes foods for USDA's Food Distribution Program)", "Rice, brown, medium-grain, cooked (Includes foods for USDA's Food Distribution Program)"],
+      "after": ["Bread, gluten-free, whole grain, made with tapioca starch and brown rice flour", "Rolls, gluten-free, whole grain, made with tapioca starch and brown rice flour", "Rice, brown, long-grain, cooked (Includes foods for USDA's Food Distribution Program)", "Rice, brown, long-grain, raw (Includes foods for USDA's Food Distribution Program)", "Rice, brown, medium-grain, cooked (Includes foods for USDA's Food Distribution Program)"]
+    },
+    {
+      "kind": "legacy",
+      "query": "chicken",
+      "baseline": ["Chicken cornbread", "Chicken curry", "Chicken feet", "Chicken kiev", "Chicken skin"],
+      "after": ["Chicken cornbread", "Chicken curry", "Chicken feet", "Chicken kiev", "Chicken skin"]
+    },
+    {
+      "kind": "legacy",
+      "query": "chicken without tomato",
+      "baseline": ["Chicken cornbread", "Chicken curry", "Chicken feet", "Chicken kiev", "Chicken skin"],
+      "after": ["Chicken cornbread", "Chicken curry", "Chicken feet", "Chicken kiev", "Chicken skin"]
+    },
+    {
+      "kind": "legacy",
+      "query": "high iron",
+      "baseline": ["Babyfood, yogurt, whole milk, with fruit, multigrain cereal and added iron fortified", "Infant formula, low iron"],
+      "after": ["Babyfood, yogurt, whole milk, with fruit, multigrain cereal and added iron fortified", "Infant formula, low iron"]
+    },
+    {
+      "kind": "legacy",
+      "query": "more iron than spinach",
+      "baseline": [],
+      "after": []
+    },
+    {
+      "kind": "legacy",
+      "query": "low sodium soup",
+      "baseline": ["Soup, pea, low sodium, prepared with equal volume water", "Soup, cream of mushroom, low sodium, ready-to-serve, canned", "Soup, tomato, canned, condensed, reduced sodium", "Soup, beef and mushroom, low sodium, chunk style", "Soup, chicken broth, low sodium, canned"],
+      "after": ["Soup, pea, low sodium, prepared with equal volume water", "Soup, cream of mushroom, low sodium, ready-to-serve, canned", "Soup, tomato, canned, condensed, reduced sodium", "Soup, beef and mushroom, low sodium, chunk style", "Soup, chicken broth, low sodium, canned"]
+    },
+    {
+      "kind": "legacy",
+      "query": "high protein breakfast",
+      "baseline": [],
+      "after": []
+    },
+    {
+      "kind": "legacy",
+      "query": "vitamin c orange",
+      "baseline": ["Beverages, orange drink, canned, with added vitamin C"],
+      "after": ["Beverages, orange drink, canned, with added vitamin C"]
+    },
+    {
+      "kind": "legacy",
+      "query": "gluten free bread",
+      "baseline": ["Bread, gluten free", "Bread, gluten free, toasted", "Bread, gluten-free, white, made with rice flour, corn starch, and/or tapioca", "Bread, gluten-free, white, made with tapioca starch and brown rice flour", "Bread, gluten-free, whole grain, made with tapioca starch and brown rice flour"],
+      "after": ["Bread, gluten free", "Bread, gluten free, toasted", "Bread, gluten-free, white, made with rice flour, corn starch, and/or tapioca", "Bread, gluten-free, white, made with tapioca starch and brown rice flour", "Bread, gluten-free, whole grain, made with tapioca starch and brown rice flour"]
+    },
+    {
+      "kind": "legacy",
+      "query": "vegan curry",
+      "baseline": ["Curry Leaves", "Curry sauce", "Curry leaf (dried)", "Curry Leaf Chutney", "Curry leaves (dried)"],
+      "after": ["Curry Leaves", "Curry sauce", "Curry leaf (dried)", "Curry Leaf Chutney", "Curry leaves (dried)"],
+      "baselineHistory": {
+        "task": "WE-8",
+        "date": "2026-07-25",
+        "reason": "Founder-approved baseline change: derived Vegan metadata correctly makes component-resolved Curry Leaf Chutney eligible; no FoodSearch ranking change."
+      }
+    },
+    {
+      "kind": "legacy",
+      "query": "dairy free yogurt",
+      "baseline": ["Yogurt, soy", "Yogurt, almond milk", "Yogurt, coconut milk"],
+      "after": ["Yogurt, soy", "Yogurt, almond milk", "Yogurt, coconut milk"]
+    },
+    {
+      "kind": "legacy",
+      "query": "no peanuts",
+      "baseline": [],
+      "after": []
+    },
+    {
+      "kind": "legacy",
+      "query": "acidic fruit",
+      "baseline": ["Lemonade, fruit juice drink", "Lemonade, fruit juice drink, light", "Soft drink, cola, fruit or vanilla flavored", "Beverages, Lemonade fruit juice drink light, fortified with vitamin E and C", "Lemonade, fruit flavored drink"],
+      "after": ["Lemonade, fruit juice drink", "Lemonade, fruit juice drink, light", "Soft drink, cola, fruit or vanilla flavored", "Beverages, Lemonade fruit juice drink light, fortified with vitamin E and C", "Lemonade, fruit flavored drink"]
+    },
+    {
+      "kind": "legacy",
+      "query": "alkaline foods",
+      "baseline": ["Spinach, frozen, chopped or leaf, unprepared (Includes foods for USDA's Food Distribution Program)", "Broccoli, frozen, spears, unprepared (Includes foods for USDA's Food Distribution Program)"],
+      "after": ["Spinach, frozen, chopped or leaf, unprepared (Includes foods for USDA's Food Distribution Program)", "Broccoli, frozen, spears, unprepared (Includes foods for USDA's Food Distribution Program)"]
+    },
+    {
+      "kind": "legacy",
+      "query": "ph 7",
+      "baseline": [],
+      "after": []
+    },
+    {
+      "kind": "legacy",
+      "query": "salmon",
+      "baseline": ["Salmon salad", "Salmon cake sandwich", "Salmon nuggets, breaded, frozen, heated", "Salmon nuggets, cooked as purchased, unheated", "Salmon, sockeye, canned, total can contents"],
+      "after": ["Salmon salad", "Salmon cake sandwich", "Salmon nuggets, breaded, frozen, heated", "Salmon nuggets, cooked as purchased, unheated", "Salmon, sockeye, canned, total can contents"]
+    },
+    {
+      "kind": "legacy",
+      "query": "lentil soup",
+      "baseline": ["Fennel Red Lentil Soup", "Tomato Red Lentil Soup", "Warming Brown Lentil Soup", "Soup, lentil", "Soup, lentil with ham, canned, ready-to-serve"],
+      "after": ["Fennel Red Lentil Soup", "Tomato Red Lentil Soup", "Warming Brown Lentil Soup", "Soup, lentil", "Soup, lentil with ham, canned, ready-to-serve"]
+    },
+    {
+      "kind": "legacy",
+      "query": "apple",
+      "baseline": ["Apple cider", "Apple Cider Vinegar", "Apple juice, 100%", "Apple pie filling", "Apple salad with dressing"],
+      "after": ["Apple cider", "Apple Cider Vinegar", "Apple juice, 100%", "Apple pie filling", "Apple salad with dressing"]
+    },
+    {
+      "kind": "legacy",
+      "query": "banana",
+      "baseline": ["Banana chips", "Banana flower", "Banana nectar", "Banana pudding", "Banana split"],
+      "after": ["Banana chips", "Banana flower", "Banana nectar", "Banana pudding", "Banana split"]
+    },
+    {
+      "kind": "legacy",
+      "query": "egg",
+      "baseline": ["Egg bhurji", "Egg burrito", "Egg burrito, with bacon", "Egg burrito, with ham", "Egg burrito, with sausage"],
+      "after": ["Egg bhurji", "Egg burrito", "Egg burrito, with bacon", "Egg burrito, with ham", "Egg burrito, with sausage"]
+    },
+    {
+      "kind": "legacy",
+      "query": "whole milk",
+      "baseline": ["Cheese, mozzarella, whole milk", "Cheese, ricotta, whole milk", "Yogurt, plain, whole milk", "Yogurt, Greek, fruit, whole milk", "Yogurt, Greek, plain, whole milk"],
+      "after": ["Cheese, mozzarella, whole milk", "Cheese, ricotta, whole milk", "Yogurt, plain, whole milk", "Yogurt, Greek, fruit, whole milk", "Yogurt, Greek, plain, whole milk"]
+    },
+    {
+      "kind": "legacy",
+      "query": "olive oil",
+      "baseline": ["Olive oil", "Olive Oil Wheat Piada", "Chickpea Olive Oil Socca", "Mayonnaise, reduced fat,  with olive oil", "Mayonnaise, reduced fat, with olive oil"],
+      "after": ["Olive oil", "Olive Oil Wheat Piada", "Chickpea Olive Oil Socca", "Mayonnaise, reduced fat,  with olive oil", "Mayonnaise, reduced fat, with olive oil"]
+    },
+    {
+      "kind": "safety",
+      "query": "without dairy",
+      "mustExcludeSlugs": ["recipe.amaranth-kheer"],
+      "reason": "WE-8 safety golden: named-allergen exclusion must reject the seeded milk-bearing kheer recipe."
+    },
+    {
+      "kind": "safety",
+      "query": "no allergens",
+      "mustExcludeScope": "allergen-bearing-seeded-recipes",
+      "expectedExcludedCount": 1190,
+      "reason": "WE-8 safety golden: exclude-all must reject every seeded recipe whose derived allergen set is nonempty."
+    },
+    {
+      "kind": "facet",
+      "query": "cooling foods",
+      "baseline": null,
+      "after": ["Aam panna", "Agathi flower", "Agathi leaf", "Alkanet root", "Aloe vera pulp"]
+    },
+    {
+      "kind": "facet",
+      "query": "warming foods",
+      "baseline": null,
+      "after": ["Aged honey", "Ajwain seed", "Ajwain water", "Almond milk, NFS", "Almond oil"]
+    },
+    {
+      "kind": "facet",
+      "query": "pacifies vata",
+      "baseline": null,
+      "after": ["Aam panna", "Adzuki Bell Pepper Pot", "Adzuki Butternut Stew", "Adzuki Carrot Herb Pot", "Adzuki Carrot Stew"]
+    },
+    {
+      "kind": "facet",
+      "query": "deepana foods",
+      "baseline": null,
+      "after": ["Aam panna", "Agathi leaf", "Aged honey", "Ajwain seed", "Ajwain water"]
+    },
+    {
+      "kind": "facet",
+      "query": "high iron pacifies pitta",
+      "baseline": null,
+      "after": ["Punjabi Methi Matar Fennel", "Murmura Chikki", "Coriander Cumin Soup Spice", "Coriander Fennel Vegetable Masala", "Fennel Coriander Cooling Masala"]
+    },
+    {
+      "kind": "facet",
+      "query": "warming winter grains",
+      "baseline": null,
+      "after": ["Browntop millet", "Buckwheat", "Corn grain, yellow", "Foxtail millet", "Little millet"]
+    },
+    {
+      "kind": "facet",
+      "query": "Warming Brown Lentil Soup",
+      "baseline": null,
+      "after": ["Warming Brown Lentil Soup"]
+    }
+  ]
+}

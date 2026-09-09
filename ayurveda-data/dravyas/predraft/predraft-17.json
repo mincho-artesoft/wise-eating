@@ -1,0 +1,576 @@
+{
+  "predraftVersion": "1.0",
+  "batch": "predraft-17",
+  "items": [
+    {
+      "id": "dravya.rice-white-basmati",
+      "name": "White basmati rice",
+      "sanskrit": null,
+      "aliases": [
+        "basmati"
+      ],
+      "category": "grain",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 6372,
+          "name": "Rice, white, long-grain, regular, raw, enriched",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 45
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.rice-red",
+      "name": "Red rice",
+      "sanskrit": "Rakta Shali",
+      "aliases": [],
+      "category": "grain",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 45
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: red rice; rakta shali; rice red raw; rice red."
+    },
+    {
+      "id": "dravya.rice-parboiled",
+      "name": "Parboiled rice",
+      "sanskrit": "Ukda Chawal",
+      "aliases": [],
+      "category": "grain",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 7179,
+          "name": "Rice, white, long-grain, parboiled, unenriched, dry",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 45
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.rice-flattened",
+      "name": "Flattened rice",
+      "sanskrit": "Poha",
+      "aliases": [
+        "aval"
+      ],
+      "category": "grain",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 45
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: flattened rice; aval; poha; rice flakes; rice flattened."
+    },
+    {
+      "id": "dravya.rice-puffed",
+      "name": "Puffed rice",
+      "sanskrit": "Murmura",
+      "aliases": [
+        "muri"
+      ],
+      "category": "grain",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 10657,
+          "name": "Cereals ready-to-eat, rice, puffed, fortified",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 45
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.wheat-broken",
+      "name": "Broken wheat",
+      "sanskrit": "Dalia",
+      "aliases": [
+        "bulgur wheat"
+      ],
+      "category": "grain",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 7988,
+          "name": "Bulgur, dry",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 45
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.foxtail-millet",
+      "name": "Foxtail millet",
+      "sanskrit": "Kangni",
+      "aliases": [],
+      "category": "grain",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 45
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: foxtail millet; kangni."
+    },
+    {
+      "id": "dravya.little-millet",
+      "name": "Little millet",
+      "sanskrit": "Kutki",
+      "aliases": [],
+      "category": "grain",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 45
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: little millet; kutki."
+    },
+    {
+      "id": "dravya.kodo-millet",
+      "name": "Kodo millet",
+      "sanskrit": "Kodrava",
+      "aliases": [],
+      "category": "grain",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 45
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: kodo millet; kodrava."
+    },
+    {
+      "id": "dravya.barnyard-millet",
+      "name": "Barnyard millet",
+      "sanskrit": "Shyama",
+      "aliases": [
+        "sama rice"
+      ],
+      "category": "grain",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 45
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: barnyard millet; sama rice; shyama."
+    },
+    {
+      "id": "dravya.water-chestnut-flour",
+      "name": "Water chestnut flour",
+      "sanskrit": "Shringataka Churna",
+      "aliases": [],
+      "category": "grain",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          0
+        ],
+        "virya": "cooling",
+        "note": "fasting flour"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 cup",
+          "grams": 30
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: water chestnut flour; shringataka churna."
+    },
+    {
+      "id": "dravya.navara-rice",
+      "name": "Navara rice",
+      "sanskrit": "Shashtika Shali",
+      "aliases": [],
+      "category": "grain",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          0
+        ],
+        "virya": "cooling",
+        "note": "classical 60-day medicinal rice"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 45
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: navara rice; shashtika shali."
+    },
+    {
+      "id": "dravya.black-rice",
+      "name": "Black rice",
+      "sanskrit": "Krishna Vrihi",
+      "aliases": [],
+      "category": "grain",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 45
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: black rice; krishna vrihi."
+    },
+    {
+      "id": "dravya.seeraga-samba-rice",
+      "name": "Seeraga samba rice",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "grain",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          0
+        ],
+        "virya": "neutral"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 45
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: seeraga samba rice."
+    },
+    {
+      "id": "dravya.govindbhog-rice",
+      "name": "Govindbhog rice",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "grain",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 45
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: govindbhog rice."
+    },
+    {
+      "id": "dravya.emmer-wheat",
+      "name": "Emmer wheat (khapli)",
+      "sanskrit": "Godhuma (khapli)",
+      "aliases": [
+        "khapli"
+      ],
+      "category": "grain",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 45
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: emmer wheat; godhuma."
+    },
+    {
+      "id": "dravya.browntop-millet",
+      "name": "Browntop millet",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "grain",
+      "canonHints": {
+        "vpk": [
+          1,
+          -1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 45
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: browntop millet."
+    },
+    {
+      "id": "dravya.rice-flour",
+      "name": "Rice flour",
+      "sanskrit": "Tandula Churna",
+      "aliases": [],
+      "category": "grain",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 6393,
+          "name": "Rice flour, brown",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup",
+          "grams": 30
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.whole-wheat-flour",
+      "name": "Whole wheat flour (atta)",
+      "sanskrit": "Godhuma Churna",
+      "aliases": [
+        "atta"
+      ],
+      "category": "grain",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 6388,
+          "name": "Wheat flour, whole-grain (Includes foods for USDA's Food Distribution Program)",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup",
+          "grams": 30
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.refined-flour",
+      "name": "Refined flour (maida)",
+      "sanskrit": null,
+      "aliases": [
+        "maida"
+      ],
+      "category": "grain",
+      "canonHints": {
+        "vpk": [
+          1,
+          0,
+          2
+        ],
+        "virya": "neutral",
+        "note": "heavy, channel-clogging; limit"
+      },
+      "usda": [
+        {
+          "fdcId": 7182,
+          "name": "Wheat flour, white, all-purpose, unenriched",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup",
+          "grams": 30
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.vermicelli",
+      "name": "Vermicelli (seviyan)",
+      "sanskrit": null,
+      "aliases": [
+        "seviyan"
+      ],
+      "category": "grain",
+      "canonHints": {
+        "vpk": [
+          0,
+          0,
+          1
+        ],
+        "virya": "neutral"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 45
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: vermicelli."
+    },
+    {
+      "id": "dravya.sabudana",
+      "name": "Tapioca pearls (sabudana)",
+      "sanskrit": null,
+      "aliases": [
+        "sabudana"
+      ],
+      "category": "grain",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          1
+        ],
+        "virya": "cooling",
+        "note": "fasting staple; heavy"
+      },
+      "usda": [
+        {
+          "fdcId": 7138,
+          "name": "Tapioca, pearl, dry",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 45
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.mung-whole",
+      "name": "Whole mung bean",
+      "sanskrit": "Mudga",
+      "aliases": [
+        "whole green gram"
+      ],
+      "category": "legume",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 10962,
+          "name": "Mung beans, mature seeds, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.mung-dal-split",
+      "name": "Split mung dal",
+      "sanskrit": "Mudga Dal",
+      "aliases": [
+        "split green gram"
+      ],
+      "category": "legume",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 10962,
+          "name": "Mung beans, mature seeds, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true
+    }
+  ]
+}

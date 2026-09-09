@@ -1,0 +1,563 @@
+{
+  "predraftVersion": "1.0",
+  "batch": "predraft-25",
+  "items": [
+    {
+      "id": "dravya.winged-bean",
+      "name": "Winged bean",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "legume",
+      "canonHints": {
+        "vpk": [
+          1,
+          0,
+          -1
+        ],
+        "virya": "neutral"
+      },
+      "usda": [
+        {
+          "fdcId": 10989,
+          "name": "Winged beans, mature seeds, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.rice-bean",
+      "name": "Rice bean",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "legume",
+      "canonHints": {
+        "vpk": [
+          1,
+          0,
+          -1
+        ],
+        "virya": "neutral"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: rice bean."
+    },
+    {
+      "id": "dravya.field-bean",
+      "name": "Field bean (avarekalu)",
+      "sanskrit": "Nishpava",
+      "aliases": [
+        "avarekalu"
+      ],
+      "category": "legume",
+      "canonHints": {
+        "vpk": [
+          1,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: field bean; nishpava."
+    },
+    {
+      "id": "dravya.red-cowpea",
+      "name": "Red cowpea",
+      "sanskrit": "Rakta Rajamasha",
+      "aliases": [],
+      "category": "legume",
+      "canonHints": {
+        "vpk": [
+          1,
+          0,
+          -1
+        ],
+        "virya": "neutral"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: red cowpea; rakta rajamasha."
+    },
+    {
+      "id": "dravya.whole-toor",
+      "name": "Whole pigeon pea",
+      "sanskrit": "Adhaki",
+      "aliases": [],
+      "category": "legume",
+      "canonHints": {
+        "vpk": [
+          1,
+          -1,
+          -1
+        ],
+        "virya": "neutral"
+      },
+      "usda": [
+        {
+          "fdcId": 9443,
+          "name": "Pigeon peas (red gram), mature seeds, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.urad-flour",
+      "name": "Urad flour",
+      "sanskrit": "Masha Churna",
+      "aliases": [],
+      "category": "legume",
+      "canonHints": {
+        "vpk": [
+          -2,
+          0,
+          2
+        ],
+        "virya": "heating",
+        "note": "heavy, building; papad base"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 cup",
+          "grams": 30
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: urad flour; masha churna."
+    },
+    {
+      "id": "dravya.mace",
+      "name": "Mace",
+      "sanskrit": "Javitri",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 12205,
+          "name": "Mace (Jayitri)",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.mustard-seed-black",
+      "name": "Black mustard seed",
+      "sanskrit": "Krishna Sarshapa",
+      "aliases": [
+        "rai"
+      ],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 8154,
+          "name": "Spices, mustard seed, ground",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.mustard-seed-yellow",
+      "name": "Yellow mustard seed",
+      "sanskrit": "Pita Sarshapa",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 8154,
+          "name": "Spices, mustard seed, ground",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.black-cumin",
+      "name": "Black cumin",
+      "sanskrit": "Kalonji",
+      "aliases": [
+        "nigella seed"
+      ],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 12321,
+          "name": "Nigella seed",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.caraway",
+      "name": "Caraway seed",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 8143,
+          "name": "Spices, caraway seed",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.celery-seed",
+      "name": "Celery seed",
+      "sanskrit": "Radhuni",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 12376,
+          "name": "Radhuni",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.pomegranate-seed-dry",
+      "name": "Dried pomegranate seed",
+      "sanskrit": "Anardana",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 12372,
+          "name": "Anardana",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.kokum",
+      "name": "Kokum rind",
+      "sanskrit": "Vrikshamla",
+      "aliases": [
+        "Garcinia indica"
+      ],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: kokum rind; garcinia indica; vrikshamla; kokum."
+    },
+    {
+      "id": "dravya.garcinia",
+      "name": "Garcinia fruit",
+      "sanskrit": null,
+      "aliases": [
+        "Malabar tamarind"
+      ],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: garcinia fruit; malabar tamarind; garcinia."
+    },
+    {
+      "id": "dravya.trikatu",
+      "name": "Trikatu spice blend",
+      "sanskrit": "Trikatu",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: trikatu spice blend; trikatu."
+    },
+    {
+      "id": "dravya.chaturjata",
+      "name": "Chaturjata spice blend",
+      "sanskrit": "Chaturjata",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: chaturjata spice blend; chaturjata."
+    },
+    {
+      "id": "dravya.panch-phoron",
+      "name": "Panch phoron",
+      "sanskrit": null,
+      "aliases": [
+        "Bengali five-spice"
+      ],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 12221,
+          "name": "Panch Phoron",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.garam-masala-classical",
+      "name": "Classical garam masala",
+      "sanskrit": null,
+      "aliases": [
+        "garam masala"
+      ],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 11886,
+          "name": "Garam Masala",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.sambar-podi",
+      "name": "Sambar spice blend",
+      "sanskrit": null,
+      "aliases": [
+        "sambar podi"
+      ],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: sambar spice blend; sambar podi."
+    },
+    {
+      "id": "dravya.rasam-podi",
+      "name": "Rasam spice blend",
+      "sanskrit": null,
+      "aliases": [
+        "rasam podi"
+      ],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: rasam spice blend; rasam podi."
+    },
+    {
+      "id": "dravya.chai-masala",
+      "name": "Chai spice blend",
+      "sanskrit": null,
+      "aliases": [
+        "masala chai spice"
+      ],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: chai spice blend; masala chai spice; chai masala."
+    },
+    {
+      "id": "dravya.licorice",
+      "name": "Licorice root",
+      "sanskrit": "Yashtimadhu",
+      "aliases": [
+        "mulethi"
+      ],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 12569,
+          "name": "Licorice root",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.ginger-pickled",
+      "name": "Pickled ginger",
+      "sanskrit": "Ardraka",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: pickled ginger; ardraka; ginger pickled."
+    },
+    {
+      "id": "dravya.onion-seed",
+      "name": "Nigella seed",
+      "sanskrit": "Kalonji",
+      "aliases": [
+        "onion seed"
+      ],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 12321,
+          "name": "Nigella seed",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    }
+  ]
+}

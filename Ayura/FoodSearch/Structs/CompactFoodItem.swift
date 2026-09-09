@@ -1,0 +1,54 @@
+import Foundation
+
+struct CompactFoodItem: Identifiable, Hashable, Sendable {
+    let id: UUID
+    let name: String
+    let searchTokens: Set<String>
+    let minAgeMonths: Int
+    let enforcedMinAgeMonths: Int?
+    let allergens: Set<String>
+    let ph: Double
+    let referenceWeightG: Double
+    let isRecipe: Bool
+    let isMenu: Bool
+    let isFavorite: Bool
+    let isEdible: Bool
+    /// Searchable facets and their underlying numeric/contextual metadata.
+    let ayurvedaFacets: Set<String>
+    let ayurvedaMetadata: AyurvedaCanonicalSearchMetadata?
+    // Store nutrients as a raw dictionary for scoring
+    let nutrientValues: [NutrientType: Double]
+    
+    // Helper for the search logic to access values
+    func value(for type: NutrientType) -> Double {
+        return nutrientValues[type] ?? 0.0
+    }
+    
+    // Helpers for logic compatibility
+    var lowercasedName: String { name.lowercased() }
+    var paddedLowercasedName: String { " " + lowercasedName + " " }
+    
+    func contains(allergen: String) -> Bool {
+        allergens.contains { $0.localizedCaseInsensitiveContains(allergen) }
+    }
+
+    func withFavorite(_ value: Bool) -> CompactFoodItem {
+        CompactFoodItem(
+            id: id,
+            name: name,
+            searchTokens: searchTokens,
+            minAgeMonths: minAgeMonths,
+            enforcedMinAgeMonths: enforcedMinAgeMonths,
+            allergens: allergens,
+            ph: ph,
+            referenceWeightG: referenceWeightG,
+            isRecipe: isRecipe,
+            isMenu: isMenu,
+            isFavorite: value,
+            isEdible: isEdible,
+            ayurvedaFacets: ayurvedaFacets,
+            ayurvedaMetadata: ayurvedaMetadata,
+            nutrientValues: nutrientValues
+        )
+    }
+}

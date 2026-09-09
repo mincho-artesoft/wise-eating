@@ -1,0 +1,328 @@
+# Content authoring progress
+
+> **Orientation for new sessions/models: read `/PROJECT-HANDBOOK.md` (repo root)
+> first.** It is the knowledge-transfer document — architecture, decisions,
+> number registry, working process, milestone ledger. Update it after every task.
+
+## Recipes: COMPLETE ✅
+
+**1,500 recipes done and director-verified** (batches r01–r30): 300 classical
+(R1), 600 everyday/international (R2), 600 completion tier (R3 + R3-FIX).
+All validated (`validate.py --store`), viruddha-flagged where required,
+qualityState aiDraft pending expert review. Task packets and reports in
+`recipes/TASK-R*.md`, `recipes/REPORT-R*.md`.
+
+WE-2 adds build-derived nutrition without changing authored content: all 1,500
+recipes resolve to full ingredient coverage (0 estimated, 0 none) across energy,
+macros/fiber/sugars, 22 vitamins, and 11 minerals, stored per serving and per
+100g. The Classic Mung Kitchari independent gate is 379.67 kcal/serving.
+
+## Dravyas: COMPLETE ✅ (714 authored; 750 target reachable via review top-up)
+
+**All 30 predrafts promoted to `dravyas/batch-01..30.json`, validator green at
+714 dravyas + 1,500 recipes.** ~15 predraft items were skipped as duplicates of
+already-authored dravyas (documented in batch commit messages and reviewNotes).
+A final ~36-item batch-31 can be selected during expert review to hit 750.
+
+| Batch | Contents | Items |
+|---|---|---|
+| 01 | Core staples (ghee, rice, mung, ginger, turmeric, milk, honey…) | 25 |
+| 02 | Spices, herbs, salts (trikatu, tulsi, saffron, saindhava…) | 25 |
+| 03 | Grains & legumes (wheat, barley, millets, all major dals) | 25 |
+| 04 | Vegetables (incl. lauki, karela, kushmanda, shigru) | 25 |
+| 05 | Fruits (draksha, dadima, kadali, amra, melons, dates…) | 25 |
+| 06 | Greens, gourds, tubers (methi, sarson, ash/ridge gourd, taro…) | 25 |
+| 07 | Nuts, seeds, dry fruits (tila, walnut, makhana, char magaz…) | 24 |
+| 08 | Dairy, oils, sweeteners, plant milks (takra, mustard oil, mishri…) | 25 |
+| 09 | Beverages & fermented (teas, coffee, coconut water, miso…) | 12 |
+| 10 | Animal foods (eggs, meats, fish — mamsa varga) | 25 |
+| 11 | Classical preparations (kitchari, takra, CCF tea, chyawanprash…) | 25 |
+| 12 | Medicinal rasayanas & bitters (triphala trio, ashwagandha, neem…) | 25 |
+| 13 | Vegetables & gourds (parwal, suran, mooli, brinjal, raw banana…) | 25 |
+| 14 | Vegetables II — pods, flowers, tubers, shoots (sem, bamboo, kachnar…) | 25 |
+| 15 | Fruits I (mango, banana, draksha, bael, jamun, phalsa…) | 25 |
+| 16 | Fruits II & dry fruits (fig, dadima, ikshu, makhana, munakka…) | 24 |
+| 17 | Rices, millets, flours, mung (rakta shali, navara, kodrava…) | 24 |
+| 18 | Regional specials (ker-sangri, mahua, tulsi/nettle, vinegars, betel nut⚠) | 25 |
+| 19 | Regional dairy + classical beverages (yak dairy, ushnodaka, sherbets, chai) | 25 |
+| 20 | Juices, spice waters, regional ferments (kanji, pakhala, gundruk, neera) | 25 |
+| 21 | Regional preparations I (idli batter, aranala, mamsa rasa, dadhyodana) | 25 |
+| 22 | Snacks, festival sweets, medicinals (vataka, shrikhand, shilajit, gulkand) | 25 |
+| 23 | Cooling roots & murabbas (sariva, ushira, five murabbas) | 25 |
+| 24 | Legume varga (masha, chanas, kulattha, saktu, rasona) | 25 |
+| 25 | Legumes II + spice blends (trikatu, chaturjata, panch phoron, shahi jeera) | 25 |
+| 26 | Rare spices & aromatics (betel leaf, karpura, tumburu, goda masala) | 25 |
+| 27 | Spices II + leafy greens (hingvastak, bathua, gongura, moringa leaf) | 22 |
+| 28 | Greens II, dry fruits, char magaz seeds (upodika, chhuara, krishna tila) | 21 |
+| 29 | Dairy varga + specialty oils (mahisha/ushtra milk, mastu, khoya, eranda) | 19 |
+| 30 | Oils II, sweetener ladder, salts & gums (nolen gur, purana madhu, vark, vanaspati⚠) | 19 |
+
+⚠ Engine-exclusion items (display with health warning, NEVER recommend):
+**betel nut** (batch 18, carcinogen) and **vanaspati** (batch 30, trans fats).
+
+Notes: predraft-16's langsat placeholder dropped per D10 review; scaffold
+servings corrected to realistic per-piece grams during authoring; reviewNotes
+mark every place classical sources disagree or near-duplicates need reviewer
+cross-linking.
+
+## Validation
+
+`python3 ayurveda-data/validate.py --store /tmp/pre` (store from
+`cat Ayura/preseeded_db.store.gz.part-aa Ayura/preseeded_db.store.gz.part-ab > /tmp/pre.gz && gunzip -f /tmp/pre.gz`).
+Current status: **714 dravyas, 1,500 recipes — all checks pass.**
+
+The reconstructed store is the full build-time artifact: 14,484
+foods, 2,214 seed-v5 canonical profiles, 2,305 links, 10,571 recipe ingredient
+links, 1,500 full recipe panels, and a version-5 search cache for exactly 14,484
+foods, including canonical facets on 2,214 rows. Fresh install performs zero
+Ayurveda inserts/updates and no index rebuild. WE-8c is complete; see
+`REPORT-WE8c.md`.
+
+WE-3 restyles the read-only Ayurveda card with semantic center-zero dosha
+scales, wrapping property chips, always-visible warning rows, explicit
+light/dark tokens, and largest-Dynamic-Type layouts. The four deterministic
+light/dark × default/accessibility snapshots and all contrast evidence are in
+`REPORT-WE3.md`; editor behavior and content remain unchanged.
+
+WE-4 upgrades the shipped search cache to version 4 with 64 canonical Ayurveda
+facet keys / 20,114 assignments on exactly the 2,214 seeded profiles. Natural
+virya, dosha, agni/digestibility, season/ritu, and category speech plus
+`ushna`, `sheeta`, and `deepana` compose with existing text/nutrient queries.
+All 25 legacy golden queries remain exact; plain USDA rows have no facets;
+fresh install still performs zero inserts and no rebuild. See `REPORT-WE4.md`.
+
+WE-5 closes the bounded FoodSearch display/parser edges without changing the
+index or content. Searched nutrient columns now always render with distinct
+missing (`—`) and stored-zero (`0.0`) states; Tokenizer and ConstraintMapper
+nutrients share query-ordered display context; pH boundary, unknown-data
+exclusion counting, and sort-only visibility are centralized; and command
+heuristics require word/token boundaries. All 25 WE-4 goldens remain exact and
+the WE-4 median-latency budget remains green. The active engine source is
+`Ayura/FoodSearch/VM/SmartFoodSearchEngine.swift`; `Ayura/Legacy/`
+was not touched. See `REPORT-WE5.md`.
+
+WE-6 signpost profiling re-established the cold-process baseline at 3.405s and
+identified the persisted search-index decode as the dominant 1.591s launch
+phase. The same version-checked cache now loads on first FoodSearch use instead
+of before the root view. Median launch is 1.662s (−51.2%); the first lazy
+load-plus-query returns real results in 1.691s, all 25 goldens remain exact, and
+the worst warm-query median delta is +3.4%. Fresh install remains zero Ayurveda
+inserts/updates and no search rebuild. See `REPORT-WE6.md`.
+
+WE-7 audited every shipping member under `Ayura/Legacy/`. Nine Swift files
+were compiler inputs but consisted entirely of 2,288 commented lines, declared
+no compiled symbols, and had no static, interface, Objective-C runtime, selector,
+or string-based inbound reference; that single dead cluster was removed. The
+five JSON resources remain live runtime fallback inputs. Debug and Release
+builds, 38/38 tests, 25/25 goldens, all 15 WE-5 border methods, the latency
+budget, and fresh-install gates remain green; cold launch remeasured at 1.504s
+median. See `REPORT-WE7.md`.
+
+WE-8 derives conservative, expert-reviewable safety/search metadata at build
+time for all 2,214 canonical profiles. The 1,500 recipes now receive ingredient
+union allergens, ingredient intersection diets, maximum ingredient age, and
+the 12-month honey floor; every derivation is `scaffold-default` with mandatory
+review provenance. The final artifact has 1,182 allergen-bearing recipes and
+exactly 10,571 IngredientLinks across all 1,500 owners. The founder-approved
+`vegan curry` golden history is explicit, all 25 updated legacy goldens plus two
+negative safety goldens pass in production, and the worst search-latency delta
+is +4.3%. Fresh install remains zero-insert/no-rebuild and cold launch is 1.592s
+median. See `REPORT-WE8.md`.
+
+WE-8c implements provenance-gated age enforcement: legacy-import
+ingredient floors remain unchanged for display, while only the authored
+12-month honey floor hard-filters canonical dravyas and recipes. The exact
+recipe visibility gates (1,496/1,500/1,500 at 9/24/60 months), display
+histogram, 25+2 goldens, 62 tests, deterministic v5 artifacts, fresh install,
+and Debug/Release builds pass. A same-session N=12 ABAB re-measurement records
+WE-8c at 1.607s median versus WE-8b at 1.569s, with a +0.048s paired median
+delta. It passes the absolute 1.700s launch ceiling and is below the 1.650s
+profiling-paydown trigger. The pre-existing shipping-`main` USDA age issue is
+recorded separately in `ISSUE-MAIN-AGE-GATING.md`. See `REPORT-WE8c.md`.
+
+FC-1 adds a deterministic food-concept substrate without wiring a product
+consumer: 25 director-authored concepts and 75 aliases are matched at build
+time across all 14,484 catalogue rows, persisted in a 29,740-byte artifact, and
+served by a lazy immutable Swift lookup. After the director's rev2 exclusion
+corpus correction, the non-contested must-exclude and must-not-exclude gates
+have zero resolved failures; eight contested cases are reported separately and
+remain founder/vaidya decisions. All 71 tests, 25+2 search goldens, validator,
+Debug/Release builds, fresh no-insert/no-rebuild, and two-build determinism
+pass. Same-session N=10 ABAB launch is 1.584s median versus 1.584s at the branch
+point. G12's 1,217 WE-8 disagreements reduce to five systematic causes covering
+93.9% of rows. See `REPORT-FC1.md`.
+
+INT-1 integrates the complete MP-1→MP-3c chain and FC-1/FC-1b into
+`ayurveda-app` without rebasing or squashing. The combined suite reconciles at
+95/95 (62 shared + 23 MP + 9 FC + one INT launch regression), all 25+2 search
+goldens remain exact, the validator and resolution/exclusion corpora retain
+their branch-local values, and rebuilt seed/preseed/concept artifacts are
+deterministic. Fresh install remains zero-insert/no-rebuild. The initial
+integrated 1.697s launch median triggered a bounded full-seed-decode paydown;
+final launch is 1.461s median versus 1.654s at `f46a107`. Physical-device
+generation evidence is not waived: every outstanding item and commit endpoint
+is recorded in `DEFERRED-VALIDATION.md`. See `REPORT-INT1.md`.
+
+FC-1e feature-branch work is complete and integrated by INT-2 Phase 1.
+The director's rev5 ontology plus plural-tolerant unordered
+`vetoTokens` reduce the final coconut mismatch from 1 to 0 and correctly veto
+oyster mushroom in both catalogue token orders; equivalent WE-8/FC-1
+disagreements fall from 80 to 77. FC-2 replaces planner exclusion substring
+matching and the hardcoded alcohol list with canonical FoodConcept ID-set
+subtraction, preserving WE-8 authority for the 2,214 seeded rows and using
+FC-1 for the 12,601 plain USDA rows. The authored 75 aliases improve frozen
+MP-3 held-out resolution from 40/48 to 44/48 while training remains 59/59.
+All 98 tests, 25+2 search goldens, validator, Debug/Release, fresh-install,
+determinism, and tracked-size gates pass. Same-session N=10 ABAB launch is
+1.433s median versus 1.425s at `1a55e28`; the +0.010s paired median is smaller
+than both IQRs and is not resolvable. See `REPORT-FC1e.md`.
+
+MP-5 feature-branch work is complete and integrated by INT-2 Phase 1.
+Deterministic greedy construction plus bounded iterated local search now owns
+plan structure, catalogue IDs, exact USDA portions/macros, and hard
+FoodConcept/safety/age/viruddha/placement enforcement. All 23 hard properties
+pass across the ten-profile corpus; all 13 soft properties are measured. The
+critical Y1 signal is non-flat and improves dosha pacification by +0.5209,
+P10 reports named allergen infeasibility, and the 1,200/3,600 kcal edge
+profiles hit their targets. The aiDraft Ayurveda objective is gated by
+`MP5AyurvedicSolverEnabled`, off by default pending vaidya review; structural
+and safety assembly is deterministic in both modes. All 108 tests, 25+2 search
+goldens, 59/59 training and 44/48 held-out resolution, validator,
+Debug/Release, fresh-install, tracked-size, and cold-launch gates pass. The
+planner file shrank 5,374→3,348 lines after all 14 obsolete assembly/repair
+targets were removed. Same-session N=10 ABAB launch is 1.401s median versus
+1.403s at `ba2c0d7`, with no resolvable regression. See `REPORT-MP5.md`.
+
+INT-2 Phase 1 integrates FC-1e/FC-2 and MP-5 first, then MP-4, into
+`ayurveda-app` without squashing or rebasing. MP-4's one typed interpretation
+call now feeds MP-5's deterministic assembly while retaining the fallback,
+cache, structured-placement, and caveat behavior from both lines. The combined
+suite reconciles at 116/116 = 98 shared + 10 MP-5 + 8 MP-4; 25+2 search
+goldens, 59/59 + 44/48 resolution, all 23 MP-5 hard properties, validator,
+two-build seed/preseed determinism, Debug/Release, fresh zero-insert/no-rebuild,
+and tracked-file gates pass. Same-session N=10 ABAB launch is 1.437s median
+versus 1.434s at `0015e83`; the +0.002s paired median is not resolvable. See
+`REPORT-INT2.md`.
+
+MP-6 completes the host/simulator MP workstream by moving descriptive meal
+copy behind one whole-plan `@Generable` narration call. The model receives only
+finished solver facts and cannot choose food or calculate a value. A
+Foundation-only deterministic template is the complete shipping path when the
+model is absent, fails, times out, or returns mismatched day/slot keys. MP-1
+telemetry proves exactly one narration call at 1/3/7 days and a model-available
+seven-day total of 2 calls including MP-4 interpretation; that total remains a
+static host result until the deferred physical-device matrix. All 123 tests,
+25+2 search goldens, 23/23 MP-5 hard properties, validator, Debug/Release,
+fresh zero-insert/no-rebuild, tracked-size, and final 1.616s median launch gates
+pass. See `REPORT-MP6.md`.
+
+MP-6b completes the deterministic fallback copy pass. The repeated three-day
+MP-6 sample is confirmed as a dedicated narration fixture rather than solver
+output. Five day/slot-selected sentence frames now rotate with zero adjacent
+repeats; balanced agni, mixed thermal character, and empty taste filler are
+omitted, while a single taste is folded into the main sentence. The narrator
+still receives finished facts only and the model-call total remains 2. The new
+real-plan gate runs the production solver over 13,993 usable shipped catalogue
+candidates: its seven-day sample selects 91 distinct IDs and passes the
+two-day no-repeat check. All 125 tests, 25+2 search goldens, 23/23 hard
+properties, Debug/Release, flag on/off smoke, tracked-size, and final 1.543s
+median launch gates pass. See `REPORT-MP6b.md`.
+
+MP-7 completes the culinary-plausibility correction. A version-9 build-time
+artifact assigns one of 15 roles plus `notReadyToEat` and duplicate headword
+metadata to all 14,484 canonical rows. The plain catalogue has 108 `other`
+rows, 543 ineligible rows, and 304 not-ready rows; 1,039/1,500 recipes resolve
+to anchor roles and none enters a prohibited role. The solver now requires an
+anchor, respects per-role and combined seasoning caps, and clamps portions to
+authored role ranges.
+
+The first real-catalogue profile showed the earlier 150 ms figure was a
+synthetic-harness assumption: P8 took 4.056 seconds, dominated by repeated
+greedy scoring and sorting rather than 28 million local evaluations. Compact
+ranking records, exact role buckets, and precomputed duplicate/viruddha context
+reduce final seven-day solve median to 641.588 ms (max 959.744 ms) while all 30
+plan hashes, exact P7/P8 calories, +1.550713 Y1, 96 iterations, constraints,
+candidate set, and 100-run narration output remain unchanged. The full suite is
+150/150; role resolution is 44.735 ms cold / 1.086 ms cached. Physical iPhone
+16 Pro N=10 ABAB records a 1.090 s launch median and +10.281 MiB paired median
+peak-memory delta against MP-6b, inside both product budgets. See
+`REPORT-MP7.md`.
+
+The catalogue/user-store separation is implemented and simulator-verified.
+Bundled foods, exercises, yoga sequences, practices, Ayurveda data, barcode
+tables, reference nutrients, and search cache now mount from a versioned
+read-only catalogue. Profiles and every app-authored record remain in the
+existing writable store. The recovery-backed one-time migration converts
+catalogue relationships to stable UUID references and uses batch deletion;
+later catalogue revisions take a 0.0307-second migration-state fast path with
+`normalUpdateReseeded=false`. The executable fixture preserves food and
+exercise links, meal/training plans, storage, shopping, nodes, practice
+history, priority nutrients, and favorites. The combined-store factory resolves
+SwiftData's unordered configurations and runs editor-exact writable-store probes
+before launch. They cover implicitly inserted food nutrition children and
+gallery photos as well as recipes, workouts, Ayurveda overrides, and search
+cache rows; every persistent ID must resolve to the user store. The staged
+catalogue is finalized against that exact combined model, and the smoke test
+also verifies new food/exercise physical store IDs. The latest normal warm
+launch measured the catalogue/user check at 0.531 seconds and combined-container
+open at 0.340 seconds; no catalogue row preseeding ran.
+The real Add Food UI test also saves a complete nutrition graph without an
+error and returns to the food list. Relevant tests are 22/22 green; see
+`REPORT-CATALOG-SEPARATION.md`.
+
+## Next milestones
+
+1. **Host/simulator engineering through MP-7 COMPLETE on `ayurveda-app`** — D6 (models+seeder), D34 (all 12,601 foods
+   classified), D8/D8.1/D8.2 (UI end to end incl. computed tier + editors),
+   D9 (engineExcluded enforcement), WE-2 (full recipe nutrition + build-time
+   projection/search cache), WE-3 (founder-approved read-only display card),
+   WE-4 (canonical indexed Ayurveda search facets), and WE-5 (FoodSearch
+   border-case closure), WE-6 (cold-launch profiling + lazy index load), and
+   WE-7 (legacy target audit + proven-dead Swift cluster removal), and WE-8
+   (conservative derived safety metadata + IngredientLink parity), and WE-8c
+   (provenance-gated age enforcement), plus FC-1 (deterministic food-concept
+   ontology), INT-1 (unsquashed MP/FC branch integration, deterministic
+   artifact refresh, and launch paydown), and FC-1e/FC-2 (rev5 veto semantics,
+   canonical planner exclusion sets, and ontology aliases in deterministic
+   resolution), plus MP-5 (deterministic hard-validated plan assembly and
+   aiDraft Ayurveda scoring flag), INT-2 Phase 1 (unsquashed MP-4 +
+   FC-1e/FC-2 + MP-5 integration), and MP-6 (one-call batched narration plus
+   deterministic Foundation-only fallback), plus MP-6b (five-frame
+   conditional fallback copy validated on a real seven-day solver plan), plus
+   MP-7 (build-time food roles, readiness/eligibility, hard culinary
+   plausibility, and behavior-preserving real-catalogue solver optimization),
+   plus the catalogue/user-store separation (atomic read-only catalogue
+   replacement with stable user-owned references and no repeated preseeding).
+   See PROJECT-HANDBOOK.md §6 ledger and `REPORT-WE2.md` / `REPORT-WE3.md` /
+   `REPORT-WE4.md` / `REPORT-WE5.md` / `REPORT-WE6.md` for gates, timing,
+   screenshots, accessibility, search, `REPORT-WE7.md` for legacy audit
+   evidence, `REPORT-WE8.md` for safety derivation/audit evidence, and
+   `REPORT-FC1.md` for the original concept gates and WE-8 disagreement triage,
+   `REPORT-FC1e.md` for rev5 and FC-2 wiring, `REPORT-MP5.md` for solver
+   properties and launch evidence, and
+   `REPORT-INT1.md` for integrated evidence, `REPORT-INT2.md` for the Phase-1
+   merge, `REPORT-MP6.md` for narration and the two-call model topology, and
+   `REPORT-MP6b.md` for the real-plan copy sample and frame distribution, and
+   `REPORT-MP7.md` for role coverage, plausibility, real-catalogue profiling,
+   deterministic plan equivalence, and physical-device launch/memory evidence,
+   and `REPORT-CATALOG-SEPARATION.md` for migration/update safety evidence.
+2. **Physical-device validation — explicitly pending.** Run the MP-1 nine-run
+   matrix/G6/G8, MP-2 twenty-food error table/runtime counters, and MP-3 runtime
+   zero-model-call confirmation exactly as registered in
+   `DEFERRED-VALIDATION.md`. Integration did not waive these gates.
+3. **Expert review — the remaining content item.** Work aiDraft→reviewed across
+   dravyas/recipes/rules, resolve all reviewNote flags, optional batch-31
+   top-up to 750. Director can generate a reviewer packet on request.
+4. **Residual founder checks** (minutes, not milestones): physical-device AI
+   generation run (D9 G3 environmental residual), Computed/User card
+   screenshots, and physical-device VoiceOver smoke. WE-3's deterministic
+   default/largest-type light/dark matrix is complete.
+5. **Optional future scope** (new product decisions, not leftovers): visible
+   search facet chips, prakriti assessment/personalization, physical-device
+   launch signpost capture, and off-main first-search index decoding — best
+   after expert review.
+
+
+Git note (sandbox sessions): stale locks workaround — `GIT_INDEX_FILE=/tmp/ayur_index`,
+`git add` → `write-tree` → `commit-tree` → write SHA to `.git/refs/heads/main`.
+On the Mac: `rm -f .git/*.lock .git/refs/heads/main.lock && git reset`.

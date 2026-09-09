@@ -1,0 +1,638 @@
+{
+  "predraftVersion": "1.0",
+  "batch": "predraft-23",
+  "items": [
+    {
+      "id": "dravya.greater-galangal",
+      "name": "Greater galangal",
+      "sanskrit": "Kulanjana",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -2
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: greater galangal; kulanjana."
+    },
+    {
+      "id": "dravya.anantmool",
+      "name": "Indian sarsaparilla",
+      "sanskrit": "Sariva",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -2,
+          -1
+        ],
+        "virya": "cooling",
+        "note": "sherbet root"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: indian sarsaparilla; sariva; anantmool."
+    },
+    {
+      "id": "dravya.khus-root",
+      "name": "Vetiver root",
+      "sanskrit": "Ushira",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          0,
+          -2,
+          -1
+        ],
+        "virya": "cooling",
+        "note": "summer water infusion"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: vetiver root; ushira; khus root."
+    },
+    {
+      "id": "dravya.sea-buckthorn",
+      "name": "Sea buckthorn berry",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling",
+        "note": "Himalayan regional"
+      },
+      "usda": [
+        {
+          "fdcId": 12319,
+          "name": "Sea buckthorn powder (aromatic)",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.amla-murabba",
+      "name": "Amla murabba",
+      "sanskrit": "Amalaki Murabba",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 piece",
+          "grams": 30
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: amla murabba; amalaki murabba."
+    },
+    {
+      "id": "dravya.haritaki-murabba",
+      "name": "Haritaki murabba",
+      "sanskrit": "Haritaki Murabba",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          -1
+        ],
+        "virya": "neutral"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 piece",
+          "grams": 30
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: haritaki murabba."
+    },
+    {
+      "id": "dravya.bael-murabba",
+      "name": "Bael murabba",
+      "sanskrit": "Bilva Murabba",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          0
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 piece",
+          "grams": 30
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: bael murabba; bilva murabba."
+    },
+    {
+      "id": "dravya.ginger-murabba",
+      "name": "Ginger murabba",
+      "sanskrit": "Ardraka Murabba",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -2,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 piece",
+          "grams": 30
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: ginger murabba; ardraka murabba."
+    },
+    {
+      "id": "dravya.petha-murabba",
+      "name": "Ash gourd murabba (petha)",
+      "sanskrit": "Kushmanda Murabba",
+      "aliases": [
+        "petha"
+      ],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling",
+        "note": "classical brain-nourishing preserve"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 piece",
+          "grams": 30
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: ash gourd murabba; kushmanda murabba; petha murabba."
+    },
+    {
+      "id": "dravya.green-peas-pod",
+      "name": "Green peas in pod (fresh sabzi)",
+      "sanskrit": "Harita Kalaya",
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          1,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: green peas in pod; harita kalaya; green peas pod."
+    },
+    {
+      "id": "dravya.mustard-pods",
+      "name": "Tender mustard pods",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: tender mustard pods; mustard pods."
+    },
+    {
+      "id": "dravya.gherkin",
+      "name": "Indian gherkin (kundru-dondakaya kin)",
+      "sanskrit": null,
+      "aliases": [
+        "kundru-dondakaya kin"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: indian gherkin; gherkin."
+    },
+    {
+      "id": "dravya.round-melon-tinda-punjabi",
+      "name": "Punjabi tinda (apple gourd)",
+      "sanskrit": null,
+      "aliases": [
+        "apple gourd"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: punjabi tinda; round melon tinda punjabi."
+    },
+    {
+      "id": "dravya.wild-brinjal",
+      "name": "Wild brinjal (kantakari class)",
+      "sanskrit": "Brihati",
+      "aliases": [
+        "kantakari class"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -2
+        ],
+        "virya": "heating",
+        "note": "classical dashamula relative; regional sabzi"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: wild brinjal; brihati."
+    },
+    {
+      "id": "dravya.tender-tamarind-pod",
+      "name": "Tender tamarind pod",
+      "sanskrit": "Bala Amlika",
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          -1,
+          2,
+          0
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: tender tamarind pod; bala amlika."
+    },
+    {
+      "id": "dravya.papdi-lilva",
+      "name": "Fresh hyacinth beans (lilva)",
+      "sanskrit": null,
+      "aliases": [
+        "lilva"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          1,
+          0,
+          -1
+        ],
+        "virya": "neutral"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: fresh hyacinth beans; papdi lilva."
+    },
+    {
+      "id": "dravya.tender-cashew-fruit",
+      "name": "Cashew apple",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          0
+        ],
+        "virya": "heating",
+        "note": "coastal regional"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: cashew apple; tender cashew fruit."
+    },
+    {
+      "id": "dravya.sword-bean",
+      "name": "Sword bean",
+      "sanskrit": "Asidhari Shimbi",
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          1,
+          0,
+          -1
+        ],
+        "virya": "neutral"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: sword bean; asidhari shimbi."
+    },
+    {
+      "id": "dravya.ash-plantain",
+      "name": "Ash plantain",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: ash plantain."
+    },
+    {
+      "id": "dravya.raw-mango-vegetable",
+      "name": "Raw mango (sabzi/dal use)",
+      "sanskrit": "Amra (apakva)",
+      "aliases": [
+        "sabzi/dal use"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          -1,
+          2,
+          0
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 3668,
+          "name": "Mango, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.karonda-raw",
+      "name": "Raw karonda (pickle berry)",
+      "sanskrit": "Karamarda",
+      "aliases": [
+        "pickle berry"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          0
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: raw karonda; karamarda; karonda raw."
+    },
+    {
+      "id": "dravya.jimikand-pink",
+      "name": "Pink elephant yam",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: pink elephant yam; jimikand pink."
+    },
+    {
+      "id": "dravya.ash-gourd-juice-flesh",
+      "name": "Ash gourd (juicing flesh)",
+      "sanskrit": "Kushmanda Svarasa",
+      "aliases": [
+        "juicing flesh"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -2,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: ash gourd; kushmanda svarasa; ash gourd juice flesh."
+    },
+    {
+      "id": "dravya.tender-bamboo-pickled",
+      "name": "Tender bamboo (fresh, unfermented)",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          1,
+          0,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: tender bamboo; tender bamboo pickled."
+    },
+    {
+      "id": "dravya.water-lily-stem",
+      "name": "Water lily stem",
+      "sanskrit": "Kumuda Nala",
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          -2,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: water lily stem; kumuda nala."
+    }
+  ]
+}

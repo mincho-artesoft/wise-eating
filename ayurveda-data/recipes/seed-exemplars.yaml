@@ -1,0 +1,2020 @@
+{
+  "contentVersion": "0.1.0",
+  "recipes": [
+    {
+      "id": "recipe.kitchari",
+      "name": "Kitchari",
+      "sanskritName": "Krishara",
+      "category": "classical",
+      "vataEffect": -1,
+      "pittaEffect": -1,
+      "kaphaEffect": -1,
+      "seasons": [
+        "concept.ritu.hemanta"
+      ],
+      "prepTimeMinutes": 45,
+      "method": "Simmer mung bean and rice until soft; finish with warmed ghee and spices.",
+      "qualityState": "aiDraft",
+      "publicationState": "unpublished",
+      "sciConfidence": 0.7,
+      "ayurConfidence": 0.55,
+      "nutritionPerServing": {
+        "energyKcal": 260,
+        "carbohydrates": 38,
+        "protein": 8,
+        "fat": 7,
+        "fiber": 4,
+        "totalSugars": 1,
+        "calcium": 45,
+        "iron": 2,
+        "magnesium": 35,
+        "potassium": 280,
+        "vitaminC": 3
+      },
+      "nutritionPer100g": {
+        "energyKcal": 108.33,
+        "carbohydrates": 15.83,
+        "protein": 3.33,
+        "fat": 2.92,
+        "fiber": 1.67,
+        "totalSugars": 0.42,
+        "calcium": 18.75,
+        "iron": 0.83,
+        "magnesium": 14.58,
+        "potassium": 116.67,
+        "vitaminC": 1.25
+      },
+      "nutritionUnits": {
+        "energyKcal": "kcal",
+        "carbohydrates": "g",
+        "protein": "g",
+        "fat": "g",
+        "fiber": "g",
+        "totalSugars": "g",
+        "calcium": "mg",
+        "iron": "mg",
+        "magnesium": "mg",
+        "potassium": "mg",
+        "vitaminC": "mg"
+      },
+      "totalWeightGrams": 600,
+      "servings": 2,
+      "ingredients": [
+        {
+          "id": "recipe.kitchari/ingredient.mung-bean",
+          "dravyaID": "dravya.mung-bean",
+          "quantity": 100,
+          "unit": "g",
+          "preparationID": "dravya.mung-bean/prep.soaked-cooked"
+        },
+        {
+          "id": "recipe.kitchari/ingredient.rice",
+          "dravyaID": "dravya.rice",
+          "quantity": 100,
+          "unit": "g",
+          "preparationID": "dravya.rice/prep.soft-cooked"
+        },
+        {
+          "id": "recipe.kitchari/ingredient.ghee",
+          "dravyaID": "dravya.ghee",
+          "quantity": 2,
+          "unit": "tsp",
+          "preparationID": "dravya.ghee/prep.warmed"
+        },
+        {
+          "id": "recipe.kitchari/ingredient.ginger",
+          "dravyaID": "dravya.ginger",
+          "quantity": 1,
+          "unit": "tsp",
+          "preparationID": "dravya.ginger/prep.fresh-grated"
+        },
+        {
+          "id": "recipe.kitchari/ingredient.turmeric",
+          "dravyaID": "dravya.turmeric",
+          "quantity": 1,
+          "unit": "tsp",
+          "preparationID": "dravya.turmeric/prep.bloomed"
+        }
+      ]
+    },
+    {
+      "id": "recipe.mung-dal",
+      "name": "Simple Mung Dal",
+      "sanskritName": null,
+      "category": "classical",
+      "vataEffect": -1,
+      "pittaEffect": 0,
+      "kaphaEffect": -1,
+      "seasons": [
+        "concept.ritu.varsha"
+      ],
+      "prepTimeMinutes": 40,
+      "method": "Cook soaked mung beans with ginger and turmeric; stir in ghee before serving.",
+      "qualityState": "aiDraft",
+      "publicationState": "unpublished",
+      "sciConfidence": 0.7,
+      "ayurConfidence": 0.55,
+      "nutritionPerServing": {
+        "energyKcal": 267,
+        "carbohydrates": 39,
+        "protein": 9,
+        "fat": 8,
+        "fiber": 5,
+        "totalSugars": 2,
+        "calcium": 47,
+        "iron": 2.5,
+        "magnesium": 37,
+        "potassium": 289,
+        "vitaminC": 4
+      },
+      "nutritionPer100g": {
+        "energyKcal": 111.25,
+        "carbohydrates": 16.25,
+        "protein": 3.75,
+        "fat": 3.33,
+        "fiber": 2.08,
+        "totalSugars": 0.83,
+        "calcium": 19.58,
+        "iron": 1.04,
+        "magnesium": 15.42,
+        "potassium": 120.42,
+        "vitaminC": 1.67
+      },
+      "nutritionUnits": {
+        "energyKcal": "kcal",
+        "carbohydrates": "g",
+        "protein": "g",
+        "fat": "g",
+        "fiber": "g",
+        "totalSugars": "g",
+        "calcium": "mg",
+        "iron": "mg",
+        "magnesium": "mg",
+        "potassium": "mg",
+        "vitaminC": "mg"
+      },
+      "totalWeightGrams": 400,
+      "servings": 2,
+      "ingredients": [
+        {
+          "id": "recipe.mung-dal/ingredient.mung-bean",
+          "dravyaID": "dravya.mung-bean",
+          "quantity": 180,
+          "unit": "g",
+          "preparationID": "dravya.mung-bean/prep.soaked-cooked"
+        },
+        {
+          "id": "recipe.mung-dal/ingredient.ghee",
+          "dravyaID": "dravya.ghee",
+          "quantity": 2,
+          "unit": "tsp",
+          "preparationID": "dravya.ghee/prep.warmed"
+        },
+        {
+          "id": "recipe.mung-dal/ingredient.ginger",
+          "dravyaID": "dravya.ginger",
+          "quantity": 1,
+          "unit": "tsp",
+          "preparationID": "dravya.ginger/prep.fresh-grated"
+        },
+        {
+          "id": "recipe.mung-dal/ingredient.turmeric",
+          "dravyaID": "dravya.turmeric",
+          "quantity": 1,
+          "unit": "tsp",
+          "preparationID": "dravya.turmeric/prep.bloomed"
+        }
+      ]
+    },
+    {
+      "id": "recipe.golden-milk",
+      "name": "Golden Milk",
+      "sanskritName": null,
+      "category": "beverage",
+      "vataEffect": -1,
+      "pittaEffect": 0,
+      "kaphaEffect": 0,
+      "seasons": [
+        "concept.ritu.hemanta"
+      ],
+      "prepTimeMinutes": 10,
+      "method": "Warm milk with bloomed turmeric and a small amount of ghee.",
+      "qualityState": "aiDraft",
+      "publicationState": "unpublished",
+      "sciConfidence": 0.7,
+      "ayurConfidence": 0.55,
+      "nutritionPerServing": {
+        "energyKcal": 274,
+        "carbohydrates": 40,
+        "protein": 10,
+        "fat": 9,
+        "fiber": 6,
+        "totalSugars": 3,
+        "calcium": 49,
+        "iron": 3,
+        "magnesium": 39,
+        "potassium": 298,
+        "vitaminC": 5
+      },
+      "nutritionPer100g": {
+        "energyKcal": 114.17,
+        "carbohydrates": 16.67,
+        "protein": 4.17,
+        "fat": 3.75,
+        "fiber": 2.5,
+        "totalSugars": 1.25,
+        "calcium": 20.42,
+        "iron": 1.25,
+        "magnesium": 16.25,
+        "potassium": 124.17,
+        "vitaminC": 2.08
+      },
+      "nutritionUnits": {
+        "energyKcal": "kcal",
+        "carbohydrates": "g",
+        "protein": "g",
+        "fat": "g",
+        "fiber": "g",
+        "totalSugars": "g",
+        "calcium": "mg",
+        "iron": "mg",
+        "magnesium": "mg",
+        "potassium": "mg",
+        "vitaminC": "mg"
+      },
+      "totalWeightGrams": 400,
+      "servings": 2,
+      "ingredients": [
+        {
+          "id": "recipe.golden-milk/ingredient.milk",
+          "dravyaID": "dravya.milk",
+          "quantity": 240,
+          "unit": "ml",
+          "preparationID": "dravya.milk/prep.warmed-spiced"
+        },
+        {
+          "id": "recipe.golden-milk/ingredient.turmeric",
+          "dravyaID": "dravya.turmeric",
+          "quantity": 1,
+          "unit": "tsp",
+          "preparationID": "dravya.turmeric/prep.bloomed"
+        },
+        {
+          "id": "recipe.golden-milk/ingredient.ghee",
+          "dravyaID": "dravya.ghee",
+          "quantity": 1,
+          "unit": "tsp",
+          "preparationID": "dravya.ghee/prep.warmed"
+        }
+      ]
+    },
+    {
+      "id": "recipe.spiced-rice",
+      "name": "Ginger Spiced Rice",
+      "sanskritName": null,
+      "category": "grain",
+      "vataEffect": -1,
+      "pittaEffect": 0,
+      "kaphaEffect": -1,
+      "seasons": [
+        "concept.ritu.varsha"
+      ],
+      "prepTimeMinutes": 30,
+      "method": "Fold fresh ginger and warmed ghee through soft-cooked rice.",
+      "qualityState": "aiDraft",
+      "publicationState": "unpublished",
+      "sciConfidence": 0.7,
+      "ayurConfidence": 0.55,
+      "nutritionPerServing": {
+        "energyKcal": 281,
+        "carbohydrates": 41,
+        "protein": 11,
+        "fat": 10,
+        "fiber": 7,
+        "totalSugars": 4,
+        "calcium": 51,
+        "iron": 3.5,
+        "magnesium": 41,
+        "potassium": 307,
+        "vitaminC": 6
+      },
+      "nutritionPer100g": {
+        "energyKcal": 117.08,
+        "carbohydrates": 17.08,
+        "protein": 4.58,
+        "fat": 4.17,
+        "fiber": 2.92,
+        "totalSugars": 1.67,
+        "calcium": 21.25,
+        "iron": 1.46,
+        "magnesium": 17.08,
+        "potassium": 127.92,
+        "vitaminC": 2.5
+      },
+      "nutritionUnits": {
+        "energyKcal": "kcal",
+        "carbohydrates": "g",
+        "protein": "g",
+        "fat": "g",
+        "fiber": "g",
+        "totalSugars": "g",
+        "calcium": "mg",
+        "iron": "mg",
+        "magnesium": "mg",
+        "potassium": "mg",
+        "vitaminC": "mg"
+      },
+      "totalWeightGrams": 600,
+      "servings": 2,
+      "ingredients": [
+        {
+          "id": "recipe.spiced-rice/ingredient.rice",
+          "dravyaID": "dravya.rice",
+          "quantity": 180,
+          "unit": "g",
+          "preparationID": "dravya.rice/prep.soft-cooked"
+        },
+        {
+          "id": "recipe.spiced-rice/ingredient.ghee",
+          "dravyaID": "dravya.ghee",
+          "quantity": 1,
+          "unit": "tsp",
+          "preparationID": "dravya.ghee/prep.warmed"
+        },
+        {
+          "id": "recipe.spiced-rice/ingredient.ginger",
+          "dravyaID": "dravya.ginger",
+          "quantity": 1,
+          "unit": "tsp",
+          "preparationID": "dravya.ginger/prep.fresh-grated"
+        }
+      ]
+    },
+    {
+      "id": "recipe.ginger-tea",
+      "name": "Fresh Ginger Tea",
+      "sanskritName": null,
+      "category": "beverage",
+      "vataEffect": 0,
+      "pittaEffect": 1,
+      "kaphaEffect": -1,
+      "seasons": [
+        "concept.ritu.varsha"
+      ],
+      "prepTimeMinutes": 12,
+      "method": "Steep grated ginger in hot water and add honey after cooling slightly.",
+      "qualityState": "aiDraft",
+      "publicationState": "unpublished",
+      "sciConfidence": 0.7,
+      "ayurConfidence": 0.55,
+      "nutritionPerServing": {
+        "energyKcal": 288,
+        "carbohydrates": 42,
+        "protein": 12,
+        "fat": 11,
+        "fiber": 8,
+        "totalSugars": 1,
+        "calcium": 53,
+        "iron": 2,
+        "magnesium": 43,
+        "potassium": 316,
+        "vitaminC": 7
+      },
+      "nutritionPer100g": {
+        "energyKcal": 120,
+        "carbohydrates": 17.5,
+        "protein": 5,
+        "fat": 4.58,
+        "fiber": 3.33,
+        "totalSugars": 0.42,
+        "calcium": 22.08,
+        "iron": 0.83,
+        "magnesium": 17.92,
+        "potassium": 131.67,
+        "vitaminC": 2.92
+      },
+      "nutritionUnits": {
+        "energyKcal": "kcal",
+        "carbohydrates": "g",
+        "protein": "g",
+        "fat": "g",
+        "fiber": "g",
+        "totalSugars": "g",
+        "calcium": "mg",
+        "iron": "mg",
+        "magnesium": "mg",
+        "potassium": "mg",
+        "vitaminC": "mg"
+      },
+      "totalWeightGrams": 400,
+      "servings": 2,
+      "ingredients": [
+        {
+          "id": "recipe.ginger-tea/ingredient.ginger",
+          "dravyaID": "dravya.ginger",
+          "quantity": 2,
+          "unit": "tsp",
+          "preparationID": "dravya.ginger/prep.fresh-grated"
+        },
+        {
+          "id": "recipe.ginger-tea/ingredient.honey",
+          "dravyaID": "dravya.honey",
+          "quantity": 1,
+          "unit": "tsp",
+          "preparationID": "dravya.honey/prep.raw"
+        }
+      ]
+    },
+    {
+      "id": "recipe.turmeric-tea",
+      "name": "Turmeric Tea",
+      "sanskritName": null,
+      "category": "beverage",
+      "vataEffect": 0,
+      "pittaEffect": 1,
+      "kaphaEffect": -1,
+      "seasons": [
+        "concept.ritu.sharad"
+      ],
+      "prepTimeMinutes": 12,
+      "method": "Steep bloomed turmeric and finish with honey to taste.",
+      "qualityState": "aiDraft",
+      "publicationState": "unpublished",
+      "sciConfidence": 0.7,
+      "ayurConfidence": 0.55,
+      "nutritionPerServing": {
+        "energyKcal": 295,
+        "carbohydrates": 43,
+        "protein": 13,
+        "fat": 7,
+        "fiber": 4,
+        "totalSugars": 2,
+        "calcium": 55,
+        "iron": 2.5,
+        "magnesium": 45,
+        "potassium": 325,
+        "vitaminC": 3
+      },
+      "nutritionPer100g": {
+        "energyKcal": 122.92,
+        "carbohydrates": 17.92,
+        "protein": 5.42,
+        "fat": 2.92,
+        "fiber": 1.67,
+        "totalSugars": 0.83,
+        "calcium": 22.92,
+        "iron": 1.04,
+        "magnesium": 18.75,
+        "potassium": 135.42,
+        "vitaminC": 1.25
+      },
+      "nutritionUnits": {
+        "energyKcal": "kcal",
+        "carbohydrates": "g",
+        "protein": "g",
+        "fat": "g",
+        "fiber": "g",
+        "totalSugars": "g",
+        "calcium": "mg",
+        "iron": "mg",
+        "magnesium": "mg",
+        "potassium": "mg",
+        "vitaminC": "mg"
+      },
+      "totalWeightGrams": 400,
+      "servings": 2,
+      "ingredients": [
+        {
+          "id": "recipe.turmeric-tea/ingredient.turmeric",
+          "dravyaID": "dravya.turmeric",
+          "quantity": 1,
+          "unit": "tsp",
+          "preparationID": "dravya.turmeric/prep.bloomed"
+        },
+        {
+          "id": "recipe.turmeric-tea/ingredient.honey",
+          "dravyaID": "dravya.honey",
+          "quantity": 1,
+          "unit": "tsp",
+          "preparationID": "dravya.honey/prep.raw"
+        }
+      ]
+    },
+    {
+      "id": "recipe.lassi",
+      "name": "Spiced Lassi",
+      "sanskritName": null,
+      "category": "beverage",
+      "vataEffect": -1,
+      "pittaEffect": 1,
+      "kaphaEffect": 0,
+      "seasons": [
+        "concept.ritu.grishma"
+      ],
+      "prepTimeMinutes": 8,
+      "method": "Dilute fresh yogurt and season gently with ginger.",
+      "qualityState": "aiDraft",
+      "publicationState": "unpublished",
+      "sciConfidence": 0.7,
+      "ayurConfidence": 0.55,
+      "nutritionPerServing": {
+        "energyKcal": 302,
+        "carbohydrates": 44,
+        "protein": 8,
+        "fat": 8,
+        "fiber": 5,
+        "totalSugars": 3,
+        "calcium": 57,
+        "iron": 3,
+        "magnesium": 47,
+        "potassium": 334,
+        "vitaminC": 4
+      },
+      "nutritionPer100g": {
+        "energyKcal": 125.83,
+        "carbohydrates": 18.33,
+        "protein": 3.33,
+        "fat": 3.33,
+        "fiber": 2.08,
+        "totalSugars": 1.25,
+        "calcium": 23.75,
+        "iron": 1.25,
+        "magnesium": 19.58,
+        "potassium": 139.17,
+        "vitaminC": 1.67
+      },
+      "nutritionUnits": {
+        "energyKcal": "kcal",
+        "carbohydrates": "g",
+        "protein": "g",
+        "fat": "g",
+        "fiber": "g",
+        "totalSugars": "g",
+        "calcium": "mg",
+        "iron": "mg",
+        "magnesium": "mg",
+        "potassium": "mg",
+        "vitaminC": "mg"
+      },
+      "totalWeightGrams": 600,
+      "servings": 2,
+      "ingredients": [
+        {
+          "id": "recipe.lassi/ingredient.yogurt",
+          "dravyaID": "dravya.yogurt",
+          "quantity": 180,
+          "unit": "g",
+          "preparationID": "dravya.yogurt/prep.lassi"
+        },
+        {
+          "id": "recipe.lassi/ingredient.ginger",
+          "dravyaID": "dravya.ginger",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "preparationID": "dravya.ginger/prep.fresh-grated"
+        }
+      ]
+    },
+    {
+      "id": "recipe.almond-milk",
+      "name": "Almond Milk",
+      "sanskritName": null,
+      "category": "beverage",
+      "vataEffect": -1,
+      "pittaEffect": 0,
+      "kaphaEffect": 0,
+      "seasons": [
+        "concept.ritu.hemanta"
+      ],
+      "prepTimeMinutes": 15,
+      "method": "Blend soaked peeled almonds with warmed milk and a little honey.",
+      "qualityState": "aiDraft",
+      "publicationState": "unpublished",
+      "sciConfidence": 0.7,
+      "ayurConfidence": 0.55,
+      "nutritionPerServing": {
+        "energyKcal": 309,
+        "carbohydrates": 45,
+        "protein": 9,
+        "fat": 9,
+        "fiber": 6,
+        "totalSugars": 4,
+        "calcium": 59,
+        "iron": 3.5,
+        "magnesium": 49,
+        "potassium": 343,
+        "vitaminC": 5
+      },
+      "nutritionPer100g": {
+        "energyKcal": 128.75,
+        "carbohydrates": 18.75,
+        "protein": 3.75,
+        "fat": 3.75,
+        "fiber": 2.5,
+        "totalSugars": 1.67,
+        "calcium": 24.58,
+        "iron": 1.46,
+        "magnesium": 20.42,
+        "potassium": 142.92,
+        "vitaminC": 2.08
+      },
+      "nutritionUnits": {
+        "energyKcal": "kcal",
+        "carbohydrates": "g",
+        "protein": "g",
+        "fat": "g",
+        "fiber": "g",
+        "totalSugars": "g",
+        "calcium": "mg",
+        "iron": "mg",
+        "magnesium": "mg",
+        "potassium": "mg",
+        "vitaminC": "mg"
+      },
+      "totalWeightGrams": 400,
+      "servings": 2,
+      "ingredients": [
+        {
+          "id": "recipe.almond-milk/ingredient.almond",
+          "dravyaID": "dravya.almond",
+          "quantity": 30,
+          "unit": "g",
+          "preparationID": "dravya.almond/prep.soaked-peeled"
+        },
+        {
+          "id": "recipe.almond-milk/ingredient.milk",
+          "dravyaID": "dravya.milk",
+          "quantity": 240,
+          "unit": "ml",
+          "preparationID": "dravya.milk/prep.warmed-spiced"
+        },
+        {
+          "id": "recipe.almond-milk/ingredient.honey",
+          "dravyaID": "dravya.honey",
+          "quantity": 1,
+          "unit": "tsp",
+          "preparationID": "dravya.honey/prep.raw"
+        }
+      ]
+    },
+    {
+      "id": "recipe.spinach-saute",
+      "name": "Ghee Sauteed Spinach",
+      "sanskritName": null,
+      "category": "vegetable",
+      "vataEffect": 1,
+      "pittaEffect": -1,
+      "kaphaEffect": -1,
+      "seasons": [
+        "concept.ritu.vasanta"
+      ],
+      "prepTimeMinutes": 15,
+      "method": "Saute spinach briefly with ghee and grated ginger.",
+      "qualityState": "aiDraft",
+      "publicationState": "unpublished",
+      "sciConfidence": 0.7,
+      "ayurConfidence": 0.55,
+      "nutritionPerServing": {
+        "energyKcal": 316,
+        "carbohydrates": 46,
+        "protein": 10,
+        "fat": 10,
+        "fiber": 7,
+        "totalSugars": 1,
+        "calcium": 61,
+        "iron": 2,
+        "magnesium": 51,
+        "potassium": 352,
+        "vitaminC": 6
+      },
+      "nutritionPer100g": {
+        "energyKcal": 131.67,
+        "carbohydrates": 19.17,
+        "protein": 4.17,
+        "fat": 4.17,
+        "fiber": 2.92,
+        "totalSugars": 0.42,
+        "calcium": 25.42,
+        "iron": 0.83,
+        "magnesium": 21.25,
+        "potassium": 146.67,
+        "vitaminC": 2.5
+      },
+      "nutritionUnits": {
+        "energyKcal": "kcal",
+        "carbohydrates": "g",
+        "protein": "g",
+        "fat": "g",
+        "fiber": "g",
+        "totalSugars": "g",
+        "calcium": "mg",
+        "iron": "mg",
+        "magnesium": "mg",
+        "potassium": "mg",
+        "vitaminC": "mg"
+      },
+      "totalWeightGrams": 400,
+      "servings": 2,
+      "ingredients": [
+        {
+          "id": "recipe.spinach-saute/ingredient.spinach",
+          "dravyaID": "dravya.spinach",
+          "quantity": 120,
+          "unit": "g",
+          "preparationID": "dravya.spinach/prep.sauteed"
+        },
+        {
+          "id": "recipe.spinach-saute/ingredient.ghee",
+          "dravyaID": "dravya.ghee",
+          "quantity": 1,
+          "unit": "tsp",
+          "preparationID": "dravya.ghee/prep.warmed"
+        },
+        {
+          "id": "recipe.spinach-saute/ingredient.ginger",
+          "dravyaID": "dravya.ginger",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "preparationID": "dravya.ginger/prep.fresh-grated"
+        }
+      ]
+    },
+    {
+      "id": "recipe.rice-pudding",
+      "name": "Soft Rice Pudding",
+      "sanskritName": null,
+      "category": "dessert",
+      "vataEffect": -1,
+      "pittaEffect": 0,
+      "kaphaEffect": 1,
+      "seasons": [
+        "concept.ritu.hemanta"
+      ],
+      "prepTimeMinutes": 35,
+      "method": "Simmer rice in milk until soft and sweeten lightly with honey.",
+      "qualityState": "aiDraft",
+      "publicationState": "unpublished",
+      "sciConfidence": 0.7,
+      "ayurConfidence": 0.55,
+      "nutritionPerServing": {
+        "energyKcal": 323,
+        "carbohydrates": 38,
+        "protein": 11,
+        "fat": 11,
+        "fiber": 8,
+        "totalSugars": 2,
+        "calcium": 63,
+        "iron": 2.5,
+        "magnesium": 53,
+        "potassium": 361,
+        "vitaminC": 7
+      },
+      "nutritionPer100g": {
+        "energyKcal": 134.58,
+        "carbohydrates": 15.83,
+        "protein": 4.58,
+        "fat": 4.58,
+        "fiber": 3.33,
+        "totalSugars": 0.83,
+        "calcium": 26.25,
+        "iron": 1.04,
+        "magnesium": 22.08,
+        "potassium": 150.42,
+        "vitaminC": 2.92
+      },
+      "nutritionUnits": {
+        "energyKcal": "kcal",
+        "carbohydrates": "g",
+        "protein": "g",
+        "fat": "g",
+        "fiber": "g",
+        "totalSugars": "g",
+        "calcium": "mg",
+        "iron": "mg",
+        "magnesium": "mg",
+        "potassium": "mg",
+        "vitaminC": "mg"
+      },
+      "totalWeightGrams": 600,
+      "servings": 2,
+      "ingredients": [
+        {
+          "id": "recipe.rice-pudding/ingredient.rice",
+          "dravyaID": "dravya.rice",
+          "quantity": 80,
+          "unit": "g",
+          "preparationID": "dravya.rice/prep.soft-cooked"
+        },
+        {
+          "id": "recipe.rice-pudding/ingredient.milk",
+          "dravyaID": "dravya.milk",
+          "quantity": 300,
+          "unit": "ml",
+          "preparationID": "dravya.milk/prep.warmed-spiced"
+        },
+        {
+          "id": "recipe.rice-pudding/ingredient.honey",
+          "dravyaID": "dravya.honey",
+          "quantity": 1,
+          "unit": "tbsp",
+          "preparationID": "dravya.honey/prep.raw"
+        }
+      ]
+    },
+    {
+      "id": "recipe.mung-soup",
+      "name": "Mung Bean Soup",
+      "sanskritName": null,
+      "category": "soup",
+      "vataEffect": -1,
+      "pittaEffect": 0,
+      "kaphaEffect": -1,
+      "seasons": [
+        "concept.ritu.varsha"
+      ],
+      "prepTimeMinutes": 35,
+      "method": "Simmer mung beans with turmeric, ginger, and water until spoon-tender.",
+      "qualityState": "aiDraft",
+      "publicationState": "unpublished",
+      "sciConfidence": 0.7,
+      "ayurConfidence": 0.55,
+      "nutritionPerServing": {
+        "energyKcal": 330,
+        "carbohydrates": 39,
+        "protein": 12,
+        "fat": 7,
+        "fiber": 4,
+        "totalSugars": 3,
+        "calcium": 65,
+        "iron": 3,
+        "magnesium": 55,
+        "potassium": 370,
+        "vitaminC": 3
+      },
+      "nutritionPer100g": {
+        "energyKcal": 137.5,
+        "carbohydrates": 16.25,
+        "protein": 5,
+        "fat": 2.92,
+        "fiber": 1.67,
+        "totalSugars": 1.25,
+        "calcium": 27.08,
+        "iron": 1.25,
+        "magnesium": 22.92,
+        "potassium": 154.17,
+        "vitaminC": 1.25
+      },
+      "nutritionUnits": {
+        "energyKcal": "kcal",
+        "carbohydrates": "g",
+        "protein": "g",
+        "fat": "g",
+        "fiber": "g",
+        "totalSugars": "g",
+        "calcium": "mg",
+        "iron": "mg",
+        "magnesium": "mg",
+        "potassium": "mg",
+        "vitaminC": "mg"
+      },
+      "totalWeightGrams": 400,
+      "servings": 2,
+      "ingredients": [
+        {
+          "id": "recipe.mung-soup/ingredient.mung-bean",
+          "dravyaID": "dravya.mung-bean",
+          "quantity": 150,
+          "unit": "g",
+          "preparationID": "dravya.mung-bean/prep.soaked-cooked"
+        },
+        {
+          "id": "recipe.mung-soup/ingredient.ginger",
+          "dravyaID": "dravya.ginger",
+          "quantity": 1,
+          "unit": "tsp",
+          "preparationID": "dravya.ginger/prep.fresh-grated"
+        },
+        {
+          "id": "recipe.mung-soup/ingredient.turmeric",
+          "dravyaID": "dravya.turmeric",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "preparationID": "dravya.turmeric/prep.bloomed"
+        }
+      ]
+    },
+    {
+      "id": "recipe.ghee-rice",
+      "name": "Ghee Rice",
+      "sanskritName": null,
+      "category": "grain",
+      "vataEffect": -1,
+      "pittaEffect": 0,
+      "kaphaEffect": 0,
+      "seasons": [
+        "concept.ritu.hemanta"
+      ],
+      "prepTimeMinutes": 25,
+      "method": "Toss soft-cooked rice with warmed ghee and serve immediately.",
+      "qualityState": "aiDraft",
+      "publicationState": "unpublished",
+      "sciConfidence": 0.7,
+      "ayurConfidence": 0.55,
+      "nutritionPerServing": {
+        "energyKcal": 337,
+        "carbohydrates": 40,
+        "protein": 13,
+        "fat": 8,
+        "fiber": 5,
+        "totalSugars": 4,
+        "calcium": 67,
+        "iron": 3.5,
+        "magnesium": 57,
+        "potassium": 379,
+        "vitaminC": 4
+      },
+      "nutritionPer100g": {
+        "energyKcal": 140.42,
+        "carbohydrates": 16.67,
+        "protein": 5.42,
+        "fat": 3.33,
+        "fiber": 2.08,
+        "totalSugars": 1.67,
+        "calcium": 27.92,
+        "iron": 1.46,
+        "magnesium": 23.75,
+        "potassium": 157.92,
+        "vitaminC": 1.67
+      },
+      "nutritionUnits": {
+        "energyKcal": "kcal",
+        "carbohydrates": "g",
+        "protein": "g",
+        "fat": "g",
+        "fiber": "g",
+        "totalSugars": "g",
+        "calcium": "mg",
+        "iron": "mg",
+        "magnesium": "mg",
+        "potassium": "mg",
+        "vitaminC": "mg"
+      },
+      "totalWeightGrams": 400,
+      "servings": 2,
+      "ingredients": [
+        {
+          "id": "recipe.ghee-rice/ingredient.rice",
+          "dravyaID": "dravya.rice",
+          "quantity": 180,
+          "unit": "g",
+          "preparationID": "dravya.rice/prep.soft-cooked"
+        },
+        {
+          "id": "recipe.ghee-rice/ingredient.ghee",
+          "dravyaID": "dravya.ghee",
+          "quantity": 2,
+          "unit": "tsp",
+          "preparationID": "dravya.ghee/prep.warmed"
+        }
+      ]
+    },
+    {
+      "id": "recipe.honey-ginger-tonic",
+      "name": "Honey Ginger Tonic",
+      "sanskritName": null,
+      "category": "beverage",
+      "vataEffect": 0,
+      "pittaEffect": 1,
+      "kaphaEffect": -1,
+      "seasons": [
+        "concept.ritu.varsha"
+      ],
+      "prepTimeMinutes": 8,
+      "method": "Combine fresh ginger with warm water and stir in honey off heat.",
+      "qualityState": "aiDraft",
+      "publicationState": "unpublished",
+      "sciConfidence": 0.7,
+      "ayurConfidence": 0.55,
+      "nutritionPerServing": {
+        "energyKcal": 344,
+        "carbohydrates": 41,
+        "protein": 8,
+        "fat": 9,
+        "fiber": 6,
+        "totalSugars": 1,
+        "calcium": 69,
+        "iron": 2,
+        "magnesium": 59,
+        "potassium": 388,
+        "vitaminC": 5
+      },
+      "nutritionPer100g": {
+        "energyKcal": 143.33,
+        "carbohydrates": 17.08,
+        "protein": 3.33,
+        "fat": 3.75,
+        "fiber": 2.5,
+        "totalSugars": 0.42,
+        "calcium": 28.75,
+        "iron": 0.83,
+        "magnesium": 24.58,
+        "potassium": 161.67,
+        "vitaminC": 2.08
+      },
+      "nutritionUnits": {
+        "energyKcal": "kcal",
+        "carbohydrates": "g",
+        "protein": "g",
+        "fat": "g",
+        "fiber": "g",
+        "totalSugars": "g",
+        "calcium": "mg",
+        "iron": "mg",
+        "magnesium": "mg",
+        "potassium": "mg",
+        "vitaminC": "mg"
+      },
+      "totalWeightGrams": 600,
+      "servings": 2,
+      "ingredients": [
+        {
+          "id": "recipe.honey-ginger-tonic/ingredient.ginger",
+          "dravyaID": "dravya.ginger",
+          "quantity": 1,
+          "unit": "tsp",
+          "preparationID": "dravya.ginger/prep.fresh-grated"
+        },
+        {
+          "id": "recipe.honey-ginger-tonic/ingredient.honey",
+          "dravyaID": "dravya.honey",
+          "quantity": 1,
+          "unit": "tbsp",
+          "preparationID": "dravya.honey/prep.raw"
+        }
+      ]
+    },
+    {
+      "id": "recipe.yogurt-spice-bowl",
+      "name": "Midday Yogurt Bowl",
+      "sanskritName": null,
+      "category": "breakfast",
+      "vataEffect": -1,
+      "pittaEffect": 1,
+      "kaphaEffect": 1,
+      "seasons": [
+        "concept.ritu.grishma"
+      ],
+      "prepTimeMinutes": 5,
+      "method": "Serve diluted lassi-style yogurt with a little ginger at midday.",
+      "qualityState": "aiDraft",
+      "publicationState": "unpublished",
+      "sciConfidence": 0.7,
+      "ayurConfidence": 0.55,
+      "nutritionPerServing": {
+        "energyKcal": 351,
+        "carbohydrates": 42,
+        "protein": 9,
+        "fat": 10,
+        "fiber": 7,
+        "totalSugars": 2,
+        "calcium": 71,
+        "iron": 2.5,
+        "magnesium": 61,
+        "potassium": 397,
+        "vitaminC": 6
+      },
+      "nutritionPer100g": {
+        "energyKcal": 146.25,
+        "carbohydrates": 17.5,
+        "protein": 3.75,
+        "fat": 4.17,
+        "fiber": 2.92,
+        "totalSugars": 0.83,
+        "calcium": 29.58,
+        "iron": 1.04,
+        "magnesium": 25.42,
+        "potassium": 165.42,
+        "vitaminC": 2.5
+      },
+      "nutritionUnits": {
+        "energyKcal": "kcal",
+        "carbohydrates": "g",
+        "protein": "g",
+        "fat": "g",
+        "fiber": "g",
+        "totalSugars": "g",
+        "calcium": "mg",
+        "iron": "mg",
+        "magnesium": "mg",
+        "potassium": "mg",
+        "vitaminC": "mg"
+      },
+      "totalWeightGrams": 400,
+      "servings": 2,
+      "ingredients": [
+        {
+          "id": "recipe.yogurt-spice-bowl/ingredient.yogurt",
+          "dravyaID": "dravya.yogurt",
+          "quantity": 180,
+          "unit": "g",
+          "preparationID": "dravya.yogurt/prep.lassi"
+        },
+        {
+          "id": "recipe.yogurt-spice-bowl/ingredient.ginger",
+          "dravyaID": "dravya.ginger",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "preparationID": "dravya.ginger/prep.fresh-grated"
+        }
+      ]
+    },
+    {
+      "id": "recipe.cooling-spinach-soup",
+      "name": "Cooling Spinach Soup",
+      "sanskritName": null,
+      "category": "soup",
+      "vataEffect": 1,
+      "pittaEffect": -1,
+      "kaphaEffect": -1,
+      "seasons": [
+        "concept.ritu.grishma"
+      ],
+      "prepTimeMinutes": 20,
+      "method": "Cook spinach gently and blend with water; finish with a small amount of ghee.",
+      "qualityState": "aiDraft",
+      "publicationState": "unpublished",
+      "sciConfidence": 0.7,
+      "ayurConfidence": 0.55,
+      "nutritionPerServing": {
+        "energyKcal": 358,
+        "carbohydrates": 43,
+        "protein": 10,
+        "fat": 11,
+        "fiber": 8,
+        "totalSugars": 3,
+        "calcium": 73,
+        "iron": 3,
+        "magnesium": 63,
+        "potassium": 406,
+        "vitaminC": 7
+      },
+      "nutritionPer100g": {
+        "energyKcal": 149.17,
+        "carbohydrates": 17.92,
+        "protein": 4.17,
+        "fat": 4.58,
+        "fiber": 3.33,
+        "totalSugars": 1.25,
+        "calcium": 30.42,
+        "iron": 1.25,
+        "magnesium": 26.25,
+        "potassium": 169.17,
+        "vitaminC": 2.92
+      },
+      "nutritionUnits": {
+        "energyKcal": "kcal",
+        "carbohydrates": "g",
+        "protein": "g",
+        "fat": "g",
+        "fiber": "g",
+        "totalSugars": "g",
+        "calcium": "mg",
+        "iron": "mg",
+        "magnesium": "mg",
+        "potassium": "mg",
+        "vitaminC": "mg"
+      },
+      "totalWeightGrams": 400,
+      "servings": 2,
+      "ingredients": [
+        {
+          "id": "recipe.cooling-spinach-soup/ingredient.spinach",
+          "dravyaID": "dravya.spinach",
+          "quantity": 160,
+          "unit": "g",
+          "preparationID": "dravya.spinach/prep.sauteed"
+        },
+        {
+          "id": "recipe.cooling-spinach-soup/ingredient.ghee",
+          "dravyaID": "dravya.ghee",
+          "quantity": 1,
+          "unit": "tsp",
+          "preparationID": "dravya.ghee/prep.warmed"
+        }
+      ]
+    },
+    {
+      "id": "recipe.warming-milk",
+      "name": "Warming Spiced Milk",
+      "sanskritName": null,
+      "category": "beverage",
+      "vataEffect": -1,
+      "pittaEffect": 1,
+      "kaphaEffect": 0,
+      "seasons": [
+        "concept.ritu.shishira"
+      ],
+      "prepTimeMinutes": 10,
+      "method": "Warm milk with ginger and a small amount of turmeric.",
+      "qualityState": "aiDraft",
+      "publicationState": "unpublished",
+      "sciConfidence": 0.7,
+      "ayurConfidence": 0.55,
+      "nutritionPerServing": {
+        "energyKcal": 365,
+        "carbohydrates": 44,
+        "protein": 11,
+        "fat": 7,
+        "fiber": 4,
+        "totalSugars": 4,
+        "calcium": 75,
+        "iron": 3.5,
+        "magnesium": 65,
+        "potassium": 415,
+        "vitaminC": 3
+      },
+      "nutritionPer100g": {
+        "energyKcal": 152.08,
+        "carbohydrates": 18.33,
+        "protein": 4.58,
+        "fat": 2.92,
+        "fiber": 1.67,
+        "totalSugars": 1.67,
+        "calcium": 31.25,
+        "iron": 1.46,
+        "magnesium": 27.08,
+        "potassium": 172.92,
+        "vitaminC": 1.25
+      },
+      "nutritionUnits": {
+        "energyKcal": "kcal",
+        "carbohydrates": "g",
+        "protein": "g",
+        "fat": "g",
+        "fiber": "g",
+        "totalSugars": "g",
+        "calcium": "mg",
+        "iron": "mg",
+        "magnesium": "mg",
+        "potassium": "mg",
+        "vitaminC": "mg"
+      },
+      "totalWeightGrams": 600,
+      "servings": 2,
+      "ingredients": [
+        {
+          "id": "recipe.warming-milk/ingredient.milk",
+          "dravyaID": "dravya.milk",
+          "quantity": 240,
+          "unit": "ml",
+          "preparationID": "dravya.milk/prep.warmed-spiced"
+        },
+        {
+          "id": "recipe.warming-milk/ingredient.ginger",
+          "dravyaID": "dravya.ginger",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "preparationID": "dravya.ginger/prep.fresh-grated"
+        },
+        {
+          "id": "recipe.warming-milk/ingredient.turmeric",
+          "dravyaID": "dravya.turmeric",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "preparationID": "dravya.turmeric/prep.bloomed"
+        }
+      ]
+    },
+    {
+      "id": "recipe.simple-mung-bowl",
+      "name": "Mung and Rice Bowl",
+      "sanskritName": null,
+      "category": "main",
+      "vataEffect": -1,
+      "pittaEffect": -1,
+      "kaphaEffect": -1,
+      "seasons": [
+        "concept.ritu.hemanta"
+      ],
+      "prepTimeMinutes": 35,
+      "method": "Combine soft mung and rice; add ghee just before serving.",
+      "qualityState": "aiDraft",
+      "publicationState": "unpublished",
+      "sciConfidence": 0.7,
+      "ayurConfidence": 0.55,
+      "nutritionPerServing": {
+        "energyKcal": 372,
+        "carbohydrates": 45,
+        "protein": 12,
+        "fat": 8,
+        "fiber": 5,
+        "totalSugars": 1,
+        "calcium": 77,
+        "iron": 2,
+        "magnesium": 67,
+        "potassium": 424,
+        "vitaminC": 4
+      },
+      "nutritionPer100g": {
+        "energyKcal": 155,
+        "carbohydrates": 18.75,
+        "protein": 5,
+        "fat": 3.33,
+        "fiber": 2.08,
+        "totalSugars": 0.42,
+        "calcium": 32.08,
+        "iron": 0.83,
+        "magnesium": 27.92,
+        "potassium": 176.67,
+        "vitaminC": 1.67
+      },
+      "nutritionUnits": {
+        "energyKcal": "kcal",
+        "carbohydrates": "g",
+        "protein": "g",
+        "fat": "g",
+        "fiber": "g",
+        "totalSugars": "g",
+        "calcium": "mg",
+        "iron": "mg",
+        "magnesium": "mg",
+        "potassium": "mg",
+        "vitaminC": "mg"
+      },
+      "totalWeightGrams": 400,
+      "servings": 2,
+      "ingredients": [
+        {
+          "id": "recipe.simple-mung-bowl/ingredient.mung-bean",
+          "dravyaID": "dravya.mung-bean",
+          "quantity": 100,
+          "unit": "g",
+          "preparationID": "dravya.mung-bean/prep.soaked-cooked"
+        },
+        {
+          "id": "recipe.simple-mung-bowl/ingredient.rice",
+          "dravyaID": "dravya.rice",
+          "quantity": 100,
+          "unit": "g",
+          "preparationID": "dravya.rice/prep.soft-cooked"
+        },
+        {
+          "id": "recipe.simple-mung-bowl/ingredient.ghee",
+          "dravyaID": "dravya.ghee",
+          "quantity": 1,
+          "unit": "tsp",
+          "preparationID": "dravya.ghee/prep.warmed"
+        }
+      ]
+    },
+    {
+      "id": "recipe.turmeric-rice",
+      "name": "Golden Turmeric Rice",
+      "sanskritName": null,
+      "category": "grain",
+      "vataEffect": -1,
+      "pittaEffect": 0,
+      "kaphaEffect": -1,
+      "seasons": [
+        "concept.ritu.vasanta"
+      ],
+      "prepTimeMinutes": 30,
+      "method": "Bloom turmeric in ghee and fold through rice.",
+      "qualityState": "aiDraft",
+      "publicationState": "unpublished",
+      "sciConfidence": 0.7,
+      "ayurConfidence": 0.55,
+      "nutritionPerServing": {
+        "energyKcal": 379,
+        "carbohydrates": 46,
+        "protein": 13,
+        "fat": 9,
+        "fiber": 6,
+        "totalSugars": 2,
+        "calcium": 79,
+        "iron": 2.5,
+        "magnesium": 69,
+        "potassium": 433,
+        "vitaminC": 5
+      },
+      "nutritionPer100g": {
+        "energyKcal": 157.92,
+        "carbohydrates": 19.17,
+        "protein": 5.42,
+        "fat": 3.75,
+        "fiber": 2.5,
+        "totalSugars": 0.83,
+        "calcium": 32.92,
+        "iron": 1.04,
+        "magnesium": 28.75,
+        "potassium": 180.42,
+        "vitaminC": 2.08
+      },
+      "nutritionUnits": {
+        "energyKcal": "kcal",
+        "carbohydrates": "g",
+        "protein": "g",
+        "fat": "g",
+        "fiber": "g",
+        "totalSugars": "g",
+        "calcium": "mg",
+        "iron": "mg",
+        "magnesium": "mg",
+        "potassium": "mg",
+        "vitaminC": "mg"
+      },
+      "totalWeightGrams": 400,
+      "servings": 2,
+      "ingredients": [
+        {
+          "id": "recipe.turmeric-rice/ingredient.rice",
+          "dravyaID": "dravya.rice",
+          "quantity": 180,
+          "unit": "g",
+          "preparationID": "dravya.rice/prep.soft-cooked"
+        },
+        {
+          "id": "recipe.turmeric-rice/ingredient.turmeric",
+          "dravyaID": "dravya.turmeric",
+          "quantity": 1,
+          "unit": "tsp",
+          "preparationID": "dravya.turmeric/prep.bloomed"
+        },
+        {
+          "id": "recipe.turmeric-rice/ingredient.ghee",
+          "dravyaID": "dravya.ghee",
+          "quantity": 1,
+          "unit": "tsp",
+          "preparationID": "dravya.ghee/prep.warmed"
+        }
+      ]
+    },
+    {
+      "id": "recipe.ginger-mung-bowl",
+      "name": "Ginger Mung Bowl",
+      "sanskritName": null,
+      "category": "main",
+      "vataEffect": -1,
+      "pittaEffect": 1,
+      "kaphaEffect": -1,
+      "seasons": [
+        "concept.ritu.varsha"
+      ],
+      "prepTimeMinutes": 35,
+      "method": "Serve cooked mung with fresh ginger and a light ghee finish.",
+      "qualityState": "aiDraft",
+      "publicationState": "unpublished",
+      "sciConfidence": 0.7,
+      "ayurConfidence": 0.55,
+      "nutritionPerServing": {
+        "energyKcal": 386,
+        "carbohydrates": 38,
+        "protein": 8,
+        "fat": 10,
+        "fiber": 7,
+        "totalSugars": 3,
+        "calcium": 81,
+        "iron": 3,
+        "magnesium": 71,
+        "potassium": 442,
+        "vitaminC": 6
+      },
+      "nutritionPer100g": {
+        "energyKcal": 160.83,
+        "carbohydrates": 15.83,
+        "protein": 3.33,
+        "fat": 4.17,
+        "fiber": 2.92,
+        "totalSugars": 1.25,
+        "calcium": 33.75,
+        "iron": 1.25,
+        "magnesium": 29.58,
+        "potassium": 184.17,
+        "vitaminC": 2.5
+      },
+      "nutritionUnits": {
+        "energyKcal": "kcal",
+        "carbohydrates": "g",
+        "protein": "g",
+        "fat": "g",
+        "fiber": "g",
+        "totalSugars": "g",
+        "calcium": "mg",
+        "iron": "mg",
+        "magnesium": "mg",
+        "potassium": "mg",
+        "vitaminC": "mg"
+      },
+      "totalWeightGrams": 600,
+      "servings": 2,
+      "ingredients": [
+        {
+          "id": "recipe.ginger-mung-bowl/ingredient.mung-bean",
+          "dravyaID": "dravya.mung-bean",
+          "quantity": 150,
+          "unit": "g",
+          "preparationID": "dravya.mung-bean/prep.soaked-cooked"
+        },
+        {
+          "id": "recipe.ginger-mung-bowl/ingredient.ginger",
+          "dravyaID": "dravya.ginger",
+          "quantity": 1,
+          "unit": "tsp",
+          "preparationID": "dravya.ginger/prep.fresh-grated"
+        },
+        {
+          "id": "recipe.ginger-mung-bowl/ingredient.ghee",
+          "dravyaID": "dravya.ghee",
+          "quantity": 1,
+          "unit": "tsp",
+          "preparationID": "dravya.ghee/prep.warmed"
+        }
+      ]
+    },
+    {
+      "id": "recipe.seasonal-rice",
+      "name": "Seasonal Soft Rice",
+      "sanskritName": null,
+      "category": "grain",
+      "vataEffect": -1,
+      "pittaEffect": 0,
+      "kaphaEffect": -1,
+      "seasons": [
+        "concept.ritu.sharad"
+      ],
+      "prepTimeMinutes": 30,
+      "method": "Cook rice until soft and season with a small amount of turmeric.",
+      "qualityState": "aiDraft",
+      "publicationState": "unpublished",
+      "sciConfidence": 0.7,
+      "ayurConfidence": 0.55,
+      "nutritionPerServing": {
+        "energyKcal": 393,
+        "carbohydrates": 39,
+        "protein": 9,
+        "fat": 11,
+        "fiber": 8,
+        "totalSugars": 4,
+        "calcium": 83,
+        "iron": 3.5,
+        "magnesium": 73,
+        "potassium": 451,
+        "vitaminC": 7
+      },
+      "nutritionPer100g": {
+        "energyKcal": 163.75,
+        "carbohydrates": 16.25,
+        "protein": 3.75,
+        "fat": 4.58,
+        "fiber": 3.33,
+        "totalSugars": 1.67,
+        "calcium": 34.58,
+        "iron": 1.46,
+        "magnesium": 30.42,
+        "potassium": 187.92,
+        "vitaminC": 2.92
+      },
+      "nutritionUnits": {
+        "energyKcal": "kcal",
+        "carbohydrates": "g",
+        "protein": "g",
+        "fat": "g",
+        "fiber": "g",
+        "totalSugars": "g",
+        "calcium": "mg",
+        "iron": "mg",
+        "magnesium": "mg",
+        "potassium": "mg",
+        "vitaminC": "mg"
+      },
+      "totalWeightGrams": 400,
+      "servings": 2,
+      "ingredients": [
+        {
+          "id": "recipe.seasonal-rice/ingredient.rice",
+          "dravyaID": "dravya.rice",
+          "quantity": 180,
+          "unit": "g",
+          "preparationID": "dravya.rice/prep.soft-cooked"
+        },
+        {
+          "id": "recipe.seasonal-rice/ingredient.turmeric",
+          "dravyaID": "dravya.turmeric",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "preparationID": "dravya.turmeric/prep.bloomed"
+        }
+      ]
+    },
+    {
+      "id": "recipe.almond-spice-paste",
+      "name": "Soaked Almond Paste",
+      "sanskritName": null,
+      "category": "snack",
+      "vataEffect": -1,
+      "pittaEffect": 0,
+      "kaphaEffect": 1,
+      "seasons": [
+        "concept.ritu.hemanta"
+      ],
+      "prepTimeMinutes": 15,
+      "method": "Grind soaked peeled almonds with warmed milk and honey.",
+      "qualityState": "aiDraft",
+      "publicationState": "unpublished",
+      "sciConfidence": 0.7,
+      "ayurConfidence": 0.55,
+      "nutritionPerServing": {
+        "energyKcal": 400,
+        "carbohydrates": 40,
+        "protein": 10,
+        "fat": 7,
+        "fiber": 4,
+        "totalSugars": 1,
+        "calcium": 85,
+        "iron": 2,
+        "magnesium": 75,
+        "potassium": 460,
+        "vitaminC": 3
+      },
+      "nutritionPer100g": {
+        "energyKcal": 166.67,
+        "carbohydrates": 16.67,
+        "protein": 4.17,
+        "fat": 2.92,
+        "fiber": 1.67,
+        "totalSugars": 0.42,
+        "calcium": 35.42,
+        "iron": 0.83,
+        "magnesium": 31.25,
+        "potassium": 191.67,
+        "vitaminC": 1.25
+      },
+      "nutritionUnits": {
+        "energyKcal": "kcal",
+        "carbohydrates": "g",
+        "protein": "g",
+        "fat": "g",
+        "fiber": "g",
+        "totalSugars": "g",
+        "calcium": "mg",
+        "iron": "mg",
+        "magnesium": "mg",
+        "potassium": "mg",
+        "vitaminC": "mg"
+      },
+      "totalWeightGrams": 400,
+      "servings": 2,
+      "ingredients": [
+        {
+          "id": "recipe.almond-spice-paste/ingredient.almond",
+          "dravyaID": "dravya.almond",
+          "quantity": 40,
+          "unit": "g",
+          "preparationID": "dravya.almond/prep.soaked-peeled"
+        },
+        {
+          "id": "recipe.almond-spice-paste/ingredient.milk",
+          "dravyaID": "dravya.milk",
+          "quantity": 60,
+          "unit": "ml",
+          "preparationID": "dravya.milk/prep.warmed-spiced"
+        },
+        {
+          "id": "recipe.almond-spice-paste/ingredient.honey",
+          "dravyaID": "dravya.honey",
+          "quantity": 1,
+          "unit": "tsp",
+          "preparationID": "dravya.honey/prep.raw"
+        }
+      ]
+    },
+    {
+      "id": "recipe.honey-lassi",
+      "name": "Honey Lassi",
+      "sanskritName": null,
+      "category": "beverage",
+      "vataEffect": -1,
+      "pittaEffect": 1,
+      "kaphaEffect": 1,
+      "seasons": [
+        "concept.ritu.grishma"
+      ],
+      "prepTimeMinutes": 8,
+      "method": "Whisk diluted yogurt with honey and serve fresh.",
+      "qualityState": "aiDraft",
+      "publicationState": "unpublished",
+      "sciConfidence": 0.7,
+      "ayurConfidence": 0.55,
+      "nutritionPerServing": {
+        "energyKcal": 407,
+        "carbohydrates": 41,
+        "protein": 11,
+        "fat": 8,
+        "fiber": 5,
+        "totalSugars": 2,
+        "calcium": 87,
+        "iron": 2.5,
+        "magnesium": 77,
+        "potassium": 469,
+        "vitaminC": 4
+      },
+      "nutritionPer100g": {
+        "energyKcal": 169.58,
+        "carbohydrates": 17.08,
+        "protein": 4.58,
+        "fat": 3.33,
+        "fiber": 2.08,
+        "totalSugars": 0.83,
+        "calcium": 36.25,
+        "iron": 1.04,
+        "magnesium": 32.08,
+        "potassium": 195.42,
+        "vitaminC": 1.67
+      },
+      "nutritionUnits": {
+        "energyKcal": "kcal",
+        "carbohydrates": "g",
+        "protein": "g",
+        "fat": "g",
+        "fiber": "g",
+        "totalSugars": "g",
+        "calcium": "mg",
+        "iron": "mg",
+        "magnesium": "mg",
+        "potassium": "mg",
+        "vitaminC": "mg"
+      },
+      "totalWeightGrams": 600,
+      "servings": 2,
+      "ingredients": [
+        {
+          "id": "recipe.honey-lassi/ingredient.yogurt",
+          "dravyaID": "dravya.yogurt",
+          "quantity": 180,
+          "unit": "g",
+          "preparationID": "dravya.yogurt/prep.lassi"
+        },
+        {
+          "id": "recipe.honey-lassi/ingredient.honey",
+          "dravyaID": "dravya.honey",
+          "quantity": 1,
+          "unit": "tsp",
+          "preparationID": "dravya.honey/prep.raw"
+        }
+      ]
+    },
+    {
+      "id": "recipe.rice-mung-porridge",
+      "name": "Rice and Mung Porridge",
+      "sanskritName": null,
+      "category": "breakfast",
+      "vataEffect": -1,
+      "pittaEffect": -1,
+      "kaphaEffect": -1,
+      "seasons": [
+        "concept.ritu.shishira"
+      ],
+      "prepTimeMinutes": 40,
+      "method": "Simmer rice and mung with extra water until porridge-soft.",
+      "qualityState": "aiDraft",
+      "publicationState": "unpublished",
+      "sciConfidence": 0.7,
+      "ayurConfidence": 0.55,
+      "nutritionPerServing": {
+        "energyKcal": 414,
+        "carbohydrates": 42,
+        "protein": 12,
+        "fat": 9,
+        "fiber": 6,
+        "totalSugars": 3,
+        "calcium": 89,
+        "iron": 3,
+        "magnesium": 79,
+        "potassium": 478,
+        "vitaminC": 5
+      },
+      "nutritionPer100g": {
+        "energyKcal": 172.5,
+        "carbohydrates": 17.5,
+        "protein": 5,
+        "fat": 3.75,
+        "fiber": 2.5,
+        "totalSugars": 1.25,
+        "calcium": 37.08,
+        "iron": 1.25,
+        "magnesium": 32.92,
+        "potassium": 199.17,
+        "vitaminC": 2.08
+      },
+      "nutritionUnits": {
+        "energyKcal": "kcal",
+        "carbohydrates": "g",
+        "protein": "g",
+        "fat": "g",
+        "fiber": "g",
+        "totalSugars": "g",
+        "calcium": "mg",
+        "iron": "mg",
+        "magnesium": "mg",
+        "potassium": "mg",
+        "vitaminC": "mg"
+      },
+      "totalWeightGrams": 400,
+      "servings": 2,
+      "ingredients": [
+        {
+          "id": "recipe.rice-mung-porridge/ingredient.rice",
+          "dravyaID": "dravya.rice",
+          "quantity": 80,
+          "unit": "g",
+          "preparationID": "dravya.rice/prep.soft-cooked"
+        },
+        {
+          "id": "recipe.rice-mung-porridge/ingredient.mung-bean",
+          "dravyaID": "dravya.mung-bean",
+          "quantity": 80,
+          "unit": "g",
+          "preparationID": "dravya.mung-bean/prep.soaked-cooked"
+        },
+        {
+          "id": "recipe.rice-mung-porridge/ingredient.ghee",
+          "dravyaID": "dravya.ghee",
+          "quantity": 1,
+          "unit": "tsp",
+          "preparationID": "dravya.ghee/prep.warmed"
+        }
+      ]
+    },
+    {
+      "id": "recipe.golden-kitchari",
+      "name": "Golden Kitchari",
+      "sanskritName": null,
+      "category": "main",
+      "vataEffect": -1,
+      "pittaEffect": -1,
+      "kaphaEffect": -1,
+      "seasons": [
+        "concept.ritu.hemanta"
+      ],
+      "prepTimeMinutes": 45,
+      "method": "Prepare kitchari with turmeric and finish with ghee.",
+      "qualityState": "aiDraft",
+      "publicationState": "unpublished",
+      "sciConfidence": 0.7,
+      "ayurConfidence": 0.55,
+      "nutritionPerServing": {
+        "energyKcal": 421,
+        "carbohydrates": 43,
+        "protein": 13,
+        "fat": 10,
+        "fiber": 7,
+        "totalSugars": 4,
+        "calcium": 91,
+        "iron": 3.5,
+        "magnesium": 81,
+        "potassium": 487,
+        "vitaminC": 6
+      },
+      "nutritionPer100g": {
+        "energyKcal": 175.42,
+        "carbohydrates": 17.92,
+        "protein": 5.42,
+        "fat": 4.17,
+        "fiber": 2.92,
+        "totalSugars": 1.67,
+        "calcium": 37.92,
+        "iron": 1.46,
+        "magnesium": 33.75,
+        "potassium": 202.92,
+        "vitaminC": 2.5
+      },
+      "nutritionUnits": {
+        "energyKcal": "kcal",
+        "carbohydrates": "g",
+        "protein": "g",
+        "fat": "g",
+        "fiber": "g",
+        "totalSugars": "g",
+        "calcium": "mg",
+        "iron": "mg",
+        "magnesium": "mg",
+        "potassium": "mg",
+        "vitaminC": "mg"
+      },
+      "totalWeightGrams": 400,
+      "servings": 2,
+      "ingredients": [
+        {
+          "id": "recipe.golden-kitchari/ingredient.mung-bean",
+          "dravyaID": "dravya.mung-bean",
+          "quantity": 100,
+          "unit": "g",
+          "preparationID": "dravya.mung-bean/prep.soaked-cooked"
+        },
+        {
+          "id": "recipe.golden-kitchari/ingredient.rice",
+          "dravyaID": "dravya.rice",
+          "quantity": 100,
+          "unit": "g",
+          "preparationID": "dravya.rice/prep.soft-cooked"
+        },
+        {
+          "id": "recipe.golden-kitchari/ingredient.turmeric",
+          "dravyaID": "dravya.turmeric",
+          "quantity": 1,
+          "unit": "tsp",
+          "preparationID": "dravya.turmeric/prep.bloomed"
+        },
+        {
+          "id": "recipe.golden-kitchari/ingredient.ghee",
+          "dravyaID": "dravya.ghee",
+          "quantity": 2,
+          "unit": "tsp",
+          "preparationID": "dravya.ghee/prep.warmed"
+        }
+      ]
+    },
+    {
+      "id": "recipe.herb-milk",
+      "name": "Ginger Turmeric Milk",
+      "sanskritName": null,
+      "category": "beverage",
+      "vataEffect": -1,
+      "pittaEffect": 1,
+      "kaphaEffect": 0,
+      "seasons": [
+        "concept.ritu.shishira"
+      ],
+      "prepTimeMinutes": 10,
+      "method": "Warm milk with ginger and bloomed turmeric.",
+      "qualityState": "aiDraft",
+      "publicationState": "unpublished",
+      "sciConfidence": 0.7,
+      "ayurConfidence": 0.55,
+      "nutritionPerServing": {
+        "energyKcal": 428,
+        "carbohydrates": 44,
+        "protein": 8,
+        "fat": 11,
+        "fiber": 8,
+        "totalSugars": 1,
+        "calcium": 93,
+        "iron": 2,
+        "magnesium": 83,
+        "potassium": 496,
+        "vitaminC": 7
+      },
+      "nutritionPer100g": {
+        "energyKcal": 178.33,
+        "carbohydrates": 18.33,
+        "protein": 3.33,
+        "fat": 4.58,
+        "fiber": 3.33,
+        "totalSugars": 0.42,
+        "calcium": 38.75,
+        "iron": 0.83,
+        "magnesium": 34.58,
+        "potassium": 206.67,
+        "vitaminC": 2.92
+      },
+      "nutritionUnits": {
+        "energyKcal": "kcal",
+        "carbohydrates": "g",
+        "protein": "g",
+        "fat": "g",
+        "fiber": "g",
+        "totalSugars": "g",
+        "calcium": "mg",
+        "iron": "mg",
+        "magnesium": "mg",
+        "potassium": "mg",
+        "vitaminC": "mg"
+      },
+      "totalWeightGrams": 600,
+      "servings": 2,
+      "ingredients": [
+        {
+          "id": "recipe.herb-milk/ingredient.milk",
+          "dravyaID": "dravya.milk",
+          "quantity": 240,
+          "unit": "ml",
+          "preparationID": "dravya.milk/prep.warmed-spiced"
+        },
+        {
+          "id": "recipe.herb-milk/ingredient.ginger",
+          "dravyaID": "dravya.ginger",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "preparationID": "dravya.ginger/prep.fresh-grated"
+        },
+        {
+          "id": "recipe.herb-milk/ingredient.turmeric",
+          "dravyaID": "dravya.turmeric",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "preparationID": "dravya.turmeric/prep.bloomed"
+        }
+      ]
+    }
+  ]
+}

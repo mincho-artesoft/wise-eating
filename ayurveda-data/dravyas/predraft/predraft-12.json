@@ -1,0 +1,653 @@
+{
+  "predraftVersion": "1.0",
+  "batch": "predraft-12",
+  "items": [
+    {
+      "id": "dravya.amla-dry",
+      "name": "Dried amla",
+      "sanskrit": "Amalaki (shushka)",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          -1
+        ],
+        "virya": "cooling",
+        "note": "tridoshic rasayana; sour-dominant, five rasas"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: dried amla; amalaki; amla dry."
+    },
+    {
+      "id": "dravya.haritaki",
+      "name": "Haritaki (chebulic myrobalan)",
+      "sanskrit": "Haritaki",
+      "aliases": [
+        "chebulic myrobalan"
+      ],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          -1
+        ],
+        "virya": "heating",
+        "note": "tridoshic; five rasas except salty"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: haritaki."
+    },
+    {
+      "id": "dravya.bibhitaki",
+      "name": "Bibhitaki (belleric myrobalan)",
+      "sanskrit": "Vibhitaki",
+      "aliases": [
+        "belleric myrobalan"
+      ],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -2
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: bibhitaki; vibhitaki."
+    },
+    {
+      "id": "dravya.triphala-churna",
+      "name": "Triphala",
+      "sanskrit": "Triphala",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          -1
+        ],
+        "virya": "neutral",
+        "note": "amla+haritaki+bibhitaki"
+      },
+      "usda": [
+        {
+          "fdcId": 12391,
+          "name": "Triphala powder",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.ashwagandha-powder",
+      "name": "Ashwagandha root powder",
+      "sanskrit": "Ashvagandha",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -2,
+          0,
+          1
+        ],
+        "virya": "heating",
+        "note": "rasayana; heavy, building"
+      },
+      "usda": [
+        {
+          "fdcId": 12390,
+          "name": "Ashwagandha powder",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.shatavari-powder",
+      "name": "Shatavari root powder",
+      "sanskrit": "Shatavari",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -2,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: shatavari root powder; shatavari; shatavari powder."
+    },
+    {
+      "id": "dravya.guduchi",
+      "name": "Guduchi (giloy) stem",
+      "sanskrit": "Guduchi / Amrita",
+      "aliases": [
+        "Guduchi",
+        "Amrita",
+        "giloy"
+      ],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          -1
+        ],
+        "virya": "heating",
+        "note": "tridoshic rasayana"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: guduchi stem; guduchi; amrita."
+    },
+    {
+      "id": "dravya.giloy-satva",
+      "name": "Giloy satva (starch extract)",
+      "sanskrit": "Guduchi Satva",
+      "aliases": [
+        "starch extract"
+      ],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          0,
+          -2,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: giloy satva; guduchi satva."
+    },
+    {
+      "id": "dravya.brahmi",
+      "name": "Brahmi (bacopa)",
+      "sanskrit": "Brahmi",
+      "aliases": [
+        "bacopa"
+      ],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          -1
+        ],
+        "virya": "cooling",
+        "note": "medhya rasayana"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: brahmi."
+    },
+    {
+      "id": "dravya.gotu-kola",
+      "name": "Gotu kola",
+      "sanskrit": "Mandukaparni",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: gotu kola; mandukaparni."
+    },
+    {
+      "id": "dravya.shankhpushpi",
+      "name": "Shankhpushpi",
+      "sanskrit": "Shankhapushpi",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: shankhpushpi; shankhapushpi."
+    },
+    {
+      "id": "dravya.vidari-kanda",
+      "name": "Vidari kanda",
+      "sanskrit": "Vidarikanda",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling",
+        "note": "nourishing tuber"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: vidari kanda; vidarikanda."
+    },
+    {
+      "id": "dravya.safed-musli",
+      "name": "Safed musli",
+      "sanskrit": "Shveta Musali",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: safed musli; shveta musali."
+    },
+    {
+      "id": "dravya.kaunch-beej",
+      "name": "Mucuna seed",
+      "sanskrit": "Kapikacchu",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -2,
+          0,
+          1
+        ],
+        "virya": "heating",
+        "note": "requires classical processing before dietary use"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: mucuna seed; kapikacchu; kaunch beej."
+    },
+    {
+      "id": "dravya.gokshura",
+      "name": "Gokshura (tribulus)",
+      "sanskrit": "Gokshura",
+      "aliases": [
+        "tribulus"
+      ],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: gokshura."
+    },
+    {
+      "id": "dravya.punarnava-leaf",
+      "name": "Punarnava leaf",
+      "sanskrit": "Punarnava",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: punarnava leaf; punarnava."
+    },
+    {
+      "id": "dravya.moringa-leaf-dry",
+      "name": "Moringa leaf powder",
+      "sanskrit": "Shigru Patra Churna",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -2
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: moringa leaf powder; shigru patra churna; moringa leaf dry."
+    },
+    {
+      "id": "dravya.neem-leaf",
+      "name": "Neem leaf",
+      "sanskrit": "Nimba Patra",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          1,
+          -2,
+          -2
+        ],
+        "virya": "cooling",
+        "note": "intensely bitter; seasonal (spring) dietary use"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: neem leaf; nimba patra."
+    },
+    {
+      "id": "dravya.neem-flower",
+      "name": "Neem flower",
+      "sanskrit": "Nimba Pushpa",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          1,
+          -2,
+          -1
+        ],
+        "virya": "cooling",
+        "note": "ugadi pachadi ingredient"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: neem flower; nimba pushpa."
+    },
+    {
+      "id": "dravya.aloe-vera-pulp",
+      "name": "Aloe vera pulp",
+      "sanskrit": "Kumari",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: aloe vera pulp; kumari."
+    },
+    {
+      "id": "dravya.psyllium-husk",
+      "name": "Psyllium husk",
+      "sanskrit": "Snigdhajira / Isabgol",
+      "aliases": [
+        "Snigdhajira",
+        "Isabgol"
+      ],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: psyllium husk; snigdhajira; isabgol."
+    },
+    {
+      "id": "dravya.wheatgrass",
+      "name": "Wheatgrass",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling",
+        "note": "modern usage"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: wheatgrass."
+    },
+    {
+      "id": "dravya.spirulina",
+      "name": "Spirulina",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "neutral",
+        "note": "modern usage"
+      },
+      "usda": [
+        {
+          "fdcId": 7478,
+          "name": "Seaweed, spirulina, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.chirata",
+      "name": "Chirata",
+      "sanskrit": "Kiratatikta",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          1,
+          -2,
+          -2
+        ],
+        "virya": "cooling",
+        "note": "bitter tonic infusion"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: chirata; kiratatikta."
+    },
+    {
+      "id": "dravya.kalmegh",
+      "name": "Kalmegh (andrographis)",
+      "sanskrit": "Bhunimba",
+      "aliases": [
+        "andrographis"
+      ],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          1,
+          -2,
+          -2
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: kalmegh; bhunimba."
+    }
+  ]
+}

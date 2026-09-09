@@ -1,0 +1,135 @@
+{
+  "note": "Dravyas that must NOT inherit an existing archive frame through their usda[] binding. build_batches.py checks this before taking the reuse path, so a listed dravya falls through and gets its own generated image. Reviewed by hand: a frame is only rejected when the substance differs from it in colour, form or processing. Two names for the same material keep sharing.",
+  "dravyas": {
+    "dravya.alphonso-mango": {
+      "name": "Alphonso mango",
+      "sharedFrame": "Mangos, raw",
+      "reason": "a distinct cultivar, smaller and deep orange"
+    },
+    "dravya.bajra": {
+      "name": "Pearl millet",
+      "sharedFrame": "Millet, raw",
+      "reason": "bajra is grey-green and larger than proso"
+    },
+    "dravya.bay-leaf": {
+      "name": "Bay leaf, Indian",
+      "sharedFrame": "Spices, bay leaf",
+      "reason": "tej patta is larger and three-veined; the frame is Mediterranean laurel"
+    },
+    "dravya.black-grapes": {
+      "name": "Black grapes",
+      "sharedFrame": "Grapes, red or green (European type, such as Thompson seedless), raw",
+      "reason": "the frame cannot be both red and green; black grapes need their own"
+    },
+    "dravya.chana-dal": {
+      "name": "Chana dal (split bengal gram)",
+      "sharedFrame": "Chickpeas (garbanzo beans, bengal gram), mature seeds, raw",
+      "reason": "split yellow dal, not a whole chickpea"
+    },
+    "dravya.chickpea-black": {
+      "name": "Black chickpea",
+      "sharedFrame": "Chickpeas (garbanzo beans, bengal gram), mature seeds, raw",
+      "reason": "kala chana is small and dark brown; the frame is pale kabuli"
+    },
+    "dravya.dry-coconut": {
+      "name": "Dry coconut (copra)",
+      "sharedFrame": "Nuts, coconut meat, dried (desiccated), not sweetened",
+      "reason": "copra is a whole dried half-shell; the frame is shredded desiccated coconut"
+    },
+    "dravya.dry-dates": {
+      "name": "Dry dates (chhuara)",
+      "sharedFrame": "Dates, medjool",
+      "reason": "chhuara is pale and shrivelled; medjool is dark and plump"
+    },
+    "dravya.elaichi-banana": {
+      "name": "Elaichi banana (small)",
+      "sharedFrame": "Bananas, raw",
+      "reason": "a small finger banana, not the standard cavendish in the frame"
+    },
+    "dravya.green-grapes": {
+      "name": "Green grapes",
+      "sharedFrame": "Grapes, red or green (European type, such as Thompson seedless), raw",
+      "reason": "shares the same ambiguous grape frame as black grapes, so both get their own"
+    },
+    "dravya.long-brinjal": {
+      "name": "Brinjal (long purple)",
+      "sharedFrame": "Eggplant, raw",
+      "reason": "long slender fruit, not the globe eggplant in the frame"
+    },
+    "dravya.lotus-seed": {
+      "name": "Lotus seeds (makhana)",
+      "sharedFrame": "Seeds, lotus seeds, raw",
+      "reason": "makhana is white puffed popped seed; the raw-lotus-seed frame is what kamal gatta looks like"
+    },
+    "dravya.masoor-dal": {
+      "name": "Split red lentil",
+      "sharedFrame": "Lentils, pink or red, raw",
+      "reason": "split masoor dal, not the whole lentil"
+    },
+    "dravya.mishri": {
+      "name": "Rock sugar (mishri)",
+      "sharedFrame": "Sugars, granulated",
+      "reason": "irregular crystal lumps, not granulated sugar"
+    },
+    "dravya.mung-dal-split": {
+      "name": "Split mung dal",
+      "sharedFrame": "Mung beans, mature seeds, raw",
+      "reason": "yellow split dal, not the whole green bean"
+    },
+    "dravya.mustard-seed-black": {
+      "name": "Black mustard seed",
+      "sharedFrame": "Spices, mustard seed, ground",
+      "reason": "whole dark seed, not ground powder"
+    },
+    "dravya.mustard-seed-yellow": {
+      "name": "Yellow mustard seed",
+      "sharedFrame": "Spices, mustard seed, ground",
+      "reason": "whole pale seed, not ground powder"
+    },
+    "dravya.ragi": {
+      "name": "Finger millet",
+      "sharedFrame": "Millet, raw",
+      "reason": "ragi is dark red-brown; the frame is pale proso millet"
+    },
+    "dravya.raw-jackfruit": {
+      "name": "Raw jackfruit (kathal)",
+      "sharedFrame": "Jackfruit, raw",
+      "reason": "unripe kathal is pale green-white; the frame reads as the golden ripe fruit"
+    },
+    "dravya.red-amaranth-greens": {
+      "name": "Red amaranth greens (lal chaulai)",
+      "sharedFrame": "Amaranth leaves, raw",
+      "reason": "lal chaulai is red-purple; the frame is the green leaf"
+    },
+    "dravya.red-banana": {
+      "name": "Red banana",
+      "sharedFrame": "Bananas, raw",
+      "reason": "red skin"
+    },
+    "dravya.red-onion": {
+      "name": "Red onion",
+      "sharedFrame": "Onions, raw",
+      "reason": "purple-red skin and flesh"
+    },
+    "dravya.red-yellow-capsicum": {
+      "name": "Red/yellow capsicum",
+      "sharedFrame": "Peppers, sweet, red, raw",
+      "reason": "covers yellow as well, which a red-pepper frame cannot show"
+    },
+    "dravya.small-brinjal": {
+      "name": "Brinjal (small round)",
+      "sharedFrame": "Eggplant, raw",
+      "reason": "small round fruit, not the globe eggplant in the frame"
+    },
+    "dravya.white-onion": {
+      "name": "White onion",
+      "sharedFrame": "Onions, raw",
+      "reason": "white skin, not the brown onion in the frame"
+    },
+    "dravya.white-peas": {
+      "name": "White peas (safed vatana)",
+      "sharedFrame": "Peas, green, split, mature seeds, raw",
+      "reason": "cream-coloured whole peas, not green split peas"
+    }
+  }
+}

@@ -1,0 +1,728 @@
+{
+  "predraftVersion": "1.0",
+  "batch": "predraft-10",
+  "items": [
+    {
+      "id": "dravya.chicken-egg",
+      "name": "Chicken egg",
+      "sanskrit": "Kukkuta Anda",
+      "aliases": [],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 8484,
+          "name": "Egg, whole, raw, fresh",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 egg",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.desi-egg",
+      "name": "Country chicken egg",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 8484,
+          "name": "Egg, whole, raw, fresh",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 egg",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.duck-egg",
+      "name": "Duck egg",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          2
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 9240,
+          "name": "Egg, duck, whole, fresh, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 egg",
+          "grams": 70
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.quail-egg",
+      "name": "Quail egg",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 9242,
+          "name": "Egg, quail, whole, fresh, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 egg",
+          "grams": 9
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.broiler-chicken",
+      "name": "Chicken (broiler)",
+      "sanskrit": "Kukkuta Mamsa",
+      "aliases": [
+        "broiler"
+      ],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 8262,
+          "name": "Chicken, broilers or fryers, meat only, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "3 oz",
+          "grams": 85
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.country-chicken",
+      "name": "Country chicken (desi)",
+      "sanskrit": "Grama Kukkuta",
+      "aliases": [
+        "desi"
+      ],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -2,
+          0,
+          1
+        ],
+        "virya": "heating",
+        "note": "classical vata-pacifying meat"
+      },
+      "usda": [
+        {
+          "fdcId": 8262,
+          "name": "Chicken, broilers or fryers, meat only, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "3 oz",
+          "grams": 85
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.goat-meat",
+      "name": "Goat meat (mutton)",
+      "sanskrit": "Chhaga Mamsa",
+      "aliases": [
+        "mutton"
+      ],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -2,
+          0,
+          1
+        ],
+        "virya": "neutral",
+        "note": "most balanced meat per classical texts"
+      },
+      "usda": [
+        {
+          "fdcId": 11874,
+          "name": "Game meat, goat, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "3 oz",
+          "grams": 85
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.lamb",
+      "name": "Lamb",
+      "sanskrit": "Mesha Mamsa",
+      "aliases": [],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -2,
+          1,
+          2
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 9619,
+          "name": "Lamb, New Zealand, imported, ground lamb, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "3 oz",
+          "grams": 85
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.pork",
+      "name": "Pork",
+      "sanskrit": "Varaha Mamsa",
+      "aliases": [],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -2,
+          0,
+          2
+        ],
+        "virya": "heating",
+        "note": "very heavy, building — classical varaha"
+      },
+      "usda": [
+        {
+          "fdcId": 393,
+          "name": "Pork, NFS",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "3 oz",
+          "grams": 85
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.duck-meat",
+      "name": "Duck meat",
+      "sanskrit": "Hamsa-kula",
+      "aliases": [],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -2,
+          1,
+          2
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 9417,
+          "name": "Duck, domesticated, meat only, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "3 oz",
+          "grams": 85
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.quail-meat",
+      "name": "Quail meat",
+      "sanskrit": "Lava Mamsa",
+      "aliases": [],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          0
+        ],
+        "virya": "neutral",
+        "note": "classical lava — light game bird, praised"
+      },
+      "usda": [
+        {
+          "fdcId": 9426,
+          "name": "Quail, meat only, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "3 oz",
+          "grams": 85
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.turkey",
+      "name": "Turkey",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          0
+        ],
+        "virya": "neutral",
+        "note": "modern adoption"
+      },
+      "usda": [
+        {
+          "fdcId": 8645,
+          "name": "Turkey, whole, meat only, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "3 oz",
+          "grams": 85
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.venison",
+      "name": "Venison (classical reference)",
+      "sanskrit": "Harina Mamsa",
+      "aliases": [],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          -1
+        ],
+        "virya": "cooling",
+        "note": "most praised classical meat; legal restrictions apply in India"
+      },
+      "usda": [
+        {
+          "fdcId": 10623,
+          "name": "Game meat, deer, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "3 oz",
+          "grams": 85
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.rohu",
+      "name": "Rohu (freshwater fish)",
+      "sanskrit": "Rohita Matsya",
+      "aliases": [],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          1
+        ],
+        "virya": "heating",
+        "note": "rohita — best classical fish"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "3 oz",
+          "grams": 85
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: rohu; rohita matsya."
+    },
+    {
+      "id": "dravya.catla",
+      "name": "Catla",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "3 oz",
+          "grams": 85
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: catla."
+    },
+    {
+      "id": "dravya.hilsa",
+      "name": "Hilsa",
+      "sanskrit": "Illisha",
+      "aliases": [],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          2
+        ],
+        "virya": "heating",
+        "note": "rich, oily"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "3 oz",
+          "grams": 85
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: hilsa; illisha."
+    },
+    {
+      "id": "dravya.pomfret",
+      "name": "Pomfret",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "3 oz",
+          "grams": 85
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: pomfret."
+    },
+    {
+      "id": "dravya.mackerel",
+      "name": "Mackerel (bangda)",
+      "sanskrit": null,
+      "aliases": [
+        "bangda"
+      ],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 790,
+          "name": "Fish, mackerel, NFS",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "3 oz",
+          "grams": 85
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.sardine",
+      "name": "Sardine",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 11733,
+          "name": "Fish, sardine, Pacific, canned in tomato sauce, drained solids with bone",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "3 oz",
+          "grams": 85
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.seer-fish",
+      "name": "Seer fish (surmai)",
+      "sanskrit": null,
+      "aliases": [
+        "surmai"
+      ],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "3 oz",
+          "grams": 85
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: seer fish."
+    },
+    {
+      "id": "dravya.tuna",
+      "name": "Tuna",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          0
+        ],
+        "virya": "heating",
+        "note": "modern"
+      },
+      "usda": [
+        {
+          "fdcId": 835,
+          "name": "Fish, tuna, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "3 oz",
+          "grams": 85
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.salmon",
+      "name": "Salmon",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          1
+        ],
+        "virya": "heating",
+        "note": "modern"
+      },
+      "usda": [
+        {
+          "fdcId": 811,
+          "name": "Fish, salmon, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "3 oz",
+          "grams": 85
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.prawn",
+      "name": "Prawn",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 11772,
+          "name": "Crustaceans, shrimp, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "3 oz",
+          "grams": 85
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.crab",
+      "name": "Crab",
+      "sanskrit": "Karkataka",
+      "aliases": [],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -2,
+          1,
+          1
+        ],
+        "virya": "heating",
+        "note": "classical strength-builder"
+      },
+      "usda": [
+        {
+          "fdcId": 871,
+          "name": "Crab",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "3 oz",
+          "grams": 85
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.dried-fish",
+      "name": "Dried fish",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          0,
+          2,
+          1
+        ],
+        "virya": "heating",
+        "note": "coastal regional; intense"
+      },
+      "usda": [
+        {
+          "fdcId": 12220,
+          "name": "Dried Fish (Shutki - as a key flavor base)",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "3 oz",
+          "grams": 85
+        }
+      ],
+      "_facetsPending": true
+    }
+  ]
+}

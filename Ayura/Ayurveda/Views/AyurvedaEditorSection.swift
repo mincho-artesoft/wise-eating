@@ -1,0 +1,713 @@
+import SwiftData
+import SwiftUI
+
+struct AyurvedaForm: Equatable, Sendable {
+  var vata: Int
+  var pitta: Int
+  var kapha: Int
+  var rasa: Set<String>
+  var virya: String?
+  var vipaka: String?
+  var gunas: Set<String>
+
+  init(
+    vata: Int = 0,
+    pitta: Int = 0,
+    kapha: Int = 0,
+    rasa: Set<String> = [],
+    virya: String? = nil,
+    vipaka: String? = nil,
+    gunas: Set<String> = []
+  ) {
+    self.vata = vata
+    self.pitta = pitta
+    self.kapha = kapha
+    self.rasa = rasa
+    self.virya = virya
+    self.vipaka = vipaka
+    self.gunas = gunas
+  }
+
+  static var neutral: AyurvedaForm {
+    AyurvedaForm()
+  }
+
+  static func prefilled(
+    from computed: AyurvedaDisplayMath.Computed?
+  ) -> AyurvedaForm {
+    guard let computed else {
+      return .neutral
+    }
+    return AyurvedaForm(
+      vata: computed.vata,
+      pitta: computed.pitta,
+      kapha: computed.kapha,
+      virya: computed.virya
+    )
+  }
+
+  var isEmpty: Bool {
+    vata == 0
+      && pitta == 0
+      && kapha == 0
+      && rasa.isEmpty
+      && virya == nil
+      && vipaka == nil
+      && gunas.isEmpty
+  }
+}
+
+struct AyurvedaEditorSection: View {
+  private enum ViryaPickerOption: String, CaseIterable, Identifiable {
+    case cooling = "Cooling"
+    case neutral = "Neutral"
+    case heating = "Heating"
+
+    var id: Self { self }
+    var storedValue: String { rawValue.lowercased() }
+
+    var tint: Color? {
+      switch self {
+      case .cooling: return .blue
+      case .neutral: return nil
+      case .heating: return .orange
+      }
+    }
+
+    var systemImage: String {
+      switch self {
+      case .cooling: return "snowflake"
+      case .neutral: return "minus"
+      case .heating: return "flame"
+      }
+    }
+  }
+
+  private enum VipakaPickerOption: String, CaseIterable, Identifiable {
+    case sweet = "Sweet"
+    case sour = "Sour"
+    case pungent = "Pungent"
+
+    var id: Self { self }
+    var storedValue: String { rawValue.lowercased() }
+  }
+
+  private static let rasaValues = [
+    "sweet", "sour", "salty", "pungent", "bitter", "astringent"
+  ]
+  private static let gunaValues = [
+    "dense", "dry", "heavy", "light", "liquid",
+    "oily", "penetrating", "rough", "sharp", "slimy", "smooth", "soft"
+  ]
+  @ObservedObject private var effectManager = EffectManager.shared
+  @Binding var form: AyurvedaForm
+
+  var body: some View {
+    VStack(alignment: .leading, spacing: 0) {
+      doshaGroup
+      sectionDivider
+      rasaGroup
+      sectionDivider
+      viryaGroup
+      sectionDivider
+      vipakaGroup
+      sectionDivider
+      gunaGroup
+    }
+    .foregroundStyle(effectManager.currentGlobalAccentColor)
+    .tint(effectManager.currentGlobalAccentColor)
+  }
+
+  private var sectionDivider: some View {
+    Divider()
+      .padding(.vertical, 12)
+  }
+
+  private var header: some View {
+    Text("Dosha Effects")
+      .font(.caption.bold())
+      .foregroundStyle(effectManager.currentGlobalAccentColor)
+  }
+
+  private var doshaGroup: some View {
+    VStack(alignment: .leading, spacing: 12) {
+      header
+      DoshaScaleSelector(
+        value: $form.vata,
+        dosha: .vata,
+        subtitle: "Movement & Air"
+      )
+      Divider()
+      DoshaScaleSelector(
+        value: $form.pitta,
+        dosha: .pitta,
+        subtitle: "Fire & Transformation"
+      )
+      Divider()
+      DoshaScaleSelector(
+        value: $form.kapha,
+        dosha: .kapha,
+        subtitle: "Structure & Water"
+      )
+    }
+  }
+
+  private var rasaGroup: some View {
+    editorGroup(title: "Rasa (taste)") {
+      ChipGrid {
+        ForEach(Self.rasaValues, id: \.self) { value in
+          GlassChipView(
+            label: value.capitalized,
+            color: rasaTint(value),
+            systemImage: rasaIcon(value),
+            textColor: effectManager.currentGlobalAccentColor,
+            isSelected: form.rasa.contains(value),
+            action: { toggleRasa(value) }
+          )
+        }
+      }
+    }
+  }
+
+  private var viryaGroup: some View {
+    editorGroup(title: "Virya (energy)") {
+      WrappingSegmentedControl(
+        selection: viryaSelection,
+        layoutMode: .wrap,
+        selectionTint: {
+          $0.tint ?? effectManager.currentGlobalAccentColor
+        },
+        systemImage: \.systemImage
+        )
+        .frame(minHeight: 36)
+        .padding(2)
+        .background(
+          effectManager.currentGlobalAccentColor.opacity(
+            effectManager.isLightRowTextColor ? 0.12 : 0.07
+          ),
+          in: Capsule()
+        )
+        .overlay {
+          Capsule()
+            .stroke(
+              effectManager.currentGlobalAccentColor.opacity(
+                effectManager.isLightRowTextColor ? 0.22 : 0.12
+              )
+            )
+        }
+        .accessibilityLabel("Virya energy")
+    }
+  }
+
+  private var vipakaGroup: some View {
+    editorGroup(title: "Vipaka (post-digestive)") {
+      WrappingSegmentedControl(
+        selection: vipakaSelection,
+        layoutMode: .wrap,
+        selectionTint: { _ in effectManager.currentGlobalAccentColor }
+        )
+        .frame(minHeight: 36)
+        .padding(2)
+        .background(
+          effectManager.currentGlobalAccentColor.opacity(
+            effectManager.isLightRowTextColor ? 0.12 : 0.07
+          ),
+          in: Capsule()
+        )
+        .overlay {
+          Capsule()
+            .stroke(
+              effectManager.currentGlobalAccentColor.opacity(
+                effectManager.isLightRowTextColor ? 0.22 : 0.12
+              )
+            )
+        }
+        .accessibilityLabel("Vipaka post-digestive effect")
+    }
+  }
+
+  private var gunaGroup: some View {
+    editorGroup(title: "Gunas (qualities)") {
+      ChipGrid {
+        ForEach(Self.gunaValues, id: \.self) { value in
+          GlassChipView(
+            label: value.capitalized,
+            color: effectManager.currentGlobalAccentColor,
+            systemImage: nil,
+            textColor: effectManager.currentGlobalAccentColor,
+            isSelected: form.gunas.contains(value),
+            action: { toggleGuna(value) }
+          )
+        }
+      }
+    }
+  }
+
+  private func editorGroup<Content: View>(
+    title: String,
+    @ViewBuilder content: () -> Content
+  ) -> some View {
+    VStack(alignment: .leading, spacing: 8) {
+      Text(title)
+        .font(.caption.bold())
+        .foregroundStyle(effectManager.currentGlobalAccentColor)
+      content()
+    }
+  }
+
+  private func toggleRasa(_ value: String) {
+    if form.rasa.contains(value) {
+      form.rasa.remove(value)
+    } else {
+      form.rasa.insert(value)
+    }
+  }
+
+  private func toggleGuna(_ value: String) {
+    if form.gunas.contains(value) {
+      form.gunas.remove(value)
+    } else {
+      form.gunas.insert(value)
+    }
+  }
+
+  private var viryaSelection: Binding<ViryaPickerOption?> {
+    Binding(
+      get: {
+        guard let storedValue = form.virya else { return nil }
+        return ViryaPickerOption.allCases.first { $0.storedValue == storedValue }
+      },
+      set: { form.virya = $0?.storedValue }
+    )
+  }
+
+  private var vipakaSelection: Binding<VipakaPickerOption?> {
+    Binding(
+      get: {
+        guard let storedValue = form.vipaka else { return nil }
+        return VipakaPickerOption.allCases.first { $0.storedValue == storedValue }
+      },
+      set: { form.vipaka = $0?.storedValue }
+    )
+  }
+
+  private func rasaIcon(_ value: String) -> String {
+    switch value {
+    case "sweet": return "sparkles"
+    case "sour": return "drop.fill"
+    case "salty": return "water.waves"
+    case "pungent": return "flame.fill"
+    case "bitter": return "leaf.fill"
+    default: return "circle.grid.3x3.fill"
+    }
+  }
+
+  private func rasaTint(_ value: String) -> Color {
+    switch value {
+    case "sweet": return .purple
+    case "sour": return .yellow
+    case "salty": return .teal
+    case "pungent": return .red
+    case "bitter": return .green
+    default: return .indigo
+    }
+  }
+}
+
+struct AyurvedaRecipeEditorSection: View {
+  @ObservedObject private var effectManager = EffectManager.shared
+
+  @Binding var isManualOverride: Bool
+  @Binding var form: AyurvedaForm
+
+  let computation: AyurvedaIngredientComputation
+
+  var body: some View {
+    VStack(alignment: .leading, spacing: 14) {
+      Toggle("Set manually", isOn: $isManualOverride)
+        .onChange(of: isManualOverride) { wasManual, isManual in
+          if isManual && !wasManual {
+            form = .prefilled(from: computation.computed)
+          }
+        }
+      if isManualOverride {
+        AyurvedaEditorSection(form: $form)
+      } else {
+        AyurvedaAutomaticPreview(computation: computation)
+      }
+    }
+    .foregroundStyle(effectManager.currentGlobalAccentColor)
+    .tint(effectManager.currentGlobalAccentColor)
+  }
+}
+
+private struct AyurvedaAutomaticPreview: View {
+  @ObservedObject private var effectManager = EffectManager.shared
+
+  let computation: AyurvedaIngredientComputation
+
+  var body: some View {
+    VStack(alignment: .leading, spacing: 10) {
+      if !computation.hasIngredients {
+        Text("Add ingredients to see a live Ayurveda preview.")
+          .font(.caption)
+          .foregroundStyle(
+            effectManager.currentGlobalAccentColor.opacity(0.72)
+          )
+      } else {
+        Text("Computed from your ingredients — updates automatically")
+          .font(.caption)
+          .foregroundStyle(
+            effectManager.currentGlobalAccentColor.opacity(0.72)
+          )
+        if let computed = computation.computed {
+          DoshaBarsView(
+            vata: computed.vata,
+            pitta: computed.pitta,
+            kapha: computed.kapha
+          )
+          computedVirya(computed.virya)
+        } else {
+          Text("Not enough recognizable ingredients yet.")
+            .font(.caption)
+            .foregroundStyle(
+              effectManager.currentGlobalAccentColor.opacity(0.72)
+            )
+        }
+      }
+    }
+  }
+
+  private func computedVirya(_ virya: String) -> some View {
+    VStack(alignment: .leading, spacing: 7) {
+      Label("Virya (energy)", systemImage: "bolt.fill")
+        .font(.caption)
+        .foregroundStyle(
+          effectManager.currentGlobalAccentColor.opacity(0.72)
+        )
+
+      GlassChipView(
+        label: virya.capitalized,
+        color: viryaColor(virya),
+        systemImage: viryaIcon(virya),
+        textColor: effectManager.currentGlobalAccentColor,
+        isSelected: true,
+        action: nil
+      )
+    }
+  }
+
+  private func viryaColor(_ virya: String) -> Color {
+    switch virya.lowercased() {
+    case "cooling": Color("AyurvedaPacify")
+    case "heating": Color("AyurvedaAggravate")
+    default: Color("AyurvedaNeutral")
+    }
+  }
+
+  private func viryaIcon(_ virya: String) -> String {
+    switch virya.lowercased() {
+    case "cooling": "snowflake"
+    case "heating": "flame.fill"
+    default: "minus.circle.fill"
+    }
+  }
+}
+
+@MainActor
+enum AyurvedaUserProfileStore {
+  static func form(foodId: UUID, context: ModelContext) -> AyurvedaForm? {
+    guard let profile = profile(foodId: foodId, context: context) else {
+      return nil
+    }
+    return AyurvedaForm(
+      vata: profile.doshaVata,
+      pitta: profile.doshaPitta,
+      kapha: profile.doshaKapha,
+      rasa: Set(profile.rasa),
+      virya: profile.virya,
+      vipaka: profile.vipaka,
+      gunas: Set(profile.gunas)
+    )
+  }
+
+  static func resolvedFormForDuplication(
+    foodId: UUID,
+    context: ModelContext
+  ) -> AyurvedaForm? {
+    let sourceFoodId = foodId
+    var descriptor = FetchDescriptor<FoodItem>(
+      predicate: #Predicate<FoodItem> { food in
+        food.id == sourceFoodId
+      }
+    )
+    descriptor.fetchLimit = 1
+
+    guard
+      let food = try? context.fetch(descriptor).first,
+      let resolution = try? AyurvedaResolver.resolve(for: food, context: context),
+      let display = AyurvedaDisplay.make(from: resolution)
+    else {
+      return nil
+    }
+
+    return AyurvedaForm(
+      vata: display.vata,
+      pitta: display.pitta,
+      kapha: display.kapha,
+      rasa: Set(display.rasa),
+      virya: display.virya,
+      vipaka: display.vipaka,
+      gunas: Set(display.gunas)
+    )
+  }
+
+  static func upsert(
+    form: AyurvedaForm,
+    for food: FoodItem,
+    context: ModelContext
+  ) throws {
+    let writeContext = ModelContext(context.container)
+    writeContext.autosaveEnabled = false
+    let existing = profile(foodId: food.id, context: writeContext)
+    guard existing != nil || !form.isEmpty else {
+      return
+    }
+
+    let profile = existing ?? makeProfile(form: form, food: food)
+    apply(form: form, food: food, to: profile)
+    if existing == nil {
+      try insertMissingProfile(profile, container: context.container)
+    } else {
+      try writeContext.save()
+    }
+  }
+
+  /// Inserts a profile for a newly-created user item without first fetching
+  /// the catalogue-backed Ayurveda entity. In a combined SwiftData container,
+  /// that fetch can make the following insert inherit the read-only store.
+  static func insert(
+    form: AyurvedaForm,
+    for food: FoodItem,
+    context: ModelContext
+  ) throws {
+    let profile = makeProfile(form: form, food: food)
+    apply(form: form, food: food, to: profile)
+    try insertMissingProfile(profile, container: context.container)
+  }
+
+  /// Persists the complete AI payload while allowing the editor's seven
+  /// directly editable Ayurveda fields to remain the final authority.
+  static func upsert(
+    generated: AyurvedaGeneratedFoodDTO,
+    editorForm: AyurvedaForm,
+    for food: FoodItem,
+    context: ModelContext
+  ) throws {
+    let writeContext = ModelContext(context.container)
+    writeContext.autosaveEnabled = false
+    let existing = profile(foodId: food.id, context: writeContext)
+    let profile = existing ?? makeProfile(form: editorForm, food: food)
+    apply(
+      generated: generated,
+      editorForm: editorForm,
+      food: food,
+      to: profile
+    )
+
+    if existing == nil {
+      try insertMissingProfile(profile, container: context.container)
+    } else {
+      try writeContext.save()
+    }
+  }
+
+  static func insert(
+    generated: AyurvedaGeneratedFoodDTO,
+    editorForm: AyurvedaForm,
+    for food: FoodItem,
+    context: ModelContext
+  ) throws {
+    let profile = makeProfile(form: editorForm, food: food)
+    apply(
+      generated: generated,
+      editorForm: editorForm,
+      food: food,
+      to: profile
+    )
+    try insertMissingProfile(profile, container: context.container)
+  }
+
+  static func remove(foodId: UUID, context: ModelContext) {
+    guard let existing = profile(foodId: foodId, context: context) else {
+      return
+    }
+    context.delete(existing)
+  }
+
+  private static func profile(
+    foodId: UUID,
+    context: ModelContext
+  ) -> AyurvedaProfile? {
+    let key = profileKey(foodId)
+    var descriptor = FetchDescriptor<AyurvedaProfile>(
+      predicate: #Predicate<AyurvedaProfile> { profile in
+        profile.key == key
+      }
+    )
+    descriptor.fetchLimit = 1
+    return try? context.fetch(descriptor).first
+  }
+
+  private static func makeProfile(
+    form: AyurvedaForm,
+    food: FoodItem
+  ) -> AyurvedaProfile {
+    AyurvedaProfile(
+      id: UUID(),
+      key: profileKey(food.id),
+      kind: "user",
+      foodId: food.id,
+      name: food.name,
+      doshaVata: form.vata,
+      doshaPitta: form.pitta,
+      doshaKapha: form.kapha,
+      seasons: [],
+      timeOfDay: [],
+      viruddha: [],
+      provenance: ["user-editor"],
+      confidenceAyur: 1.0,
+      confidenceSci: nil,
+      qualityState: "user",
+      reviewNote: nil,
+      seedVersion: bundleSeedVersion,
+      sanskrit: nil,
+      rasa: form.rasa.sorted(),
+      virya: form.virya,
+      vipaka: form.vipaka,
+      gunas: form.gunas.sorted(),
+      prabhava: nil,
+      agniEffect: nil,
+      digestibility: nil,
+      preparation: nil,
+      servingsJSON: nil,
+      meal: nil,
+      servingsCount: nil,
+      prepMinutes: nil,
+      cookMinutes: nil,
+      guidance: nil
+    )
+  }
+
+  private static func apply(
+    form: AyurvedaForm,
+    food: FoodItem,
+    to profile: AyurvedaProfile
+  ) {
+    profile.kind = "user"
+    profile.foodId = food.id
+    profile.foodIsPlaceholder = false
+    profile.name = food.name
+    profile.doshaVata = form.vata
+    profile.doshaPitta = form.pitta
+    profile.doshaKapha = form.kapha
+    profile.seasons = []
+    profile.timeOfDay = []
+    profile.viruddha = []
+    profile.provenance = ["user-editor"]
+    profile.confidenceAyur = 1.0
+    profile.confidenceSci = nil
+    profile.qualityState = "user"
+    profile.reviewNote = nil
+    profile.engineExcluded = false
+    profile.seedVersion = bundleSeedVersion
+    profile.sanskrit = nil
+    profile.aliases = []
+    profile.rasa = form.rasa.sorted()
+    profile.virya = form.virya
+    profile.vipaka = form.vipaka
+    profile.gunas = form.gunas.sorted()
+    profile.prabhava = nil
+    profile.agniEffect = nil
+    profile.digestibility = nil
+    profile.combinations = []
+    profile.contraindications = []
+    profile.preparation = nil
+    profile.servingsJSON = nil
+    profile.meal = nil
+    profile.servingsCount = nil
+    profile.prepMinutes = nil
+    profile.cookMinutes = nil
+    profile.steps = []
+    profile.guidance = nil
+  }
+
+  private static func apply(
+    generated: AyurvedaGeneratedFoodDTO,
+    editorForm: AyurvedaForm,
+    food: FoodItem,
+    to profile: AyurvedaProfile
+  ) {
+    let value = generated.overridingEditableFields(with: editorForm)
+    profile.kind = "user"
+    profile.foodId = food.id
+    profile.foodIsPlaceholder = false
+    profile.name = food.name
+    profile.doshaVata = value.doshaVata
+    profile.doshaPitta = value.doshaPitta
+    profile.doshaKapha = value.doshaKapha
+    profile.seasons = value.seasons
+    profile.timeOfDay = value.timeOfDay
+    profile.viruddha = value.viruddha
+    profile.provenance = ["ai-generated", "apple-foundation-models"]
+    profile.confidenceAyur = value.confidenceAyur
+    profile.confidenceSci = nil
+    profile.qualityState = "aiDraft"
+    profile.reviewNote = "AI-generated Ayurveda metadata; expert review required."
+    profile.engineExcluded = !food.isEdible
+    profile.edible = food.isEdible
+    profile.inedibleReason = food.inedibleReason
+    profile.seedVersion = bundleSeedVersion
+    profile.sanskrit = value.sanskrit
+    profile.aliases = value.aliases
+    profile.rasa = value.rasa
+    profile.virya = value.virya
+    profile.vipaka = value.vipaka
+    profile.gunas = value.gunas
+    profile.prabhava = value.prabhava
+    profile.agniEffect = value.agniEffect
+    profile.digestibility = value.digestibility
+    profile.combinations = value.combinations
+    profile.contraindications = value.contraindications
+    profile.preparation = value.preparation
+    profile.servingsJSON = nil
+    profile.meal = nil
+    profile.servingsCount = nil
+    profile.prepMinutes = nil
+    profile.cookMinutes = nil
+    profile.steps = []
+    profile.guidance = value.guidance
+  }
+
+  private static func profileKey(_ foodId: UUID) -> String {
+    "user.\(foodId)"
+  }
+
+  /// A failed cross-store lookup can leave the calling context biased toward
+  /// the read-only catalogue configuration for this shared model type. Insert
+  /// a genuinely missing user profile through a clean context, where the
+  /// combined-store routing has already been verified at application startup.
+  private static func insertMissingProfile(
+    _ profile: AyurvedaProfile,
+    container: ModelContainer
+  ) throws {
+    let writeContext = ModelContext(container)
+    writeContext.autosaveEnabled = false
+    writeContext.insert(profile)
+    try writeContext.save()
+  }
+
+  private static var bundleSeedVersion: Int {
+    (try? AyurvedaSeeder.bundleSeedVersion()) ?? 0
+  }
+}

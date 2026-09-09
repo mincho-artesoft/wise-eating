@@ -1,0 +1,32 @@
+VAL-1a physical-device preflight
+Captured: 2026-07-28 02:36:43 Europe/Sofia
+Commit endpoint: 161689e8efd6d54b657b8eac4d3bd5128e5f6093
+Build: signed Release, arm64-apple-ios18.0
+Device: iPhone 16 Pro (iPhone17,1)
+Device ID: 00008140-000135E611E0801C
+OS: iOS 26.5 (23F77)
+Launch arguments: -wePlannerTelemetry -uiTestNoAds
+
+Launched application with WiseEating.Arte-Soft bundle identifier.
+Waiting for the application to terminate…
+🚀 SwiftData Path: /var/mobile/Containers/Data/Application/CA4CE268-995A-4E54-B8A0-78A1BE373D9D/Library/Application%20Support/
+🏁 Database already pre-seeded in a previous launch. Skipping copy.
+💎 [AdOptimization] User has Premium/Promo active. Skipping ALL ad initialization.
+✅ AppDelegate: Application did finish launching.
+🧠 AI Availability changed -> appleIntelligenceNotEnabled
+🎨 RootLauncher: Initial snapshot taken and accent color set.
+🚀 Starting database seed process if needed...
+-> Checking for Barcodes (Vocabulary & Buckets)...
+   Barcodes already seeded, skipping.
+-> Checking for Foods...
+   Foods already seeded, skipping.
+-> Checking for Ayurveda data...
+   Ayurveda seed version already applied, skipping.
+-> Checking for Exercises...
+   Exercises already seeded, skipping.
+✅ SearchIndexStore: Index is up-to-date (version: 5, DB: 14484). Skipping rebuild.
+✅ Seeding process completed.
+
+No plan was scheduled. The process was terminated after the unavailable
+precondition was observed, so zero model calls from this launch are not treated
+as VAL-1a evidence.
