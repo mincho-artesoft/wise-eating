@@ -1421,6 +1421,8 @@ struct RootView: View {
     
     @MainActor
     private func tryShowAd() {
+        // Automatic ads must not interrupt a practice player or an editor sheet.
+        guard keyWindowRootViewController()?.presentedViewController == nil else { return }
         // Проверка 1: Има ли селектиран профил?
         guard selectedProfile != nil else {
             print("⚠️ [Ad Loop] Времето дойде, но НЯМА избран профил. Скипваме.")
@@ -1438,7 +1440,7 @@ struct RootView: View {
         if InterstitialAdManager.shared.isReady {
             print("▶️ [Ad Loop] Пускане на INTERSTITIAL.")
             InterstitialAdManager.shared.showIfAvailable {
-                print("✅ [Interstitial] Затворена.")
+                print("[Ads] Automatic interstitial attempt finished.")
             }
         } else {
             // Ако не е готова, опитваме да я заредим за следващия път
@@ -1451,6 +1453,7 @@ struct RootView: View {
     
     // MARK: - Interaction Ad Logic
     private func trackInteractionAndShowAdIfNeeded() {
+        guard keyWindowRootViewController()?.presentedViewController == nil else { return }
         // 1. Ако потребителят е Premium, не правим нищо
         guard AdsConfiguration.shouldShowAds else { return }
         
@@ -1473,7 +1476,7 @@ struct RootView: View {
                 // Проверяваме дали има заредена, ако не - опитваме да заредим за следващия път
                 if InterstitialAdManager.shared.isReady {
                     InterstitialAdManager.shared.showIfAvailable {
-                        print("✅ Interstitial dismissed after interaction trigger.")
+                        print("[Ads] Interaction interstitial attempt finished.")
                     }
                 } else {
                     print("⚠️ Interstitial not ready. Loading for next time.")

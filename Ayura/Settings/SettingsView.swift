@@ -14,6 +14,7 @@ struct SettingsView: View {
     @ObservedObject private var themeManager = ThemeManager.shared
     @ObservedObject private var backgroundManager = BackgroundManager.shared
     @ObservedObject private var effectManager = EffectManager.shared
+    @ObservedObject private var adsConsent = AdsConsentManager.shared
 
     @AppStorage(NotificationManager.appNotificationsEnabledKey)
     private var appNotificationsEnabled = true
@@ -30,6 +31,16 @@ struct SettingsView: View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 20) {
                 notificationsSection
+
+                if adsConsent.isPrivacyOptionsRequired {
+                    Button {
+                        Task { await adsConsent.presentPrivacyOptions() }
+                    } label: {
+                        Label("Ad privacy choices", systemImage: "hand.raised")
+                    }
+                    .disabled(adsConsent.isPreparing)
+                    .padding(.horizontal)
+                }
 
                 Divider().padding(.horizontal)
 
@@ -164,6 +175,14 @@ struct SettingsView: View {
         .foregroundColor(effectManager.currentGlobalAccentColor)
         .sheet(isPresented: $showingImagePicker) {
             ImagePicker(selectedImage: $inputImage)
+        }
+        .alert("Ad privacy choices", isPresented: Binding(
+            get: { adsConsent.privacyError != nil },
+            set: { if !$0 { adsConsent.privacyError = nil } }
+        )) {
+            Button("OK", role: .cancel) { adsConsent.privacyError = nil }
+        } message: {
+            Text(adsConsent.privacyError ?? "")
         }
         .onChange(of: inputImage) { _, newImage in
             guard let newImage = newImage else { return }

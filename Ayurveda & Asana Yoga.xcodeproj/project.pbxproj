@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD0909010000000000000001 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = AD0909010000000000000003 /* GoogleMobileAds */; };
+		AD0909010000000000000004 /* GoogleUserMessagingPlatform in Frameworks */ = {isa = PBXBuildFile; productRef = AD0909010000000000000006 /* GoogleUserMessagingPlatform */; };
 		A55E75102F1B000100000001 /* ayurveda-data/yoga/asanas.json in Resources */ = {isa = PBXBuildFile; fileRef = A55E75202F1B000100000001 /* ayurveda-data/yoga/asanas.json */; };
 		A55E75112F1B000100000001 /* ayurveda-data/yoga/sequences.json.gz in Resources */ = {isa = PBXBuildFile; fileRef = A55E75212F1B000100000001 /* ayurveda-data/yoga/sequences.json.gz */; };
 		A710000E2F1C00010000000E /* Ayura/LiveActivity/NextEventActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A710000D2F1C00010000000D /* Ayura/LiveActivity/NextEventActivityAttributes.swift */; };
@@ -108,6 +110,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD0909010000000000000001 /* GoogleMobileAds in Frameworks */,
+				AD0909010000000000000004 /* GoogleUserMessagingPlatform in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,6 +189,8 @@
 			);
 			name = "Ayurveda & Asana Yoga";
 			packageProductDependencies = (
+				AD0909010000000000000003 /* GoogleMobileAds */,
+				AD0909010000000000000006 /* GoogleUserMessagingPlatform */,
 			);
 			productName = "Ayurveda & Asana Yoga";
 			productReference = 508496252DE5D05D0038A7D5 /* Ayurveda & Asana Yoga.app */;
@@ -245,6 +251,8 @@
 			mainGroup = 5084961C2DE5D05D0038A7D5;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
+				AD0909010000000000000002 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				AD0909010000000000000005 /* XCRemoteSwiftPackageReference "swift-package-manager-google-user-messaging-platform" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 508496262DE5D05D0038A7D5 /* Products */;
@@ -580,7 +588,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "AyurvedaAsanaYoga.Arte-Soft";
 				PRODUCT_NAME = "Ayurveda & Asana Yoga";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -636,7 +644,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "AyurvedaAsanaYoga.Arte-Soft";
 				PRODUCT_NAME = "Ayurveda & Asana Yoga";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -665,7 +673,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "AyurvedaAsanaYoga.Arte-Soft.LiveActivityWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -695,7 +703,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "AyurvedaAsanaYoga.Arte-Soft.LiveActivityWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -740,6 +748,32 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AD0909010000000000000002 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {kind = upToNextMajorVersion; minimumVersion = 13.9.0; };
+		};
+		AD0909010000000000000005 /* XCRemoteSwiftPackageReference "swift-package-manager-google-user-messaging-platform" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-user-messaging-platform.git";
+			requirement = {kind = upToNextMajorVersion; minimumVersion = 3.0.0; };
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AD0909010000000000000003 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD0909010000000000000002 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
+		AD0909010000000000000006 /* GoogleUserMessagingPlatform */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD0909010000000000000005 /* XCRemoteSwiftPackageReference "swift-package-manager-google-user-messaging-platform" */;
+			productName = GoogleUserMessagingPlatform;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5084961D2DE5D05D0038A7D5 /* Project object */;
 }

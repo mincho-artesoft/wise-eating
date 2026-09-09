@@ -15,8 +15,12 @@ class AppOpenAdManager: NSObject {
 
     private var appOpenAd: AppOpenAd?
     
+    func reset() {
+        appOpenAd = nil
+    }
+
     func loadAd() async {
-        guard AdsConfiguration.shouldShowAds else {
+        guard AdsConfiguration.canRequestAds else {
             appOpenAd = nil
             loadTime = nil
             return
@@ -28,11 +32,14 @@ class AppOpenAdManager: NSObject {
         defer { isLoadingAd = false }
 
         do {
-            appOpenAd = try await AppOpenAd.load(with: adUnitID, request: Request())
+            let ad = try await AppOpenAd.load(with: adUnitID, request: Request())
+            guard AdsConfiguration.canRequestAds else { return }
+            appOpenAd = ad
+            print("[Ads] App Open loaded.")
             appOpenAd?.fullScreenContentDelegate = self
             loadTime = Date()
         } catch {
-            print("❌ [AppOpen] Error: \(error.localizedDescription)")
+            AdDiagnostics.failure("App Open load", error)
         }
     }
     
@@ -42,7 +49,8 @@ class AppOpenAdManager: NSObject {
     }
 
     func showAdIfAvailable(forceShow: Bool = false) { // Параметърът forceShow вече не е нужен, но можем да го оставим за съвместимост
-        guard AdsConfiguration.shouldShowAds else { return }
+        guard AdsConfiguration.canRequestAds else { return }
+        guard UIApplication.shared.applicationState == .active else { return }
         if isShowingAd { return }
         
         if !isAdAvailable() {
@@ -52,8 +60,10 @@ class AppOpenAdManager: NSObject {
 
         // Премахваме брояча и проверката за честота.
         // Рекламата се показва винаги, когато е налична.
-        if let root = keyWindowRootViewController() {
+        if let root = keyWindowRootViewController(), root.presentedViewController == nil,
+           FullScreenAdPresentation.begin() {
             isShowingAd = true
+            print("[Ads] App Open presenting.")
             appOpenAd?.present(from: root)
         }
     }
@@ -61,12 +71,22 @@ class AppOpenAdManager: NSObject {
 }
 
 extension AppOpenAdManager: FullScreenContentDelegate {
+    func adWillPresentFullScreenContent(_ ad: any FullScreenPresentingAd) {
+        print("[Ads] App Open will present.")
+    }
+    func adDidRecordImpression(_ ad: any FullScreenPresentingAd) {
+        print("[Ads] App Open impression recorded.")
+    }
     func ad(_ ad: any FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: any Error) {
+        AdDiagnostics.failure("App Open presentation", error)
+        FullScreenAdPresentation.end()
         appOpenAd = nil
         isShowingAd = false
         Task { await loadAd() }
     }
     func adDidDismissFullScreenContent(_ ad: any FullScreenPresentingAd) {
+        print("[Ads] App Open dismissed.")
+        FullScreenAdPresentation.end()
         appOpenAd = nil
         isShowingAd = false
         Task { await loadAd() }
@@ -77,6 +97,7 @@ extension AppOpenAdManager: FullScreenContentDelegate {
 final class AppOpenAdManager: NSObject {
     static let shared = AppOpenAdManager()
 
+    func reset() {}
     func loadAd() async {}
     func showAdIfAvailable(forceShow: Bool = false) {}
 }

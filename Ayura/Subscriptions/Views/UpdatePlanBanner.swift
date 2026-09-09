@@ -26,6 +26,7 @@ final class BannerRotationManager: ObservableObject {
 struct UpdatePlanBanner: View {
     @ObservedObject private var subscriptionManager = SubscriptionManager.shared
     @ObservedObject private var effectManager = EffectManager.shared
+    @ObservedObject private var adsConsent = AdsConsentManager.shared
 
     @Environment(\.scenePhase) private var scenePhase
 
@@ -35,29 +36,21 @@ struct UpdatePlanBanner: View {
     @State private var hasAppeared: Bool = false
 
     var body: some View {
-        VStack {
-            // ✅ СЦЕНАРИЙ 1: ПРОМОЦИЯ (До 17 Януари)
-            if subscriptionManager.isPromoActive {
-                if subscriptionManager.subscriptionStatus == .removeAds && isVisible {
-                    upgradePlanContent
-                        .transition(.opacity.combined(with: .move(edge: .top)))
-                }
-            }
-
-            // ✅ СЦЕНАРИЙ 2: СТАНДАРТЕН РЕЖИМ (След 17 Януари)
-            else if subscriptionManager.subscriptionStatus == .base && isVisible {
+        Group {
+            if subscriptionManager.subscriptionStatus == .base && isVisible {
                 Group {
                     switch currentBannerType {
                     case .upgrade:
                         upgradePlanContent
                     case .ad:
-                        if AdsConfiguration.shouldShowAds {
+                        if AdsConfiguration.canRequestAds && isAdLoaded {
                             adBannerContent
                         } else {
                             upgradePlanContent
                         }
                     }
                 }
+                .padding(.top)
                 .transition(.opacity.combined(with: .move(edge: .top)))
                 .onAppear {
                     if !hasAppeared {
@@ -72,11 +65,14 @@ struct UpdatePlanBanner: View {
                 }
             }
         }
-        .padding(.top)
+        .onChange(of: adsConsent.canRequestAds) { _, ready in
+            if ready { isAdLoaded = true }
+        }
     }
 
     private func refreshContent() {
         withAnimation {
+            isAdLoaded = true
             currentBannerType = AdsConfiguration.shouldShowAds
                 ? BannerRotationManager.shared.getAndCycle()
                 : .upgrade
@@ -114,13 +110,12 @@ struct UpdatePlanBanner: View {
 
     // MARK: - Ad Banner
     private var adBannerContent: some View {
-        HStack {
-            Spacer()
+        HStack(spacing: 0) {
             BannerAdView(adsBool: $isAdLoaded, bucket: .small)
-                .frame(height: 50)
-                .clipShape(RoundedRectangle(cornerRadius: 15))
+                .frame(width: 320, height: 50)
             closeButton
         }
+        .frame(maxWidth: .infinity)
         .padding(.vertical, 6)
         .background(
             RoundedRectangle(cornerRadius: 20)

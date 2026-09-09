@@ -13,7 +13,7 @@ struct BannerAdView: UIViewRepresentable {
     func makeUIView(context: Context) -> BannerView {
         let banner = BannerView(adSize: AdSizeBanner)
         guard
-            AdsConfiguration.shouldShowAds,
+            AdsConfiguration.canRequestAds,
             let adUnitID = AdsConfiguration.adUnitID(for: .banner)
         else {
             adsBool = false
@@ -41,12 +41,14 @@ struct BannerAdView: UIViewRepresentable {
         init(_ parent: BannerAdView) { self.parent = parent }
         
         func bannerViewDidReceiveAd(_ bannerView: BannerView) {
+            print("[Ads] Banner loaded.")
             withAnimation {
                 parent.adsBool = true
             }
         }
         
         func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: Error) {
+            AdDiagnostics.failure("Banner load", error)
             withAnimation {
                 parent.adsBool = false
             }

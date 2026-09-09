@@ -33,7 +33,6 @@ struct AyurvedaAsanaYogaApp: App {
     @ObservedObject private var effectManager = EffectManager.shared
     
     @AppStorage("isFirstAppLaunch") private var isFirstAppLaunch: Bool = true
-    @State private var coldStart: Bool = true
     
     private let database = DatabaseSetup.createContainer()
     private var notificationDelegate = NotificationDelegate()
@@ -59,33 +58,8 @@ struct AyurvedaAsanaYogaApp: App {
             AIManager.shared.setup(container: container)
             Task { @MainActor in await CalendarViewModel.shared.ensureSharedShoppingListCalendarExists() }
 
-            // --- AD LOADING LOGIC ---
-            if AdsConfiguration.shouldShowAds {
-                
-                #if canImport(GoogleMobileAds)
-                // Инициализация на SDK
-                MobileAds.shared.start(completionHandler: nil)
-               
-                
-                // App Open Ad е OK да се зареди, защото се показва веднага при отваряне
-                Task { @MainActor in await AppOpenAdManager.shared.loadAd() }
-                
-                // Тези за цял екран (Rewarded/Interstitial) също са OK да се заредят по 1 брой
-                Task.detached(priority: .background) {
-                    try? await Task.sleep(nanoseconds: 3 * 1_000_000_000)
-                    await MainActor.run {
-                        // Правим повторна проверка преди зареждането
-                        if AdsConfiguration.shouldShowAds {
-                            print("🚀 [AdOptimization] Loading fullscreen ads...")
-                            Task { await RewardedAdManager.shared.loadAd() }
-                            Task { await InterstitialAdManager.shared.loadAd() }
-                        }
-                    }
-                }
-                #endif
-            } else {
-                print("🚫 [Ads] Advertising is disabled. Skipping SDK initialization.")
-            }
+            // Consent and ad SDK startup run after the root view is visible.
+
         }
     
     var body: some Scene {
@@ -95,38 +69,40 @@ struct AyurvedaAsanaYogaApp: App {
                     .modelContainer(container)
                     .preferredColorScheme(effectManager.appColorScheme)
                     .toggleStyle(ThemedSwitchToggleStyle())
+                    .task {
+                        guard !Self.isIsolatedSmokeTest else { return }
+                        // StoreKit refreshes independently. Its cached plan already
+                        // suppresses ads for subscribers, and changes reset ads below.
+                        await AdsConsentManager.shared.prepareAds()
+                    }
+                    .onChange(of: subscriptionManager.subscriptionStatus) { _, _ in
+                        guard !Self.isIsolatedSmokeTest else { return }
+                        Task { await AdsConsentManager.shared.subscriptionDidChange() }
+                    }
                     .onChange(of: scenePhase) { _, newPhase in
                     guard !Self.isIsolatedSmokeTest else { return }
                     // ... (старата логика за scenePhase остава същата) ...
                     switch newPhase {
                     case .active:
                         ReviewManager.appLaunched()
-                        let shouldShowAds = AdsConfiguration.shouldShowAds
-                        
-                        if isFirstAppLaunch {
-                            isFirstAppLaunch = false
-                        } else if shouldShowAds {
-                            let context = container.mainContext
-                            let settings = (try? context.fetch(FetchDescriptor<UserSettings>()))?.first
-                            let hasProfile = settings?.lastSelectedProfile != nil
-                            
-                            if hasProfile {
-                                if coldStart {
-                                    coldStart = false
-                                    Task { @MainActor in
-                                        try? await Task.sleep(nanoseconds: 2 * 1_000_000_000)
-                                        AppOpenAdManager.shared.showAdIfAvailable(forceShow: true)
-                                    }
-                                } else {
-                                    Task { @MainActor in
-                                        try? await Task.sleep(nanoseconds: 2 * 1_000_000_000)
-                                        AppOpenAdManager.shared.showAdIfAvailable(forceShow: false)
-                                    }
-                                }
-                            } else { coldStart = false }
+                        Task { await subscriptionManager.updatePurchasedStatus() }
+                        Task { @MainActor in
+                            await AdsConsentManager.shared.prepareAds()
+                            if isFirstAppLaunch {
+                                isFirstAppLaunch = false
+                                return
+                            }
+                            guard AdsConfiguration.canRequestAds else { return }
+                            let settings = (try? container.mainContext.fetch(
+                                FetchDescriptor<UserSettings>()
+                            ))?.first
+                            guard settings?.lastSelectedProfile != nil else { return }
+                            try? await Task.sleep(for: .seconds(2))
+                            guard !Task.isCancelled,
+                                  UIApplication.shared.applicationState == .active else { return }
+                            AppOpenAdManager.shared.showAdIfAvailable()
                         }
-                        
-                        Task { @MainActor in await subscriptionManager.updatePurchasedStatus() }
+
                         Task { @MainActor in GlobalState.updateAIAvailability() }
                         Task { @MainActor in await AIManager.shared.fetchJobs() }
                         Task {

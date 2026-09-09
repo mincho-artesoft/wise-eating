@@ -4,12 +4,14 @@ import GoogleMobileAds
 #endif
 
 struct AdRowView: View {
+    @ObservedObject private var subscriptionManager = SubscriptionManager.shared
+    @ObservedObject private var adsConsent = AdsConsentManager.shared
     @StateObject private var loader = NativeAdLoader()
     @State private var hasLoaded = false
     
     var body: some View {
     #if canImport(GoogleMobileAds)
-        if AdsConfiguration.shouldShowAds {
+        if subscriptionManager.subscriptionStatus == .base && adsConsent.canRequestAds {
             VStack {
                 if let nativeAd = loader.nativeAd {
                     NativeAdViewWrapper(nativeAd: nativeAd)
@@ -29,6 +31,10 @@ struct AdRowView: View {
                 }
             }
             .padding(.vertical, 4)
+            .onDisappear {
+                loader.nativeAd = nil
+                hasLoaded = false
+            }
         }
     #endif
     }

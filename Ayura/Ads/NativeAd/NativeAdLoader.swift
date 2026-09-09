@@ -19,7 +19,7 @@ final class NativeAdLoader: NSObject, ObservableObject, AdLoaderDelegate, Native
     
     func loadAd() {
         guard
-            AdsConfiguration.shouldShowAds,
+            AdsConfiguration.canRequestAds,
             let adUnitID = AdsConfiguration.adUnitID(for: .native)
         else {
             nativeAd = nil
@@ -49,6 +49,7 @@ final class NativeAdLoader: NSObject, ObservableObject, AdLoaderDelegate, Native
         let safeAd = UnsafeSendableAd(ad: nativeAd)
         
         Task { @MainActor in
+            guard AdsConfiguration.canRequestAds else { return }
             print("✅ [Native] Ad received directly.")
             withAnimation {
                 // Разопаковаме я на главната нишка
@@ -59,7 +60,7 @@ final class NativeAdLoader: NSObject, ObservableObject, AdLoaderDelegate, Native
     
     nonisolated func adLoader(_ adLoader: AdLoader, didFailToReceiveAdWithError error: Error) {
         Task { @MainActor in
-            print("❌ [Native] Failed to load: \(error.localizedDescription)")
+            AdDiagnostics.failure("Native load", error)
         }
     }
 }

@@ -180,6 +180,9 @@ struct PracticesView: View {
                 .padding(.horizontal, -18)
                 .padding(.bottom, -4)
 
+            UpdatePlanBanner()
+                .padding(.horizontal, -18)
+
             header
             rightNowCard
             filterChips

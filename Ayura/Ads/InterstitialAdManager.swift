@@ -13,13 +13,19 @@ final class InterstitialAdManager: NSObject {
     private var isLoading = false
 
     private var interstitialAd: InterstitialAd?
+    // Keep the consumed ad alive until its presentation delegate finishes.
+    private var presentingAd: InterstitialAd?
 
     var isReady: Bool {
-        AdsConfiguration.shouldShowAds && interstitialAd != nil
+        AdsConfiguration.canRequestAds && !FullScreenAdPresentation.isShowing && interstitialAd != nil
+    }
+
+    func reset() {
+        interstitialAd = nil
     }
 
     func loadAd() async {
-        guard AdsConfiguration.shouldShowAds else {
+        guard AdsConfiguration.canRequestAds else {
             interstitialAd = nil
             return
         }
@@ -29,37 +35,59 @@ final class InterstitialAdManager: NSObject {
         defer { isLoading = false }
         
         do {
-            interstitialAd = try await InterstitialAd.load(with: adUnitID, request: Request())
+            let ad = try await InterstitialAd.load(with: adUnitID, request: Request())
+            guard AdsConfiguration.canRequestAds else { return }
+            interstitialAd = ad
+            print("[Ads] Interstitial loaded.")
             interstitialAd?.fullScreenContentDelegate = self
         } catch {
-            print("❌ [Interstitial] Error: \(error.localizedDescription)")
+            AdDiagnostics.failure("Interstitial load", error)
             interstitialAd = nil
         }
     }
 
     func showIfAvailable(onDismiss: @escaping () -> Void) {
-        guard AdsConfiguration.shouldShowAds else {
+        guard AdsConfiguration.canRequestAds else {
+            print("[Ads] Interstitial skipped: subscription or consent blocks ads.")
             onDismiss()
             return
         }
-        guard let ad = interstitialAd, let root = keyWindowRootViewController() else {
+        guard UIApplication.shared.applicationState == .active,
+              let ad = interstitialAd, let root = UIApplication.shared.topMostViewController,
+              FullScreenAdPresentation.begin() else {
+            print("[Ads] Interstitial skipped: active=\(UIApplication.shared.applicationState == .active), loaded=\(interstitialAd != nil), anotherAd=\(FullScreenAdPresentation.isShowing).")
             onDismiss()
             Task { await loadAd() }
             return
         }
+        presentingAd = ad
+        interstitialAd = nil
         self.onAdDismissed = onDismiss
+        print("[Ads] Interstitial presenting.")
         ad.present(from: root)
     }
 }
 
 extension InterstitialAdManager: FullScreenContentDelegate {
+    func adWillPresentFullScreenContent(_ ad: any FullScreenPresentingAd) {
+        print("[Ads] Interstitial will present.")
+    }
+    func adDidRecordImpression(_ ad: any FullScreenPresentingAd) {
+        print("[Ads] Interstitial impression recorded.")
+    }
     func ad(_ ad: any FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: any Error) {
+        AdDiagnostics.failure("Interstitial presentation", error)
+        FullScreenAdPresentation.end()
+        presentingAd = nil
         interstitialAd = nil
         onAdDismissed?()
         onAdDismissed = nil
         Task { await loadAd() }
     }
     func adDidDismissFullScreenContent(_ ad: any FullScreenPresentingAd) {
+        print("[Ads] Interstitial dismissed.")
+        FullScreenAdPresentation.end()
+        presentingAd = nil
         interstitialAd = nil
         onAdDismissed?()
         onAdDismissed = nil
@@ -73,6 +101,7 @@ final class InterstitialAdManager: NSObject {
 
     var isReady: Bool { false }
 
+    func reset() {}
     func loadAd() async {}
 
     func showIfAvailable(onDismiss: @escaping () -> Void) {

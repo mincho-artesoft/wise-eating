@@ -109,13 +109,20 @@ struct PracticeEntryView: View {
             guard newTab != .practices else { return }
             dismiss()
         }
-        .fullScreenCover(isPresented: $isPresentingPlayer) {
+        .fullScreenCover(
+            isPresented: $isPresentingPlayer,
+            onDismiss: showPostPracticeAd
+        ) {
             PracticePlayerView(
                 practice: practice,
                 profile: profile,
                 duration: selectedDuration,
                 voiceMode: selectedVoiceMode,
-                ambienceResourceName: selectedAmbienceName
+                ambienceResourceName: selectedAmbienceName,
+                onCompleted: {
+                    guard AdsConfiguration.shouldShowAds else { return }
+                    isPresentingPlayer = false
+                }
             )
         }
         .fullScreenCover(isPresented: $isPresentingArtwork) {
@@ -127,6 +134,12 @@ struct PracticeEntryView: View {
                 Color.black.ignoresSafeArea()
             }
         }
+    }
+
+    private func showPostPracticeAd() {
+        // Both completion and early exit arrive here, after the player closes.
+        guard AdsConfiguration.shouldShowAds else { return }
+        InterstitialAdManager.shared.showIfAvailable(onDismiss: {})
     }
 
     private var customHeader: some View {

@@ -7,6 +7,7 @@ struct PracticePlayerView: View {
     let duration: Int
     let voiceMode: PracticeVoiceMode
     let ambienceResourceName: String?
+    var onCompleted: () -> Void = {}
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
@@ -68,6 +69,7 @@ struct PracticePlayerView: View {
         .onChange(of: player.state) { _, state in
             guard state == .finished else { return }
             recordSessionIfNeeded(completed: true)
+            onCompleted()
         }
     }
 
@@ -76,6 +78,7 @@ struct PracticePlayerView: View {
         guard !hasStarted else { return }
         hasStarted = true
         UIApplication.shared.isIdleTimerDisabled = true
+        Task { await InterstitialAdManager.shared.loadAd() }
 
         do {
             try player.prepareForPlayback()
