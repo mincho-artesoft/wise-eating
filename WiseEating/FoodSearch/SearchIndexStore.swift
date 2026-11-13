@@ -18,8 +18,8 @@ final class SearchIndexStore {
     private(set) var nutrientRankings: [NutrientType: [Int]] = [:]
 
     // MARK: - Async Save Infra
-    /// Таймер за debounce на тежкия запис на кеша
-    private var saveDebounceTimer: Timer?
+    /// Задачи за debounce на тежкия запис на кеша
+    private var saveDebounceTask: Task<Void, Never>?
 
     private init() {}
 
@@ -220,9 +220,10 @@ final class SearchIndexStore {
     }
 
     private func scheduleCacheSave(context: ModelContext) {
-        saveDebounceTimer?.invalidate()
-        saveDebounceTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { [weak self] _ in
-            guard let self else { return }
+        saveDebounceTask?.cancel()
+        saveDebounceTask = Task { @MainActor [weak self] in
+            try? await Task.sleep(nanoseconds: 3_000_000_000)
+            guard !Task.isCancelled, let self else { return }
             let start = CFAbsoluteTimeGetCurrent()
             do {
                 try self.saveCache(context: context)

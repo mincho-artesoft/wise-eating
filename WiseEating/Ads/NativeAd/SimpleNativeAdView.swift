@@ -106,16 +106,16 @@ final class SimpleNativeAdView: NativeAdView {
             mediaViewOutlet.heightAnchor.constraint(equalToConstant: 120),
             
             iconImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            iconImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            iconImageView.widthAnchor.constraint(equalToConstant: 40),
-            iconImageView.heightAnchor.constraint(equalToConstant: 40),
+            iconImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            iconImageView.widthAnchor.constraint(equalToConstant: 36),
+            iconImageView.heightAnchor.constraint(equalToConstant: 36),
             
             headlineLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 8),
             headlineLabel.topAnchor.constraint(equalTo: iconImageView.topAnchor),
             headlineLabel.trailingAnchor.constraint(equalTo: mediaViewOutlet.leadingAnchor, constant: -8),
             
             adBadgeLabel.leadingAnchor.constraint(equalTo: iconImageView.leadingAnchor),
-            adBadgeLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 4),
+            adBadgeLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 3),
             adBadgeLabel.widthAnchor.constraint(equalToConstant: 22),
             adBadgeLabel.heightAnchor.constraint(equalToConstant: 14),
             
@@ -124,9 +124,9 @@ final class SimpleNativeAdView: NativeAdView {
             bodyLabel.trailingAnchor.constraint(equalTo: mediaViewOutlet.leadingAnchor, constant: -8),
             
             callToActionButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            callToActionButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            callToActionButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
             callToActionButton.trailingAnchor.constraint(equalTo: mediaViewOutlet.leadingAnchor, constant: -8),
-            callToActionButton.heightAnchor.constraint(equalToConstant: 30)
+            callToActionButton.heightAnchor.constraint(equalToConstant: 28)
         ])
     }
 

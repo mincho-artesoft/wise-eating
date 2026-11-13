@@ -25,76 +25,58 @@ struct WiseEatingApp: App {
             UNUserNotificationCenter.current().delegate = notificationDelegate
             AIManager.shared.setup(container: container)
             Task { @MainActor in await CalendarViewModel.shared.ensureSharedShoppingListCalendarExists() }
-            
-            // --- AD LOADING LOGIC ---
-            // Зареждаме реклами САМО ако е Base план
-            if SubscriptionManager.shared.subscriptionStatus == .base {
-                
-                #if !targetEnvironment(macCatalyst)
-                // Инициализация на SDK
-                MobileAds.shared.start(completionHandler: nil)
-               
-                
-                // App Open Ad е OK да се зареди, защото се показва веднага при отваряне
-                Task { @MainActor in await AppOpenAdManager.shared.loadAd() }
-                
-                // Тези за цял екран (Rewarded/Interstitial) също са OK да се заредят по 1 брой
-                Task.detached(priority: .background) {
-                    try? await Task.sleep(nanoseconds: 3 * 1_000_000_000)
-                    await MainActor.run {
-                        // Правим повторна проверка преди зареждането
-                        if SubscriptionManager.shared.subscriptionStatus == .base {
-                            print("🚀 [AdOptimization] Loading fullscreen ads...")
-                            Task { await RewardedAdManager.shared.loadAd() }
-                            Task { await InterstitialAdManager.shared.loadAd() }
-                        }
-                    }
-                }
-                #endif
-            } else {
-                // ✅ ТУК Е ДОБАВЕНИЯТ ЛОГ
-                print("💎 [AdOptimization] User has Premium/Promo active. Skipping ALL ad initialization.")
-            }
         }
     
     var body: some Scene {
         WindowGroup {
             RootLauncher(container: container)
+                .task {
+                    await AdsConsentManager.shared.prepareAds()
+                }
+                .onChange(of: subscriptionManager.subscriptionStatus) { _, _ in
+                    Task { await AdsConsentManager.shared.subscriptionDidChange() }
+                }
                 .onChange(of: scenePhase) { _, newPhase in
                     // ... (старата логика за scenePhase остава същата) ...
                     switch newPhase {
                     case .active:
                         ReviewManager.appLaunched()
-                        let shouldShowAds = subscriptionManager.subscriptionStatus == .base
-                        
-                        if isFirstAppLaunch {
-                            isFirstAppLaunch = false
-                        } else if shouldShowAds {
+                        Task { await subscriptionManager.updatePurchasedStatus() }
+                        Task { @MainActor in
+                            await AdsConsentManager.shared.prepareAds()
+                            let shouldShowAds = AdsConsentManager.shouldShowAds && AdsConsentManager.shared.canRequestAds
+                            if isFirstAppLaunch {
+                                isFirstAppLaunch = false
+                                coldStart = false
+                                return
+                            }
+                            guard shouldShowAds else {
+                                coldStart = false
+                                return
+                            }
                             let context = container.mainContext
                             let settings = (try? context.fetch(FetchDescriptor<UserSettings>()))?.first
                             let hasProfile = settings?.lastSelectedProfile != nil
-                            
                             if hasProfile {
                                 if coldStart {
                                     coldStart = false
-                                    Task { @MainActor in
-                                        try? await Task.sleep(nanoseconds: 2 * 1_000_000_000)
-                                        #if !targetEnvironment(macCatalyst)
-                                        AppOpenAdManager.shared.showAdIfAvailable(forceShow: true)
-                                        #endif
-                                    }
+                                    try? await Task.sleep(nanoseconds: 2 * 1_000_000_000)
+                                    guard UIApplication.shared.applicationState == .active else { return }
+                                    #if !targetEnvironment(macCatalyst)
+                                    AppOpenAdManager.shared.showAdIfAvailable(forceShow: true)
+                                    #endif
                                 } else {
-                                    Task { @MainActor in
-                                        try? await Task.sleep(nanoseconds: 2 * 1_000_000_000)
-                                        #if !targetEnvironment(macCatalyst)
-                                        AppOpenAdManager.shared.showAdIfAvailable(forceShow: false)
-                                        #endif
-                                    }
+                                    try? await Task.sleep(nanoseconds: 2 * 1_000_000_000)
+                                    guard UIApplication.shared.applicationState == .active else { return }
+                                    #if !targetEnvironment(macCatalyst)
+                                    AppOpenAdManager.shared.showAdIfAvailable(forceShow: false)
+                                    #endif
                                 }
-                            } else { coldStart = false }
+                            } else {
+                                coldStart = false
+                            }
                         }
-                        
-                        Task { @MainActor in await subscriptionManager.updatePurchasedStatus() }
+
                         Task { @MainActor in GlobalState.updateAIAvailability() }
                         Task { @MainActor in await AIManager.shared.fetchJobs() }
                         GlobalState.refreshSystemSettings()

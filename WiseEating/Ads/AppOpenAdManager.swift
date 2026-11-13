@@ -22,15 +22,27 @@ class AppOpenAdManager: NSObject {
           #endif
     }
     
+    func reset() {
+        appOpenAd = nil
+        loadTime = nil
+    }
+
     func loadAd() async {
-        guard SubscriptionManager.shared.subscriptionStatus == .base else { return }
+        guard AdsConsentManager.shouldShowAds,
+              AdsConsentManager.shared.canRequestAds else {
+            reset()
+            return
+        }
         guard !isLoadingAd && !isAdAvailable() else { return }
 
         isLoadingAd = true
         defer { isLoadingAd = false }
 
         do {
-            appOpenAd = try await AppOpenAd.load(with: adUnitID, request: Request())
+            let ad = try await AppOpenAd.load(with: adUnitID, request: Request())
+            guard AdsConsentManager.shouldShowAds,
+                  AdsConsentManager.shared.canRequestAds else { return }
+            appOpenAd = ad
             appOpenAd?.fullScreenContentDelegate = self
             loadTime = Date()
         } catch {
@@ -44,7 +56,9 @@ class AppOpenAdManager: NSObject {
     }
 
     func showAdIfAvailable(forceShow: Bool = false) { // Параметърът forceShow вече не е нужен, но можем да го оставим за съвместимост
-        guard SubscriptionManager.shared.subscriptionStatus == .base else { return }
+        guard AdsConsentManager.shouldShowAds,
+              AdsConsentManager.shared.canRequestAds,
+              UIApplication.shared.applicationState == .active else { return }
         if isShowingAd { return }
         
         if !isAdAvailable() {
@@ -54,7 +68,8 @@ class AppOpenAdManager: NSObject {
 
         // Премахваме брояча и проверката за честота.
         // Рекламата се показва винаги, когато е налична.
-        if let root = keyWindowRootViewController() {
+        if let root = keyWindowRootViewController(), root.presentedViewController == nil,
+           FullScreenAdPresentation.begin() {
             isShowingAd = true
             appOpenAd?.present(from: root)
         }
@@ -66,11 +81,13 @@ class AppOpenAdManager: NSObject {
 #if !targetEnvironment(macCatalyst)
 extension AppOpenAdManager: FullScreenContentDelegate {
     func ad(_ ad: any FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: any Error) {
+        FullScreenAdPresentation.end()
         appOpenAd = nil
         isShowingAd = false
         Task { await loadAd() }
     }
     func adDidDismissFullScreenContent(_ ad: any FullScreenPresentingAd) {
+        FullScreenAdPresentation.end()
         appOpenAd = nil
         isShowingAd = false
         Task { await loadAd() }

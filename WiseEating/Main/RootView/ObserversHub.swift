@@ -155,144 +155,159 @@ struct ObserversHub: View {
     
     var body: some View {
         Group {
-            
-            Color.clear
-                .onChange(of: aiManager.jobs) { _, newJobs in
-                    let isGenerating = newJobs.contains { $0.status == .pending || $0.status == .running }
-                    if self.isAIGenerating != isGenerating {
-                        self.isAIGenerating = isGenerating
-                    }
-                }
-                .onAppear {
-                    let isGenerating = aiManager.isGenerating
-                    if self.isAIGenerating != isGenerating {
-                        self.isAIGenerating = isGenerating
-                    }
-                }
-                .onReceive(NotificationCenter.default.publisher(for: .aiJobStatusDidChange)) { _ in
-                    let isGenerating = aiManager.isGenerating
-                    if self.isAIGenerating != isGenerating {
-                        self.isAIGenerating = isGenerating
-                    }
-                }
-            
-            TabChangeObserver(
-                selectedTab: $selectedTab,
-                hasNewNutrition: $hasNewNutrition,
-                hasNewTraining: $hasNewTraining,
-                isPresentingNewProfile: $isPresentingNewProfile,
-                editingProfile: $editingProfile,
-                profileForHistoryView: $profileForHistoryView,
-                isPresentingProfileWizard: $isPresentingProfileWizard,
-                isMealPlanEditorPresented: coordinator.pendingAIPlanPreview != nil,
-                isSearchButtonVisible: $isSearchButtonVisible,
-                menuState: $menuState,
-                navBarIsHidden: $navBarIsHidden,
-                isProfilesDrawerVisible: $isProfilesDrawerVisible,
-                hasUnreadAINotifications: $hasUnreadAINotifications
-            )
-
-            NotificationsObserver(
-                profiles: profiles,
-                onEditNutrition: { payload in
-                    if let profile = profiles.first(where: { $0.calendarID == payload.calendarID }) {
-                        selectedProfile = profile
-                        selectedTab = .nutrition
-                        menuState = .collapsed
-                        nutritionChosenDate = payload.date
-                        launchMealName = payload.mealName
-                    }
-                },
-                onEditTraining: { payload in
-                    if let profile = profiles.first(where: { $0.calendarID == payload.calendarID }) {
-                        selectedProfile = profile
-                        selectedTab = .training
-                        menuState = .collapsed
-                        trainingChosenDate = payload.date
-                        launchTrainingName = payload.mealName
-                    }
-                },
-                onNewMeal: { payload in
-                    if selectedTab != .nutrition {
-                        withAnimation {
-                            if let profile = profiles.first(where: { $0.calendarID == payload.calendarID }) {
-                                selectedProfile = profile
-                                hasNewNutrition = true
-                                nutritionChosenDate = payload.date
-                                launchMealName = payload.mealName
-                            }
-                        }
-                    }
-                },
-                onNewTraining: { payload in
-                    if selectedTab != .training {
-                        withAnimation {
-                            if let profile = profiles.first(where: { $0.calendarID == payload.calendarID }) {
-                                selectedProfile = profile
-                                hasNewTraining = true
-                                trainingChosenDate = payload.date
-                                launchTrainingName = payload.mealName
-                            }
-                        }
-                    }
-                },
-                onWillEnterForeground: {
-                    Task { await onCheckUnreadAI() }
-                },
-                onUnreadStatusChanged: {
-                    Task { await onCheckUnreadAI() }
-                },
-                onOpenProfilesDrawer: {
-                    isProfilesDrawerVisible = true
-                    withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
-                        profilesMenuState = .full
-                        menuState = .collapsed
-                        navBarIsHidden = true
-                    }
-                },
-                onBackgroundChanged: {
-                    onUpdateBackgroundSnapshot()
-                },
-                onCheckUnreadBadges: onCheckUnreadBadges,
-                // ✅ ДОБАВЕНО: Подаваме callback-а към NotificationsObserver
-                onOpenSubscriptionFlow: onOpenSubscriptionFlow
-            )
-            
-            CoordinatorObserver(
-                coordinator: coordinator,
-                profiles: profiles,
-                selectedProfile: $selectedProfile,
-                selectedTab: $selectedTab,
-                menuState: $menuState,
-                nutritionChosenDate: $nutritionChosenDate,
-                nutritionSelectedMealID: $nutritionSelectedMealID,
-                trainingChosenDate: $trainingChosenDate,
-                launchTrainingName: $launchTrainingName,
-                isProfilesDrawerVisible: $isProfilesDrawerVisible,
-                profilesMenuState: $profilesMenuState,
-                navBarIsHidden: $navBarIsHidden,
-                isPresentingNewProfile: $isPresentingNewProfile,
-                editingProfile: $editingProfile,
-                profileForHistoryView: $profileForHistoryView,
-                isPresentingProfileWizard: $isPresentingProfileWizard,
-                isShowingDailyAIGenerator: $isShowingDailyAIGenerator,
-                onDismissSearch: onDismissSearch
-            )
-
-            ProfilesDrawerObserver(
-                profilesMenuState: $profilesMenuState,
-                isPresentingNewProfile: $isPresentingNewProfile,
-                editingProfile: $editingProfile,
-                profileForHistoryView: $profileForHistoryView,
-                isPresentingProfileWizard: $isPresentingProfileWizard,
-                navBarIsHidden: $navBarIsHidden,
-                isProfilesDrawerVisible: $isProfilesDrawerVisible,
-                onDismissSearch: onDismissSearch
-            )
-
+            aiStatusObserver
+            tabChangeObserver
+            notificationsObserver
+            coordinatorObserver
+            profilesDrawerObserver
             KeyboardObserver(keyboardHeight: $keyboardHeight)
         }
         .hidden()
+    }
+
+    private var aiStatusObserver: some View {
+        Color.clear
+            .onChange(of: aiManager.jobs) { _, newJobs in
+                let isGenerating = newJobs.contains { job in
+                    job.status == .pending || job.status == .running
+                }
+                if self.isAIGenerating != isGenerating {
+                    self.isAIGenerating = isGenerating
+                }
+            }
+            .onAppear {
+                let isGenerating = aiManager.isGenerating
+                if self.isAIGenerating != isGenerating {
+                    self.isAIGenerating = isGenerating
+                }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .aiJobStatusDidChange)) { _ in
+                let isGenerating = aiManager.isGenerating
+                if self.isAIGenerating != isGenerating {
+                    self.isAIGenerating = isGenerating
+                }
+            }
+    }
+
+    private var tabChangeObserver: some View {
+        TabChangeObserver(
+            selectedTab: $selectedTab,
+            hasNewNutrition: $hasNewNutrition,
+            hasNewTraining: $hasNewTraining,
+            isPresentingNewProfile: $isPresentingNewProfile,
+            editingProfile: $editingProfile,
+            profileForHistoryView: $profileForHistoryView,
+            isPresentingProfileWizard: $isPresentingProfileWizard,
+            isMealPlanEditorPresented: coordinator.pendingAIPlanPreview != nil,
+            isSearchButtonVisible: $isSearchButtonVisible,
+            menuState: $menuState,
+            navBarIsHidden: $navBarIsHidden,
+            isProfilesDrawerVisible: $isProfilesDrawerVisible,
+            hasUnreadAINotifications: $hasUnreadAINotifications
+        )
+    }
+
+    private var notificationsObserver: some View {
+        NotificationsObserver(
+            profiles: profiles,
+            onEditNutrition: { payload in
+                if let profile = profiles.first(where: { $0.calendarID == payload.calendarID }) {
+                    selectedProfile = profile
+                    selectedTab = .nutrition
+                    menuState = .collapsed
+                    nutritionChosenDate = payload.date
+                    launchMealName = payload.mealName
+                }
+            },
+            onEditTraining: { payload in
+                if let profile = profiles.first(where: { $0.calendarID == payload.calendarID }) {
+                    selectedProfile = profile
+                    selectedTab = .training
+                    menuState = .collapsed
+                    trainingChosenDate = payload.date
+                    launchTrainingName = payload.mealName
+                }
+            },
+            onNewMeal: { payload in
+                if selectedTab != .nutrition {
+                    withAnimation {
+                        if let profile = profiles.first(where: { $0.calendarID == payload.calendarID }) {
+                            selectedProfile = profile
+                            hasNewNutrition = true
+                            nutritionChosenDate = payload.date
+                            launchMealName = payload.mealName
+                        }
+                    }
+                }
+            },
+            onNewTraining: { payload in
+                if selectedTab != .training {
+                    withAnimation {
+                        if let profile = profiles.first(where: { $0.calendarID == payload.calendarID }) {
+                            selectedProfile = profile
+                            hasNewTraining = true
+                            trainingChosenDate = payload.date
+                            launchTrainingName = payload.mealName
+                        }
+                    }
+                }
+            },
+            onWillEnterForeground: {
+                Task { await onCheckUnreadAI() }
+            },
+            onUnreadStatusChanged: {
+                Task { await onCheckUnreadAI() }
+            },
+            onOpenProfilesDrawer: {
+                isProfilesDrawerVisible = true
+                withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                    profilesMenuState = .full
+                    menuState = .collapsed
+                    navBarIsHidden = true
+                }
+            },
+            onBackgroundChanged: {
+                onUpdateBackgroundSnapshot()
+            },
+            onCheckUnreadBadges: onCheckUnreadBadges,
+            onOpenSubscriptionFlow: onOpenSubscriptionFlow
+        )
+    }
+
+    private var coordinatorObserver: some View {
+        CoordinatorObserver(
+            coordinator: coordinator,
+            profiles: profiles,
+            selectedProfile: $selectedProfile,
+            selectedTab: $selectedTab,
+            menuState: $menuState,
+            nutritionChosenDate: $nutritionChosenDate,
+            nutritionSelectedMealID: $nutritionSelectedMealID,
+            trainingChosenDate: $trainingChosenDate,
+            launchTrainingName: $launchTrainingName,
+            isProfilesDrawerVisible: $isProfilesDrawerVisible,
+            profilesMenuState: $profilesMenuState,
+            navBarIsHidden: $navBarIsHidden,
+            isPresentingNewProfile: $isPresentingNewProfile,
+            editingProfile: $editingProfile,
+            profileForHistoryView: $profileForHistoryView,
+            isPresentingProfileWizard: $isPresentingProfileWizard,
+            isShowingDailyAIGenerator: $isShowingDailyAIGenerator,
+            onDismissSearch: onDismissSearch
+        )
+    }
+
+    private var profilesDrawerObserver: some View {
+        ProfilesDrawerObserver(
+            profilesMenuState: $profilesMenuState,
+            isPresentingNewProfile: $isPresentingNewProfile,
+            editingProfile: $editingProfile,
+            profileForHistoryView: $profileForHistoryView,
+            isPresentingProfileWizard: $isPresentingProfileWizard,
+            navBarIsHidden: $navBarIsHidden,
+            isProfilesDrawerVisible: $isProfilesDrawerVisible,
+            onDismissSearch: onDismissSearch
+        )
     }
 }
 

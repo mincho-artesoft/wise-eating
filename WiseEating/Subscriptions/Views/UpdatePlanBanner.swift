@@ -26,6 +26,7 @@ final class BannerRotationManager: ObservableObject {
 struct UpdatePlanBanner: View {
     @ObservedObject private var subscriptionManager = SubscriptionManager.shared
     @ObservedObject private var effectManager = EffectManager.shared
+    @ObservedObject private var adsConsent = AdsConsentManager.shared
 
     @Environment(\.scenePhase) private var scenePhase
 
@@ -57,7 +58,11 @@ struct UpdatePlanBanner: View {
                     case .upgrade:
                         upgradePlanContent
                     case .ad:
-                        adBannerContent
+                        if adsConsent.canRequestAds && isAdLoaded {
+                            adBannerContent
+                        } else {
+                            upgradePlanContent
+                        }
                     }
                     #endif
                 }
@@ -72,6 +77,9 @@ struct UpdatePlanBanner: View {
                     if newPhase == .active && hasAppeared {
                         refreshContent()
                     }
+                }
+                .onChange(of: adsConsent.canRequestAds) { _, ready in
+                    if ready { isAdLoaded = true }
                 }
             }
         }
@@ -133,23 +141,18 @@ struct UpdatePlanBanner: View {
         .padding(.bottom, 8)
     }
 
-    // MARK: - Ad Banner
+    // MARK: - Ad Banner (Upgraded to Native Ad Card)
     private var adBannerContent: some View {
-        HStack {
-            Spacer()
-            BannerAdView(adsBool: $isAdLoaded, bucket: .small)
-                .frame(height: 50)
-                .clipShape(RoundedRectangle(cornerRadius: 15))
-            closeButton
-        }
-        .padding(.vertical, 6)
-        .background(
-            RoundedRectangle(cornerRadius: 20)
-                .fill(.ultraThinMaterial)
-                .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
-        )
-        .padding(.horizontal)
-        .padding(.bottom, 8)
+        BannerAdView(adsBool: $isAdLoaded, bucket: .large)
+            .frame(maxWidth: .infinity)
+            .frame(height: 136)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .overlay(
+                closeButton,
+                alignment: .topTrailing
+            )
+            .padding(.horizontal)
+            .padding(.bottom, 8)
     }
 
     // MARK: - Close Button

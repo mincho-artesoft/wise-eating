@@ -11,7 +11,13 @@ final class RewardedAdManager: NSObject {
 
 #if !targetEnvironment(macCatalyst)
     private var rewardedAd: RewardedAd?
-    var isReady: Bool { return rewardedAd != nil }
+    private var presentingAd: RewardedAd?
+    var isReady: Bool {
+        AdsConsentManager.shouldShowAds
+            && AdsConsentManager.shared.canRequestAds
+            && !FullScreenAdPresentation.isShowing
+            && rewardedAd != nil
+    }
     
     private var adUnitID: String {
         #if DEBUG
@@ -21,13 +27,25 @@ final class RewardedAdManager: NSObject {
         #endif
     }
 
+    func reset() {
+        rewardedAd = nil
+    }
+
     func loadAd() async {
+        guard AdsConsentManager.shouldShowAds,
+              AdsConsentManager.shared.canRequestAds else {
+            rewardedAd = nil
+            return
+        }
         guard !isLoading, rewardedAd == nil else { return }
         isLoading = true
         defer { isLoading = false }
 
         do {
-            rewardedAd = try await RewardedAd.load(with: adUnitID, request: Request())
+            let ad = try await RewardedAd.load(with: adUnitID, request: Request())
+            guard AdsConsentManager.shouldShowAds,
+                  AdsConsentManager.shared.canRequestAds else { return }
+            rewardedAd = ad
             rewardedAd?.fullScreenContentDelegate = self
         } catch {
             print("❌ [Rewarded] Error: \(error.localizedDescription)")
@@ -35,13 +53,20 @@ final class RewardedAdManager: NSObject {
     }
 
     func showIfAvailable(onReward: @escaping (_ amount: NSDecimalNumber, _ type: String) -> Void) {
-        guard let ad = rewardedAd, let root = keyWindowRootViewController() else {
+        guard AdsConsentManager.shouldShowAds,
+              AdsConsentManager.shared.canRequestAds,
+              UIApplication.shared.applicationState == .active,
+              let ad = rewardedAd,
+              let root = keyWindowRootViewController(),
+              FullScreenAdPresentation.begin() else {
             Task { await loadAd() }
             return
         }
-        
-        ad.present(from: root) { [weak self] in
-            guard let reward = self?.rewardedAd?.adReward else { return }
+
+        presentingAd = ad
+        rewardedAd = nil
+        let reward = ad.adReward
+        ad.present(from: root) {
             onReward(reward.amount, reward.type)
         }
     }
@@ -52,9 +77,14 @@ final class RewardedAdManager: NSObject {
 #if !targetEnvironment(macCatalyst)
 extension RewardedAdManager: FullScreenContentDelegate {
     func ad(_ ad: any FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: any Error) {
+        FullScreenAdPresentation.end()
+        presentingAd = nil
         rewardedAd = nil
+        Task { await loadAd() }
     }
     func adDidDismissFullScreenContent(_ ad: any FullScreenPresentingAd) {
+        FullScreenAdPresentation.end()
+        presentingAd = nil
         rewardedAd = nil
         Task { await loadAd() }
     }

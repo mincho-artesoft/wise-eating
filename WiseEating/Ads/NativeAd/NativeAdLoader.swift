@@ -26,18 +26,24 @@ final class NativeAdLoader: NSObject, ObservableObject, AdLoaderDelegate, Native
     }
     
     func loadAd() {
-        guard SubscriptionManager.shared.subscriptionStatus == .base else { return }
+        guard AdsConsentManager.shouldShowAds,
+              AdsConsentManager.shared.canRequestAds else {
+            nativeAd = nil
+            return
+        }
 
         guard let rootVC = UIApplication.shared.topMostViewController else { return }
         
         let multipleAdsOptions = MultipleAdsAdLoaderOptions()
         multipleAdsOptions.numberOfAds = 1
+        let mediaOptions = NativeAdMediaAdLoaderOptions()
+        mediaOptions.mediaAspectRatio = .any
         
         adLoader = AdLoader(
             adUnitID: adUnitID,
             rootViewController: rootVC,
             adTypes: [.native],
-            options: [multipleAdsOptions]
+            options: [multipleAdsOptions, mediaOptions]
         )
         adLoader?.delegate = self
         
@@ -51,6 +57,9 @@ final class NativeAdLoader: NSObject, ObservableObject, AdLoaderDelegate, Native
         let safeAd = UnsafeSendableAd(ad: nativeAd)
         
         Task { @MainActor in
+            guard AdsConsentManager.shouldShowAds,
+                  AdsConsentManager.shared.canRequestAds else { return }
+            safeAd.ad.rootViewController = UIApplication.shared.topMostViewController
             print("✅ [Native] Ad received directly.")
             withAnimation {
                 // Разопаковаме я на главната нишка

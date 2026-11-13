@@ -13,6 +13,7 @@ final class InterstitialAdManager: NSObject {
 
 #if !targetEnvironment(macCatalyst)
     private var interstitialAd: InterstitialAd?
+    private var presentingAd: InterstitialAd?
     
     private var adUnitID: String {
         #if DEBUG
@@ -22,15 +23,32 @@ final class InterstitialAdManager: NSObject {
         #endif
     }
 
-    var isReady: Bool { return interstitialAd != nil }
+    var isReady: Bool {
+        AdsConsentManager.shouldShowAds
+            && AdsConsentManager.shared.canRequestAds
+            && !FullScreenAdPresentation.isShowing
+            && interstitialAd != nil
+    }
+
+    func reset() {
+        interstitialAd = nil
+    }
 
     func loadAd() async {
+        guard AdsConsentManager.shouldShowAds,
+              AdsConsentManager.shared.canRequestAds else {
+            interstitialAd = nil
+            return
+        }
         guard !isLoading, interstitialAd == nil else { return }
         isLoading = true
         defer { isLoading = false }
         
         do {
-            interstitialAd = try await InterstitialAd.load(with: adUnitID, request: Request())
+            let ad = try await InterstitialAd.load(with: adUnitID, request: Request())
+            guard AdsConsentManager.shouldShowAds,
+                  AdsConsentManager.shared.canRequestAds else { return }
+            interstitialAd = ad
             interstitialAd?.fullScreenContentDelegate = self
         } catch {
             print("❌ [Interstitial] Error: \(error.localizedDescription)")
@@ -39,11 +57,18 @@ final class InterstitialAdManager: NSObject {
     }
 
     func showIfAvailable(onDismiss: @escaping () -> Void) {
-        guard let ad = interstitialAd, let root = keyWindowRootViewController() else {
+        guard AdsConsentManager.shouldShowAds,
+              AdsConsentManager.shared.canRequestAds,
+              UIApplication.shared.applicationState == .active,
+              let ad = interstitialAd,
+              let root = keyWindowRootViewController(),
+              FullScreenAdPresentation.begin() else {
             onDismiss()
             Task { await loadAd() }
             return
         }
+        presentingAd = ad
+        interstitialAd = nil
         self.onAdDismissed = onDismiss
         ad.present(from: root)
     }
@@ -53,12 +78,16 @@ final class InterstitialAdManager: NSObject {
 #if !targetEnvironment(macCatalyst)
 extension InterstitialAdManager: FullScreenContentDelegate {
     func ad(_ ad: any FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: any Error) {
+        FullScreenAdPresentation.end()
+        presentingAd = nil
         interstitialAd = nil
         onAdDismissed?()
         onAdDismissed = nil
         Task { await loadAd() }
     }
     func adDidDismissFullScreenContent(_ ad: any FullScreenPresentingAd) {
+        FullScreenAdPresentation.end()
+        presentingAd = nil
         interstitialAd = nil
         onAdDismissed?()
         onAdDismissed = nil
