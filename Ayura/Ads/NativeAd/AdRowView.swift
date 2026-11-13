@@ -31,10 +31,6 @@ struct AdRowView: View {
                 }
             }
             .padding(.vertical, 4)
-            .onDisappear {
-                loader.nativeAd = nil
-                hasLoaded = false
-            }
         }
     #endif
     }

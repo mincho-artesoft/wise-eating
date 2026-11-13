@@ -1,4 +1,7 @@
 import SwiftUI
+#if !targetEnvironment(macCatalyst)
+import AppTrackingTransparency
+#endif
 #if canImport(GoogleMobileAds) && canImport(UserMessagingPlatform)
 import GoogleMobileAds
 import UserMessagingPlatform
@@ -22,8 +25,13 @@ final class AdsConsentManager: ObservableObject {
     func prepareAds() async {
         #if canImport(GoogleMobileAds) && canImport(UserMessagingPlatform)
         guard AdsConfiguration.shouldShowAds,
-              UIApplication.shared.applicationState == .active,
-              !isPreparing else { return }
+              UIApplication.shared.applicationState == .active else { return }
+        if isPreparing {
+            while isPreparing {
+                try? await Task.sleep(nanoseconds: 100_000_000)
+            }
+            return
+        }
         isPreparing = true
         defer { isPreparing = false }
         print("[Ads] Preparing ads for Base plan.")
@@ -41,7 +49,33 @@ final class AdsConsentManager: ObservableObject {
             }
         }
 
+        await requestTrackingIfAllowed()
         await startAdsIfAllowed()
+        #endif
+    }
+
+    private func requestTrackingIfAllowed() async {
+        #if !targetEnvironment(macCatalyst) && canImport(UserMessagingPlatform)
+        guard ConsentInformation.shared.canRequestAds else { return }
+        guard ATTrackingManager.trackingAuthorizationStatus == .notDetermined else { return }
+
+        let gdprApplies = UserDefaults.standard.integer(forKey: "IABTCF_gdprApplies") == 1
+        if gdprApplies,
+           let purposeConsents = UserDefaults.standard.string(forKey: "IABTCF_PurposeConsents"),
+           purposeConsents.hasPrefix("0") {
+            return
+        }
+
+        for _ in 0..<60 {
+            if UIApplication.shared.applicationState == .active { break }
+            try? await Task.sleep(nanoseconds: 250_000_000)
+        }
+        guard UIApplication.shared.applicationState == .active,
+              ATTrackingManager.trackingAuthorizationStatus == .notDetermined else { return }
+
+        try? await Task.sleep(nanoseconds: 350_000_000)
+        guard UIApplication.shared.applicationState == .active else { return }
+        _ = await ATTrackingManager.requestTrackingAuthorization()
         #endif
     }
 

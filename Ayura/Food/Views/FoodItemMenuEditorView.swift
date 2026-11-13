@@ -160,7 +160,7 @@ struct FoodItemMenuEditorView: View {
         isSearchFieldFocused: FocusState<Bool>.Binding,
         isAIInit: Bool? = false
     ) {
-        self.isAIInit = isAIInit!
+        self._isAIInit = State(initialValue: isAIInit ?? false)
         self._isSearchFieldFocused = isSearchFieldFocused
         self.dubFood  = dubFood
         self.food     = food

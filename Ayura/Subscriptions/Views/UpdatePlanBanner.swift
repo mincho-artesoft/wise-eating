@@ -108,22 +108,18 @@ struct UpdatePlanBanner: View {
         .padding(.bottom, 8)
     }
 
-    // MARK: - Ad Banner
+    // MARK: - Ad Banner (Upgraded to Native Ad Card)
     private var adBannerContent: some View {
-        HStack(spacing: 0) {
-            BannerAdView(adsBool: $isAdLoaded, bucket: .small)
-                .frame(width: 320, height: 50)
-            closeButton
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 6)
-        .background(
-            RoundedRectangle(cornerRadius: 20)
-                .fill(.ultraThinMaterial)
-                .environment(\.colorScheme, effectManager.appColorScheme)
-        )
-        .padding(.horizontal)
-        .padding(.bottom, 8)
+        BannerAdView(adsBool: $isAdLoaded, bucket: .large)
+            .frame(maxWidth: .infinity)
+            .frame(height: 136)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .overlay(
+                closeButton,
+                alignment: .topTrailing
+            )
+            .padding(.horizontal)
+            .padding(.bottom, 8)
     }
 
     // MARK: - Close Button

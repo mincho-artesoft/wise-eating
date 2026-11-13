@@ -30,12 +30,14 @@ final class NativeAdLoader: NSObject, ObservableObject, AdLoaderDelegate, Native
         
         let multipleAdsOptions = MultipleAdsAdLoaderOptions()
         multipleAdsOptions.numberOfAds = 1
+        let mediaOptions = NativeAdMediaAdLoaderOptions()
+        mediaOptions.mediaAspectRatio = .any
         
         adLoader = AdLoader(
             adUnitID: adUnitID,
             rootViewController: rootVC,
             adTypes: [.native],
-            options: [multipleAdsOptions]
+            options: [multipleAdsOptions, mediaOptions]
         )
         adLoader?.delegate = self
         
@@ -50,6 +52,7 @@ final class NativeAdLoader: NSObject, ObservableObject, AdLoaderDelegate, Native
         
         Task { @MainActor in
             guard AdsConfiguration.canRequestAds else { return }
+            safeAd.ad.rootViewController = UIApplication.shared.topMostViewController
             print("✅ [Native] Ad received directly.")
             withAnimation {
                 // Разопаковаме я на главната нишка
