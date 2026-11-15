@@ -24,6 +24,13 @@ enum ReviewManager {
     private static let installDateKey  = "rm_installDate"
     private static let launchCountKey  = "rm_launchCount"
     private static let lastPromptKey   = "rm_lastPromptDate"
+    private static var lastPromptTriggerAt: Date?
+
+    /// Prevents AppOpenAd from covering the system review dialog right after it is requested.
+    static var shouldPauseAppOpenAds: Bool {
+        guard let lastPromptTriggerAt else { return false }
+        return Date().timeIntervalSince(lastPromptTriggerAt) < 30
+    }
 
     // MARK: - Public API
 
@@ -67,6 +74,7 @@ enum ReviewManager {
                 return
         }
 
+        lastPromptTriggerAt = Date()
         Task {
             print("⭐ [ReviewManager] Calling requestReview(in:)…")
             if #available(iOS 18.0, *) {

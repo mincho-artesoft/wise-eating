@@ -1,13 +1,10 @@
 import SwiftUI
-#if !targetEnvironment(macCatalyst)
-import AppTrackingTransparency
-#endif
 #if !targetEnvironment(macCatalyst) && canImport(GoogleMobileAds) && canImport(UserMessagingPlatform)
 import GoogleMobileAds
 import UserMessagingPlatform
 #endif
 
-/// Owns UMP consent, ATT prompt ordering, and Google Mobile Ads SDK startup.
+/// Owns UMP consent and Google Mobile Ads SDK startup (non-tracking mode matching App Privacy).
 @MainActor
 final class AdsConsentManager: ObservableObject {
     static let shared = AdsConsentManager()
@@ -55,33 +52,7 @@ final class AdsConsentManager: ObservableObject {
             }
         }
 
-        await requestTrackingIfAllowed()
         await startAdsIfAllowed()
-        #endif
-    }
-
-    private func requestTrackingIfAllowed() async {
-        #if !targetEnvironment(macCatalyst) && canImport(UserMessagingPlatform)
-        guard ConsentInformation.shared.canRequestAds else { return }
-        guard ATTrackingManager.trackingAuthorizationStatus == .notDetermined else { return }
-
-        let gdprApplies = UserDefaults.standard.integer(forKey: "IABTCF_gdprApplies") == 1
-        if gdprApplies,
-           let purposeConsents = UserDefaults.standard.string(forKey: "IABTCF_PurposeConsents"),
-           purposeConsents.hasPrefix("0") {
-            return
-        }
-
-        for _ in 0..<60 {
-            if UIApplication.shared.applicationState == .active { break }
-            try? await Task.sleep(nanoseconds: 250_000_000)
-        }
-        guard UIApplication.shared.applicationState == .active,
-              ATTrackingManager.trackingAuthorizationStatus == .notDetermined else { return }
-
-        try? await Task.sleep(nanoseconds: 350_000_000)
-        guard UIApplication.shared.applicationState == .active else { return }
-        _ = await ATTrackingManager.requestTrackingAuthorization()
         #endif
     }
 

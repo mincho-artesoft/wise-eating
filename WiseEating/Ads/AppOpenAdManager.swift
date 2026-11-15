@@ -58,6 +58,7 @@ class AppOpenAdManager: NSObject {
     func showAdIfAvailable(forceShow: Bool = false) { // Параметърът forceShow вече не е нужен, но можем да го оставим за съвместимост
         guard AdsConsentManager.shouldShowAds,
               AdsConsentManager.shared.canRequestAds,
+              !ReviewManager.shouldPauseAppOpenAds,
               UIApplication.shared.applicationState == .active else { return }
         if isShowingAd { return }
         
