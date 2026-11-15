@@ -201,11 +201,17 @@ struct SubscriptionView: View {
             }
         }
 
-        if let firstSelectable = manager.sortedProducts.first(where: { product in
+        let candidates = manager.sortedProducts.filter { product in
             categoryMatches(product)
             && manager.canPurchase(product)
             && !manager.purchasedProductIDs.contains(product.id)
+        }
+
+        if let trialOrYearly = candidates.first(where: {
+            $0.subscription?.introductoryOffer != nil || $0.subscription?.subscriptionPeriod.unit == .year
         }) {
+            selectedProductID = trialOrYearly.id
+        } else if let firstSelectable = candidates.first {
             selectedProductID = firstSelectable.id
         } else {
             selectedProductID = manager.sortedProducts.first(where: categoryMatches)?.id

@@ -1202,9 +1202,8 @@ struct RootView: View {
         // Отваряме долното меню на таб "Subscriptions"
         selectedDraggableMenuTab = .subscriptions
         
-        // 👇 Тук приемам, че имаш case .removeAds в SubscriptionCategory
-        // Ако името е друго – смени го с твоето.
-        selectedSubscriptionCategory = .removeAds
+        // Фокусираме основния план Advanced (с 7-дневен Free Trial и без реклами) при първо отваряне
+        selectedSubscriptionCategory = .advance
         
         withAnimation {
             profilesMenuState = .collapsed

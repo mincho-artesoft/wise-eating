@@ -26,6 +26,7 @@ final class InterstitialAdManager: NSObject {
     var isReady: Bool {
         AdsConsentManager.shouldShowAds
             && AdsConsentManager.shared.canRequestAds
+            && !ReviewManager.shouldPauseAppOpenAds
             && !FullScreenAdPresentation.isShowing
             && interstitialAd != nil
     }
@@ -59,6 +60,7 @@ final class InterstitialAdManager: NSObject {
     func showIfAvailable(onDismiss: @escaping () -> Void) {
         guard AdsConsentManager.shouldShowAds,
               AdsConsentManager.shared.canRequestAds,
+              !ReviewManager.shouldPauseAppOpenAds,
               UIApplication.shared.applicationState == .active,
               let ad = interstitialAd,
               let root = keyWindowRootViewController(),
