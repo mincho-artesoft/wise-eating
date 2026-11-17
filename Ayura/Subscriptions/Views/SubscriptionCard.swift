@@ -8,6 +8,7 @@ struct SubscriptionCard: View {
     let expirationDate: Date?
     let action: () -> Void
     
+    @ObservedObject private var manager = SubscriptionManager.shared
     @ObservedObject private var effectManager = EffectManager.shared
 
     var body: some View {
@@ -16,10 +17,16 @@ struct SubscriptionCard: View {
                 VStack(alignment: .leading, spacing: 5) {
                     Text(product.periodUnitOnly)
                         .font(.headline)
+                    if product.id.hasSuffix(".yearly"),
+                       let monthly = manager.products.first(where: { $0.id == String(product.id.dropLast(7)) }),
+                       monthly.price > 0, monthly.priceFormatStyle.currencyCode == product.priceFormatStyle.currencyCode {
+                        let savings = Int((1 - NSDecimalNumber(decimal: product.price / (monthly.price * 12)).doubleValue) * 100)
+                        if savings > 0 { Text(String(format: String(localized: "Save %lld%% vs monthly"), Int64(savings))).font(.caption.bold()) }
+                    }
                     Text(product.displayPrice)
                         .font(.title2.weight(.semibold))
                     
-                    if !isActive, let intro = product.subscription?.introductoryOffer {
+                    if !isActive, manager.eligibleTrialIDs.contains(product.id), let intro = product.subscription?.introductoryOffer {
                         let plural = intro.period.value > 1
                         let unit = intro.period.unit.noun(plural: plural).lowercased()
                         Text("\(intro.period.value) \(unit) free")

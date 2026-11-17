@@ -34,37 +34,27 @@ struct AyurvedaAsanaYogaApp: App {
     
     @AppStorage("isFirstAppLaunch") private var isFirstAppLaunch: Bool = true
     
-    private let database = DatabaseSetup.createContainer()
+    @StateObject private var bootstrap = DatabaseBootstrapController()
+    private var database: DatabaseLaunchState { bootstrap.database }
     private var notificationDelegate = NotificationDelegate()
     
-    init() {
-            guard let container = database.container else {
-                return
-            }
-            // --- Common Logic ---
-            GlobalState.modelContext = container.mainContext
-            do {
-                try CatalogPreferenceStore.shared.load(context: container.mainContext)
-            } catch {
-                print("⚠️ Could not load catalogue preferences: \(error)")
-            }
-            
-            Task { @MainActor in GlobalState.updateAIAvailability() }
-            UNUserNotificationCenter.current().delegate = notificationDelegate
-            if Self.isIsolatedSmokeTest {
-                print("SMOKE_TEST|APP|isolated-launch-mode")
-                return
-            }
-            AIManager.shared.setup(container: container)
-            Task { @MainActor in await CalendarViewModel.shared.ensureSharedShoppingListCalendarExists() }
+    init() { AyurvedaAsanaYogaLaunchProbe.event("app-init") }
 
-            // Consent and ad SDK startup run after the root view is visible.
-
-        }
-    
     var body: some Scene {
         WindowGroup {
-            if let container = database.container {
+            Group {
+            if bootstrap.isPreparing {
+                ZStack {
+                    ThemeBackgroundView().ignoresSafeArea()
+                    VStack(spacing: 20) {
+                        Text("Ayurveda & Asana Yoga").font(.title2.bold())
+                        ProgressView()
+                        Text("Preparing offline Ayurveda & Yoga library...")
+                            .multilineTextAlignment(.center)
+                    }.padding(32)
+                }
+                .onAppear { AyurvedaAsanaYogaLaunchProbe.event("bootstrap-view-visible") }
+            } else if let container = database.container {
                 RootLauncher(container: container)
                     .modelContainer(container)
                     .preferredColorScheme(effectManager.appColorScheme)
@@ -132,7 +122,64 @@ struct AyurvedaAsanaYogaApp: App {
                 )
                 .preferredColorScheme(effectManager.appColorScheme)
             }
+            }
+            .task { await bootstrap.start(isolated: Self.isIsolatedSmokeTest) }
+            .onAppear { UNUserNotificationCenter.current().delegate = notificationDelegate }
         }
+    }
+}
+
+@MainActor
+final class DatabaseBootstrapController: ObservableObject {
+    enum Phase {
+        case preparing(status: String)
+        case ready(ModelContainer, isRecoveryMode: Bool)
+        case failed(diagnostic: String)
+    }
+    @Published private(set) var phase: Phase = .preparing(status: "Preparing offline Ayurveda & Yoga library...")
+    var isPreparing: Bool { if case .preparing = phase { return true }; return false }
+    var database: DatabaseLaunchState {
+        switch phase {
+        case .preparing(let status): return .unavailable(status)
+        case .ready(let container, let recovery): return .ready(container, isRecoveryMode: recovery)
+        case .failed(let diagnostic): return .unavailable(diagnostic)
+        }
+    }
+    private var started = false
+
+    func start(isolated: Bool) async {
+        guard !started else { return }
+        started = true
+        // Profile only: a main-actor heartbeat exposes blocking intervals during
+        // first-install preparation without changing normal launch behaviour.
+        let responsivenessProbe = Task { @MainActor in
+            guard ProcessInfo.processInfo.arguments.contains("-ayurvedaasanayogaLaunchProfile") else { return }
+            while !Task.isCancelled {
+                AyurvedaAsanaYogaLaunchProbe.event("bootstrap-main-responsive")
+                do { try await Task.sleep(for: .milliseconds(100)) } catch { return }
+            }
+        }
+        defer { responsivenessProbe.cancel() }
+        await Task.yield()
+        let result = await DatabaseSetup.createContainer()
+        if let container = result.container {
+            GlobalState.modelContext = container.mainContext
+            do { try CatalogPreferenceStore.shared.load(context: container.mainContext) }
+            catch { print("Could not load catalogue preferences: \(error)") }
+            GlobalState.updateAIAvailability()
+            if isolated {
+                print("SMOKE_TEST|APP|isolated-launch-mode")
+            } else {
+                AIManager.shared.setup(container: container)
+                Task { await CalendarViewModel.shared.ensureSharedShoppingListCalendarExists() }
+            }
+        }
+        if let container = result.container {
+            phase = .ready(container, isRecoveryMode: result.isRecoveryMode)
+        } else {
+            phase = .failed(diagnostic: result.diagnostic ?? "Database unavailable")
+        }
+        AyurvedaAsanaYogaLaunchProbe.event("bootstrap-ready")
     }
 }
 

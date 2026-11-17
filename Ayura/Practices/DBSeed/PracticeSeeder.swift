@@ -1,7 +1,6 @@
 import Foundation
 import SwiftData
 
-@MainActor
 enum PracticeSeeder {
     struct Result {
         let practiceCount: Int

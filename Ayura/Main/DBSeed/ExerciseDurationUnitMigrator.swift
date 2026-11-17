@@ -1,7 +1,6 @@
 import Foundation
 import SwiftData
 
-@MainActor
 enum ExerciseDurationUnitMigrator {
     private static let migrationVersionKey = "exerciseDurationStorageVersion"
     private static let secondsStorageVersion = 1

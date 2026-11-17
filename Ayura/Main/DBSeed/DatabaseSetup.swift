@@ -55,12 +55,12 @@ struct DatabaseSetup {
     )
     private static let recoveryModeKey =
         "AyurvedaAsanaYoga_DatabaseRecoveryMode_v1"
-    private static let recoveryStoreName =
+    nonisolated private static let recoveryStoreName =
         "AyurvedaAsanaYogaRecovery.store"
 
     /// Database creation is intentionally non-fatal. A SwiftData/Core Data
     /// error must never terminate the process before SwiftUI can show a frame.
-    static func createContainer() -> DatabaseLaunchState {
+    static func createContainer() async -> DatabaseLaunchState {
         AyurvedaAsanaYogaLaunchProbe.event("database-setup-begin")
         do {
             let appSupportURL = try FileManager.default.url(
@@ -73,7 +73,7 @@ struct DatabaseSetup {
 
             if UserDefaults.standard.bool(forKey: recoveryModeKey) {
                 do {
-                    let container = try makeRecoveryContainer(
+                    let container = try await makeRecoveryContainer(
                         in: appSupportURL
                     )
                     CatalogReferenceResolver.reset()
@@ -87,8 +87,10 @@ struct DatabaseSetup {
                 }
             }
 
+            let hadUserStore = FileManager.default.fileExists(atPath:
+                appSupportURL.appendingPathComponent("AyurvedaAsanaYoga.store").path)
             do {
-                let container = try makePrimaryContainer(in: appSupportURL)
+                let container = try await makePrimaryContainer(in: appSupportURL)
                 return .ready(container)
             } catch {
                 let primaryError = error
@@ -96,9 +98,15 @@ struct DatabaseSetup {
                     "Primary database startup failed: \(String(reflecting: primaryError), privacy: .public)"
                 )
                 print("DATABASE_RECOVERY|PRIMARY_FAILED|\(primaryError)")
+                // Never silently replace an installed user's database with a
+                // fresh catalogue. Preserve it and surface a recoverable error.
+                guard !hadUserStore else {
+                    return unavailableState(primaryError: primaryError,
+                        recoveryError: DatabaseRecoveryError.existingUserDataPreserved)
+                }
 
                 do {
-                    let container = try makeRecoveryContainer(
+                    let container = try await makeRecoveryContainer(
                         in: appSupportURL
                     )
                     CatalogReferenceResolver.reset()
@@ -126,64 +134,49 @@ struct DatabaseSetup {
 
     private static func makePrimaryContainer(
         in appSupportURL: URL
-    ) throws -> ModelContainer {
+    ) async throws -> ModelContainer {
             // The existing path becomes the writable user store. Keeping the
             // path lets an installed app migrate in place without losing data.
             let userStoreURL = appSupportURL.appendingPathComponent(
                 "AyurvedaAsanaYoga.store"
             )
-            let hadLegacyStore = FileManager.default.fileExists(
-                atPath: userStoreURL.path
-            )
-            removeObsoleteTemplateStore(from: appSupportURL)
-
-            AyurvedaAsanaYogaLaunchProbe.event("preseed-check-begin")
-            let preparedCatalog = try CatalogStoreManager.prepareCatalog(
-                in: appSupportURL
-            )
-            let catalogStoreIdentifier = try CatalogStoreManager.storeIdentifier(
-                at: preparedCatalog.storeURL
-            )
-            CatalogReferenceResolver.configure(
-                catalogStoreIdentifier: catalogStoreIdentifier
-            )
-
-            let separation = try LegacyStoreSeparator.prepareUserStore(
-                at: userStoreURL,
-                catalogStoreURL: preparedCatalog.storeURL,
-                manifest: preparedCatalog.manifest,
-                hadLegacyStore: hadLegacyStore
-            )
-            if separation.performedMigration {
-                print(
-                    "✅ Catalog/user separation complete: "
-                        + "food refs=\(separation.migratedFoodReferences), "
-                        + "exercise refs=\(separation.migratedExerciseReferences), "
-                        + "preferences=\(separation.preservedPreferences), "
-                        + "removed catalog rows=\(separation.removedCatalogObjects)."
+            // This worker owns its temporary SwiftData contexts; only paths,
+            // the manifest and a store identifier cross back to the UI actor.
+            let prepared = try await Task.detached(priority: .userInitiated) {
+                let hadLegacyStore = FileManager.default.fileExists(atPath: userStoreURL.path)
+                removeObsoleteTemplateStore(from: appSupportURL)
+                AyurvedaAsanaYogaLaunchProbe.event("preseed-check-begin")
+                let catalog = try CatalogStoreManager.prepareCatalog(in: appSupportURL)
+                let identifier = try CatalogStoreManager.storeIdentifier(at: catalog.storeURL)
+                let separation = try LegacyStoreSeparator.prepareUserStore(
+                    at: userStoreURL, catalogStoreURL: catalog.storeURL,
+                    manifest: catalog.manifest, hadLegacyStore: hadLegacyStore
                 )
-            } else if preparedCatalog.installedNewCatalog {
-                print("✅ Catalog replaced atomically; user store was not reseeded.")
-            } else {
-                print("🏁 Catalog and user store are already current.")
-            }
-            AyurvedaAsanaYogaLaunchProbe.event("preseed-check-end")
+                print("CATALOG_PREPARED|migrated=\(separation.performedMigration)|new=\(catalog.installedNewCatalog)")
+                AyurvedaAsanaYogaLaunchProbe.event("preseed-check-end")
+                return (catalog, identifier)
+            }.value
+            let preparedCatalog = prepared.0
+            CatalogReferenceResolver.configure(catalogStoreIdentifier: prepared.1)
 
             AyurvedaAsanaYogaLaunchProbe.event("model-container-open-begin")
-            let container = try CombinedStoreFactory.makeContainer(
+            let container = try await Task.detached(priority: .userInitiated) {
+                try CombinedStoreFactory.makeContainer(
                 schema: DatabaseSchema.combined,
                 userSchema: DatabaseSchema.user,
                 catalogSchema: DatabaseSchema.catalog,
                 userStoreURL: userStoreURL,
                 catalogStoreURL: preparedCatalog.storeURL
-            )
+                )
+            }.value
             // The new store is now proven mountable. Older immutable versions
             // are no longer needed and can otherwise consume hundreds of MB
             // per application update.
-            CatalogStoreManager.removeObsoleteVersions(
-                in: appSupportURL,
-                keeping: preparedCatalog.storeURL
-            )
+            await Task.detached(priority: .utility) {
+                CatalogStoreManager.removeObsoleteVersions(
+                    in: appSupportURL, keeping: preparedCatalog.storeURL
+                )
+            }.value
             AyurvedaAsanaYogaLaunchProbe.event("model-container-open-end")
             return container
     }
@@ -194,12 +187,14 @@ struct DatabaseSetup {
     /// routing. The primary user store is never deleted or modified here.
     private static func makeRecoveryContainer(
         in appSupportURL: URL
-    ) throws -> ModelContainer {
+    ) async throws -> ModelContainer {
         let fileManager = FileManager.default
         let storeURL = appSupportURL.appendingPathComponent(recoveryStoreName)
         let storeExists = fileManager.fileExists(atPath: storeURL.path)
 
         if !storeExists {
+            try await Task.detached(priority: .userInitiated) {
+                let fileManager = FileManager.default
             let stagingDirectory = appSupportURL.appendingPathComponent(
                 ".database-recovery-\(UUID().uuidString)",
                 isDirectory: true
@@ -218,6 +213,8 @@ struct DatabaseSetup {
                 temporaryDirectory: stagingDirectory
             )
             try fileManager.moveItem(at: stagedStoreURL, to: storeURL)
+
+            }.value
         }
 
         // This is the configuration name used by the original monolithic
@@ -259,7 +256,7 @@ struct DatabaseSetup {
         return .unavailable(diagnostic)
     }
 
-    private static func removeObsoleteTemplateStore(from directory: URL) {
+    nonisolated private static func removeObsoleteTemplateStore(from directory: URL) {
         let baseName = "AyurvedaAsanaYogaTemplates.store"
         let fileManager = FileManager.default
         for filename in [baseName, baseName + "-wal", baseName + "-shm"] {
@@ -277,9 +274,12 @@ struct DatabaseSetup {
 
 private enum DatabaseRecoveryError: LocalizedError {
     case preseedIsEmpty
+    case existingUserDataPreserved
 
     var errorDescription: String? {
         switch self {
+        case .existingUserDataPreserved:
+            return "Your saved database has been preserved. Please retry or contact support; no replacement database was created."
         case .preseedIsEmpty:
             return "The recovery database did not contain its bundled catalogue."
         }

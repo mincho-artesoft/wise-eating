@@ -1,0 +1,5388 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "Preparing offline Ayurveda & Yoga library...": {
+      "extractionState": "manual",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جارٍ إعداد مكتبة الأيورفيدا واليوجا غير المتصلة بالإنترنت..."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Подготвя се офлайн библиотека за аюрведа и йога..."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "অফলাইন আয়ুর্বেদ ও যোগ লাইব্রেরি প্রস্তুত করা হচ্ছে..."
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "S'està preparant la biblioteca d'ayurveda i ioga fora de línia..."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Příprava offline knihovny ájurvédy a jógy..."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forbereder offline Ayurveda & Yoga bibliotek..."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vorbereitung der Offline-Ayurveda- und Yoga-Bibliothek ..."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Προετοιμασία βιβλιοθήκης Ayurveda & Yoga εκτός σύνδεσης..."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preparing offline Ayurveda & Yoga library..."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preparando biblioteca fuera de línea de Ayurveda y Yoga..."
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preparando biblioteca fuera de línea de Ayurveda y Yoga..."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Valmistellaan offline-Ayurveda & Yoga -kirjastoa..."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Préparation d'une bibliothèque Ayurveda et Yoga hors ligne..."
+          }
+        },
+        "fr-CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Préparation d'une bibliothèque Ayurveda et Yoga hors ligne..."
+          }
+        },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ઑફલાઇન આયુર્વેદ અને યોગ લાઇબ્રેરી તૈયાર કરી રહ્યાં છીએ..."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מכין ספריית איורוודה ויוגה במצב לא מקוון..."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ऑफ़लाइन आयुर्वेद और योग पुस्तकालय तैयार किया जा रहा है..."
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Priprema izvanmrežne zbirke Ayurveda & Yoga..."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Offline Ayurveda & Yoga könyvtár előkészítése..."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mempersiapkan perpustakaan Ayurveda & Yoga offline..."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preparazione della libreria offline di Ayurveda e Yoga..."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オフライン アーユルヴェーダ & ヨガ ライブラリを準備中..."
+          }
+        },
+        "kk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Офлайн Ayurveda және йога кітапханасы дайындалуда..."
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ಆಫ್‌ಲೈನ್ ಆಯುರ್ವೇದ ಮತ್ತು ಯೋಗ ಗ್ರಂಥಾಲಯವನ್ನು ಸಿದ್ಧಪಡಿಸಲಾಗುತ್ತಿದೆ..."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "오프라인 아유르베다 및 요가 라이브러리 준비 중..."
+          }
+        },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ഓഫ്‌ലൈൻ ആയുർവേദ, യോഗ ലൈബ്രറി തയ്യാറാക്കുന്നു..."
+          }
+        },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ऑफलाइन आयुर्वेद आणि योग लायब्ररी तयार करत आहे..."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menyediakan perpustakaan Ayurveda & Yoga luar talian..."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forbereder offline Ayurveda- og Yoga-bibliotek..."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Offline Ayurveda- en yogabibliotheek voorbereiden..."
+          }
+        },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ଅଫଲାଇନ୍ ଆୟୁର୍ବେଦ ଏବଂ ଯୋଗ ଲାଇବ୍ରେରୀ ପ୍ରସ୍ତୁତ କରୁଛି ..."
+          }
+        },
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ਔਫਲਾਈਨ ਆਯੁਰਵੇਦ ਅਤੇ ਯੋਗਾ ਲਾਇਬ੍ਰੇਰੀ ਤਿਆਰ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ..."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przygotowywanie biblioteki ajurwedy i jogi offline..."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preparando biblioteca offline de Ayurveda e Yoga..."
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preparar biblioteca offline de Ayurveda e Yoga..."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se pregătește biblioteca offline Ayurveda și Yoga..."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Подготовка автономной библиотеки Аюрведы и йоги..."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pripravuje sa offline knižnica ajurvédy a jogy..."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Priprava knjižnice ajurvede in joge brez povezave ..."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Förbereder offline Ayurveda & Yoga-bibliotek..."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஆஃப்லைனில் ஆயுர்வேதம் & யோகா நூலகத்தைத் தயாரிக்கிறது..."
+          }
+        },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ఆఫ్‌లైన్ ఆయుర్వేద & యోగా లైబ్రరీని సిద్ధం చేస్తోంది..."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "กำลังเตรียมห้องสมุดอายุรเวชและโยคะออฟไลน์..."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çevrimdışı Ayurveda ve Yoga kütüphanesi hazırlanıyor..."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Підготовка автономної бібліотеки аюрведи та йоги..."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "آف لائن آیوروید اور یوگا لائبریری کی تیاری..."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang chuẩn bị ngoại tuyến thư viện Ayurveda & Yoga..."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在準備離線阿育吠陀和瑜伽圖書館..."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在准备离线阿育吠陀和瑜伽图书馆..."
+          }
+        }
+      }
+    },
+    "Save %lld%% vs monthly": {
+      "extractionState": "manual",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يمكنك توفير %1$lld%% مقارنةً شهريًا"
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Спестете %1$lld%% спрямо месечно"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld%% বনাম মাসিক সংরক্ষণ করুন"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estalvieu %1$lld%% respecte al mes"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ušetřete %1$lld%% oproti měsíčně"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spar %1$lld%% vs. månedligt"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sparen Sie %1$lld%% im Vergleich zu monatlich"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Εξοικονομήστε %1$lld%% έναντι μηνιαίας"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save %lld%% vs monthly"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ahorre %1$lld%% en comparación con el mes"
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ahorre %1$lld%% en comparación con el mes"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Säästä %1$lld%% kuukausittain"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Économisez %1$lld%% par rapport au mois"
+          }
+        },
+        "fr-CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Économisez %1$lld%% par rapport au mois"
+          }
+        },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld%% વિ માસિક સાચવો"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חסוך %1$lld%% לעומת חודשי"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld%% बनाम मासिक बचत करें"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uštedite %1$lld%% u odnosu na mjesečnu"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Takarítson meg %1$lld%% havi összeget"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hemat %1$lld%% vs bulanan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Risparmia %1$lld%% rispetto al mese"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "毎月と比較して %1$lld%% を節約"
+          }
+        },
+        "kk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld%% және ай сайын үнемдеңіз"
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ಮಾಸಿಕವಾಗಿ %1$lld%% ಉಳಿಸಿ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "월별 대비 %1$lld%% 절약"
+          }
+        },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "പ്രതിമാസം %1$lld%% സംരക്ഷിക്കുക"
+          }
+        },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld%% वि मासिक बचत करा"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jimat %1$lld%% lwn bulanan"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spar %1$lld%% kontra månedlig"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bespaar %1$lld%% vergeleken met maandelijks"
+          }
+        },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ମାସିକ %1$lld %% ବନାମ ସଞ୍ଚୟ କରନ୍ତୁ |"
+          }
+        },
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld%% ਬਨਾਮ ਮਹੀਨਾਵਾਰ ਬਚਾਓ"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaoszczędź %1$lld%% w porównaniu z miesięcznie"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Economize %1$lld%% versus mensalmente"
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Poupe %1$lld%% versus mensalmente"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Economisiți %1$lld%% față de lunar"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сэкономьте %1$lld%% по сравнению с ежемесячным"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ušetrite %1$lld%% v porovnaní s mesiacom"
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prihranite %1$lld%% v primerjavi z mesečnim"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spara %1$lld%% jämfört med månadsvis"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மாதந்தோறும் %1$lld%% சேமியுங்கள்"
+          }
+        },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld%% vs నెలవారీ ఆదా చేసుకోండి"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ประหยัด %1$lld%% เทียบกับรายเดือน"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aylık olarak %1$lld%% tasarruf edin"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Заощаджуйте %1$lld%% порівняно з місячними"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld%% بمقابلہ ماہانہ محفوظ کریں۔"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiết kiệm %1$lld%% so với hàng tháng"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "與每月相比節省 %1$lld%%"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "与每月相比节省 %1$lld%%"
+          }
+        }
+      }
+    },
+    "Monthly AI budget": {
+      "extractionState": "manual",
+      "localizations": {
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ਮਹੀਨਾਵਾਰ AI ਬਜਟ"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bugetul lunar AI"
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Месечен бюджет за AI"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Presupuesto mensual de IA"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anggaran AI bulanan"
+          }
+        },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "പ്രതിമാസ AI ബജറ്റ്"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மாதாந்திர AI பட்ஜெட்"
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Presupuesto mensual de IA"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Miesięczny budżet AI"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "মাসিক এআই বাজেট"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Budget mensile dell'IA"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ماہانہ AI بجٹ"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pressupost mensual d'IA"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ngân sách AI hàng tháng"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monthly AI budget"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Månedlig AI-budsjett"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mesačný rozpočet AI"
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mesečni proračun za AI"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aylık yapay zeka bütçesi"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Měsíční rozpočet AI"
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orçamento mensal de IA"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Місячний бюджет ШІ"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Månedligt AI-budget"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Budget mensuel de l'IA"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belanjawan AI bulanan"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Μηνιαίος προϋπολογισμός AI"
+          }
+        },
+        "fr-CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Budget mensuel de l'IA"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mjesečni proračun za AI"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Havi AI költségvetés"
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ಮಾಸಿಕ AI ಬಜೆಟ್"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monatliches KI-Budget"
+          }
+        },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मासिक AI बजेट"
+          }
+        },
+        "kk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ай сайынғы AI бюджеті"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मासिक एआई बजट"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "งบประมาณ AI รายเดือน"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maandelijks AI-budget"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orçamento mensal de IA"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Månatlig AI-budget"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "תקציב AI חודשי"
+          }
+        },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ମାସିକ AI ବଜେଟ୍ |"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ежемесячный бюджет ИИ"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每月人工智慧預算"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ميزانية الذكاء الاصطناعي الشهرية"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每月人工智能预算"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "월간 AI 예산"
+          }
+        },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "માસિક AI બજેટ"
+          }
+        },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "నెలవారీ AI బడ్జెట్"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kuukausittainen AI-budjetti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "月間 AI 予算"
+          }
+        }
+      }
+    },
+    "Monthly and yearly subscriptions renew automatically unless canceled at least 24 hours before the current period ends. Payment is charged to your Apple Account. Lifetime is a one-time purchase with no subscription.": {
+      "extractionState": "manual",
+      "localizations": {
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ਮਾਸਿਕ ਅਤੇ ਸਲਾਨਾ ਗਾਹਕੀ ਆਪਣੇ ਆਪ ਰੀਨਿਊ ਹੋ ਜਾਂਦੀ ਹੈ ਜਦੋਂ ਤੱਕ ਮੌਜੂਦਾ ਮਿਆਦ ਖਤਮ ਹੋਣ ਤੋਂ ਘੱਟੋ-ਘੱਟ 24 ਘੰਟੇ ਪਹਿਲਾਂ ਰੱਦ ਨਹੀਂ ਕੀਤੀ ਜਾਂਦੀ। ਭੁਗਤਾਨ ਤੁਹਾਡੇ Apple ਖਾਤੇ ਤੋਂ ਲਿਆ ਜਾਂਦਾ ਹੈ। ਲਾਈਫਟਾਈਮ ਬਿਨਾਂ ਕਿਸੇ ਗਾਹਕੀ ਦੇ ਇੱਕ ਵਾਰ ਦੀ ਖਰੀਦ ਹੈ।"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abonamentele lunare și anuale se reînnoiesc automat, cu excepția cazului în care sunt anulate cu cel puțin 24 de ore înainte de încheierea perioadei curente. Plata este debitată din contul dvs. Apple. Viața este o achiziție unică, fără abonament."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Месечните и годишните абонаменти се подновяват автоматично, освен ако не бъдат анулирани поне 24 часа преди края на текущия период. Плащането се таксува от вашия акаунт в Apple. Lifetime е еднократна покупка без абонамент."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las suscripciones mensuales y anuales se renuevan automáticamente a menos que se cancelen al menos 24 horas antes de que finalice el período actual. El pago se carga a su cuenta Apple. Lifetime es una compra única sin suscripción."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Langganan bulanan dan tahunan diperpanjang secara otomatis kecuali dibatalkan setidaknya 24 jam sebelum periode berjalan berakhir. Pembayaran dibebankan ke Akun Apple Anda. Seumur hidup adalah pembelian satu kali tanpa berlangganan."
+          }
+        },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "നിലവിലെ കാലയളവ് അവസാനിക്കുന്നതിന് 24 മണിക്കൂർ മുമ്പെങ്കിലും റദ്ദാക്കിയില്ലെങ്കിൽ പ്രതിമാസ, വാർഷിക സബ്‌സ്‌ക്രിപ്‌ഷനുകൾ സ്വയമേവ പുതുക്കും. നിങ്ങളുടെ Apple അക്കൗണ്ടിലേക്ക് പേയ്‌മെൻ്റ് ഈടാക്കും. ആജീവനാന്തം സബ്‌സ്‌ക്രിപ്‌ഷനില്ലാത്ത ഒറ്റത്തവണ വാങ്ങലാണ്."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "தற்போதைய காலம் முடிவடைவதற்கு குறைந்தபட்சம் 24 மணிநேரத்திற்கு முன்பு ரத்து செய்யாவிட்டால் மாதாந்திர மற்றும் வருடாந்திர சந்தாக்கள் தானாகவே புதுப்பிக்கப்படும். உங்கள் ஆப்பிள் கணக்கில் கட்டணம் வசூலிக்கப்படுகிறது. வாழ்நாள் என்பது சந்தா இல்லாமல் ஒரு முறை வாங்குவது."
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las suscripciones mensuales y anuales se renuevan automáticamente a menos que se cancelen al menos 24 horas antes de que finalice el período actual. El pago se carga a su cuenta Apple. Lifetime es una compra única sin suscripción."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Subskrypcje miesięczne i roczne odnawiają się automatycznie, chyba że zostaną anulowane co najmniej 24 godziny przed końcem bieżącego okresu. Płatność zostanie pobrana z Twojego konta Apple. Dożywotnia subskrypcja to jednorazowy zakup bez subskrypcji."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "বর্তমান মেয়াদ শেষ হওয়ার কমপক্ষে 24 ঘন্টা আগে বাতিল না হলে মাসিক এবং বার্ষিক সদস্যতা স্বয়ংক্রিয়ভাবে পুনর্নবীকরণ হয়। পেমেন্ট আপনার Apple অ্যাকাউন্টে চার্জ করা হয়। লাইফটাইম হল কোনো সাবস্ক্রিপশন ছাড়াই এককালীন কেনাকাটা।"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gli abbonamenti mensili e annuali si rinnovano automaticamente a meno che non vengano annullati almeno 24 ore prima della fine del periodo corrente. Il pagamento viene addebitato sul tuo account Apple. Lifetime è un acquisto una tantum senza abbonamento."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ماہانہ اور سالانہ سبسکرپشنز خود بخود تجدید ہو جاتی ہیں الا یہ کہ موجودہ مدت ختم ہونے سے کم از کم 24 گھنٹے پہلے منسوخ کر دی جائیں۔ ادائیگی آپ کے Apple اکاؤنٹ سے وصول کی جاتی ہے۔ لائف ٹائم ایک بار کی خریداری ہے جس میں کوئی رکنیت نہیں ہے۔"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les subscripcions mensuals i anuals es renoven automàticament tret que es cancel·lin almenys 24 hores abans que finalitzi el període actual. El pagament es carrega al vostre compte d'Apple. Lifetime és una compra única sense subscripció."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đăng ký hàng tháng và hàng năm sẽ tự động gia hạn trừ khi bị hủy ít nhất 24 giờ trước khi giai đoạn hiện tại kết thúc. Khoản thanh toán được tính vào Tài khoản Apple của bạn. Trọn đời là mua một lần mà không cần đăng ký."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monthly and yearly subscriptions renew automatically unless canceled at least 24 hours before the current period ends. Payment is charged to your Apple Account. Lifetime is a one-time purchase with no subscription."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Månedlige og årlige abonnementer fornyes automatisk med mindre de kanselleres minst 24 timer før gjeldende periode slutter. Betaling belastes Apple-kontoen din. Lifetime er et engangskjøp uten abonnement."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mesačné a ročné predplatné sa automaticky obnovuje, pokiaľ nie je zrušené aspoň 24 hodín pred koncom aktuálneho obdobia. Platba sa účtuje na váš účet Apple. Lifetime je jednorazový nákup bez predplatného."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mesečne in letne naročnine se samodejno obnovijo, razen če jih prekličete vsaj 24 ur pred koncem trenutnega obdobja. Plačilo se zaračuna na vaš račun Apple. Lifetime je enkraten nakup brez naročnine."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aylık ve yıllık abonelikler, cari dönemin bitiminden en az 24 saat önce iptal edilmediği sürece otomatik olarak yenilenir. Ödeme Apple Hesabınızdan tahsil edilir. Ömür boyu abonelik gerektirmeyen tek seferlik bir satın alma işlemidir."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Měsíční a roční předplatné se automaticky obnovuje, pokud není zrušeno alespoň 24 hodin před koncem aktuálního období. Platba je účtována na váš účet Apple. Lifetime je jednorázový nákup bez předplatného."
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As subscrições mensais e anuais são renovadas automaticamente, a menos que sejam canceladas pelo menos 24 horas antes do fim do período em curso. O pagamento é cobrado na sua conta Apple. O Lifetime é uma compra única sem subscrição."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Щомісячні та річні підписки поновлюються автоматично, якщо їх не скасовувати принаймні за 24 години до закінчення поточного періоду. Оплата стягується з вашого облікового запису Apple. Lifetime — це одноразова покупка без передплати."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Månedlige og årlige abonnementer fornyes automatisk, medmindre de annulleres mindst 24 timer før den aktuelle periode slutter. Betalingen debiteres din Apple-konto. Lifetime er et engangskøb uden abonnement."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les abonnements mensuels et annuels se renouvellent automatiquement sauf annulation au moins 24 heures avant la fin de la période en cours. Le paiement est débité de votre compte Apple. Lifetime est un achat unique sans abonnement."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Langganan bulanan dan tahunan diperbaharui secara automatik melainkan dibatalkan sekurang-kurangnya 24 jam sebelum tempoh semasa tamat. Bayaran dicaj ke Akaun Apple anda. Seumur hidup ialah pembelian sekali sahaja tanpa langganan."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Οι μηνιαίες και ετήσιες συνδρομές ανανεώνονται αυτόματα εκτός εάν ακυρωθούν τουλάχιστον 24 ώρες πριν από τη λήξη της τρέχουσας περιόδου. Η πληρωμή χρεώνεται στον λογαριασμό σας Apple. Το Lifetime είναι μια εφάπαξ αγορά χωρίς συνδρομή."
+          }
+        },
+        "fr-CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les abonnements mensuels et annuels se renouvellent automatiquement sauf annulation au moins 24 heures avant la fin de la période en cours. Le paiement est débité de votre compte Apple. Lifetime est un achat unique sans abonnement."
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mjesečne i godišnje pretplate automatski se obnavljaju osim ako se ne otkažu najmanje 24 sata prije završetka tekućeg razdoblja. Plaćanje se naplaćuje s vašeg Apple računa. Lifetime je jednokratna kupnja bez pretplate."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A havi és éves előfizetések automatikusan megújulnak, hacsak nem mondják le legalább 24 órával az aktuális időszak vége előtt. A fizetés az Apple-fiókját terheli. A Lifetime egyszeri vásárlás előfizetés nélkül."
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ಪ್ರಸ್ತುತ ಅವಧಿ ಮುಗಿಯುವ ಕನಿಷ್ಠ 24 ಗಂಟೆಗಳ ಮೊದಲು ರದ್ದುಗೊಳಿಸದ ಹೊರತು ಮಾಸಿಕ ಮತ್ತು ವಾರ್ಷಿಕ ಚಂದಾದಾರಿಕೆಗಳು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ನವೀಕರಿಸಲ್ಪಡುತ್ತವೆ. ನಿಮ್ಮ Apple ಖಾತೆಗೆ ಪಾವತಿಯನ್ನು ವಿಧಿಸಲಾಗುತ್ತದೆ. ಜೀವಮಾನವು ಯಾವುದೇ ಚಂದಾದಾರಿಕೆ ಇಲ್ಲದೆ ಒಂದು-ಬಾರಿಯ ಖರೀದಿಯಾಗಿದೆ."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monats- und Jahresabonnements verlängern sich automatisch, sofern sie nicht mindestens 24 Stunden vor Ablauf des aktuellen Zeitraums gekündigt werden. Die Zahlung wird Ihrem Apple-Konto belastet. Lifetime ist ein einmaliger Kauf ohne Abonnement."
+          }
+        },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मासिक आणि वार्षिक सदस्यता वर्तमान कालावधी संपण्याच्या किमान 24 तास आधी रद्द केल्याशिवाय स्वयंचलितपणे नूतनीकरण होते. पेमेंट तुमच्या Apple खात्यावर शुल्क आकारले जाते. लाइफटाइम ही सदस्यता नसलेली एक-वेळची खरेदी आहे."
+          }
+        },
+        "kk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ағымдағы кезеңнің аяқталуына кемінде 24 сағат қалғанда бас тартылмаса, айлық және жылдық жазылымдар автоматты түрде жаңартылады. Төлем Apple есептік жазбаңыздан алынады. Өмір бойы - жазылусыз бір реттік сатып алу."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मासिक और वार्षिक सदस्यताएँ स्वचालित रूप से नवीनीकृत हो जाती हैं जब तक कि वर्तमान अवधि समाप्त होने से कम से कम 24 घंटे पहले रद्द न कर दी जाए। भुगतान आपके Apple खाते से लिया जाता है। लाइफटाइम बिना किसी सदस्यता के एक बार की खरीदारी है।"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "การสมัครสมาชิกรายเดือนและรายปีจะต่ออายุโดยอัตโนมัติเว้นแต่จะยกเลิกอย่างน้อย 24 ชั่วโมงก่อนช่วงเวลาปัจจุบันจะสิ้นสุดลง การชำระเงินจะถูกหักออกจากบัญชี Apple ของคุณ อายุการใช้งานคือการซื้อครั้งเดียวโดยไม่มีการสมัครสมาชิก"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maand- en jaarabonnementen worden automatisch verlengd, tenzij ze ten minste 24 uur vóór het einde van de huidige periode worden opgezegd. De betaling wordt in rekening gebracht op uw Apple-account. Lifetime is een eenmalige aankoop zonder abonnement."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As assinaturas mensais e anuais são renovadas automaticamente, a menos que sejam canceladas pelo menos 24 horas antes do término do período atual. O pagamento é cobrado em sua conta Apple. Lifetime é uma compra única sem assinatura."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Månads- och årsprenumerationer förnyas automatiskt om de inte avbryts minst 24 timmar innan den aktuella perioden slutar. Betalningen debiteras ditt Apple-konto. Lifetime är ett engångsköp utan prenumeration."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מנויים חודשיים ושנתיים מתחדשים אוטומטית אלא אם בוטלו לפחות 24 שעות לפני סיום התקופה הנוכחית. התשלום מחויב בחשבון Apple שלך. Lifetime היא רכישה חד פעמית ללא מנוי."
+          }
+        },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ସାମ୍ପ୍ରତିକ ଅବଧି ଶେଷ ହେବାର ଅତି କମରେ 24 ଘଣ୍ଟା ପୂର୍ବରୁ ବାତିଲ ନହେବା ପର୍ଯ୍ୟନ୍ତ ମାସିକ ଏବଂ ବାର୍ଷିକ ସଦସ୍ୟତା ସ୍ୱୟଂଚାଳିତ ଭାବରେ ନବୀକରଣ ହୁଏ | ଆପଣଙ୍କ ଆପଲ ଆକାଉଣ୍ଟରେ ଦେୟ ଆଦାୟ କରାଯାଏ | ଆଜୀବନ କ no ଣସି ସଦସ୍ୟତା ବିନା ଏକ ଥର କ୍ରୟ |"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ежемесячные и годовые подписки продлеваются автоматически, если они не отменены по крайней мере за 24 часа до окончания текущего периода. Оплата списывается с вашей учетной записи Apple. Пожизненная покупка — это единоразовая покупка без подписки."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "除非在目前訂閱期結束前至少 24 小時取消，否則按月和按年訂閱會自動續訂。付款將從您的 Apple 帳戶中扣除。終身是一次性購買，無需訂閱。"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يتم تجديد الاشتراكات الشهرية والسنوية تلقائيًا ما لم يتم إلغاؤها قبل 24 ساعة على الأقل من انتهاء الفترة الحالية. يتم فرض الدفع على حساب Apple الخاص بك. مدى الحياة هو عملية شراء لمرة واحدة بدون اشتراك."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "除非在当前订阅期结束前至少 24 小时取消，否则按月和按年订阅会自动续订。付款将从您的 Apple 帐户中扣除。终身是一次性购买，无需订阅。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "월간 및 연간 구독은 현재 기간이 끝나기 최소 24시간 전에 취소하지 않으면 자동으로 갱신됩니다. 결제 금액은 Apple 계정으로 청구됩니다. 평생은 구독 없이 일회성 구매입니다."
+          }
+        },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "માસિક અને વાર્ષિક સબ્સ્ક્રિપ્શન્સ આપમેળે રિન્યુ થાય છે સિવાય કે વર્તમાન અવધિ સમાપ્ત થાય તેના ઓછામાં ઓછા 24 કલાક પહેલા રદ કરવામાં આવે. ચુકવણી તમારા Apple એકાઉન્ટ પર ચાર્જ કરવામાં આવે છે. આજીવન કોઈ સબ્સ્ક્રિપ્શન વિના એક વખતની ખરીદી છે."
+          }
+        },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ప్రస్తుత వ్యవధి ముగియడానికి కనీసం 24 గంటల ముందు రద్దు చేయకపోతే నెలవారీ మరియు వార్షిక సభ్యత్వాలు స్వయంచాలకంగా పునరుద్ధరించబడతాయి. మీ Apple ఖాతాకు చెల్లింపు ఛార్జ్ చేయబడుతుంది. జీవితకాలం అనేది సభ్యత్వం లేకుండా ఒక-పర్యాయ కొనుగోలు."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kuukausi- ja vuositilaukset uusiutuvat automaattisesti, ellei niitä peruuteta vähintään 24 tuntia ennen nykyisen jakson päättymistä. Maksu veloitetaan Apple-tililtäsi. Lifetime on kertaostos ilman tilausta."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "現在の期間が終了する少なくとも 24 時間前にキャンセルしない限り、月次および年次のサブスクリプションは自動的に更新されます。お支払いは Apple アカウントに請求されます。ライフタイムは、定期購入なしの 1 回限りの購入です。"
+          }
+        }
+      }
+    },
+    "Subscription access is active": {
+      "extractionState": "manual",
+      "localizations": {
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ਗਾਹਕੀ ਪਹੁੰਚ ਕਿਰਿਆਸ਼ੀਲ ਹੈ"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accesul la abonament este activ"
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Абонаментният достъп е активен"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El acceso por suscripción está activo"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Akses berlangganan aktif"
+          }
+        },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "സബ്സ്ക്രിപ്ഷൻ ആക്സസ് സജീവമാണ്"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "சந்தா அணுகல் செயலில் உள்ளது"
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El acceso por suscripción está activo"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dostęp w ramach subskrypcji jest aktywny"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "সদস্যতা অ্যাক্সেস সক্রিয় আছে"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'accesso all'abbonamento è attivo"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سبسکرپشن تک رسائی فعال ہے۔"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'accés per subscripció està actiu"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quyền truy cập đăng ký đang hoạt động"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Subscription access is active"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abonnementstilgang er aktiv"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prístup k odberu je aktívny"
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naročniški dostop je aktiven"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abonelik erişimi etkin"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Přístup k předplatnému je aktivní"
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O acesso à subscrição está ativo"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Доступ за підпискою активний"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abonnementsadgang er aktiv"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'accès à l'abonnement est actif"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Akses langganan aktif"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Η πρόσβαση στη συνδρομή είναι ενεργή"
+          }
+        },
+        "fr-CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'accès à l'abonnement est actif"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pristup pretplati je aktivan"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az előfizetési hozzáférés aktív"
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ಚಂದಾದಾರಿಕೆ ಪ್ರವೇಶ ಸಕ್ರಿಯವಾಗಿದೆ"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Abonnementzugriff ist aktiv"
+          }
+        },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सदस्यता प्रवेश सक्रिय आहे"
+          }
+        },
+        "kk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Жазылымға кіру белсенді"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सदस्यता पहुंच सक्रिय है"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "การเข้าถึงการสมัครสมาชิกเปิดใช้งานอยู่"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abonnementstoegang is actief"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O acesso à assinatura está ativo"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prenumerationsåtkomst är aktiv"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הגישה למנוי פעילה"
+          }
+        },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ସଦସ୍ୟତା ପ୍ରବେଶ ସକ୍ରିୟ ଅଟେ |"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Доступ по подписке активен"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "訂閱訪問已激活"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الوصول إلى الاشتراك نشط"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "订阅访问已激活"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "구독 액세스가 활성화되었습니다."
+          }
+        },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "સબ્સ્ક્રિપ્શન ઍક્સેસ સક્રિય છે"
+          }
+        },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "సబ్‌స్క్రిప్షన్ యాక్సెస్ సక్రియంగా ఉంది"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tilauskäyttö on aktiivinen"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サブスクリプションアクセスがアクティブです"
+          }
+        }
+      }
+    },
+    "Yearly": {
+      "extractionState": "manual",
+      "localizations": {
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ਸਾਲਾਨਾ"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anual"
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Годишно"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anual"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tahunan"
+          }
+        },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "വർഷം തോറും"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஆண்டுதோறும்"
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anual"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rocznie"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "বার্ষিক"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuale"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سالانہ"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anualment"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hàng năm"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yearly"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Årlig"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ročne"
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Letno"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yıllık"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ročně"
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anualmente"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "щорічно"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Årligt"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuel"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "setiap tahun"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ετήσιο"
+          }
+        },
+        "fr-CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuel"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "godišnje"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Évente"
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ವಾರ್ಷಿಕ"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jährlich"
+          }
+        },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वार्षिक"
+          }
+        },
+        "kk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Жыл сайын"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वार्षिक"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "เป็นประจำทุกปี"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jaarlijks"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anualmente"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Årligen"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מדי שנה"
+          }
+        },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ବାର୍ଷିକ |"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ежегодно"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每年"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سنويا"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每年"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "매년"
+          }
+        },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "વાર્ષિક"
+          }
+        },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "సంవత్సరానికి"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vuosittain"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "毎年"
+          }
+        }
+      }
+    },
+    "/ year": {
+      "extractionState": "manual",
+      "localizations": {
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ ਸਾਲ"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/an"
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ година"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ año"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ tahun"
+          }
+        },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ വർഷം"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ வருடம்"
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ año"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ rok"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ বছর"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/anno"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ سال"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ any"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ năm"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ year"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ år"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ rok"
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ leto"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ yıl"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ rok"
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ ano"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ рік"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ år"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ an"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ tahun"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ έτος"
+          }
+        },
+        "fr-CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ an"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ godina"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ év"
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ ವರ್ಷ"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ Jahr"
+          }
+        },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ वर्ष"
+          }
+        },
+        "kk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ жыл"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ वर्ष"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ ปี"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ jaar"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ ano"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ år"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ שנה"
+          }
+        },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ ବର୍ଷ"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ год"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ 年"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ سنة"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ 年"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/년"
+          }
+        },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ વર્ષ"
+          }
+        },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ సంవత్సరం"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ vuosi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/年"
+          }
+        }
+      }
+    },
+    "Includes 24,000 AI credits per annual payment. Billed yearly upfront, with no free trial. Auto-renews until canceled.": {
+      "extractionState": "manual",
+      "localizations": {
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ਪ੍ਰਤੀ ਸਲਾਨਾ ਭੁਗਤਾਨ ਵਿੱਚ 24,000 AI ਕ੍ਰੈਡਿਟ ਸ਼ਾਮਲ ਹਨ। ਬਿਨਾਂ ਕਿਸੇ ਮੁਫ਼ਤ ਅਜ਼ਮਾਇਸ਼ ਦੇ, ਸਲਾਨਾ ਅਗਾਊਂ ਬਿਲ ਕੀਤਾ ਜਾਂਦਾ ਹੈ। ਰੱਦ ਹੋਣ ਤੱਕ ਸਵੈ-ਨਵੀਨੀਕਰਨ।"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Include 24.000 de credite AI per plată anuală. Facturat anual în avans, fără încercare gratuită. Se reînnoiește automat până la anulare."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Включва 24 000 AI кредита на годишно плащане. Таксува се предварително всяка година, без безплатен пробен период. Подновява се автоматично до отмяна."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Incluye 24.000 créditos de IA por pago anual. Se factura anualmente por adelantado, sin prueba gratuita. Se renueva automáticamente hasta que se cancele."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Termasuk 24.000 kredit AI per pembayaran tahunan. Ditagih setiap tahun di muka, tanpa uji coba gratis. Perpanjangan otomatis hingga dibatalkan."
+          }
+        },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ഓരോ വാർഷിക പേയ്‌മെൻ്റിനും 24,000 AI ക്രെഡിറ്റുകൾ ഉൾപ്പെടുന്നു. സൗജന്യ ട്രയൽ ഇല്ലാതെ, വർഷം തോറും മുൻകൂറായി ബിൽ ചെയ്യുന്നു. റദ്ദാക്കുന്നത് വരെ സ്വയമേവ പുതുക്കുന്നു."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஒரு வருடாந்திர கட்டணத்திற்கு 24,000 AI கிரெடிட்கள் அடங்கும். இலவச சோதனை இல்லாமல், ஆண்டுதோறும் முன்கூட்டியே பில் செய்யப்படும். ரத்துசெய்யும் வரை தானாக புதுப்பிக்கப்படும்."
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Incluye 24.000 créditos de IA por pago anual. Se factura anualmente por adelantado, sin prueba gratuita. Se renueva automáticamente hasta que se cancele."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obejmuje 24 000 kredytów AI na każdą płatność roczną. Płatność roczna z góry, bez bezpłatnego okresu próbnego. Automatyczne odnawianie do momentu anulowania."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "প্রতি বার্ষিক অর্থপ্রদানে 24,000 AI ক্রেডিট অন্তর্ভুক্ত। বিনামূল্যের ট্রায়াল ছাড়াই বার্ষিক আগাম বিল করা হয়। বাতিল না হওয়া পর্যন্ত অটো-রিনিউ।"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Include 24.000 crediti AI per pagamento annuale. Fatturazione annuale anticipata, senza prova gratuita. Rinnovo automatico fino all'annullamento."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ہر سالانہ ادائیگی پر 24,000 AI کریڈٹس شامل ہیں۔ بغیر کسی مفت آزمائش کے، سالانہ پیشگی بل بھیجا جاتا ہے۔ منسوخ ہونے تک خودکار تجدید ہوتی ہے۔"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inclou 24.000 crèdits AI per pagament anual. Facturat anualment per endavant, sense prova gratuïta. Es renova automàticament fins que es cancel·li."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bao gồm 24.000 tín dụng AI cho mỗi khoản thanh toán hàng năm. Thanh toán trả trước hàng năm, không dùng thử miễn phí. Tự động gia hạn cho đến khi bị hủy."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Includes 24,000 AI credits per annual payment. Billed yearly upfront, with no free trial. Auto-renews until canceled."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inkluderer 24 000 AI-kreditter per årlig betaling. Faktureres årlig på forhånd, uten gratis prøveperiode. Fornyes automatisk til avbestilling."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zahŕňa 24 000 kreditov AI za ročnú platbu. Fakturované ročne vopred, bez bezplatnej skúšobnej verzie. Automaticky sa obnovuje do zrušenia."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vključuje 24.000 kreditov AI na letno plačilo. Zaračunano letno vnaprej, brez brezplačnega preizkusa. Samodejno se obnavlja do preklica."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yıllık ödeme başına 24.000 AI kredisi içerir. Ücretsiz deneme olmaksızın, yıllık peşin olarak faturalandırılır. İptal edilene kadar otomatik olarak yenilenir."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zahrnuje 24 000 kreditů AI za roční platbu. Účtuje se ročně předem, bez bezplatného zkušebního období. Automaticky se obnovuje do zrušení."
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inclui 24.000 créditos de IA por pagamento anual. Faturado antecipadamente anualmente, sem teste gratuito. Renova automaticamente até ser cancelado."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Включає 24 000 кредитів AI за щорічний платіж. Рахунок виставляється щороку, без безкоштовного пробного періоду. Автоматично поновлюється до скасування."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inkluderer 24.000 AI-kreditter pr. årlig betaling. Faktureres årligt på forhånd uden gratis prøveperiode. Fornyes automatisk indtil annullering."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comprend 24 000 crédits IA par paiement annuel. Facturé annuellement à l'avance, sans essai gratuit. Se renouvelle automatiquement jusqu'à annulation."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Termasuk 24,000 kredit AI setiap pembayaran tahunan. Dibilkan setiap tahun di muka, tanpa percubaan percuma. Autobaharui sehingga dibatalkan."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Περιλαμβάνει 24.000 πιστώσεις AI ανά ετήσια πληρωμή. Χρεώνεται εκ των προτέρων ετησίως, χωρίς δωρεάν δοκιμή. Αυτόματη ανανέωση μέχρι να ακυρωθεί."
+          }
+        },
+        "fr-CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comprend 24 000 crédits IA par paiement annuel. Facturé annuellement à l'avance, sans essai gratuit. Se renouvelle automatiquement jusqu'à annulation."
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uključuje 24 000 AI kredita po godišnjoj uplati. Naplaćuje se godišnje unaprijed, bez besplatnog probnog razdoblja. Automatski se obnavlja do otkazivanja."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Éves befizetésenként 24 000 AI-kreditet tartalmaz. Évente előre számlázva, ingyenes próbaidőszak nélkül. Lemondásig automatikusan megújul."
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ಪ್ರತಿ ವಾರ್ಷಿಕ ಪಾವತಿಗೆ 24,000 AI ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಒಳಗೊಂಡಿದೆ. ಉಚಿತ ಪ್ರಯೋಗವಿಲ್ಲದೆ, ವಾರ್ಷಿಕ ಮುಂಗಡವಾಗಿ ಬಿಲ್ ಮಾಡಲಾಗುತ್ತದೆ. ರದ್ದುಗೊಳ್ಳುವವರೆಗೆ ಸ್ವಯಂ-ನವೀಕರಿಸುತ್ತದೆ."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beinhaltet 24.000 AI-Credits pro Jahreszahlung. Wird jährlich im Voraus in Rechnung gestellt, ohne kostenlose Testversion. Automatische Verlängerung bis zur Kündigung."
+          }
+        },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रति वार्षिक पेमेंट 24,000 AI क्रेडिट समाविष्ट करते. कोणत्याही विनामूल्य चाचणीशिवाय, वार्षिक आगाऊ बिल केले जाते. रद्द होईपर्यंत स्वयं-नूतनीकरण."
+          }
+        },
+        "kk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Жылдық төлемге 24 000 AI несиесін қамтиды. Тегін сынақ нұсқасы жоқ, жыл сайын алдын ала шот алынады. Бас тартылғанға дейін автоматты түрде жаңартылады."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रति वार्षिक भुगतान 24,000 एआई क्रेडिट शामिल हैं। बिना किसी नि:शुल्क परीक्षण के वार्षिक अग्रिम बिल भेजा जाता है। रद्द होने तक स्वतः नवीनीकरण।"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "รวมเครดิต AI 24,000 ต่อการชำระรายปี เรียกเก็บเงินล่วงหน้าเป็นรายปี ไม่มีการทดลองใช้ฟรี ต่ออายุอัตโนมัติจนกว่าจะยกเลิก"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inclusief 24.000 AI-credits per jaarlijkse betaling. Jaarlijks vooraf gefactureerd, zonder gratis proefperiode. Automatische verlenging tot annulering."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inclui 24.000 créditos de IA por pagamento anual. Faturado antecipadamente anualmente, sem teste gratuito. Renova automaticamente até ser cancelado."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inkluderar 24 000 AI-krediter per årlig betalning. Faktureras årligen i förväg, utan gratis provperiod. Förnyas automatiskt tills den avbryts."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "כולל 24,000 זיכויים בינה מלאכותית לכל תשלום שנתי. מחויב מדי שנה מראש, ללא ניסיון חינם. מתחדש אוטומטית עד לביטול."
+          }
+        },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ବାର୍ଷିକ ଦେୟ ପାଇଁ 24,000 AI କ୍ରେଡିଟ୍ ଅନ୍ତର୍ଭୁକ୍ତ କରେ | କ free ଣସି ମାଗଣା ପରୀକ୍ଷା ବିନା ବାର୍ଷିକ ଉପରମୁଣ୍ଡରେ ବିଲ୍ | ବାତିଲ ହେବା ପର୍ଯ୍ୟନ୍ତ ଅଟୋ-ରିନ୍ୟୁ କରେ |"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Включает 24 000 кредитов AI за годовой платеж. Оплата производится ежегодно вперед, без бесплатной пробной версии. Автоматическое продление до отмены."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "包括每年支付 24,000 個 AI 積分。按年預付費用，沒有免費試用。自動續訂直至取消。"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يتضمن 24000 رصيدًا من الذكاء الاصطناعي لكل دفعة سنوية. يتم إصدار الفاتورة سنويًا مقدمًا، بدون نسخة تجريبية مجانية. التجديد التلقائي حتى يتم إلغاؤه."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "包括每年支付 24,000 个 AI 积分。按年预付费用，没有免费试用。自动续订直至取消。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "연간 결제당 24,000 AI 크레딧이 포함됩니다. 무료 평가판 없이 매년 선불로 청구됩니다. 취소할 때까지 자동 갱신됩니다."
+          }
+        },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "વાર્ષિક ચુકવણી દીઠ 24,000 AI ક્રેડિટનો સમાવેશ થાય છે. કોઈ મફત અજમાયશ વિના, વાર્ષિક અપફ્રન્ટ બિલ કરવામાં આવે છે. રદ ન થાય ત્યાં સુધી સ્વતઃ-નવીકરણ."
+          }
+        },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "వార్షిక చెల్లింపుకు 24,000 AI క్రెడిట్‌లను కలిగి ఉంటుంది. ఉచిత ట్రయల్ లేకుండా, సంవత్సరానికి ముందస్తుగా బిల్ చేయబడుతుంది. రద్దు చేయబడే వరకు స్వయంచాలకంగా పునరుద్ధరించబడుతుంది."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sisältää 24 000 tekoälykrediittiä per vuosimaksu. Laskutetaan vuosittain etukäteen, ilman ilmaista kokeilua. Uusiutuu automaattisesti, kunnes se peruutetaan."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "年間支払いごとに 24,000 AI クレジットが含まれます。毎年前払いで請求され、無料トライアルはありません。キャンセルされるまで自動更新されます。"
+          }
+        }
+      }
+    },
+    "Choose monthly or yearly access, or a one-time Lifetime purchase to create and export chat videos on Mac. Mac and iPhone/iPad plans are separate.": {
+      "extractionState": "manual",
+      "localizations": {
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac 'ਤੇ ਚੈਟ ਵੀਡੀਓ ਬਣਾਉਣ ਅਤੇ ਨਿਰਯਾਤ ਕਰਨ ਲਈ ਮਹੀਨਾਵਾਰ ਜਾਂ ਸਲਾਨਾ ਪਹੁੰਚ, ਜਾਂ ਇੱਕ ਵਾਰ ਦੀ ਲਾਈਫਟਾਈਮ ਖਰੀਦ ਚੁਣੋ। Mac ਅਤੇ iPhone/iPad ਯੋਜਨਾਵਾਂ ਵੱਖਰੀਆਂ ਹਨ।"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alegeți acces lunar sau anual sau o achiziție unică pe viață pentru a crea și exporta videoclipuri de chat pe Mac. Planurile Mac și iPhone/iPad sunt separate."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Изберете месечен или годишен достъп или еднократна покупка за цял живот, за да създавате и експортирате видеоклипове за чат на Mac. Плановете Mac и iPhone/iPad са отделни."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elija acceso mensual o anual, o una compra única de por vida para crear y exportar videos de chat en Mac. Los planes Mac y iPhone/iPad son independientes."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pilih akses bulanan atau tahunan, atau pembelian satu kali Seumur Hidup untuk membuat dan mengekspor video chat di Mac. Paket Mac dan iPhone/iPad terpisah."
+          }
+        },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac-ൽ ചാറ്റ് വീഡിയോകൾ സൃഷ്‌ടിക്കാനും എക്‌സ്‌പോർട്ട് ചെയ്യാനും പ്രതിമാസ അല്ലെങ്കിൽ വാർഷിക ആക്‌സസ് അല്ലെങ്കിൽ ഒറ്റത്തവണ ലൈഫ് ടൈം വാങ്ങൽ തിരഞ്ഞെടുക്കുക. Mac, iPhone/iPad പ്ലാനുകൾ വെവ്വേറെയാണ്."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac இல் அரட்டை வீடியோக்களை உருவாக்க மற்றும் ஏற்றுமதி செய்ய மாதாந்திர அல்லது வருடாந்திர அணுகல் அல்லது ஒருமுறை வாழ்நாள் வாங்குதலைத் தேர்வுசெய்யவும். Mac மற்றும் iPhone/iPad திட்டங்கள் தனித்தனியாக உள்ளன."
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elija acceso mensual o anual, o una compra única de por vida para crear y exportar videos de chat en Mac. Los planes Mac y iPhone/iPad son independientes."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wybierz dostęp miesięczny lub roczny albo jednorazowy zakup na całe życie, aby tworzyć i eksportować filmy z czatów na platformie Mac. Plany Mac i iPhone/iPad to osobne plany."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac-এ চ্যাট ভিডিও তৈরি এবং রপ্তানি করতে মাসিক বা বার্ষিক অ্যাক্সেস বা এককালীন লাইফটাইম কেনাকাটা বেছে নিন। Mac এবং iPhone/iPad প্ল্যানগুলি আলাদা৷"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli l'accesso mensile o annuale oppure un acquisto una tantum a vita per creare ed esportare video di chat su Mac. I piani Mac e iPhone/iPad sono separati."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac پر چیٹ ویڈیوز بنانے اور برآمد کرنے کے لیے ماہانہ یا سالانہ رسائی، یا ایک بار لائف ٹائم خریداری کا انتخاب کریں۔ Mac اور iPhone/iPad پلان الگ الگ ہیں۔"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trieu un accés mensual o anual, o una compra única per a tota la vida per crear i exportar vídeos de xat a Mac. Els plans Mac i iPhone/iPad són separats."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chọn quyền truy cập hàng tháng hoặc hàng năm hoặc mua hàng trọn đời một lần để tạo và xuất video trò chuyện trên Mac. Các gói Mac và iPhone/iPad là riêng biệt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose monthly or yearly access, or a one-time Lifetime purchase to create and export chat videos on Mac. Mac and iPhone/iPad plans are separate."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Velg månedlig eller årlig tilgang, eller et engangskjøp på livstid for å lage og eksportere chattevideoer på Mac. Mac- og iPhone/iPad-planer er separate."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vyberte si mesačný alebo ročný prístup alebo jednorazový celoživotný nákup a vytvorte a exportujte četové videá na Mac. Plány Mac a iPhone/iPad sú samostatné."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Izberite mesečni ali letni dostop ali enkratni doživljenjski nakup za ustvarjanje in izvoz videoposnetkov klepeta na Mac. Načrta Mac in iPhone/iPad sta ločena."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac üzerinde sohbet videoları oluşturmak ve dışa aktarmak için aylık veya yıllık erişimi veya tek seferlik Ömür Boyu satın almayı seçin. Mac ve iPhone/iPad planları ayrıdır."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vyberte si měsíční nebo roční přístup nebo jednorázový celoživotní nákup pro vytváření a export chatovacích videí na Mac. Plány Mac a iPhone/iPad jsou samostatné."
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolha o acesso mensal ou anual, ou uma compra vitalícia única para criar e exportar vídeos de chat em Mac. Os planos Mac e iPhone/iPad estão separados."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Виберіть місячний або річний доступ або одноразову покупку на весь період, щоб створювати та експортувати відео чату на Mac. Плани Mac і iPhone/iPad окремі."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vælg månedlig eller årlig adgang, eller et engangs-livsvarigt køb for at oprette og eksportere chatvideoer på Mac. Mac og iPhone/iPad-planer er separate."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez un accès mensuel ou annuel, ou un achat unique à vie pour créer et exporter des vidéos de chat sur Mac. Les forfaits Mac et iPhone/iPad sont distincts."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pilih akses bulanan atau tahunan, atau pembelian sekali Seumur Hidup untuk membuat dan mengeksport video sembang di Mac. Pelan Mac dan iPhone/iPad adalah berasingan."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Επιλέξτε μηνιαία ή ετήσια πρόσβαση ή μια εφάπαξ αγορά Διαρκείας για να δημιουργήσετε και να εξαγάγετε βίντεο συνομιλίας στο Mac. Τα προγράμματα Mac και iPhone/iPad είναι ξεχωριστά."
+          }
+        },
+        "fr-CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez un accès mensuel ou annuel, ou un achat unique à vie pour créer et exporter des vidéos de chat sur Mac. Les forfaits Mac et iPhone/iPad sont distincts."
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odaberite mjesečni ili godišnji pristup ili jednokratnu doživotnu kupnju za izradu i izvoz videozapisa za chat na Mac. Planovi Mac i iPhone/iPad su odvojeni."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Válasszon havi vagy éves hozzáférést, vagy egyszeri életre szóló vásárlást csevegővideók létrehozásához és exportálásához a Mac webhelyen. A Mac és a iPhone/iPad csomag különálló."
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac ನಲ್ಲಿ ಚಾಟ್ ವೀಡಿಯೊಗಳನ್ನು ರಚಿಸಲು ಮತ್ತು ರಫ್ತು ಮಾಡಲು ಮಾಸಿಕ ಅಥವಾ ವಾರ್ಷಿಕ ಪ್ರವೇಶ ಅಥವಾ ಒಂದು-ಬಾರಿ ಜೀವಮಾನದ ಖರೀದಿಯನ್ನು ಆರಿಸಿ. Mac ಮತ್ತು iPhone/iPad ಯೋಜನೆಗಳು ಪ್ರತ್ಯೇಕವಾಗಿರುತ್ತವೆ."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wählen Sie monatlichen oder jährlichen Zugriff oder einen einmaligen lebenslangen Kauf, um Chat-Videos auf Mac zu erstellen und zu exportieren. Die Pläne Mac und iPhone/iPad sind getrennt."
+          }
+        },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac वर चॅट व्हिडिओ तयार आणि निर्यात करण्यासाठी मासिक किंवा वार्षिक प्रवेश निवडा किंवा एक-वेळची आजीवन खरेदी निवडा. Mac आणि iPhone/iPad योजना वेगळ्या आहेत."
+          }
+        },
+        "kk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac сайтында чат бейнелерін жасау және экспорттау үшін ай сайынғы немесе жыл сайынғы рұқсатты немесе бір реттік Өмір бойы сатып алуды таңдаңыз. Mac және iPhone/iPad жоспарлары бөлек."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac पर चैट वीडियो बनाने और निर्यात करने के लिए मासिक या वार्षिक पहुंच, या एकमुश्त लाइफटाइम खरीदारी चुनें। Mac और iPhone/iPad प्लान अलग-अलग हैं।"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "เลือกการเข้าถึงรายเดือนหรือรายปี หรือซื้อครั้งเดียวตลอดชีพเพื่อสร้างและส่งออกวิดีโอแชทบน Mac แผน Mac และ iPhone/iPad แยกจากกัน"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kies voor maandelijkse of jaarlijkse toegang, of voor een eenmalige levenslange aankoop om chatvideo's te maken en te exporteren op Mac. De abonnementen Mac en iPhone/iPad zijn gescheiden."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolha acesso mensal ou anual, ou uma compra vitalícia única para criar e exportar vídeos de bate-papo em Mac. Os planos Mac e iPhone/iPad são separados."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Välj månatlig eller årlig åtkomst, eller ett engångsköp för hela livet för att skapa och exportera chattvideor på Mac. Mac och iPhone/iPad plan är separata."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "בחר גישה חודשית או שנתית, או רכישה חד פעמית לכל החיים כדי ליצור ולייצא סרטוני צ'אט ב-Mac. תוכניות Mac ו-iPhone/iPad נפרדות."
+          }
+        },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ଚାଟ୍ ଭିଡିଓ ସୃଷ୍ଟି ଏବଂ ରପ୍ତାନି କରିବାକୁ ମାସିକ କିମ୍ବା ବାର୍ଷିକ ପ୍ରବେଶ, କିମ୍ବା ଏକ ଥର ଲାଇଫ୍ ଟାଇମ୍ କ୍ରୟ ବାଛନ୍ତୁ | Mac। Mac ଏବଂ iPhone/iPad ଯୋଜନାଗୁଡିକ ଅଲଗା ଅଟେ |"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Выберите ежемесячный или годовой доступ или единоразовую пожизненную покупку, чтобы создавать и экспортировать видео чата на Mac. Планы Mac и iPhone/iPad являются отдельными."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選擇按月或按年訪問，或一次性終身購買，在 Mac 上建立和匯出聊天影片。 Mac 和 iPhone/iPad 計畫是獨立的。"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اختر الوصول شهريًا أو سنويًا، أو الشراء لمرة واحدة مدى الحياة لإنشاء مقاطع فيديو للدردشة وتصديرها على Mac. خطتا Mac وiPhone/iPad منفصلتان."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择按月或按年访问，或一次性终身购买，在 Mac 上创建和导出聊天视频。 Mac 和 iPhone/iPad 计划是独立的。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac에서 채팅 비디오를 만들고 내보내려면 월간 또는 연간 액세스 또는 일회성 평생 구매를 선택하세요. Mac 및 iPhone/iPad 계획은 별개입니다."
+          }
+        },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac પર ચેટ વિડિયોઝ બનાવવા અને નિકાસ કરવા માટે માસિક અથવા વાર્ષિક ઍક્સેસ અથવા વન-ટાઇમ લાઇફટાઇમ ખરીદી પસંદ કરો. Mac અને iPhone/iPad પ્લાન અલગ છે."
+          }
+        },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Macలో చాట్ వీడియోలను సృష్టించడానికి మరియు ఎగుమతి చేయడానికి నెలవారీ లేదా వార్షిక యాక్సెస్ లేదా ఒక-పర్యాయ జీవితకాల కొనుగోలును ఎంచుకోండి. Mac మరియు iPhone/iPad ప్లాన్‌లు వేరు."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voit luoda ja viedä chat-videoita Mac -palvelussa valitsemalla kuukausittaisen tai vuosittaisen käyttöoikeuden tai kertaluonteisen elinikäisen ostoksen. Tilaukset Mac ja iPhone/iPad ovat erillisiä."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac でチャット動画を作成してエクスポートするには、毎月または毎年のアクセス、または 1 回限りの生涯購入を選択してください。 Mac プランと iPhone/iPad プランは別のものです。"
+          }
+        }
+      }
+    },
+    "Lifetime access is active": {
+      "extractionState": "manual",
+      "localizations": {
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ਲਾਈਫਟਾਈਮ ਪਹੁੰਚ ਕਿਰਿਆਸ਼ੀਲ ਹੈ"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accesul pe viață este activ"
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Доживотният достъп е активен"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El acceso de por vida está activo"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Akses seumur hidup aktif"
+          }
+        },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ആജീവനാന്ത ആക്സസ് സജീവമാണ്"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "வாழ்நாள் அணுகல் செயலில் உள்ளது"
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El acceso de por vida está activo"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dostęp dożywotni jest aktywny"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "আজীবন অ্যাক্সেস সক্রিয়"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'accesso a vita è attivo"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تاحیات رسائی فعال ہے۔"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'accés de per vida està actiu"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quyền truy cập trọn đời đang hoạt động"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lifetime access is active"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Livstidstilgang er aktiv"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doživotný prístup je aktívny"
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doživljenjski dostop je aktiven"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ömür boyu erişim aktif"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doživotní přístup je aktivní"
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O acesso vitalício está ativo"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Довічний доступ активний"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Livsvarig adgang er aktiv"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'accès à vie est actif"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Akses seumur hidup aktif"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Η πρόσβαση εφ' όρου ζωής είναι ενεργή"
+          }
+        },
+        "fr-CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'accès à vie est actif"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doživotni pristup je aktivan"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az élethosszig tartó hozzáférés aktív"
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ಜೀವಮಾನದ ಪ್ರವೇಶವು ಸಕ್ರಿಯವಾಗಿದೆ"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der lebenslange Zugriff ist aktiv"
+          }
+        },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आजीवन प्रवेश सक्रिय आहे"
+          }
+        },
+        "kk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Өмір бойы қол жеткізу белсенді"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आजीवन पहुंच सक्रिय है"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "การเข้าถึงตลอดชีพเปิดใช้งานอยู่"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Levenslange toegang is actief"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O acesso vitalício está ativo"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Livstidsåtkomst är aktiv"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "גישה לכל החיים פעילה"
+          }
+        },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ଆଜୀବନ ପ୍ରବେଶ ସକ୍ରିୟ ଅଟେ |"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пожизненный доступ активен"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "終身訪問處於活動狀態"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الوصول مدى الحياة نشط"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "终身访问处于活动状态"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "평생 액세스가 활성화되었습니다."
+          }
+        },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "આજીવન ઍક્સેસ સક્રિય છે"
+          }
+        },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "జీవితకాల యాక్సెస్ సక్రియంగా ఉంది"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elinikäinen käyttöoikeus on aktiivinen"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "生涯アクセスが有効です"
+          }
+        }
+      }
+    },
+    "Buying Lifetime does not cancel your subscription. Manage your subscription to avoid future renewal charges.": {
+      "extractionState": "manual",
+      "localizations": {
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ਲਾਈਫਟਾਈਮ ਖਰੀਦਣਾ ਤੁਹਾਡੀ ਗਾਹਕੀ ਨੂੰ ਰੱਦ ਨਹੀਂ ਕਰਦਾ ਹੈ। ਭਵਿੱਖ ਵਿੱਚ ਨਵਿਆਉਣ ਦੇ ਖਰਚਿਆਂ ਤੋਂ ਬਚਣ ਲਈ ਆਪਣੀ ਗਾਹਕੀ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ।"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cumpărarea Lifetime nu anulează abonamentul. Gestionați-vă abonamentul pentru a evita taxele viitoare de reînnoire."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Купуването на Lifetime не анулира вашия абонамент. Управлявайте абонамента си, за да избегнете бъдещи такси за подновяване."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comprar Lifetime no cancela su suscripción. Administre su suscripción para evitar futuros cargos de renovación."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Membeli Seumur Hidup tidak membatalkan langganan Anda. Kelola langganan Anda untuk menghindari biaya perpanjangan di masa mendatang."
+          }
+        },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ലൈഫ്‌ടൈം വാങ്ങുന്നത് നിങ്ങളുടെ സബ്‌സ്‌ക്രിപ്‌ഷൻ റദ്ദാക്കില്ല. ഭാവിയിലെ പുതുക്കൽ നിരക്കുകൾ ഒഴിവാക്കാൻ നിങ്ങളുടെ സബ്‌സ്‌ക്രിപ്‌ഷൻ നിയന്ത്രിക്കുക."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "லைஃப்டைம் வாங்குவது உங்கள் சந்தாவை ரத்து செய்யாது. எதிர்கால புதுப்பித்தல் கட்டணங்களைத் தவிர்க்க உங்கள் சந்தாவை நிர்வகிக்கவும்."
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comprar Lifetime no cancela su suscripción. Administre su suscripción para evitar futuros cargos de renovación."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zakup Lifetime nie powoduje anulowania subskrypcji. Zarządzaj swoją subskrypcją, aby uniknąć przyszłych opłat za przedłużenie."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "লাইফটাইম কেনা আপনার সাবস্ক্রিপশন বাতিল করে না। ভবিষ্যতে পুনর্নবীকরণ চার্জ এড়াতে আপনার সদস্যতা পরিচালনা করুন।"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'acquisto di Lifetime non annulla l'abbonamento. Gestisci il tuo abbonamento per evitare futuri addebiti per rinnovi."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لائف ٹائم خریدنا آپ کی رکنیت منسوخ نہیں کرتا ہے۔ مستقبل کی تجدید کے چارجز سے بچنے کے لیے اپنی رکنیت کا نظم کریں۔"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comprar Lifetime no cancel·la la vostra subscripció. Gestioneu la vostra subscripció per evitar futurs càrrecs de renovació."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mua trọn đời không hủy đăng ký của bạn. Quản lý đăng ký của bạn để tránh phí gia hạn trong tương lai."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buying Lifetime does not cancel your subscription. Manage your subscription to avoid future renewal charges."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Å kjøpe Lifetime kansellerer ikke abonnementet ditt. Administrer abonnementet ditt for å unngå fremtidige fornyelseskostnader."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zakúpením Lifetime sa vaše predplatné nezruší. Spravujte svoje predplatné, aby ste sa vyhli budúcim poplatkom za obnovenie."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nakup Lifetime ne prekliče vaše naročnine. Upravljajte svojo naročnino, da se izognete prihodnjim stroškom podaljšanja."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ömür Boyu satın almak aboneliğinizi iptal etmez. Gelecekteki yenileme ücretlerinden kaçınmak için aboneliğinizi yönetin."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nákupem Lifetime se nezruší vaše předplatné. Spravujte své předplatné, abyste se vyhnuli budoucím poplatkům za obnovení."
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comprar Lifetime não cancela a sua subscrição. Faça a gestão da sua subscrição para evitar futuras cobranças de renovação."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Купівля Lifetime не скасовує вашу підписку. Керуйте своєю підпискою, щоб уникнути плати за оновлення в майбутньому."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Køb af Lifetime annullerer ikke dit abonnement. Administrer dit abonnement for at undgå fremtidige fornyelsesgebyrer."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’achat à vie n’annule pas votre abonnement. Gérez votre abonnement pour éviter de futurs frais de renouvellement."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Membeli Sepanjang Hayat tidak membatalkan langganan anda. Urus langganan anda untuk mengelakkan caj pembaharuan masa hadapan."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Η αγορά Lifetime δεν ακυρώνει τη συνδρομή σας. Διαχειριστείτε τη συνδρομή σας για να αποφύγετε μελλοντικές χρεώσεις ανανέωσης."
+          }
+        },
+        "fr-CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’achat à vie n’annule pas votre abonnement. Gérez votre abonnement pour éviter de futurs frais de renouvellement."
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doživotna kupnja ne otkazuje vašu pretplatu. Upravljajte svojom pretplatom kako biste izbjegli buduće troškove obnove."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Lifetime megvásárlása nem mondja le az előfizetését. Kezelje előfizetését a jövőbeni megújítási díjak elkerülése érdekében."
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ಜೀವಮಾನವನ್ನು ಖರೀದಿಸುವುದರಿಂದ ನಿಮ್ಮ ಚಂದಾದಾರಿಕೆಯನ್ನು ರದ್ದುಗೊಳಿಸುವುದಿಲ್ಲ. ಭವಿಷ್ಯದ ನವೀಕರಣ ಶುಲ್ಕಗಳನ್ನು ತಪ್ಪಿಸಲು ನಿಮ್ಮ ಚಂದಾದಾರಿಕೆಯನ್ನು ನಿರ್ವಹಿಸಿ."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Durch den Kauf von Lifetime wird Ihr Abonnement nicht gekündigt. Verwalten Sie Ihr Abonnement, um künftige Verlängerungsgebühren zu vermeiden."
+          }
+        },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "लाइफटाइम खरेदी केल्याने तुमची सदस्यता रद्द होत नाही. भविष्यातील नूतनीकरण शुल्क टाळण्यासाठी तुमचे सदस्यत्व व्यवस्थापित करा."
+          }
+        },
+        "kk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Өмір бойы сатып алу жазылымнан бас тартпайды. Болашақта жаңарту ақысын болдырмау үшін жазылымды басқарыңыз."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "लाइफटाइम ख़रीदने से आपकी सदस्यता रद्द नहीं होती. भविष्य में नवीनीकरण शुल्क से बचने के लिए अपनी सदस्यता प्रबंधित करें।"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "การซื้อตลอดชีพไม่ได้ยกเลิกการสมัครสมาชิกของคุณ จัดการการสมัครของคุณเพื่อหลีกเลี่ยงค่าธรรมเนียมการต่ออายุในอนาคต"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Als u Lifetime koopt, wordt uw abonnement niet opgezegd. Beheer uw abonnement om toekomstige verlengingskosten te voorkomen."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comprar Lifetime não cancela sua assinatura. Gerencie sua assinatura para evitar futuras cobranças de renovação."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Att köpa Lifetime avslutar inte ditt abonnemang. Hantera din prenumeration för att undvika framtida förnyelseavgifter."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "קניית Lifetime אינה מבטלת את המנוי שלך. נהל את המנוי שלך כדי להימנע מחיובי חידוש עתידיים."
+          }
+        },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ଆଜୀବନ କିଣିବା ଆପଣଙ୍କ ସଦସ୍ୟତା ବାତିଲ କରେ ନାହିଁ | ଭବିଷ୍ୟତର ନବୀକରଣ ଦେୟକୁ ଏଡାଇବା ପାଇଁ ଆପଣଙ୍କର ସଦସ୍ୟତା ପରିଚାଳନା କରନ୍ତୁ |"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Покупка Lifetime не отменяет вашу подписку. Управляйте своей подпиской, чтобы избежать платы за продление в будущем."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "購買終身並不會取消您的訂閱。管理您的訂閱以避免未來的續訂費用。"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "شراء مدى الحياة لا يلغي اشتراكك. قم بإدارة اشتراكك لتجنب رسوم التجديد المستقبلية."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "购买终身并不会取消您的订阅。管理您的订阅以避免未来的续订费用。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lifetime을 구매해도 구독이 취소되지는 않습니다. 향후 갱신 비용을 방지하려면 구독을 관리하세요."
+          }
+        },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "લાઇફટાઇમ ખરીદવાથી તમારું સબ્સ્ક્રિપ્શન રદ થતું નથી. ભાવિ નવીકરણ શુલ્ક ટાળવા માટે તમારું સબ્સ્ક્રિપ્શન મેનેજ કરો."
+          }
+        },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "జీవితకాలం కొనుగోలు చేయడం వలన మీ సభ్యత్వం రద్దు చేయబడదు. భవిష్యత్తులో పునరుద్ధరణ ఛార్జీలను నివారించడానికి మీ సభ్యత్వాన్ని నిర్వహించండి."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lifetime-ostos ei peruuta tilaustasi. Hallinnoi tilaustasi välttääksesi tulevat uusimismaksut."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ライフタイムを購入してもサブスクリプションはキャンセルされません。将来の更新料金を回避するためにサブスクリプションを管理します。"
+          }
+        }
+      }
+    },
+    "Annual AI budget": {
+      "extractionState": "manual",
+      "localizations": {
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ਸਲਾਨਾ AI ਬਜਟ"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bugetul anual AI"
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Годишен бюджет за AI"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Presupuesto anual de IA"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anggaran AI tahunan"
+          }
+        },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "വാർഷിക AI ബജറ്റ്"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஆண்டு AI பட்ஜெட்"
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Presupuesto anual de IA"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Roczny budżet AI"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "বার্ষিক এআই বাজেট"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Budget annuale dell'IA"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سالانہ AI بجٹ"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pressupost anual d'IA"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ngân sách AI hàng năm"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annual AI budget"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Årlig AI-budsjett"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ročný rozpočet AI"
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Letni proračun za AI"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yıllık yapay zeka bütçesi"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Roční rozpočet AI"
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orçamento anual de IA"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Річний бюджет ШІ"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Årligt AI-budget"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Budget annuel de l'IA"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belanjawan AI tahunan"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ετήσιος προϋπολογισμός AI"
+          }
+        },
+        "fr-CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Budget annuel de l'IA"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Godišnji proračun AI"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Éves AI költségvetés"
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ವಾರ್ಷಿಕ AI ಬಜೆಟ್"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jährliches KI-Budget"
+          }
+        },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वार्षिक AI बजेट"
+          }
+        },
+        "kk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Жылдық AI бюджеті"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वार्षिक एआई बजट"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "งบประมาณ AI ประจำปี"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jaarlijks AI-budget"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orçamento anual de IA"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Årlig AI-budget"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "תקציב AI שנתי"
+          }
+        },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ବାର୍ଷିକ AI ବଜେଟ୍ |"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Годовой бюджет ИИ"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "年度人工智慧預算"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ميزانية الذكاء الاصطناعي السنوية"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "年度人工智能预算"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "연간 AI 예산"
+          }
+        },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "વાર્ષિક AI બજેટ"
+          }
+        },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "వార్షిక AI బడ్జెట్"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vuotuinen AI-budjetti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AIの年間予算"
+          }
+        }
+      }
+    },
+    "Yearly GPT Assistant": {
+      "extractionState": "manual",
+      "localizations": {
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ਸਾਲਾਨਾ GPT ਸਹਾਇਕ"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Asistent GPT anual"
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Годишен GPT асистент"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Asistente anual de GPT"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Asisten GPT Tahunan"
+          }
+        },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "വാർഷിക GPT അസിസ്റ്റൻ്റ്"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஆண்டு GPT உதவியாளர்"
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Asistente anual de GPT"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Roczny asystent GPT"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "বার্ষিক জিপিটি সহকারী"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Assistente GPT annuale"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سالانہ GPT اسسٹنٹ"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Assistent GPT anual"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trợ lý GPT hàng năm"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yearly GPT Assistant"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Årlig GPT-assistent"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ročný asistent GPT"
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Letni GPT asistent"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yıllık GPT Asistanı"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Roční asistent GPT"
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Assistente GPT anual"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Річний асистент GPT"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Årlig GPT-assistent"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Assistant GPT annuel"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pembantu GPT Tahunan"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ετήσιος Βοηθός GPT"
+          }
+        },
+        "fr-CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Assistant GPT annuel"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Godišnji GPT asistent"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Éves GPT asszisztens"
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ವಾರ್ಷಿಕ GPT ಸಹಾಯಕ"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jährlicher GPT-Assistent"
+          }
+        },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वार्षिक GPT सहाय्यक"
+          }
+        },
+        "kk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Жыл сайынғы GPT көмекшісі"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वार्षिक जीपीटी सहायक"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ผู้ช่วย GPT ประจำปี"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jaarlijkse GPT-assistent"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Assistente GPT anual"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Årlig GPT-assistent"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "עוזר GPT שנתי"
+          }
+        },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ବାର୍ଷିକ ଜିପିଟି ଆସିଷ୍ଟାଣ୍ଟ |"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Годовой помощник GPT"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "年度 GPT 助理"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مساعد GPT السنوي"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "年度 GPT 助理"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "연간 GPT 도우미"
+          }
+        },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "વાર્ષિક GPT મદદનીશ"
+          }
+        },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "వార్షిక GPT అసిస్టెంట్"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vuosittainen GPT-assistentti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "年間 GPT アシスタント"
+          }
+        }
+      }
+    },
+    "5,000 bonus AI credits per annual payment": {
+      "extractionState": "manual",
+      "localizations": {
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5,000 ਬੋਨਸ AI ਕ੍ਰੈਡਿਟ ਪ੍ਰਤੀ ਸਲਾਨਾ ਭੁਗਤਾਨ"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5.000 de credite AI bonus per plată anuală"
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5000 бонус AI кредита на годишно плащане"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5000 créditos de IA de bonificación por pago anual"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5.000 bonus kredit AI per pembayaran tahunan"
+          }
+        },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ഓരോ വാർഷിക പേയ്‌മെൻ്റിനും 5,000 ബോണസ് AI ക്രെഡിറ്റുകൾ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஒரு வருடாந்திர கட்டணத்திற்கு 5,000 போனஸ் AI கிரெடிட்கள்"
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5000 créditos de IA de bonificación por pago anual"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5000 dodatkowych kredytów AI za każdą płatność roczną"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "প্রতি বার্ষিক অর্থপ্রদানে 5,000 বোনাস AI ক্রেডিট"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5.000 crediti AI bonus per pagamento annuale"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5,000 بونس AI کریڈٹس فی سالانہ ادائیگی"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5.000 crèdits addicionals d'IA per pagament anual"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5.000 tín dụng AI thưởng cho mỗi lần thanh toán hàng năm"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5,000 bonus AI credits per annual payment"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5 000 bonus AI-kreditter per årlig betaling"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5 000 bonusových kreditov AI za ročnú platbu"
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5.000 bonus kreditov AI na letno plačilo"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yıllık ödeme başına 5.000 bonus AI kredisi"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5 000 bonusových kreditů AI za roční platbu"
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5.000 créditos de IA de bónus por pagamento anual"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5000 бонусних кредитів AI за щорічний платіж"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5.000 bonus AI-kreditter pr. årlig betaling"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5 000 crédits IA bonus par paiement annuel"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5,000 bonus kredit AI setiap pembayaran tahunan"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5.000 μπόνους πιστώσεις AI ανά ετήσια πληρωμή"
+          }
+        },
+        "fr-CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5 000 crédits IA bonus par paiement annuel"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5000 bonus AI kredita po godišnjoj uplati"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5000 bónusz AI kredit éves befizetésenként"
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ಪ್ರತಿ ವಾರ್ಷಿಕ ಪಾವತಿಗೆ 5,000 ಬೋನಸ್ AI ಕ್ರೆಡಿಟ್‌ಗಳು"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5.000 Bonus-KI-Credits pro Jahreszahlung"
+          }
+        },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रति वार्षिक पेमेंट 5,000 बोनस AI क्रेडिट्स"
+          }
+        },
+        "kk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Жыл сайынғы төлем үшін 5 000 бонустық AI кредиті"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रति वार्षिक भुगतान 5,000 बोनस एआई क्रेडिट"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "เครดิต AI โบนัส 5,000 ต่อการชำระรายปี"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5.000 bonus-AI-credits per jaarlijkse betaling"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5.000 créditos de IA de bônus por pagamento anual"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5 000 bonus AI-krediter per årlig betalning"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5,000 זיכוי AI בונוס לכל תשלום שנתי"
+          }
+        },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ବାର୍ଷିକ ଦେୟ ପାଇଁ 5000 ବୋନସ୍ AI କ୍ରେଡିଟ୍ |"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5000 бонусных кредитов AI за каждый годовой платеж"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每年付款 5,000 個獎勵 AI 積分"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5000 رصيد إضافي من الذكاء الاصطناعي لكل دفعة سنوية"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每年付款 5,000 个奖励 AI 积分"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "연간 결제당 5,000 보너스 AI 크레딧"
+          }
+        },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "વાર્ષિક ચુકવણી દીઠ 5,000 બોનસ AI ક્રેડિટ"
+          }
+        },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "వార్షిక చెల్లింపుకు 5,000 బోనస్ AI క్రెడిట్‌లు"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5 000 bonus AI-krediittiä per vuosimaksu"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "年間支払いごとに 5,000 ボーナス AI クレジット"
+          }
+        }
+      }
+    },
+    "Choose a monthly or yearly plan, or add a credit pack. Local models do not spend credits.": {
+      "extractionState": "manual",
+      "localizations": {
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ਇੱਕ ਮਹੀਨਾਵਾਰ ਜਾਂ ਸਾਲਾਨਾ ਯੋਜਨਾ ਚੁਣੋ, ਜਾਂ ਇੱਕ ਕ੍ਰੈਡਿਟ ਪੈਕ ਸ਼ਾਮਲ ਕਰੋ। ਸਥਾਨਕ ਮਾਡਲ ਕ੍ਰੈਡਿਟ ਖਰਚ ਨਹੀਂ ਕਰਦੇ।"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alegeți un plan lunar sau anual sau adăugați un pachet de credite. Modelele locale nu cheltuiesc credite."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Изберете месечен или годишен план или добавете кредитен пакет. Местните модели не харчат кредити."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elija un plan mensual o anual, o agregue un paquete de crédito. Los modelos locales no gastan créditos."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pilih paket bulanan atau tahunan, atau tambahkan paket kredit. Model lokal tidak mengeluarkan kredit."
+          }
+        },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "പ്രതിമാസ അല്ലെങ്കിൽ വാർഷിക പ്ലാൻ തിരഞ്ഞെടുക്കുക, അല്ലെങ്കിൽ ഒരു ക്രെഡിറ്റ് പായ്ക്ക് ചേർക്കുക. പ്രാദേശിക മോഡലുകൾ ക്രെഡിറ്റുകൾ ചെലവഴിക്കുന്നില്ല."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மாதாந்திர அல்லது வருடாந்திர திட்டத்தைத் தேர்வுசெய்யவும் அல்லது கிரெடிட் பேக்கைச் சேர்க்கவும். உள்ளூர் மாதிரிகள் வரவுகளை செலவிடுவதில்லை."
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elija un plan mensual o anual, o agregue un paquete de crédito. Los modelos locales no gastan créditos."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wybierz plan miesięczny lub roczny albo dodaj pakiet punktów. Lokalne modele nie wydają kredytów."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "একটি মাসিক বা বার্ষিক পরিকল্পনা চয়ন করুন, বা একটি ক্রেডিট প্যাক যোগ করুন। স্থানীয় মডেল ক্রেডিট খরচ না."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli un piano mensile o annuale oppure aggiungi un pacchetto di crediti. I modelli locali non spendono crediti."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ایک ماہانہ یا سالانہ منصوبہ منتخب کریں، یا کریڈٹ پیک شامل کریں۔ مقامی ماڈل کریڈٹ خرچ نہیں کرتے ہیں۔"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trieu un pla mensual o anual, o afegiu un paquet de crèdits. Els models locals no gasten crèdits."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chọn gói hàng tháng hoặc hàng năm hoặc thêm gói tín dụng. Người mẫu địa phương không chi tín dụng."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a monthly or yearly plan, or add a credit pack. Local models do not spend credits."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Velg en månedlig eller årlig plan, eller legg til en kredittpakke. Lokale modeller bruker ikke kreditter."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vyberte si mesačný alebo ročný plán alebo pridajte balík kreditov. Miestne modely nemíňajú kredity."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Izberite mesečni ali letni paket ali dodajte kreditni paket. Lokalni modeli ne porabljajo kreditov."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aylık veya yıllık bir plan seçin veya bir kredi paketi ekleyin. Yerel modeller kredi harcamaz."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vyberte si měsíční nebo roční plán nebo přidejte balíček kreditů. Místní modely neutrácejí kredity."
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolha um plano mensal ou anual ou adicione um pacote de créditos. Os modelos locais não gastam créditos."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Виберіть місячний або річний план або додайте кредитний пакет. Місцеві моделі не витрачають кредити."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vælg en månedlig eller årlig plan, eller tilføj en kreditpakke. Lokale modeller bruger ikke kreditter."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez un forfait mensuel ou annuel, ou ajoutez un pack de crédits. Les modèles locaux ne dépensent pas de crédits."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pilih pelan bulanan atau tahunan, atau tambahkan pek kredit. Model tempatan tidak membelanjakan kredit."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Επιλέξτε ένα μηνιαίο ή ετήσιο πρόγραμμα ή προσθέστε ένα πακέτο πίστωσης. Τα τοπικά μοντέλα δεν ξοδεύουν πιστώσεις."
+          }
+        },
+        "fr-CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez un forfait mensuel ou annuel, ou ajoutez un pack de crédits. Les modèles locaux ne dépensent pas de crédits."
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odaberite mjesečni ili godišnji plan ili dodajte kreditni paket. Domaći modeli ne troše kredite."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Válasszon havi vagy éves csomagot, vagy adjon hozzá hitelcsomagot. A helyi modellek nem költenek kreditet."
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ಮಾಸಿಕ ಅಥವಾ ವಾರ್ಷಿಕ ಯೋಜನೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ ಅಥವಾ ಕ್ರೆಡಿಟ್ ಪ್ಯಾಕ್ ಸೇರಿಸಿ. ಸ್ಥಳೀಯ ಮಾದರಿಗಳು ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಖರ್ಚು ಮಾಡುವುದಿಲ್ಲ."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wählen Sie einen Monats- oder Jahresplan oder fügen Sie ein Guthabenpaket hinzu. Lokale Models geben keine Credits aus."
+          }
+        },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मासिक किंवा वार्षिक योजना निवडा किंवा क्रेडिट पॅक जोडा. स्थानिक मॉडेल क्रेडिट्स खर्च करत नाहीत."
+          }
+        },
+        "kk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Айлық немесе жылдық жоспарды таңдаңыз немесе несие пакетін қосыңыз. Жергілікті модельдер несие жұмсамайды."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "एक मासिक या वार्षिक योजना चुनें, या एक क्रेडिट पैक जोड़ें। स्थानीय मॉडल क्रेडिट खर्च नहीं करते."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "เลือกแผนรายเดือนหรือรายปี หรือเพิ่มชุดเครดิต โมเดลท้องถิ่นไม่ใช้เครดิต"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kies een maand- of jaarabonnement, of voeg een creditpakket toe. Lokale modellen geven geen credits uit."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolha um plano mensal ou anual ou adicione um pacote de créditos. Os modelos locais não gastam créditos."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Välj en månads- eller årsprenumeration, eller lägg till ett kreditpaket. Lokala modeller spenderar inte krediter."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "בחר תוכנית חודשית או שנתית, או הוסף חבילת אשראי. דוגמניות מקומיות לא מוציאות זיכויים."
+          }
+        },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ଏକ ମାସିକ କିମ୍ବା ବାର୍ଷିକ ଯୋଜନା ବାଛନ୍ତୁ, କିମ୍ବା ଏକ କ୍ରେଡିଟ୍ ପ୍ୟାକ୍ ଯୋଡନ୍ତୁ | ସ୍ଥାନୀୟ ମଡେଲଗୁଡିକ କ୍ରେଡିଟ୍ ଖର୍ଚ୍ଚ କରନ୍ତି ନାହିଁ |"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Выберите ежемесячный или годовой план или добавьте пакет кредитов. Местные модели не тратят кредиты."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選擇月度或年度計劃，或新增積分包。本地模型不花費積分。"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اختر خطة شهرية أو سنوية، أو قم بإضافة حزمة ائتمانية. النماذج المحلية لا تنفق الاعتمادات."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择月度或年度计划，或添加积分包。本地模型不花费积分。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "월간 또는 연간 요금제를 선택하거나 크레딧 팩을 추가하세요. 로컬 모델은 크레딧을 사용하지 않습니다."
+          }
+        },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "માસિક અથવા વાર્ષિક પ્લાન પસંદ કરો અથવા ક્રેડિટ પૅક ઉમેરો. સ્થાનિક મોડલ ક્રેડિટ ખર્ચ કરતા નથી."
+          }
+        },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "నెలవారీ లేదా వార్షిక ప్రణాళికను ఎంచుకోండి లేదా క్రెడిట్ ప్యాక్‌ని జోడించండి. స్థానిక నమూనాలు క్రెడిట్‌లను ఖర్చు చేయవు."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Valitse kuukausi- tai vuosisuunnitelma tai lisää luottopaketti. Paikalliset mallit eivät käytä luottoja."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "月ごとまたは年ごとのプランを選択するか、クレジット パックを追加します。ローカル モデルはクレジットを消費しません。"
+          }
+        }
+      }
+    },
+    "2,000 bonus AI credits per payment": {
+      "extractionState": "manual",
+      "localizations": {
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ਪ੍ਰਤੀ ਭੁਗਤਾਨ 2,000 ਬੋਨਸ AI ਕ੍ਰੈਡਿਟ"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2.000 de credite AI bonus per plată"
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2000 бонус AI кредита на плащане"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2000 créditos de IA adicionales por pago"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2.000 bonus kredit AI per pembayaran"
+          }
+        },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ഓരോ പേയ്‌മെൻ്റിനും 2,000 ബോണസ് AI ക്രെഡിറ്റുകൾ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஒரு கட்டணத்திற்கு 2,000 போனஸ் AI கிரெடிட்கள்"
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2000 créditos de IA adicionales por pago"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2000 dodatkowych kredytów AI na każdą płatność"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "পেমেন্ট প্রতি 2,000 বোনাস AI ক্রেডিট"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2.000 crediti AI bonus per pagamento"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2,000 بونس AI کریڈٹس فی ادائیگی"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2.000 crèdits addicionals d'IA per pagament"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2.000 tín dụng AI thưởng cho mỗi lần thanh toán"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2,000 bonus AI credits per payment"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2000 bonus AI-kreditter per betaling"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2 000 bonusových kreditov AI za platbu"
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2.000 bonus kreditov AI na plačilo"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ödeme başına 2.000 bonus AI kredisi"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2 000 bonusových kreditů AI za platbu"
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2.000 créditos de bónus de IA por pagamento"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2000 бонусних кредитів ШІ за платіж"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2.000 bonus AI-kreditter pr. betaling"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2 000 crédits IA bonus par paiement"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2,000 kredit AI bonus setiap pembayaran"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2.000 μπόνους πιστώσεις AI ανά πληρωμή"
+          }
+        },
+        "fr-CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2 000 crédits IA bonus par paiement"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2000 bonus AI kredita po plaćanju"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2000 bónusz AI kredit fizetésenként"
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ಪ್ರತಿ ಪಾವತಿಗೆ 2,000 ಬೋನಸ್ AI ಕ್ರೆಡಿಟ್‌ಗಳು"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2.000 Bonus-KI-Credits pro Zahlung"
+          }
+        },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रति पेमेंट 2,000 बोनस AI क्रेडिट्स"
+          }
+        },
+        "kk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Төлем үшін 2000 бонустық AI кредиті"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रति भुगतान 2,000 बोनस एआई क्रेडिट"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "เครดิต AI โบนัส 2,000 ต่อการชำระเงิน"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2.000 bonus-AI-credits per betaling"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2.000 créditos de bônus de IA por pagamento"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2 000 bonus AI-krediter per betalning"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2,000 זיכויי AI בונוס לכל תשלום"
+          }
+        },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ଦେୟ ପ୍ରତି 2,000 ବୋନସ୍ AI କ୍ରେଡିଟ୍ |"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2000 бонусных кредитов AI за каждый платеж"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每次付款可獲得 2,000 個獎勵 AI 積分"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2000 رصيد إضافي من الذكاء الاصطناعي لكل دفعة"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每次付款可获得 2,000 个奖励 AI 积分"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "결제당 2,000 보너스 AI 크레딧"
+          }
+        },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ચુકવણી દીઠ 2,000 બોનસ AI ક્રેડિટ"
+          }
+        },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ఒక్కో చెల్లింపుకు 2,000 బోనస్ AI క్రెడిట్‌లు"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2 000 bonus AI-krediittiä maksua kohden"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支払いごとに 2,000 ボーナス AI クレジット"
+          }
+        }
+      }
+    },
+    "Monthly and Lifetime plans include 2,000 bonus AI credits per payment. Yearly includes 5,000 bonus AI credits per annual payment.": {
+      "extractionState": "manual",
+      "localizations": {
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ਮਹੀਨਾਵਾਰ ਅਤੇ ਜੀਵਨ ਕਾਲ ਦੀਆਂ ਯੋਜਨਾਵਾਂ ਵਿੱਚ ਪ੍ਰਤੀ ਭੁਗਤਾਨ 2,000 ਬੋਨਸ AI ਕ੍ਰੈਡਿਟ ਸ਼ਾਮਲ ਹੁੰਦੇ ਹਨ। ਸਾਲਾਨਾ ਵਿੱਚ 5,000 ਬੋਨਸ AI ਕ੍ਰੈਡਿਟ ਪ੍ਰਤੀ ਸਲਾਨਾ ਭੁਗਤਾਨ ਸ਼ਾਮਲ ਹੁੰਦੇ ਹਨ।"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planurile lunare și pe viață includ 2.000 de credite AI bonus per plată. Anual include 5.000 de credite AI bonus per plată anuală."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Месечните и доживотните планове включват 2000 бонус AI кредита на плащане. Годишно включва 5000 бонус AI кредита на годишно плащане."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los planes mensuales y de por vida incluyen 2000 créditos AI adicionales por pago. Anualmente incluye 5000 créditos de IA adicionales por pago anual."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paket Bulanan dan Seumur Hidup mencakup 2.000 bonus kredit AI per pembayaran. Tahunan mencakup 5.000 bonus kredit AI per pembayaran tahunan."
+          }
+        },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "പ്രതിമാസ, ലൈഫ് ടൈം പ്ലാനുകളിൽ ഓരോ പേയ്‌മെൻ്റിനും 2,000 ബോണസ് AI ക്രെഡിറ്റുകൾ ഉൾപ്പെടുന്നു. വാർഷിക പേയ്‌മെൻ്റിന് 5,000 ബോണസ് AI ക്രെഡിറ്റുകൾ പ്രതിവർഷം ഉൾപ്പെടുന്നു."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மாதாந்திர மற்றும் வாழ்நாள் திட்டங்களில் ஒரு கட்டணத்திற்கு 2,000 போனஸ் AI கிரெடிட்கள் அடங்கும். ஆண்டுக்கு 5,000 போனஸ் AI கிரெடிட்கள் ஒரு வருடாந்திர கட்டணத்தில் அடங்கும்."
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los planes mensuales y de por vida incluyen 2000 créditos AI adicionales por pago. Anualmente incluye 5000 créditos de IA adicionales por pago anual."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plany miesięczne i dożywotnie obejmują 2000 dodatkowych kredytów AI na każdą płatność. Opcja roczna obejmuje 5000 dodatkowych kredytów AI na każdą płatność roczną."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "মাসিক এবং লাইফটাইম প্ল্যানে প্রতি পেমেন্টে 2,000 বোনাস AI ক্রেডিট অন্তর্ভুক্ত। বার্ষিক পেমেন্ট প্রতি 5,000 বোনাস AI ক্রেডিট অন্তর্ভুক্ত।"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I piani mensili e a vita includono 2.000 crediti AI bonus per pagamento. Annuale include 5.000 crediti AI bonus per pagamento annuale."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ماہانہ اور لائف ٹائم پلانز میں فی ادائیگی 2,000 بونس AI کریڈٹس شامل ہیں۔ سالانہ میں 5,000 بونس AI کریڈٹس فی سالانہ ادائیگی شامل ہیں۔"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Els plans mensuals i de per vida inclouen 2.000 crèdits d'IA de bonificació per pagament. Anualment inclou 5.000 crèdits addicionals d'IA per pagament anual."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Các gói hàng tháng và trọn đời bao gồm 2.000 tín dụng AI thưởng cho mỗi lần thanh toán. Hàng năm bao gồm 5.000 tín dụng AI thưởng cho mỗi khoản thanh toán hàng năm."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monthly and Lifetime plans include 2,000 bonus AI credits per payment. Yearly includes 5,000 bonus AI credits per annual payment."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Måneds- og levetidsplaner inkluderer 2000 bonus AI-kreditter per betaling. Årlig inkluderer 5 000 bonus AI-kreditter per årlig betaling."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mesačné a celoživotné plány zahŕňajú 2 000 bonusových kreditov AI na platbu. Ročne zahŕňa 5 000 bonusových kreditov AI za ročnú platbu."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mesečni in življenjski načrti vključujejo 2.000 bonus kreditov AI na plačilo. Letno vključuje 5000 bonus kreditov AI na letno plačilo."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aylık ve Ömür Boyu planlar, ödeme başına 2.000 bonus AI kredisi içerir. Yıllık, yıllık ödeme başına 5.000 bonus AI kredisini içerir."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Měsíční a celoživotní plány zahrnují 2 000 bonusových kreditů AI na platbu. Ročně zahrnuje 5 000 bonusových kreditů AI za roční platbu."
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os planos mensal e vitalício incluem 2.000 créditos de IA de bónus por pagamento. Anualmente inclui 5.000 créditos de bónus de IA por pagamento anual."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Щомісячний і довічний плани включають 2000 бонусних кредитів AI за платіж. Річний включає 5000 бонусних кредитів ШІ за щорічний платіж."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Månedlige og livslange planer inkluderer 2.000 bonus AI-kreditter pr. betaling. Årligt inkluderer 5.000 bonus AI-kreditter pr. årlig betaling."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les forfaits mensuels et à vie incluent 2 000 crédits IA bonus par paiement. L'abonnement annuel comprend 5 000 crédits IA bonus par paiement annuel."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pelan bulanan dan Sepanjang Hayat termasuk 2,000 kredit AI bonus setiap pembayaran. Setiap tahun termasuk 5,000 kredit AI bonus setiap pembayaran tahunan."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Τα μηνιαία και ισόβια προγράμματα περιλαμβάνουν 2.000 μπόνους πιστώσεις AI ανά πληρωμή. Το ετήσιο περιλαμβάνει 5.000 μπόνους πιστώσεις AI ανά ετήσια πληρωμή."
+          }
+        },
+        "fr-CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les forfaits mensuels et à vie incluent 2 000 crédits IA bonus par paiement. L'abonnement annuel comprend 5 000 crédits IA bonus par paiement annuel."
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mjesečni i doživotni planovi uključuju 2000 bonus AI kredita po plaćanju. Godišnje uključuje 5000 bonus AI kredita po godišnjoj uplati."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A havi és életre szóló előfizetések fizetésenként 2000 bónusz AI-kreditet tartalmaznak. Évente 5000 bónusz AI-kreditet tartalmaz éves befizetésenként."
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ಮಾಸಿಕ ಮತ್ತು ಜೀವಮಾನದ ಯೋಜನೆಗಳು ಪ್ರತಿ ಪಾವತಿಗೆ 2,000 ಬೋನಸ್ AI ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಒಳಗೊಂಡಿವೆ. ವಾರ್ಷಿಕ ಪಾವತಿಗೆ 5,000 ಬೋನಸ್ AI ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಒಳಗೊಂಡಿರುತ್ತದೆ."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monats- und Lebenszeitpläne beinhalten 2.000 Bonus-AI-Credits pro Zahlung. Jährlich beinhaltet 5.000 Bonus-AI-Credits pro Jahreszahlung."
+          }
+        },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मासिक आणि आजीवन योजनांमध्ये प्रति पेमेंट 2,000 बोनस एआय क्रेडिट्स समाविष्ट आहेत. वार्षिक 5,000 बोनस AI क्रेडिट प्रति वार्षिक पेमेंट समाविष्ट आहे."
+          }
+        },
+        "kk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ай сайынғы және өмірлік жоспарларға төлем үшін 2000 бонустық AI кредиті кіреді. Жыл сайын жылдық төлемге 5 000 бонустық AI кредиті кіреді."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मासिक और आजीवन योजनाओं में प्रति भुगतान 2,000 बोनस एआई क्रेडिट शामिल हैं। वार्षिक भुगतान में 5,000 बोनस एआई क्रेडिट शामिल हैं।"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "แผนรายเดือนและตลอดชีพรวมเครดิต AI โบนัส 2,000 เครดิตต่อการชำระเงิน รวมเครดิต AI โบนัส 5,000 ต่อปีต่อการชำระรายปี"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maandelijkse en levenslange abonnementen omvatten 2.000 bonus-AI-credits per betaling. Jaarlijks omvat 5.000 bonus-AI-credits per jaarlijkse betaling."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os planos mensal e vitalício incluem 2.000 créditos de IA de bônus por pagamento. Anualmente inclui 5.000 créditos de bônus de IA por pagamento anual."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Månads- och livstidsplaner inkluderar 2 000 bonus AI-krediter per betalning. Varje år inkluderar 5 000 bonus AI-krediter per årlig betalning."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "תוכניות חודשיות ותוכניות לכל החיים כוללות 2,000 נקודות בונוס של AI לכל תשלום. שנתי כולל 5,000 זיכויי AI בונוס לכל תשלום שנתי."
+          }
+        },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ମାସିକ ଏବଂ ଆଜୀବନ ଯୋଜନାରେ ପ୍ରତି ପେମେଣ୍ଟରେ 2,000 ବୋନସ୍ AI କ୍ରେଡିଟ୍ ଅନ୍ତର୍ଭୁକ୍ତ | ବାର୍ଷିକ ଦେୟ ପ୍ରତି 5000 ବୋନସ୍ AI କ୍ରେଡିଟ୍ ଅନ୍ତର୍ଭୁକ୍ତ କରେ |"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ежемесячный и пожизненный планы включают 2000 бонусных кредитов AI за каждый платеж. Ежегодно включает 5000 бонусных кредитов AI за каждый годовой платеж."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每月和終身計劃包括每次付款 2,000 個獎勵 AI 積分。每年包括每次年付款 5,000 個獎勵 AI 積分。"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تشتمل الخطط الشهرية ومدى الحياة على 2000 رصيد إضافي من الذكاء الاصطناعي لكل دفعة. يتضمن سنويًا 5000 رصيد إضافي من الذكاء الاصطناعي لكل دفعة سنوية."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每月和终身计划包括每次付款 2,000 个奖励 AI 积分。每年包括每次年付款 5,000 个奖励 AI 积分。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "월간 및 평생 플랜에는 결제당 2,000개의 보너스 AI 크레딧이 포함됩니다. 연간에는 연간 결제당 5,000개의 보너스 AI 크레딧이 포함됩니다."
+          }
+        },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "માસિક અને આજીવન યોજનાઓમાં ચુકવણી દીઠ 2,000 બોનસ AI ક્રેડિટનો સમાવેશ થાય છે. વાર્ષિકમાં વાર્ષિક ચુકવણી દીઠ 5,000 બોનસ AI ક્રેડિટનો સમાવેશ થાય છે."
+          }
+        },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "నెలవారీ మరియు జీవితకాల ప్లాన్‌లలో ఒక్కో చెల్లింపుకు 2,000 బోనస్ AI క్రెడిట్‌లు ఉంటాయి. వార్షిక చెల్లింపుకు 5,000 బోనస్ AI క్రెడిట్‌లను కలిగి ఉంటుంది."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kuukausittaiset ja elinikäiset suunnitelmat sisältävät 2 000 bonus AI-krediittiä maksua kohden. Vuosittain sisältää 5 000 bonus AI-krediittiä per vuosimaksu."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "月間プランと生涯プランには、支払いごとに 2,000 ボーナス AI クレジットが含まれます。年間には、年間支払いごとに 5,000 ボーナス AI クレジットが含まれます。"
+          }
+        }
+      }
+    },
+    "%@ every %@. Auto-renews. Cancel anytime.": {
+      "extractionState": "manual",
+      "localizations": {
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ ਹਰ %2$@। ਸਵੈ-ਨਵੀਨੀਕਰਨ। ਕਿਸੇ ਵੀ ਸਮੇਂ ਰੱਦ ਕਰੋ।"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ la fiecare %2$@. Se reînnoiește automat. Anulați oricând."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ на всеки %2$@. Автоматично подновява. Отказ по всяко време."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ cada %2$@. Renovación automática. Cancele en cualquier momento."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ setiap %2$@. Perpanjangan otomatis. Batalkan kapan saja."
+          }
+        },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ ഓരോ %2$@-ലും. സ്വയമേവ പുതുക്കുന്നു. എപ്പോൾ വേണമെങ്കിലും റദ്ദാക്കുക."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ ஒவ்வொரு %2$@. தானாக புதுப்பிக்கிறது. எப்போது வேண்டுமானாலும் ரத்து செய்யலாம்."
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ cada %2$@. Renovación automática. Cancele en cualquier momento."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ co %2$@. Automatyczne odnawianie. Anuluj w dowolnym momencie."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ প্রতি %2$@। অটো-রিনিউ। যেকোনো সময় বাতিল করুন।"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ ogni %2$@. Rinnovo automatico. Annulla in qualsiasi momento."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ ہر %2$@۔ خودکار تجدید۔ کسی بھی وقت منسوخ کریں۔"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ cada %2$@. Renovació automàtica. Cancel·la en qualsevol moment."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ mỗi %2$@. Tự động gia hạn. Hủy bỏ bất cứ lúc nào."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ every %@. Auto-renews. Cancel anytime."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ hver %2$@. Automatisk fornyelse. Avbryt når som helst."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ každých %2$@. Automaticky sa obnovuje. Zrušiť kedykoľvek."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ vsak %2$@. Samodejno obnavlja. Prekliči kadar koli."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Her %2$@ %1$@. Otomatik yenilenir. İstediğiniz zaman iptal edin."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ každých %2$@. Automaticky se obnovuje. Kdykoli zrušit."
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ a cada %2$@. Renovação automática. Cancele a qualquer momento."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ кожні %2$@. Автоматично поновлюється. Скасувати будь-коли."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ hver %2$@. Automatisk fornyelse. Annuller når som helst."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ tous les %2$@. Renouvellement automatique. Annulez à tout moment."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ setiap %2$@. Autobaharui. Batalkan bila-bila masa."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ κάθε %2$@. Αυτόματη ανανέωση. Ακύρωση ανά πάσα στιγμή."
+          }
+        },
+        "fr-CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ tous les %2$@. Renouvellement automatique. Annulez à tout moment."
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ svakih %2$@. Automatski se obnavlja. Otkaži bilo kada."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ minden %2$@. Automatikus megújítás. Bármikor lemondhatja."
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ ಪ್ರತಿ %2$@. ಸ್ವಯಂ ನವೀಕರಣ. ಯಾವಾಗ ಬೇಕಾದರೂ ರದ್ದುಮಾಡಿ."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ alle %2$@. Automatische Verlängerung. Jederzeit kündbar."
+          }
+        },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ प्रत्येक %2$@. स्वयं-नूतनीकरण. कधीही रद्द करा."
+          }
+        },
+        "kk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ сайын %2$@. Автоматты түрде жаңартылады. Кез келген уақытта бас тарту."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ प्रत्येक %2$@। स्वतः नवीनीकरण. किसी भी समय रद्द करें."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ ทุกๆ %2$@ ต่ออายุอัตโนมัติ ยกเลิกได้ตลอดเวลา"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ elke %2$@. Automatische verlenging. Annuleer op elk gewenst moment."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ a cada %2$@. Renovação automática. Cancele a qualquer momento."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ varje %2$@. Automatisk förnyelse. Avbryt när som helst."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ כל %2$@. חידוש אוטומטי. בטל בכל עת."
+          }
+        },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ ପ୍ରତ୍ୟେକ %2$@ | ଅଟୋ-ନବୀକରଣ | ଯେକ time ଣସି ସମୟରେ ବାତିଲ୍ କରନ୍ତୁ |"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ каждые %2$@. Автоматическое продление. Отменить в любое время."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 每 %2$@。自動續訂。隨時取消。"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ كل %2$@. التجديد التلقائي. إلغاء في أي وقت."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 每 %2$@。自动续订。随时取消。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%2$@마다 %1$@. 자동 갱신됩니다. 언제든지 취소하세요."
+          }
+        },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ દરેક %2$@. સ્વતઃ-નવીકરણ. કોઈપણ સમયે રદ કરો."
+          }
+        },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ ప్రతి %2$@. స్వయంచాలకంగా పునరుద్ధరించబడుతుంది. ఎప్పుడైనా రద్దు చేయండి."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ joka %2$@. Uusiutuu automaattisesti. Peru milloin tahansa."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ ごとに %2$@。自動更新。いつでもキャンセルできます。"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

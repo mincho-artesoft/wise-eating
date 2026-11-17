@@ -33,9 +33,8 @@ struct CatalogManifest: Codable, Equatable, Sendable {
     let expected: Expected
 }
 
-@MainActor
 enum CatalogStoreManager {
-    struct PreparedCatalog {
+    struct PreparedCatalog: Sendable {
         let storeURL: URL
         let manifest: CatalogManifest
         let installedNewCatalog: Bool
@@ -136,12 +135,12 @@ enum CatalogStoreManager {
         // lightweight schema migration when an older bundled store is used.
         // Newly rebuilt bundles are already current and this is a cheap open.
         try migrateAndValidateStore(at: stagedStoreURL, manifest: manifest)
-        try checkpointAndValidateSQLite(at: stagedStoreURL)
+        try checkpointAndValidateSQLite(at: stagedStoreURL, validate: false)
         // SwiftData's persistent model metadata also depends on the complete
         // multi-configuration container schema. Finalize the staged file with
         // the exact combined model before it is published read-only.
         try finalizeForCombinedMount(at: stagedStoreURL)
-        try checkpointAndValidateSQLite(at: stagedStoreURL)
+        try checkpointAndValidateSQLite(at: stagedStoreURL, validate: false)
         try assignFreshStoreIdentifier(at: stagedStoreURL)
         try checkpointAndValidateSQLite(at: stagedStoreURL)
 
@@ -231,7 +230,7 @@ enum CatalogStoreManager {
         )
         var descriptor = FetchDescriptor<FoodItem>()
         descriptor.fetchLimit = 1
-        guard try !container.mainContext.fetch(descriptor).isEmpty else {
+        guard try !ModelContext(container).fetch(descriptor).isEmpty else {
             throw CatalogError.integrityCheck("finalized catalog is empty")
         }
         withExtendedLifetime(container) {}
@@ -391,7 +390,7 @@ enum CatalogStoreManager {
             for: DatabaseSchema.catalog,
             configurations: [configuration]
         )
-        let context = container.mainContext
+        let context = ModelContext(container)
 
         // Practices were historically shipped as JSON rather than in the
         // SQLite archive. Install them into the staged catalogue, never into
@@ -480,7 +479,7 @@ enum CatalogStoreManager {
         }
     }
 
-    private static func checkpointAndValidateSQLite(at storeURL: URL) throws {
+    private static func checkpointAndValidateSQLite(at storeURL: URL, validate: Bool = true) throws {
         var database: OpaquePointer?
         guard sqlite3_open_v2(
             storeURL.path,
@@ -492,12 +491,15 @@ enum CatalogStoreManager {
         }
         defer { sqlite3_close(database) }
 
-        sqlite3_wal_checkpoint_v2(database, nil, SQLITE_CHECKPOINT_TRUNCATE, nil, nil)
+        guard sqlite3_wal_checkpoint_v2(database, nil, SQLITE_CHECKPOINT_TRUNCATE, nil, nil) == SQLITE_OK else {
+            throw CatalogError.integrityCheck("WAL checkpoint failed")
+        }
+        guard validate else { return }
 
         var statement: OpaquePointer?
         guard sqlite3_prepare_v2(
             database,
-            "PRAGMA integrity_check",
+            "PRAGMA quick_check(1)",
             -1,
             &statement,
             nil

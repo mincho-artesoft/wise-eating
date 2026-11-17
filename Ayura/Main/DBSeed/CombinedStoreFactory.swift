@@ -1,25 +1,18 @@
 import Foundation
 import SwiftData
 
-/// Opens the read-only catalogue and writable user databases in one container.
-///
-/// SwiftData exposes configurations as an unordered `Set`, while overlapping
-/// entity schemas send a new object to the last configuration in that set. The
-/// user URL is expressed through an equivalent `..` path so its hash can vary;
-/// candidates are accepted only after a real insert/save/delete probe proves
-/// writable-store routing. An unverified container is never returned to the app.
-@MainActor
+/// Reads the immutable catalogue together with user data. Shared model writes
+/// use a single-configuration user container, never unordered store routing.
 enum CombinedStoreFactory {
-    private static let maximumAttempts = 128
-    private static var cachedUserWriteContainer: ModelContainer?
-    private static var cachedUserWriteURL: URL?
+    @MainActor private static var cachedUserWriteContainer: ModelContainer?
+    @MainActor private static var cachedUserWriteURL: URL?
 
     /// Creates an unambiguous write context for user-owned shared models.
     /// The main app container mounts both stores for combined reads, but
     /// SwiftData does not expose an API for selecting the destination
     /// configuration of an insert. A single-configuration container removes
     /// that ambiguity while writing the same user SQLite store.
-    static func makeUserWriteContext(
+    @MainActor static func makeUserWriteContext(
         from combinedContainer: ModelContainer
     ) throws -> ModelContext {
         let configurations = Array(combinedContainer.configurations)
@@ -53,88 +46,32 @@ enum CombinedStoreFactory {
         userStoreURL: URL,
         catalogStoreURL: URL
     ) throws -> ModelContainer {
-        let parent = userStoreURL.deletingLastPathComponent()
-        let routingRoot = parent
-            .appendingPathComponent(".swiftdata-store-routes", isDirectory: true)
-            .appendingPathComponent(UUID().uuidString, isDirectory: true)
-        try FileManager.default.createDirectory(
-            at: routingRoot,
-            withIntermediateDirectories: true
+        let userConfiguration = ModelConfiguration(
+            DatabaseSchema.userConfigurationName, schema: userSchema,
+            url: userStoreURL, allowsSave: true, cloudKitDatabase: .none
         )
-
-        for attempt in 0..<maximumAttempts {
-            let routeDirectory = routingRoot.appendingPathComponent(
-                "route-\(attempt)",
-                isDirectory: true
-            )
-            try FileManager.default.createDirectory(
-                at: routeDirectory,
-                withIntermediateDirectories: true
-            )
-            let userAliasURL = routeDirectory.appendingPathComponent(
-                "../../../\(userStoreURL.lastPathComponent)"
-            )
-
-            let userConfiguration = ModelConfiguration(
-                DatabaseSchema.userConfigurationName,
-                schema: userSchema,
-                url: userAliasURL,
-                allowsSave: true,
-                cloudKitDatabase: .none
-            )
-            let catalogConfiguration = ModelConfiguration(
-                DatabaseSchema.catalogConfigurationName,
-                schema: catalogSchema,
-                url: catalogStoreURL,
-                allowsSave: false,
-                cloudKitDatabase: .none
-            )
-
-            // ModelContainer internally exposes configurations as a Set and
-            // assigns an overlapping model to the last matching entry. Avoid
-            // opening both SQLite files and running a write probe for aliases
-            // whose in-process Set order already ends in the catalogue.
-            let configurationOrder = Array(Set([
-                catalogConfiguration,
-                userConfiguration,
-            ]))
-            guard configurationOrder.last?.name
-                    == DatabaseSchema.userConfigurationName else {
-                continue
-            }
-
-            let container = try ModelContainer(
-                for: schema,
-                configurations: [catalogConfiguration, userConfiguration]
-            )
-
-            do {
-                try verifyWritableRouting(in: container)
-                if ProcessInfo.processInfo.arguments.contains(
-                    "-catalogSeparationSmokeTest"
-                ) {
-                    print("WRITE_ROUTING|PASS|attempt=\(attempt)")
-                }
-                return container
-            } catch {
-                // The candidate container is discarded without ever modifying
-                // the read-only catalogue; try another equivalent user URL.
-                if ProcessInfo.processInfo.arguments.contains(
-                    "-catalogSeparationSmokeTest"
-                ) {
-                    print("WRITE_ROUTING|RETRY|attempt=\(attempt)|\(error)")
-                }
-                continue
-            }
+        let catalogConfiguration = ModelConfiguration(
+            DatabaseSchema.catalogConfigurationName, schema: catalogSchema,
+            url: catalogStoreURL, allowsSave: false, cloudKitDatabase: .none
+        )
+        // Test the same single-store destination used by production editors.
+        // A combined-context insert is ambiguous for overlapping schemas and
+        // is not a valid test of the explicit user writer.
+        let writer = try ModelContainer(for: userSchema, configurations: [userConfiguration])
+        try verifyWritableRouting(in: writer)
+        let reader = try ModelContainer(
+            for: schema, configurations: [catalogConfiguration, userConfiguration]
+        )
+        if ProcessInfo.processInfo.arguments.contains("-catalogSeparationSmokeTest") {
+            print("WRITE_ROUTING|PASS|single-user-store")
         }
-
-        throw CombinedStoreError.couldNotRouteWrites
+        return reader
     }
 
     private static func verifyWritableRouting(
         in container: ModelContainer
     ) throws {
-        let context = container.mainContext
+        let context = ModelContext(container)
         context.autosaveEnabled = false
         let token = UUID().uuidString
         guard let userStoreIdentifier = try context.fetch(

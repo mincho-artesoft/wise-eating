@@ -35,7 +35,7 @@ struct SubscriptionListView: View {
                 
                 // 2. Subscription Cards Section
                 VStack(spacing: 12) {
-                    HStack(spacing: 10) {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 240))], spacing: 12) {
                         ForEach(products) { product in
                             let isActive = manager.purchasedProductIDs.contains(product.id)
                             let isSelectedOrActive = isActive || product.id == selectedProductID
@@ -170,7 +170,7 @@ struct SubscriptionListView: View {
                 Button {
                     Task { await manager.purchase(product) }
                 } label: {
-                    let label = product.subscription?.introductoryOffer != nil ? "Start Free Trial" : "Subscribe Now"
+                    let label = manager.eligibleTrialIDs.contains(product.id) ? "Start Free Trial" : "Subscribe Now"
                     Text(label)
                         .font(.headline.weight(.semibold))
                         .padding(.vertical, 12)

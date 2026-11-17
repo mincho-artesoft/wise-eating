@@ -9,7 +9,10 @@ enum SubscriptionProductID {
     static let advanced = "ayurveda.asana.yoga.advanced"
     static let premium = "ayurveda.asana.yoga.premium"
 
-    static let all = [noAds, advanced, premium]
+    static let noAdsYearly = noAds + ".yearly"
+    static let advancedYearly = advanced + ".yearly"
+    static let premiumYearly = premium + ".yearly"
+    static let all = [noAdsYearly, noAds, advancedYearly, advanced, premiumYearly, premium]
 }
 
 private enum SubscriptionTier: Int {
@@ -19,11 +22,11 @@ private enum SubscriptionTier: Int {
 
     init?(productID: String) {
         switch productID {
-        case SubscriptionProductID.noAds:
+        case SubscriptionProductID.noAds, SubscriptionProductID.noAdsYearly:
             self = .noAds
-        case SubscriptionProductID.advanced:
+        case SubscriptionProductID.advanced, SubscriptionProductID.advancedYearly:
             self = .advanced
-        case SubscriptionProductID.premium:
+        case SubscriptionProductID.premium, SubscriptionProductID.premiumYearly:
             self = .premium
         default:
             return nil
@@ -92,6 +95,7 @@ class SubscriptionManager: ObservableObject {
         }
 
     @Published var products: [Product] = []
+    @Published private(set) var eligibleTrialIDs: Set<String> = []
     @Published var purchasedProductIDs: Set<String> = [] {
         didSet { updateSubscriptionStatus() }
     }
@@ -143,6 +147,15 @@ class SubscriptionManager: ObservableObject {
                 print("   → id=\(product.id), name=\(product.displayName)")
             }
 
+            var trials = Set<String>()
+            for product in fetched {
+                if let subscription = product.subscription,
+                   subscription.introductoryOffer?.paymentMode == .freeTrial,
+                   await subscription.isEligibleForIntroOffer {
+                    trials.insert(product.id)
+                }
+            }
+            eligibleTrialIDs = trials
             self.products = ids.compactMap { id in
                 fetched.first(where: { $0.id == id })
             }
@@ -157,7 +170,7 @@ class SubscriptionManager: ObservableObject {
     // MARK: - Purchase
     func canPurchase(_ newProduct: Product) -> Bool {
         guard hasActiveSubscription else { return true }
-        if purchasedProductIDs.contains(newProduct.id) { return true }
+        if purchasedProductIDs.contains(newProduct.id) { return false }
         return isUpgradeable(to: newProduct)
     }
 
@@ -168,10 +181,11 @@ class SubscriptionManager: ObservableObject {
         else { return false }
 
         return newTier.rawValue > currentTier.rawValue
+            || (newTier == currentTier && newProduct.id.hasSuffix(".yearly") && !currentID.hasSuffix(".yearly"))
     }
 
     func purchase(_ product: Product) async {
-        if hasActiveSubscription && !isUpgradeable(to: product) && !purchasedProductIDs.contains(product.id) {
+        if !canPurchase(product) {
             print("Cannot purchase – already have non-upgradeable subscription.")
             return
         }
@@ -218,7 +232,7 @@ class SubscriptionManager: ObservableObject {
             do {
                 let tx = try checkVerified(verification)
                 if SubscriptionProductID.all.contains(tx.productID),
-                   tx.revocationDate == nil,
+                   tx.revocationDate == nil, !tx.isUpgraded,
                    let expiry = tx.expirationDate,
                    expiry > Date() {
                     activeIDs.insert(tx.productID)
@@ -232,7 +246,8 @@ class SubscriptionManager: ObservableObject {
         if let highestTierProductID = activeIDs.max(by: { lhs, rhs in
             let lhsTier = SubscriptionTier(productID: lhs)?.rawValue ?? 0
             let rhsTier = SubscriptionTier(productID: rhs)?.rawValue ?? 0
-            return lhsTier < rhsTier
+            if lhsTier != rhsTier { return lhsTier < rhsTier }
+            return !lhs.hasSuffix(".yearly") && rhs.hasSuffix(".yearly")
         }) {
             activeIDs = [highestTierProductID]
         }
@@ -265,7 +280,8 @@ class SubscriptionManager: ObservableObject {
         products.sorted {
             let lhsTier = SubscriptionTier(productID: $0.id)?.rawValue ?? 0
             let rhsTier = SubscriptionTier(productID: $1.id)?.rawValue ?? 0
-            return lhsTier < rhsTier
+            if lhsTier != rhsTier { return lhsTier < rhsTier }
+            return $0.id.hasSuffix(".yearly") && !$1.id.hasSuffix(".yearly")
         }
     }
 
@@ -276,13 +292,13 @@ class SubscriptionManager: ObservableObject {
               return
           }
           
-          if purchasedProductIDs.contains(SubscriptionProductID.premium) {
+          if !purchasedProductIDs.isDisjoint(with: [SubscriptionProductID.premium, SubscriptionProductID.premiumYearly]) {
               subscriptionStatus = .premium
               print("💎 [SubscriptionManager] Status updated: PREMIUM")
-          } else if purchasedProductIDs.contains(SubscriptionProductID.advanced) {
+          } else if !purchasedProductIDs.isDisjoint(with: [SubscriptionProductID.advanced, SubscriptionProductID.advancedYearly]) {
               subscriptionStatus = .advance
               print("💎 [SubscriptionManager] Status updated: ADVANCED")
-          } else if purchasedProductIDs.contains(SubscriptionProductID.noAds) {
+          } else if !purchasedProductIDs.isDisjoint(with: [SubscriptionProductID.noAds, SubscriptionProductID.noAdsYearly]) {
               subscriptionStatus = .removeAds
               print("💎 [SubscriptionManager] Status updated: REMOVE ADS")
           } else {

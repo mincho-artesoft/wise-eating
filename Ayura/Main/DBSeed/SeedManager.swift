@@ -11,6 +11,18 @@ enum SeedManager {
         let ctx = GlobalState.modelContext!
         ctx.autosaveEnabled = false
 
+        if CatalogReferenceResolver.catalogStoreIdentifier != nil {
+            // The manifest-verified immutable catalogue and legacy user
+            // migration were prepared on the bootstrap worker. Re-running
+            // seed decoders here duplicates expensive work on the main actor
+            // and must never try to insert into the read-only catalogue.
+            do { _ = try RecipeNutritionProjection.shared.load(context: ctx) }
+            catch { print("Could not load recipe nutrition display data: \(error)") }
+            ctx.autosaveEnabled = true
+            AyurvedaAsanaYogaLaunchProbe.event("seed-checks-end")
+            return
+        }
+
         migrateExerciseDurationsIfNeeded(context: ctx)
         removeBundledExercisesIfNeeded(context: ctx)
         seedYogaIfNeeded(context: ctx)

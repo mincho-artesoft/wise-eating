@@ -404,16 +404,18 @@ struct BarcodeScannerView: View {
     private func createNewFoodItemAndAdd(from scannedItem: ScannedItem) {
         guard let productName = scannedItem.productName else { return }
 
-        let newFoodItem = FoodItem(id: UUID(), name: productName)
+        let newFoodItem = FoodItem(id: UUID(), name: productName, isUserAdded: true)
 
 
-        modelContext.insert(newFoodItem)
         do {
-            try modelContext.save()
+            let writeContext = try CombinedStoreFactory.makeUserWriteContext(from: modelContext.container)
+            writeContext.insert(newFoodItem)
+            try writeContext.save()
             onAddFoodItem(newFoodItem)
             withAnimation { deleteScannedItem(scannedItem) }
         } catch {
             print("Failed to save new food item from barcode: \(error)")
+            return
         }
     }
 
@@ -422,16 +424,18 @@ struct BarcodeScannerView: View {
         guard let productName = scannedItem.productName else { return }
         guard ensureAIAvailableOrShowMessage() else { return }
 
-        let newFoodItem = FoodItem(id: UUID(), name: productName)
+        let newFoodItem = FoodItem(id: UUID(), name: productName, isUserAdded: true)
 
 
-        modelContext.insert(newFoodItem)
                do {
-                   try modelContext.save()
+                   let writeContext = try CombinedStoreFactory.makeUserWriteContext(from: modelContext.container)
+                   writeContext.insert(newFoodItem)
+                   try writeContext.save()
                    onAddFoodItem(newFoodItem)
                    withAnimation { deleteScannedItem(scannedItem) }
                } catch {
                    print("Failed to save new food item from barcode: \(error)")
+            return
                }
         AIManager.shared.startEmptyFoodGeneration(for: profile, foodItem: newFoodItem)
         

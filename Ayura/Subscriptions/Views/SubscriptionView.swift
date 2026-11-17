@@ -75,21 +75,21 @@ struct SubscriptionView: View {
                     case .removeAds:
                         SubscriptionListView(
                             title: "No Ads",
-                            products: manager.sortedProducts.filter { $0.id == SubscriptionProductID.noAds },
+                            products: manager.sortedProducts.filter { [SubscriptionProductID.noAdsYearly, SubscriptionProductID.noAds].contains($0.id) },
                             selectedProductID: $selectedProductID
                         )
 
                     case .advance:
                         SubscriptionListView(
                             title: "Advanced",
-                            products: manager.sortedProducts.filter { $0.id == SubscriptionProductID.advanced },
+                            products: manager.sortedProducts.filter { [SubscriptionProductID.advancedYearly, SubscriptionProductID.advanced].contains($0.id) },
                             selectedProductID: $selectedProductID
                         )
 
                     case .premium:
                         SubscriptionListView(
                             title: "Premium",
-                            products: manager.sortedProducts.filter { $0.id == SubscriptionProductID.premium },
+                            products: manager.sortedProducts.filter { [SubscriptionProductID.premiumYearly, SubscriptionProductID.premium].contains($0.id) },
                             selectedProductID: $selectedProductID
                         )
                     }
@@ -193,11 +193,11 @@ struct SubscriptionView: View {
         let categoryMatches: (Product) -> Bool = { product in
             switch selectedCategory {
             case .removeAds:
-                return product.id == SubscriptionProductID.noAds
+                return [SubscriptionProductID.noAdsYearly, SubscriptionProductID.noAds].contains(product.id)
             case .advance:
-                return product.id == SubscriptionProductID.advanced
+                return [SubscriptionProductID.advancedYearly, SubscriptionProductID.advanced].contains(product.id)
             case .premium:
-                return product.id == SubscriptionProductID.premium
+                return [SubscriptionProductID.premiumYearly, SubscriptionProductID.premium].contains(product.id)
             case .base:
                 return false
             }

@@ -7,15 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4178070A8CE99C026EC227C0 /* YearlyReviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DA2B6B0937CACAB22C96C8 /* YearlyReviewTests.swift */; };
+		5307600E0D98121FC26E36A5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D336BF06C9021E192B12F9B /* Foundation.framework */; };
+		A55E75102F1B000100000001 /* asanas.json in Resources */ = {isa = PBXBuildFile; fileRef = A55E75202F1B000100000001 /* asanas.json */; };
+		A55E75112F1B000100000001 /* sequences.json.gz in Resources */ = {isa = PBXBuildFile; fileRef = A55E75212F1B000100000001 /* sequences.json.gz */; };
+		A710000E2F1C00010000000E /* NextEventActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A710000D2F1C00010000000D /* NextEventActivityAttributes.swift */; };
+		A710000F2F1C00010000000F /* AyuraLiveActivityWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A71000022F1C000100000002 /* AyuraLiveActivityWidget.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AD0909010000000000000001 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = AD0909010000000000000003 /* GoogleMobileAds */; };
 		AD0909010000000000000004 /* GoogleUserMessagingPlatform in Frameworks */ = {isa = PBXBuildFile; productRef = AD0909010000000000000006 /* GoogleUserMessagingPlatform */; };
-		A55E75102F1B000100000001 /* ayurveda-data/yoga/asanas.json in Resources */ = {isa = PBXBuildFile; fileRef = A55E75202F1B000100000001 /* ayurveda-data/yoga/asanas.json */; };
-		A55E75112F1B000100000001 /* ayurveda-data/yoga/sequences.json.gz in Resources */ = {isa = PBXBuildFile; fileRef = A55E75212F1B000100000001 /* ayurveda-data/yoga/sequences.json.gz */; };
-		A710000E2F1C00010000000E /* Ayura/LiveActivity/NextEventActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A710000D2F1C00010000000D /* Ayura/LiveActivity/NextEventActivityAttributes.swift */; };
-		A710000F2F1C00010000000F /* AyuraLiveActivityWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A71000022F1C000100000002 /* AyuraLiveActivityWidget.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C8DBD41D51F95B243AB93125 /* Purchases.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 7BFE4B3F0CB580751B543957 /* Purchases.storekit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		34FA7DEBBFD96B33FA6E4C47 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5084961D2DE5D05D0038A7D5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 508496242DE5D05D0038A7D5;
+			remoteInfo = "Ayurveda & Asana Yoga";
+		};
 		A710000B2F1C00010000000B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5084961D2DE5D05D0038A7D5 /* Project object */;
@@ -50,16 +60,20 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4D336BF06C9021E192B12F9B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		508496252DE5D05D0038A7D5 /* Ayurveda & Asana Yoga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ayurveda & Asana Yoga.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A55E75202F1B000100000001 /* ayurveda-data/yoga/asanas.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "ayurveda-data/yoga/asanas.json"; sourceTree = SOURCE_ROOT; };
-		A55E75212F1B000100000001 /* ayurveda-data/yoga/sequences.json.gz */ = {isa = PBXFileReference; lastKnownFileType = archive.gzip; path = "ayurveda-data/yoga/sequences.json.gz"; sourceTree = SOURCE_ROOT; };
+		7BFE4B3F0CB580751B543957 /* Purchases.storekit */ = {isa = PBXFileReference; includeInIndex = 1; path = Purchases.storekit; sourceTree = "<group>"; };
+		A55E75202F1B000100000001 /* asanas.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "ayurveda-data/yoga/asanas.json"; sourceTree = SOURCE_ROOT; };
+		A55E75212F1B000100000001 /* sequences.json.gz */ = {isa = PBXFileReference; lastKnownFileType = archive.gzip; path = "ayurveda-data/yoga/sequences.json.gz"; sourceTree = SOURCE_ROOT; };
 		A71000022F1C000100000002 /* AyuraLiveActivityWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AyuraLiveActivityWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		A710000D2F1C00010000000D /* Ayura/LiveActivity/NextEventActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ayura/LiveActivity/NextEventActivityAttributes.swift; sourceTree = SOURCE_ROOT; };
+		A710000D2F1C00010000000D /* NextEventActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ayura/LiveActivity/NextEventActivityAttributes.swift; sourceTree = SOURCE_ROOT; };
 		C843A40D2E7E7C66000B1F28 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
+		D7DA2B6B0937CACAB22C96C8 /* YearlyReviewTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = YearlyReviewTests.swift; sourceTree = "<group>"; };
+		F2D18B1422AC30DC5C64AE88 /* YearlyReviewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YearlyReviewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		505890182EE6E0C300C51FC6 /* Exceptions for "Ayurveda & Asana Yoga" folder in "Ayurveda & Asana Yoga" target */ = {
+		505890182EE6E0C300C51FC6 /* Exceptions for "Ayura" folder in "Ayurveda & Asana Yoga" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -86,10 +100,10 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		508496272DE5D05D0038A7D5 /* Ayurveda & Asana Yoga */ = {
+		508496272DE5D05D0038A7D5 /* Ayura */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				505890182EE6E0C300C51FC6 /* Exceptions for "Ayurveda & Asana Yoga" folder in "Ayurveda & Asana Yoga" target */,
+				505890182EE6E0C300C51FC6 /* Exceptions for "Ayura" folder in "Ayurveda & Asana Yoga" target */,
 			);
 			name = "Ayurveda & Asana Yoga";
 			path = Ayura;
@@ -115,6 +129,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		884D3548323F8DC9888C46EA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5307600E0D98121FC26E36A5 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A71000062F1C000100000006 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -125,16 +147,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		443C2DD2AF3AB1682D7A7853 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				4D336BF06C9021E192B12F9B /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
 		5084961C2DE5D05D0038A7D5 = {
 			isa = PBXGroup;
 			children = (
-				508496272DE5D05D0038A7D5 /* Ayurveda & Asana Yoga */,
+				508496272DE5D05D0038A7D5 /* Ayura */,
 				A71000032F1C000100000003 /* AyuraLiveActivityWidget */,
-				A55E75202F1B000100000001 /* ayurveda-data/yoga/asanas.json */,
-				A55E75212F1B000100000001 /* ayurveda-data/yoga/sequences.json.gz */,
+				A55E75202F1B000100000001 /* asanas.json */,
+				A55E75212F1B000100000001 /* sequences.json.gz */,
 				C843A40C2E7E7C66000B1F28 /* Frameworks */,
 				508496262DE5D05D0038A7D5 /* Products */,
 				508A8D733034B8AB00411EB1 /* Recovered References */,
+				A7B6D90F0A49D94FC42537B7 /* YearlyReviewTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -143,6 +174,7 @@
 			children = (
 				508496252DE5D05D0038A7D5 /* Ayurveda & Asana Yoga.app */,
 				A71000022F1C000100000002 /* AyuraLiveActivityWidget.appex */,
+				F2D18B1422AC30DC5C64AE88 /* YearlyReviewTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -150,15 +182,26 @@
 		508A8D733034B8AB00411EB1 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				A710000D2F1C00010000000D /* Ayura/LiveActivity/NextEventActivityAttributes.swift */,
+				A710000D2F1C00010000000D /* NextEventActivityAttributes.swift */,
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		A7B6D90F0A49D94FC42537B7 /* YearlyReviewTests */ = {
+			isa = PBXGroup;
+			children = (
+				D7DA2B6B0937CACAB22C96C8 /* YearlyReviewTests.swift */,
+				7BFE4B3F0CB580751B543957 /* Purchases.storekit */,
+			);
+			name = YearlyReviewTests;
+			path = Tests/YearlyReview;
 			sourceTree = "<group>";
 		};
 		C843A40C2E7E7C66000B1F28 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				C843A40D2E7E7C66000B1F28 /* Intents.framework */,
+				443C2DD2AF3AB1682D7A7853 /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -185,7 +228,7 @@
 				A710000C2F1C00010000000C /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				508496272DE5D05D0038A7D5 /* Ayurveda & Asana Yoga */,
+				508496272DE5D05D0038A7D5 /* Ayura */,
 			);
 			name = "Ayurveda & Asana Yoga";
 			packageProductDependencies = (
@@ -212,11 +255,27 @@
 				A71000032F1C000100000003 /* AyuraLiveActivityWidget */,
 			);
 			name = AyuraLiveActivityWidget;
-			packageProductDependencies = (
-			);
 			productName = AyuraLiveActivityWidget;
 			productReference = A71000022F1C000100000002 /* AyuraLiveActivityWidget.appex */;
 			productType = "com.apple.product-type.app-extension";
+		};
+		CD2DEAF00F842465B6FD67E9 /* YearlyReviewTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 821B9F918FF23F356469AE11 /* Build configuration list for PBXNativeTarget "YearlyReviewTests" */;
+			buildPhases = (
+				71EEA99727BFBF87F9181576 /* Sources */,
+				884D3548323F8DC9888C46EA /* Frameworks */,
+				BB4CCA82366370A13175E71B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AD86C2AA5B635DB3659A725A /* PBXTargetDependency */,
+			);
+			name = YearlyReviewTests;
+			productName = YearlyReviewTests;
+			productReference = F2D18B1422AC30DC5C64AE88 /* YearlyReviewTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -261,6 +320,7 @@
 			targets = (
 				508496242DE5D05D0038A7D5 /* Ayurveda & Asana Yoga */,
 				A71000012F1C000100000001 /* AyuraLiveActivityWidget */,
+				CD2DEAF00F842465B6FD67E9 /* YearlyReviewTests */,
 			);
 		};
 /* End PBXProject section */
@@ -270,8 +330,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A55E75102F1B000100000001 /* ayurveda-data/yoga/asanas.json in Resources */,
-				A55E75112F1B000100000001 /* ayurveda-data/yoga/sequences.json.gz in Resources */,
+				A55E75102F1B000100000001 /* asanas.json in Resources */,
+				A55E75112F1B000100000001 /* sequences.json.gz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +339,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB4CCA82366370A13175E71B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C8DBD41D51F95B243AB93125 /* Purchases.storekit in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,11 +464,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		71EEA99727BFBF87F9181576 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4178070A8CE99C026EC227C0 /* YearlyReviewTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A71000052F1C000100000005 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A710000E2F1C00010000000E /* Ayura/LiveActivity/NextEventActivityAttributes.swift in Sources */,
+				A710000E2F1C00010000000E /* NextEventActivityAttributes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,9 +488,68 @@
 			target = A71000012F1C000100000001 /* AyuraLiveActivityWidget */;
 			targetProxy = A710000B2F1C00010000000B /* PBXContainerItemProxy */;
 		};
+		AD86C2AA5B635DB3659A725A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Ayurveda & Asana Yoga";
+			target = 508496242DE5D05D0038A7D5 /* Ayurveda & Asana Yoga */;
+			targetProxy = 34FA7DEBBFD96B33FA6E4C47 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		13712185C6F94F199ED8E7AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8293TNMX6S;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.arte-soft.AyurvedaAsanaYoga.YearlyReviewTests";
+				PRODUCT_NAME = YearlyReviewTests;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ayurveda & Asana Yoga.app/Ayurveda & Asana Yoga";
+			};
+			name = Debug;
+		};
+		2565416D634594715597AADB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8293TNMX6S;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.arte-soft.AyurvedaAsanaYoga.YearlyReviewTests";
+				PRODUCT_NAME = YearlyReviewTests;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ayurveda & Asana Yoga.app/Ayurveda & Asana Yoga";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		508496302DE5D05F0038A7D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -552,7 +687,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Ayura/AyurvedaAsanaYoga.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 8293TNMX6S;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_APP_SANDBOX = YES;
@@ -609,7 +744,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Ayura/AyurvedaAsanaYoga.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 8293TNMX6S;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_FILE_ACCESS_PICTURE_FOLDER = readonly;
@@ -662,7 +797,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 8293TNMX6S;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -692,7 +827,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 8293TNMX6S;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -738,6 +873,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		821B9F918FF23F356469AE11 /* Build configuration list for PBXNativeTarget "YearlyReviewTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2565416D634594715597AADB /* Release */,
+				13712185C6F94F199ED8E7AC /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A710000A2F1C00010000000A /* Build configuration list for PBXNativeTarget "AyuraLiveActivityWidget" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -753,12 +897,18 @@
 		AD0909010000000000000002 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
-			requirement = {kind = upToNextMajorVersion; minimumVersion = 13.9.0; };
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.9.0;
+			};
 		};
 		AD0909010000000000000005 /* XCRemoteSwiftPackageReference "swift-package-manager-google-user-messaging-platform" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/googleads/swift-package-manager-google-user-messaging-platform.git";
-			requirement = {kind = upToNextMajorVersion; minimumVersion = 3.0.0; };
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 

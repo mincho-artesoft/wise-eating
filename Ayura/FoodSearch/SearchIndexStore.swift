@@ -450,6 +450,9 @@ final class SearchIndexStore {
         )
 
         let data = try JSONEncoder().encode(payload)
+        let context = persist && context.container.configurations.count > 1
+            ? try CombinedStoreFactory.makeUserWriteContext(from: context.container)
+            : context
         for existing in try context.fetch(FetchDescriptor<SearchIndexCache>())
         where !CatalogReferenceResolver.isCatalog(existing) {
             context.delete(existing)

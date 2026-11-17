@@ -1,7 +1,6 @@
 import Foundation
 import SwiftData
 
-@MainActor
 enum LegacyStoreSeparator {
     static let separationVersion = 1
 
@@ -41,7 +40,7 @@ enum LegacyStoreSeparator {
             for: DatabaseSchema.combined,
             configurations: [emptyCatalogConfiguration, userConfiguration]
         )
-        let userContext = userContainer.mainContext
+        let userContext = ModelContext(userContainer)
         userContext.autosaveEnabled = false
 
         // Run the legacy units migration while only the writable store is
@@ -111,7 +110,7 @@ enum LegacyStoreSeparator {
             for: DatabaseSchema.combined,
             configurations: [catalogConfiguration, emptyUserConfiguration]
         )
-        let catalogContext = catalogContainer.mainContext
+        let catalogContext = ModelContext(catalogContainer)
 
         let catalogFoodIDs = Set(
             try catalogContext.fetch(FetchDescriptor<FoodItem>()).map(\.id)

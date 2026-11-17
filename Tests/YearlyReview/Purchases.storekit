@@ -1,0 +1,190 @@
+{
+  "appPolicies": {
+    "eula": "",
+    "policies": [
+      {
+        "locale": "en_US",
+        "policyText": "",
+        "policyURL": ""
+      }
+    ]
+  },
+  "identifier": "0C04BAA3",
+  "nonRenewingSubscriptions": [],
+  "products": [],
+  "settings": {
+    "_applicationInternalID": "6800370073",
+    "_askToBuyEnabled": false,
+    "_billingGracePeriodEnabled": false,
+    "_billingIssuesEnabled": false,
+    "_developerTeamID": "8293TNMX6S",
+    "_disableDialogs": false,
+    "_failTransactionsEnabled": false,
+    "_lastSynchronizedDate": 810547141.001722,
+    "_locale": "en_US",
+    "_renewalBillingIssuesEnabled": false,
+    "_storefront": "USA",
+    "_storeKitErrors": [],
+    "_timeRate": 0
+  },
+  "subscriptionGroups": [
+    {
+      "id": "22304088",
+      "localizations": [],
+      "name": "аyurveda.asana.yoga.group",
+      "subscriptions": [
+        {
+          "adHocOffers": [],
+          "codeOffers": [],
+          "displayPrice": "3.99",
+          "familyShareable": false,
+          "groupNumber": 2,
+          "internalID": "6800608864",
+          "introductoryOffer": null,
+          "localizations": [
+            {
+              "description": "4 profiles monthly: couples and small families",
+              "displayName": "Advanced",
+              "locale": "en_US"
+            }
+          ],
+          "productID": "ayurveda.asana.yoga.advanced",
+          "recurringSubscriptionPeriod": "P1M",
+          "referenceName": "Advanced",
+          "subscriptionGroupID": "22304088",
+          "type": "RecurringSubscription",
+          "winbackOffers": []
+        },
+        {
+          "adHocOffers": [],
+          "codeOffers": [],
+          "displayPrice": "1.99",
+          "familyShareable": false,
+          "groupNumber": 3,
+          "internalID": "6800607528",
+          "introductoryOffer": null,
+          "localizations": [
+            {
+              "description": "Removes all ads while your subscription is active.",
+              "displayName": "No Ads",
+              "locale": "en_US"
+            }
+          ],
+          "productID": "ayurveda.asana.yoga.noads",
+          "recurringSubscriptionPeriod": "P1M",
+          "referenceName": "No Ads",
+          "subscriptionGroupID": "22304088",
+          "type": "RecurringSubscription",
+          "winbackOffers": []
+        },
+        {
+          "adHocOffers": [],
+          "codeOffers": [],
+          "displayPrice": "5.99",
+          "familyShareable": false,
+          "groupNumber": 1,
+          "internalID": "6800609580",
+          "introductoryOffer": null,
+          "localizations": [
+            {
+              "description": "12profiles monthly for dietitians coaches pediatricians",
+              "displayName": "Premium",
+              "locale": "en_US"
+            }
+          ],
+          "productID": "ayurveda.asana.yoga.premium",
+          "recurringSubscriptionPeriod": "P1M",
+          "referenceName": "Premium",
+          "subscriptionGroupID": "22304088",
+          "type": "RecurringSubscription",
+          "winbackOffers": []
+        },
+        {
+          "adHocOffers": [],
+          "codeOffers": [],
+          "displayPrice": "9.99",
+          "familyShareable": false,
+          "groupNumber": 3,
+          "internalID": "6835180521",
+          "introductoryOffer": {
+            "internalID": "900000005",
+            "paymentMode": "free",
+            "subscriptionPeriod": "P1W",
+            "numberOfPeriods": 1
+          },
+          "localizations": [
+            {
+              "description": "Removes all ads while your subscription is active.",
+              "displayName": "No Ads Yearly",
+              "locale": "en_US"
+            }
+          ],
+          "productID": "ayurveda.asana.yoga.noads.yearly",
+          "recurringSubscriptionPeriod": "P1Y",
+          "referenceName": "No Ads Yearly",
+          "subscriptionGroupID": "22304088",
+          "type": "RecurringSubscription",
+          "winbackOffers": []
+        },
+        {
+          "adHocOffers": [],
+          "codeOffers": [],
+          "displayPrice": "24.99",
+          "familyShareable": false,
+          "groupNumber": 2,
+          "internalID": "6835180237",
+          "introductoryOffer": {
+            "internalID": "900000007",
+            "paymentMode": "free",
+            "subscriptionPeriod": "P1W",
+            "numberOfPeriods": 1
+          },
+          "localizations": [
+            {
+              "description": "4 profiles yearly: couples and small families",
+              "displayName": "Advanced Yearly",
+              "locale": "en_US"
+            }
+          ],
+          "productID": "ayurveda.asana.yoga.advanced.yearly",
+          "recurringSubscriptionPeriod": "P1Y",
+          "referenceName": "Advanced Yearly",
+          "subscriptionGroupID": "22304088",
+          "type": "RecurringSubscription",
+          "winbackOffers": []
+        },
+        {
+          "adHocOffers": [],
+          "codeOffers": [],
+          "displayPrice": "39.99",
+          "familyShareable": false,
+          "groupNumber": 1,
+          "internalID": "6835178369",
+          "introductoryOffer": {
+            "internalID": "900000009",
+            "paymentMode": "free",
+            "subscriptionPeriod": "P1W",
+            "numberOfPeriods": 1
+          },
+          "localizations": [
+            {
+              "description": "12profiles yearly for dietitians coaches pediatricians",
+              "displayName": "Premium Yearly",
+              "locale": "en_US"
+            }
+          ],
+          "productID": "ayurveda.asana.yoga.premium.yearly",
+          "recurringSubscriptionPeriod": "P1Y",
+          "referenceName": "Premium Yearly",
+          "subscriptionGroupID": "22304088",
+          "type": "RecurringSubscription",
+          "winbackOffers": []
+        }
+      ]
+    }
+  ],
+  "version": {
+    "major": 4,
+    "minor": 0
+  }
+}
