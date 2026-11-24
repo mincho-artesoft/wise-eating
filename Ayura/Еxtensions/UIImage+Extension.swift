@@ -41,6 +41,11 @@ extension UIImage {
     /// Връща **само** .black или .white според това дали
     /// цялостният фон е по-скоро светъл или тъмен.
     func findGlobalAccentColor(threshold: CGFloat = 0.55) async -> Color {
+        globalAccentColor(threshold: threshold)
+    }
+
+    /// A one-pixel sample is also safe before the first SwiftUI layout exists.
+    func globalAccentColor(threshold: CGFloat = 0.55) -> Color {
         let luminance = averageLuminance() ?? 0.5
         // ако фонът е светъл -> черен текст, иначе -> бял текст
         return luminance > threshold ? .black : .white

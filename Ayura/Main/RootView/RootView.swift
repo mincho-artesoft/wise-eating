@@ -12,11 +12,8 @@ struct RootView: View {
     private var headerTopPadding: CGFloat { safeAreaInsets.top }
     enum ProfilesDrawerContent { case profiles, notifications }
     
-    // ПРОМЯНА 1: Премахваме .notificationsDenied от enum-а, тъй като вече не блокираме приложението за това.
-    enum PermissionState { case checking, granted, calendarDenied }
-    
     @State private var isAIGenerating: Bool = false
-    @State private var permissionState: PermissionState = .checking
+    @State private var didPrepareOptionalServices = false
     @ObservedObject private var themeManager = ThemeManager.shared
     @Environment(\.modelContext) private var modelContext
     @State private var navBarIsHiden: Bool = false
@@ -152,44 +149,38 @@ struct RootView: View {
     
     var body: some View {
         ZStack {
-            switch permissionState {
-            case .checking:
-                ZStack {
-                    ThemeBackgroundView().ignoresSafeArea()
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: effectManager.currentGlobalAccentColor))
-                }
-                .onAppear(perform: checkPermissions)
-                
-            case .granted:
-                if profiles.isEmpty {
-                    // 🔹 СЦЕНАРИЙ 1: НОВ ПОТРЕБИТЕЛ (Няма профил)
-                    ProfileWizardView(isInit: true, onDismiss: { newlyCreatedProfile in
-                        if let profile = newlyCreatedProfile {
-                            self.selectedProfile = profile
-                            
-                            // Тук е моментът! Потребителят току-що създаде профил.
-                            // 1. Показваме Subscription екрана (стандартната логика)
-                            showInitialSubscriptionIfNeeded()
-                        }
-                    })
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
-                } else {
-                    // 🔹 СЦЕНАРИЙ 2: СЪЩЕСТВУВАЩ ПОТРЕБИТЕЛ (Има профил)
-                    rootViewHierarchy
-                        .onAppear {
-                            setup()
-                            // Показваме стандартния абонаментен екран (ако не е видян)
-                            showInitialSubscriptionIfNeeded()
-                        }
-                }
-            case .calendarDenied:
-                PermissionDeniedView(type: .calendar, onTryAgain: checkPermissions)
-                
-                // ПРОМЯНА 2: Случаят .notificationsDenied е премахнат, защото вече не блокираме.
+            if profiles.isEmpty {
+                // 🔹 СЦЕНАРИЙ 1: НОВ ПОТРЕБИТЕЛ (Няма профил)
+                ProfileWizardView(isInit: true, onDismiss: { newlyCreatedProfile in
+                    if let profile = newlyCreatedProfile {
+                        self.selectedProfile = profile
+
+                        // Тук е моментът! Потребителят току-що създаде профил.
+                        // 1. Показваме Subscription екрана (стандартната логика)
+                        showInitialSubscriptionIfNeeded()
+                    }
+                })
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+            } else {
+                // 🔹 СЦЕНАРИЙ 2: СЪЩЕСТВУВАЩ ПОТРЕБИТЕЛ (Има профил)
+                rootViewHierarchy
+                    .onAppear {
+                        setup()
+                        // Показваме стандартния абонаментен екран (ако не е видян)
+                        showInitialSubscriptionIfNeeded()
+                    }
             }
         }
         .onAppear(perform: restoreStoredTabsIfNeeded)
+        .task(id: profiles.isEmpty) {
+            // Onboarding and local records stay usable regardless of pending
+            // or denied system permissions. Ask for optional integrations only
+            // after a profile exists, without replacing the app with a spinner.
+            guard !profiles.isEmpty, !didPrepareOptionalServices,
+                  !ProcessInfo.processInfo.arguments.contains("-skipPermissionPrompts") else { return }
+            didPrepareOptionalServices = true
+            await prepareOptionalServices()
+        }
         .onReceive(NotificationCenter.default.publisher(for: .snoozeAds)) { _ in
             print("⏳ Ad Snoozed! Adding 3 minutes to the timer.")
             // Ако следващата реклама е в миналото (трябва да се пусне сега) или в бъдещето,
@@ -768,20 +759,7 @@ struct RootView: View {
         let viewToRender = backgroundSourceView
         effectManager.snapshot = viewToRender.renderAsImage(size: UIScreen.main.bounds.size)
         
-        guard let snapshot = effectManager.snapshot else {
-            effectManager.currentGlobalAccentColor = themeManager
-                .currentTheme
-                .preferredForegroundColor
-            effectManager.isLightRowTextColor = themeManager
-                .currentTheme
-                .prefersLightForeground
-            return
-        }
-        Task { @MainActor in
-            let calculatedColor = await snapshot.findGlobalAccentColor()
-            effectManager.currentGlobalAccentColor = calculatedColor
-            effectManager.isLightRowTextColor = calculatedColor.isLight()
-        }
+        effectManager.updateThemeForeground()
     }
     
     
@@ -1018,34 +996,14 @@ struct RootView: View {
     }
     
     // MARK: - Setup/Helpers
-    private func checkPermissions() {
-        if ProcessInfo.processInfo.arguments.contains("-skipPermissionPrompts") {
-            permissionState = .granted
-            return
+    private func prepareOptionalServices() async {
+        let notificationStatus = await NotificationManager.shared.getAuthorizationStatus()
+        guard !Task.isCancelled else { return }
+        if notificationStatus == .notDetermined {
+            _ = await NotificationManager.shared.requestAuthorization()
         }
-        Task {
-            var calendarStatus = CalendarViewModel.shared.isCalendarAccessGranted()
-            if !calendarStatus {
-                calendarStatus = await CalendarViewModel.shared.requestCalendarAccessIfNeeded()
-            }
-            guard calendarStatus else { permissionState = .calendarDenied; return }
-            
-            let notificationStatus = await NotificationManager.shared.getAuthorizationStatus()
-            // ПРОМЯНА 3: Ако статусът е notDetermined, питаме потребителя.
-            if notificationStatus == .notDetermined {
-                _ = await NotificationManager.shared.requestAuthorization()
-                // Изчакваме малко, за да се обнови статусът (по желание, но полезно при бързи преходи)
-                try? await Task.sleep(nanoseconds: 500_000_000)
-            }
-
-            // HealthKit е optional: отказът скрива единствено зоните за сън.
-            // Приложението продължава да работи без error/permission screen.
-            _ = await SleepHealthStore.shared.requestReadAuthorizationIfNeeded()
-            
-            // ПРОМЯНА 4: Без значение дали потребителят е дал разрешение или е отказал,
-            // ние продължаваме напред към .granted, защото нотификациите и HealthKit са optional.
-            permissionState = .granted
-        }
+        guard !Task.isCancelled else { return }
+        _ = await SleepHealthStore.shared.requestReadAuthorizationIfNeeded()
     }
     
     private func activateSearch() {

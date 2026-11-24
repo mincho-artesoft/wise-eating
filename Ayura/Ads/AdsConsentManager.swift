@@ -1,7 +1,4 @@
 import SwiftUI
-#if !targetEnvironment(macCatalyst)
-import AppTrackingTransparency
-#endif
 #if canImport(GoogleMobileAds) && canImport(UserMessagingPlatform)
 import GoogleMobileAds
 import UserMessagingPlatform
@@ -49,33 +46,7 @@ final class AdsConsentManager: ObservableObject {
             }
         }
 
-        await requestTrackingIfAllowed()
         await startAdsIfAllowed()
-        #endif
-    }
-
-    private func requestTrackingIfAllowed() async {
-        #if !targetEnvironment(macCatalyst) && canImport(UserMessagingPlatform)
-        guard ConsentInformation.shared.canRequestAds else { return }
-        guard ATTrackingManager.trackingAuthorizationStatus == .notDetermined else { return }
-
-        let gdprApplies = UserDefaults.standard.integer(forKey: "IABTCF_gdprApplies") == 1
-        if gdprApplies,
-           let purposeConsents = UserDefaults.standard.string(forKey: "IABTCF_PurposeConsents"),
-           purposeConsents.hasPrefix("0") {
-            return
-        }
-
-        for _ in 0..<60 {
-            if UIApplication.shared.applicationState == .active { break }
-            try? await Task.sleep(nanoseconds: 250_000_000)
-        }
-        guard UIApplication.shared.applicationState == .active,
-              ATTrackingManager.trackingAuthorizationStatus == .notDetermined else { return }
-
-        try? await Task.sleep(nanoseconds: 350_000_000)
-        guard UIApplication.shared.applicationState == .active else { return }
-        _ = await ATTrackingManager.requestTrackingAuthorization()
         #endif
     }
 
@@ -120,8 +91,13 @@ final class AdsConsentManager: ObservableObject {
             return
         }
 
+        // Enforce Limited Ads after each consent update, including upgrades with prior consent.
+        UserDefaults.standard.set(0, forKey: "gad_has_consent_for_cookies")
         if !didStartSDK {
-            print("[Ads] Starting Google Mobile Ads SDK.")
+            let configuration = MobileAds.shared.requestConfiguration
+            configuration.setPublisherFirstPartyIDEnabled(false)
+            configuration.publisherPrivacyPersonalizationState = .disabled
+            print("[Ads] Starting Google Mobile Ads SDK with limited ads.")
             await MobileAds.shared.start()
             didStartSDK = true
         }

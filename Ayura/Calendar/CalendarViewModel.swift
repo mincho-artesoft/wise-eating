@@ -45,6 +45,7 @@ final class CalendarViewModel: ObservableObject {
     @Published var eventsByID:  [String: EKEvent] = [:]
 
     @Published var accessGranted = false
+    private var calendarAccessTask: Task<Bool, Never>?
     @Published var selectedCalendarIDs: Set<String> = []
     @Published var calendarsDict: [String: (title: String,
                                             color: UIColor,
@@ -183,17 +184,28 @@ final class CalendarViewModel: ObservableObject {
     }
 
     func requestCalendarAccessIfNeeded() async -> Bool {
+        // Keep one system permission request in flight across callers/windows.
+        if let calendarAccessTask {
+            return await calendarAccessTask.value
+        }
         let status = EKEventStore.authorizationStatus(for: .event)
         if status == .notDetermined {
-            do {
-                let granted = try await eventStore.requestFullAccessToEvents()
+            let request = Task { @MainActor in
+                let granted: Bool
+                do {
+                    granted = try await self.eventStore.requestFullAccessToEvents()
+                } catch {
+                    print("Error requesting calendar access: \(error.localizedDescription)")
+                    granted = false
+                }
                 self.accessGranted = granted
+                if granted { self.reloadCalendars() }
                 return granted
-            } catch {
-                print("Error requesting calendar access: \(error.localizedDescription)")
-                self.accessGranted = false
-                return false
             }
+            calendarAccessTask = request
+            let granted = await request.value
+            calendarAccessTask = nil
+            return granted
         } else {
             let granted = isCalendarAccessGranted()
             self.accessGranted = granted
@@ -1134,7 +1146,8 @@ extension CalendarViewModel {
     func ensureSharedShoppingListCalendarExists() async {
         print("🛒 Проверка за съществуване на споделен календар за пазаруване...")
         
-        guard await requestCalendarAccessIfNeeded() else {
+        // Background maintenance must not initiate a permission prompt.
+        guard isCalendarAccessGranted() else {
             print("   ❌ Няма достъп до календара. Проверката е прекратена.")
             return
         }

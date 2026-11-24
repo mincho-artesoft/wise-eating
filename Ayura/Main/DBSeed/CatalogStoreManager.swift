@@ -67,6 +67,10 @@ enum CatalogStoreManager {
     private static let versionsDirectoryName = "Versions"
     private static let storeName = "AyurvedaAsanaYogaCatalog.store"
     private static let installedManifestName = "installed-catalog-manifest.json"
+    // Installation format 2 removes build-time persistent history before the
+    // catalogue is mounted read-only. A new directory also repairs installed
+    // format-1 catalogues without changing or re-migrating the user store.
+    private static let installationFormatVersion = 2
 
     static func prepareCatalog(
         in applicationSupportURL: URL,
@@ -462,6 +466,18 @@ enum CatalogStoreManager {
         )
 
         if context.hasChanges { try context.save() }
+
+        // The shipped database contains hundreds of thousands of seed-history
+        // changes. SwiftData can replay those on the main actor when observing
+        // the combined container, blocking launch and the first profile save.
+        // This context owns ONLY the staged catalogue; no user history or model
+        // records are deleted. Do this before publishing the immutable store.
+        try context.deleteHistory(HistoryDescriptor<DefaultHistoryTransaction>())
+        var remainingHistory = HistoryDescriptor<DefaultHistoryTransaction>()
+        remainingHistory.fetchLimit = 1
+        guard try context.fetchHistory(remainingHistory).isEmpty else {
+            throw CatalogError.integrityCheck("staged catalog still contains seed history")
+        }
         withExtendedLifetime(container) {}
     }
 
@@ -546,7 +562,7 @@ enum CatalogStoreManager {
                 ? character
                 : "-"
         }
-        return "v\(manifest.catalogVersion)-\(String(safeRevision))"
+        return "v\(manifest.catalogVersion)-\(String(safeRevision))-install\(installationFormatVersion)"
     }
 }
 

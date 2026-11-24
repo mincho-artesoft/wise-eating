@@ -27,6 +27,14 @@ struct AyurvedaAsanaYogaApp: App {
         isAIGenerationSmokeTest || isCatalogSeparationSmokeTest
     }
 
+    private static var isLoadingPreview: Bool {
+        #if DEBUG
+        ProcessInfo.processInfo.arguments.contains("-databaseLoadingPreview")
+        #else
+        false
+        #endif
+    }
+
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @Environment(\.scenePhase) private var scenePhase
     @ObservedObject private var subscriptionManager = SubscriptionManager.shared
@@ -43,16 +51,8 @@ struct AyurvedaAsanaYogaApp: App {
     var body: some Scene {
         WindowGroup {
             Group {
-            if bootstrap.isPreparing {
-                ZStack {
-                    ThemeBackgroundView().ignoresSafeArea()
-                    VStack(spacing: 20) {
-                        Text("Ayurveda & Asana Yoga").font(.title2.bold())
-                        ProgressView()
-                        Text("Preparing offline Ayurveda & Yoga library...")
-                            .multilineTextAlignment(.center)
-                    }.padding(32)
-                }
+            if Self.isLoadingPreview || bootstrap.isPreparing {
+                DatabaseLoadingView()
                 .onAppear { AyurvedaAsanaYogaLaunchProbe.event("bootstrap-view-visible") }
             } else if let container = database.container {
                 RootLauncher(container: container)
@@ -123,7 +123,10 @@ struct AyurvedaAsanaYogaApp: App {
                 .preferredColorScheme(effectManager.appColorScheme)
             }
             }
-            .task { await bootstrap.start(isolated: Self.isIsolatedSmokeTest) }
+            .task {
+                guard !Self.isLoadingPreview else { return }
+                await bootstrap.start(isolated: Self.isIsolatedSmokeTest)
+            }
             .onAppear { UNUserNotificationCenter.current().delegate = notificationDelegate }
         }
     }
@@ -171,7 +174,6 @@ final class DatabaseBootstrapController: ObservableObject {
                 print("SMOKE_TEST|APP|isolated-launch-mode")
             } else {
                 AIManager.shared.setup(container: container)
-                Task { await CalendarViewModel.shared.ensureSharedShoppingListCalendarExists() }
             }
         }
         if let container = result.container {

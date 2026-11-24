@@ -37,6 +37,23 @@ final class EffectManager: ObservableObject {
     
     private init() {
         self.config = EffectManager.loadConfiguration()
+        updateThemeForeground()
+    }
+
+    /// Resolve contrast from the actual background source. A detached hosting
+    /// view can produce a transparent launch snapshot, which looks black to a
+    /// pixel sampler and incorrectly selects white text on a light background.
+    static func foregroundColor(theme: Theme, background: UIImage?) -> Color {
+        background?.globalAccentColor() ?? theme.preferredForegroundColor
+    }
+
+    func updateThemeForeground() {
+        let foreground = Self.foregroundColor(
+            theme: ThemeManager.shared.currentTheme,
+            background: BackgroundManager.shared.selectedImage
+        )
+        currentGlobalAccentColor = foreground
+        isLightRowTextColor = foreground.isLight()
     }
     
     private static func loadConfiguration() -> BlurConfiguration {

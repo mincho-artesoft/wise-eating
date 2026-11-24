@@ -6,7 +6,6 @@ struct RootLauncher: View {
     @State private var isReady = false
 
     @ObservedObject private var effectManager = EffectManager.shared
-    @ObservedObject private var themeManager = ThemeManager.shared
 
     @Query private var allVitamins: [Vitamin]
     @Query private var allMinerals: [Mineral]
@@ -24,46 +23,20 @@ struct RootLauncher: View {
                         }
                     }
             } else {
-                ZStack {
-                    ThemeBackgroundView()
-                        .ignoresSafeArea()
-                    
-                    VStack(spacing: 16) {
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle(tint: effectManager.currentGlobalAccentColor))
-                            .scaleEffect(1.5)
-
-                        Text("Preparing database…")
-                            .font(.headline)
-                            .fontWeight(.medium)
-                            .foregroundColor(effectManager.currentGlobalAccentColor)
-                    }
-                    .padding(30)
-                    .glassCardStyle(cornerRadius: 20)
-                }
-                .transition(.opacity.animation(.easeInOut))
+                DatabaseLoadingView()
+                    .transition(.opacity.animation(.easeInOut))
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
         .task(priority: .userInitiated) {
+            guard !isReady else { return }
             AyurvedaAsanaYogaLaunchProbe.event("root-task-begin")
             // 1. Намиране на цветове (Theme)
             let viewToRender = ThemeBackgroundView()
             let snapshot = viewToRender.renderAsImage(size: UIScreen.main.bounds.size)
             effectManager.snapshot = snapshot
-            if let aSnapshot = snapshot {
-                let accentColor = await aSnapshot.findGlobalAccentColor()
-                effectManager.currentGlobalAccentColor = accentColor
-                effectManager.isLightRowTextColor = accentColor.isLight()
-            } else {
-                let prefersLightForeground = themeManager.currentTheme
-                    .prefersLightForeground
-                effectManager.currentGlobalAccentColor = themeManager
-                    .currentTheme
-                    .preferredForegroundColor
-                effectManager.isLightRowTextColor = prefersLightForeground
-            }
+            effectManager.updateThemeForeground()
             print("🎨 RootLauncher: Initial snapshot taken and accent color set.")
             AyurvedaAsanaYogaLaunchProbe.event("theme-snapshot-end")
 
@@ -96,12 +69,25 @@ struct RootLauncher: View {
             // Keeping the 28 MB cache decode off the launch path makes first render
             // independent of a feature the user may not open in this session.
             AyurvedaAsanaYogaLaunchProbe.event("search-index-load-deferred")
-                        
+
+            // Only local database preparation gates the UI. EventKit permission
+            // requests may wait for user interaction (or another system sheet)
+            // indefinitely, so they must never own the launch spinner.
+            withAnimation {
+                isReady = true
+            }
+            AyurvedaAsanaYogaLaunchProbe.event("root-ready-set")
+            await Task.yield()
+            guard !Task.isCancelled else { return }
+
             let modelContext = container.mainContext
             AyurvedaAsanaYogaLaunchProbe.event("calendar-load-begin")
+            // Retain automatic profile recovery on a reinstall: ask once, after
+            // the UI is visible, then restore as soon as access is granted.
             let calendarAccessGranted = await CalendarViewModel.shared.requestCalendarAccessIfNeeded()
             
             if calendarAccessGranted {
+                await CalendarViewModel.shared.ensureSharedShoppingListCalendarExists()
                 let existingProfiles = try? modelContext.fetch(FetchDescriptor<Profile>())
                 let existingProfileIDs = Set(existingProfiles?.map { $0.id.uuidString } ?? [])
 
@@ -116,14 +102,6 @@ struct RootLauncher: View {
                 print("Calendar access not granted. Skipping profile reconstruction from calendars.")
             }
             AyurvedaAsanaYogaLaunchProbe.event("calendar-load-end")
-
-            // 4. Готово - показваме UI
-            if !isReady {
-                withAnimation {
-                    isReady = true
-                }
-                AyurvedaAsanaYogaLaunchProbe.event("root-ready-set")
-            }
         }
     }
 }

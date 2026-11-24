@@ -268,8 +268,6 @@
 	<string>LaunchScreen</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSUserTrackingUsageDescription</key>
-	<string>Allowing tracking helps show ads that are more relevant to your interests instead of random ones.</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 </dict>

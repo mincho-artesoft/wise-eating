@@ -7,6 +7,109 @@ final class VAL1DeviceDriverUITests: XCTestCase {
         continueAfterFailure = false
     }
 
+    /// Run on a fresh install, then again after denying Calendar access with
+    /// simctl privacy. Declining access must still leave onboarding usable.
+    func testLaunchReachesInteractiveOnboardingWithoutPermissions() throws {
+        let app = XCUIApplication(bundleIdentifier: ayurvedaasanayogaBundleID)
+        app.launchArguments = ["-uiTestNoAds", "-ayurvedaasanayogaLaunchProfile"]
+        app.launch()
+
+        let deny = XCUIApplication(bundleIdentifier: "com.apple.springboard")
+            .buttons.matching(NSPredicate(format: "label MATCHES %@", "Don.t Allow")).firstMatch
+        if deny.waitForExistence(timeout: 20) {
+            deny.tap()
+        }
+
+        let name = app.textFields["profile-wizard-name"]
+        XCTAssertTrue(name.waitForExistence(timeout: 60),
+                      "Launch must reach onboarding without waiting for system permissions")
+        XCTAssertFalse(app.staticTexts["Preparing database…"].exists)
+        XCTAssertFalse(app.alerts.firstMatch.exists)
+        name.tap()
+        name.typeText("Launch Review")
+        XCTAssertEqual(name.value as? String, "Launch Review")
+        let next = app.buttons["profile-wizard-continue"]
+        XCTAssertTrue(next.isEnabled)
+        next.tap()
+        XCTAssertTrue(app.staticTexts["profile-wizard-step-1"].waitForExistence(timeout: 5))
+
+        let attachment = XCTAttachment(screenshot: app.screenshot())
+        attachment.name = "Interactive onboarding without permissions"
+        attachment.lifetime = .keepAlways
+        add(attachment)
+
+        app.terminate()
+        app.launch()
+        XCTAssertTrue(name.waitForExistence(timeout: 30),
+                      "A second launch must remain accessible without permissions")
+    }
+
+    /// Run against the previous build with Calendar permission granted, then
+    /// install the replacement build without uninstalling and run the check below.
+    func testCreateLaunchUpgradeFixture() throws {
+        let app = XCUIApplication(bundleIdentifier: ayurvedaasanayogaBundleID)
+        app.launchArguments = ["-uiTestNoAds", "-skipPermissionPrompts",
+                               "-hasShownInitialSubscription", "YES",
+                               "-lastSelectedTabRoot", "10"]
+        app.launch()
+        let name = app.textFields["profile-wizard-name"]
+        XCTAssertTrue(name.waitForExistence(timeout: 60))
+        name.tap()
+        name.typeText("Launch Upgrade")
+
+        for step in [0, 1, 2, 3, 4, 5] {
+            XCTAssertTrue(app.staticTexts["profile-wizard-step-\(step)"].waitForExistence(timeout: 10))
+            let next = app.buttons["profile-wizard-continue"]
+            XCTAssertTrue(next.isEnabled)
+            next.tap()
+        }
+        let vata = app.buttons["ayurveda-constitution-option-vata"]
+        XCTAssertTrue(vata.waitForExistence(timeout: 10))
+        vata.tap()
+        app.buttons["ayurveda-constitution-continue"].tap()
+        let finish = app.buttons["ayurveda-constitution-finish"]
+        XCTAssertTrue(finish.waitForExistence(timeout: 10))
+        finish.tap()
+        for step in [6, 7, 8, 9, 10] {
+            XCTAssertTrue(app.staticTexts["profile-wizard-step-\(step)"].waitForExistence(timeout: 10))
+            app.buttons["profile-wizard-continue"].tap()
+        }
+        let save = app.buttons["profile-wizard-save"]
+        XCTAssertTrue(save.waitForExistence(timeout: 10))
+        save.tap()
+        XCTAssertTrue(app.buttons["profile-drawer-button"].waitForExistence(timeout: 30))
+        app.terminate()
+    }
+
+    func testLaunchPreservesProfileAfterUpgrade() throws {
+        assertLaunchOpensStoredProfile()
+    }
+
+    /// Reinstall after creating the fixture, retain its EventKit calendar, and
+    /// grant Calendar access before launch. The app database starts empty.
+    func testLaunchRestoresProfileFromCalendar() throws {
+        assertLaunchOpensStoredProfile()
+    }
+
+    private func assertLaunchOpensStoredProfile() {
+        let app = XCUIApplication(bundleIdentifier: ayurvedaasanayogaBundleID)
+        // The separate onboarding test exercises unmodified permission behavior;
+        // here only unrelated notification/Health prompts are suppressed.
+        app.launchArguments = ["-uiTestNoAds", "-skipPermissionPrompts",
+                               "-hasShownInitialSubscription", "YES",
+                               "-lastSelectedTabRoot", "10"]
+        app.launch()
+        let profiles = app.buttons["profile-drawer-button"]
+        XCTAssertTrue(profiles.waitForExistence(timeout: 30))
+        profiles.tap()
+        XCTAssertTrue(app.staticTexts["Launch Upgrade"].waitForExistence(timeout: 10))
+        XCTAssertFalse(app.staticTexts["Preparing database…"].exists)
+        let attachment = XCTAttachment(screenshot: app.screenshot())
+        attachment.name = "Profile retained after app update"
+        attachment.lifetime = .keepAlways
+        add(attachment)
+    }
+
     func testCaptureAyurvedaAsanaYogaHierarchy() throws {
         let app = XCUIApplication(bundleIdentifier: ayurvedaasanayogaBundleID)
         app.launchArguments = ["-ayurvedaasanayogaPlannerTelemetry", "-uiTestNoAds"]

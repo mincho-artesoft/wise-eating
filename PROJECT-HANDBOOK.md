@@ -2,7 +2,20 @@
 **Read this first. It is the knowledge-transfer document for anyone (human or AI)
 taking over direction of this project. Update it at the end of every milestone —
 that is a standing rule baked into all task packets.**
-Last updated: 2026-08-20 (the catalogue/user-store separation makes bundled
+Last updated: 2026-11-17. App Review launch repair (1.1.2 build 13): staged
+catalogue installation format 2 removes seed persistent history before the
+read-only mount; permissions and calendar profile recovery run after the UI is
+ready. Both startup phases share the processing screen with the app logo.
+Foreground contrast comes directly from the selected background/theme, including
+the first onboarding frame. See `ayurveda-data/REPORT-LAUNCH-20261117.md` for
+device, upgrade, recovery, and first-install evidence.
+The final Release archive was uploaded to App Store Connect through API-key
+authentication and build 13 was attached to iOS 1.1.2. Apple processing completed
+without errors/warnings. Version 1.1.2 (13) was resubmitted through the API on
+2026-11-17 at 10:58 Europe/Sofia and is `WAITING_FOR_REVIEW`, retaining the six
+subscription items from the existing submission.
+
+Previous milestone: 2026-08-20 (the catalogue/user-store separation makes bundled
 food, exercise, yoga, practice, Ayurveda, barcode, and search data an atomic
 read-only catalogue while preserving app-authored records in a writable store;
 normal catalogue updates no longer repeat the one-time separation or row-wise
