@@ -125,6 +125,130 @@ enum SearchNameGuard {
         return wordForms.map { $0.min(by: { $0.count < $1.count })! }
     }
 
+    /// Foods whose name has every word of a query that mixes ordinary words
+    /// with command words ("high protein bread", "chicken without skin",
+    /// "low fat yogurt"). The command still runs; these few are shown first,
+    /// so a food the user named outright is never filtered away or buried.
+    static func fullNameMatches(
+        query: String,
+        allFoods: [UUID: CompactFoodItem],
+        invertedIndex: [String: Set<UUID>],
+        knowledge: SearchKnowledgeBase = .shared,
+        limit: Int = 10
+    ) -> [UUID] {
+        let lower = query.lowercased()
+        if lower.rangeOfCharacter(from: .decimalDigits) != nil { return [] }
+        if lower.rangeOfCharacter(from: CharacterSet(charactersIn: "<>=%")) != nil { return [] }
+        let words = lower
+            .split(whereSeparator: { !$0.isLetter && !$0.isNumber })
+            .map(String.init)
+        guard words.count >= 2, words.count <= 8 else { return [] }
+
+        // The words of a nutrient written as several words ("vitamin c") are
+        // command words too, not a name.
+        let padded = " " + words.joined(separator: " ") + " "
+        var nutrientPhraseWords = Set<String>()
+        for key in knowledge.nutrientMap.keys where key.contains(" ") && padded.contains(" \(key) ") {
+            nutrientPhraseWords.formUnion(key.split(separator: " ").map(String.init))
+        }
+        func isCommandWord(_ word: String) -> Bool {
+            if commandSignals.contains(word) || nutrientPhraseWords.contains(word) { return true }
+            if knowledge.nutrientMap[word] != nil { return true }
+            if word.hasSuffix("s"), knowledge.nutrientMap[String(word.dropLast())] != nil { return true }
+            return knowledge.phTerms[word] != nil || knowledge.phKeywords.contains(word)
+        }
+        func variants(_ word: String) -> [String] {
+            var out = [word, word + "s"]
+            if word.hasSuffix("es"), word.count > 4 { out.append(String(word.dropLast(2))) }
+            if word.hasSuffix("s"), word.count > 3 { out.append(String(word.dropLast())) }
+            return out
+        }
+
+        let filler: Set<String> = ["and", "or", "with", "in", "of", "the", "a", "an"]
+        let required = words.filter { !filler.contains($0) && !knowledge.stopWords.contains($0) }
+        let ordinary = required.filter { !isCommandWord($0) }
+        guard !ordinary.isEmpty, ordinary.count < required.count else { return [] }
+
+        // Narrow through the index by the rarest ordinary word, then read the
+        // names. A word right after "without"/"no" is not in the index (the
+        // index drops what a name excludes), so it cannot be used to narrow.
+        let negators: Set<String> = ["without", "no", "excluding", "except"]
+        var candidates: Set<UUID>?
+        for (position, word) in required.enumerated() where !isCommandWord(word) {
+            if position > 0, negators.contains(required[position - 1]) { continue }
+            var ids = Set<UUID>()
+            for form in variants(word) { ids.formUnion(invertedIndex[form] ?? []) }
+            if candidates == nil || ids.count < candidates!.count { candidates = ids }
+        }
+        let pool = candidates.map(Array.init) ?? Array(allFoods.keys)
+
+        let phrase = required.joined(separator: " ")
+        var matches: [(id: UUID, rank: Int, words: Int, name: String)] = []
+        for id in pool {
+            guard let name = allFoods[id]?.lowercasedName else { continue }
+            let ordered = name.split(whereSeparator: { !$0.isLetter && !$0.isNumber }).map(String.init)
+            let nameWords = Set(ordered)
+            guard required.allSatisfy({ word in variants(word).contains(where: nameWords.contains) })
+            else { continue }
+            // "without skin" must stand together in the name: "grilled
+            // without sauce, skin eaten" has the words and the opposite sense.
+            let joined = " " + ordered.joined(separator: " ") + " "
+            let negationsHold = required.indices.dropLast().allSatisfy { index in
+                guard negators.contains(required[index]) else { return true }
+                return variants(required[index + 1]).contains {
+                    joined.contains(" \(required[index]) \($0) ")
+                }
+            }
+            guard negationsHold else { continue }
+            // Best: the name starts with one of the query's ordinary words,
+            // as catalogue names lead with the food ("Yogurt, plain, low
+            // fat"). Next: the query stands in the name as typed.
+            let asTyped = joined.contains(" " + phrase + " ")
+            let leads = ordered.first.map { first in
+                ordinary.contains { variants($0).contains(first) }
+            } ?? false
+            let rank = leads ? (asTyped ? 0 : 1) : (asTyped ? 2 : 3)
+            matches.append((id, rank, ordered.count, name))
+        }
+        matches.sort { ($0.rank, $0.words, $0.name) < ($1.rank, $1.words, $1.name) }
+        return matches.prefix(limit).map(\.id)
+    }
+
+    /// The pH limit in "ph < 6", "ph below 4.5", "ph at least 8" or
+    /// "ph between 6 and 7", wherever it stands in the query.
+    static func explicitPhConstraint(in query: String) -> ConstraintValue? {
+        let text = query.lowercased()
+        let number = "([0-9]+(?:\\.[0-9]+)?)"
+        func firstMatch(_ pattern: String) -> [Double]? {
+            guard let regex = try? NSRegularExpression(pattern: pattern),
+                  let match = regex.firstMatch(
+                      in: text, range: NSRange(text.startIndex..., in: text)
+                  )
+            else { return nil }
+            return (1..<match.numberOfRanges).compactMap { index in
+                Range(match.range(at: index), in: text).flatMap { Double(text[$0]) }
+            }
+        }
+        let ph = "\\bph\\s*(?:is\\s+|of\\s+)?"
+        if let v = firstMatch(ph + "(?:between|from)\\s+\(number)\\s+(?:and|to)\\s+\(number)"),
+           v.count == 2 {
+            return .range(min(v[0], v[1]), max(v[0], v[1]))
+        }
+        if let v = firstMatch(ph + "(?:<=|at most|no more than|max(?:imum)?)\\s*\(number)") {
+            return v.first.map(ConstraintValue.max)
+        }
+        if let v = firstMatch(ph + "(?:>=|at least|no less than|min(?:imum)?)\\s*\(number)") {
+            return v.first.map(ConstraintValue.min)
+        }
+        if let v = firstMatch(ph + "(?:<|less than|lower than|below|under)\\s*\(number)") {
+            return v.first.map(ConstraintValue.strictMax)
+        }
+        if let v = firstMatch(ph + "(?:>|greater than|more than|higher than|above|over)\\s*\(number)") {
+            return v.first.map(ConstraintValue.strictMin)
+        }
+        return nil
+    }
+
     /// One filter per nutrient. A numeric limit wins; otherwise the direction
     /// the tokenizer read from the words ("low", "high", "free").
     static func consistentGoals(

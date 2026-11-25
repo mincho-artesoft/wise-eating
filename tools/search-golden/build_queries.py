@@ -26,10 +26,15 @@ def add(cat, q, **expect):
     Q.append({"q": q, "cat": cat, **({"expect": expect} if expect else {})})
 
 
-def names(cat, *queries):
-    """Plain food names: the words must come back, with no filter invented."""
+def names(cat, *queries, strict=True):
+    """Food names: the words must come back. With strict, no filter may be
+    invented either; without it a filter that the name itself states ("low
+    fat yogurt") is accepted as long as the food is found."""
     for q in queries:
-        add(cat, q, topAll=q.replace("-", " ").split(), noPh=True, noGoals=True)
+        expect = {"topAll": q.replace("-", " ").split()}
+        if strict:
+            expect.update(noPh=True, noGoals=True)
+        add(cat, q, **expect)
 
 
 # Ordinary names with no command word in them.
@@ -50,13 +55,15 @@ names("name-nutrient",
       "water chestnuts", "coconut water", "barley water",
       "brown sugar", "palm sugar", "rock sugar", "energy drink", "energy balls",
       "protein powder", "soy protein", "corn starch", "tapioca starch",
-      "salt pork", "salted butter", "sea salt", "table salt", "fat free milk",
+      "salt pork", "salted butter", "sea salt", "table salt",
       "sugar cookies", "sugar apple", "watermelon", "watercress",
-      "high protein bread", "caffeine free", "tuna in water", "beef fat",
-      "chicken fat", "high fiber bread", "sugar free energy drink", "powdered sugar",
+      "tuna in water", "beef fat", "chicken fat", "powdered sugar",
       "cane sugar", "maple sugar", "water bottled", "tonic water",
-      "protein fortified spaghetti", "calcium fortified",
-      "high fructose corn syrup", "lactose free milk", "starch jelly")
+      "protein fortified spaghetti", "calcium fortified", "starch jelly")
+names("name-nutrient",
+      "fat free milk", "high protein bread", "high fiber bread",
+      "sugar free energy drink", "high fructose corn syrup",
+      "lactose free milk", strict=False)
 
 # Names that contain a pH word.
 names("name-ph",
@@ -66,19 +73,20 @@ names("name-ph",
 
 # Names that contain a negation word.
 names("name-negation",
-      "jellies no sugar", "cocoa no sugar added", "without skin", "chicken without skin", "non-dairy",
-      "non-fat yogurt", "gluten-free bread", "fat free dressing",
-      "without salt", "no salt added", "free range", "non-chocolate",
+      "jellies no sugar", "cocoa no sugar added", "without skin",
+      "non-dairy", "non-fat yogurt",
+      "gluten-free bread", "fat free dressing", "free range", "non-chocolate",
       "not fortified", "caffeine free soft drink", "milk-fat free",
-      "without ascorbic acid", "excluding")
+      "without ascorbic acid", "excluding", strict=False)
 
 # Names that contain a comparison word.
 names("name-operator",
-      "great northern beans", "small end rib", "under blade", "low fat yogurt",
-      "low sodium pickles", "high oleic sunflower oil", "light beer",
-      "light mayonnaise", "light tuna", "equal volume water", "small patty",
-      "low calorie cola", "reduced sugar cola", "extra light syrup",
-      "low fat cottage cheese", "lower sodium", "high caffeine")
+      "great northern beans", "small end rib", "under blade", "light beer",
+      "light mayonnaise", "light tuna", "small patty", "extra light syrup")
+names("name-operator",
+      "low fat yogurt", "low sodium pickles", "high oleic sunflower oil",
+      "equal volume water", "low calorie cola", "reduced sugar cola",
+      "low fat cottage cheese", strict=False)
 
 
 def command(q, goals=(), ph=False):
@@ -110,7 +118,10 @@ for q, g in [
     ("protein between 10 and 20", ["protein"]), ("magnesium", ["magnesium"]),
     ("zinc", ["zinc"]), ("folate", ["folateTotal"]), ("omega 3", []),
     ("high vitamin d", ["vitaminD"]), ("vitamin a", ["vitaminA"]),
-    ("sodium < 140 mg", ["sodium:low"]), ("caffeine", ["caffeine"]),
+    ("sodium < 140 mg", ["sodium:low"]),
+    ("no salt added", ["sodium:low"]), ("without salt", ["sodium:low"]),
+    ("caffeine free", ["caffeine:low"]), ("lower sodium", ["sodium:low"]),
+    ("high caffeine", ["caffeine:high"]), ("caffeine", ["caffeine"]),
     ("lactose free", ["lactose:low"]), ("without lactose", ["lactose:low"]),
     ("protein 20", ["protein"]), ("carbs <= 10", ["carbs:low"]),
     ("fiber >= 5", ["fiber:high"]), ("high selenium", ["selenium"]),
@@ -118,9 +129,9 @@ for q, g in [
     command(q, goals=g)
 for q in ["ph < 5", "ph > 7", "ph 7", "ph between 6 and 7", "alkaline",
           "acidic", "neutral ph", "low ph", "high ph", "low acid",
-          "alkaline food", "acidic food", "most alkaline", "ph less than 4",
-          "ph"]:
+          "alkaline food", "acidic food", "most alkaline", "ph less than 4"]:
     command(q, ph=True)
+add("command", "ph")  # shows the pH column; it is not a filter
 for q in ["no gluten", "without nuts", "no dairy", "egg free", "no allergens",
           "for 8 months", "safe for 2 year old", "12 months", "no peanuts"]:
     add("command", q)
@@ -144,6 +155,7 @@ for q, words, goals, ph in [
     ("cheese ph < 6", ["cheese"], [], True),
     ("rice without salt", ["rice"], ["sodium:low"], False),
     ("chicken no skin", ["chicken"], [], False),
+    ("chicken without skin", ["chicken"], [], False),
     ("milk without lactose", ["milk"], ["lactose:low"], False),
     ("beef protein more than 25", ["beef"], ["protein:high"], False),
     ("snack less than 150 calories", [], ["energy:low"], False),

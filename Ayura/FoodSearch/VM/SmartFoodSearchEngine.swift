@@ -862,6 +862,9 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             }
             // 2. Приоритет: UI Бутон > Constraint Engine > Tokenizer
             let phConstraintForIntent = explicitPhConstraint
+                                        ?? (nameFirst && nameTokens == nil
+                                            ? SearchNameGuard.explicitPhConstraint(in: searchQuery)
+                                            : nil)
                                         ?? phConstraintFromConstraints
                                         ?? (simplePHToggle ? nil : parsed.phConstraint)
             // --------------------------------------------------
@@ -1275,7 +1278,18 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                         isNumericConstraint = false
                     }
 
-                    if isNumericConstraint && val == 0 {
+                    // "sugar free" must keep foods with no sugar at all. A food
+                    // with a full nutrient panel and nothing recorded for this
+                    // nutrient has none of it; one with a bare panel is unknown.
+                    var zeroMeansNone = false
+                    if nameFirst, val == 0, item.nutrientValues.count >= 10 {
+                        switch goal.constraint {
+                        case .max, .strictMax: zeroMeansNone = true
+                        default: break
+                        }
+                    }
+
+                    if isNumericConstraint && val == 0 && !zeroMeansNone {
                         passesNutrients = false
                         if !nameFirst { print("🧪 [SmartSearch] Excluding '\(item.lowercasedName)' for \(goal.nutrient) – numeric constraint \(goal.constraint) but rounded value is 0.0") }
                         break
@@ -1495,8 +1509,31 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                 finalResults = sortedResults
             }
             
+            // With the flag on: foods whose name has every word of a query
+            // such as "high protein bread" go first, whatever the command in
+            // it filtered or ranked. Skipped whenever a safety or Ayurveda
+            // constraint is active, so those are never bypassed.
+            var orderedResults = finalResults
+            if nameFirst, nameTokens == nil, !hasAyurvedaRequest, !hasNonLatinLetters,
+               profileConstraints == nil, intent.targetConsumerAge == nil,
+               intent.allergenExclusions.isEmpty, !intent.excludeAllAllergens,
+               !isFavoritesOnly, !isRecipesOnly, !isMenusOnly, searchMode == nil {
+                let pinned = SearchNameGuard.fullNameMatches(
+                    query: searchQuery,
+                    allFoods: compactMap,
+                    invertedIndex: invertedIndex
+                ).filter { id in
+                    guard let item = compactMap[id] else { return false }
+                    return item.isEdible && !excludedFoodIDs.contains(id)
+                }
+                if !pinned.isEmpty {
+                    let pinnedSet = Set(pinned)
+                    orderedResults = pinned + finalResults.filter { !pinnedSet.contains($0) }
+                }
+            }
+
             return (
-                finalResults,
+                orderedResults,
                 intent,
                 effectiveTextTokens,
                 forceShowPH,

@@ -866,19 +866,6 @@
   }
  },
  {
-  "q": "fat free milk",
-  "cat": "name-nutrient",
-  "expect": {
-   "topAll": [
-    "fat",
-    "free",
-    "milk"
-   ],
-   "noPh": true,
-   "noGoals": true
-  }
- },
- {
   "q": "sugar cookies",
   "cat": "name-nutrient",
   "expect": {
@@ -925,31 +912,6 @@
   }
  },
  {
-  "q": "high protein bread",
-  "cat": "name-nutrient",
-  "expect": {
-   "topAll": [
-    "high",
-    "protein",
-    "bread"
-   ],
-   "noPh": true,
-   "noGoals": true
-  }
- },
- {
-  "q": "caffeine free",
-  "cat": "name-nutrient",
-  "expect": {
-   "topAll": [
-    "caffeine",
-    "free"
-   ],
-   "noPh": true,
-   "noGoals": true
-  }
- },
- {
   "q": "tuna in water",
   "cat": "name-nutrient",
   "expect": {
@@ -981,33 +943,6 @@
    "topAll": [
     "chicken",
     "fat"
-   ],
-   "noPh": true,
-   "noGoals": true
-  }
- },
- {
-  "q": "high fiber bread",
-  "cat": "name-nutrient",
-  "expect": {
-   "topAll": [
-    "high",
-    "fiber",
-    "bread"
-   ],
-   "noPh": true,
-   "noGoals": true
-  }
- },
- {
-  "q": "sugar free energy drink",
-  "cat": "name-nutrient",
-  "expect": {
-   "topAll": [
-    "sugar",
-    "free",
-    "energy",
-    "drink"
    ],
    "noPh": true,
    "noGoals": true
@@ -1099,6 +1034,63 @@
   }
  },
  {
+  "q": "starch jelly",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "starch",
+    "jelly"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "fat free milk",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "fat",
+    "free",
+    "milk"
+   ]
+  }
+ },
+ {
+  "q": "high protein bread",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "high",
+    "protein",
+    "bread"
+   ]
+  }
+ },
+ {
+  "q": "high fiber bread",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "high",
+    "fiber",
+    "bread"
+   ]
+  }
+ },
+ {
+  "q": "sugar free energy drink",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "sugar",
+    "free",
+    "energy",
+    "drink"
+   ]
+  }
+ },
+ {
   "q": "high fructose corn syrup",
   "cat": "name-nutrient",
   "expect": {
@@ -1107,9 +1099,7 @@
     "fructose",
     "corn",
     "syrup"
-   ],
-   "noPh": true,
-   "noGoals": true
+   ]
   }
  },
  {
@@ -1120,21 +1110,7 @@
     "lactose",
     "free",
     "milk"
-   ],
-   "noPh": true,
-   "noGoals": true
-  }
- },
- {
-  "q": "starch jelly",
-  "cat": "name-nutrient",
-  "expect": {
-   "topAll": [
-    "starch",
-    "jelly"
-   ],
-   "noPh": true,
-   "noGoals": true
+   ]
   }
  },
  {
@@ -1284,9 +1260,7 @@
     "jellies",
     "no",
     "sugar"
-   ],
-   "noPh": true,
-   "noGoals": true
+   ]
   }
  },
  {
@@ -1298,9 +1272,7 @@
     "no",
     "sugar",
     "added"
-   ],
-   "noPh": true,
-   "noGoals": true
+   ]
   }
  },
  {
@@ -1310,22 +1282,7 @@
    "topAll": [
     "without",
     "skin"
-   ],
-   "noPh": true,
-   "noGoals": true
-  }
- },
- {
-  "q": "chicken without skin",
-  "cat": "name-negation",
-  "expect": {
-   "topAll": [
-    "chicken",
-    "without",
-    "skin"
-   ],
-   "noPh": true,
-   "noGoals": true
+   ]
   }
  },
  {
@@ -1335,9 +1292,7 @@
    "topAll": [
     "non",
     "dairy"
-   ],
-   "noPh": true,
-   "noGoals": true
+   ]
   }
  },
  {
@@ -1348,9 +1303,7 @@
     "non",
     "fat",
     "yogurt"
-   ],
-   "noPh": true,
-   "noGoals": true
+   ]
   }
  },
  {
@@ -1361,9 +1314,7 @@
     "gluten",
     "free",
     "bread"
-   ],
-   "noPh": true,
-   "noGoals": true
+   ]
   }
  },
  {
@@ -1374,34 +1325,7 @@
     "fat",
     "free",
     "dressing"
-   ],
-   "noPh": true,
-   "noGoals": true
-  }
- },
- {
-  "q": "without salt",
-  "cat": "name-negation",
-  "expect": {
-   "topAll": [
-    "without",
-    "salt"
-   ],
-   "noPh": true,
-   "noGoals": true
-  }
- },
- {
-  "q": "no salt added",
-  "cat": "name-negation",
-  "expect": {
-   "topAll": [
-    "no",
-    "salt",
-    "added"
-   ],
-   "noPh": true,
-   "noGoals": true
+   ]
   }
  },
  {
@@ -1411,9 +1335,7 @@
    "topAll": [
     "free",
     "range"
-   ],
-   "noPh": true,
-   "noGoals": true
+   ]
   }
  },
  {
@@ -1423,9 +1345,7 @@
    "topAll": [
     "non",
     "chocolate"
-   ],
-   "noPh": true,
-   "noGoals": true
+   ]
   }
  },
  {
@@ -1435,9 +1355,7 @@
    "topAll": [
     "not",
     "fortified"
-   ],
-   "noPh": true,
-   "noGoals": true
+   ]
   }
  },
  {
@@ -1449,9 +1367,7 @@
     "free",
     "soft",
     "drink"
-   ],
-   "noPh": true,
-   "noGoals": true
+   ]
   }
  },
  {
@@ -1462,9 +1378,7 @@
     "milk",
     "fat",
     "free"
-   ],
-   "noPh": true,
-   "noGoals": true
+   ]
   }
  },
  {
@@ -1475,9 +1389,7 @@
     "without",
     "ascorbic",
     "acid"
-   ],
-   "noPh": true,
-   "noGoals": true
+   ]
   }
  },
  {
@@ -1486,9 +1398,7 @@
   "expect": {
    "topAll": [
     "excluding"
-   ],
-   "noPh": true,
-   "noGoals": true
+   ]
   }
  },
  {
@@ -1524,46 +1434,6 @@
    "topAll": [
     "under",
     "blade"
-   ],
-   "noPh": true,
-   "noGoals": true
-  }
- },
- {
-  "q": "low fat yogurt",
-  "cat": "name-operator",
-  "expect": {
-   "topAll": [
-    "low",
-    "fat",
-    "yogurt"
-   ],
-   "noPh": true,
-   "noGoals": true
-  }
- },
- {
-  "q": "low sodium pickles",
-  "cat": "name-operator",
-  "expect": {
-   "topAll": [
-    "low",
-    "sodium",
-    "pickles"
-   ],
-   "noPh": true,
-   "noGoals": true
-  }
- },
- {
-  "q": "high oleic sunflower oil",
-  "cat": "name-operator",
-  "expect": {
-   "topAll": [
-    "high",
-    "oleic",
-    "sunflower",
-    "oil"
    ],
    "noPh": true,
    "noGoals": true
@@ -1606,51 +1476,12 @@
   }
  },
  {
-  "q": "equal volume water",
-  "cat": "name-operator",
-  "expect": {
-   "topAll": [
-    "equal",
-    "volume",
-    "water"
-   ],
-   "noPh": true,
-   "noGoals": true
-  }
- },
- {
   "q": "small patty",
   "cat": "name-operator",
   "expect": {
    "topAll": [
     "small",
     "patty"
-   ],
-   "noPh": true,
-   "noGoals": true
-  }
- },
- {
-  "q": "low calorie cola",
-  "cat": "name-operator",
-  "expect": {
-   "topAll": [
-    "low",
-    "calorie",
-    "cola"
-   ],
-   "noPh": true,
-   "noGoals": true
-  }
- },
- {
-  "q": "reduced sugar cola",
-  "cat": "name-operator",
-  "expect": {
-   "topAll": [
-    "reduced",
-    "sugar",
-    "cola"
    ],
    "noPh": true,
    "noGoals": true
@@ -1670,6 +1501,73 @@
   }
  },
  {
+  "q": "low fat yogurt",
+  "cat": "name-operator",
+  "expect": {
+   "topAll": [
+    "low",
+    "fat",
+    "yogurt"
+   ]
+  }
+ },
+ {
+  "q": "low sodium pickles",
+  "cat": "name-operator",
+  "expect": {
+   "topAll": [
+    "low",
+    "sodium",
+    "pickles"
+   ]
+  }
+ },
+ {
+  "q": "high oleic sunflower oil",
+  "cat": "name-operator",
+  "expect": {
+   "topAll": [
+    "high",
+    "oleic",
+    "sunflower",
+    "oil"
+   ]
+  }
+ },
+ {
+  "q": "equal volume water",
+  "cat": "name-operator",
+  "expect": {
+   "topAll": [
+    "equal",
+    "volume",
+    "water"
+   ]
+  }
+ },
+ {
+  "q": "low calorie cola",
+  "cat": "name-operator",
+  "expect": {
+   "topAll": [
+    "low",
+    "calorie",
+    "cola"
+   ]
+  }
+ },
+ {
+  "q": "reduced sugar cola",
+  "cat": "name-operator",
+  "expect": {
+   "topAll": [
+    "reduced",
+    "sugar",
+    "cola"
+   ]
+  }
+ },
+ {
   "q": "low fat cottage cheese",
   "cat": "name-operator",
   "expect": {
@@ -1678,33 +1576,7 @@
     "fat",
     "cottage",
     "cheese"
-   ],
-   "noPh": true,
-   "noGoals": true
-  }
- },
- {
-  "q": "lower sodium",
-  "cat": "name-operator",
-  "expect": {
-   "topAll": [
-    "lower",
-    "sodium"
-   ],
-   "noPh": true,
-   "noGoals": true
-  }
- },
- {
-  "q": "high caffeine",
-  "cat": "name-operator",
-  "expect": {
-   "topAll": [
-    "high",
-    "caffeine"
-   ],
-   "noPh": true,
-   "noGoals": true
+   ]
   }
  },
  {
@@ -2067,6 +1939,56 @@
   }
  },
  {
+  "q": "no salt added",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "sodium:low"
+   ]
+  }
+ },
+ {
+  "q": "without salt",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "sodium:low"
+   ]
+  }
+ },
+ {
+  "q": "caffeine free",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "caffeine:low"
+   ]
+  }
+ },
+ {
+  "q": "lower sodium",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "sodium:low"
+   ]
+  }
+ },
+ {
+  "q": "high caffeine",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "caffeine:high"
+   ]
+  }
+ },
+ {
   "q": "caffeine",
   "cat": "command",
   "expect": {
@@ -2250,11 +2172,7 @@
  },
  {
   "q": "ph",
-  "cat": "command",
-  "expect": {
-   "minTotal": 1,
-   "ph": true
-  }
+  "cat": "command"
  },
  {
   "q": "no gluten",
@@ -2487,6 +2405,16 @@
  },
  {
   "q": "chicken no skin",
+  "cat": "mixed",
+  "expect": {
+   "minTotal": 1,
+   "topAll": [
+    "chicken"
+   ]
+  }
+ },
+ {
+  "q": "chicken without skin",
   "cat": "mixed",
   "expect": {
    "minTotal": 1,
