@@ -126,6 +126,13 @@ simulation; must always pass).
   125 MB instead of 147 MB in two gzip parts, 287 MB instead of 350 MB unpacked.
   `build_preseeded_store.py` reads either payload form, writes the binary one,
   and compacts again after rewriting it.
+  Command words of other languages are data: `Ayura/FoodSearch/Grammar/
+  search_grammar.<language>.json` maps a language's phrases to the English
+  commands (`SearchGrammar.swift`), so the English parser stays the only
+  parser; Bulgarian is the pilot (32 golden commands). A new language is a
+  new file plus golden queries; `testGrammarFilesMapToCommands` rejects a
+  phrase the parser would not fully understand. Food names are not in these
+  files; localized names are the next step.
 - `Ayura/Ayurveda/AyurvedaRecommendationGate.swift` (D9): set-driven
   never-recommend enforcement (engineExcluded profiles + linked fdcIds + AI
   free-text name screen) wired into all AI generation paths and the Siri intent;

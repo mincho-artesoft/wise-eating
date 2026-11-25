@@ -22,8 +22,13 @@ import sys
 Q = []
 
 
-def add(cat, q, **expect):
-    Q.append({"q": q, "cat": cat, **({"expect": expect} if expect else {})})
+def add(cat, q, lang=None, **expect):
+    Q.append({
+        "q": q,
+        "cat": cat,
+        **({"lang": lang} if lang else {}),
+        **({"expect": expect} if expect else {}),
+    })
 
 
 def names(cat, *queries, strict=True):
@@ -191,6 +196,50 @@ for q in ["пиле", "мляко", "ябълка", "ориз", "кисело м
           "苹果", "牛奶", "りんご", "牛乳", "दूध", "चावल", "تفاح", "사과",
           "яблоко", "молоко"]:
     add("locale", q)
+
+# Commands typed in Bulgarian, through Grammar/search_grammar.bg.json. Each
+# must give what its English twin gives.
+for q, goals, ph in [
+    ("високо протеин", ["protein:high"], False),
+    ("богати на протеин", ["protein:high"], False),
+    ("ниско съдържание на мазнини", ["totalFat:low"], False),
+    ("без захар", ["totalSugar:low"], False),
+    ("без сол", ["sodium:low"], False),
+    ("ниско натрий", ["sodium:low"], False),
+    ("протеин > 20", ["protein:high"], False),
+    ("протеин повече от 20", ["protein:high"], False),
+    ("протеин поне 15 г", ["protein:high"], False),
+    ("мазнини под 5", ["totalFat:low"], False),
+    ("калории под 100", ["energy:low"], False),
+    ("по-малко от 100 калории", ["energy:low"], False),
+    ("витамин ц > 50", ["vitaminC:high"], False),
+    ("високо желязо", ["iron:high"], False),
+    ("калций поне 200 мг", ["calcium:high"], False),
+    ("богати на фибри", ["fiber:high"], False),
+    ("протеин между 10 и 20", ["protein"], False),
+    ("натрий под 140 мг", ["sodium:low"], False),
+    ("без холестерол", ["cholesterol:low"], False),
+    ("въглехидрати под 10,5", ["carbs:low"], False),
+    ("ph под 5", [], True),
+    ("рн над 7", [], True),
+    ("ph между 6 и 7", [], True),
+    ("алкални", [], True),
+    ("кисели", [], True),
+    ("неутрално ph", [], True),
+]:
+    expect = {"minTotal": 1}
+    if goals:
+        expect["goals"] = goals
+    if ph:
+        expect["ph"] = True
+    add("bg-command", q, lang="bg", **expect)
+for q in ["без глутен", "без ядки", "без млечни продукти", "за бебе",
+          "8 месеца", "2 години"]:
+    add("bg-command", q, lang="bg", minTotal=1)
+# Food names with a command word in them: recorded now, judged once the
+# Bulgarian names are in the index. They must not turn into a filter.
+for q in ["кисело мляко", "кисело зеле", "кафява захар", "морска сол"]:
+    add("bg-name", q, lang="bg", noPh=True, noGoals=True)
 
 # Odd input.
 for q in ["", " ", "%", "2% milk", "1% milk", "100% juice", "7 up", "v8",

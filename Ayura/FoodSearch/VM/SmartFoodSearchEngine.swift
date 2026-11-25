@@ -612,10 +612,15 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             let nameTokens: [String]? = nameFirst
                 ? SearchNameGuard.nameTokens(query: query, invertedIndex: invertedIndex)
                 : nil
+            // Command words typed in the user's language become the English
+            // commands the parsers below understand; food names are untouched.
+            let commandQuery = nameTokens == nil
+                ? (SearchGrammar.active?.normalize(query) ?? query)
+                : query
             let parsedFacets = nameTokens != nil
-                ? AyurvedaFacetParseResult.passthrough(query)
+                ? AyurvedaFacetParseResult.passthrough(commandQuery)
                 : CanonicalFacetParser.parse(
-                    query,
+                    commandQuery,
                     synonyms: SearchKnowledgeBase.shared.synonyms
                 )
             let facetParse: AyurvedaFacetParseResult
@@ -626,7 +631,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     $0.lowercasedName == originalSimpleRawQuery
                 }
                 facetParse = exactNameMatch
-                    ? AyurvedaFacetParseResult.passthrough(query)
+                    ? AyurvedaFacetParseResult.passthrough(commandQuery)
                     : parsedFacets
             }
             let searchQuery = facetParse.remainingQuery
@@ -718,7 +723,8 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     // A number or comparison word that a filter already used
                     // ("protein > 8", "fat less than 3") is not part of a name.
                     let isSpentOnFilter = nameFirst
-                        && (!parsed.nutrientGoals.isEmpty || parsed.phConstraint != nil)
+                        && (!parsed.nutrientGoals.isEmpty || parsed.phConstraint != nil
+                            || parsed.targetConsumerAge != nil)
                         && (rawToken.allSatisfy(\.isNumber)
                             || SearchNameGuard.isComparisonWord(rawToken)
                             || filterWords.contains(rawToken))

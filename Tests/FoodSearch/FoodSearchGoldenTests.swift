@@ -15,6 +15,8 @@ nonisolated final class FoodSearchGoldenTests: XCTestCase {
     private struct Query: Decodable {
         let q: String
         let cat: String
+        /// The language the user is assumed to type in; nil is English.
+        let lang: String?
     }
 
     private struct Row: Encodable {
@@ -84,6 +86,10 @@ nonisolated final class FoodSearchGoldenTests: XCTestCase {
         var rows: [Row] = []
         var timings: [Timing] = []
         for query in queries {
+            SearchGrammar.active = query.lang.flatMap { SearchGrammar.bundled(for: $0) }
+            if let lang = query.lang {
+                XCTAssertNotNil(SearchGrammar.active, "no grammar file for '\(lang)'")
+            }
             let first = await engine.searchDiagnostics(query: query.q, temporalContext: clock)
             var samples: [Double] = []
             for _ in 0..<runs {
@@ -115,6 +121,7 @@ nonisolated final class FoodSearchGoldenTests: XCTestCase {
             ))
         }
 
+        SearchGrammar.active = nil
         let sorted = timings.map(\.medianMs).sorted()
         func percentile(_ p: Double) -> Double {
             sorted.isEmpty ? 0 : sorted[min(sorted.count - 1, Int(Double(sorted.count) * p))]
@@ -164,5 +171,36 @@ nonisolated final class FoodSearchGoldenTests: XCTestCase {
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
         try encoder.encode(report).write(to: out.appendingPathComponent("binary.json"))
         print("SEARCH_BINARY|exact=\(report.roundTripIsExact)|json=\(report.jsonBytes)|binary=\(report.binaryBytes)|jsonLoadMs=\(Int(report.jsonDecodeMs + report.jsonToMemoryMs))|binaryDecodeMs=\(Int(report.binaryDecodeMs))")
+    }
+
+    /// Every phrase of every grammar file must turn into a command the
+    /// English parser fully understands: nothing may be left over as a word
+    /// to look for in food names.
+    @MainActor func testGrammarFilesMapToCommands() throws {
+        let grammars = SearchGrammar.allBundled()
+        XCTAssertFalse(grammars.isEmpty, "no grammar files in the bundle")
+        // Fragments that only mean something next to a number or a nutrient.
+        let fragments: Set<String> = [
+            "low", "high", "without", "zero", "less than", "more than", "at least",
+            "at most", "no more than", "month", "year", "ph",
+        ]
+        for grammar in grammars {
+            XCTAssertGreaterThan(grammar.allPhrases.count, 20, grammar.language)
+            for (phrase, command) in grammar.allPhrases {
+                XCTAssertEqual(
+                    phrase.filter { $0 == "#" }.count,
+                    command.filter { $0 == "#" }.count,
+                    "[\(grammar.language)] '\(phrase)': numbers do not match '\(command)'"
+                )
+                if fragments.contains(command) { continue }
+                let sample = command.replacingOccurrences(of: "#", with: "5")
+                let leftover = Tokenizer.parse(sample).textTokens
+                    .subtracting(["5"])
+                XCTAssertTrue(
+                    leftover.isEmpty,
+                    "[\(grammar.language)] '\(phrase)' -> '\(command)' leaves \(leftover.sorted()) as plain words"
+                )
+            }
+        }
     }
 }

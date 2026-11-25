@@ -27,7 +27,7 @@ enum SearchNameGuard {
 
     private static let comparisonWords: Set<String> = [
         "less", "more", "greater", "lower", "higher", "than", "under", "below",
-        "over", "above", "least", "most", "between", "equal", "max", "min",
+        "over", "above", "at", "least", "most", "between", "equal", "max", "min",
         "maximum", "minimum",
     ]
 
@@ -50,7 +50,8 @@ enum SearchNameGuard {
     static func nameTokens(
         query: String,
         invertedIndex: [String: Set<UUID>],
-        knowledge: SearchKnowledgeBase = .shared
+        knowledge: SearchKnowledgeBase = .shared,
+        grammar: SearchGrammar? = SearchGrammar.active
     ) -> [String]? {
         let lower = query.lowercased()
         if lower.rangeOfCharacter(from: .decimalDigits) != nil { return nil }
@@ -71,16 +72,25 @@ enum SearchNameGuard {
             if padded.contains(" \(pattern) ") { return nil }
         }
 
+        // A command word of the user's own language counts as the English
+        // words it stands for ("без" is "without").
+        let translated = words.flatMap { grammar?.commandWords(for: $0) ?? [] }
+        if translated.contains(where: commandSignals.contains) { return nil }
+
         func forms(_ word: String) -> [String] {
             var candidates = [word, word + "s"]
             if word.hasSuffix("es"), word.count > 4 { candidates.append(String(word.dropLast(2))) }
             if word.hasSuffix("s"), word.count > 3 { candidates.append(String(word.dropLast())) }
             return candidates.filter { invertedIndex[$0] != nil }
         }
-        func isCommandWord(_ word: String) -> Bool {
+        func isEnglishCommandWord(_ word: String) -> Bool {
             if knowledge.nutrientMap[word] != nil { return true }
             if word.hasSuffix("s"), knowledge.nutrientMap[String(word.dropLast())] != nil { return true }
             return knowledge.phTerms[word] != nil || knowledge.phKeywords.contains(word)
+        }
+        func isCommandWord(_ word: String) -> Bool {
+            isEnglishCommandWord(word)
+                || (grammar?.commandWords(for: word) ?? []).contains(where: isEnglishCommandWord)
         }
 
         let content = words.filter { !indexStopWords.contains($0) }

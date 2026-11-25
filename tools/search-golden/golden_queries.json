@@ -2756,6 +2756,364 @@
   "cat": "locale"
  },
  {
+  "q": "високо протеин",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "protein:high"
+   ]
+  }
+ },
+ {
+  "q": "богати на протеин",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "protein:high"
+   ]
+  }
+ },
+ {
+  "q": "ниско съдържание на мазнини",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "totalFat:low"
+   ]
+  }
+ },
+ {
+  "q": "без захар",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "totalSugar:low"
+   ]
+  }
+ },
+ {
+  "q": "без сол",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "sodium:low"
+   ]
+  }
+ },
+ {
+  "q": "ниско натрий",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "sodium:low"
+   ]
+  }
+ },
+ {
+  "q": "протеин > 20",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "protein:high"
+   ]
+  }
+ },
+ {
+  "q": "протеин повече от 20",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "protein:high"
+   ]
+  }
+ },
+ {
+  "q": "протеин поне 15 г",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "protein:high"
+   ]
+  }
+ },
+ {
+  "q": "мазнини под 5",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "totalFat:low"
+   ]
+  }
+ },
+ {
+  "q": "калории под 100",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "energy:low"
+   ]
+  }
+ },
+ {
+  "q": "по-малко от 100 калории",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "energy:low"
+   ]
+  }
+ },
+ {
+  "q": "витамин ц > 50",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "vitaminC:high"
+   ]
+  }
+ },
+ {
+  "q": "високо желязо",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "iron:high"
+   ]
+  }
+ },
+ {
+  "q": "калций поне 200 мг",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "calcium:high"
+   ]
+  }
+ },
+ {
+  "q": "богати на фибри",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "fiber:high"
+   ]
+  }
+ },
+ {
+  "q": "протеин между 10 и 20",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "protein"
+   ]
+  }
+ },
+ {
+  "q": "натрий под 140 мг",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "sodium:low"
+   ]
+  }
+ },
+ {
+  "q": "без холестерол",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "cholesterol:low"
+   ]
+  }
+ },
+ {
+  "q": "въглехидрати под 10,5",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "carbs:low"
+   ]
+  }
+ },
+ {
+  "q": "ph под 5",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "ph": true
+  }
+ },
+ {
+  "q": "рн над 7",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "ph": true
+  }
+ },
+ {
+  "q": "ph между 6 и 7",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "ph": true
+  }
+ },
+ {
+  "q": "алкални",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "ph": true
+  }
+ },
+ {
+  "q": "кисели",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "ph": true
+  }
+ },
+ {
+  "q": "неутрално ph",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1,
+   "ph": true
+  }
+ },
+ {
+  "q": "без глутен",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1
+  }
+ },
+ {
+  "q": "без ядки",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1
+  }
+ },
+ {
+  "q": "без млечни продукти",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1
+  }
+ },
+ {
+  "q": "за бебе",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1
+  }
+ },
+ {
+  "q": "8 месеца",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1
+  }
+ },
+ {
+  "q": "2 години",
+  "cat": "bg-command",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1
+  }
+ },
+ {
+  "q": "кисело мляко",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "кисело зеле",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "кафява захар",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "морска сол",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
   "q": "",
   "cat": "edge"
  },
