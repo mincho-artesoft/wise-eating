@@ -17,14 +17,26 @@ struct FoodNameLocalizer: Sendable {
     let language: String
     private let translations: [String: String]
 
+    /// `translated` holds one line per segment, then lines of the form
+    /// "Milk|whole<TAB>пълномаслено": a segment translated differently in
+    /// names whose first segment is the given food.
     init(language: String, segments: [String], translated: [String]) {
         self.language = language
         var table: [String: String] = [:]
-        table.reserveCapacity(segments.count)
+        table.reserveCapacity(translated.count)
         for (english, local) in zip(segments, translated) where !local.isEmpty && local != english {
             table[english] = local
         }
+        for line in translated.dropFirst(segments.count) {
+            let parts = line.split(separator: "\t", maxSplits: 1).map(String.init)
+            if parts.count == 2 { table[parts[0]] = parts[1] }
+        }
         translations = table
+    }
+
+    /// The translation of one segment of a name that starts with `food`.
+    func translation(ofSegment segment: String, in food: String) -> String? {
+        translations[food + "|" + segment] ?? translations[segment]
     }
 
     static func segments(of name: String) -> [String] {
@@ -34,19 +46,15 @@ struct FoodNameLocalizer: Sendable {
     /// The name in this language, or nil when none of its segments is translated.
     func localizedName(_ english: String) -> String? {
         var translatedAny = false
-        let parts = Self.segments(of: english).map { segment -> String in
-            if let local = translations[segment] {
+        let all = Self.segments(of: english)
+        let parts = all.map { segment -> String in
+            if let local = translation(ofSegment: segment, in: all[0]) {
                 translatedAny = true
                 return local
             }
             return segment
         }
         return translatedAny ? parts.joined(separator: ", ") : nil
-    }
-
-    /// The translation of one segment, for building the search index.
-    func translation(ofSegment segment: String) -> String? {
-        translations[segment]
     }
 
     /// The words and adjacent word pairs of a localized segment, as the search
@@ -79,7 +87,7 @@ struct FoodNameLocalizer: Sendable {
         guard language != "en",
               let segments = lines(of: "food_name_segments.en", in: bundle),
               let translated = lines(of: "food_names.\(language)", in: bundle),
-              segments.count == translated.count
+              translated.count >= segments.count
         else { return nil }
         return FoodNameLocalizer(language: language, segments: segments, translated: translated)
     }

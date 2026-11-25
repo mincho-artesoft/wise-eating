@@ -44,14 +44,16 @@ final class SearchIndexStore {
             for food in compactFoods {
                 guard let name = localizer.localizedName(food.name) else { continue }
                 names[food.id] = name.lowercased()
-                for segment in FoodNameLocalizer.segments(of: food.name) {
-                    guard let local = localizer.translation(ofSegment: segment) else { continue }
+                let segments = FoodNameLocalizer.segments(of: food.name)
+                for segment in segments {
+                    guard let local = localizer.translation(ofSegment: segment, in: segments[0])
+                    else { continue }
                     let tokens: [String]
-                    if let known = tokensBySegment[segment] {
+                    if let known = tokensBySegment[local] {
                         tokens = known
                     } else {
                         tokens = FoodNameLocalizer.searchTokens(of: local)
-                        tokensBySegment[segment] = tokens
+                        tokensBySegment[local] = tokens
                     }
                     for token in tokens { index[token, default: []].insert(food.id) }
                 }

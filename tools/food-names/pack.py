@@ -10,6 +10,10 @@ food names (the parts between ", "). <language>.json maps each of them to its
 translation. The app reads both packed files line by line, so line i of a
 language is the translation of line i of the segment list; a segment mapped to
 itself or missing is written as an empty line and stays English in the app.
+
+A key of the form "Milk|whole" translates a segment only in names whose first
+segment is "Milk" ("whole" is "цяло" for a turkey and "пълномаслено" for
+milk). These follow the aligned lines as "Milk|whole<TAB>translation".
 """
 import json
 import pathlib
@@ -40,6 +44,11 @@ print(f"segments: {len(segments)}, {sum(len(s.encode()) for s in segments)} byte
 
 for language in sys.argv[1:]:
     table = json.loads((here / f"{language}.json").read_text())
+    by_food = {key: value for key, value in table.items() if "|" in key}
+    table = {key: value for key, value in table.items() if "|" not in key}
+    for key in by_food:
+        food, _, segment = key.partition("|")
+        assert food in segments and segment in segments, f"{language}: unknown segments in {key!r}"
     unknown = sorted(set(table) - set(segments))
     assert not unknown, f"{language}: not catalogue segments: {unknown[:5]}"
     problems = []
@@ -54,11 +63,15 @@ for language in sys.argv[1:]:
             problems.append(f"line break in: {segment!r}")
         lines.append(local)
     translated = sum(1 for line in lines if line)
+    by_food_problems = [key for key, value in by_food.items() if "\t" in value or "\n" in value or not value.strip()]
+    assert not by_food_problems, by_food_problems
     for problem in problems[:40]:
         print("  " + problem)
     if problems:
         sys.exit(f"{language}: {len(problems)} problems; nothing written")
     target = out / f"food_names.{language}.z"
+    lines += [f"{key}\t{value.strip()}" for key, value in sorted(by_food.items())]
     target.write_bytes(pack(lines))
     print(f"{language}: {translated} of {len(segments)} segments translated, "
+          f"{len(by_food)} food-specific, "
           f"{sum(len(l.encode()) for l in lines)} bytes of text, {target.stat().st_size} packed")
