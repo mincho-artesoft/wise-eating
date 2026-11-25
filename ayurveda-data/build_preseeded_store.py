@@ -14,6 +14,7 @@ import tempfile
 import uuid
 from pathlib import Path
 
+from search_index_binary import SearchIndexError, encode as encode_search_index, load_payload
 from build_seed import (
     TARGET_AYURVEDA_LINKS,
     TARGET_FOODS,
@@ -33,7 +34,7 @@ TARGET_EXPECTED = {
     "nutritionEstimated": 3,
     "links": TARGET_AYURVEDA_LINKS,
     "cacheFoods": TARGET_FOODS,
-    "cacheVersion": 13,
+    "cacheVersion": 14,
     "inedibleFoods": 6,
     "facetFoods": TARGET_FOODS,
     "metadataFoods": TARGET_FOODS,
@@ -192,7 +193,7 @@ def add_estimated_search_fallbacks(store: Path) -> None:
         ).fetchone()
         if row is None:
             raise PreseedBuildError("main search cache is missing")
-        payload = json.loads(row[0])
+        payload = load_payload(row[0])
         payload.pop("knownDiets", None)
         food_rows = {
             uuid_key(food_id): name
@@ -255,11 +256,7 @@ def add_estimated_search_fallbacks(store: Path) -> None:
             facet: sorted(food_ids)
             for facet, food_ids in sorted(facet_index.items())
         }
-        payload_data = json.dumps(
-            payload,
-            ensure_ascii=False,
-            separators=(",", ":"),
-        ).encode("utf-8")
+        payload_data = encode_search_index(payload)
         connection.execute(
             """
             UPDATE ZSEARCHINDEXCACHE
@@ -668,8 +665,8 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
         require_equal("cache foodsCount", cache_foods, EXPECTED["cacheFoods"])
         require_equal("cache version", cache_version, EXPECTED["cacheVersion"])
         try:
-            payload = json.loads(payload_data)
-        except (TypeError, UnicodeDecodeError, json.JSONDecodeError) as error:
+            payload = load_payload(payload_data)
+        except (TypeError, UnicodeDecodeError, json.JSONDecodeError, SearchIndexError) as error:
             raise PreseedBuildError(f"search cache payload cannot decode: {error}") from error
         compact_foods = payload.get("compactFoods")
         if not isinstance(compact_foods, list):
@@ -1106,10 +1103,15 @@ def main() -> int:
     source = args.source_store.resolve()
     with tempfile.TemporaryDirectory(prefix="ayura-preseed-") as temporary:
         temporary_root = Path(temporary)
+        staged = temporary_root / "staged.store"
         compacted = temporary_root / "default.store"
         compressed = temporary_root / "preseeded_db.store.gz"
-        compact_store(source, compacted)
-        add_estimated_search_fallbacks(compacted)
+        compact_store(source, staged)
+        add_estimated_search_fallbacks(staged)
+        # Rewriting the search cache frees pages inside the file (62 MB when
+        # a JSON payload becomes binary); compact again so they are not shipped.
+        compact_store(staged, compacted)
+        staged.unlink()
         audit = audit_store(compacted)
         deterministic_gzip(compacted, compressed)
         parts = write_parts(compressed, args.output_directory)

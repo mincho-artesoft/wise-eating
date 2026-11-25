@@ -7,6 +7,11 @@ import unittest
 import uuid
 from pathlib import Path
 
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from search_index_binary import load_payload  # noqa: E402
+
 
 ROOT = Path(__file__).resolve().parents[2]
 BUILD_SEED_PATH = ROOT / "ayurveda-data" / "build_seed.py"
@@ -185,7 +190,7 @@ class WE8PreseedSafetyTests(unittest.TestCase):
             encoding="utf-8",
         ) as source:
             cls.seed = json.load(source)
-        payload = json.loads(
+        payload = load_payload(
             cls.connection.execute(
                 "SELECT ZPAYLOADDATA FROM ZSEARCHINDEXCACHE WHERE ZKEY = 'main'"
             ).fetchone()[0]

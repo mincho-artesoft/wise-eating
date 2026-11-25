@@ -112,6 +112,20 @@ simulation; must always pass).
   await the same version-checked load before taking an index snapshot. Version 7
   also persists display and enforced age floors separately: badges
   retain the display floor; canonical age filters use only authored floors.
+- Search rework, 2026-11-25 (supersedes the cache details above):
+  `tools/search-golden/` holds 332 golden queries with expectations, a
+  committed `baseline.json`, and `remote.sh run`, which builds on the second
+  Mac, runs `Tests/FoodSearch/FoodSearchGoldenTests.swift` on the real
+  catalogue and compares. Run it before and after any search change.
+  `SearchFeatureFlags.nameFirst` (on by default; `-SearchNameFirstEnabled NO`
+  restores the old path) reads a query as a food name before a command, keeps
+  one filter per nutrient, and shows foods named outright first; 3 of 220
+  expectations fail, against 108 before. The search cache is version 14 and
+  binary (`SearchIndexBinary.swift`, twin `ayurveda-data/search_index_binary.py`
+  — change them together): 6.4 MB instead of 68.8 MB of JSON, bundled catalogue
+  125 MB instead of 147 MB in two gzip parts, 287 MB instead of 350 MB unpacked.
+  `build_preseeded_store.py` reads either payload form, writes the binary one,
+  and compacts again after rewriting it.
 - `Ayura/Ayurveda/AyurvedaRecommendationGate.swift` (D9): set-driven
   never-recommend enforcement (engineExcluded profiles + linked fdcIds + AI
   free-text name screen) wired into all AI generation paths and the Siri intent;

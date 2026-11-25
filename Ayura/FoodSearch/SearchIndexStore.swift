@@ -10,7 +10,7 @@ final class SearchIndexStore {
     static let shared = SearchIndexStore()
 
     /// Bump this when the structure of CompactFoodItem / tokens changes
-    private let currentIndexVersion: Int = 13
+    private let currentIndexVersion: Int = 14
     private let mainCacheID = UUID(
         uuidString: "76686d0c-b023-5c5e-b7d5-59582e3d9f3b"
     )!
@@ -96,8 +96,8 @@ final class SearchIndexStore {
                 !CatalogReferenceResolver.isCatalog($0)
             }) ?? caches.first {
                 if cache.version == currentIndexVersion {
-                    if let payload = try? JSONDecoder().decode(SearchIndexPayload.self, from: cache.payloadData) {
-                        apply(payload: payload)
+                    if let snapshot = try? SearchIndexBinary.decode(cache.payloadData) {
+                        apply(snapshot: snapshot)
                         print("🔎 SearchIndexStore: Loaded from cached index (version: \(cache.version), \(compactFoods.count) foods).")
                         return
                     } else {
@@ -440,16 +440,14 @@ final class SearchIndexStore {
         context: ModelContext,
         persist: Bool = true
     ) throws {
-        let payload = SearchIndexPayload(
-            compactFoods: compactFoods.map { $0.asCodable() },
-            invertedIndex: invertedIndex.mapValues { Array($0) },
+        let data = try SearchIndexBinary.encode(SearchIndexSnapshot(
+            compactFoods: compactFoods,
+            invertedIndex: invertedIndex,
             vocabulary: vocabulary,
-            maxNutrientValues: encodeMaxNutrientValues(maxNutrientValues),
-            nutrientRankings: encodeNutrientRankings(nutrientRankings),
-            ayurvedaFacetIndex: ayurvedaFacetIndex.mapValues { Array($0) }
-        )
-
-        let data = try JSONEncoder().encode(payload)
+            maxNutrientValues: maxNutrientValues,
+            nutrientRankings: nutrientRankings,
+            ayurvedaFacetIndex: ayurvedaFacetIndex
+        ))
         let context = persist && context.container.configurations.count > 1
             ? try CombinedStoreFactory.makeUserWriteContext(from: context.container)
             : context
@@ -472,31 +470,25 @@ final class SearchIndexStore {
         }
     }
 
-    private func apply(payload: SearchIndexPayload) {
-        let compact = payload.compactFoods.map {
-            let item = CompactFoodItem($0)
-            let favorite = CatalogPreferenceStore.shared.isFavorite(
+    private func apply(snapshot: SearchIndexSnapshot) {
+        let compact = snapshot.compactFoods.map { item in
+            item.withFavorite(CatalogPreferenceStore.shared.isFavorite(
                 kind: "food",
                 itemID: item.id,
                 fallback: item.isFavorite
-            )
-            return item.withFavorite(favorite)
+            ))
         }
-        
+
         self.compactFoods = compact
         self.compactMap = Dictionary(uniqueKeysWithValues: compact.map { ($0.id, $0) })
-        self.invertedIndex = payload.invertedIndex.reduce(into: [:]) { dict, pair in
-            dict[pair.key] = Set(pair.value)
-        }
-        self.vocabulary = payload.vocabulary
-        self.maxNutrientValues = decodeMaxNutrientValues(payload.maxNutrientValues)
-        self.nutrientRankings = decodeNutrientRankings(payload.nutrientRankings)
-        self.ayurvedaFacetIndex = payload.ayurvedaFacetIndex.reduce(into: [:]) {
-            $0[$1.key] = Set($1.value)
-        }
+        self.invertedIndex = snapshot.invertedIndex
+        self.vocabulary = snapshot.vocabulary
+        self.maxNutrientValues = snapshot.maxNutrientValues
+        self.nutrientRankings = snapshot.nutrientRankings
+        self.ayurvedaFacetIndex = snapshot.ayurvedaFacetIndex
         revision &+= 1
     }
-    
+
     private func makeCompactItem(
         from food: FoodItem,
         ayurvedaMetadata: AyurvedaCanonicalSearchMetadata?,
@@ -822,7 +814,7 @@ extension SearchIndexStore {
 }
 #endif
 
-// MARK: - Codable Structures (Unchanged)
+// MARK: - The JSON payload of cache versions up to 13 (kept for the size and timing comparison)
 
 private struct SearchIndexPayload: Codable {
     struct CompactFoodCodable: Codable {

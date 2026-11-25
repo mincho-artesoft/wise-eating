@@ -7,6 +7,11 @@ import unittest
 import uuid
 from pathlib import Path
 
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from search_index_binary import load_payload  # noqa: E402
+
 
 ROOT = Path(__file__).resolve().parents[2]
 PLANNER = (
@@ -66,7 +71,7 @@ class MP3DeterministicResolutionTests(unittest.TestCase):
             payload_data = connection.execute(
                 """
                 SELECT ZPAYLOADDATA FROM ZSEARCHINDEXCACHE
-                WHERE ZKEY = 'main' AND ZVERSION = 13
+                WHERE ZKEY = 'main' AND ZVERSION = 14
                 """
             ).fetchone()[0]
             profile_rows = connection.execute(
@@ -82,7 +87,7 @@ class MP3DeterministicResolutionTests(unittest.TestCase):
                 """
             ).fetchall()
 
-        payload = json.loads(payload_data)
+        payload = load_payload(payload_data)
         profile_rows = [
             (
                 str(uuid.UUID(bytes=profile_id)),

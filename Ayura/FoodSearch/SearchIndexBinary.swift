@@ -17,8 +17,11 @@ struct SearchIndexSnapshot: Equatable {
 /// Every string is stored once in a table and referred to by number; a food
 /// is referred to by its position in the food list instead of its UUID; the
 /// Ayurveda metadata, which thousands of foods share, is stored once per
-/// distinct value. The result is LZFSE-compressed. Decoding gives back exactly
-/// the snapshot that was encoded, so search results cannot change.
+/// distinct value. The result is DEFLATE-compressed. Decoding gives back
+/// exactly the snapshot that was encoded, so search results cannot change.
+///
+/// ayurveda-data/search_index_binary.py reads and writes the same format for
+/// the catalogue build; the two must change together.
 enum SearchIndexBinary {
     static let magic: [UInt8] = Array("AYSI".utf8)
     static let formatVersion: UInt8 = 1
@@ -130,7 +133,7 @@ enum SearchIndexBinary {
         }
         out.bytes.append(contentsOf: body.bytes)
 
-        let packed = try (Data(out.bytes) as NSData).compressed(using: .lzfse) as Data
+        let packed = try (Data(out.bytes) as NSData).compressed(using: .zlib) as Data
         var file = Data(magic)
         file.append(formatVersion)
         file.append(packed)
@@ -146,7 +149,7 @@ enum SearchIndexBinary {
         let version = data[data.startIndex + magic.count]
         guard version == formatVersion else { throw DecodingError.unsupportedVersion(version) }
         let packed = data.dropFirst(magic.count + 1)
-        let raw = try (Data(packed) as NSData).decompressed(using: .lzfse) as Data
+        let raw = try (Data(packed) as NSData).decompressed(using: .zlib) as Data
         var reader = Reader(bytes: [UInt8](raw))
 
         let stringCount = try reader.varint()

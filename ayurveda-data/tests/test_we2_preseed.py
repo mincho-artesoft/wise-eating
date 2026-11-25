@@ -17,6 +17,7 @@ assert SPEC and SPEC.loader
 build_preseeded_store = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(build_preseeded_store)
 from stable_ids import yoga_asana_uuid, yoga_sequence_uuid
+from search_index_binary import load_payload
 
 TARGET = build_preseeded_store.TARGET_EXPECTED
 
@@ -67,7 +68,7 @@ class PreseedArtifactTests(unittest.TestCase):
                 "nutritionFull": TARGET["nutritionFull"],
                 "nutritionEstimated": TARGET["nutritionEstimated"],
                 "cacheFoods": TARGET["cacheFoods"],
-                "cacheVersion": 13,
+                "cacheVersion": 14,
                 "facetFoods": TARGET["foods"],
                 "metadataFoods": TARGET["foods"],
                 "linkedFacetFoods": 2_007,
@@ -353,8 +354,8 @@ class PreseedArtifactTests(unittest.TestCase):
             """
         ).fetchone()
         self.assertEqual(cache_count, food_count)
-        self.assertEqual(version, 13)
-        decoded = json.loads(payload)
+        self.assertEqual(version, 14)
+        decoded = load_payload(payload)
         self.assertEqual(len(decoded["compactFoods"]), food_count)
         self.assertTrue(
             all("diets" not in food for food in decoded["compactFoods"])

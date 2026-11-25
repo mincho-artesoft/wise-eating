@@ -1,22 +1,17 @@
 {
   "formatVersion": 1,
   "catalogVersion": 1,
-  "contentRevision": "seed-10-search-13-practice-1-catalog-schema-4-20260818",
+  "contentRevision": "seed-10-search-14-practice-1-catalog-schema-4-20261125",
   "parts": [
     {
       "resource": "preseeded_db.store.gz.part-aa",
       "byteCount": 73400320,
-      "sha256": "c42891b4a654a8bf875a56b67001ed83db7eec76d671059646b6a64c6ad3cbd3"
+      "sha256": "1d3bd56ed725605b79a0c930eef58bd95e2b37c9309b624fb99d75f44662183e"
     },
     {
       "resource": "preseeded_db.store.gz.part-ab",
-      "byteCount": 73400320,
-      "sha256": "d080aa17ec6ffe4679cf162095dfa398c62abc9439890f2eb8216dca5521791c"
-    },
-    {
-      "resource": "preseeded_db.store.gz.part-ac",
-      "byteCount": 205603,
-      "sha256": "d9b3158a0a796c034215827e96097830efe24f50e81f26ab04b6b96d2b0cc1b2"
+      "byteCount": 51796002,
+      "sha256": "47cbda6be845baa31eb0d30e3c23a316882682e7136acf475f9231f5e6062ded"
     }
   ],
   "expected": {

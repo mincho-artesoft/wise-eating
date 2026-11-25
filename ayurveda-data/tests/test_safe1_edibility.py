@@ -141,9 +141,9 @@ class SAFE1EdibilityTests(unittest.TestCase):
             encoding="utf-8"
         )
         self.assertIn("let enforcedMinAgeMonths: Int?", compact)
-        self.assertIn("currentIndexVersion: Int = 13", index)
+        self.assertIn("currentIndexVersion: Int = 14", index)
         self.assertIn("food.isEdible", index)
-        self.assertIn('"cacheVersion": 13', preseed)
+        self.assertIn('"cacheVersion": 14', preseed)
         self.assertIn(
             '"compact nil enforced ages differ from inedible foods"',
             preseed,

@@ -7,6 +7,11 @@ import tempfile
 import unittest
 from pathlib import Path
 
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from search_index_binary import load_payload  # noqa: E402
+
 
 ROOT = Path(__file__).resolve().parents[2]
 PARSER = (
@@ -207,8 +212,8 @@ struct ParserHarness {
                 """
             ).fetchone()
         version, food_count, payload_data = row
-        self.assertEqual((version, food_count), (13, TARGET_FOODS))
-        payload = json.loads(payload_data)
+        self.assertEqual((version, food_count), (14, TARGET_FOODS))
+        payload = load_payload(payload_data)
         compact_by_id = {food["id"]: food for food in payload["compactFoods"]}
 
         with gzip.open(SEED, "rt", encoding="utf-8") as source:
@@ -285,7 +290,7 @@ struct ParserHarness {
     def test_engine_uses_index_intersection_and_exact_title_escape_hatch(self):
         engine = SEARCH_ENGINE.read_text(encoding="utf-8")
         index_store = INDEX_STORE.read_text(encoding="utf-8")
-        self.assertIn("currentIndexVersion: Int = 13", index_store)
+        self.assertIn("currentIndexVersion: Int = 14", index_store)
         self.assertIn("ayurvedaFacetIndex", index_store)
         self.assertIn("if let ayurveda = item.ayurvedaMetadata", engine)
         self.assertIn("AyurvedaSearchRanker.matches(", engine)
