@@ -6,6 +6,15 @@ import SwiftData
 // Global embedding instance reused for semantic neighbors
 private let smartFoodSearchEmbedding: NLEmbedding? = NLEmbedding.wordEmbedding(for: .english)
 
+/// Names in the user's language, as one search works with them.
+fileprivate struct LocalizedNameSnapshot: Sendable {
+    /// food -> lowercased localized name
+    var names: [UUID: String] = [:]
+    /// token -> foods, for tokens that come from localized names
+    var index: [String: Set<UUID>] = [:]
+    var isEmpty: Bool { names.isEmpty }
+}
+
 fileprivate struct ProfileSearchConstraints: Sendable {
     let ageInMonths: Int
     let avoidedAllergens: Set<String> // Алергени, които профилът има (храната не трябва да ги съдържа)
@@ -46,6 +55,9 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
     private var compactMap: [UUID: CompactFoodItem] = [:]
     
     private var vocabulary: [String] = []
+    /// Lowercased names in the user's language, and the tokens only they have.
+    private var localizedLowercasedNames: [UUID: String] = [:]
+    private var localizedOnlyIndex: [String: Set<UUID>] = [:]
     private var maxNutrientValues: [NutrientType: Double] = [:]
     
     /// Optional: nutrient-based candidate lists from NutrientIndex
@@ -304,6 +316,10 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                         temporalContext: temporalContext,
                         constitutionTarget: constitutionTarget,
                         phSortOrder: phSortOrder,
+                        localized: LocalizedNameSnapshot(
+                            names: localizedLowercasedNames,
+                            index: localizedOnlyIndex
+                        ),
                         container: self.container
                     )
                     
@@ -594,6 +610,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             temporalContext: AyurvedaSearchTemporalContext,
             constitutionTarget: AyurvedaDoshaDistribution?,
             phSortOrder: PhSortOrder?, // ✅ НОВ ПАРАМЕТЪР
+            localized: LocalizedNameSnapshot = LocalizedNameSnapshot(),
             container: ModelContainer
         ) async -> (
             resultIDs: [UUID],
@@ -639,7 +656,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                 .lowercased()
                 .trimmingCharacters(in: .whitespacesAndNewlines)
             
-            let hasNonLatinLetters: Bool = simpleRawQuery.unicodeScalars.contains { scalar in
+            let hasNonLatinLetters: Bool = localized.isEmpty && simpleRawQuery.unicodeScalars.contains { scalar in
                 if scalar.isASCII { return false }
                 if CharacterSet.whitespacesAndNewlines.contains(scalar) { return false }
                 if CharacterSet.punctuationCharacters.contains(scalar) { return false }
@@ -1119,6 +1136,14 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                 // Може да се оптимизира, но за безопасност минаваме през всички
             }
             
+            // "без лук": foods whose localized name has the excluded word.
+            var localizedExcluded = Set<UUID>()
+            if !localized.isEmpty {
+                for token in negativeIngredients.union(intent.negativeTokens) {
+                    localizedExcluded.formUnion(localized.index[token] ?? [])
+                }
+            }
+
             let sequence: [CompactFoodItem] = finalCandidateIDs?.compactMap { compactMap[$0] } ?? allFoods
             var itemsToRank: [CompactFoodItem] = []
             var foodsWithoutPhExcluded = 0
@@ -1177,6 +1202,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                 if isRecipesOnly && !item.isRecipe { continue }
                 if isMenusOnly && !item.isMenu { continue }
                 if !item.searchTokens.isDisjoint(with: intent.negativeTokens) { continue }
+                if localizedExcluded.contains(item.id) { continue }
 
                 // Ingredient-level negative filter (e.g. "no tomato", "without tomato").
                 // This now checks BOTH the visible name and the underlying searchTokens
@@ -1372,29 +1398,40 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     )
                 }
                 var score = 100.0
-                let nameLower = item.lowercasedName
-                let paddedName = item.paddedLowercasedName
-                
-                if !simpleRawQuery.isEmpty && simpleRawQuery.count >= 2 {
-                    if simpleRawIsSingleWord {
-                        if nameLower == simpleRawQuery { score += 4000.0 }
-                        else if nameLower.hasPrefix(simpleRawQuery + " ") || nameLower.hasPrefix(simpleRawQuery + ",") { score += 3500.0 }
-                        else if nameLower.hasPrefix(simpleRawQuery) { score += 3000.0 }
-                        else if nameLower.contains(simpleRawQuery) { score += 1500.0 }
-                    } else if nameLower.contains(simpleRawQuery) { score += 1500.0 }
-                }
-                
-                if !effectiveTextTokens.isEmpty, !rawCleanQuery.isEmpty {
-                    if nameLower == rawCleanQuery { score += 3000.0 }
-                    else if nameLower.hasPrefix(rawCleanQuery + " ") || nameLower.hasPrefix(rawCleanQuery + ",") { score += 2500.0 }
-                    else if paddedName.contains(rawPaddedQuery) { score += 2000.0 }
-                    else if nameLower.hasPrefix(rawCleanQuery) { score += 500.0 }
-                    var matches = 0
-                    for term in effectiveTextTokens {
-                        if paddedName.contains(" " + term + " ") { score += 200.0; matches += 1 }
-                        else if nameLower.contains(term) { score += 50.0; matches += 1 }
+                // How well a name matches what was typed. A food is scored on
+                // its English name and, when there is one, its name in the
+                // user's language, and keeps the better of the two.
+                func nameScore(_ nameLower: String, _ paddedName: String) -> Double {
+                    var gain = 0.0
+                    if !simpleRawQuery.isEmpty && simpleRawQuery.count >= 2 {
+                        if simpleRawIsSingleWord {
+                            if nameLower == simpleRawQuery { gain += 4000.0 }
+                            else if nameLower.hasPrefix(simpleRawQuery + " ") || nameLower.hasPrefix(simpleRawQuery + ",") { gain += 3500.0 }
+                            else if nameLower.hasPrefix(simpleRawQuery) { gain += 3000.0 }
+                            else if nameLower.contains(simpleRawQuery) { gain += 1500.0 }
+                        } else if nameLower.contains(simpleRawQuery) { gain += 1500.0 }
                     }
-                    if matches > 0 { score -= Double(item.searchTokens.count) * 5.0 }
+                
+                    if !effectiveTextTokens.isEmpty, !rawCleanQuery.isEmpty {
+                        if nameLower == rawCleanQuery { gain += 3000.0 }
+                        else if nameLower.hasPrefix(rawCleanQuery + " ") || nameLower.hasPrefix(rawCleanQuery + ",") { gain += 2500.0 }
+                        else if paddedName.contains(rawPaddedQuery) { gain += 2000.0 }
+                        else if nameLower.hasPrefix(rawCleanQuery) { gain += 500.0 }
+                        var matches = 0
+                        for term in effectiveTextTokens {
+                            if paddedName.contains(" " + term + " ") { gain += 200.0; matches += 1 }
+                            else if nameLower.contains(term) { gain += 50.0; matches += 1 }
+                        }
+                        if matches > 0 { gain -= Double(item.searchTokens.count) * 5.0 }
+                    }
+                
+                    return gain
+                }
+                let englishScore = nameScore(item.lowercasedName, item.paddedLowercasedName)
+                if let localName = localized.names[item.id] {
+                    score += max(englishScore, nameScore(localName, " " + localName + " "))
+                } else {
+                    score += englishScore
                 }
                 
                 for (idx, goal) in intent.nutrientGoals.enumerated() {
@@ -1622,9 +1659,17 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
         let didChange = loadedIndexRevision != store.revision
         allFoods = store.compactFoods
         compactMap = store.compactMap
-        invertedIndex = store.invertedIndex
+        // Names in the user's language are searched through the same index.
+        localizedLowercasedNames = store.localizedLowercasedNames
+        localizedOnlyIndex = store.localizedNameIndex
+        if store.localizedNameIndex.isEmpty {
+            invertedIndex = store.invertedIndex
+            vocabulary = store.vocabulary
+        } else {
+            invertedIndex = store.invertedIndex.merging(store.localizedNameIndex) { $0.union($1) }
+            vocabulary = Array(invertedIndex.keys)
+        }
         ayurvedaFacetIndex = store.ayurvedaFacetIndex
-        vocabulary = store.vocabulary
         maxNutrientValues = store.maxNutrientValues
         nutrientRankings = store.nutrientRankings
         loadedIndexRevision = store.revision
@@ -2359,6 +2404,10 @@ extension SmartFoodSearch3 {
             temporalContext: AyurvedaSearchTemporalContext.current(),
             constitutionTarget: constitutionTarget,
             phSortOrder: phSortOrder,
+            localized: LocalizedNameSnapshot(
+                names: localizedLowercasedNames,
+                index: localizedOnlyIndex
+            ),
             container: self.container
         )
 
@@ -2433,6 +2482,10 @@ extension SmartFoodSearch3 {
             temporalContext: AyurvedaSearchTemporalContext.current(),
             constitutionTarget: nil,
             phSortOrder: nil,
+            localized: LocalizedNameSnapshot(
+                names: localizedLowercasedNames,
+                index: localizedOnlyIndex
+            ),
             container: self.container
         )
 
@@ -2644,11 +2697,17 @@ extension SmartFoodSearch3 {
             temporalContext: temporalContext,
             constitutionTarget: nil,
             phSortOrder: nil,
+            localized: LocalizedNameSnapshot(
+                names: localizedLowercasedNames,
+                index: localizedOnlyIndex
+            ),
             container: container
         )
         return SearchDiagnostics(
             resultIDs: resultIDs,
-            topNames: resultIDs.prefix(max(0, limit)).compactMap { snapshotMap[$0]?.name },
+            topNames: resultIDs.prefix(max(0, limit)).compactMap { id in
+                snapshotMap[id].map { FoodNameLocalizer.active?.localizedName($0.name) ?? $0.name }
+            },
             intent: intent,
             effectiveTokens: effectiveTokens,
             foodsWithoutPhExcluded: withoutPh

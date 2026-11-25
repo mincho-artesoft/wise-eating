@@ -3082,6 +3082,10 @@
   "cat": "bg-name",
   "lang": "bg",
   "expect": {
+   "topAll": [
+    "кисело",
+    "мляко"
+   ],
    "noPh": true,
    "noGoals": true
   }
@@ -3091,6 +3095,10 @@
   "cat": "bg-name",
   "lang": "bg",
   "expect": {
+   "topAll": [
+    "кисело",
+    "зеле"
+   ],
    "noPh": true,
    "noGoals": true
   }
@@ -3100,6 +3108,10 @@
   "cat": "bg-name",
   "lang": "bg",
   "expect": {
+   "topAll": [
+    "кафява",
+    "захар"
+   ],
    "noPh": true,
    "noGoals": true
   }
@@ -3109,8 +3121,406 @@
   "cat": "bg-name",
   "lang": "bg",
   "expect": {
+   "topAll": [
+    "морска",
+    "сол"
+   ],
    "noPh": true,
    "noGoals": true
+  }
+ },
+ {
+  "q": "банан",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "банан"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "ябълка",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "ябълка"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "ориз",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "ориз"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "пилешко",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "пилешко"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "сьомга",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "сьомга"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "зехтин",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "зехтин"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "мед",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "мед"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "леща",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "леща"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "спанак",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "спанак"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "морков",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "морков"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "чесън",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "чесън"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "джинджифил",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "джинджифил"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "куркума",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "куркума"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "броколи",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "броколи"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "яйце",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "яйце"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "хляб",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "хляб"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "масло",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "масло"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "сирене",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "сирене"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "краставица",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "краставица"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "домат",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "домат"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "овесени ядки",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "овесени",
+    "ядки"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "нахут",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "нахут"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "тиква",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "тиква"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "бадеми",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "бадеми"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "орехи",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "орехи"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "ананас",
+  "cat": "bg-name",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "ананас"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "пилешко високо протеин",
+  "cat": "bg-mixed",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "пилешко"
+   ],
+   "goals": [
+    "protein:high"
+   ],
+   "minTotal": 1
+  }
+ },
+ {
+  "q": "сирене ниско мазнини",
+  "cat": "bg-mixed",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "сирене"
+   ],
+   "goals": [
+    "totalFat:low"
+   ],
+   "minTotal": 1
+  }
+ },
+ {
+  "q": "хляб без сол",
+  "cat": "bg-mixed",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "хляб"
+   ],
+   "goals": [
+    "sodium:low"
+   ],
+   "minTotal": 1
+  }
+ },
+ {
+  "q": "кисело мляко протеин > 5",
+  "cat": "bg-mixed",
+  "lang": "bg",
+  "expect": {
+   "topAll": [
+    "кисело",
+    "мляко"
+   ],
+   "goals": [
+    "protein:high"
+   ],
+   "minTotal": 1
+  }
+ },
+ {
+  "q": "chicken breast",
+  "cat": "bg-english",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1
+  }
+ },
+ {
+  "q": "sour cream",
+  "cat": "bg-english",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1
+  }
+ },
+ {
+  "q": "high protein",
+  "cat": "bg-english",
+  "lang": "bg",
+  "expect": {
+   "minTotal": 1
   }
  },
  {

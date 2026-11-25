@@ -236,10 +236,25 @@ for q, goals, ph in [
 for q in ["без глутен", "без ядки", "без млечни продукти", "за бебе",
           "8 месеца", "2 години"]:
     add("bg-command", q, lang="bg", minTotal=1)
-# Food names with a command word in them: recorded now, judged once the
-# Bulgarian names are in the index. They must not turn into a filter.
+# Food names typed in Bulgarian, found through the translated name segments
+# (tools/food-names). topAll is checked against the Bulgarian names shown.
 for q in ["кисело мляко", "кисело зеле", "кафява захар", "морска сол"]:
-    add("bg-name", q, lang="bg", noPh=True, noGoals=True)
+    add("bg-name", q, lang="bg", topAll=q.split(), noPh=True, noGoals=True)
+for q in ["банан", "ябълка", "ориз", "пилешко", "сьомга", "зехтин", "мед",
+          "леща", "спанак", "морков", "чесън", "джинджифил", "куркума",
+          "броколи", "яйце", "хляб", "масло", "сирене", "краставица", "домат",
+          "овесени ядки", "нахут", "тиква", "бадеми", "орехи", "ананас"]:
+    add("bg-name", q, lang="bg", topAll=q.split(), noPh=True, noGoals=True)
+for q, words, goals in [
+    ("пилешко високо протеин", ["пилешко"], ["protein:high"]),
+    ("сирене ниско мазнини", ["сирене"], ["totalFat:low"]),
+    ("хляб без сол", ["хляб"], ["sodium:low"]),
+    ("кисело мляко протеин > 5", ["кисело", "мляко"], ["protein:high"]),
+]:
+    add("bg-mixed", q, lang="bg", topAll=words, goals=goals, minTotal=1)
+# English still works while the user's language is Bulgarian.
+for q in ["chicken breast", "sour cream", "high protein"]:
+    add("bg-english", q, lang="bg", minTotal=1)
 
 # Odd input.
 for q in ["", " ", "%", "2% milk", "1% milk", "100% juice", "7 up", "v8",

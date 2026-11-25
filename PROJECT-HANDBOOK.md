@@ -132,7 +132,19 @@ simulation; must always pass).
   parser; Bulgarian is the pilot (32 golden commands). A new language is a
   new file plus golden queries; `testGrammarFilesMapToCommands` rejects a
   phrase the parser would not fully understand. Food names are not in these
-  files; localized names are the next step.
+  files.
+  Food names in other languages are translated per segment, not per name:
+  the 14,487 names are made of 9,009 distinct comma-separated segments
+  (`tools/food-names/segments.en.json`), a language is a table of those
+  (`tools/food-names/bg.json`), and `tools/food-names/pack.py <language>`
+  checks it and writes `Ayura/FoodSearch/Names/food_names.<language>.z`
+  (68 KB for Bulgarian; the shared English segment list is 52 KB).
+  `FoodNameLocalizer` composes a name from its segments and
+  `SearchIndexStore.rebuildLocalizedNames()` adds the localized words beside
+  the index in memory, so the saved cache stays English and English queries
+  keep working in every language. Bulgarian is the pilot: machine-translated,
+  not yet reviewed by a person. Only the search rows show localized names
+  (`FoodItem.displayName`); the other screens still show English.
 - `Ayura/Ayurveda/AyurvedaRecommendationGate.swift` (D9): set-driven
   never-recommend enforcement (engineExcluded profiles + linked fdcIds + AI
   free-text name screen) wired into all AI generation paths and the Siri intent;

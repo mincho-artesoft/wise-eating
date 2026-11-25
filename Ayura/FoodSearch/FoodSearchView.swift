@@ -288,7 +288,7 @@ private struct FoodSearchViewContent: View {
                 Section("Selected") {
                     ForEach(selectedFoods, id: \.id) { food in
                         HStack {
-                            Text(food.name)
+                            Text(food.displayName)
                                 .font(.body)
                             Spacer()
                             Button(role: .destructive) {
@@ -504,7 +504,7 @@ private struct FoodRowView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
-                Text(food.name)
+                Text(food.displayName)
                     .font(.body)
                     .foregroundColor(effectManager.currentGlobalAccentColor)
                 Spacer()

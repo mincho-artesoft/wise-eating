@@ -26,7 +26,7 @@ DIRECTION = {"low": "low", "max": "low", "strictMax": "low", "lowest": "low",
 
 
 def words_of(name):
-    return set(re.findall(r"[a-z0-9]+", name.lower()))
+    return set(re.findall(r"\w+", name.lower()))
 
 
 def has_word(word, tokens):

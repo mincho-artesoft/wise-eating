@@ -83,12 +83,26 @@ nonisolated final class FoodSearchGoldenTests: XCTestCase {
         let clock = AyurvedaSearchTemporalContext(season: "hemanta", period: "midday")
         let runs = 5
 
+        // The golden queries are English unless a query says otherwise.
+        var activeLanguage: String?
+        SearchGrammar.active = nil
+        FoodNameLocalizer.active = nil
+        SearchIndexStore.shared.rebuildLocalizedNames()
+        engine.refreshData()
+
         var rows: [Row] = []
         var timings: [Timing] = []
         for query in queries {
-            SearchGrammar.active = query.lang.flatMap { SearchGrammar.bundled(for: $0) }
-            if let lang = query.lang {
-                XCTAssertNotNil(SearchGrammar.active, "no grammar file for '\(lang)'")
+            if query.lang != activeLanguage {
+                activeLanguage = query.lang
+                SearchGrammar.active = query.lang.flatMap { SearchGrammar.bundled(for: $0) }
+                FoodNameLocalizer.active = query.lang.flatMap { FoodNameLocalizer.bundled(for: $0) }
+                SearchIndexStore.shared.rebuildLocalizedNames()
+                engine.refreshData()
+                if let lang = query.lang {
+                    XCTAssertNotNil(SearchGrammar.active, "no grammar file for '\(lang)'")
+                    XCTAssertNotNil(FoodNameLocalizer.active, "no food names for '\(lang)'")
+                }
             }
             let first = await engine.searchDiagnostics(query: query.q, temporalContext: clock)
             var samples: [Double] = []
@@ -122,6 +136,8 @@ nonisolated final class FoodSearchGoldenTests: XCTestCase {
         }
 
         SearchGrammar.active = nil
+        FoodNameLocalizer.active = nil
+        SearchIndexStore.shared.rebuildLocalizedNames()
         let sorted = timings.map(\.medianMs).sorted()
         func percentile(_ p: Double) -> Double {
             sorted.isEmpty ? 0 : sorted[min(sorted.count - 1, Int(Double(sorted.count) * p))]

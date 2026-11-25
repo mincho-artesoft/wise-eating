@@ -26,6 +26,42 @@ final class SearchIndexStore {
     private(set) var ayurvedaFacetIndex: [String: Set<UUID>] = [:]
     private var bundledAyurvedaSearchMap: [UUID: AyurvedaCanonicalSearchMetadata]?
 
+    // MARK: - Names in the user's language
+    // Kept beside the index, never inside it: the cache that is saved stays
+    // the English index, and changing language only rebuilds this overlay.
+    /// token -> foods whose localized name has it
+    private(set) var localizedNameIndex: [String: Set<UUID>] = [:]
+    /// food -> its lowercased name in the user's language
+    private(set) var localizedLowercasedNames: [UUID: String] = [:]
+
+    /// Rebuilds the overlay for `FoodNameLocalizer.active`. Tokens are worked
+    /// out once per segment, not once per food.
+    func rebuildLocalizedNames() {
+        var index: [String: Set<UUID>] = [:]
+        var names: [UUID: String] = [:]
+        if let localizer = FoodNameLocalizer.active {
+            var tokensBySegment: [String: [String]] = [:]
+            for food in compactFoods {
+                guard let name = localizer.localizedName(food.name) else { continue }
+                names[food.id] = name.lowercased()
+                for segment in FoodNameLocalizer.segments(of: food.name) {
+                    guard let local = localizer.translation(ofSegment: segment) else { continue }
+                    let tokens: [String]
+                    if let known = tokensBySegment[segment] {
+                        tokens = known
+                    } else {
+                        tokens = FoodNameLocalizer.searchTokens(of: local)
+                        tokensBySegment[segment] = tokens
+                    }
+                    for token in tokens { index[token, default: []].insert(food.id) }
+                }
+            }
+        }
+        localizedNameIndex = index
+        localizedLowercasedNames = names
+        revision &+= 1
+    }
+
     // MARK: - Async Save Infra
     /// Задачи за debounce на тежкия запис на кеша
     private var saveDebounceTask: Task<Void, Never>?
@@ -227,6 +263,7 @@ final class SearchIndexStore {
             }
             rebuildNutrientIndexes(for: Set(newCompactItem.nutrientValues.keys))
             revision &+= 1
+            rebuildLocalizedNames()
             scheduleCacheSave(context: context)
             print("🔎 SearchIndexStore: Inserted new item '\(food.name)' during update call.")
             return
@@ -297,6 +334,7 @@ final class SearchIndexStore {
                 .union(newCompactItem.nutrientValues.keys)
         )
         revision &+= 1
+        rebuildLocalizedNames()
         scheduleCacheSave(context: context)
         
         let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
@@ -332,6 +370,7 @@ final class SearchIndexStore {
 
         rebuildNutrientIndexes(for: Set(compact.nutrientValues.keys))
         revision &+= 1
+        rebuildLocalizedNames()
         scheduleCacheSave(context: context)
         
         let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
@@ -434,6 +473,7 @@ final class SearchIndexStore {
         self.nutrientRankings = tmpRankings
         self.ayurvedaFacetIndex = tmpFacetIndex
         revision &+= 1
+        rebuildLocalizedNames()
     }
 
     private func saveCache(
@@ -487,6 +527,7 @@ final class SearchIndexStore {
         self.nutrientRankings = snapshot.nutrientRankings
         self.ayurvedaFacetIndex = snapshot.ayurvedaFacetIndex
         revision &+= 1
+        rebuildLocalizedNames()
     }
 
     private func makeCompactItem(
