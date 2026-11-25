@@ -630,6 +630,15 @@ struct Tokenizer {
         return nil
     }
 
+    /// The stem `processWord` looks up in the synonym table.
+    static func singularForm(of word: String) -> String {
+        if let root = SearchKnowledgeBase.shared.stemmingExceptions[word] { return root }
+        if word.hasSuffix("s"), word.count > 3, !word.hasSuffix("ss") {
+            return String(word.dropLast())
+        }
+        return word
+    }
+
     static func processWord(_ word: String) -> String {
         var token = word
         if let root = SearchKnowledgeBase.shared.stemmingExceptions[word] {

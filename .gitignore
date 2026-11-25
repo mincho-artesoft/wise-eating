@@ -58,3 +58,6 @@ ayurveda-data/yoga-video/
 # results/ is NOT ignored: results/ledger.json is tracked and is the record of
 # every generation run.
 ayurveda-data/imagery/*.bak-*
+
+# Golden search test output (tools/search-golden/remote.sh pull); baseline.json is the tracked copy
+tools/search-golden/out/

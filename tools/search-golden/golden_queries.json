@@ -1,0 +1,2942 @@
+[
+ {
+  "q": "banana",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "banana"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "apple",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "apple"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "broccoli",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "broccoli"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "salmon",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "salmon"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "olive oil",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "olive",
+    "oil"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "ghee",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "ghee"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "rice",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "rice"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "chicken breast",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "chicken",
+    "breast"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "ground beef",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "ground",
+    "beef"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "cheddar cheese",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "cheddar",
+    "cheese"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "whole milk",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "whole",
+    "milk"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "egg",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "egg"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "oatmeal",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "oatmeal"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "lentils",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "lentils"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "chickpeas",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "chickpeas"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "spinach",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "spinach"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "carrots",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "carrots"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "sweet potato",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "sweet",
+    "potato"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "peanut butter",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "peanut",
+    "butter"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "orange juice",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "orange",
+    "juice"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "greek yogurt",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "greek",
+    "yogurt"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "almonds",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "almonds"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "walnuts",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "walnuts"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "tofu",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "tofu"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "quinoa",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "quinoa"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "avocado",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "avocado"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "blueberries",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "blueberries"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "strawberries",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "strawberries"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "tomato",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "tomato"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "cucumber",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "cucumber"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "garlic",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "garlic"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "ginger",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "ginger"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "turmeric",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "turmeric"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "cumin",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "cumin"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "basmati rice",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "basmati",
+    "rice"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "mung beans",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "mung",
+    "beans"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "coconut milk",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "coconut",
+    "milk"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "honey",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "honey"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "dates",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "dates"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "pumpkin",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "pumpkin"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "zucchini",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "zucchini"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "mushrooms",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "mushrooms"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "bread",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "bread"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "pasta",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "pasta"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "butter",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "butter"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "yogurt",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "yogurt"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "turkey",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "turkey"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "pork chop",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "pork",
+    "chop"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "tuna",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "tuna"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "shrimp",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "shrimp"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "lamb",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "lamb"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "kale",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "kale"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "cauliflower",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "cauliflower"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "beets",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "beets"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "mango",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "mango"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "pineapple",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "pineapple"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "papaya",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "papaya"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "sesame seeds",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "sesame",
+    "seeds"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "barley",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "barley"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "millet",
+  "cat": "name",
+  "expect": {
+   "topAll": [
+    "millet"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "water chestnuts",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "water",
+    "chestnuts"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "coconut water",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "coconut",
+    "water"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "barley water",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "barley",
+    "water"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "brown sugar",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "brown",
+    "sugar"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "palm sugar",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "palm",
+    "sugar"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "rock sugar",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "rock",
+    "sugar"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "energy drink",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "energy",
+    "drink"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "energy balls",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "energy",
+    "balls"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "protein powder",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "protein",
+    "powder"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "soy protein",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "soy",
+    "protein"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "corn starch",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "corn",
+    "starch"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "tapioca starch",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "tapioca",
+    "starch"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "salt pork",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "salt",
+    "pork"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "salted butter",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "salted",
+    "butter"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "sea salt",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "sea",
+    "salt"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "table salt",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "table",
+    "salt"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "fat free milk",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "fat",
+    "free",
+    "milk"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "sugar cookies",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "sugar",
+    "cookies"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "sugar apple",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "sugar",
+    "apple"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "watermelon",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "watermelon"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "watercress",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "watercress"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "high protein bread",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "high",
+    "protein",
+    "bread"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "caffeine free",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "caffeine",
+    "free"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "tuna in water",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "tuna",
+    "in",
+    "water"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "beef fat",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "beef",
+    "fat"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "chicken fat",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "chicken",
+    "fat"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "high fiber bread",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "high",
+    "fiber",
+    "bread"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "sugar free energy drink",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "sugar",
+    "free",
+    "energy",
+    "drink"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "powdered sugar",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "powdered",
+    "sugar"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "cane sugar",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "cane",
+    "sugar"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "maple sugar",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "maple",
+    "sugar"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "water bottled",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "water",
+    "bottled"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "tonic water",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "tonic",
+    "water"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "protein fortified spaghetti",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "protein",
+    "fortified",
+    "spaghetti"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "calcium fortified",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "calcium",
+    "fortified"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "high fructose corn syrup",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "high",
+    "fructose",
+    "corn",
+    "syrup"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "lactose free milk",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "lactose",
+    "free",
+    "milk"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "starch jelly",
+  "cat": "name-nutrient",
+  "expect": {
+   "topAll": [
+    "starch",
+    "jelly"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "sour cream",
+  "cat": "name-ph",
+  "expect": {
+   "topAll": [
+    "sour",
+    "cream"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "sour cherries",
+  "cat": "name-ph",
+  "expect": {
+   "topAll": [
+    "sour",
+    "cherries"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "sour dough",
+  "cat": "name-ph",
+  "expect": {
+   "topAll": [
+    "sour",
+    "dough"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "sweet and sour pork",
+  "cat": "name-ph",
+  "expect": {
+   "topAll": [
+    "sweet",
+    "and",
+    "sour",
+    "pork"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "sweet and sour sauce",
+  "cat": "name-ph",
+  "expect": {
+   "topAll": [
+    "sweet",
+    "and",
+    "sour",
+    "sauce"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "sour pickles",
+  "cat": "name-ph",
+  "expect": {
+   "topAll": [
+    "sour",
+    "pickles"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "ascorbic acid",
+  "cat": "name-ph",
+  "expect": {
+   "topAll": [
+    "ascorbic",
+    "acid"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "acid wash",
+  "cat": "name-ph",
+  "expect": {
+   "topAll": [
+    "acid",
+    "wash"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "lauric acid",
+  "cat": "name-ph",
+  "expect": {
+   "topAll": [
+    "lauric",
+    "acid"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "sour cream dressing",
+  "cat": "name-ph",
+  "expect": {
+   "topAll": [
+    "sour",
+    "cream",
+    "dressing"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "hot and sour soup",
+  "cat": "name-ph",
+  "expect": {
+   "topAll": [
+    "hot",
+    "and",
+    "sour",
+    "soup"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "jellies no sugar",
+  "cat": "name-negation",
+  "expect": {
+   "topAll": [
+    "jellies",
+    "no",
+    "sugar"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "cocoa no sugar added",
+  "cat": "name-negation",
+  "expect": {
+   "topAll": [
+    "cocoa",
+    "no",
+    "sugar",
+    "added"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "without skin",
+  "cat": "name-negation",
+  "expect": {
+   "topAll": [
+    "without",
+    "skin"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "chicken without skin",
+  "cat": "name-negation",
+  "expect": {
+   "topAll": [
+    "chicken",
+    "without",
+    "skin"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "non-dairy",
+  "cat": "name-negation",
+  "expect": {
+   "topAll": [
+    "non",
+    "dairy"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "non-fat yogurt",
+  "cat": "name-negation",
+  "expect": {
+   "topAll": [
+    "non",
+    "fat",
+    "yogurt"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "gluten-free bread",
+  "cat": "name-negation",
+  "expect": {
+   "topAll": [
+    "gluten",
+    "free",
+    "bread"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "fat free dressing",
+  "cat": "name-negation",
+  "expect": {
+   "topAll": [
+    "fat",
+    "free",
+    "dressing"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "without salt",
+  "cat": "name-negation",
+  "expect": {
+   "topAll": [
+    "without",
+    "salt"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "no salt added",
+  "cat": "name-negation",
+  "expect": {
+   "topAll": [
+    "no",
+    "salt",
+    "added"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "free range",
+  "cat": "name-negation",
+  "expect": {
+   "topAll": [
+    "free",
+    "range"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "non-chocolate",
+  "cat": "name-negation",
+  "expect": {
+   "topAll": [
+    "non",
+    "chocolate"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "not fortified",
+  "cat": "name-negation",
+  "expect": {
+   "topAll": [
+    "not",
+    "fortified"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "caffeine free soft drink",
+  "cat": "name-negation",
+  "expect": {
+   "topAll": [
+    "caffeine",
+    "free",
+    "soft",
+    "drink"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "milk-fat free",
+  "cat": "name-negation",
+  "expect": {
+   "topAll": [
+    "milk",
+    "fat",
+    "free"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "without ascorbic acid",
+  "cat": "name-negation",
+  "expect": {
+   "topAll": [
+    "without",
+    "ascorbic",
+    "acid"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "excluding",
+  "cat": "name-negation",
+  "expect": {
+   "topAll": [
+    "excluding"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "great northern beans",
+  "cat": "name-operator",
+  "expect": {
+   "topAll": [
+    "great",
+    "northern",
+    "beans"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "small end rib",
+  "cat": "name-operator",
+  "expect": {
+   "topAll": [
+    "small",
+    "end",
+    "rib"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "under blade",
+  "cat": "name-operator",
+  "expect": {
+   "topAll": [
+    "under",
+    "blade"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "low fat yogurt",
+  "cat": "name-operator",
+  "expect": {
+   "topAll": [
+    "low",
+    "fat",
+    "yogurt"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "low sodium pickles",
+  "cat": "name-operator",
+  "expect": {
+   "topAll": [
+    "low",
+    "sodium",
+    "pickles"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "high oleic sunflower oil",
+  "cat": "name-operator",
+  "expect": {
+   "topAll": [
+    "high",
+    "oleic",
+    "sunflower",
+    "oil"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "light beer",
+  "cat": "name-operator",
+  "expect": {
+   "topAll": [
+    "light",
+    "beer"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "light mayonnaise",
+  "cat": "name-operator",
+  "expect": {
+   "topAll": [
+    "light",
+    "mayonnaise"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "light tuna",
+  "cat": "name-operator",
+  "expect": {
+   "topAll": [
+    "light",
+    "tuna"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "equal volume water",
+  "cat": "name-operator",
+  "expect": {
+   "topAll": [
+    "equal",
+    "volume",
+    "water"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "small patty",
+  "cat": "name-operator",
+  "expect": {
+   "topAll": [
+    "small",
+    "patty"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "low calorie cola",
+  "cat": "name-operator",
+  "expect": {
+   "topAll": [
+    "low",
+    "calorie",
+    "cola"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "reduced sugar cola",
+  "cat": "name-operator",
+  "expect": {
+   "topAll": [
+    "reduced",
+    "sugar",
+    "cola"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "extra light syrup",
+  "cat": "name-operator",
+  "expect": {
+   "topAll": [
+    "extra",
+    "light",
+    "syrup"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "low fat cottage cheese",
+  "cat": "name-operator",
+  "expect": {
+   "topAll": [
+    "low",
+    "fat",
+    "cottage",
+    "cheese"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "lower sodium",
+  "cat": "name-operator",
+  "expect": {
+   "topAll": [
+    "lower",
+    "sodium"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "high caffeine",
+  "cat": "name-operator",
+  "expect": {
+   "topAll": [
+    "high",
+    "caffeine"
+   ],
+   "noPh": true,
+   "noGoals": true
+  }
+ },
+ {
+  "q": "high protein",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "protein:high"
+   ]
+  }
+ },
+ {
+  "q": "low fat",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "totalFat:low"
+   ]
+  }
+ },
+ {
+  "q": "low sodium",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "sodium:low"
+   ]
+  }
+ },
+ {
+  "q": "high fiber",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "fiber:high"
+   ]
+  }
+ },
+ {
+  "q": "low sugar",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "totalSugar:low"
+   ]
+  }
+ },
+ {
+  "q": "sugar free",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "totalSugar:low"
+   ]
+  }
+ },
+ {
+  "q": "fat free",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "totalFat:low"
+   ]
+  }
+ },
+ {
+  "q": "low carb",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "carbs:low"
+   ]
+  }
+ },
+ {
+  "q": "protein > 20",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "protein:high"
+   ]
+  }
+ },
+ {
+  "q": "protein more than 20",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "protein:high"
+   ]
+  }
+ },
+ {
+  "q": "protein at least 15 g",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "protein:high"
+   ]
+  }
+ },
+ {
+  "q": "fat < 5",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "totalFat:low"
+   ]
+  }
+ },
+ {
+  "q": "fat less than 3",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "totalFat:low"
+   ]
+  }
+ },
+ {
+  "q": "calories under 100",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "energy:low"
+   ]
+  }
+ },
+ {
+  "q": "less than 100 calories",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "energy:low"
+   ]
+  }
+ },
+ {
+  "q": "vitamin c > 50",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "vitaminC:high"
+   ]
+  }
+ },
+ {
+  "q": "high vitamin c",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "vitaminC:high"
+   ]
+  }
+ },
+ {
+  "q": "vitamin b12",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "vitaminB12"
+   ]
+  }
+ },
+ {
+  "q": "high iron",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "iron:high"
+   ]
+  }
+ },
+ {
+  "q": "iron more than 5 mg",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "iron:high"
+   ]
+  }
+ },
+ {
+  "q": "calcium at least 200 mg",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "calcium:high"
+   ]
+  }
+ },
+ {
+  "q": "high calcium",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "calcium:high"
+   ]
+  }
+ },
+ {
+  "q": "potassium > 400",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "potassium:high"
+   ]
+  }
+ },
+ {
+  "q": "high potassium",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "potassium"
+   ]
+  }
+ },
+ {
+  "q": "zero cholesterol",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "cholesterol:low"
+   ]
+  }
+ },
+ {
+  "q": "no cholesterol",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "cholesterol:low"
+   ]
+  }
+ },
+ {
+  "q": "high fiber low sugar",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "fiber:high",
+    "totalSugar:low"
+   ]
+  }
+ },
+ {
+  "q": "high protein low fat",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "protein:high",
+    "totalFat:low"
+   ]
+  }
+ },
+ {
+  "q": "protein between 10 and 20",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "protein"
+   ]
+  }
+ },
+ {
+  "q": "magnesium",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "magnesium"
+   ]
+  }
+ },
+ {
+  "q": "zinc",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "zinc"
+   ]
+  }
+ },
+ {
+  "q": "folate",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "folateTotal"
+   ]
+  }
+ },
+ {
+  "q": "omega 3",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1
+  }
+ },
+ {
+  "q": "high vitamin d",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "vitaminD"
+   ]
+  }
+ },
+ {
+  "q": "vitamin a",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "vitaminA"
+   ]
+  }
+ },
+ {
+  "q": "sodium < 140 mg",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "sodium:low"
+   ]
+  }
+ },
+ {
+  "q": "caffeine",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "caffeine"
+   ]
+  }
+ },
+ {
+  "q": "lactose free",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "lactose:low"
+   ]
+  }
+ },
+ {
+  "q": "without lactose",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "lactose:low"
+   ]
+  }
+ },
+ {
+  "q": "protein 20",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "protein"
+   ]
+  }
+ },
+ {
+  "q": "carbs <= 10",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "carbs:low"
+   ]
+  }
+ },
+ {
+  "q": "fiber >= 5",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "fiber:high"
+   ]
+  }
+ },
+ {
+  "q": "high selenium",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "selenium"
+   ]
+  }
+ },
+ {
+  "q": "ph < 5",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "ph": true
+  }
+ },
+ {
+  "q": "ph > 7",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "ph": true
+  }
+ },
+ {
+  "q": "ph 7",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "ph": true
+  }
+ },
+ {
+  "q": "ph between 6 and 7",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "ph": true
+  }
+ },
+ {
+  "q": "alkaline",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "ph": true
+  }
+ },
+ {
+  "q": "acidic",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "ph": true
+  }
+ },
+ {
+  "q": "neutral ph",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "ph": true
+  }
+ },
+ {
+  "q": "low ph",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "ph": true
+  }
+ },
+ {
+  "q": "high ph",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "ph": true
+  }
+ },
+ {
+  "q": "low acid",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "ph": true
+  }
+ },
+ {
+  "q": "alkaline food",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "ph": true
+  }
+ },
+ {
+  "q": "acidic food",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "ph": true
+  }
+ },
+ {
+  "q": "most alkaline",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "ph": true
+  }
+ },
+ {
+  "q": "ph less than 4",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "ph": true
+  }
+ },
+ {
+  "q": "ph",
+  "cat": "command",
+  "expect": {
+   "minTotal": 1,
+   "ph": true
+  }
+ },
+ {
+  "q": "no gluten",
+  "cat": "command"
+ },
+ {
+  "q": "without nuts",
+  "cat": "command"
+ },
+ {
+  "q": "no dairy",
+  "cat": "command"
+ },
+ {
+  "q": "egg free",
+  "cat": "command"
+ },
+ {
+  "q": "no allergens",
+  "cat": "command"
+ },
+ {
+  "q": "for 8 months",
+  "cat": "command"
+ },
+ {
+  "q": "safe for 2 year old",
+  "cat": "command"
+ },
+ {
+  "q": "12 months",
+  "cat": "command"
+ },
+ {
+  "q": "no peanuts",
+  "cat": "command"
+ },
+ {
+  "q": "chicken high protein",
+  "cat": "mixed",
+  "expect": {
+   "minTotal": 1,
+   "topAll": [
+    "chicken"
+   ],
+   "goals": [
+    "protein:high"
+   ]
+  }
+ },
+ {
+  "q": "cheese low fat",
+  "cat": "mixed",
+  "expect": {
+   "minTotal": 1,
+   "topAll": [
+    "cheese"
+   ],
+   "goals": [
+    "totalFat:low"
+   ]
+  }
+ },
+ {
+  "q": "bread low sodium",
+  "cat": "mixed",
+  "expect": {
+   "minTotal": 1,
+   "topAll": [
+    "bread"
+   ],
+   "goals": [
+    "sodium:low"
+   ]
+  }
+ },
+ {
+  "q": "yogurt protein > 8",
+  "cat": "mixed",
+  "expect": {
+   "minTotal": 1,
+   "topAll": [
+    "yogurt"
+   ],
+   "goals": [
+    "protein:high"
+   ]
+  }
+ },
+ {
+  "q": "fruit high vitamin c",
+  "cat": "mixed",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "vitaminC"
+   ]
+  }
+ },
+ {
+  "q": "beans high fiber",
+  "cat": "mixed",
+  "expect": {
+   "minTotal": 1,
+   "topAll": [
+    "beans"
+   ],
+   "goals": [
+    "fiber:high"
+   ]
+  }
+ },
+ {
+  "q": "fish low fat",
+  "cat": "mixed",
+  "expect": {
+   "minTotal": 1,
+   "topAll": [
+    "fish"
+   ],
+   "goals": [
+    "totalFat:low"
+   ]
+  }
+ },
+ {
+  "q": "cereal high iron",
+  "cat": "mixed",
+  "expect": {
+   "minTotal": 1,
+   "topAll": [
+    "cereal"
+   ],
+   "goals": [
+    "iron"
+   ]
+  }
+ },
+ {
+  "q": "milk high calcium",
+  "cat": "mixed",
+  "expect": {
+   "minTotal": 1,
+   "topAll": [
+    "milk"
+   ],
+   "goals": [
+    "calcium:high"
+   ]
+  }
+ },
+ {
+  "q": "juice low sugar",
+  "cat": "mixed",
+  "expect": {
+   "minTotal": 1,
+   "topAll": [
+    "juice"
+   ],
+   "goals": [
+    "totalSugar:low"
+   ]
+  }
+ },
+ {
+  "q": "soup sodium < 300",
+  "cat": "mixed",
+  "expect": {
+   "minTotal": 1,
+   "topAll": [
+    "soup"
+   ],
+   "goals": [
+    "sodium:low"
+   ]
+  }
+ },
+ {
+  "q": "nuts high magnesium",
+  "cat": "mixed",
+  "expect": {
+   "minTotal": 1,
+   "topAll": [
+    "nuts"
+   ],
+   "goals": [
+    "magnesium"
+   ]
+  }
+ },
+ {
+  "q": "alkaline vegetables",
+  "cat": "mixed",
+  "expect": {
+   "minTotal": 1,
+   "ph": true
+  }
+ },
+ {
+  "q": "acidic fruit",
+  "cat": "mixed",
+  "expect": {
+   "minTotal": 1,
+   "ph": true
+  }
+ },
+ {
+  "q": "cheese ph < 6",
+  "cat": "mixed",
+  "expect": {
+   "minTotal": 1,
+   "topAll": [
+    "cheese"
+   ],
+   "ph": true
+  }
+ },
+ {
+  "q": "rice without salt",
+  "cat": "mixed",
+  "expect": {
+   "minTotal": 1,
+   "topAll": [
+    "rice"
+   ],
+   "goals": [
+    "sodium:low"
+   ]
+  }
+ },
+ {
+  "q": "chicken no skin",
+  "cat": "mixed",
+  "expect": {
+   "minTotal": 1,
+   "topAll": [
+    "chicken"
+   ]
+  }
+ },
+ {
+  "q": "milk without lactose",
+  "cat": "mixed",
+  "expect": {
+   "minTotal": 1,
+   "topAll": [
+    "milk"
+   ],
+   "goals": [
+    "lactose:low"
+   ]
+  }
+ },
+ {
+  "q": "beef protein more than 25",
+  "cat": "mixed",
+  "expect": {
+   "minTotal": 1,
+   "topAll": [
+    "beef"
+   ],
+   "goals": [
+    "protein:high"
+   ]
+  }
+ },
+ {
+  "q": "snack less than 150 calories",
+  "cat": "mixed",
+  "expect": {
+   "minTotal": 1,
+   "goals": [
+    "energy:low"
+   ]
+  }
+ },
+ {
+  "q": "vata pacifying",
+  "cat": "ayurveda"
+ },
+ {
+  "q": "pitta pacifying",
+  "cat": "ayurveda"
+ },
+ {
+  "q": "kapha reducing",
+  "cat": "ayurveda"
+ },
+ {
+  "q": "heating",
+  "cat": "ayurveda"
+ },
+ {
+  "q": "cooling",
+  "cat": "ayurveda"
+ },
+ {
+  "q": "sweet taste",
+  "cat": "ayurveda"
+ },
+ {
+  "q": "bitter",
+  "cat": "ayurveda"
+ },
+ {
+  "q": "astringent",
+  "cat": "ayurveda"
+ },
+ {
+  "q": "pungent",
+  "cat": "ayurveda"
+ },
+ {
+  "q": "light and dry",
+  "cat": "ayurveda"
+ },
+ {
+  "q": "heavy",
+  "cat": "ayurveda"
+ },
+ {
+  "q": "easy to digest",
+  "cat": "ayurveda"
+ },
+ {
+  "q": "kindles agni",
+  "cat": "ayurveda"
+ },
+ {
+  "q": "good for vata",
+  "cat": "ayurveda"
+ },
+ {
+  "q": "aggravates pitta",
+  "cat": "ayurveda"
+ },
+ {
+  "q": "winter foods",
+  "cat": "ayurveda"
+ },
+ {
+  "q": "summer",
+  "cat": "ayurveda"
+ },
+ {
+  "q": "warming breakfast",
+  "cat": "ayurveda"
+ },
+ {
+  "q": "kitchari",
+  "cat": "ayurveda"
+ },
+ {
+  "q": "dal",
+  "cat": "ayurveda"
+ },
+ {
+  "q": "chai",
+  "cat": "ayurveda"
+ },
+ {
+  "q": "lassi",
+  "cat": "ayurveda"
+ },
+ {
+  "q": "khichdi",
+  "cat": "ayurveda"
+ },
+ {
+  "q": "ashwagandha",
+  "cat": "ayurveda"
+ },
+ {
+  "q": "triphala",
+  "cat": "ayurveda"
+ },
+ {
+  "q": "chiken",
+  "cat": "typing"
+ },
+ {
+  "q": "brocoli",
+  "cat": "typing"
+ },
+ {
+  "q": "tomatos",
+  "cat": "typing"
+ },
+ {
+  "q": "yoghurt",
+  "cat": "typing"
+ },
+ {
+  "q": "avo",
+  "cat": "typing"
+ },
+ {
+  "q": "oj",
+  "cat": "typing"
+ },
+ {
+  "q": "spuds",
+  "cat": "typing"
+ },
+ {
+  "q": "chick",
+  "cat": "typing"
+ },
+ {
+  "q": "bana",
+  "cat": "typing"
+ },
+ {
+  "q": "straw",
+  "cat": "typing"
+ },
+ {
+  "q": "chees",
+  "cat": "typing"
+ },
+ {
+  "q": "choclate",
+  "cat": "typing"
+ },
+ {
+  "q": "spagetti",
+  "cat": "typing"
+ },
+ {
+  "q": "veggies",
+  "cat": "typing"
+ },
+ {
+  "q": "pb",
+  "cat": "typing"
+ },
+ {
+  "q": "fries",
+  "cat": "typing"
+ },
+ {
+  "q": "coke",
+  "cat": "typing"
+ },
+ {
+  "q": "brew",
+  "cat": "typing"
+ },
+ {
+  "q": "bluberry",
+  "cat": "typing"
+ },
+ {
+  "q": "letuce",
+  "cat": "typing"
+ },
+ {
+  "q": "cinamon",
+  "cat": "typing"
+ },
+ {
+  "q": "yog",
+  "cat": "typing"
+ },
+ {
+  "q": "sal",
+  "cat": "typing"
+ },
+ {
+  "q": "app",
+  "cat": "typing"
+ },
+ {
+  "q": "mush",
+  "cat": "typing"
+ },
+ {
+  "q": "пиле",
+  "cat": "locale"
+ },
+ {
+  "q": "мляко",
+  "cat": "locale"
+ },
+ {
+  "q": "ябълка",
+  "cat": "locale"
+ },
+ {
+  "q": "ориз",
+  "cat": "locale"
+ },
+ {
+  "q": "кисело мляко",
+  "cat": "locale"
+ },
+ {
+  "q": "pollo",
+  "cat": "locale"
+ },
+ {
+  "q": "leche",
+  "cat": "locale"
+ },
+ {
+  "q": "manzana",
+  "cat": "locale"
+ },
+ {
+  "q": "Hähnchen",
+  "cat": "locale"
+ },
+ {
+  "q": "Milch",
+  "cat": "locale"
+ },
+ {
+  "q": "Äpfel",
+  "cat": "locale"
+ },
+ {
+  "q": "poulet",
+  "cat": "locale"
+ },
+ {
+  "q": "lait",
+  "cat": "locale"
+ },
+ {
+  "q": "pomme",
+  "cat": "locale"
+ },
+ {
+  "q": "苹果",
+  "cat": "locale"
+ },
+ {
+  "q": "牛奶",
+  "cat": "locale"
+ },
+ {
+  "q": "りんご",
+  "cat": "locale"
+ },
+ {
+  "q": "牛乳",
+  "cat": "locale"
+ },
+ {
+  "q": "दूध",
+  "cat": "locale"
+ },
+ {
+  "q": "चावल",
+  "cat": "locale"
+ },
+ {
+  "q": "تفاح",
+  "cat": "locale"
+ },
+ {
+  "q": "사과",
+  "cat": "locale"
+ },
+ {
+  "q": "яблоко",
+  "cat": "locale"
+ },
+ {
+  "q": "молоко",
+  "cat": "locale"
+ },
+ {
+  "q": "",
+  "cat": "edge"
+ },
+ {
+  "q": " ",
+  "cat": "edge"
+ },
+ {
+  "q": "%",
+  "cat": "edge"
+ },
+ {
+  "q": "2% milk",
+  "cat": "edge"
+ },
+ {
+  "q": "1% milk",
+  "cat": "edge"
+ },
+ {
+  "q": "100% juice",
+  "cat": "edge"
+ },
+ {
+  "q": "7 up",
+  "cat": "edge"
+ },
+ {
+  "q": "v8",
+  "cat": "edge"
+ },
+ {
+  "q": "half and half",
+  "cat": "edge"
+ },
+ {
+  "q": "b12",
+  "cat": "edge"
+ },
+ {
+  "q": "c",
+  "cat": "edge"
+ },
+ {
+  "q": "a",
+  "cat": "edge"
+ },
+ {
+  "q": "m&m",
+  "cat": "edge"
+ },
+ {
+  "q": "3 musketeers",
+  "cat": "edge"
+ },
+ {
+  "q": "🍎",
+  "cat": "edge"
+ },
+ {
+  "q": "chicken, breast, raw",
+  "cat": "edge"
+ },
+ {
+  "q": "CHICKEN BREAST",
+  "cat": "edge"
+ },
+ {
+  "q": "  chicken   breast  ",
+  "cat": "edge"
+ },
+ {
+  "q": "chicken breast grilled without skin low sodium high protein",
+  "cat": "edge"
+ },
+ {
+  "q": "or",
+  "cat": "edge"
+ },
+ {
+  "q": "and",
+  "cat": "edge"
+ },
+ {
+  "q": "high",
+  "cat": "edge"
+ },
+ {
+  "q": "low",
+  "cat": "edge"
+ },
+ {
+  "q": "free",
+  "cat": "edge"
+ },
+ {
+  "q": "no",
+  "cat": "edge"
+ },
+ {
+  "q": ">",
+  "cat": "edge"
+ },
+ {
+  "q": "< 5",
+  "cat": "edge"
+ },
+ {
+  "q": "20",
+  "cat": "edge"
+ }
+]

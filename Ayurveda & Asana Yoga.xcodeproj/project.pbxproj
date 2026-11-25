@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4178070A8CE99C026EC227C0 /* YearlyReviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DA2B6B0937CACAB22C96C8 /* YearlyReviewTests.swift */; };
+		F00D5EA2C0000000000000A1 /* FoodSearchGoldenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D5EA2C0000000000000A0 /* FoodSearchGoldenTests.swift */; };
 		5307600E0D98121FC26E36A5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D336BF06C9021E192B12F9B /* Foundation.framework */; };
 		A55E75102F1B000100000001 /* asanas.json in Resources */ = {isa = PBXBuildFile; fileRef = A55E75202F1B000100000001 /* asanas.json */; };
 		A55E75112F1B000100000001 /* sequences.json.gz in Resources */ = {isa = PBXBuildFile; fileRef = A55E75212F1B000100000001 /* sequences.json.gz */; };
@@ -69,6 +70,7 @@
 		A710000D2F1C00010000000D /* NextEventActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ayura/LiveActivity/NextEventActivityAttributes.swift; sourceTree = SOURCE_ROOT; };
 		C843A40D2E7E7C66000B1F28 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		D7DA2B6B0937CACAB22C96C8 /* YearlyReviewTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = YearlyReviewTests.swift; sourceTree = "<group>"; };
+		F00D5EA2C0000000000000A0 /* FoodSearchGoldenTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FoodSearchGoldenTests.swift; path = ../FoodSearch/FoodSearchGoldenTests.swift; sourceTree = "<group>"; };
 		F2D18B1422AC30DC5C64AE88 /* YearlyReviewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YearlyReviewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -191,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				D7DA2B6B0937CACAB22C96C8 /* YearlyReviewTests.swift */,
+				F00D5EA2C0000000000000A0 /* FoodSearchGoldenTests.swift */,
 				7BFE4B3F0CB580751B543957 /* Purchases.storekit */,
 			);
 			name = YearlyReviewTests;
@@ -469,6 +472,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4178070A8CE99C026EC227C0 /* YearlyReviewTests.swift in Sources */,
+				F00D5EA2C0000000000000A1 /* FoodSearchGoldenTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

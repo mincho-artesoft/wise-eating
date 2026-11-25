@@ -606,10 +606,18 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             let originalSimpleRawQuery = query
                 .lowercased()
                 .trimmingCharacters(in: .whitespacesAndNewlines)
-            let parsedFacets = CanonicalFacetParser.parse(
-                query,
-                synonyms: SearchKnowledgeBase.shared.synonyms
-            )
+            let nameFirst = SearchFeatureFlags.nameFirst
+            // With the flag on: the index tokens of a query that names a food
+            // ("sour cream"), which then skips every command parser below.
+            let nameTokens: [String]? = nameFirst
+                ? SearchNameGuard.nameTokens(query: query, invertedIndex: invertedIndex)
+                : nil
+            let parsedFacets = nameTokens != nil
+                ? AyurvedaFacetParseResult.passthrough(query)
+                : CanonicalFacetParser.parse(
+                    query,
+                    synonyms: SearchKnowledgeBase.shared.synonyms
+                )
             let facetParse: AyurvedaFacetParseResult
             if parsedFacets.constraints.isEmpty {
                 facetParse = parsedFacets
@@ -636,7 +644,22 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             let queryBoundary = ConstraintQueryBoundary(searchQuery)
             let rawPhCount = queryBoundary.count(of: "ph")
             
-            let parsed = await Tokenizer.parse(searchQuery)
+            let parsed: SearchIntent
+            if let nameTokens {
+                parsed = SearchIntent(
+                    textTokens: Set(nameTokens),
+                    negativeTokens: [],
+                    nutrientGoals: [],
+                    displayNutrients: [],
+                    targetConsumerAge: nil,
+                    allergenExclusions: [],
+                    excludeAllAllergens: false,
+                    phConstraint: nil,
+                    ayurvedaFacetConstraints: []
+                )
+            } else {
+                parsed = await Tokenizer.parse(searchQuery)
+            }
             let hasDigits = searchQuery.rangeOfCharacter(from: .decimalDigits) != nil
             var textTokens = parsed.textTokens
 
@@ -659,30 +682,65 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                 .components(separatedBy: CharacterSet.alphanumerics.inverted)
                 .filter { !$0.isEmpty }
             
-            for rawToken in rawQueryTokens {
+            // With the flag on: the words of the nutrient names the tokenizer
+            // turned into filters ("vitamin", "c"), which are then not also
+            // searched for in food names.
+            var filterWords = Set<String>()
+            if nameFirst, !parsed.nutrientGoals.isEmpty {
+                let filtered = Set(parsed.nutrientGoals.map(\.nutrient))
+                for (key, nutrient) in SearchKnowledgeBase.shared.nutrientMap
+                where filtered.contains(nutrient) {
+                    for word in key.split(whereSeparator: { !$0.isLetter && !$0.isNumber }) {
+                        filterWords.insert(String(word))
+                    }
+                }
+                filterWords.formUnion(SearchKnowledgeBase.shared.suffixNegationTerms)
+            }
+            for rawToken in rawQueryTokens where nameTokens == nil {
                 // Check if this raw token actually exists in our DB index.
                 if invertedIndex[rawToken] != nil {
                     // If it exists in DB, add it to search tokens even if Tokenizer removed/changed it.
                     // But skip common stop words to avoid noise (e.g. "with").
                     let isStopWord = SearchKnowledgeBase.shared.stopWords.contains(rawToken)
                     let isFacetNutrientModifier =
-                        !facetParse.constraints.isEmpty
+                        (nameFirst || !facetParse.constraints.isEmpty)
                         && !parsed.nutrientGoals.isEmpty
                         && ["high", "higher", "low", "lower", "rich", "poor"]
                             .contains(rawToken)
                     let isFacetNutrientToken =
-                        !facetParse.constraints.isEmpty
+                        (nameFirst || !facetParse.constraints.isEmpty)
                         && SearchKnowledgeBase.shared.nutrientMap[rawToken]
                             .map { nutrient in
                                 parsed.nutrientGoals.contains {
                                     $0.nutrient == nutrient
                                 }
                             } == true
+                    // A number or comparison word that a filter already used
+                    // ("protein > 8", "fat less than 3") is not part of a name.
+                    let isSpentOnFilter = nameFirst
+                        && (!parsed.nutrientGoals.isEmpty || parsed.phConstraint != nil)
+                        && (rawToken.allSatisfy(\.isNumber)
+                            || SearchNameGuard.isComparisonWord(rawToken)
+                            || filterWords.contains(rawToken))
                     if !isStopWord
+                        && !isSpentOnFilter
                         && !isFacetNutrientModifier
                         && !isFacetNutrientToken
                         && !textTokens.contains(rawToken) {
                         textTokens.insert(rawToken)
+                        // The tokenizer may have swapped the word for a synonym
+                        // ("rice" -> "grain"). Tokens are ANDed, so keeping both
+                        // would demand both words in one name.
+                        if nameFirst {
+                            let swapped = Tokenizer.processWord(rawToken)
+                            if swapped != rawToken,
+                               SearchKnowledgeBase.shared.synonyms[rawToken] != nil
+                                || SearchKnowledgeBase.shared.synonyms[
+                                    Tokenizer.singularForm(of: rawToken)
+                                ] != nil {
+                                textTokens.remove(swapped)
+                            }
+                        }
                     }
                 }
             }
@@ -741,7 +799,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                 return false
             }()
             
-            if shouldUseConstraintEngine {
+            if shouldUseConstraintEngine, nameTokens == nil {
                 print("🧮 [Constraints] Using constraint engine for query: \(searchQuery)")
                 mappedConstraints = await MainActor.run {
                     let rawConstraints = ConstraintExtractor.extract(from: searchQuery)
@@ -752,7 +810,9 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             }
             
             var numericGoals = mappedConstraints.nutrientGoals
-            let fallbackGoals = SmartFoodSearch3.parseNumericNutrientConstraintsFromQuery(searchQuery)
+            let fallbackGoals = nameTokens == nil
+                ? SmartFoodSearch3.parseNumericNutrientConstraintsFromQuery(searchQuery)
+                : []
             if !fallbackGoals.isEmpty {
                 for goal in fallbackGoals {
                     if let index = numericGoals.firstIndex(where: { $0.nutrient == goal.nutrient }) {
@@ -765,6 +825,12 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             
             // Merge numeric goals into our prioritized list
             mergedGoals = SmartFoodSearch3.mergeNumericGoals(numericGoals, into: mergedGoals)
+            if nameFirst {
+                mergedGoals = SearchNameGuard.consistentGoals(
+                    mergedGoals,
+                    tokenizerGoals: parsed.nutrientGoals
+                )
+            }
             let displayNutrients = SmartFoodSearch3.orderedDisplayNutrients(
                 in: searchQuery,
                 goalGroups: [
@@ -991,7 +1057,9 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     if termMatches.isEmpty && !isCommandPrefix && term.count >= 3 {
                         let restored = term.replacingOccurrences(of: "_", with: " ")
                         if let (_, nutrient) = SearchKnowledgeBase.shared.nutrientMap.first(where: { (key, _) in key.hasPrefix(restored) }) {
-                            mergedGoals.append(NutrientGoal(nutrient: nutrient, constraint: .high))
+                            if !nameFirst || !mergedGoals.contains(where: { $0.nutrient == nutrient }) {
+                                mergedGoals.append(NutrientGoal(nutrient: nutrient, constraint: .high))
+                            }
                             continue
                         }
                     }
@@ -1021,7 +1089,20 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             
             // Ако няма текстови кандидати, зареждаме кандидатите за първата (най-приоритетна) цел
             if finalCandidateIDs == nil, let primaryGoal = intent.nutrientGoals.first, let rankedIDs = nutrientRankings[primaryGoal.nutrient] {
-                finalCandidateIDs = Set(Array(rankedIDs.prefix(800)))
+                if nameFirst {
+                    // The ranking runs from the highest value down, so its head
+                    // only suits goals that ask for a lot of the nutrient.
+                    switch primaryGoal.constraint {
+                    case .high, .highest, .min, .strictMin:
+                        finalCandidateIDs = Set(rankedIDs.prefix(800))
+                    case .low, .lowest:
+                        finalCandidateIDs = Set(rankedIDs.suffix(800))
+                    case .max, .strictMax, .range, .notEqual:
+                        break // every food; the nutrient filter below decides
+                    }
+                } else {
+                    finalCandidateIDs = Set(Array(rankedIDs.prefix(800)))
+                }
             }
             
             // Ако все още няма кандидати и имаме pH constraint, вземаме всички (филтърът ще ги намали)
@@ -1196,12 +1277,12 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
 
                     if isNumericConstraint && val == 0 {
                         passesNutrients = false
-                        print("🧪 [SmartSearch] Excluding '\(item.lowercasedName)' for \(goal.nutrient) – numeric constraint \(goal.constraint) but rounded value is 0.0")
+                        if !nameFirst { print("🧪 [SmartSearch] Excluding '\(item.lowercasedName)' for \(goal.nutrient) – numeric constraint \(goal.constraint) but rounded value is 0.0") }
                         break
                     }
 
                     // DEBUG: see exactly what we're comparing
-                    print("⚖️ [SmartSearch] Checking \(goal.nutrient) for '\(item.lowercasedName)': valuePer100g(raw=\(rawVal), rounded=\(val)), constraint=\(goal.constraint)")
+                    if !nameFirst { print("⚖️ [SmartSearch] Checking \(goal.nutrient) for '\(item.lowercasedName)': valuePer100g(raw=\(rawVal), rounded=\(val)), constraint=\(goal.constraint)") }
 
                     switch goal.constraint {
                     case .min(let v):
@@ -2473,3 +2554,62 @@ extension SmartFoodSearch3 {
         applyLoadedIndex()
     }
 }
+
+#if DEBUG
+extension SmartFoodSearch3 {
+    /// What one query produced, for the golden-query regression test
+    /// (Tests/FoodSearch). Debug builds only; the app does not call it.
+    struct SearchDiagnostics {
+        let resultIDs: [UUID]
+        let topNames: [String]
+        let intent: SearchIntent
+        let effectiveTokens: [String]
+        let foodsWithoutPhExcluded: Int
+    }
+
+    /// Same pipeline as `searchCompact`, with the season and time of day
+    /// passed in so that a snapshot does not change with the clock.
+    @MainActor
+    func searchDiagnostics(
+        query rawQuery: String,
+        temporalContext: AyurvedaSearchTemporalContext,
+        limit: Int = 10
+    ) async -> SearchDiagnostics {
+        if allFoods.isEmpty {
+            await loadDataAndWait()
+        }
+        let snapshotMap = compactMap
+        let (resultIDs, intent, effectiveTokens, _, withoutPh) = await runSearchLogic(
+            query: SmartFoodSearch3.canonicalQuery(from: rawQuery),
+            activeFilters: [],
+            compactMap: snapshotMap,
+            allFoods: allFoods,
+            maxValues: maxNutrientValues,
+            invertedIndex: invertedIndex,
+            ayurvedaFacetIndex: ayurvedaFacetIndex,
+            vocabulary: vocabulary,
+            nutrientRankings: nutrientRankings,
+            quickAgeMonths: nil,
+            forcePhDisplay: false,
+            isFavoritesOnly: false,
+            isRecipesOnly: false,
+            isMenusOnly: false,
+            searchMode: nil,
+            profileConstraints: nil,
+            excludedFoodIDs: [],
+            ayurvedaFilters: .empty,
+            temporalContext: temporalContext,
+            constitutionTarget: nil,
+            phSortOrder: nil,
+            container: container
+        )
+        return SearchDiagnostics(
+            resultIDs: resultIDs,
+            topNames: resultIDs.prefix(max(0, limit)).compactMap { snapshotMap[$0]?.name },
+            intent: intent,
+            effectiveTokens: effectiveTokens,
+            foodsWithoutPhExcluded: withoutPh
+        )
+    }
+}
+#endif
