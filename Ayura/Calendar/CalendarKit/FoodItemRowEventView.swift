@@ -113,7 +113,7 @@ struct FoodItemRowEventView: View {
 
                 VStack(alignment: .leading, spacing: 4) {
                     HStack {
-                        Text(item.name)
+                        Text(item.displayName)
                             .font(.system(size: 10, weight: .bold)).lineLimit(1)
                             .foregroundColor(effectManager.currentGlobalAccentColor)
                         Spacer()

@@ -32,7 +32,7 @@ struct GalleryFoodItemCell: View {
             }
             .glassCardStyle(cornerRadius: 16)
             
-            Text(item.name)
+            Text(item.displayName)
                 .font(.caption)
                 .fontWeight(.medium)
                 .foregroundStyle(effectManager.currentGlobalAccentColor)

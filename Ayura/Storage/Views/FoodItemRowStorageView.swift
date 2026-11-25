@@ -54,14 +54,14 @@ struct FoodItemRowStorageView: View {
     private var descriptionOrIngredientsText: String? {
         if item.isRecipe {
             guard let links = item.ingredients, !links.isEmpty else {
-                return item.itemDescription?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty()
+                return item.displayDescription
             }
-            let first = links.prefix(3).map { $0.food?.name ?? "Ingredient" }
+            let first = links.prefix(3).map { $0.food?.displayName ?? "Ingredient" }
             var txt = first.joined(separator: ", ")
             if links.count > 3 { txt += "..." }
             return txt
         } else {
-            return item.itemDescription?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty()
+            return item.displayDescription
         }
     }
 
@@ -87,7 +87,7 @@ struct FoodItemRowStorageView: View {
                 .padding(.top, 2)
 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(item.name)
+                    Text(item.displayName)
                         .font(.headline.weight(.bold))
                         .foregroundColor(effectManager.currentGlobalAccentColor)
                         .lineLimit(2)

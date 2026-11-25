@@ -123,7 +123,7 @@ struct SelectedFoodRowView: View {
                 .foregroundStyle(effectManager.currentGlobalAccentColor)
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(item.name)
+                    Text(item.displayName)
                         .accessibilityIdentifier("meal-food-row-\(item.name)")
                         .font(.system(size: 16, weight: .semibold))
                         .foregroundStyle(effectManager.currentGlobalAccentColor)

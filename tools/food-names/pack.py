@@ -4,6 +4,9 @@
   pack.py bg        check tools/food-names/bg.json and write
                     Ayura/FoodSearch/Names/food_names.bg.z
   pack.py           only (re)write food_name_segments.en.z
+  pack.py --catalog yoga [languages]
+                    the same for the yoga names (tools/yoga-names ->
+                    Ayura/Yoga/Names/yoga_names.<language>.z)
 
 segments.en.json is the sorted list of distinct segments of the catalogue's
 food names (the parts between ", "). <language>.json maps each of them to its
@@ -21,8 +24,22 @@ import re
 import sys
 import zlib
 
-here = pathlib.Path(__file__).parent
-out = here.parent.parent / "Ayura" / "FoodSearch" / "Names"
+tools = pathlib.Path(__file__).parent.parent
+arguments = sys.argv[1:]
+catalog = "food"
+if "--catalog" in arguments:
+    position = arguments.index("--catalog")
+    catalog = arguments[position + 1]
+    del arguments[position:position + 2]
+# Each catalogue: the folder with segments.en.json and <language>.json, the
+# folder the app bundles, and the resource names the app looks for.
+CATALOGS = {
+    "food": (tools / "food-names", tools.parent / "Ayura" / "FoodSearch" / "Names",
+             "food_name_segments.en.z", "food_names"),
+    "yoga": (tools / "yoga-names", tools.parent / "Ayura" / "Yoga" / "Names",
+             "yoga_name_segments.en.z", "yoga_names"),
+}
+here, out, segments_file, names_prefix = CATALOGS[catalog]
 
 
 def pack(lines):
@@ -38,11 +55,11 @@ def numbers(text):
 segments = json.loads((here / "segments.en.json").read_text())
 assert segments == sorted(set(segments), key=lambda s: (s.lower(), s)), "segments.en.json is not sorted/unique"
 out.mkdir(parents=True, exist_ok=True)
-(out / "food_name_segments.en.z").write_bytes(pack(segments))
-print(f"segments: {len(segments)}, {sum(len(s.encode()) for s in segments)} bytes of text, "
-      f"{(out / 'food_name_segments.en.z').stat().st_size} packed")
+(out / segments_file).write_bytes(pack(segments))
+print(f"{catalog} segments: {len(segments)}, {sum(len(s.encode()) for s in segments)} bytes of text, "
+      f"{(out / segments_file).stat().st_size} packed")
 
-for language in sys.argv[1:]:
+for language in arguments:
     table = json.loads((here / f"{language}.json").read_text())
     by_food = {key: value for key, value in table.items() if "|" in key}
     table = {key: value for key, value in table.items() if "|" not in key}
@@ -69,7 +86,7 @@ for language in sys.argv[1:]:
         print("  " + problem)
     if problems:
         sys.exit(f"{language}: {len(problems)} problems; nothing written")
-    target = out / f"food_names.{language}.z"
+    target = out / f"{names_prefix}.{language}.z"
     lines += [f"{key}\t{value.strip()}" for key, value in sorted(by_food.items())]
     target.write_bytes(pack(lines))
     print(f"{language}: {translated} of {len(segments)} segments translated, "

@@ -64,7 +64,7 @@ struct ConsumedFoodRowView: View {
             .foregroundStyle(effectManager.currentGlobalAccentColor)
 
             VStack(alignment: .leading, spacing: 2) {
-                Text(item.name)
+                Text(item.displayName)
                     .font(.system(size: 14, weight: .semibold))
                     .lineLimit(2)
                     .foregroundStyle(effectManager.currentGlobalAccentColor)

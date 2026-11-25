@@ -49,7 +49,7 @@ struct FoodFullScreenDetailView: View {
                 // Долен панел с информация и бутони (Glass Effect)
                 VStack(spacing: 24) {
                     // Име на продукта
-                    Text(item.name)
+                    Text(item.displayName)
                         .font(.title2)
                         .fontWeight(.bold)
                         .foregroundStyle(effectManager.currentGlobalAccentColor)

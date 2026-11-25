@@ -219,4 +219,153 @@ nonisolated final class FoodSearchGoldenTests: XCTestCase {
             }
         }
     }
+
+    /// Every packed language must load, cover the whole segment list and be
+    /// found for the identifiers iOS reports for it.
+    @MainActor func testFoodNameFilesLoad() throws {
+        let files = (Bundle.main.urls(forResourcesWithExtension: "z", subdirectory: nil) ?? [])
+            .map { $0.deletingPathExtension().lastPathComponent }
+            .filter { $0.hasPrefix("food_names.") }
+            .map { String($0.dropFirst("food_names.".count)) }
+            .sorted()
+        XCTAssertFalse(files.isEmpty, "no food name files in the bundle")
+        for language in files {
+            let localizer = try XCTUnwrap(FoodNameLocalizer.bundled(for: language), language)
+            XCTAssertEqual(localizer.language, language)
+            XCTAssertNotNil(localizer.localizedName("Beef, raw"), "[\(language)] 'Beef, raw' is not translated")
+        }
+        XCTAssertTrue(FoodNameLocalizer.candidates(for: "zh-Hant-TW").contains("zh-Hant"))
+        XCTAssertTrue(FoodNameLocalizer.candidates(for: "zh-TW").contains("zh-Hant"))
+        XCTAssertTrue(FoodNameLocalizer.candidates(for: "zh-CN").contains("zh-Hans"))
+        XCTAssertEqual(FoodNameLocalizer.candidates(for: "es-MX").filter { ["es-MX", "es"].contains($0) }, ["es-MX", "es"])
+        XCTAssertEqual(FoodNameLocalizer.candidates(for: "pt-BR").filter { ["pt-BR", "pt"].contains($0) }, ["pt-BR", "pt"])
+        XCTAssertTrue(FoodNameLocalizer.candidates(for: "bg").contains("bg"))
+        if files.contains("zh-Hant") {
+            XCTAssertEqual(FoodNameLocalizer.bundled(for: "zh-Hant-TW")?.language, "zh-Hant")
+            XCTAssertEqual(FoodNameLocalizer.bundled(for: "zh-TW")?.language, "zh-Hant")
+        }
+        if files.contains("zh-Hans") {
+            XCTAssertEqual(FoodNameLocalizer.bundled(for: "zh-CN")?.language, "zh-Hans")
+        }
+        if files.contains("es-MX") {
+            XCTAssertEqual(FoodNameLocalizer.bundled(for: "es-MX")?.language, "es-MX")
+        }
+        if files.contains("pt") {
+            XCTAssertEqual(FoodNameLocalizer.bundled(for: "pt-BR")?.language, "pt")
+        }
+        print("SEARCH_NAMES|languages=\(files.count)|\(files.joined(separator: ","))")
+    }
+
+    /// Every packed recipe/dravya content table must load and match the
+    /// English table length.
+    @MainActor func testRecipeContentFilesLoad() throws {
+        let files = (Bundle.main.urls(forResourcesWithExtension: "z", subdirectory: nil) ?? [])
+            .map { $0.deletingPathExtension().lastPathComponent }
+            .filter { $0.hasPrefix("recipe_content.") && $0 != "recipe_content.en" }
+            .map { String($0.dropFirst("recipe_content.".count)) }
+            .sorted()
+        guard !files.isEmpty else { return }
+        for language in files {
+            let localizer = try XCTUnwrap(RecipeContentLocalizer.bundled(for: language), language)
+            XCTAssertEqual(localizer.language, language)
+        }
+        print("RECIPE_CONTENT|languages=\(files.count)|\(files.joined(separator: ","))")
+    }
+
+    /// The yoga tab's index over the real catalogue: every pose is reachable
+    /// by its English and Sanskrit names in any word order, in part, with a
+    /// typing error, and by family, level and muscle group. Results and
+    /// timings are written next to the food results.
+    @MainActor func testYogaSearch() async throws {
+        var context: ModelContext?
+        for _ in 0..<1200 {
+            if let ready = GlobalState.modelContext { context = ready; break }
+            try await Task.sleep(for: .milliseconds(500))
+        }
+        let ready = try XCTUnwrap(context, "the database never became ready")
+        let poses = try ready.fetch(FetchDescriptor<ExerciseItem>(
+            predicate: #Predicate { !$0.isUserAdded }
+        ))
+        XCTAssertGreaterThan(poses.count, 800)
+
+        let buildStart = CFAbsoluteTimeGetCurrent()
+        let index = YogaSearchIndex.make(from: poses)
+        let buildMs = (CFAbsoluteTimeGetCurrent() - buildStart) * 1000
+        let nameByID = Dictionary(poses.map { ($0.id, $0.name) }, uniquingKeysWith: { first, _ in first })
+        let poseByID = Dictionary(poses.map { ($0.id, $0) }, uniquingKeysWith: { first, _ in first })
+
+        struct Row: Encodable { let q: String; let total: Int; let ms: Double; let top: [String] }
+        var rows: [Row] = []
+        func search(_ query: String) -> [String] {
+            let start = CFAbsoluteTimeGetCurrent()
+            let ids = index.search(query)
+            let ms = (CFAbsoluteTimeGetCurrent() - start) * 1000
+            let top = ids.prefix(8).compactMap { nameByID[$0] }
+            rows.append(Row(q: query, total: ids.count, ms: ms, top: top))
+            return ids.compactMap { nameByID[$0] }
+        }
+
+        // The first result is the pose that was named.
+        for (query, expected) in [
+            ("mountain pose", "Mountain Pose"),
+            ("tadasana", "Mountain Pose"),
+            ("downward-facing dog", "Downward-Facing Dog"),
+            ("dog downward", "Downward-Facing Dog"),
+            ("adho mukha svanasana", "Downward-Facing Dog"),
+            ("warrior ii", "Warrior II"),
+            ("child's pose", "Child's Pose"),
+            ("childs pose", "Child's Pose"),
+            ("balasana", "Child's Pose"),
+            ("cat pose", "Cat Pose"),
+            ("marjaryasana", "Cat Pose"),
+            ("puppy", "Puppy Pose"),
+            ("WARRIOR III", "Warrior III"),
+        ] {
+            // Catalogue names read "Mountain Pose (Tadasana)".
+            let first = search(query).first ?? ""
+            XCTAssertTrue(
+                first == expected || first.hasPrefix(expected + " ("),
+                "query '\(query)' gave '\(first)', expected '\(expected)'"
+            )
+        }
+        // Part of a word, and a typing error.
+        func has(_ names: [String], _ title: String) -> Bool {
+            names.contains { $0 == title || $0.hasPrefix(title + " (") }
+        }
+        XCTAssertTrue(has(search("warr"), "Warrior I"))
+        XCTAssertTrue(has(search("tadas"), "Mountain Pose"))
+        XCTAssertTrue(has(search("warior"), "Warrior I"), "one wrong letter")
+        // Names that start with the words typed come first; the pose itself
+        // is still among them.
+        XCTAssertTrue(has(Array(search("downward dog").prefix(10)), "Downward-Facing Dog"))
+        // Title and Sanskrit name are taken apart for translation.
+        let mountain = try XCTUnwrap(poses.first { $0.name.hasPrefix("Mountain Pose") })
+        XCTAssertEqual(YogaSearchIndex.title(of: mountain), "Mountain Pose")
+        XCTAssertEqual(mountain.sanskrit, "Tadasana")
+        XCTAssertTrue(search("trikonasna").contains { $0.contains("Triangle") }, "one missing letter")
+        // Facets: family, level, muscle group, alone and together.
+        for query in ["backbend", "hip opener", "standing balance", "beginner", "advanced inversion",
+                      "hamstrings", "beginner backbend", "twist intermediate"] {
+            XCTAssertFalse(search(query).isEmpty, "facet query '\(query)'")
+        }
+        let beginnerBackbends = index.search("beginner backbend").compactMap { poseByID[$0] }
+        XCTAssertTrue(beginnerBackbends.allSatisfy { $0.level == 1 })
+        XCTAssertTrue(beginnerBackbends.allSatisfy {
+            $0.family == .backbend || $0.name.lowercased().contains("backbend")
+        })
+        // A name outranks a facet: "twist" lists poses named Twist before the family.
+        XCTAssertTrue(search("twist").first?.lowercased().contains("twist") == true)
+        XCTAssertTrue(search("zzzzqq").isEmpty)
+        XCTAssertTrue(search("").isEmpty)
+
+        let slowest = rows.map(\.ms).max() ?? 0
+        if let dir = ProcessInfo.processInfo.environment["SEARCH_GOLDEN_DIR"] {
+            let out = URL(fileURLWithPath: dir).appendingPathComponent("out")
+            try FileManager.default.createDirectory(at: out, withIntermediateDirectories: true)
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
+            try encoder.encode(rows).write(to: out.appendingPathComponent("yoga.json"))
+        }
+        print("SEARCH_YOGA|poses=\(poses.count)|buildMs=\(Int(buildMs))|queries=\(rows.count)|slowestMs=\(slowest)")
+    }
 }

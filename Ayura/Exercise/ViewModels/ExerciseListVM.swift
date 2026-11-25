@@ -36,6 +36,9 @@ final class ExerciseListVM: ObservableObject {
     private var startsWithOffset = 0
     private var containsOffset = 0
     private var ayurvedaOffset = 0
+    /// The current query's results from the name index, in rank order.
+    private var indexedResults: [ExerciseItem]?
+    private var indexedOffset = 0
 
     // Де-дубликация през целия lifecycle на текущото зареждане
     private var seenIDs = Set<UUID>()
@@ -125,6 +128,8 @@ final class ExerciseListVM: ObservableObject {
         startsWithOffset = 0
         containsOffset = 0
         ayurvedaOffset = 0
+        indexedResults = nil
+        indexedOffset = 0
         hasMore = false
         isLoading = false
         loadPage()
@@ -154,6 +159,18 @@ final class ExerciseListVM: ObservableObject {
             .trimmingCharacters(in: .whitespacesAndNewlines)
         let usesAyurvedaRanking = ayurvedaFilters.isActive
             || !parsedQuery.constraints.isEmpty
+
+        // A typed query goes through the name index: every word in any order,
+        // by English, Sanskrit or localized name, or by family, level and
+        // muscle group. The unfiltered list below stays a paged database read.
+        if SearchFeatureFlags.nameFirst, !search.isEmpty {
+            loadIndexedPage(
+                context: readContext,
+                search: search,
+                constraints: parsedQuery.constraints
+            )
+            return
+        }
 
         if usesAyurvedaRanking {
             loadAyurvedaPage(
@@ -250,6 +267,50 @@ final class ExerciseListVM: ObservableObject {
             locale: .current
         )
         return normalizedName.contains(query)
+    }
+
+    private func loadIndexedPage(
+        context: ModelContext,
+        search: String,
+        constraints: [AyurvedaFacetConstraint]
+    ) {
+        do {
+            if indexedResults == nil {
+                let candidates = try context.fetch(
+                    FetchDescriptor(predicate: makePredicate(for: .startsWith, search: ""))
+                )
+                let byID = Dictionary(candidates.map { ($0.id, $0) }, uniquingKeysWith: { first, _ in first })
+                var ranked = YogaSearchIndex.make(from: candidates)
+                    .search(search)
+                    .compactMap { byID[$0] }
+                if ayurvedaFilters.isActive || !constraints.isEmpty {
+                    // Dosha preferences reorder the matches; ties keep the
+                    // order the names earned.
+                    let scored = ranked.enumerated().map { position, item in
+                        (item, ExerciseAyurvedaSearch.score(
+                            item: item,
+                            filters: ayurvedaFilters,
+                            constraints: constraints
+                        ), position)
+                    }
+                    ranked = scored
+                        .sorted { $0.1 != $1.1 ? $0.1 > $1.1 : $0.2 < $1.2 }
+                        .map(\.0)
+                }
+                indexedResults = ranked
+            }
+            let ranked = indexedResults ?? []
+            let page = ranked.dropFirst(indexedOffset).prefix(pageSize)
+            items.append(contentsOf: page.filter { seenIDs.insert($0.id).inserted })
+            indexedOffset += page.count
+            hasMore = indexedOffset < ranked.count
+            searchPhase = hasMore ? .startsWith : .finished
+        } catch {
+            print("❌ ExerciseListVM indexed search error: \(error)")
+            hasMore = false
+            searchPhase = .finished
+        }
+        isLoading = false
     }
 
     private func loadAyurvedaPage(

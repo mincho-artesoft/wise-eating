@@ -193,13 +193,14 @@ struct SearchGrammar: Sendable {
     )
 
     static func bundled(for languageIdentifier: String, in bundle: Bundle = .main) -> SearchGrammar? {
-        let language = Locale(identifier: languageIdentifier).language.languageCode?.identifier
-            ?? languageIdentifier
-        guard language != "en",
-              let url = bundle.url(forResource: "search_grammar.\(language)", withExtension: "json"),
-              let data = try? Data(contentsOf: url)
-        else { return nil }
-        return try? SearchGrammar(data: data)
+        for language in FoodNameLocalizer.candidates(for: languageIdentifier) where language != "en" {
+            if let url = bundle.url(forResource: "search_grammar.\(language)", withExtension: "json"),
+               let data = try? Data(contentsOf: url),
+               let grammar = try? SearchGrammar(data: data) {
+                return grammar
+            }
+        }
+        return nil
     }
 
     /// Every grammar file in the bundle, for the test that checks them.

@@ -637,7 +637,7 @@ struct ShoppingListDetailView: View {
             ForEach(combinedSuggestions) { food in
                 HStack {
                     VStack(alignment: .leading) {
-                        Text(food.name)
+                        Text(food.displayName)
                         if let storageItem = viewModel.suggestedItems.first(where: { $0.food?.id == food.id }) {
                             Text("Low stock: \(Int(storageItem.totalQuantity)) g").font(.caption).foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
                         } else {

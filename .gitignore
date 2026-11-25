@@ -61,3 +61,7 @@ ayurveda-data/imagery/*.bak-*
 
 # Golden search test output (tools/search-golden/remote.sh pull); baseline.json is the tracked copy
 tools/search-golden/out/
+
+# Translators' and reviewers' working files; tools/food-names/<language>.json is the tracked result
+tools/food-names/work/
+tools/recipe-content/work/

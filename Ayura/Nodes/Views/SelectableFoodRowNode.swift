@@ -106,7 +106,7 @@ struct SelectableFoodRowNode: View {
                 .foregroundStyle(effectManager.currentGlobalAccentColor)
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(food.name)
+                    Text(food.displayName)
                         .font(.system(size: 16, weight: .semibold))
                         .lineLimit(2)
                         .foregroundStyle(effectManager.currentGlobalAccentColor)

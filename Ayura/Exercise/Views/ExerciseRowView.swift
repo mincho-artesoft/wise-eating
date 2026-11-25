@@ -51,7 +51,7 @@ struct ExerciseRowView: View {
 
                     VStack(alignment: .leading, spacing: 4) {
                         HStack(alignment: .top) {
-                            Text(item.name)
+                            Text(item.displayName)
                                 .font(.headline.weight(.bold))
                                 .foregroundColor(effectManager.currentGlobalAccentColor)
                                 .lineLimit(2)

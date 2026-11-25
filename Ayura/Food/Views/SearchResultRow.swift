@@ -73,7 +73,7 @@ struct SearchResultRow: View {
                             
                             // 1. Top Row: First Part
                             HStack(alignment: .top, spacing: 0) {
-                                Text(titleFirstPart.isEmpty ? item.name : titleFirstPart)
+                                Text(titleFirstPart.isEmpty ? item.displayName : titleFirstPart)
                                     .font(.body)
                                     .foregroundColor(effectManager.currentGlobalAccentColor)
                                     .lineLimit(2)
@@ -336,7 +336,7 @@ struct SearchResultRow: View {
         let availableBottomWidth = contentWidth
 
         let result = TextSplitterCore.split3(
-            text: item.name,
+            text: item.displayName,
             font: titleFont,
             topWidth: availableTopWidth,
             bottomWidth: availableBottomWidth

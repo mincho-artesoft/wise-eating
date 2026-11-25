@@ -37,13 +37,13 @@ struct FoodItemDetailView: View {
     }
     
     private var descriptionOrIngredientsText: String? {
-        if let desc = food.itemDescription?.trimmingCharacters(in: .whitespacesAndNewlines), !desc.isEmpty {
+        if let desc = food.displayDescription {
             return desc
         }
         if (food.isRecipe || food.isMenu), let ingredients = food.ingredients, !ingredients.isEmpty {
             let topIngredients = ingredients.prefix(3)
             let ingredientsStrings = topIngredients.map { link -> String in
-                let name = link.food?.name ?? "Ingredient"
+                let name = link.food?.displayName ?? "Ingredient"
                 if let ingredient = link.food, !ingredient.isEdible {
                     let notes = ingredient.inedibleContraindications
                         .joined(separator: "; ")
@@ -390,7 +390,7 @@ struct FoodItemDetailView: View {
 
     private var textInfoSection: some View {
         VStack(spacing: 16) {
-            Text(food.name)
+            Text(food.displayName)
                 .font(.largeTitle.weight(.bold))
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
@@ -496,7 +496,7 @@ struct FoodItemDetailView: View {
                         if let ingredient = link.food {
                             VStack(alignment: .leading, spacing: 4) {
                                 HStack {
-                                    Text(ingredient.name)
+                                    Text(ingredient.displayName)
                                         .foregroundColor(effectManager.currentGlobalAccentColor)
 
                                     Spacer()
@@ -511,7 +511,7 @@ struct FoodItemDetailView: View {
                                 }
                                 if !ingredient.isEdible {
                                     ForEach(ingredient.inedibleContraindications, id: \.self) { note in
-                                        Text(note)
+                                        Text(RecipeContentLocalizer.active?.localizedText(note) ?? note)
                                             .font(.caption)
                                             .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
                                     }

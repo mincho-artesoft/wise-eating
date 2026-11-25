@@ -64,7 +64,7 @@ struct IngredientRowView<FocusField: Hashable>: View {
                 }
                 .frame(width: 40, height: 40)
             }
-            Text(item.name)
+            Text(item.displayName)
                 .foregroundColor(effectManager.currentGlobalAccentColor)
                 .lineLimit(2)
                 .frame(maxWidth: .infinity, alignment: .leading)

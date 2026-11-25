@@ -81,15 +81,44 @@ struct FoodNameLocalizer: Sendable {
         for: Locale.preferredLanguages.first ?? "en"
     )
 
-    static func bundled(for languageIdentifier: String, in bundle: Bundle = .main) -> FoodNameLocalizer? {
-        let language = Locale(identifier: languageIdentifier).language.languageCode?.identifier
-            ?? languageIdentifier
-        guard language != "en",
-              let segments = lines(of: "food_name_segments.en", in: bundle),
-              let translated = lines(of: "food_names.\(language)", in: bundle),
-              translated.count >= segments.count
-        else { return nil }
-        return FoodNameLocalizer(language: language, segments: segments, translated: translated)
+    /// The food names by default; another catalogue with the same file format
+    /// (the yoga names) passes its own resource names.
+    static func bundled(
+        for languageIdentifier: String,
+        in bundle: Bundle = .main,
+        segmentsResource: String = "food_name_segments.en",
+        namesPrefix: String = "food_names"
+    ) -> FoodNameLocalizer? {
+        guard let segments = lines(of: segmentsResource, in: bundle) else { return nil }
+        for language in candidates(for: languageIdentifier) where language != "en" {
+            if let translated = lines(of: "\(namesPrefix).\(language)", in: bundle),
+               translated.count >= segments.count {
+                return FoodNameLocalizer(language: language, segments: segments, translated: translated)
+            }
+        }
+        return nil
+    }
+
+    /// The file names to try for a preferred language, most specific first:
+    /// "zh-Hant-TW" gives zh-Hant-TW, zh-Hant, zh; "es-MX" gives es-MX, es;
+    /// "pt-BR" gives pt-BR, pt. A regional file is used when the bundle has
+    /// one (es-MX, fr-CA, pt-PT) and the plain language otherwise.
+    static func candidates(for languageIdentifier: String) -> [String] {
+        let locale = Locale(identifier: languageIdentifier)
+        guard let code = locale.language.languageCode?.identifier else { return [languageIdentifier] }
+        var out: [String] = []
+        func add(_ value: String) { if !out.contains(value) { out.append(value) } }
+        let script = locale.language.script?.identifier
+        let region = locale.language.region?.identifier
+        if let script, let region { add("\(code)-\(script)-\(region)") }
+        if let script { add("\(code)-\(script)") }
+        if let region { add("\(code)-\(region)") }
+        // Chinese without a script: Taiwan, Hong Kong and Macau read Traditional.
+        if code == "zh", script == nil {
+            add(["TW", "HK", "MO"].contains(region ?? "") ? "zh-Hant" : "zh-Hans")
+        }
+        add(code)
+        return out
     }
 
     private static func lines(of resource: String, in bundle: Bundle) -> [String]? {

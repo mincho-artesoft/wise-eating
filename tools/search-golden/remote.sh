@@ -58,7 +58,7 @@ test)
         -destination id=$id -derivedDataPath \$HOME/$DIR/dd \
         -only-testing:YearlyReviewTests/FoodSearchGoldenTests \
         > \$HOME/$DIR/test.log 2>&1; rc=\$?; \
-        grep -E 'SEARCH_GOLDEN\||SEARCH_BINARY\||error:|Test Case|\*\* TEST' \$HOME/$DIR/test.log | tail -40; exit \$rc"
+        grep -E 'SEARCH_GOLDEN\||SEARCH_BINARY\||SEARCH_YOGA\||SEARCH_NAMES\||error:|Test Case|\*\* TEST' \$HOME/$DIR/test.log | tail -40; exit \$rc"
     ;;
 pull)
     mkdir -p "$here/out"

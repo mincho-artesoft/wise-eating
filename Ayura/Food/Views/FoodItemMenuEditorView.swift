@@ -1161,7 +1161,7 @@ struct FoodItemMenuEditorView: View {
         )
         
         HStack {
-            Text(item.name)
+            Text(item.displayName)
                 .foregroundColor(effectManager.currentGlobalAccentColor)
             
             Spacer()

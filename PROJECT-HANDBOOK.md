@@ -145,6 +145,15 @@ simulation; must always pass).
   keep working in every language. Bulgarian is the pilot: machine-translated,
   not yet reviewed by a person. Only the search rows show localized names
   (`FoodItem.displayName`); the other screens still show English.
+  The yoga tab searches through the same pieces (2026-11-25):
+  `FoodSearch/Shared/NameSearchIndex.swift` is a small generic index in which
+  an item answers to several names and to its facet labels; any word order,
+  partial words, one or two typing errors. `Yoga/Models/YogaSearchIndex.swift`
+  builds it for the poses from the English title, the Sanskrit name, the
+  localized names, and family, level and muscle group, and `ExerciseListVM`
+  uses it for every typed query (the unfiltered list is still a paged
+  database read). Yoga names are translated like food names:
+  `tools/yoga-names/README.md`.
 - `Ayura/Ayurveda/AyurvedaRecommendationGate.swift` (D9): set-driven
   never-recommend enforcement (engineExcluded profiles + linked fdcIds + AI
   free-text name screen) wired into all AI generation paths and the Siri intent;
