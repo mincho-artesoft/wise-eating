@@ -749,6 +749,79 @@ final class SearchIndexStore {
 
 }
 
+#if DEBUG
+extension SearchIndexStore {
+    /// Sizes and timings of the JSON cache payload against the binary form of
+    /// the same loaded index, and whether the binary form decodes back to
+    /// exactly what was encoded. Used by Tests/FoodSearch.
+    struct BinaryCodecReport: Encodable {
+        let foods: Int
+        let jsonBytes: Int
+        let binaryBytes: Int
+        /// Decoding the JSON, then turning its arrays into the sets and
+        /// dictionaries the engine uses. The binary decode does both at once.
+        let jsonDecodeMs: Double
+        let jsonToMemoryMs: Double
+        let binaryDecodeMs: Double
+        let binaryEncodeMs: Double
+        let roundTripIsExact: Bool
+    }
+
+    func binaryCodecReport() throws -> BinaryCodecReport {
+        func milliseconds(_ work: () throws -> Void) rethrows -> Double {
+            let start = CFAbsoluteTimeGetCurrent()
+            try work()
+            return (CFAbsoluteTimeGetCurrent() - start) * 1000
+        }
+        let snapshot = SearchIndexSnapshot(
+            compactFoods: compactFoods,
+            invertedIndex: invertedIndex,
+            vocabulary: vocabulary,
+            maxNutrientValues: maxNutrientValues,
+            nutrientRankings: nutrientRankings,
+            ayurvedaFacetIndex: ayurvedaFacetIndex
+        )
+        let json = try JSONEncoder().encode(SearchIndexPayload(
+            compactFoods: compactFoods.map { $0.asCodable() },
+            invertedIndex: invertedIndex.mapValues { Array($0) },
+            vocabulary: vocabulary,
+            maxNutrientValues: encodeMaxNutrientValues(maxNutrientValues),
+            nutrientRankings: encodeNutrientRankings(nutrientRankings),
+            ayurvedaFacetIndex: ayurvedaFacetIndex.mapValues { Array($0) }
+        ))
+        var payload: SearchIndexPayload?
+        let jsonDecodeMs = try milliseconds {
+            payload = try JSONDecoder().decode(SearchIndexPayload.self, from: json)
+        }
+        let jsonToMemoryMs = milliseconds {
+            guard let payload else { return }
+            _ = SearchIndexSnapshot(
+                compactFoods: payload.compactFoods.map { CompactFoodItem($0) },
+                invertedIndex: payload.invertedIndex.mapValues { Set($0) },
+                vocabulary: payload.vocabulary,
+                maxNutrientValues: decodeMaxNutrientValues(payload.maxNutrientValues),
+                nutrientRankings: decodeNutrientRankings(payload.nutrientRankings),
+                ayurvedaFacetIndex: payload.ayurvedaFacetIndex.mapValues { Set($0) }
+            )
+        }
+        var binary = Data()
+        let binaryEncodeMs = try milliseconds { binary = try SearchIndexBinary.encode(snapshot) }
+        var decoded: SearchIndexSnapshot?
+        let binaryDecodeMs = try milliseconds { decoded = try SearchIndexBinary.decode(binary) }
+        return BinaryCodecReport(
+            foods: compactFoods.count,
+            jsonBytes: json.count,
+            binaryBytes: binary.count,
+            jsonDecodeMs: jsonDecodeMs,
+            jsonToMemoryMs: jsonToMemoryMs,
+            binaryDecodeMs: binaryDecodeMs,
+            binaryEncodeMs: binaryEncodeMs,
+            roundTripIsExact: decoded == snapshot
+        )
+    }
+}
+#endif
+
 // MARK: - Codable Structures (Unchanged)
 
 private struct SearchIndexPayload: Codable {

@@ -137,4 +137,32 @@ nonisolated final class FoodSearchGoldenTests: XCTestCase {
         try encoder.encode(report).write(to: out.appendingPathComponent("timing.json"))
         print("SEARCH_GOLDEN|nameFirst=\(nameFirst)|queries=\(rows.count)|foods=\(foods)|loadMs=\(Int(indexLoadMs))|p50=\(report.p50Ms)|p95=\(report.p95Ms)")
     }
+
+    /// The binary search index must give back exactly the index it was made
+    /// from; its size and decode time are written next to the search results.
+    /// Named to run after the golden queries, which time the first index load.
+    @MainActor func testIndexBinaryRoundTrip() async throws {
+        guard let dir = ProcessInfo.processInfo.environment["SEARCH_GOLDEN_DIR"] else {
+            throw XCTSkip("SEARCH_GOLDEN_DIR is not set")
+        }
+        var context: ModelContext?
+        for _ in 0..<1200 {
+            if let ready = GlobalState.modelContext { context = ready; break }
+            try await Task.sleep(for: .milliseconds(500))
+        }
+        let container = try XCTUnwrap(context, "the database never became ready").container
+        let loaded = await SmartFoodSearch3(container: container).prepareForSearch()
+        XCTAssertTrue(loaded, "the search index did not load")
+
+        let report = try SearchIndexStore.shared.binaryCodecReport()
+        XCTAssertTrue(report.roundTripIsExact, "the binary index does not decode to what was encoded")
+        XCTAssertGreaterThan(report.foods, 10_000)
+
+        let out = URL(fileURLWithPath: dir).appendingPathComponent("out")
+        try FileManager.default.createDirectory(at: out, withIntermediateDirectories: true)
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        try encoder.encode(report).write(to: out.appendingPathComponent("binary.json"))
+        print("SEARCH_BINARY|exact=\(report.roundTripIsExact)|json=\(report.jsonBytes)|binary=\(report.binaryBytes)|jsonLoadMs=\(Int(report.jsonDecodeMs + report.jsonToMemoryMs))|binaryDecodeMs=\(Int(report.binaryDecodeMs))")
+    }
 }
