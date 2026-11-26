@@ -13,6 +13,7 @@ Usage examples:
   python3 tools/practice-narration/generate.py --lang bg --model eleven_multilingual_v2 --asr
 """
 import argparse
+import concurrent.futures
 import difflib
 import json
 import os
@@ -21,6 +22,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 import unicodedata
 
@@ -217,12 +219,14 @@ def master_audio(raw_path: pathlib.Path, out_path: pathlib.Path, mcfg: dict) -> 
             raise RuntimeError(f"Could not parse loudnorm JSON for {raw_path}:\n{p1.stderr[-500:]}")
         stats = json.loads(m.group(0))
 
-        # Pass 2: apply linear loudnorm + final encode (mono, 24kHz, 96kbps MP3)
+        # Pass 2: apply linear loudnorm + resample + true-peak ceiling before MP3 encode
         ln2 = (
             f"loudnorm=I={target_i}:TP={target_tp}:LRA={target_lra}:"
             f"measured_I={stats['input_i']}:measured_LRA={stats['input_lra']}:"
             f"measured_TP={stats['input_tp']}:measured_thresh={stats['input_thresh']}:"
-            f"offset={stats['target_offset']}:linear=true:print_format=summary"
+            f"offset={stats['target_offset']}:linear=true:print_format=summary,"
+            f"aresample={sr},"
+            f"alimiter=limit=0.79:attack=0.5:release=50:level=false:asc=false"
         )
         subprocess.run(
             [
@@ -281,6 +285,7 @@ def main():
     ap.add_argument("--whisper-model", default="mlx-community/whisper-large-v3-turbo", help="mlx_whisper model repo")
     ap.add_argument("--seed-overrides", help="Optional JSON file mapping 'slug/NN' -> seed int for retakes")
     ap.add_argument("--voice-slot", help="Optional single-voice slot under language_pilots[lang][slot], e.g. A or B")
+    ap.add_argument("--workers", type=int, default=1, help="Concurrent TTS+mastering workers per practice (default: 1)")
     args = ap.parse_args()
 
     api_key = require_api_key()
@@ -347,33 +352,54 @@ def main():
 
             print(f"\n[{args.model}] {slug} ({role} -> {vcfg['library_name']}, {len(p['cues'])} cues)", flush=True)
             practice_incomplete = False
-            for idx, cue in enumerate(p["cues"]):
+            quota_event = threading.Event()
+
+            def process_one(idx_cue):
+                idx, cue = idx_cue
                 n = cue["n"]
                 text_tr = cues_tr[idx]
                 prev_text = cues_tr[idx - 1] if idx > 0 else None
                 next_text = cues_tr[idx + 1] if idx + 1 < len(cues_tr) else None
                 key_id = f"{slug}/{n:02d}"
                 seed = int(seed_overrides.get(key_id, vcfg["seed"]))
-
                 raw_path = raw_dir / slug / f"cue-{n:02d}.mp3"
                 out_path = audio_dir / slug / f"cue-{n:02d}.mp3"
 
                 if args.resume and raw_path.exists() and raw_path.stat().st_size > 1000:
-                    synth_info = {"request_id": "cached", "character_cost": 0, "bytes": raw_path.stat().st_size}
+                    synth_info = {"request_id": "cached", "character_cost": 0, "bytes": raw_path.stat().st_size, "generated": False}
                 else:
+                    if quota_event.is_set():
+                        return (idx, None, f"{slug}/cue-{n:02d}")
                     payload = build_tts_payload(text_tr, args.model, model_caps, vcfg, args.lang, prev_text, next_text, seed)
                     try:
                         synth_info = synthesize_cue(client, headers, vcfg["voice_id"], voices_cfg["output_format"], payload, raw_path)
+                        synth_info["generated"] = True
                     except QuotaExceededError as qe:
+                        quota_event.set()
                         print(f"  [QUOTA_STOP] {slug}/cue-{n:02d}: {qe}", flush=True)
-                        stopped_on_quota = True
-                        stopped_at = f"{slug}/cue-{n:02d}"
-                        practice_incomplete = True
-                        break
-                    total_billed_header += synth_info["character_cost"]
-                    generated_count += 1
+                        return (idx, None, f"{slug}/cue-{n:02d}")
 
                 master_info = master_audio(raw_path, out_path, mcfg)
+                return (idx, (cue, text_tr, seed, synth_info, master_info, out_path), None)
+
+            if args.workers > 1:
+                with concurrent.futures.ThreadPoolExecutor(max_workers=args.workers) as ex:
+                    results_list = list(ex.map(process_one, enumerate(p["cues"])))
+            else:
+                results_list = [process_one(x) for x in enumerate(p["cues"])]
+
+            for idx, res_tuple, stopped_key in results_list:
+                if res_tuple is None:
+                    stopped_on_quota = True
+                    if stopped_at is None:
+                        stopped_at = stopped_key
+                    practice_incomplete = True
+                    continue
+                cue, text_tr, seed, synth_info, master_info, out_path = res_tuple
+                n = cue["n"]
+                if synth_info["generated"]:
+                    total_billed_header += synth_info["character_cost"]
+                    generated_count += 1
                 en_sec = float(cue["englishSeconds"])
                 dur = master_info["durationSec"]
                 ratio = dur / en_sec if en_sec > 0 else 0.0
@@ -383,7 +409,6 @@ def main():
                     f"I={master_info['lufs']} LUFS TP={master_info['truePeakDb']} dB{flag}",
                     flush=True,
                 )
-
                 manifest_cues.append({
                     "audioAssetName": f"narration/audio/{slug}/cue-{n:02d}.mp3",
                     "durationSec": dur,
