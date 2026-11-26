@@ -1,8 +1,9 @@
-# For Neon: yoga and practices in 47 languages
+# For Neon: yoga and practices in 48 languages
 
 The food names and the recipe content are done. This is the same job for the
 yoga catalogue and the guided practices, in the same file format, with the
-same languages:
+same languages - all 48, Bulgarian included, since nothing of the yoga or the
+practices is translated yet:
 
 ar bg bn ca cs da de el es es-MX fi fr fr-CA gu he hi hr hu id it ja kk kn ko
 ml mr ms nb nl or pa pl pt pt-PT ro ru sk sl sv ta te th tr uk ur vi zh-Hans

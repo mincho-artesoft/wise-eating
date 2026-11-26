@@ -65,3 +65,7 @@ tools/search-golden/out/
 # Translators' and reviewers' working files; tools/food-names/<language>.json is the tracked result
 tools/food-names/work/
 tools/recipe-content/work/
+# For yoga and practices the batches are tracked; the per-language folders are not
+tools/yoga-names/work/*/
+tools/yoga-content/work/*/
+tools/practice-content/work/*/
