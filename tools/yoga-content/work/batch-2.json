@@ -1,0 +1,1598 @@
+[
+{
+"i": 532,
+"k": "pose_description",
+"s": "Dragon Pose with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Dragon Pose (Baddha Yin Lizard)"
+},
+{
+"i": 533,
+"k": "pose_description",
+"s": "Firelog Pose with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Firelog Pose (Baddha Agnistambhasana)"
+},
+{
+"i": 534,
+"k": "pose_description",
+"s": "Frog Pose with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Frog Pose (Baddha Bhekasana)"
+},
+{
+"i": 535,
+"k": "pose_description",
+"s": "Garland Pose with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Garland Pose (Baddha Malasana)"
+},
+{
+"i": 536,
+"k": "pose_description",
+"s": "Half Pigeon with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Half Pigeon (Baddha Eka Pada Rajakapotasana (prep))"
+},
+{
+"i": 537,
+"k": "pose_description",
+"s": "Happy Baby with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Happy Baby (Baddha Ananda Balasana)"
+},
+{
+"i": 538,
+"k": "pose_description",
+"s": "Lizard Pose with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Lizard Pose (Baddha Utthan Pristhasana)"
+},
+{
+"i": 539,
+"k": "pose_description",
+"s": "Low Lunge with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Low Lunge (Baddha Anjaneyasana)"
+},
+{
+"i": 540,
+"k": "pose_description",
+"s": "Prenatal Wide Squat with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Prenatal Wide Squat (Baddha Malasana (prenatal))"
+},
+{
+"i": 541,
+"k": "pose_description",
+"s": "Reclined Big Toe Side with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Reclined Big Toe Side (Baddha Supta Padangusthasana II)"
+},
+{
+"i": 542,
+"k": "pose_description",
+"s": "Reclined Pigeon with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Reclined Pigeon (Baddha Supta Kapotasana)"
+},
+{
+"i": 543,
+"k": "pose_description",
+"s": "Runner's Lunge with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Runner's Lunge (Baddha Anjaneyasana (high))"
+},
+{
+"i": 544,
+"k": "pose_description",
+"s": "Shoelace Pose with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Shoelace Pose (Baddha Yin Gomukhasana)"
+},
+{
+"i": 545,
+"k": "pose_description",
+"s": "Side Lunge with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Side Lunge (Baddha Parsva Utkatasana)"
+},
+{
+"i": 546,
+"k": "pose_description",
+"s": "Skandasana with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Skandasana (Baddha Skandasana)"
+},
+{
+"i": 547,
+"k": "pose_description",
+"s": "Sleeping Swan with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Sleeping Swan (Baddha Yin Pigeon)"
+},
+{
+"i": 548,
+"k": "pose_description",
+"s": "Square Pose with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Square Pose (Baddha Yin Agnistambhasana)"
+},
+{
+"i": 549,
+"k": "pose_description",
+"s": "Standing Wide Squat with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Standing Wide Squat (Baddha Prasarita Malasana)"
+},
+{
+"i": 550,
+"k": "pose_description",
+"s": "Bound angle with the knees moving up and down. Warms the hips before any deeper opening.",
+"in": "Butterfly Flaps (Titali Asana)"
+},
+{
+"i": 551,
+"k": "pose_description",
+"s": "Butterfly Flaps approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Butterfly Flaps with Strap (Titali Asana (strap))"
+},
+{
+"i": 552,
+"k": "pose_description",
+"s": "Ankle crossed over the opposite knee while seated. The figure-four hip opener for chairs and desks.",
+"in": "Chair Pigeon (Kapotasana (chair))"
+},
+{
+"i": 553,
+"k": "pose_description",
+"s": "One leg lifted over the shoulder and extended straight while the torso rotates. Among the most demanding seated shapes for hamstring and shoulder range together.",
+"in": "Compass Pose (Parivrtta Surya Yantrasana)"
+},
+{
+"i": 554,
+"k": "pose_description",
+"s": "Compass Pose taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Compass Pose with Block (Parivrtta Surya Yantrasana (block))"
+},
+{
+"i": 555,
+"k": "pose_description",
+"s": "Compass Pose approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Compass Pose with Strap (Parivrtta Surya Yantrasana (strap))"
+},
+{
+"i": 556,
+"k": "pose_description",
+"s": "Knees stacked and arms clasped behind the back in opposite directions. Simultaneously one of the hardest hip and shoulder openers.",
+"in": "Cow Face Pose (Gomukhasana)"
+},
+{
+"i": 557,
+"k": "pose_description",
+"s": "Cow Face Pose taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Cow Face Pose with Block (Gomukhasana (block))"
+},
+{
+"i": 558,
+"k": "pose_description",
+"s": "Cow Face Pose approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Cow Face Pose with Strap (Gomukhasana (strap))"
+},
+{
+"i": 559,
+"k": "pose_description",
+"s": "One shin cradled in the arms and rocked side to side. Opens the outer hip without loading the knee the way pigeon can.",
+"in": "Cradle Stretch (Hindolasana)"
+},
+{
+"i": 560,
+"k": "pose_description",
+"s": "Cradle Stretch taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Cradle Stretch with Block (Hindolasana (block))"
+},
+{
+"i": 561,
+"k": "pose_description",
+"s": "Cradle Stretch approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Cradle Stretch with Strap (Hindolasana (strap))"
+},
+{
+"i": 562,
+"k": "pose_description",
+"s": "Walking forward in a deep squat. Classically prescribed for digestion and among the most heating of the simple practices.",
+"in": "Crow Walking (Kauva Chalasana)"
+},
+{
+"i": 563,
+"k": "pose_description",
+"s": "Shins crossed and stacked with the torso folding forward. A gentler entry to the firelog shape for tighter hips.",
+"in": "Double Pigeon (Sukhasana Sarvangasana)"
+},
+{
+"i": 564,
+"k": "pose_description",
+"s": "Double Pigeon taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Double Pigeon with Block (Sukhasana Sarvangasana (block))"
+},
+{
+"i": 565,
+"k": "pose_description",
+"s": "Double Pigeon approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Double Pigeon with Strap (Sukhasana Sarvangasana (strap))"
+},
+{
+"i": 566,
+"k": "pose_description",
+"s": "Three-legged dog with the hip opening and the knee bending. Opens the outer hip but stresses the sacroiliac joint if the shoulders collapse.",
+"in": "Downward Dog Split Twist (Eka Pada Adho Mukha (open hip))"
+},
+{
+"i": 567,
+"k": "pose_description",
+"s": "Downward Dog Split Twist approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Downward Dog Split Twist with Strap (Eka Pada Adho Mukha (open hip) (strap))"
+},
+{
+"i": 568,
+"k": "pose_description",
+"s": "The yin form of a deep lunge held for several minutes. Targets connective tissue rather than muscle.",
+"in": "Dragon Pose (Yin Lizard)"
+},
+{
+"i": 569,
+"k": "pose_description",
+"s": "Shins stacked one directly above the other. One of the most intense external hip rotations available seated, and unforgiving of knee compensation.",
+"in": "Firelog Pose (Agnistambhasana)"
+},
+{
+"i": 570,
+"k": "pose_description",
+"s": "Firelog Pose taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Firelog Pose with Block (Agnistambhasana (block))"
+},
+{
+"i": 571,
+"k": "pose_description",
+"s": "Firelog Pose approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Firelog Pose with Strap (Agnistambhasana (strap))"
+},
+{
+"i": 572,
+"k": "pose_description",
+"s": "Knees wide and shins out with the hips sinking toward the floor. A very strong adductor opener that must be entered slowly.",
+"in": "Frog Pose (Bhekasana)"
+},
+{
+"i": 573,
+"k": "pose_description",
+"s": "Frog Pose taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Frog Pose with Block (Bhekasana (block))"
+},
+{
+"i": 574,
+"k": "pose_description",
+"s": "Frog Pose approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Frog Pose with Strap (Bhekasana (strap))"
+},
+{
+"i": 575,
+"k": "pose_description",
+"s": "The frog shape with the feet against a wall so the depth can be controlled precisely.",
+"in": "Frog at Wall (Bhekasana (wall))"
+},
+{
+"i": 576,
+"k": "pose_description",
+"s": "A deep squat with heels down and elbows pressing the knees wide. The everyday resting squat of much of the world, and a strong hip opener for those who have lost it.",
+"in": "Garland Pose (Malasana)"
+},
+{
+"i": 577,
+"k": "pose_description",
+"s": "Garland Pose taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Garland Pose with Block (Malasana (block))"
+},
+{
+"i": 578,
+"k": "pose_description",
+"s": "Garland Pose approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Garland Pose with Strap (Malasana (strap))"
+},
+{
+"i": 579,
+"k": "pose_description",
+"s": "Front shin angled across the mat, back leg extending straight behind. The most widely taught hip opener in modern classes.",
+"in": "Half Pigeon (Eka Pada Rajakapotasana (prep))"
+},
+{
+"i": 580,
+"k": "pose_description",
+"s": "Half Pigeon taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Half Pigeon with Block (Eka Pada Rajakapotasana (prep) (block))"
+},
+{
+"i": 581,
+"k": "pose_description",
+"s": "Half Pigeon approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Half Pigeon with Strap (Eka Pada Rajakapotasana (prep) (strap))"
+},
+{
+"i": 582,
+"k": "pose_description",
+"s": "On the back with knees drawn wide toward the armpits and feet held. Opens the hips while the low back stays flat and safe.",
+"in": "Happy Baby (Ananda Balasana)"
+},
+{
+"i": 583,
+"k": "pose_description",
+"s": "Happy Baby approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Happy Baby with Strap (Ananda Balasana (strap))"
+},
+{
+"i": 584,
+"k": "pose_description",
+"s": "A deep lunge with both hands inside the front foot and forearms often lowering. Opens the hip in flexion and the groin at once.",
+"in": "Lizard Pose (Utthan Pristhasana)"
+},
+{
+"i": 585,
+"k": "pose_description",
+"s": "Lizard Pose taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Lizard Pose with Block (Utthan Pristhasana (block))"
+},
+{
+"i": 586,
+"k": "pose_description",
+"s": "Lizard Pose approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Lizard Pose with Strap (Utthan Pristhasana (strap))"
+},
+{
+"i": 587,
+"k": "pose_description",
+"s": "Back knee down, hips sinking forward, arms often overhead. The primary hip flexor opener and a staple of the sun salutation cycle.",
+"in": "Low Lunge (Anjaneyasana)"
+},
+{
+"i": 588,
+"k": "pose_description",
+"s": "Low Lunge taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Low Lunge with Block (Anjaneyasana (block))"
+},
+{
+"i": 589,
+"k": "pose_description",
+"s": "Low Lunge approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Low Lunge with Strap (Anjaneyasana (strap))"
+},
+{
+"i": 590,
+"k": "pose_description",
+"s": "Rocking between a low lunge and a half split. Works hip flexors and hamstrings alternately.",
+"in": "Lunge to Half Split Flow (Anjaneyasana-Ardha Hanumanasana)"
+},
+{
+"i": 591,
+"k": "pose_description",
+"s": "A supported wide squat used through pregnancy to open the pelvis. Held with support rather than depth.",
+"in": "Prenatal Wide Squat (Malasana (prenatal))"
+},
+{
+"i": 592,
+"k": "pose_description",
+"s": "Supine hand-to-toe with the leg opening out to the side. Adductor length without any balance demand.",
+"in": "Reclined Big Toe Side (Supta Padangusthasana II)"
+},
+{
+"i": 593,
+"k": "pose_description",
+"s": "Cow face legs taken lying down. Removes the spinal load while keeping the hip opening.",
+"in": "Reclined Cow Face (Supta Gomukhasana)"
+},
+{
+"i": 594,
+"k": "pose_description",
+"s": "Ankle crossed over the opposite thigh with the legs drawn in. The figure-four shape, and the accessible version of pigeon for stiff or injured hips.",
+"in": "Reclined Pigeon (Supta Kapotasana)"
+},
+{
+"i": 595,
+"k": "pose_description",
+"s": "Reclined Pigeon approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Reclined Pigeon with Strap (Supta Kapotasana (strap))"
+},
+{
+"i": 596,
+"k": "pose_description",
+"s": "Butterfly Flaps with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Butterfly Flaps (Parivrtta Titali Asana)"
+},
+{
+"i": 597,
+"k": "pose_description",
+"s": "Compass Pose with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Compass Pose (Parivrtta Parivrtta Surya Yantrasana)"
+},
+{
+"i": 598,
+"k": "pose_description",
+"s": "Cow Face Pose with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Cow Face Pose (Parivrtta Gomukhasana)"
+},
+{
+"i": 599,
+"k": "pose_description",
+"s": "Cradle Stretch with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Cradle Stretch (Parivrtta Hindolasana)"
+},
+{
+"i": 600,
+"k": "pose_description",
+"s": "Double Pigeon with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Double Pigeon (Parivrtta Sukhasana Sarvangasana)"
+},
+{
+"i": 601,
+"k": "pose_description",
+"s": "Dragon Pose with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Dragon Pose (Parivrtta Yin Lizard)"
+},
+{
+"i": 602,
+"k": "pose_description",
+"s": "Firelog Pose with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Firelog Pose (Parivrtta Agnistambhasana)"
+},
+{
+"i": 603,
+"k": "pose_description",
+"s": "Frog Pose with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Frog Pose (Parivrtta Bhekasana)"
+},
+{
+"i": 604,
+"k": "pose_description",
+"s": "Garland Pose with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Garland Pose (Parivrtta Malasana)"
+},
+{
+"i": 605,
+"k": "pose_description",
+"s": "Half Pigeon with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Half Pigeon (Parivrtta Eka Pada Rajakapotasana (prep))"
+},
+{
+"i": 606,
+"k": "pose_description",
+"s": "Happy Baby with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Happy Baby (Parivrtta Ananda Balasana)"
+},
+{
+"i": 607,
+"k": "pose_description",
+"s": "Lizard Pose with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Lizard Pose (Parivrtta Utthan Pristhasana)"
+},
+{
+"i": 608,
+"k": "pose_description",
+"s": "Low Lunge with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Low Lunge (Parivrtta Anjaneyasana)"
+},
+{
+"i": 609,
+"k": "pose_description",
+"s": "Prenatal Wide Squat with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Prenatal Wide Squat (Parivrtta Malasana (prenatal))"
+},
+{
+"i": 610,
+"k": "pose_description",
+"s": "Reclined Big Toe Side with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Reclined Big Toe Side (Parivrtta Supta Padangusthasana II)"
+},
+{
+"i": 611,
+"k": "pose_description",
+"s": "Reclined Pigeon with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Reclined Pigeon (Parivrtta Supta Kapotasana)"
+},
+{
+"i": 612,
+"k": "pose_description",
+"s": "Runner's Lunge with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Runner's Lunge (Parivrtta Anjaneyasana (high))"
+},
+{
+"i": 613,
+"k": "pose_description",
+"s": "Shoelace Pose with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Shoelace Pose (Parivrtta Yin Gomukhasana)"
+},
+{
+"i": 614,
+"k": "pose_description",
+"s": "Side Lunge with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Side Lunge (Parivrtta Parsva Utkatasana)"
+},
+{
+"i": 615,
+"k": "pose_description",
+"s": "Skandasana with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Skandasana (Parivrtta Skandasana)"
+},
+{
+"i": 616,
+"k": "pose_description",
+"s": "Sleeping Swan with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Sleeping Swan (Parivrtta Yin Pigeon)"
+},
+{
+"i": 617,
+"k": "pose_description",
+"s": "Square Pose with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Square Pose (Parivrtta Yin Agnistambhasana)"
+},
+{
+"i": 618,
+"k": "pose_description",
+"s": "Standing Wide Squat with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Standing Wide Squat (Parivrtta Prasarita Malasana)"
+},
+{
+"i": 619,
+"k": "pose_description",
+"s": "A lunge with both hands framing the front foot and the back leg long. The most common transitional shape in vinyasa.",
+"in": "Runner's Lunge (Anjaneyasana (high))"
+},
+{
+"i": 620,
+"k": "pose_description",
+"s": "Runner's Lunge approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Runner's Lunge with Strap (Anjaneyasana (high) (strap))"
+},
+{
+"i": 621,
+"k": "pose_description",
+"s": "The yin version of cow face legs, held long. One of the most effective outer hip releases available.",
+"in": "Shoelace Pose (Yin Gomukhasana)"
+},
+{
+"i": 622,
+"k": "pose_description",
+"s": "A wide lateral lunge with the torso upright. The gentler precursor to skandasana.",
+"in": "Side Lunge (Parsva Utkatasana)"
+},
+{
+"i": 623,
+"k": "pose_description",
+"s": "Side Lunge approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Side Lunge with Strap (Parsva Utkatasana (strap))"
+},
+{
+"i": 624,
+"k": "pose_description",
+"s": "Side-lying leg raises. Simple conditioning for the outer hip and lateral trunk.",
+"in": "Side-Lying Leg Lifts (Anantasana (dynamic))"
+},
+{
+"i": 625,
+"k": "pose_description",
+"s": "Lying on one side and catching the top foot behind. A safe quadriceps stretch with no balance demand.",
+"in": "Side-Lying Quad Stretch (Supta Ardha Bhekasana)"
+},
+{
+"i": 626,
+"k": "pose_description",
+"s": "A deep side lunge with one leg straight and the other bent to a squat. Opens the adductors under load.",
+"in": "Skandasana (Skandasana)"
+},
+{
+"i": 627,
+"k": "pose_description",
+"s": "Skandasana approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Skandasana with Strap (Skandasana (strap))"
+},
+{
+"i": 628,
+"k": "pose_description",
+"s": "The yin form of pigeon, held long and unforced with the torso folding down.",
+"in": "Sleeping Swan (Yin Pigeon)"
+},
+{
+"i": 629,
+"k": "pose_description",
+"s": "Side-lying with the top leg lifted and held at the toe. Named for Vishnu reclining on the cosmic serpent.",
+"in": "Sleeping Vishnu (Anantasana)"
+},
+{
+"i": 630,
+"k": "pose_description",
+"s": "Firelog held in the yin manner for several minutes. Intense and slow rather than muscular.",
+"in": "Square Pose (Yin Agnistambhasana)"
+},
+{
+"i": 631,
+"k": "pose_description",
+"s": "A wide-footed squat with the torso upright, less demanding on ankle range than malasana and better tolerated by stiff hips.",
+"in": "Standing Wide Squat (Prasarita Malasana)"
+},
+{
+"i": 632,
+"k": "pose_description",
+"s": "Standing Wide Squat taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Standing Wide Squat with Block (Prasarita Malasana (block))"
+},
+{
+"i": 633,
+"k": "pose_description",
+"s": "Standing Wide Squat approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Standing Wide Squat with Strap (Prasarita Malasana (strap))"
+},
+{
+"i": 634,
+"k": "pose_description",
+"s": "Seated with one leg lifted over the shoulder and extended while the torso opens.",
+"in": "Sundial Pose (Surya Yantrasana)"
+},
+{
+"i": 635,
+"k": "pose_description",
+"s": "The supine figure-four with the hands drawing the underneath thigh toward the chest.",
+"in": "Thread the Needle Supine (Supta Sucirandhrasana)"
+},
+{
+"i": 636,
+"k": "pose_description",
+"s": "The deep squat held for several minutes rather than seconds. Restores a range most adults have lost.",
+"in": "Yoga Squat Hold (Malasana (long hold))"
+},
+{
+"i": 637,
+"k": "pose_description",
+"s": "Headstand with the forearms crossed rather than the fingers interlaced.",
+"in": "Baddha Hasta Sirsasana (Baddha Hasta Sirsasana)"
+},
+{
+"i": 638,
+"k": "pose_description",
+"s": "Shoulderstand with a belt around the upper arms to hold the shoulder position. An Iyengar solution to collapsing elbows.",
+"in": "Belted Shoulderstand (Sarvangasana (belt))"
+},
+{
+"i": 639,
+"k": "pose_description",
+"s": "Shoulderstand fully supported on a chair with the shoulders on a bolster. The Iyengar restorative inversion.",
+"in": "Chair Shoulderstand (Sarvangasana (chair))"
+},
+{
+"i": 640,
+"k": "pose_description",
+"s": "Handstand facing the wall so the body must find true vertical rather than banana back.",
+"in": "Chest-to-Wall Handstand (Adho Mukha Vrksasana (chest-wall))"
+},
+{
+"i": 641,
+"k": "pose_description",
+"s": "Downward dog on the forearms. The single best preparation for forearm stand and a strong shoulder builder in its own right.",
+"in": "Dolphin Pose (Ardha Pincha Mayurasana)"
+},
+{
+"i": 642,
+"k": "pose_description",
+"s": "Dolphin Pose practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Dolphin Pose at the Wall (Ardha Pincha Mayurasana (wall))"
+},
+{
+"i": 643,
+"k": "pose_description",
+"s": "Dolphin with alternating leg lifts against a wall. The safe drill for building forearm stand.",
+"in": "Dolphin to Forearm Stand Drill (Pincha (prep))"
+},
+{
+"i": 644,
+"k": "pose_description",
+"s": "Dolphin to Forearm Stand Drill practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Dolphin to Forearm Stand Drill at the Wall (Pincha (prep) (wall))"
+},
+{
+"i": 645,
+"k": "pose_description",
+"s": "Pedalling the heels in downward dog to release each calf in turn.",
+"in": "Downward Dog Calf Stretch (Adho Mukha (calf pedal))"
+},
+{
+"i": 646,
+"k": "pose_description",
+"s": "Hands on a wall at hip height with the torso horizontal. Teaches the shoulder action of downward dog without the weight.",
+"in": "Downward Dog at Wall (Adho Mukha Svanasana (wall))"
+},
+{
+"i": 647,
+"k": "pose_description",
+"s": "Downward dog with hands elevated on blocks. Reduces the wrist angle for anyone with wrist pain.",
+"in": "Downward Dog with Blocks (Adho Mukha (blocks))"
+},
+{
+"i": 648,
+"k": "pose_description",
+"s": "An inverted V with hips lifting and heels descending. The most-used shape in modern practice and a mild inversion in its own right.",
+"in": "Downward-Facing Dog (Adho Mukha Svanasana)"
+},
+{
+"i": 649,
+"k": "pose_description",
+"s": "Plough with the knees folding beside the ears. Deeper spinal flexion still, and only appropriate once plough is entirely comfortable.",
+"in": "Ear Pressure Pose (Karnapidasana)"
+},
+{
+"i": 650,
+"k": "pose_description",
+"s": "Ear Pressure Pose practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Ear Pressure Pose at the Wall (Karnapidasana (wall))"
+},
+{
+"i": 651,
+"k": "pose_description",
+"s": "From shoulderstand, the lotus legs folding down toward the chest. A deeply compressed closing shape.",
+"in": "Embryo in Womb (Pindasana)"
+},
+{
+"i": 652,
+"k": "pose_description",
+"s": "Forearm stand entered with the hands clasped. More stable at the base and harder to press up into.",
+"in": "Feathered Peacock (Pincha Mayurasana (bound))"
+},
+{
+"i": 653,
+"k": "pose_description",
+"s": "A full inversion balanced on the forearms. Demands more shoulder flexion than handstand and is often easier to hold once entered.",
+"in": "Forearm Stand (Pincha Mayurasana)"
+},
+{
+"i": 654,
+"k": "pose_description",
+"s": "Forearm Stand practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Forearm Stand at the Wall (Pincha Mayurasana (wall))"
+},
+{
+"i": 655,
+"k": "pose_description",
+"s": "From shoulderstand, the feet lowering to the floor behind the head. Very strong on the cervical spine and never to be entered by dropping.",
+"in": "Halasana Plough (Halasana)"
+},
+{
+"i": 656,
+"k": "pose_description",
+"s": "Halasana Plough practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Halasana Plough at the Wall (Halasana (wall))"
+},
+{
+"i": 657,
+"k": "pose_description",
+"s": "A full inversion on the hands. The most athletically demanding shape in the catalogue and the one that most rewards patient wall work.",
+"in": "Handstand (Adho Mukha Vrksasana)"
+},
+{
+"i": 658,
+"k": "pose_description",
+"s": "Small hops toward vertical from a downward dog base. The safe way to find the balance point before committing to the full inversion.",
+"in": "Handstand Hops (Adho Mukha Vrksasana (prep))"
+},
+{
+"i": 659,
+"k": "pose_description",
+"s": "Handstand Hops practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Handstand Hops at the Wall (Adho Mukha Vrksasana (prep) (wall))"
+},
+{
+"i": 660,
+"k": "pose_description",
+"s": "Handstand with the spine arching into a scorpion shape. Among the most advanced postures practised.",
+"in": "Handstand Scorpion (Taraksvasana)"
+},
+{
+"i": 661,
+"k": "pose_description",
+"s": "Balanced on the forearms and crown with the body vertical. The king of asanas classically, and the shape with the highest injury cost when learned without supervision.",
+"in": "Headstand (Sirsasana)"
+},
+{
+"i": 662,
+"k": "pose_description",
+"s": "Headstand with the legs moving into splits, wide angle or lotus. Only appropriate once the base is unshakeable.",
+"in": "Headstand Leg Variations (Sirsasana (variations))"
+},
+{
+"i": 663,
+"k": "pose_description",
+"s": "Downward dog with the hips supported in wall ropes so the spine can traction. Distinctly Iyengar.",
+"in": "Iyengar Wall Rope Dog (Adho Mukha Svanasana (rope))"
+},
+{
+"i": 664,
+"k": "pose_description",
+"s": "Headstand with the legs folding into lotus. Requires both a solid headstand and a comfortable lotus.",
+"in": "Lotus Headstand (Urdhva Padmasana in Sirsasana)"
+},
+{
+"i": 665,
+"k": "pose_description",
+"s": "Shoulderstand with the legs in lotus and the knees pressing into the hands.",
+"in": "Lotus Shoulderstand (Urdhva Padmasana)"
+},
+{
+"i": 666,
+"k": "pose_description",
+"s": "Headstand with the arms free and palms flat, offering far less base than the bound version.",
+"in": "Mukta Hasta Sirsasana (Mukta Hasta Sirsasana)"
+},
+{
+"i": 667,
+"k": "pose_description",
+"s": "Dolphin Pose with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Dolphin Pose (Eka Pada Ardha Pincha Mayurasana)"
+},
+{
+"i": 668,
+"k": "pose_description",
+"s": "Ear Pressure Pose with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Ear Pressure Pose (Eka Pada Karnapidasana)"
+},
+{
+"i": 669,
+"k": "pose_description",
+"s": "Forearm Stand with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Forearm Stand (Eka Pada Pincha Mayurasana)"
+},
+{
+"i": 670,
+"k": "pose_description",
+"s": "Halasana Plough with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Halasana Plough (Eka Pada Halasana)"
+},
+{
+"i": 671,
+"k": "pose_description",
+"s": "Handstand with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Handstand (Eka Pada Adho Mukha Vrksasana)"
+},
+{
+"i": 672,
+"k": "pose_description",
+"s": "Handstand Hops with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Handstand Hops (Eka Pada Adho Mukha Vrksasana (prep))"
+},
+{
+"i": 673,
+"k": "pose_description",
+"s": "Shoulderstand with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Shoulderstand (Eka Pada Salamba Sarvangasana)"
+},
+{
+"i": 674,
+"k": "pose_description",
+"s": "Three-Legged Dog with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Three-Legged Dog (Eka Pada Eka Pada Adho Mukha Svanasana)"
+},
+{
+"i": 675,
+"k": "pose_description",
+"s": "Tripod Headstand with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Tripod Headstand (Eka Pada Sirsasana II)"
+},
+{
+"i": 676,
+"k": "pose_description",
+"s": "Moving between plough and shoulderstand with control rather than momentum.",
+"in": "Plow to Shoulderstand Flow (Halasana-Sarvangasana)"
+},
+{
+"i": 677,
+"k": "pose_description",
+"s": "The closing shoulderstand of the Ashtanga sequence, held long before plough and ear pressure.",
+"in": "Salamba Sarvangasana Ashtanga (Sarvangasana (Ashtanga))"
+},
+{
+"i": 678,
+"k": "pose_description",
+"s": "Forearm stand with the spine arching and the feet reaching toward the head. Inversion and deep backbend at once.",
+"in": "Scorpion Pose (Vrschikasana)"
+},
+{
+"i": 679,
+"k": "pose_description",
+"s": "Body vertical on the shoulders with the neck supported. Called the queen of asanas in the classical literature, and genuinely risky for the cervical spine when unsupported.",
+"in": "Shoulderstand (Salamba Sarvangasana)"
+},
+{
+"i": 680,
+"k": "pose_description",
+"s": "Shoulderstand with the legs moving into splits, wide angle or lotus.",
+"in": "Shoulderstand Leg Variations (Sarvangasana (variations))"
+},
+{
+"i": 681,
+"k": "pose_description",
+"s": "Shoulderstand with the feet against a wall to control the load on the neck. How the pose should be learned.",
+"in": "Shoulderstand at Wall (Sarvangasana (wall))"
+},
+{
+"i": 682,
+"k": "pose_description",
+"s": "Shoulderstand practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Shoulderstand at the Wall (Salamba Sarvangasana (wall))"
+},
+{
+"i": 683,
+"k": "pose_description",
+"s": "The yin form of plough with a rounded spine held long. Considerable load on the cervical spine and not for beginners.",
+"in": "Snail Pose (Yin Halasana)"
+},
+{
+"i": 684,
+"k": "pose_description",
+"s": "Headstand practised with the wall behind so the legs cannot swing past vertical. The honest way to learn the shape.",
+"in": "Supported Headstand at Wall (Sirsasana (wall))"
+},
+{
+"i": 685,
+"k": "pose_description",
+"s": "Shoulderstand with folded blankets under the shoulders so the cervical curve is preserved. The Iyengar standard, and the only version many teachers will now teach.",
+"in": "Supported Shoulderstand with Blankets (Sarvangasana (blankets))"
+},
+{
+"i": 686,
+"k": "pose_description",
+"s": "Plough with the legs wide and the big toes gripped, then rolling up to a seated fold.",
+"in": "Supta Konasana (Supta Konasana)"
+},
+{
+"i": 687,
+"k": "pose_description",
+"s": "Downward dog with one leg lifting behind. The standard preparation for stepping through to a lunge.",
+"in": "Three-Legged Dog (Eka Pada Adho Mukha Svanasana)"
+},
+{
+"i": 688,
+"k": "pose_description",
+"s": "Three-Legged Dog practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Three-Legged Dog at the Wall (Eka Pada Adho Mukha Svanasana (wall))"
+},
+{
+"i": 689,
+"k": "pose_description",
+"s": "A headstand with the hands forward forming a tripod. The entry point for many arm balance transitions.",
+"in": "Tripod Headstand (Sirsasana II)"
+},
+{
+"i": 690,
+"k": "pose_description",
+"s": "Tripod Headstand practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Tripod Headstand at the Wall (Sirsasana II (wall))"
+},
+{
+"i": 691,
+"k": "pose_description",
+"s": "Scorpion entered from handstand rather than forearm stand, with straight arms throughout.",
+"in": "Vrschikasana II (Vrschikasana II)"
+},
+{
+"i": 692,
+"k": "pose_description",
+"s": "Handstand held with the heels resting on a wall. Where the strength and alignment are actually built.",
+"in": "Wall Handstand Hold (Adho Mukha Vrksasana (wall))"
+},
+{
+"i": 693,
+"k": "pose_description",
+"s": "A supported shoulderstand variant with the legs floating rather than fully vertical.",
+"in": "Waterfall (Viparita Karani (active))"
+},
+{
+"i": 694,
+"k": "pose_description",
+"s": "Alternate nostril breathing extended with counted ratios and retention. The bridge between simple breathing and formal pranayama.",
+"in": "Alternating Nostril Cleansing (Nadi Shodhana (advanced))"
+},
+{
+"i": 695,
+"k": "pose_description",
+"s": "Kapalabhati performed kneeling, the closing practice of the Bikram sequence.",
+"in": "Blowing in Firm (Kapalbhati in Vajrasana)"
+},
+{
+"i": 696,
+"k": "pose_description",
+"s": "Steady unblinking gaze at a candle flame until the eyes water, then holding the afterimage. A concentration practice classed among the cleansing kriyas.",
+"in": "Eye Cleansing Gaze (Trataka)"
+},
+{
+"i": 697,
+"k": "pose_description",
+"s": "Kneeling with arms overhead, pulling the navel in rhythm with a chanted mantra. The central Kundalini kriya.",
+"in": "Sat Kriya (Sat Kriya)"
+},
+{
+"i": 698,
+"k": "pose_description",
+"s": "Rapid forceful exhalations with passive inhalations. Classically a cleansing kriya rather than a pranayama, and strongly heating.",
+"in": "Skull-Shining Breath (Kapalabhati)"
+},
+{
+"i": 699,
+"k": "pose_description",
+"s": "Isolating and rolling the abdominal recti on an empty breath. The most difficult kriya to learn and among the most strongly claimed for digestion.",
+"in": "Stomach Churning (Nauli)"
+},
+{
+"i": 700,
+"k": "pose_description",
+"s": "A cross-legged seat with one heel at the perineum, named for the adepts. Favoured in the hatha texts over lotus for long pranayama sessions.",
+"in": "Accomplished Pose (Siddhasana)"
+},
+{
+"i": 701,
+"k": "pose_description",
+"s": "A shortened rotation of consciousness through the body. Suitable at the end of any practice in place of a longer savasana.",
+"in": "Body Scan (Yoga Nidra (short))"
+},
+{
+"i": 702,
+"k": "pose_description",
+"s": "Full lotus with the arms crossing behind to catch the opposite toes.",
+"in": "Bound Lotus (Baddha Padmasana)"
+},
+{
+"i": 703,
+"k": "pose_description",
+"s": "Holding attention on a single object. The sixth limb, and the discipline that makes dhyana possible.",
+"in": "Concentration Practice (Dharana)"
+},
+{
+"i": 704,
+"k": "pose_description",
+"s": "A simple cross-legged seat with the spine upright. The default meditation posture when lotus is unavailable, which for most adults it is.",
+"in": "Easy Pose (Sukhasana)"
+},
+{
+"i": 705,
+"k": "pose_description",
+"s": "One foot drawn onto the opposite thigh, the other tucked beneath. The usual stepping stone toward full lotus and a stable seat in its own right.",
+"in": "Half Lotus (Ardha Padmasana)"
+},
+{
+"i": 706,
+"k": "pose_description",
+"s": "Both feet drawn onto the opposite thighs. The classical seat of the texts, and one that must come from external hip rotation rather than knee torque.",
+"in": "Lotus Pose (Padmasana)"
+},
+{
+"i": 707,
+"k": "pose_description",
+"s": "Silent or whispered repetition of a mantra, often counted on a mala. The most widely practised meditation technique in the tradition.",
+"in": "Mantra Repetition (Japa)"
+},
+{
+"i": 708,
+"k": "pose_description",
+"s": "Sustained undirected awareness in a stable seat. The seventh limb, and the destination the physical practice is arranged to serve.",
+"in": "Seated Meditation (Dhyana)"
+},
+{
+"i": 709,
+"k": "pose_description",
+"s": "Meditation seated in a chair with the feet flat and spine free of the backrest. The stable seat for most modern practitioners.",
+"in": "Seated Meditation on Chair (Dhyana (chair))"
+},
+{
+"i": 710,
+"k": "pose_description",
+"s": "Deliberately withdrawing attention from sensory input. The fifth limb and the hinge between the outer and inner practices.",
+"in": "Sense Withdrawal (Pratyahara)"
+},
+{
+"i": 711,
+"k": "pose_description",
+"s": "Slow deliberate walking with attention on each footfall. The classical alternative when sitting is not possible.",
+"in": "Walking Meditation (Chankramanam)"
+},
+{
+"i": 712,
+"k": "pose_description",
+"s": "A guided rotation of awareness through the body while lying completely still. Deeply restorative and the most accessible entry to formal meditation.",
+"in": "Yogic Sleep (Yoga Nidra)"
+},
+{
+"i": 713,
+"k": "pose_description",
+"s": "Breathing through one nostril at a time in a fixed cycle. The most widely prescribed balancing pranayama and the safest to self-practise.",
+"in": "Alternate Nostril Breath (Nadi Shodhana)"
+},
+{
+"i": 714,
+"k": "pose_description",
+"s": "Forceful inhalation and exhalation in equal measure. The most heating breath practice in the repertoire and not for beginners.",
+"in": "Bellows Breath (Bhastrika)"
+},
+{
+"i": 715,
+"k": "pose_description",
+"s": "A rapid even-paced diaphragmatic breath from the Kundalini tradition, distinct from kapalabhati in rhythm.",
+"in": "Breath of Fire (Agni Pran)"
+},
+{
+"i": 716,
+"k": "pose_description",
+"s": "Inhaling through a rolled tongue. Explicitly cooling, and the classical answer to excess pitta or summer heat.",
+"in": "Cooling Breath (Sitali)"
+},
+{
+"i": 717,
+"k": "pose_description",
+"s": "Arms at sixty degrees with breath of fire, from the Kundalini repertoire. Strongly heating and named for its intent.",
+"in": "Ego Eradicator (Kundalini Ego Eradicator)"
+},
+{
+"i": 718,
+"k": "pose_description",
+"s": "Inhale and exhale matched to the same count. The simplest way to steady an agitated breath and the entry to all ratio work.",
+"in": "Equal Breath (Sama Vritti)"
+},
+{
+"i": 719,
+"k": "pose_description",
+"s": "Lengthening the exhale to roughly twice the inhale. The most direct breath lever on the parasympathetic system.",
+"in": "Extended Exhale (Visama Vritti)"
+},
+{
+"i": 720,
+"k": "pose_description",
+"s": "Inhaling through clenched teeth with a hiss. The alternative to sitali for those who cannot roll the tongue.",
+"in": "Hissing Breath (Sitkari)"
+},
+{
+"i": 721,
+"k": "pose_description",
+"s": "A soft humming on every exhale with the ears closed. Reliably calming and one of the few practices with reasonable modern evidence for anxiety.",
+"in": "Humming Bee Breath (Bhramari)"
+},
+{
+"i": 722,
+"k": "pose_description",
+"s": "Ujjayi practised seated and still rather than during movement. Where the quality of the breath can actually be examined.",
+"in": "Ocean Breath Seated (Ujjayi (seated))"
+},
+{
+"i": 723,
+"k": "pose_description",
+"s": "The opening breath of the Bikram series, standing with fingers interlaced under the chin.",
+"in": "Standing Deep Breathing (Pranayama (standing))"
+},
+{
+"i": 724,
+"k": "pose_description",
+"s": "Filling the belly, then the ribs, then the upper chest in one long inhale. The first breath practice taught and the foundation for the rest.",
+"in": "Three-Part Breath (Dirga Pranayama)"
+},
+{
+"i": 725,
+"k": "pose_description",
+"s": "A soft constriction at the glottis giving the breath an audible ocean quality. The default breath of vinyasa practice.",
+"in": "Victorious Breath (Ujjayi Pranayama)"
+},
+{
+"i": 726,
+"k": "pose_description",
+"s": "Ujjayi with deliberate breath retention after inhale or exhale. Retention is where pranayama becomes genuinely risky without a teacher.",
+"in": "Victorious Breath with Retention (Ujjayi with Kumbhaka)"
+},
+{
+"i": 727,
+"k": "pose_description",
+"s": "Eight points touching the floor — knees, chest and chin — as the gentler alternative to chaturanga in classical sun salutations.",
+"in": "Knees-Chest-Chin (Ashtanga Namaskara)"
+},
+{
+"i": 728,
+"k": "pose_description",
+"s": "Face-down rest with the arms extended forward. Prescribed traditionally for a strained low back.",
+"in": "Advasana (Advasana)"
+},
+{
+"i": 729,
+"k": "pose_description",
+"s": "Lying on the back curved into a crescent. A long passive stretch of the whole side body and the intercostals.",
+"in": "Banana Pose (Bananasana)"
+},
+{
+"i": 730,
+"k": "pose_description",
+"s": "The banana curve held long on each side, targeting the fascial line from armpit to hip.",
+"in": "Bananasana Side (Yin Bananasana)"
+},
+{
+"i": 731,
+"k": "pose_description",
+"s": "A supported bridge with blocks under both the sacrum and the shoulders.",
+"in": "Block Between Blocks Bridge (Setu Bandha (two blocks))"
+},
+{
+"i": 732,
+"k": "pose_description",
+"s": "Kneeling and folding forward with the forehead down. The universal resting shape and the one to return to whenever a practice becomes too much.",
+"in": "Child's Pose (Balasana)"
+},
+{
+"i": 733,
+"k": "pose_description",
+"s": "Lying with knees bent and feet planted so the low back can release. The alternative to savasana for anyone whose back complains lying flat.",
+"in": "Constructive Rest (Savasana (knees bent))"
+},
+{
+"i": 734,
+"k": "pose_description",
+"s": "Lying completely still on the back. The hardest asana to do properly and the one the whole practice is arranged to make possible.",
+"in": "Corpse Pose (Savasana)"
+},
+{
+"i": 735,
+"k": "pose_description",
+"s": "Final rest with a bolster under the knees and support under the head. The version most low backs actually need.",
+"in": "Corpse with Bolster (Savasana (supported))"
+},
+{
+"i": 736,
+"k": "pose_description",
+"s": "Puppy pose supported on blocks so the heart opening can be held for minutes. Named for the heart centre it is said to work on.",
+"in": "Extended Puppy with Blocks (Anahatasana (supported))"
+},
+{
+"i": 737,
+"k": "pose_description",
+"s": "Final rest guided by voice through progressive release. The bridge between savasana and yoga nidra.",
+"in": "Guided Relaxation (Savasana (guided))"
+},
+{
+"i": 738,
+"k": "pose_description",
+"s": "Reclining lengthways over a bolster so the thoracic spine opens passively. A modern restorative staple.",
+"in": "Heart Bench (Anahatasana (bench))"
+},
+{
+"i": 739,
+"k": "pose_description",
+"s": "Prone rest with the hands clasped behind the neck and the elbows down.",
+"in": "Jyestikasana (Jyestikasana)"
+},
+{
+"i": 740,
+"k": "pose_description",
+"s": "Legs up the wall with a bolster raising the pelvis. Deepens the mild inversion while remaining entirely passive.",
+"in": "Legs Up Wall with Bolster (Viparita Karani (bolster))"
+},
+{
+"i": 741,
+"k": "pose_description",
+"s": "Lying with the legs vertical against a wall. A mild inversion with most of the benefit and almost none of the risk of shoulderstand.",
+"in": "Legs Up the Wall (Viparita Karani)"
+},
+{
+"i": 742,
+"k": "pose_description",
+"s": "Lying with the calves resting on a chair seat. The gentlest way to unload the lumbar spine.",
+"in": "Legs on Chair (Savasana (chair))"
+},
+{
+"i": 743,
+"k": "pose_description",
+"s": "Lying prone with the forehead on stacked forearms. The classical prone rest between backbends.",
+"in": "Makarasana Crocodile (Makarasana)"
+},
+{
+"i": 744,
+"k": "pose_description",
+"s": "The flapping fish pose, prone with one knee drawn up to the side. Traditionally recommended for sleep and digestion.",
+"in": "Matsya Kridasana (Matsya Kridasana)"
+},
+{
+"i": 745,
+"k": "pose_description",
+"s": "Hips high, chest and chin melting toward the floor. A yin shape held for minutes rather than breaths.",
+"in": "Melting Heart (Anahatasana)"
+},
+{
+"i": 746,
+"k": "pose_description",
+"s": "A kneeling surrender pose with the forehead down and arms extended forward, held in stillness.",
+"in": "Pranidhanasana (Pranidhanasana)"
+},
+{
+"i": 747,
+"k": "pose_description",
+"s": "Left-side-lying rest with support between the knees. The recommended final rest after the first trimester.",
+"in": "Prenatal Side-Lying Rest (Parsva Savasana (prenatal))"
+},
+{
+"i": 748,
+"k": "pose_description",
+"s": "Final rest taken face down. Often more settling than the supine version for an anxious nervous system.",
+"in": "Prone Savasana (Adho Savasana)"
+},
+{
+"i": 749,
+"k": "pose_description",
+"s": "Forearms on a chair seat with the chest melting down. A shoulder opener that needs no floor work.",
+"in": "Puppy at Chair (Anahatasana (chair))"
+},
+{
+"i": 750,
+"k": "pose_description",
+"s": "Bound angle taken lying down, usually over a bolster. One of the most reliably calming shapes in the whole restorative repertoire.",
+"in": "Reclined Bound Angle (Supta Baddha Konasana)"
+},
+{
+"i": 751,
+"k": "pose_description",
+"s": "Reclined bound angle with blocks under the thighs so the groin can release without strain.",
+"in": "Reclined Butterfly with Blocks (Supta Baddha Konasana (blocks))"
+},
+{
+"i": 752,
+"k": "pose_description",
+"s": "A supine twist with the knees resting on a bolster so nothing has to be held. Suitable for long holds and for pregnancy.",
+"in": "Reclined Twist with Bolster (Supta Matsyendrasana (bolster))"
+},
+{
+"i": 753,
+"k": "pose_description",
+"s": "Final rest taken on the side with support between the knees. The recommended form in pregnancy and for anyone uncomfortable on the back.",
+"in": "Side-Lying Savasana (Parsva Savasana)"
+},
+{
+"i": 754,
+"k": "pose_description",
+"s": "Reclined bound angle with a strap holding the legs so no muscular effort is needed. The standard long-hold restorative hip shape.",
+"in": "Supine Bound Angle with Strap (Supta Baddha Konasana (strap))"
+},
+{
+"i": 755,
+"k": "pose_description",
+"s": "A long passive backbend over a bolster or backbender. Opens the thoracic spine without any effort.",
+"in": "Supported Backbend over Bolster (Viparita Dandasana (bolster))"
+},
+{
+"i": 756,
+"k": "pose_description",
+"s": "Bridge with a block under the sacrum so the shape is held without effort. A passive chest opener and a mild inversion.",
+"in": "Supported Bridge (Setu Bandha Sarvangasana (block support))"
+},
+{
+"i": 757,
+"k": "pose_description",
+"s": "Child's pose over a bolster so the torso is fully carried. Suitable for very long holds and for pregnancy with the knees wide.",
+"in": "Supported Child's Pose (Balasana (bolster))"
+},
+{
+"i": 758,
+"k": "pose_description",
+"s": "Fish taken over a bolster so the chest opens without any muscular effort. One of the best shapes for a desk-bound upper back.",
+"in": "Supported Fish (Matsyasana (bolster))"
+},
+{
+"i": 759,
+"k": "pose_description",
+"s": "A seated fold resting the torso entirely on a bolster. Quiet and long rather than deep.",
+"in": "Supported Forward Fold (Paschimottanasana (bolster))"
+},
+{
+"i": 760,
+"k": "pose_description",
+"s": "Half frog supported on a bolster so the quadriceps releases without a knee demand.",
+"in": "Supported Half Frog (Ardha Bhekasana (bolster))"
+},
+{
+"i": 761,
+"k": "pose_description",
+"s": "A long passive twist with the knees resting on a bolster to one side.",
+"in": "Supported Twist over Bolster (Jathara Parivartanasana (bolster))"
+},
+{
+"i": 762,
+"k": "pose_description",
+"s": "Legs wide against a wall while lying on the back, gravity doing the work over several minutes.",
+"in": "Wall Splits (Hanumanasana (wall))"
+},
+{
+"i": 763,
+"k": "pose_description",
+"s": "Child's pose with the knees wide so the belly can settle between the thighs. Better tolerated in pregnancy and by larger bodies.",
+"in": "Wide-Knee Child's Pose (Balasana (wide))"
+},
+{
+"i": 764,
+"k": "pose_description",
+"s": "Rotating the ankles in both directions. The first movement in the classical pawanmuktasana joint series.",
+"in": "Ankle Rotations (Gulf Chakra)"
+},
+{
+"i": 765,
+"k": "pose_description",
+"s": "Ankle Rotations approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Ankle Rotations with Strap (Gulf Chakra (strap))"
+},
+{
+"i": 766,
+"k": "pose_description",
+"s": "Kneeling with the tops of the feet flat and the knees lifted. The counterpose to the toe squat.",
+"in": "Ankle Stretch (Yin Vajrasana (ankles))"
+},
+{
+"i": 767,
+"k": "pose_description",
+"s": "Cow Face Arms Only with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Cow Face Arms Only (Baddha Gomukhasana (arms))"
+},
+{
+"i": 768,
+"k": "pose_description",
+"s": "Eagle Arms Only with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Eagle Arms Only (Baddha Garudasana (arms))"
+},
+{
+"i": 769,
+"k": "pose_description",
+"s": "Hero Pose with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Hero Pose (Baddha Virasana)"
+},
+{
+"i": 770,
+"k": "pose_description",
+"s": "Prenatal Cat-Cow with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Prenatal Cat-Cow (Baddha Marjaryasana (prenatal))"
+},
+{
+"i": 771,
+"k": "pose_description",
+"s": "Reverse Prayer with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Reverse Prayer (Baddha Paschim Namaskarasana)"
+},
+{
+"i": 772,
+"k": "pose_description",
+"s": "Seated Cat-Cow with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Seated Cat-Cow (Baddha Upavistha Marjaryasana)"
+},
+{
+"i": 773,
+"k": "pose_description",
+"s": "Seated Side Stretch with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Seated Side Stretch (Baddha Parsva Sukhasana)"
+},
+{
+"i": 774,
+"k": "pose_description",
+"s": "Staff Pose with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Staff Pose (Baddha Dandasana)"
+},
+{
+"i": 775,
+"k": "pose_description",
+"s": "Thunderbolt Pose with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Thunderbolt Pose (Baddha Vajrasana)"
+},
+{
+"i": 776,
+"k": "pose_description",
+"s": "Spinal flexion and extension in a chair. The most useful movement for anyone sitting all day.",
+"in": "Chair Cat-Cow (Marjaryasana (chair))"
+},
+{
+"i": 777,
+"k": "pose_description",
+"s": "The eagle arm wrap performed sitting. Opens the upper back with no balance requirement.",
+"in": "Chair Eagle Arms (Garudasana (chair))"
+},
+{
+"i": 778,
+"k": "pose_description",
+"s": "Seated tall at the front of a chair with the feet grounded. The reference posture for the whole chair sequence.",
+"in": "Chair Mountain (Tadasana (chair))"
+},
+{
+"i": 779,
+"k": "pose_description",
+"s": "A warrior shape built around a chair with one leg extended back. Keeps the leg work available for limited mobility.",
+"in": "Chair Warrior (Virabhadrasana (chair))"
+},
+{
+"i": 780,
+"k": "pose_description",
+"s": "The overhead-and-behind clasp of cow face without the leg position. The most useful shoulder opener for desk-bound bodies.",
+"in": "Cow Face Arms Only (Gomukhasana (arms))"
+},
+{
+"i": 781,
+"k": "pose_description",
+"s": "Cow Face Arms Only approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Cow Face Arms Only with Strap (Gomukhasana (arms) (strap))"
+},
+{
+"i": 782,
+"k": "pose_description",
+"s": "The double arm wrap of eagle taken seated. Opens the rear shoulder and upper back with no balance demand.",
+"in": "Eagle Arms Only (Garudasana (arms))"
+},
+{
+"i": 783,
+"k": "pose_description",
+"s": "Eagle Arms Only approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Eagle Arms Only with Strap (Garudasana (arms) (strap))"
+},
+{
+"i": 784,
+"k": "pose_description",
+"s": "Moving in and out of the cow face arm bind with the breath rather than holding it.",
+"in": "Gomukhasana Dynamic (Gomukhasana (dynamic))"
+},
+{
+"i": 785,
+"k": "pose_description",
+"s": "Kneeling with the hips settling between the heels. A classical meditation seat that opens the quadriceps and ankles over time.",
+"in": "Hero Pose (Virasana)"
+},
+{
+"i": 786,
+"k": "pose_description",
+"s": "Hero Pose taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Hero Pose with Block (Virasana (block))"
+},
+{
+"i": 787,
+"k": "pose_description",
+"s": "Hero Pose approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Hero Pose with Strap (Virasana (strap))"
+},
+{
+"i": 788,
+"k": "pose_description",
+"s": "Slow circles and half circles of the head. Releases the cervical tension that undermines every seated practice.",
+"in": "Neck Rolls (Griva Sanchalana)"
+},
+{
+"i": 789,
+"k": "pose_description",
+"s": "Neck Rolls approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Neck Rolls with Strap (Griva Sanchalana (strap))"
+},
+{
+"i": 790,
+"k": "pose_description",
+"s": "Cat-cow on all fours during pregnancy, favouring the neutral and cow phases. Relieves lumbar load.",
+"in": "Prenatal Cat-Cow (Marjaryasana (prenatal))"
+},
+{
+"i": 791,
+"k": "pose_description",
+"s": "Palms pressed together behind the back between the shoulder blades. Demands wrist and shoulder range most people lack.",
+"in": "Reverse Prayer (Paschim Namaskarasana)"
+},
+{
+"i": 792,
+"k": "pose_description",
+"s": "Reverse Prayer approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Reverse Prayer with Strap (Paschim Namaskarasana (strap))"
+},
+{
+"i": 793,
+"k": "pose_description",
+"s": "Cow Face Arms Only with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Cow Face Arms Only (Parivrtta Gomukhasana (arms))"
+},
+{
+"i": 794,
+"k": "pose_description",
+"s": "Eagle Arms Only with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Eagle Arms Only (Parivrtta Garudasana (arms))"
+},
+{
+"i": 795,
+"k": "pose_description",
+"s": "Hero Pose with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Hero Pose (Parivrtta Virasana)"
+},
+{
+"i": 796,
+"k": "pose_description",
+"s": "Prenatal Cat-Cow with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Prenatal Cat-Cow (Parivrtta Marjaryasana (prenatal))"
+},
+{
+"i": 797,
+"k": "pose_description",
+"s": "Reverse Prayer with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Reverse Prayer (Parivrtta Paschim Namaskarasana)"
+}
+]

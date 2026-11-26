@@ -1,0 +1,1586 @@
+[
+{
+"i": 798,
+"k": "pose_description",
+"s": "Seated Cat-Cow with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Seated Cat-Cow (Parivrtta Upavistha Marjaryasana)"
+},
+{
+"i": 799,
+"k": "pose_description",
+"s": "Seated Side Stretch with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Seated Side Stretch (Parivrtta Parsva Sukhasana)"
+},
+{
+"i": 800,
+"k": "pose_description",
+"s": "Staff Pose with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Staff Pose (Parivrtta Dandasana)"
+},
+{
+"i": 801,
+"k": "pose_description",
+"s": "Thunderbolt Pose with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Thunderbolt Pose (Parivrtta Vajrasana)"
+},
+{
+"i": 802,
+"k": "pose_description",
+"s": "Spinal flexion and extension performed sitting. The version that works for chairs, for pregnancy and for anyone who cannot kneel.",
+"in": "Seated Cat-Cow (Upavistha Marjaryasana)"
+},
+{
+"i": 803,
+"k": "pose_description",
+"s": "Seated Cat-Cow taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Seated Cat-Cow with Block (Upavistha Marjaryasana (block))"
+},
+{
+"i": 804,
+"k": "pose_description",
+"s": "Seated Cat-Cow approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Seated Cat-Cow with Strap (Upavistha Marjaryasana (strap))"
+},
+{
+"i": 805,
+"k": "pose_description",
+"s": "Ear drawing toward the shoulder with the opposite hand anchoring. Directly targets the upper trapezius.",
+"in": "Seated Neck Stretch (Griva Asana)"
+},
+{
+"i": 806,
+"k": "pose_description",
+"s": "A cross-legged seat with one arm reaching overhead and the torso curving sideways. The gentlest side-body opener in the catalogue.",
+"in": "Seated Side Stretch (Parsva Sukhasana)"
+},
+{
+"i": 807,
+"k": "pose_description",
+"s": "Seated Side Stretch taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Seated Side Stretch with Block (Parsva Sukhasana (block))"
+},
+{
+"i": 808,
+"k": "pose_description",
+"s": "Seated Side Stretch approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Seated Side Stretch with Strap (Parsva Sukhasana (strap))"
+},
+{
+"i": 809,
+"k": "pose_description",
+"s": "Taking a strap in wide hands from front to back overhead. The safest way to restore shoulder range.",
+"in": "Shoulder Flossing with Strap (Skandhasana (strap))"
+},
+{
+"i": 810,
+"k": "pose_description",
+"s": "Rapid seated spinal flexion and extension holding the ankles, used to warm the spine in Kundalini practice.",
+"in": "Spinal Flex (Kundalini Spinal Flex)"
+},
+{
+"i": 811,
+"k": "pose_description",
+"s": "Seated with legs extended and spine vertical. The seated counterpart to tadasana and the reference for every seated forward bend.",
+"in": "Staff Pose (Dandasana)"
+},
+{
+"i": 812,
+"k": "pose_description",
+"s": "Staff Pose taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Staff Pose with Block (Dandasana (block))"
+},
+{
+"i": 813,
+"k": "pose_description",
+"s": "Staff Pose approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Staff Pose with Strap (Dandasana (strap))"
+},
+{
+"i": 814,
+"k": "pose_description",
+"s": "Kneeling with the buttocks on the heels. Traditionally the one asana said to be safe immediately after eating, which is why it carries its digestive reputation.",
+"in": "Thunderbolt Pose (Vajrasana)"
+},
+{
+"i": 815,
+"k": "pose_description",
+"s": "Thunderbolt Pose taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Thunderbolt Pose with Block (Vajrasana (block))"
+},
+{
+"i": 816,
+"k": "pose_description",
+"s": "Thunderbolt Pose approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Thunderbolt Pose with Strap (Vajrasana (strap))"
+},
+{
+"i": 817,
+"k": "pose_description",
+"s": "Kneeling on tucked toes. Extremely intense on the plantar fascia and held for minutes in yin practice.",
+"in": "Toe Squat (Yin Vajrasana (toes))"
+},
+{
+"i": 818,
+"k": "pose_description",
+"s": "A seated shape with one leg behind the head and the torso folding over the other.",
+"in": "Viranchyasana (Viranchyasana)"
+},
+{
+"i": 819,
+"k": "pose_description",
+"s": "Circling and flexing the wrists. Essential preparation before any weight-bearing on the hands.",
+"in": "Wrist Circles (Manibandha Chakra)"
+},
+{
+"i": 820,
+"k": "pose_description",
+"s": "Wrist Circles approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Wrist Circles with Strap (Manibandha Chakra (strap))"
+},
+{
+"i": 821,
+"k": "pose_description",
+"s": "A lunge with the arms drawn as if pulling a bow, held long. Builds determination as much as leg endurance.",
+"in": "Archer Pose (Kundalini Archer)"
+},
+{
+"i": 822,
+"k": "pose_description",
+"s": "Full circles of the arms in both directions. Warms the shoulder joint through its whole range.",
+"in": "Arm Circles (Bahu Chakra)"
+},
+{
+"i": 823,
+"k": "pose_description",
+"s": "The three-part Bikram chair sequence: arms forward, heels lifted, then sinking low with knees together.",
+"in": "Awkward Pose (Utkatasana (Bikram))"
+},
+{
+"i": 824,
+"k": "pose_description",
+"s": "Side angle with the arms binding beneath the front thigh. Adds a deep shoulder opening to an already strong leg shape.",
+"in": "Bound Extended Side Angle (Baddha Utthita Parsvakonasana)"
+},
+{
+"i": 825,
+"k": "pose_description",
+"s": "The transition from a bound side angle up into bird of paradise, practised as one movement.",
+"in": "Bound Extended Side Angle to Bird (Baddha Parsvakonasana flow)"
+},
+{
+"i": 826,
+"k": "pose_description",
+"s": "Gate Pose with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Gate Pose (Baddha Parighasana)"
+},
+{
+"i": 827,
+"k": "pose_description",
+"s": "Goddess Pose with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Goddess Pose (Baddha Utkata Konasana)"
+},
+{
+"i": 828,
+"k": "pose_description",
+"s": "High Lunge with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound High Lunge (Baddha Ashta Chandrasana)"
+},
+{
+"i": 829,
+"k": "pose_description",
+"s": "Humble Warrior with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Humble Warrior (Baddha Baddha Virabhadrasana)"
+},
+{
+"i": 830,
+"k": "pose_description",
+"s": "Reverse Warrior with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Reverse Warrior (Baddha Viparita Virabhadrasana)"
+},
+{
+"i": 831,
+"k": "pose_description",
+"s": "Squat and Rise with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Squat and Rise (Baddha Utkatasana (dynamic))"
+},
+{
+"i": 832,
+"k": "pose_description",
+"s": "Standing Cat-Cow with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Standing Cat-Cow (Baddha Marjaryasana (standing))"
+},
+{
+"i": 833,
+"k": "pose_description",
+"s": "Standing Side Bend with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Standing Side Bend (Baddha Ardha Chandrasana (standing))"
+},
+{
+"i": 834,
+"k": "pose_description",
+"s": "Triangle with a bind wrapping behind the back. Requires the shoulders to open before the pose can be entered at all.",
+"in": "Bound Triangle (Baddha Trikonasana)"
+},
+{
+"i": 835,
+"k": "pose_description",
+"s": "Warrior I with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Warrior I (Baddha Virabhadrasana I)"
+},
+{
+"i": 836,
+"k": "pose_description",
+"s": "Warrior II with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Warrior II (Baddha Virabhadrasana II)"
+},
+{
+"i": 837,
+"k": "pose_description",
+"s": "Warrior II Side Bend with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Warrior II Side Bend (Baddha Utthita Parsvakonasana (extended))"
+},
+{
+"i": 838,
+"k": "pose_description",
+"s": "Moving between tabletop, cat-cow and downward dog. The standard opening flow of most classes.",
+"in": "Cat-Cow to Downward Dog Flow (Marjaryasana-Adho Mukha)"
+},
+{
+"i": 839,
+"k": "pose_description",
+"s": "Knees bent deep with weight in the heels and arms lifting overhead. Heats the body quickly and is the classic kapha-reducing standing shape.",
+"in": "Chair Pose (Utkatasana)"
+},
+{
+"i": 840,
+"k": "pose_description",
+"s": "High lunge with hands on blocks either side. Stabilises the shape while the legs build endurance.",
+"in": "Crescent with Blocks (Ashta Chandrasana (blocks))"
+},
+{
+"i": 841,
+"k": "pose_description",
+"s": "Front forearm on thigh or hand to floor, top arm reaching over the ear in one long diagonal from back heel to fingertips.",
+"in": "Extended Side Angle (Utthita Parsvakonasana)"
+},
+{
+"i": 842,
+"k": "pose_description",
+"s": "Extended Side Angle practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Extended Side Angle at the Wall (Utthita Parsvakonasana (wall))"
+},
+{
+"i": 843,
+"k": "pose_description",
+"s": "Extended Side Angle taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Extended Side Angle with Block (Utthita Parsvakonasana (block))"
+},
+{
+"i": 844,
+"k": "pose_description",
+"s": "Feet wide, arms wide, body forming a five-pointed star. Used as a transition and a chest opener between wider standing shapes.",
+"in": "Five-Pointed Star (Utthita Tadasana)"
+},
+{
+"i": 845,
+"k": "pose_description",
+"s": "Repeated deep squats on the toes with the heels together. One of the most strongly heating practices in the Kundalini set.",
+"in": "Frog Squats (Kundalini Frog Pose)"
+},
+{
+"i": 846,
+"k": "pose_description",
+"s": "Kneeling on one leg with the other extended sideways and the torso bending over it. Opens the side body without loading the hamstrings.",
+"in": "Gate Pose (Parighasana)"
+},
+{
+"i": 847,
+"k": "pose_description",
+"s": "Gate Pose practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Gate Pose at the Wall (Parighasana (wall))"
+},
+{
+"i": 848,
+"k": "pose_description",
+"s": "Gate Pose taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Gate Pose with Block (Parighasana (block))"
+},
+{
+"i": 849,
+"k": "pose_description",
+"s": "Feet wide and turned out, knees bent to a wide squat, arms in cactus. Builds heat fast and opens the hips at the same time.",
+"in": "Goddess Pose (Utkata Konasana)"
+},
+{
+"i": 850,
+"k": "pose_description",
+"s": "Goddess Pose practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Goddess Pose at the Wall (Utkata Konasana (wall))"
+},
+{
+"i": 851,
+"k": "pose_description",
+"s": "Goddess Pose taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Goddess Pose with Block (Utkata Konasana (block))"
+},
+{
+"i": 852,
+"k": "pose_description",
+"s": "The Bikram half moon, a standing side bend and back bend followed by a full forward fold.",
+"in": "Half Moon with Hands to Feet (Ardha Chandrasana (Bikram))"
+},
+{
+"i": 853,
+"k": "pose_description",
+"s": "Back heel lifted, front knee stacked over the ankle, torso upright. Strong in the legs and demanding on balance in a way low lunge is not.",
+"in": "High Lunge (Ashta Chandrasana)"
+},
+{
+"i": 854,
+"k": "pose_description",
+"s": "High Lunge practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "High Lunge at the Wall (Ashta Chandrasana (wall))"
+},
+{
+"i": 855,
+"k": "pose_description",
+"s": "High Lunge taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "High Lunge with Block (Ashta Chandrasana (block))"
+},
+{
+"i": 856,
+"k": "pose_description",
+"s": "Circling the pelvis in both directions with the feet planted. Mobilises the hip before deeper opening.",
+"in": "Hip Circles (Kati Chakra)"
+},
+{
+"i": 857,
+"k": "pose_description",
+"s": "Warrior I with fingers interlaced behind the back and the torso folding inside the front leg. A shoulder opener disguised as a standing pose.",
+"in": "Humble Warrior (Baddha Virabhadrasana)"
+},
+{
+"i": 858,
+"k": "pose_description",
+"s": "Humble Warrior practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Humble Warrior at the Wall (Baddha Virabhadrasana (wall))"
+},
+{
+"i": 859,
+"k": "pose_description",
+"s": "Humble Warrior taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Humble Warrior with Block (Baddha Virabhadrasana (block))"
+},
+{
+"i": 860,
+"k": "pose_description",
+"s": "Gentle circling of the knees with the hands resting on them. From the classical joint-freeing series.",
+"in": "Knee Circles (Janu Chakra)"
+},
+{
+"i": 861,
+"k": "pose_description",
+"s": "The reference standing shape. Feet rooted, crown lifting, arms at the sides — every other standing asana is measured against the alignment learned here.",
+"in": "Mountain Pose (Tadasana)"
+},
+{
+"i": 862,
+"k": "pose_description",
+"s": "Extended Side Angle with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Extended Side Angle (Eka Pada Utthita Parsvakonasana)"
+},
+{
+"i": 863,
+"k": "pose_description",
+"s": "Gate Pose with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Gate Pose (Eka Pada Parighasana)"
+},
+{
+"i": 864,
+"k": "pose_description",
+"s": "Goddess Pose with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Goddess Pose (Eka Pada Utkata Konasana)"
+},
+{
+"i": 865,
+"k": "pose_description",
+"s": "High Lunge with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged High Lunge (Eka Pada Ashta Chandrasana)"
+},
+{
+"i": 866,
+"k": "pose_description",
+"s": "Humble Warrior with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Humble Warrior (Eka Pada Baddha Virabhadrasana)"
+},
+{
+"i": 867,
+"k": "pose_description",
+"s": "Reverse Warrior with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Reverse Warrior (Eka Pada Viparita Virabhadrasana)"
+},
+{
+"i": 868,
+"k": "pose_description",
+"s": "Standing Side Bend with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Standing Side Bend (Eka Pada Ardha Chandrasana (standing))"
+},
+{
+"i": 869,
+"k": "pose_description",
+"s": "Triangle Pose with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Triangle Pose (Eka Pada Trikonasana)"
+},
+{
+"i": 870,
+"k": "pose_description",
+"s": "Warrior I with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Warrior I (Eka Pada Virabhadrasana I)"
+},
+{
+"i": 871,
+"k": "pose_description",
+"s": "Warrior II with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Warrior II (Eka Pada Virabhadrasana II)"
+},
+{
+"i": 872,
+"k": "pose_description",
+"s": "Warrior II Side Bend with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Warrior II Side Bend (Eka Pada Utthita Parsvakonasana (extended))"
+},
+{
+"i": 873,
+"k": "pose_description",
+"s": "A wide-legged bend supported at a wall or chair. Builds leg endurance for labour without balance risk.",
+"in": "Prenatal Supported Goddess (Utkata Konasana (supported))"
+},
+{
+"i": 874,
+"k": "pose_description",
+"s": "Warrior II with the front arm sweeping overhead and the torso arching back. A side-body opener rather than a true backbend.",
+"in": "Reverse Warrior (Viparita Virabhadrasana)"
+},
+{
+"i": 875,
+"k": "pose_description",
+"s": "Reverse Warrior practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Reverse Warrior at the Wall (Viparita Virabhadrasana (wall))"
+},
+{
+"i": 876,
+"k": "pose_description",
+"s": "Reverse Warrior taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Reverse Warrior with Block (Viparita Virabhadrasana (block))"
+},
+{
+"i": 877,
+"k": "pose_description",
+"s": "Extended Side Angle with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Extended Side Angle (Parivrtta Utthita Parsvakonasana)"
+},
+{
+"i": 878,
+"k": "pose_description",
+"s": "Five-Pointed Star with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Five-Pointed Star (Parivrtta Utthita Tadasana)"
+},
+{
+"i": 879,
+"k": "pose_description",
+"s": "Gate Pose with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Gate Pose (Parivrtta Parighasana)"
+},
+{
+"i": 880,
+"k": "pose_description",
+"s": "Goddess Pose with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Goddess Pose (Parivrtta Utkata Konasana)"
+},
+{
+"i": 881,
+"k": "pose_description",
+"s": "Humble Warrior with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Humble Warrior (Parivrtta Baddha Virabhadrasana)"
+},
+{
+"i": 882,
+"k": "pose_description",
+"s": "Reverse Warrior with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Reverse Warrior (Parivrtta Viparita Virabhadrasana)"
+},
+{
+"i": 883,
+"k": "pose_description",
+"s": "Standing Cat-Cow with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Standing Cat-Cow (Parivrtta Marjaryasana (standing))"
+},
+{
+"i": 884,
+"k": "pose_description",
+"s": "Standing Side Bend with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Standing Side Bend (Parivrtta Ardha Chandrasana (standing))"
+},
+{
+"i": 885,
+"k": "pose_description",
+"s": "Warrior I with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Warrior I (Parivrtta Virabhadrasana I)"
+},
+{
+"i": 886,
+"k": "pose_description",
+"s": "Warrior II with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Warrior II (Parivrtta Virabhadrasana II)"
+},
+{
+"i": 887,
+"k": "pose_description",
+"s": "Warrior II Side Bend with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Warrior II Side Bend (Parivrtta Utthita Parsvakonasana (extended))"
+},
+{
+"i": 888,
+"k": "pose_description",
+"s": "Lifting and releasing the shoulders with the breath. Releases the trapezius before any overhead work.",
+"in": "Shoulder Shrugs (Skandha Chakra)"
+},
+{
+"i": 889,
+"k": "pose_description",
+"s": "Repeated lowering and rising from a squat with the breath. Builds heat quickly and is strongly kapha-reducing.",
+"in": "Squat and Rise (Utkatasana (dynamic))"
+},
+{
+"i": 890,
+"k": "pose_description",
+"s": "Spinal flexion and extension standing with hands on the thighs. Warms the spine when the floor is unavailable.",
+"in": "Standing Cat-Cow (Marjaryasana (standing))"
+},
+{
+"i": 891,
+"k": "pose_description",
+"s": "Small forward and back tilts of the pelvis standing. The simplest way to find lumbar movement.",
+"in": "Standing Pelvic Tilts (Kati Chakrasana)"
+},
+{
+"i": 892,
+"k": "pose_description",
+"s": "Feet together, arms overhead, torso curving to one side. The simplest way to open the intercostals and lengthen the side waist.",
+"in": "Standing Side Bend (Ardha Chandrasana (standing))"
+},
+{
+"i": 893,
+"k": "pose_description",
+"s": "Standing Side Bend practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Standing Side Bend at the Wall (Ardha Chandrasana (standing) (wall))"
+},
+{
+"i": 894,
+"k": "pose_description",
+"s": "Standing Side Bend taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Standing Side Bend with Block (Ardha Chandrasana (standing) (block))"
+},
+{
+"i": 895,
+"k": "pose_description",
+"s": "Legs straight and wide, torso hinging sideways over the front leg. Lengthens the side body while the hamstrings work eccentrically.",
+"in": "Triangle Pose (Trikonasana)"
+},
+{
+"i": 896,
+"k": "pose_description",
+"s": "Triangle Pose practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Triangle Pose at the Wall (Trikonasana (wall))"
+},
+{
+"i": 897,
+"k": "pose_description",
+"s": "Triangle with the lower hand on a block so the chest can stay open rather than rotating down.",
+"in": "Triangle with Block (Trikonasana (block))"
+},
+{
+"i": 898,
+"k": "pose_description",
+"s": "Tadasana with the arms sweeping overhead. Opens the front body and sets the first inhale of a sun salutation.",
+"in": "Upward Salute (Urdhva Hastasana)"
+},
+{
+"i": 899,
+"k": "pose_description",
+"s": "The Ashtanga chair pose entered from a jump and held for five breaths.",
+"in": "Utkatasana Ashtanga (Utkatasana (Ashtanga))"
+},
+{
+"i": 900,
+"k": "pose_description",
+"s": "The Ashtanga triangle with the hand gripping the big toe rather than resting on the shin.",
+"in": "Utthita Trikonasana A (Trikonasana A)"
+},
+{
+"i": 901,
+"k": "pose_description",
+"s": "The paired warrior sequence of the Ashtanga series moving directly from the first to the second.",
+"in": "Virabhadrasana A and B Flow (Virabhadrasana (Ashtanga))"
+},
+{
+"i": 902,
+"k": "pose_description",
+"s": "Chair pose with the back sliding down a wall. Isolates the quadriceps without demanding balance.",
+"in": "Wall Chair (Utkatasana (wall))"
+},
+{
+"i": 903,
+"k": "pose_description",
+"s": "Hands on a wall with the torso folding to horizontal. Teaches the shape without any weight on the wrists.",
+"in": "Wall Downward Dog (Adho Mukha (wall))"
+},
+{
+"i": 904,
+"k": "pose_description",
+"s": "The wall-supported chair held for minutes. Pure quadriceps endurance and strongly kapha-reducing.",
+"in": "Wall Sit Yoga (Utkatasana (wall long hold))"
+},
+{
+"i": 905,
+"k": "pose_description",
+"s": "Front knee bent, back foot angled in, hips and chest turning forward with arms overhead. Squares the pelvis in a way the other warriors do not.",
+"in": "Warrior I (Virabhadrasana I)"
+},
+{
+"i": 906,
+"k": "pose_description",
+"s": "Warrior I with the back heel against a wall so the alignment can be felt rather than guessed.",
+"in": "Warrior I at Wall (Virabhadrasana I (wall))"
+},
+{
+"i": 907,
+"k": "pose_description",
+"s": "Warrior I taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Warrior I with Block (Virabhadrasana I (block))"
+},
+{
+"i": 908,
+"k": "pose_description",
+"s": "Hips open to the side, arms extended front and back, gaze over the front hand. Builds the leg endurance the standing sequence is named for.",
+"in": "Warrior II (Virabhadrasana II)"
+},
+{
+"i": 909,
+"k": "pose_description",
+"s": "Side angle with the bottom hand reaching to the floor outside the front foot rather than resting on the thigh.",
+"in": "Warrior II Side Bend (Utthita Parsvakonasana (extended))"
+},
+{
+"i": 910,
+"k": "pose_description",
+"s": "Warrior II Side Bend practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Warrior II Side Bend at the Wall (Utthita Parsvakonasana (extended) (wall))"
+},
+{
+"i": 911,
+"k": "pose_description",
+"s": "Warrior II Side Bend taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Warrior II Side Bend with Block (Utthita Parsvakonasana (extended) (block))"
+},
+{
+"i": 912,
+"k": "pose_description",
+"s": "Warrior II practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Warrior II at the Wall (Virabhadrasana II (wall))"
+},
+{
+"i": 913,
+"k": "pose_description",
+"s": "Cycling between warrior II, reverse warrior and side angle. The standard standing flow of a level-one class.",
+"in": "Warrior II to Reverse Flow (Virabhadrasana II (flow))"
+},
+{
+"i": 914,
+"k": "pose_description",
+"s": "Warrior II with a block under the front thigh to build endurance without collapsing.",
+"in": "Warrior II with Block (Virabhadrasana II (block))"
+},
+{
+"i": 915,
+"k": "pose_description",
+"s": "A squatting chopping motion with clasped hands. Heating, dynamic and strongly kapha-reducing.",
+"in": "Wood Chopping (Kashtha Takshanasana)"
+},
+{
+"i": 916,
+"k": "pose_description",
+"s": "Standing half lotus with a bind behind the back and a fold over the standing leg.",
+"in": "Ardha Baddha Padmottanasana Ashtanga (Ardha Baddha Padmottanasana (Ashtanga))"
+},
+{
+"i": 917,
+"k": "pose_description",
+"s": "A single-leg T shape with arms and lifted leg forming one horizontal line, held briefly and intensely.",
+"in": "Balancing Stick (Tuladandasana)"
+},
+{
+"i": 918,
+"k": "pose_description",
+"s": "Standing from a bound side angle and extending the bound leg straight. Modern in name and demanding on hamstring and balance together.",
+"in": "Bird of Paradise (Svarga Dvijasana)"
+},
+{
+"i": 919,
+"k": "pose_description",
+"s": "Half moon with the top foot caught behind in a sugarcane bind. Balance and a quadriceps stretch at once.",
+"in": "Bound Ardha Chandrasana (Baddha Ardha Chandrasana)"
+},
+{
+"i": 920,
+"k": "pose_description",
+"s": "Dancer Pose with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Dancer Pose (Baddha Natarajasana)"
+},
+{
+"i": 921,
+"k": "pose_description",
+"s": "Eagle Pose with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Eagle Pose (Baddha Garudasana)"
+},
+{
+"i": 922,
+"k": "pose_description",
+"s": "Extended Hand-to-Big-Toe with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Extended Hand-to-Big-Toe (Baddha Utthita Hasta Padangusthasana)"
+},
+{
+"i": 923,
+"k": "pose_description",
+"s": "Half moon with a bind wrapping the standing thigh.",
+"in": "Bound Half Moon (Baddha Ardha Chandrasana II)"
+},
+{
+"i": 924,
+"k": "pose_description",
+"s": "Standing Figure Four with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Standing Figure Four (Baddha Utkatasana (figure four))"
+},
+{
+"i": 925,
+"k": "pose_description",
+"s": "Standing Knee Hug with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Standing Knee Hug (Baddha Utthita Apanasana)"
+},
+{
+"i": 926,
+"k": "pose_description",
+"s": "Standing Quad Stretch with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Standing Quad Stretch (Baddha Utthita Natarajasana (prep))"
+},
+{
+"i": 927,
+"k": "pose_description",
+"s": "Standing Split with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Standing Split (Baddha Urdhva Prasarita Eka Padasana)"
+},
+{
+"i": 928,
+"k": "pose_description",
+"s": "Sugarcane Pose with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Sugarcane Pose (Baddha Ardha Chandra Chapasana)"
+},
+{
+"i": 929,
+"k": "pose_description",
+"s": "Toe Stand with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Toe Stand (Baddha Padangusthasana (balance))"
+},
+{
+"i": 930,
+"k": "pose_description",
+"s": "Tree Pose with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Tree Pose (Baddha Vrksasana)"
+},
+{
+"i": 931,
+"k": "pose_description",
+"s": "Tree with Hands Overhead with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Tree with Hands Overhead (Baddha Vrksasana (arms up))"
+},
+{
+"i": 932,
+"k": "pose_description",
+"s": "Warrior III with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Warrior III (Baddha Virabhadrasana III)"
+},
+{
+"i": 933,
+"k": "pose_description",
+"s": "Chair pose with the heels lifted. Adds a strong calf and balance demand to an already heating shape.",
+"in": "Chair Pose on Toes (Utkatasana (toes))"
+},
+{
+"i": 934,
+"k": "pose_description",
+"s": "Standing on one leg while the other is caught behind and lifted into a backbend. Balance, backbend and shoulder opening at once.",
+"in": "Dancer Pose (Natarajasana)"
+},
+{
+"i": 935,
+"k": "pose_description",
+"s": "Dancer Pose practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Dancer Pose at the Wall (Natarajasana (wall))"
+},
+{
+"i": 936,
+"k": "pose_description",
+"s": "Dancer Pose taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Dancer Pose with Block (Natarajasana (block))"
+},
+{
+"i": 937,
+"k": "pose_description",
+"s": "Standing on one leg with the other hooked behind the head. Among the hardest standing balances in the tradition.",
+"in": "Durvasasana (Durvasasana)"
+},
+{
+"i": 938,
+"k": "pose_description",
+"s": "The Bikram eagle, sinking deeper in the legs than the vinyasa version usually asks.",
+"in": "Eagle Bikram (Garurasana (Bikram))"
+},
+{
+"i": 939,
+"k": "pose_description",
+"s": "Arms and legs each double-wrapped while the hips sink. Compresses and then floods the joints, and demands focus to hold.",
+"in": "Eagle Pose (Garudasana)"
+},
+{
+"i": 940,
+"k": "pose_description",
+"s": "Eagle Pose practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Eagle Pose at the Wall (Garudasana (wall))"
+},
+{
+"i": 941,
+"k": "pose_description",
+"s": "Eagle Pose taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Eagle Pose with Block (Garudasana (block))"
+},
+{
+"i": 942,
+"k": "pose_description",
+"s": "Standing on one leg with the other extended and held at the toe. Exposes any hamstring shortness immediately.",
+"in": "Extended Hand-to-Big-Toe (Utthita Hasta Padangusthasana)"
+},
+{
+"i": 943,
+"k": "pose_description",
+"s": "Extended Hand-to-Big-Toe practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Extended Hand-to-Big-Toe at the Wall (Utthita Hasta Padangusthasana (wall))"
+},
+{
+"i": 944,
+"k": "pose_description",
+"s": "Extended Hand-to-Big-Toe taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Extended Hand-to-Big-Toe with Block (Utthita Hasta Padangusthasana (block))"
+},
+{
+"i": 945,
+"k": "pose_description",
+"s": "Standing on one leg in half lotus with the foot bound and the torso folding forward.",
+"in": "Half Bound Standing Forward Fold (Ardha Baddha Padmottanasana)"
+},
+{
+"i": 946,
+"k": "pose_description",
+"s": "Balanced on one leg and one hand with the top leg and arm reaching apart. Opens the hip while testing lateral stability.",
+"in": "Half Moon Pose (Ardha Chandrasana)"
+},
+{
+"i": 947,
+"k": "pose_description",
+"s": "Half Moon Pose practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Half Moon Pose at the Wall (Ardha Chandrasana (wall))"
+},
+{
+"i": 948,
+"k": "pose_description",
+"s": "Half Moon Pose taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Half Moon Pose with Block (Ardha Chandrasana (block))"
+},
+{
+"i": 949,
+"k": "pose_description",
+"s": "The full dancer with both hands catching the raised foot overhead and the spine deeply arched.",
+"in": "Natarajasana Full (Natarajasana (full))"
+},
+{
+"i": 950,
+"k": "pose_description",
+"s": "Dancer Pose with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Dancer Pose (Parivrtta Natarajasana)"
+},
+{
+"i": 951,
+"k": "pose_description",
+"s": "Eagle Pose with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Eagle Pose (Parivrtta Garudasana)"
+},
+{
+"i": 952,
+"k": "pose_description",
+"s": "Extended Hand-to-Big-Toe with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Extended Hand-to-Big-Toe (Parivrtta Utthita Hasta Padangusthasana)"
+},
+{
+"i": 953,
+"k": "pose_description",
+"s": "Half moon with the torso rotated toward the standing leg. One of the harder standing balances because the twist removes the visual reference.",
+"in": "Revolved Half Moon (Parivrtta Ardha Chandrasana)"
+},
+{
+"i": 954,
+"k": "pose_description",
+"s": "Extended hand-to-toe with the torso rotating away. Balance without a visual reference on a straight leg.",
+"in": "Revolved Hand-to-Big-Toe (Parivrtta Hasta Padangusthasana)"
+},
+{
+"i": 955,
+"k": "pose_description",
+"s": "Standing Split with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Standing Split (Parivrtta Urdhva Prasarita Eka Padasana)"
+},
+{
+"i": 956,
+"k": "pose_description",
+"s": "Sugarcane Pose with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Sugarcane Pose (Parivrtta Ardha Chandra Chapasana)"
+},
+{
+"i": 957,
+"k": "pose_description",
+"s": "Toe Stand with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Toe Stand (Parivrtta Padangusthasana (balance))"
+},
+{
+"i": 958,
+"k": "pose_description",
+"s": "Tree Pose with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Tree Pose (Parivrtta Vrksasana)"
+},
+{
+"i": 959,
+"k": "pose_description",
+"s": "Tree with Hands Overhead with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Tree with Hands Overhead (Parivrtta Vrksasana (arms up))"
+},
+{
+"i": 960,
+"k": "pose_description",
+"s": "Warrior III with the torso rotating. Adding rotation removes the visual reference that made the original stable, so balance and spinal mobility are tested together.",
+"in": "Revolved Warrior III (Parivrtta Virabhadrasana III)"
+},
+{
+"i": 961,
+"k": "pose_description",
+"s": "A standing forward fold with one leg behind the head. The folded counterpart to Durvasasana.",
+"in": "Ruchikasana (Ruchikasana)"
+},
+{
+"i": 962,
+"k": "pose_description",
+"s": "Standing upright with one leg behind the head, hands at the heart. A rarely achieved shape.",
+"in": "Skandasana Standing (Skandasana (standing))"
+},
+{
+"i": 963,
+"k": "pose_description",
+"s": "The Bikram standing bow, kicking one foot back and up while the opposite arm reaches forward.",
+"in": "Standing Bow Pulling (Dandayamana Dhanurasana)"
+},
+{
+"i": 964,
+"k": "pose_description",
+"s": "A one-legged chair pose with the other ankle crossed over the knee. Opens the outer hip under load.",
+"in": "Standing Figure Four (Utkatasana (figure four))"
+},
+{
+"i": 965,
+"k": "pose_description",
+"s": "Standing on one leg with the other knee drawn into the chest. Balance and hip flexion together.",
+"in": "Standing Knee Hug (Utthita Apanasana)"
+},
+{
+"i": 966,
+"k": "pose_description",
+"s": "Catching one foot behind while standing. The preparation for dancer pose and a direct quadriceps stretch.",
+"in": "Standing Quad Stretch (Utthita Natarajasana (prep))"
+},
+{
+"i": 967,
+"k": "pose_description",
+"s": "A forward fold on one leg with the other lifting toward vertical. Hamstring length and balance combined, often approached from half moon.",
+"in": "Standing Split (Urdhva Prasarita Eka Padasana)"
+},
+{
+"i": 968,
+"k": "pose_description",
+"s": "Standing Split practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Standing Split at the Wall (Urdhva Prasarita Eka Padasana (wall))"
+},
+{
+"i": 969,
+"k": "pose_description",
+"s": "Standing split with a hand catching the standing ankle.",
+"in": "Standing Split with Bind (Urdhva Prasarita Eka Padasana (bind))"
+},
+{
+"i": 970,
+"k": "pose_description",
+"s": "Standing Split taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Standing Split with Block (Urdhva Prasarita Eka Padasana (block))"
+},
+{
+"i": 971,
+"k": "pose_description",
+"s": "Half moon with the top leg bent and caught, opening into a backbend. Modern in name and demanding in practice.",
+"in": "Sugarcane Pose (Ardha Chandra Chapasana)"
+},
+{
+"i": 972,
+"k": "pose_description",
+"s": "Sugarcane Pose practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Sugarcane Pose at the Wall (Ardha Chandra Chapasana (wall))"
+},
+{
+"i": 973,
+"k": "pose_description",
+"s": "Balancing on the ball of one foot in a half lotus squat. Extremely demanding on the ankle and knee.",
+"in": "Toe Stand (Padangusthasana (balance))"
+},
+{
+"i": 974,
+"k": "pose_description",
+"s": "Toe Stand practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Toe Stand at the Wall (Padangusthasana (balance) (wall))"
+},
+{
+"i": 975,
+"k": "pose_description",
+"s": "One foot rooted, the other sole pressed to the inner calf or thigh. The first balance most practitioners learn and a lifelong measure of steadiness.",
+"in": "Tree Pose (Vrksasana)"
+},
+{
+"i": 976,
+"k": "pose_description",
+"s": "The Bikram tree with the foot drawn high into half lotus against the standing thigh.",
+"in": "Tree Pose Bikram (Tadasana (Bikram tree))"
+},
+{
+"i": 977,
+"k": "pose_description",
+"s": "Tree Pose taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Tree Pose with Block (Vrksasana (block))"
+},
+{
+"i": 978,
+"k": "pose_description",
+"s": "Tree pose with the arms extending overhead rather than at the heart. Raises the centre of gravity and the difficulty.",
+"in": "Tree with Hands Overhead (Vrksasana (arms up))"
+},
+{
+"i": 979,
+"k": "pose_description",
+"s": "Tree with Hands Overhead practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Tree with Hands Overhead at the Wall (Vrksasana (arms up) (wall))"
+},
+{
+"i": 980,
+"k": "pose_description",
+"s": "A standing split held vertically with one leg raised straight up beside the ear.",
+"in": "Trivikramasana (Trivikramasana)"
+},
+{
+"i": 981,
+"k": "pose_description",
+"s": "The extended hand-to-toe balance with the leg opened out to the side.",
+"in": "Utthita Parsvasahita (Utthita Hasta Padangusthasana B)"
+},
+{
+"i": 982,
+"k": "pose_description",
+"s": "A half lotus kneeling balance with the arms in eagle. Very demanding on the knee and the hip.",
+"in": "Vatayanasana Horse Face (Vatayanasana)"
+},
+{
+"i": 983,
+"k": "pose_description",
+"s": "Tree pose with the back against a wall. Removes the fear of falling so alignment can be learned.",
+"in": "Wall Tree (Vrksasana (wall))"
+},
+{
+"i": 984,
+"k": "pose_description",
+"s": "Cycling between warrior II and half moon. Trains the balance transition rather than the static shape.",
+"in": "Warrior II to Half Moon Flow (Virabhadrasana II-Ardha Chandrasana)"
+},
+{
+"i": 985,
+"k": "pose_description",
+"s": "A single-leg balance with torso and lifted leg forming one horizontal line. Demands hamstring strength and proprioception together.",
+"in": "Warrior III (Virabhadrasana III)"
+},
+{
+"i": 986,
+"k": "pose_description",
+"s": "Warrior III with the hands pressing a wall. The right way to build the strength before removing support.",
+"in": "Warrior III at Wall (Virabhadrasana III (wall))"
+},
+{
+"i": 987,
+"k": "pose_description",
+"s": "Warrior III taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Warrior III with Block (Virabhadrasana III (block))"
+},
+{
+"i": 988,
+"k": "pose_description",
+"s": "Reclined with one leg cradled behind the head and the hands at the heart.",
+"in": "Bhairavasana (Bhairavasana)"
+},
+{
+"i": 989,
+"k": "pose_description",
+"s": "Lying on the back with both knees hugged in. Named for apana vayu, the downward-moving breath, and used to settle the low back and the gut.",
+"in": "Knees-to-Chest (Apanasana)"
+},
+{
+"i": 990,
+"k": "pose_description",
+"s": "Knees-to-Chest approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Knees-to-Chest with Strap (Apanasana (strap))"
+},
+{
+"i": 991,
+"k": "pose_description",
+"s": "Lying on the back with one leg extended upward and held by a strap or the toe. The safest place to work on hamstring length.",
+"in": "Reclined Hand-to-Big-Toe (Supta Padangusthasana)"
+},
+{
+"i": 992,
+"k": "pose_description",
+"s": "Reclined Hand-to-Big-Toe approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Reclined Hand-to-Big-Toe with Strap (Supta Padangusthasana (strap))"
+},
+{
+"i": 993,
+"k": "pose_description",
+"s": "Lying flat with the arms overhead and the whole body lengthening in two directions.",
+"in": "Supta Tadasana (Supta Tadasana)"
+},
+{
+"i": 994,
+"k": "pose_description",
+"s": "Reclined with one leg drawn out to the side and down toward the floor beside the head.",
+"in": "Supta Trivikramasana (Supta Trivikramasana)"
+},
+{
+"i": 995,
+"k": "pose_description",
+"s": "Single and double knee compression into the abdomen, worked one side at a time then together.",
+"in": "Wind Removing Pose (Pavanamuktasana (Bikram))"
+},
+{
+"i": 996,
+"k": "pose_description",
+"s": "One knee drawn firmly into the chest while the other leg stays long. Named directly for its effect on trapped digestive gas.",
+"in": "Wind-Relieving Pose (Pavanamuktasana)"
+},
+{
+"i": 997,
+"k": "pose_description",
+"s": "Wind-Relieving Pose approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Wind-Relieving Pose with Strap (Pavanamuktasana (strap))"
+},
+{
+"i": 998,
+"k": "pose_description",
+"s": "The twelve-position hatha salutation using knees-chest-chin and cobra rather than chaturanga and upward dog. Gentler on the shoulders.",
+"in": "Classical Sun Salutation (Surya Namaskar (classical))"
+},
+{
+"i": 999,
+"k": "pose_description",
+"s": "The standing half of the salutation — fold, half lift, rise — without the floor sequence. The standard warm-up opening.",
+"in": "Half Sun Salutation (Ardha Surya Namaskar)"
+},
+{
+"i": 1000,
+"k": "pose_description",
+"s": "The salutation cycle performed entirely from the knees. Accessible for limited standing tolerance.",
+"in": "Kneeling Sun Salutation (Surya Namaskar (kneeling))"
+},
+{
+"i": 1001,
+"k": "pose_description",
+"s": "A lateral, cooling counterpart to the sun salutation moving through goddess, triangle and side lunges. Modern in origin and explicitly pitta-pacifying.",
+"in": "Moon Salutation (Chandra Namaskar)"
+},
+{
+"i": 1002,
+"k": "pose_description",
+"s": "The salutation shapes adapted to a chair. Keeps the breath-movement link available to anyone.",
+"in": "Seated Sun Salutation (Surya Namaskar (seated))"
+},
+{
+"i": 1003,
+"k": "pose_description",
+"s": "The nine-movement salutation cycle linking fold, plank, chaturanga, upward dog and downward dog. The engine of every vinyasa practice.",
+"in": "Sun Salutation A (Surya Namaskar A)"
+},
+{
+"i": 1004,
+"k": "pose_description",
+"s": "The longer salutation adding chair pose and warrior I to each round. Substantially more heating than the A form.",
+"in": "Sun Salutation B (Surya Namaskar B)"
+},
+{
+"i": 1005,
+"k": "pose_description",
+"s": "A gentler salutation using low lunge and cobra throughout. Common in hatha and beginner classes.",
+"in": "Sun Salutation C (Surya Namaskar C)"
+},
+{
+"i": 1006,
+"k": "pose_description",
+"s": "A salutation variant stepping into low lunges rather than jumping. Lower impact and better for stiff bodies.",
+"in": "Sun Salutation with Lunges (Surya Namaskar (lunge))"
+},
+{
+"i": 1007,
+"k": "pose_description",
+"s": "A gentle seated twist with both legs folded to one side. The most accessible of the named seated twists and safe for most backs.",
+"in": "Bharadvaja's Twist (Bharadvajasana)"
+},
+{
+"i": 1008,
+"k": "pose_description",
+"s": "Bharadvaja's Twist taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Bharadvaja's Twist with Block (Bharadvajasana (block))"
+},
+{
+"i": 1009,
+"k": "pose_description",
+"s": "Bharadvaja's Twist with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Bharadvaja's Twist (Baddha Bharadvajasana)"
+},
+{
+"i": 1010,
+"k": "pose_description",
+"s": "Churning the Mill with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Churning the Mill (Baddha Chakki Chalanasana)"
+},
+{
+"i": 1011,
+"k": "pose_description",
+"s": "Crescent Lunge Twist with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Crescent Lunge Twist (Baddha Parivrtta Ashta Chandrasana)"
+},
+{
+"i": 1012,
+"k": "pose_description",
+"s": "Deer Pose with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Deer Pose (Baddha Yin Mrigasana)"
+},
+{
+"i": 1013,
+"k": "pose_description",
+"s": "Full Lord of the Fishes with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Full Lord of the Fishes (Baddha Paripurna Matsyendrasana)"
+},
+{
+"i": 1014,
+"k": "pose_description",
+"s": "Reclined Figure Four Twist with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Reclined Figure Four Twist (Baddha Supta Kapotasana (twist))"
+},
+{
+"i": 1015,
+"k": "pose_description",
+"s": "Reclined Twist with Extended Leg with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Reclined Twist with Extended Leg (Baddha Jathara Parivartanasana)"
+},
+{
+"i": 1016,
+"k": "pose_description",
+"s": "Sage Marichi III with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Sage Marichi III (Baddha Marichyasana III)"
+},
+{
+"i": 1017,
+"k": "pose_description",
+"s": "Seated Twist with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Seated Twist (Baddha Ardha Matsyendrasana)"
+},
+{
+"i": 1018,
+"k": "pose_description",
+"s": "Seated Wide-Legged Twist with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Seated Wide-Legged Twist (Baddha Parivrtta Upavistha Konasana)"
+},
+{
+"i": 1019,
+"k": "pose_description",
+"s": "Standing Twist with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Standing Twist (Baddha Kati Chakrasana (twist))"
+},
+{
+"i": 1020,
+"k": "pose_description",
+"s": "Supine Twist with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Supine Twist (Baddha Supta Matsyendrasana)"
+},
+{
+"i": 1021,
+"k": "pose_description",
+"s": "Thread the Needle with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Thread the Needle (Baddha Parsva Balasana)"
+},
+{
+"i": 1022,
+"k": "pose_description",
+"s": "Warrior I Twist with the arms binding. The bind deepens the rotation or the opening considerably and demands shoulder range before the pose itself can be entered at all.",
+"in": "Bound Warrior I Twist (Baddha Parivrtta Virabhadrasana)"
+},
+{
+"i": 1023,
+"k": "pose_description",
+"s": "A long yin twist catching the top foot behind while the legs scissor. Combines rotation with a quadriceps stretch.",
+"in": "Cat Pulling Its Tail (Yin Twist)"
+},
+{
+"i": 1024,
+"k": "pose_description",
+"s": "Revolved chair with palms in prayer and the lower elbow hooked outside the opposite knee. The deepest of the standing twists.",
+"in": "Chair Pose with Prayer Twist (Parivrtta Utkatasana (namaskar))"
+},
+{
+"i": 1025,
+"k": "pose_description",
+"s": "A gentle seated rotation using the chair back for leverage. Safe for almost every body.",
+"in": "Chair Twist (Bharadvajasana (chair))"
+},
+{
+"i": 1026,
+"k": "pose_description",
+"s": "Seated with hands on the shoulders, twisting rhythmically side to side with the breath.",
+"in": "Chair Twist Kundalini (Kundalini Spinal Twist)"
+},
+{
+"i": 1027,
+"k": "pose_description",
+"s": "A seated spinal twist performed in a chair. The accessible version for offices, older practitioners and limited mobility.",
+"in": "Chair Twist at Chair (Parivrtta Utkatasana (chair))"
+},
+{
+"i": 1028,
+"k": "pose_description",
+"s": "Seated with legs wide, hands clasped, circling the torso as if turning a millstone. A classical abdominal and waist practice.",
+"in": "Churning the Mill (Chakki Chalanasana)"
+},
+{
+"i": 1029,
+"k": "pose_description",
+"s": "High lunge with the torso rotated and the opposite elbow to the outer knee. A common vinyasa transition and a genuine detoxifying twist.",
+"in": "Crescent Lunge Twist (Parivrtta Ashta Chandrasana)"
+},
+{
+"i": 1030,
+"k": "pose_description",
+"s": "Crescent Lunge Twist taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Crescent Lunge Twist with Block (Parivrtta Ashta Chandrasana (block))"
+},
+{
+"i": 1031,
+"k": "pose_description",
+"s": "A seated shape with one hip internally and one externally rotated. Works both rotations of the hip at once.",
+"in": "Deer Pose (Yin Mrigasana)"
+},
+{
+"i": 1032,
+"k": "pose_description",
+"s": "Downward dog with one hand crossing to catch the opposite ankle.",
+"in": "Downward Dog with Twist (Parivrtta Adho Mukha Svanasana)"
+},
+{
+"i": 1033,
+"k": "pose_description",
+"s": "Seated with legs extended, twisting side to side to reach the opposite foot. A warming spinal rotation.",
+"in": "Dynamic Spinal Twist (Meru Wakrasana)"
+},
+{
+"i": 1034,
+"k": "pose_description",
+"s": "The bound full expression of the seated twist with the arms wrapping the leg. Requires shoulder range as much as spinal rotation.",
+"in": "Full Lord of the Fishes (Paripurna Matsyendrasana)"
+},
+{
+"i": 1035,
+"k": "pose_description",
+"s": "Full Lord of the Fishes taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Full Lord of the Fishes with Block (Paripurna Matsyendrasana (block))"
+},
+{
+"i": 1036,
+"k": "pose_description",
+"s": "A deep squat with the arms binding around the legs in a twist. Demands ankle range before rotation is even possible.",
+"in": "Noose Pose (Pasasana)"
+},
+{
+"i": 1037,
+"k": "pose_description",
+"s": "Extended puppy with one arm threading beneath the body into a thoracic rotation.",
+"in": "Puppy Dog Twist (Anahatasana (twist))"
+},
+{
+"i": 1038,
+"k": "pose_description",
+"s": "Reclined pigeon taken across the body into a twist. Releases the outer hip and low back together.",
+"in": "Reclined Figure Four Twist (Supta Kapotasana (twist))"
+},
+{
+"i": 1039,
+"k": "pose_description",
+"s": "Legs extended and swept to one side while the shoulders stay down. Stronger on the obliques than the knees-bent version.",
+"in": "Reclined Twist with Extended Leg (Jathara Parivartanasana)"
+},
+{
+"i": 1040,
+"k": "pose_description",
+"s": "A supine twist held five minutes per side. The standard closing shape of a yin practice.",
+"in": "Reclining Twist Yin (Yin Supta Matsyendrasana)"
+},
+{
+"i": 1041,
+"k": "pose_description",
+"s": "Chair pose with the torso rotated and the opposite elbow outside the knee. Combines leg endurance with a closed twist.",
+"in": "Revolved Chair (Parivrtta Utkatasana)"
+},
+{
+"i": 1042,
+"k": "pose_description",
+"s": "A seated side bend and twist over one straight leg with the top arm reaching overhead. Opens the side body more than the hamstrings.",
+"in": "Revolved Head-to-Knee (Parivrtta Janu Sirsasana)"
+},
+{
+"i": 1043,
+"k": "pose_description",
+"s": "A revolved low lunge with the arms binding beneath the front thigh.",
+"in": "Revolved Lunge with Bind (Parivrtta Anjaneyasana (bound))"
+},
+{
+"i": 1044,
+"k": "pose_description",
+"s": "Revolved side angle with a full bind. Rotation, leg endurance and shoulder opening at once.",
+"in": "Revolved Side Angle with Bind (Baddha Parivrtta Parsvakonasana)"
+},
+{
+"i": 1045,
+"k": "pose_description",
+"s": "Triangle with the torso rotated so the opposite hand reaches the floor. Balance and hamstring length are both tested at once.",
+"in": "Revolved Triangle (Parivrtta Trikonasana)"
+},
+{
+"i": 1046,
+"k": "pose_description",
+"s": "A bound seated twist with the arm hooked outside the upright knee. The bind deepens the rotation well beyond the unbound version.",
+"in": "Sage Marichi III (Marichyasana III)"
+},
+{
+"i": 1047,
+"k": "pose_description",
+"s": "Sage Marichi III taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Sage Marichi III with Block (Marichyasana III (block))"
+},
+{
+"i": 1048,
+"k": "pose_description",
+"s": "A bound seated twist with one leg in half lotus. The most demanding of the four Marichi poses.",
+"in": "Sage Twist with Bind (Marichyasana IV)"
+},
+{
+"i": 1049,
+"k": "pose_description",
+"s": "The half lord of the fishes — one knee upright, torso rotating toward it. The reference seated twist of modern practice.",
+"in": "Seated Twist (Ardha Matsyendrasana)"
+},
+{
+"i": 1050,
+"k": "pose_description",
+"s": "Seated Twist taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Seated Twist with Block (Ardha Matsyendrasana (block))"
+},
+{
+"i": 1051,
+"k": "pose_description",
+"s": "A wide-legged seated position with the torso rotating and folding over one leg. Combines adductor stretch with rotation.",
+"in": "Seated Wide-Legged Twist (Parivrtta Upavistha Konasana)"
+},
+{
+"i": 1052,
+"k": "pose_description",
+"s": "Seated Wide-Legged Twist taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Seated Wide-Legged Twist with Block (Parivrtta Upavistha Konasana (block))"
+},
+{
+"i": 1053,
+"k": "pose_description",
+"s": "The closing twist of the Bikram series, taken with a specific hand and knee placement.",
+"in": "Spine Twisting Pose (Ardha Matsyendrasana (Bikram))"
+},
+{
+"i": 1054,
+"k": "pose_description",
+"s": "Loose rotational swinging of the torso with the arms trailing. A classical warm-up from the pawanmuktasana series.",
+"in": "Standing Twist (Kati Chakrasana (twist))"
+},
+{
+"i": 1055,
+"k": "pose_description",
+"s": "The wide-legged fold with one hand to the floor and the other reaching up in rotation.",
+"in": "Standing Wide Fold Twist (Prasarita (twist))"
+},
+{
+"i": 1056,
+"k": "pose_description",
+"s": "Knees dropping to one side while the shoulders stay grounded. The gentlest twist available and the standard closing shape before savasana.",
+"in": "Supine Twist (Supta Matsyendrasana)"
+},
+{
+"i": 1057,
+"k": "pose_description",
+"s": "From all fours, one arm threading beneath the body to the opposite side. Releases the upper back and rear shoulder with no strain.",
+"in": "Thread the Needle (Parsva Balasana)"
+},
+{
+"i": 1058,
+"k": "pose_description",
+"s": "The revolved triangle of the Ashtanga sequence, entered from a specific foot alignment.",
+"in": "Utthita Trikonasana B (Parivrtta Trikonasana B)"
+},
+{
+"i": 1059,
+"k": "pose_description",
+"s": "Warrior I with the torso rotating over the front thigh. Strong legs beneath a closed twist, and hard on the sacroiliac joint if forced.",
+"in": "Warrior I Twist (Parivrtta Virabhadrasana)"
+},
+{
+"i": 1060,
+"k": "pose_description",
+"s": "Warrior I Twist taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Warrior I Twist with Block (Parivrtta Virabhadrasana (block))"
+},
+{
+"i": 1061,
+"k": "pose_description",
+"s": "Knees falling slowly side to side with the feet planted. The gentlest possible spinal rotation.",
+"in": "Windshield Wipers (Jathara Parivartanasana (dynamic))"
+}
+]

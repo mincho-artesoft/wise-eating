@@ -1,0 +1,5441 @@
+[
+{
+"i": 0,
+"k": "family",
+"s": "Arm Balance"
+},
+{
+"i": 1,
+"k": "family",
+"s": "Backbend"
+},
+{
+"i": 2,
+"k": "family",
+"s": "Bandha & Mudra"
+},
+{
+"i": 3,
+"k": "family",
+"s": "Core"
+},
+{
+"i": 4,
+"k": "family",
+"s": "Forward Bend"
+},
+{
+"i": 5,
+"k": "family",
+"s": "Hip Opener"
+},
+{
+"i": 6,
+"k": "family",
+"s": "Inversion"
+},
+{
+"i": 7,
+"k": "family",
+"s": "Kriya"
+},
+{
+"i": 8,
+"k": "family",
+"s": "Meditation"
+},
+{
+"i": 9,
+"k": "family",
+"s": "Pranayama"
+},
+{
+"i": 10,
+"k": "family",
+"s": "Prone"
+},
+{
+"i": 11,
+"k": "family",
+"s": "Restorative"
+},
+{
+"i": 12,
+"k": "family",
+"s": "Seated"
+},
+{
+"i": 13,
+"k": "family",
+"s": "Standing"
+},
+{
+"i": 14,
+"k": "family",
+"s": "Standing Balance"
+},
+{
+"i": 15,
+"k": "family",
+"s": "Supine"
+},
+{
+"i": 16,
+"k": "family",
+"s": "Surya Namaskar"
+},
+{
+"i": 17,
+"k": "family",
+"s": "Twist"
+},
+{
+"i": 18,
+"k": "muscle_group",
+"s": "Abs"
+},
+{
+"i": 19,
+"k": "muscle_group",
+"s": "Back"
+},
+{
+"i": 20,
+"k": "muscle_group",
+"s": "Calves"
+},
+{
+"i": 21,
+"k": "muscle_group",
+"s": "Chest"
+},
+{
+"i": 22,
+"k": "muscle_group",
+"s": "Deltoids"
+},
+{
+"i": 23,
+"k": "muscle_group",
+"s": "Forearms"
+},
+{
+"i": 24,
+"k": "muscle_group",
+"s": "Full Body"
+},
+{
+"i": 25,
+"k": "muscle_group",
+"s": "Glutes"
+},
+{
+"i": 26,
+"k": "muscle_group",
+"s": "Hamstrings"
+},
+{
+"i": 27,
+"k": "muscle_group",
+"s": "Hip Flexors"
+},
+{
+"i": 28,
+"k": "muscle_group",
+"s": "Inner Thighs"
+},
+{
+"i": 29,
+"k": "muscle_group",
+"s": "Lats"
+},
+{
+"i": 30,
+"k": "muscle_group",
+"s": "Legs"
+},
+{
+"i": 31,
+"k": "muscle_group",
+"s": "Lower Back"
+},
+{
+"i": 32,
+"k": "muscle_group",
+"s": "Obliques"
+},
+{
+"i": 33,
+"k": "muscle_group",
+"s": "Quads"
+},
+{
+"i": 34,
+"k": "muscle_group",
+"s": "Shoulders"
+},
+{
+"i": 35,
+"k": "muscle_group",
+"s": "Traps"
+},
+{
+"i": 36,
+"k": "muscle_group",
+"s": "Triceps"
+},
+{
+"i": 37,
+"k": "level",
+"s": "Beginner"
+},
+{
+"i": 38,
+"k": "level",
+"s": "Intermediate"
+},
+{
+"i": 39,
+"k": "level",
+"s": "Advanced"
+},
+{
+"i": 40,
+"k": "level",
+"s": "Easy"
+},
+{
+"i": 41,
+"k": "level",
+"s": "Level 1"
+},
+{
+"i": 42,
+"k": "level",
+"s": "Level 2"
+},
+{
+"i": 43,
+"k": "level",
+"s": "Level 3"
+},
+{
+"i": 44,
+"k": "level",
+"s": "Workout"
+},
+{
+"i": 45,
+"k": "pose",
+"s": "Chakorasana",
+"in": "Chakorasana"
+},
+{
+"i": 46,
+"k": "pose",
+"s": "Crane Pose",
+"in": "Bakasana (straight arm)"
+},
+{
+"i": 47,
+"k": "sanskrit",
+"s": "Bakasana (straight arm)",
+"in": "Crane Pose"
+},
+{
+"i": 48,
+"k": "pose",
+"s": "Crow Pose",
+"in": "Bakasana"
+},
+{
+"i": 49,
+"k": "sanskrit",
+"s": "Bakasana",
+"in": "Crow Pose"
+},
+{
+"i": 50,
+"k": "pose",
+"s": "Crow to Headstand Transition",
+"in": "Bakasana-Sirsasana"
+},
+{
+"i": 51,
+"k": "sanskrit",
+"s": "Bakasana-Sirsasana",
+"in": "Crow to Headstand Transition"
+},
+{
+"i": 52,
+"k": "pose",
+"s": "Crow with Head Down",
+"in": "Bakasana (tripod prep)"
+},
+{
+"i": 53,
+"k": "sanskrit",
+"s": "Bakasana (tripod prep)",
+"in": "Crow with Head Down"
+},
+{
+"i": 54,
+"k": "pose",
+"s": "Destroyer of the Universe",
+"in": "Kala Bhairavasana"
+},
+{
+"i": 55,
+"k": "sanskrit",
+"s": "Kala Bhairavasana",
+"in": "Destroyer of the Universe"
+},
+{
+"i": 56,
+"k": "pose",
+"s": "Eight-Angle Pose",
+"in": "Astavakrasana"
+},
+{
+"i": 57,
+"k": "sanskrit",
+"s": "Astavakrasana",
+"in": "Eight-Angle Pose"
+},
+{
+"i": 58,
+"k": "pose",
+"s": "Elephant Trunk Pose",
+"in": "Eka Hasta Bhujasana"
+},
+{
+"i": 59,
+"k": "sanskrit",
+"s": "Eka Hasta Bhujasana",
+"in": "Elephant Trunk Pose"
+},
+{
+"i": 60,
+"k": "pose",
+"s": "Firefly Pose",
+"in": "Tittibhasana"
+},
+{
+"i": 61,
+"k": "sanskrit",
+"s": "Tittibhasana",
+"in": "Firefly Pose"
+},
+{
+"i": 62,
+"k": "pose",
+"s": "Flying Pigeon",
+"in": "Eka Pada Galavasana"
+},
+{
+"i": 63,
+"k": "sanskrit",
+"s": "Eka Pada Galavasana",
+"in": "Flying Pigeon"
+},
+{
+"i": 64,
+"k": "pose",
+"s": "Grasshopper Pose",
+"in": "Parsva Bhuja Dandasana"
+},
+{
+"i": 65,
+"k": "sanskrit",
+"s": "Parsva Bhuja Dandasana",
+"in": "Grasshopper Pose"
+},
+{
+"i": 66,
+"k": "pose",
+"s": "Grasshopper Variation",
+"in": "Maksikanagasana"
+},
+{
+"i": 67,
+"k": "sanskrit",
+"s": "Maksikanagasana",
+"in": "Grasshopper Variation"
+},
+{
+"i": 68,
+"k": "pose",
+"s": "Hurdler Pose",
+"in": "Eka Pada Koundinyasana (hurdle)"
+},
+{
+"i": 69,
+"k": "sanskrit",
+"s": "Eka Pada Koundinyasana (hurdle)",
+"in": "Hurdler Pose"
+},
+{
+"i": 70,
+"k": "pose",
+"s": "One-Legged Crane Pose",
+"in": "Eka Pada Bakasana (straight arm)"
+},
+{
+"i": 71,
+"k": "sanskrit",
+"s": "Eka Pada Bakasana (straight arm)",
+"in": "One-Legged Crane Pose"
+},
+{
+"i": 72,
+"k": "pose",
+"s": "One-Legged Crow to Headstand Transition",
+"in": "Eka Pada Bakasana-Sirsasana"
+},
+{
+"i": 73,
+"k": "sanskrit",
+"s": "Eka Pada Bakasana-Sirsasana",
+"in": "One-Legged Crow to Headstand Transition"
+},
+{
+"i": 74,
+"k": "pose",
+"s": "One-Legged Eight-Angle Pose",
+"in": "Eka Pada Astavakrasana"
+},
+{
+"i": 75,
+"k": "sanskrit",
+"s": "Eka Pada Astavakrasana",
+"in": "One-Legged Eight-Angle Pose"
+},
+{
+"i": 76,
+"k": "pose",
+"s": "One-Legged Firefly Pose",
+"in": "Eka Pada Tittibhasana"
+},
+{
+"i": 77,
+"k": "sanskrit",
+"s": "Eka Pada Tittibhasana",
+"in": "One-Legged Firefly Pose"
+},
+{
+"i": 78,
+"k": "pose",
+"s": "One-Legged Grasshopper Pose",
+"in": "Eka Pada Parsva Bhuja Dandasana"
+},
+{
+"i": 79,
+"k": "sanskrit",
+"s": "Eka Pada Parsva Bhuja Dandasana",
+"in": "One-Legged Grasshopper Pose"
+},
+{
+"i": 80,
+"k": "pose",
+"s": "One-Legged Peacock Pose",
+"in": "Eka Pada Mayurasana"
+},
+{
+"i": 81,
+"k": "sanskrit",
+"s": "Eka Pada Mayurasana",
+"in": "One-Legged Peacock Pose"
+},
+{
+"i": 82,
+"k": "pose",
+"s": "One-Legged Rooster Pose",
+"in": "Eka Pada Kukkutasana"
+},
+{
+"i": 83,
+"k": "sanskrit",
+"s": "Eka Pada Kukkutasana",
+"in": "One-Legged Rooster Pose"
+},
+{
+"i": 84,
+"k": "pose",
+"s": "One-Legged Sage Vasistha's Pose",
+"in": "Eka Pada Vasisthasana"
+},
+{
+"i": 85,
+"k": "sanskrit",
+"s": "Eka Pada Vasisthasana",
+"in": "One-Legged Sage Vasistha's Pose"
+},
+{
+"i": 86,
+"k": "pose",
+"s": "One-Legged Scale Pose",
+"in": "Eka Pada Tolasana"
+},
+{
+"i": 87,
+"k": "sanskrit",
+"s": "Eka Pada Tolasana",
+"in": "One-Legged Scale Pose"
+},
+{
+"i": 88,
+"k": "pose",
+"s": "One-Legged Shoulder-Pressing Pose",
+"in": "Eka Pada Bhujapidasana"
+},
+{
+"i": 89,
+"k": "sanskrit",
+"s": "Eka Pada Bhujapidasana",
+"in": "One-Legged Shoulder-Pressing Pose"
+},
+{
+"i": 90,
+"k": "pose",
+"s": "One-Legged Side Crow",
+"in": "Eka Pada Parsva Bakasana"
+},
+{
+"i": 91,
+"k": "sanskrit",
+"s": "Eka Pada Parsva Bakasana",
+"in": "One-Legged Side Crow"
+},
+{
+"i": 92,
+"k": "pose",
+"s": "One-Legged Side Plank with Leg Lift",
+"in": "Eka Pada Vasisthasana (variation)"
+},
+{
+"i": 93,
+"k": "sanskrit",
+"s": "Eka Pada Vasisthasana (variation)",
+"in": "One-Legged Side Plank with Leg Lift"
+},
+{
+"i": 94,
+"k": "pose",
+"s": "One-Legged Staff Pose Lift",
+"in": "Eka Pada Utpluthih"
+},
+{
+"i": 95,
+"k": "sanskrit",
+"s": "Eka Pada Utpluthih",
+"in": "One-Legged Staff Pose Lift"
+},
+{
+"i": 96,
+"k": "pose",
+"s": "Peacock Feather Pose",
+"in": "Mayurasana (lotus)"
+},
+{
+"i": 97,
+"k": "sanskrit",
+"s": "Mayurasana (lotus)",
+"in": "Peacock Feather Pose"
+},
+{
+"i": 98,
+"k": "pose",
+"s": "Peacock Pose",
+"in": "Mayurasana"
+},
+{
+"i": 99,
+"k": "sanskrit",
+"s": "Mayurasana",
+"in": "Peacock Pose"
+},
+{
+"i": 100,
+"k": "pose",
+"s": "Rooster Pose",
+"in": "Kukkutasana"
+},
+{
+"i": 101,
+"k": "sanskrit",
+"s": "Kukkutasana",
+"in": "Rooster Pose"
+},
+{
+"i": 102,
+"k": "pose",
+"s": "Rooster in Lotus",
+"in": "Garbha Pindasana"
+},
+{
+"i": 103,
+"k": "sanskrit",
+"s": "Garbha Pindasana",
+"in": "Rooster in Lotus"
+},
+{
+"i": 104,
+"k": "pose",
+"s": "Sage Koundinya I",
+"in": "Eka Pada Koundinyasana I"
+},
+{
+"i": 105,
+"k": "sanskrit",
+"s": "Eka Pada Koundinyasana I",
+"in": "Sage Koundinya I"
+},
+{
+"i": 106,
+"k": "pose",
+"s": "Sage Koundinya II",
+"in": "Eka Pada Koundinyasana II"
+},
+{
+"i": 107,
+"k": "sanskrit",
+"s": "Eka Pada Koundinyasana II",
+"in": "Sage Koundinya II"
+},
+{
+"i": 108,
+"k": "pose",
+"s": "Sage Vasistha's Pose",
+"in": "Vasisthasana"
+},
+{
+"i": 109,
+"k": "sanskrit",
+"s": "Vasisthasana",
+"in": "Sage Vasistha's Pose"
+},
+{
+"i": 110,
+"k": "pose",
+"s": "Sayanasana",
+"in": "Sayanasana"
+},
+{
+"i": 111,
+"k": "pose",
+"s": "Scale Pose",
+"in": "Tolasana"
+},
+{
+"i": 112,
+"k": "sanskrit",
+"s": "Tolasana",
+"in": "Scale Pose"
+},
+{
+"i": 113,
+"k": "pose",
+"s": "Shoulder-Pressing Pose",
+"in": "Bhujapidasana"
+},
+{
+"i": 114,
+"k": "sanskrit",
+"s": "Bhujapidasana",
+"in": "Shoulder-Pressing Pose"
+},
+{
+"i": 115,
+"k": "pose",
+"s": "Side Crow",
+"in": "Parsva Bakasana"
+},
+{
+"i": 116,
+"k": "sanskrit",
+"s": "Parsva Bakasana",
+"in": "Side Crow"
+},
+{
+"i": 117,
+"k": "pose",
+"s": "Side Plank with Leg Lift",
+"in": "Vasisthasana (variation)"
+},
+{
+"i": 118,
+"k": "sanskrit",
+"s": "Vasisthasana (variation)",
+"in": "Side Plank with Leg Lift"
+},
+{
+"i": 119,
+"k": "pose",
+"s": "Sideways Crow",
+"in": "Parsva Bakasana (extended)"
+},
+{
+"i": 120,
+"k": "sanskrit",
+"s": "Parsva Bakasana (extended)",
+"in": "Sideways Crow"
+},
+{
+"i": 121,
+"k": "pose",
+"s": "Split Arm Balance",
+"in": "Eka Pada Bakasana"
+},
+{
+"i": 122,
+"k": "sanskrit",
+"s": "Eka Pada Bakasana",
+"in": "Split Arm Balance"
+},
+{
+"i": 123,
+"k": "pose",
+"s": "Staff Pose Lift",
+"in": "Utpluthih"
+},
+{
+"i": 124,
+"k": "sanskrit",
+"s": "Utpluthih",
+"in": "Staff Pose Lift"
+},
+{
+"i": 125,
+"k": "pose",
+"s": "Tolasana Lift",
+"in": "Tolasana (Ashtanga)"
+},
+{
+"i": 126,
+"k": "sanskrit",
+"s": "Tolasana (Ashtanga)",
+"in": "Tolasana Lift"
+},
+{
+"i": 127,
+"k": "pose",
+"s": "Two-Footed Arm Balance",
+"in": "Dwi Hasta Bhujasana"
+},
+{
+"i": 128,
+"k": "sanskrit",
+"s": "Dwi Hasta Bhujasana",
+"in": "Two-Footed Arm Balance"
+},
+{
+"i": 129,
+"k": "pose",
+"s": "Bhujangasana Full",
+"in": "Bhujangasana (full)"
+},
+{
+"i": 130,
+"k": "sanskrit",
+"s": "Bhujangasana (full)",
+"in": "Bhujangasana Full"
+},
+{
+"i": 131,
+"k": "pose",
+"s": "Bow Pose",
+"in": "Dhanurasana"
+},
+{
+"i": 132,
+"k": "sanskrit",
+"s": "Dhanurasana",
+"in": "Bow Pose"
+},
+{
+"i": 133,
+"k": "pose",
+"s": "Bow Pose at the Wall",
+"in": "Dhanurasana (wall)"
+},
+{
+"i": 134,
+"k": "sanskrit",
+"s": "Dhanurasana (wall)",
+"in": "Bow Pose at the Wall"
+},
+{
+"i": 135,
+"k": "pose",
+"s": "Bow Pose with Block",
+"in": "Dhanurasana (block)"
+},
+{
+"i": 136,
+"k": "sanskrit",
+"s": "Dhanurasana (block)",
+"in": "Bow Pose with Block"
+},
+{
+"i": 137,
+"k": "pose",
+"s": "Bow with Feet to Head",
+"in": "Ganda Bherundasana (bow)"
+},
+{
+"i": 138,
+"k": "sanskrit",
+"s": "Ganda Bherundasana (bow)",
+"in": "Bow with Feet to Head"
+},
+{
+"i": 139,
+"k": "pose",
+"s": "Bow with Strap",
+"in": "Dhanurasana (strap)"
+},
+{
+"i": 140,
+"k": "sanskrit",
+"s": "Dhanurasana (strap)",
+"in": "Bow with Strap"
+},
+{
+"i": 141,
+"k": "pose",
+"s": "Bridge Pose",
+"in": "Setu Bandha Sarvangasana"
+},
+{
+"i": 142,
+"k": "sanskrit",
+"s": "Setu Bandha Sarvangasana",
+"in": "Bridge Pose"
+},
+{
+"i": 143,
+"k": "pose",
+"s": "Bridge Pose at the Wall",
+"in": "Setu Bandha Sarvangasana (wall)"
+},
+{
+"i": 144,
+"k": "sanskrit",
+"s": "Setu Bandha Sarvangasana (wall)",
+"in": "Bridge Pose at the Wall"
+},
+{
+"i": 145,
+"k": "pose",
+"s": "Bridge Pose with Block",
+"in": "Setu Bandha Sarvangasana (block)"
+},
+{
+"i": 146,
+"k": "sanskrit",
+"s": "Setu Bandha Sarvangasana (block)",
+"in": "Bridge Pose with Block"
+},
+{
+"i": 147,
+"k": "pose",
+"s": "Bridge Pose with Strap",
+"in": "Setu Bandha Sarvangasana (strap)"
+},
+{
+"i": 148,
+"k": "sanskrit",
+"s": "Setu Bandha Sarvangasana (strap)",
+"in": "Bridge Pose with Strap"
+},
+{
+"i": 149,
+"k": "pose",
+"s": "Bridge Rolls",
+"in": "Setu Bandha (dynamic)"
+},
+{
+"i": 150,
+"k": "sanskrit",
+"s": "Setu Bandha (dynamic)",
+"in": "Bridge Rolls"
+},
+{
+"i": 151,
+"k": "pose",
+"s": "Bridge with Block Between Thighs",
+"in": "Setu Bandha (thigh block)"
+},
+{
+"i": 152,
+"k": "sanskrit",
+"s": "Setu Bandha (thigh block)",
+"in": "Bridge with Block Between Thighs"
+},
+{
+"i": 153,
+"k": "pose",
+"s": "Bridge with Clasp",
+"in": "Setu Bandha (clasp)"
+},
+{
+"i": 154,
+"k": "sanskrit",
+"s": "Setu Bandha (clasp)",
+"in": "Bridge with Clasp"
+},
+{
+"i": 155,
+"k": "pose",
+"s": "Cactus Arms Backbend",
+"in": "Urdhva Hastasana (cactus)"
+},
+{
+"i": 156,
+"k": "sanskrit",
+"s": "Urdhva Hastasana (cactus)",
+"in": "Cactus Arms Backbend"
+},
+{
+"i": 157,
+"k": "pose",
+"s": "Camel Pose",
+"in": "Ustrasana"
+},
+{
+"i": 158,
+"k": "sanskrit",
+"s": "Ustrasana",
+"in": "Camel Pose"
+},
+{
+"i": 159,
+"k": "pose",
+"s": "Camel Pose at the Wall",
+"in": "Ustrasana (wall)"
+},
+{
+"i": 160,
+"k": "sanskrit",
+"s": "Ustrasana (wall)",
+"in": "Camel Pose at the Wall"
+},
+{
+"i": 161,
+"k": "pose",
+"s": "Camel Pose with Block",
+"in": "Ustrasana (block)"
+},
+{
+"i": 162,
+"k": "sanskrit",
+"s": "Ustrasana (block)",
+"in": "Camel Pose with Block"
+},
+{
+"i": 163,
+"k": "pose",
+"s": "Camel Pose with Strap",
+"in": "Ustrasana (strap)"
+},
+{
+"i": 164,
+"k": "sanskrit",
+"s": "Ustrasana (strap)",
+"in": "Camel Pose with Strap"
+},
+{
+"i": 165,
+"k": "pose",
+"s": "Camel on Blocks",
+"in": "Ustrasana (blocks)"
+},
+{
+"i": 166,
+"k": "sanskrit",
+"s": "Ustrasana (blocks)",
+"in": "Camel on Blocks"
+},
+{
+"i": 167,
+"k": "pose",
+"s": "Camel to Child Flow",
+"in": "Ustrasana-Balasana"
+},
+{
+"i": 168,
+"k": "sanskrit",
+"s": "Ustrasana-Balasana",
+"in": "Camel to Child Flow"
+},
+{
+"i": 169,
+"k": "pose",
+"s": "Camel with Hands on Sacrum",
+"in": "Ustrasana (hands on back)"
+},
+{
+"i": 170,
+"k": "sanskrit",
+"s": "Ustrasana (hands on back)",
+"in": "Camel with Hands on Sacrum"
+},
+{
+"i": 171,
+"k": "pose",
+"s": "Camel with Hands on Sacrum at the Wall",
+"in": "Ustrasana (hands on back) (wall)"
+},
+{
+"i": 172,
+"k": "sanskrit",
+"s": "Ustrasana (hands on back) (wall)",
+"in": "Camel with Hands on Sacrum at the Wall"
+},
+{
+"i": 173,
+"k": "pose",
+"s": "Cat Pose",
+"in": "Marjaryasana"
+},
+{
+"i": 174,
+"k": "sanskrit",
+"s": "Marjaryasana",
+"in": "Cat Pose"
+},
+{
+"i": 175,
+"k": "pose",
+"s": "Cat Pose with Block",
+"in": "Marjaryasana (block)"
+},
+{
+"i": 176,
+"k": "sanskrit",
+"s": "Marjaryasana (block)",
+"in": "Cat Pose with Block"
+},
+{
+"i": 177,
+"k": "pose",
+"s": "Cat Pose with Strap",
+"in": "Marjaryasana (strap)"
+},
+{
+"i": 178,
+"k": "sanskrit",
+"s": "Marjaryasana (strap)",
+"in": "Cat Pose with Strap"
+},
+{
+"i": 179,
+"k": "pose",
+"s": "Chin Stand",
+"in": "Ganda Bherundasana"
+},
+{
+"i": 180,
+"k": "sanskrit",
+"s": "Ganda Bherundasana",
+"in": "Chin Stand"
+},
+{
+"i": 181,
+"k": "pose",
+"s": "Chin Stand at the Wall",
+"in": "Ganda Bherundasana (wall)"
+},
+{
+"i": 182,
+"k": "sanskrit",
+"s": "Ganda Bherundasana (wall)",
+"in": "Chin Stand at the Wall"
+},
+{
+"i": 183,
+"k": "pose",
+"s": "Chin Stand with Strap",
+"in": "Ganda Bherundasana (strap)"
+},
+{
+"i": 184,
+"k": "sanskrit",
+"s": "Ganda Bherundasana (strap)",
+"in": "Chin Stand with Strap"
+},
+{
+"i": 185,
+"k": "pose",
+"s": "Cobra Full Expression",
+"in": "Raja Bhujangasana"
+},
+{
+"i": 186,
+"k": "sanskrit",
+"s": "Raja Bhujangasana",
+"in": "Cobra Full Expression"
+},
+{
+"i": 187,
+"k": "pose",
+"s": "Cobra Pose",
+"in": "Bhujangasana"
+},
+{
+"i": 188,
+"k": "sanskrit",
+"s": "Bhujangasana",
+"in": "Cobra Pose"
+},
+{
+"i": 189,
+"k": "pose",
+"s": "Cobra Pose with Block",
+"in": "Bhujangasana (block)"
+},
+{
+"i": 190,
+"k": "sanskrit",
+"s": "Bhujangasana (block)",
+"in": "Cobra Pose with Block"
+},
+{
+"i": 191,
+"k": "pose",
+"s": "Cobra Pose with Strap",
+"in": "Bhujangasana (strap)"
+},
+{
+"i": 192,
+"k": "sanskrit",
+"s": "Bhujangasana (strap)",
+"in": "Cobra Pose with Strap"
+},
+{
+"i": 193,
+"k": "pose",
+"s": "Cobra at Wall",
+"in": "Bhujangasana (wall)"
+},
+{
+"i": 194,
+"k": "sanskrit",
+"s": "Bhujangasana (wall)",
+"in": "Cobra at Wall"
+},
+{
+"i": 195,
+"k": "pose",
+"s": "Cobra with Hands Lifted",
+"in": "Bhujangasana (hands off)"
+},
+{
+"i": 196,
+"k": "sanskrit",
+"s": "Bhujangasana (hands off)",
+"in": "Cobra with Hands Lifted"
+},
+{
+"i": 197,
+"k": "pose",
+"s": "Cobra with Hands Lifted at the Wall",
+"in": "Bhujangasana (hands off) (wall)"
+},
+{
+"i": 198,
+"k": "sanskrit",
+"s": "Bhujangasana (hands off) (wall)",
+"in": "Cobra with Hands Lifted at the Wall"
+},
+{
+"i": 199,
+"k": "pose",
+"s": "Cow Pose",
+"in": "Bitilasana"
+},
+{
+"i": 200,
+"k": "sanskrit",
+"s": "Bitilasana",
+"in": "Cow Pose"
+},
+{
+"i": 201,
+"k": "pose",
+"s": "Cow Pose with Block",
+"in": "Bitilasana (block)"
+},
+{
+"i": 202,
+"k": "sanskrit",
+"s": "Bitilasana (block)",
+"in": "Cow Pose with Block"
+},
+{
+"i": 203,
+"k": "pose",
+"s": "Cow Pose with Strap",
+"in": "Bitilasana (strap)"
+},
+{
+"i": 204,
+"k": "sanskrit",
+"s": "Bitilasana (strap)",
+"in": "Cow Pose with Strap"
+},
+{
+"i": 205,
+"k": "pose",
+"s": "Dwi Pada Viparita Dandasana",
+"in": "Dwi Pada Viparita Dandasana"
+},
+{
+"i": 206,
+"k": "pose",
+"s": "Eka Pada Viparita Dandasana",
+"in": "Eka Pada Viparita Dandasana"
+},
+{
+"i": 207,
+"k": "pose",
+"s": "Fish Pose",
+"in": "Matsyasana"
+},
+{
+"i": 208,
+"k": "sanskrit",
+"s": "Matsyasana",
+"in": "Fish Pose"
+},
+{
+"i": 209,
+"k": "pose",
+"s": "Fish Pose at the Wall",
+"in": "Matsyasana (wall)"
+},
+{
+"i": 210,
+"k": "sanskrit",
+"s": "Matsyasana (wall)",
+"in": "Fish Pose at the Wall"
+},
+{
+"i": 211,
+"k": "pose",
+"s": "Fish Pose with Block",
+"in": "Matsyasana (block)"
+},
+{
+"i": 212,
+"k": "sanskrit",
+"s": "Matsyasana (block)",
+"in": "Fish Pose with Block"
+},
+{
+"i": 213,
+"k": "pose",
+"s": "Fish Pose with Strap",
+"in": "Matsyasana (strap)"
+},
+{
+"i": 214,
+"k": "sanskrit",
+"s": "Matsyasana (strap)",
+"in": "Fish Pose with Strap"
+},
+{
+"i": 215,
+"k": "pose",
+"s": "Fish in Lotus",
+"in": "Matsyasana (lotus)"
+},
+{
+"i": 216,
+"k": "sanskrit",
+"s": "Matsyasana (lotus)",
+"in": "Fish in Lotus"
+},
+{
+"i": 217,
+"k": "pose",
+"s": "Fixed Firm Pose",
+"in": "Supta Vajrasana"
+},
+{
+"i": 218,
+"k": "sanskrit",
+"s": "Supta Vajrasana",
+"in": "Fixed Firm Pose"
+},
+{
+"i": 219,
+"k": "pose",
+"s": "Flip Dog",
+"in": "Camatkarasana (flip)"
+},
+{
+"i": 220,
+"k": "sanskrit",
+"s": "Camatkarasana (flip)",
+"in": "Flip Dog"
+},
+{
+"i": 221,
+"k": "pose",
+"s": "Formidable Face Pose",
+"in": "Ganda Bherundasana (prep)"
+},
+{
+"i": 222,
+"k": "sanskrit",
+"s": "Ganda Bherundasana (prep)",
+"in": "Formidable Face Pose"
+},
+{
+"i": 223,
+"k": "pose",
+"s": "Full Pigeon",
+"in": "Kapotasana"
+},
+{
+"i": 224,
+"k": "sanskrit",
+"s": "Kapotasana",
+"in": "Full Pigeon"
+},
+{
+"i": 225,
+"k": "pose",
+"s": "Grivasana Neck Pose",
+"in": "Grivasana"
+},
+{
+"i": 226,
+"k": "sanskrit",
+"s": "Grivasana",
+"in": "Grivasana Neck Pose"
+},
+{
+"i": 227,
+"k": "pose",
+"s": "Half Frog",
+"in": "Ardha Bhekasana"
+},
+{
+"i": 228,
+"k": "sanskrit",
+"s": "Ardha Bhekasana",
+"in": "Half Frog"
+},
+{
+"i": 229,
+"k": "pose",
+"s": "Half Frog at the Wall",
+"in": "Ardha Bhekasana (wall)"
+},
+{
+"i": 230,
+"k": "sanskrit",
+"s": "Ardha Bhekasana (wall)",
+"in": "Half Frog at the Wall"
+},
+{
+"i": 231,
+"k": "pose",
+"s": "Half Locust",
+"in": "Ardha Salabhasana"
+},
+{
+"i": 232,
+"k": "sanskrit",
+"s": "Ardha Salabhasana",
+"in": "Half Locust"
+},
+{
+"i": 233,
+"k": "pose",
+"s": "Half Locust at the Wall",
+"in": "Ardha Salabhasana (wall)"
+},
+{
+"i": 234,
+"k": "sanskrit",
+"s": "Ardha Salabhasana (wall)",
+"in": "Half Locust at the Wall"
+},
+{
+"i": 235,
+"k": "pose",
+"s": "Half Locust with Block",
+"in": "Ardha Salabhasana (block)"
+},
+{
+"i": 236,
+"k": "sanskrit",
+"s": "Ardha Salabhasana (block)",
+"in": "Half Locust with Block"
+},
+{
+"i": 237,
+"k": "pose",
+"s": "Half Locust with Strap",
+"in": "Ardha Salabhasana (strap)"
+},
+{
+"i": 238,
+"k": "sanskrit",
+"s": "Ardha Salabhasana (strap)",
+"in": "Half Locust with Strap"
+},
+{
+"i": 239,
+"k": "pose",
+"s": "Kandharasana",
+"in": "Kandharasana"
+},
+{
+"i": 240,
+"k": "pose",
+"s": "Kapotasana Full",
+"in": "Kapotasana (full)"
+},
+{
+"i": 241,
+"k": "sanskrit",
+"s": "Kapotasana (full)",
+"in": "Kapotasana Full"
+},
+{
+"i": 242,
+"k": "pose",
+"s": "King Pigeon",
+"in": "Eka Pada Rajakapotasana"
+},
+{
+"i": 243,
+"k": "sanskrit",
+"s": "Eka Pada Rajakapotasana",
+"in": "King Pigeon"
+},
+{
+"i": 244,
+"k": "pose",
+"s": "King Pigeon at the Wall",
+"in": "Eka Pada Rajakapotasana (wall)"
+},
+{
+"i": 245,
+"k": "sanskrit",
+"s": "Eka Pada Rajakapotasana (wall)",
+"in": "King Pigeon at the Wall"
+},
+{
+"i": 246,
+"k": "pose",
+"s": "King Pigeon with Block",
+"in": "Eka Pada Rajakapotasana (block)"
+},
+{
+"i": 247,
+"k": "sanskrit",
+"s": "Eka Pada Rajakapotasana (block)",
+"in": "King Pigeon with Block"
+},
+{
+"i": 248,
+"k": "pose",
+"s": "Little Thunderbolt",
+"in": "Laghu Vajrasana"
+},
+{
+"i": 249,
+"k": "sanskrit",
+"s": "Laghu Vajrasana",
+"in": "Little Thunderbolt"
+},
+{
+"i": 250,
+"k": "pose",
+"s": "Little Thunderbolt at the Wall",
+"in": "Laghu Vajrasana (wall)"
+},
+{
+"i": 251,
+"k": "sanskrit",
+"s": "Laghu Vajrasana (wall)",
+"in": "Little Thunderbolt at the Wall"
+},
+{
+"i": 252,
+"k": "pose",
+"s": "Little Thunderbolt with Block",
+"in": "Laghu Vajrasana (block)"
+},
+{
+"i": 253,
+"k": "sanskrit",
+"s": "Laghu Vajrasana (block)",
+"in": "Little Thunderbolt with Block"
+},
+{
+"i": 254,
+"k": "pose",
+"s": "Little Thunderbolt with Strap",
+"in": "Laghu Vajrasana (strap)"
+},
+{
+"i": 255,
+"k": "sanskrit",
+"s": "Laghu Vajrasana (strap)",
+"in": "Little Thunderbolt with Strap"
+},
+{
+"i": 256,
+"k": "pose",
+"s": "Locust Pose",
+"in": "Salabhasana"
+},
+{
+"i": 257,
+"k": "sanskrit",
+"s": "Salabhasana",
+"in": "Locust Pose"
+},
+{
+"i": 258,
+"k": "pose",
+"s": "Locust Pose at the Wall",
+"in": "Salabhasana (wall)"
+},
+{
+"i": 259,
+"k": "sanskrit",
+"s": "Salabhasana (wall)",
+"in": "Locust Pose at the Wall"
+},
+{
+"i": 260,
+"k": "pose",
+"s": "Locust Pose with Block",
+"in": "Salabhasana (block)"
+},
+{
+"i": 261,
+"k": "sanskrit",
+"s": "Salabhasana (block)",
+"in": "Locust Pose with Block"
+},
+{
+"i": 262,
+"k": "pose",
+"s": "Locust Pose with Strap",
+"in": "Salabhasana (strap)"
+},
+{
+"i": 263,
+"k": "sanskrit",
+"s": "Salabhasana (strap)",
+"in": "Locust Pose with Strap"
+},
+{
+"i": 264,
+"k": "pose",
+"s": "Mandalasana",
+"in": "Mandalasana"
+},
+{
+"i": 265,
+"k": "pose",
+"s": "Marjari Asana Dynamic",
+"in": "Marjari Asana"
+},
+{
+"i": 266,
+"k": "sanskrit",
+"s": "Marjari Asana",
+"in": "Marjari Asana Dynamic"
+},
+{
+"i": 267,
+"k": "pose",
+"s": "Naukasana Prone Boat",
+"in": "Naukasana (prone)"
+},
+{
+"i": 268,
+"k": "sanskrit",
+"s": "Naukasana (prone)",
+"in": "Naukasana Prone Boat"
+},
+{
+"i": 269,
+"k": "pose",
+"s": "One-Legged Bow Pose",
+"in": "Eka Pada Dhanurasana"
+},
+{
+"i": 270,
+"k": "sanskrit",
+"s": "Eka Pada Dhanurasana",
+"in": "One-Legged Bow Pose"
+},
+{
+"i": 271,
+"k": "pose",
+"s": "One-Legged Bridge",
+"in": "Eka Pada Setu Bandha"
+},
+{
+"i": 272,
+"k": "sanskrit",
+"s": "Eka Pada Setu Bandha",
+"in": "One-Legged Bridge"
+},
+{
+"i": 273,
+"k": "pose",
+"s": "One-Legged Bridge Pose",
+"in": "Eka Pada Setu Bandha Sarvangasana"
+},
+{
+"i": 274,
+"k": "sanskrit",
+"s": "Eka Pada Setu Bandha Sarvangasana",
+"in": "One-Legged Bridge Pose"
+},
+{
+"i": 275,
+"k": "pose",
+"s": "One-Legged Bridge at the Wall",
+"in": "Eka Pada Setu Bandha (wall)"
+},
+{
+"i": 276,
+"k": "sanskrit",
+"s": "Eka Pada Setu Bandha (wall)",
+"in": "One-Legged Bridge at the Wall"
+},
+{
+"i": 277,
+"k": "pose",
+"s": "One-Legged Camel Pose",
+"in": "Eka Pada Ustrasana"
+},
+{
+"i": 278,
+"k": "sanskrit",
+"s": "Eka Pada Ustrasana",
+"in": "One-Legged Camel Pose"
+},
+{
+"i": 279,
+"k": "pose",
+"s": "One-Legged Chin Stand",
+"in": "Eka Pada Ganda Bherundasana"
+},
+{
+"i": 280,
+"k": "sanskrit",
+"s": "Eka Pada Ganda Bherundasana",
+"in": "One-Legged Chin Stand"
+},
+{
+"i": 281,
+"k": "pose",
+"s": "One-Legged Cobra Pose",
+"in": "Eka Pada Bhujangasana"
+},
+{
+"i": 282,
+"k": "sanskrit",
+"s": "Eka Pada Bhujangasana",
+"in": "One-Legged Cobra Pose"
+},
+{
+"i": 283,
+"k": "pose",
+"s": "One-Legged Fish Pose",
+"in": "Eka Pada Matsyasana"
+},
+{
+"i": 284,
+"k": "sanskrit",
+"s": "Eka Pada Matsyasana",
+"in": "One-Legged Fish Pose"
+},
+{
+"i": 285,
+"k": "pose",
+"s": "One-Legged Half Locust",
+"in": "Eka Pada Ardha Salabhasana"
+},
+{
+"i": 286,
+"k": "sanskrit",
+"s": "Eka Pada Ardha Salabhasana",
+"in": "One-Legged Half Locust"
+},
+{
+"i": 287,
+"k": "pose",
+"s": "One-Legged King Pigeon",
+"in": "Eka Pada Eka Pada Rajakapotasana"
+},
+{
+"i": 288,
+"k": "sanskrit",
+"s": "Eka Pada Eka Pada Rajakapotasana",
+"in": "One-Legged King Pigeon"
+},
+{
+"i": 289,
+"k": "pose",
+"s": "One-Legged Little Thunderbolt",
+"in": "Eka Pada Laghu Vajrasana"
+},
+{
+"i": 290,
+"k": "sanskrit",
+"s": "Eka Pada Laghu Vajrasana",
+"in": "One-Legged Little Thunderbolt"
+},
+{
+"i": 291,
+"k": "pose",
+"s": "One-Legged Locust Pose",
+"in": "Eka Pada Salabhasana"
+},
+{
+"i": 292,
+"k": "sanskrit",
+"s": "Eka Pada Salabhasana",
+"in": "One-Legged Locust Pose"
+},
+{
+"i": 293,
+"k": "pose",
+"s": "One-Legged Puppy Pose",
+"in": "Eka Pada Uttana Shishosana"
+},
+{
+"i": 294,
+"k": "sanskrit",
+"s": "Eka Pada Uttana Shishosana",
+"in": "One-Legged Puppy Pose"
+},
+{
+"i": 295,
+"k": "pose",
+"s": "One-Legged Reclined Hero",
+"in": "Eka Pada Supta Virasana"
+},
+{
+"i": 296,
+"k": "sanskrit",
+"s": "Eka Pada Supta Virasana",
+"in": "One-Legged Reclined Hero"
+},
+{
+"i": 297,
+"k": "pose",
+"s": "One-Legged Reverse Plank",
+"in": "Eka Pada Purvottanasana"
+},
+{
+"i": 298,
+"k": "sanskrit",
+"s": "Eka Pada Purvottanasana",
+"in": "One-Legged Reverse Plank"
+},
+{
+"i": 299,
+"k": "pose",
+"s": "One-Legged Seal Pose",
+"in": "Eka Pada Bhujangasana (yin)"
+},
+{
+"i": 300,
+"k": "sanskrit",
+"s": "Eka Pada Bhujangasana (yin)",
+"in": "One-Legged Seal Pose"
+},
+{
+"i": 301,
+"k": "pose",
+"s": "One-Legged Sphinx Pose",
+"in": "Eka Pada Salamba Bhujangasana"
+},
+{
+"i": 302,
+"k": "sanskrit",
+"s": "Eka Pada Salamba Bhujangasana",
+"in": "One-Legged Sphinx Pose"
+},
+{
+"i": 303,
+"k": "pose",
+"s": "One-Legged Standing Backbend",
+"in": "Eka Pada Anuvittasana"
+},
+{
+"i": 304,
+"k": "sanskrit",
+"s": "Eka Pada Anuvittasana",
+"in": "One-Legged Standing Backbend"
+},
+{
+"i": 305,
+"k": "pose",
+"s": "One-Legged Upward-Facing Dog",
+"in": "Eka Pada Urdhva Mukha Svanasana"
+},
+{
+"i": 306,
+"k": "sanskrit",
+"s": "Eka Pada Urdhva Mukha Svanasana",
+"in": "One-Legged Upward-Facing Dog"
+},
+{
+"i": 307,
+"k": "pose",
+"s": "One-Legged Wheel",
+"in": "Eka Pada Urdhva Dhanurasana"
+},
+{
+"i": 308,
+"k": "sanskrit",
+"s": "Eka Pada Urdhva Dhanurasana",
+"in": "One-Legged Wheel"
+},
+{
+"i": 309,
+"k": "pose",
+"s": "One-Legged Wheel at the Wall",
+"in": "Eka Pada Urdhva Dhanurasana (wall)"
+},
+{
+"i": 310,
+"k": "sanskrit",
+"s": "Eka Pada Urdhva Dhanurasana (wall)",
+"in": "One-Legged Wheel at the Wall"
+},
+{
+"i": 311,
+"k": "pose",
+"s": "One-Legged Wild Thing",
+"in": "Eka Pada Camatkarasana"
+},
+{
+"i": 312,
+"k": "sanskrit",
+"s": "Eka Pada Camatkarasana",
+"in": "One-Legged Wild Thing"
+},
+{
+"i": 313,
+"k": "pose",
+"s": "Padangustha Dhanurasana",
+"in": "Padangustha Dhanurasana"
+},
+{
+"i": 314,
+"k": "pose",
+"s": "Pigeon King Prep with Strap",
+"in": "Eka Pada Rajakapotasana (strap)"
+},
+{
+"i": 315,
+"k": "sanskrit",
+"s": "Eka Pada Rajakapotasana (strap)",
+"in": "Pigeon King Prep with Strap"
+},
+{
+"i": 316,
+"k": "pose",
+"s": "Pigeon with Bind",
+"in": "Eka Pada Rajakapotasana (bound)"
+},
+{
+"i": 317,
+"k": "sanskrit",
+"s": "Eka Pada Rajakapotasana (bound)",
+"in": "Pigeon with Bind"
+},
+{
+"i": 318,
+"k": "pose",
+"s": "Puppy Pose",
+"in": "Uttana Shishosana"
+},
+{
+"i": 319,
+"k": "sanskrit",
+"s": "Uttana Shishosana",
+"in": "Puppy Pose"
+},
+{
+"i": 320,
+"k": "pose",
+"s": "Puppy Pose at the Wall",
+"in": "Uttana Shishosana (wall)"
+},
+{
+"i": 321,
+"k": "sanskrit",
+"s": "Uttana Shishosana (wall)",
+"in": "Puppy Pose at the Wall"
+},
+{
+"i": 322,
+"k": "pose",
+"s": "Puppy Pose with Strap",
+"in": "Uttana Shishosana (strap)"
+},
+{
+"i": 323,
+"k": "sanskrit",
+"s": "Uttana Shishosana (strap)",
+"in": "Puppy Pose with Strap"
+},
+{
+"i": 324,
+"k": "pose",
+"s": "Purvottanasana Ashtanga",
+"in": "Purvottanasana (Ashtanga)"
+},
+{
+"i": 325,
+"k": "sanskrit",
+"s": "Purvottanasana (Ashtanga)",
+"in": "Purvottanasana Ashtanga"
+},
+{
+"i": 326,
+"k": "pose",
+"s": "Rajakapotasana Full",
+"in": "Rajakapotasana"
+},
+{
+"i": 327,
+"k": "sanskrit",
+"s": "Rajakapotasana",
+"in": "Rajakapotasana Full"
+},
+{
+"i": 328,
+"k": "pose",
+"s": "Reclined Hero",
+"in": "Supta Virasana"
+},
+{
+"i": 329,
+"k": "sanskrit",
+"s": "Supta Virasana",
+"in": "Reclined Hero"
+},
+{
+"i": 330,
+"k": "pose",
+"s": "Reclined Hero at the Wall",
+"in": "Supta Virasana (wall)"
+},
+{
+"i": 331,
+"k": "sanskrit",
+"s": "Supta Virasana (wall)",
+"in": "Reclined Hero at the Wall"
+},
+{
+"i": 332,
+"k": "pose",
+"s": "Reclined Hero with Block",
+"in": "Supta Virasana (block)"
+},
+{
+"i": 333,
+"k": "sanskrit",
+"s": "Supta Virasana (block)",
+"in": "Reclined Hero with Block"
+},
+{
+"i": 334,
+"k": "pose",
+"s": "Reclined Hero with Strap",
+"in": "Supta Virasana (strap)"
+},
+{
+"i": 335,
+"k": "sanskrit",
+"s": "Supta Virasana (strap)",
+"in": "Reclined Hero with Strap"
+},
+{
+"i": 336,
+"k": "pose",
+"s": "Reverse Plank",
+"in": "Purvottanasana"
+},
+{
+"i": 337,
+"k": "sanskrit",
+"s": "Purvottanasana",
+"in": "Reverse Plank"
+},
+{
+"i": 338,
+"k": "pose",
+"s": "Reverse Plank at the Wall",
+"in": "Purvottanasana (wall)"
+},
+{
+"i": 339,
+"k": "sanskrit",
+"s": "Purvottanasana (wall)",
+"in": "Reverse Plank at the Wall"
+},
+{
+"i": 340,
+"k": "pose",
+"s": "Reverse Plank with Strap",
+"in": "Purvottanasana (strap)"
+},
+{
+"i": 341,
+"k": "sanskrit",
+"s": "Purvottanasana (strap)",
+"in": "Reverse Plank with Strap"
+},
+{
+"i": 342,
+"k": "pose",
+"s": "Reverse Table with Head Back",
+"in": "Ardha Purvottanasana (extended)"
+},
+{
+"i": 343,
+"k": "sanskrit",
+"s": "Ardha Purvottanasana (extended)",
+"in": "Reverse Table with Head Back"
+},
+{
+"i": 344,
+"k": "pose",
+"s": "Rock Star",
+"in": "Camatkarasana (rock star)"
+},
+{
+"i": 345,
+"k": "sanskrit",
+"s": "Camatkarasana (rock star)",
+"in": "Rock Star"
+},
+{
+"i": 346,
+"k": "pose",
+"s": "Saddle Pose",
+"in": "Yin Supta Virasana"
+},
+{
+"i": 347,
+"k": "sanskrit",
+"s": "Yin Supta Virasana",
+"in": "Saddle Pose"
+},
+{
+"i": 348,
+"k": "pose",
+"s": "Seal Pose",
+"in": "Bhujangasana (yin)"
+},
+{
+"i": 349,
+"k": "sanskrit",
+"s": "Bhujangasana (yin)",
+"in": "Seal Pose"
+},
+{
+"i": 350,
+"k": "pose",
+"s": "Seal Pose at the Wall",
+"in": "Bhujangasana (yin) (wall)"
+},
+{
+"i": 351,
+"k": "sanskrit",
+"s": "Bhujangasana (yin) (wall)",
+"in": "Seal Pose at the Wall"
+},
+{
+"i": 352,
+"k": "pose",
+"s": "Seal Pose with Block",
+"in": "Bhujangasana (yin) (block)"
+},
+{
+"i": 353,
+"k": "sanskrit",
+"s": "Bhujangasana (yin) (block)",
+"in": "Seal Pose with Block"
+},
+{
+"i": 354,
+"k": "pose",
+"s": "Seal Pose with Strap",
+"in": "Bhujangasana (yin) (strap)"
+},
+{
+"i": 355,
+"k": "sanskrit",
+"s": "Bhujangasana (yin) (strap)",
+"in": "Seal Pose with Strap"
+},
+{
+"i": 356,
+"k": "pose",
+"s": "Setu Asana",
+"in": "Setu Asana"
+},
+{
+"i": 357,
+"k": "pose",
+"s": "Setu Bandhasana Ashtanga",
+"in": "Setu Bandhasana (Ashtanga)"
+},
+{
+"i": 358,
+"k": "sanskrit",
+"s": "Setu Bandhasana (Ashtanga)",
+"in": "Setu Bandhasana Ashtanga"
+},
+{
+"i": 359,
+"k": "pose",
+"s": "Shashank Bhujangasana",
+"in": "Shashank Bhujangasana"
+},
+{
+"i": 360,
+"k": "pose",
+"s": "Side Bow",
+"in": "Parsva Dhanurasana"
+},
+{
+"i": 361,
+"k": "sanskrit",
+"s": "Parsva Dhanurasana",
+"in": "Side Bow"
+},
+{
+"i": 362,
+"k": "pose",
+"s": "Sphinx Pose",
+"in": "Salamba Bhujangasana"
+},
+{
+"i": 363,
+"k": "sanskrit",
+"s": "Salamba Bhujangasana",
+"in": "Sphinx Pose"
+},
+{
+"i": 364,
+"k": "pose",
+"s": "Sphinx Pose at the Wall",
+"in": "Salamba Bhujangasana (wall)"
+},
+{
+"i": 365,
+"k": "sanskrit",
+"s": "Salamba Bhujangasana (wall)",
+"in": "Sphinx Pose at the Wall"
+},
+{
+"i": 366,
+"k": "pose",
+"s": "Sphinx Pose with Block",
+"in": "Salamba Bhujangasana (block)"
+},
+{
+"i": 367,
+"k": "sanskrit",
+"s": "Salamba Bhujangasana (block)",
+"in": "Sphinx Pose with Block"
+},
+{
+"i": 368,
+"k": "pose",
+"s": "Sphinx Pose with Strap",
+"in": "Salamba Bhujangasana (strap)"
+},
+{
+"i": 369,
+"k": "sanskrit",
+"s": "Salamba Bhujangasana (strap)",
+"in": "Sphinx Pose with Strap"
+},
+{
+"i": 370,
+"k": "pose",
+"s": "Sphinx Yin Hold",
+"in": "Yin Salamba Bhujangasana"
+},
+{
+"i": 371,
+"k": "sanskrit",
+"s": "Yin Salamba Bhujangasana",
+"in": "Sphinx Yin Hold"
+},
+{
+"i": 372,
+"k": "pose",
+"s": "Standing Backbend",
+"in": "Anuvittasana"
+},
+{
+"i": 373,
+"k": "sanskrit",
+"s": "Anuvittasana",
+"in": "Standing Backbend"
+},
+{
+"i": 374,
+"k": "pose",
+"s": "Standing Backbend at the Wall",
+"in": "Anuvittasana (wall)"
+},
+{
+"i": 375,
+"k": "sanskrit",
+"s": "Anuvittasana (wall)",
+"in": "Standing Backbend at the Wall"
+},
+{
+"i": 376,
+"k": "pose",
+"s": "Standing Backbend with Block",
+"in": "Anuvittasana (block)"
+},
+{
+"i": 377,
+"k": "sanskrit",
+"s": "Anuvittasana (block)",
+"in": "Standing Backbend with Block"
+},
+{
+"i": 378,
+"k": "pose",
+"s": "Standing Backbend with Strap",
+"in": "Anuvittasana (strap)"
+},
+{
+"i": 379,
+"k": "sanskrit",
+"s": "Anuvittasana (strap)",
+"in": "Standing Backbend with Strap"
+},
+{
+"i": 380,
+"k": "pose",
+"s": "Superman",
+"in": "Viparita Salabhasana"
+},
+{
+"i": 381,
+"k": "sanskrit",
+"s": "Viparita Salabhasana",
+"in": "Superman"
+},
+{
+"i": 382,
+"k": "pose",
+"s": "Superman at the Wall",
+"in": "Viparita Salabhasana (wall)"
+},
+{
+"i": 383,
+"k": "sanskrit",
+"s": "Viparita Salabhasana (wall)",
+"in": "Superman at the Wall"
+},
+{
+"i": 384,
+"k": "pose",
+"s": "Supported Fish Yin",
+"in": "Yin Matsyasana"
+},
+{
+"i": 385,
+"k": "sanskrit",
+"s": "Yin Matsyasana",
+"in": "Supported Fish Yin"
+},
+{
+"i": 386,
+"k": "pose",
+"s": "Swimming Locust",
+"in": "Salabhasana (dynamic)"
+},
+{
+"i": 387,
+"k": "sanskrit",
+"s": "Salabhasana (dynamic)",
+"in": "Swimming Locust"
+},
+{
+"i": 388,
+"k": "pose",
+"s": "Swimming Locust at the Wall",
+"in": "Salabhasana (dynamic) (wall)"
+},
+{
+"i": 389,
+"k": "sanskrit",
+"s": "Salabhasana (dynamic) (wall)",
+"in": "Swimming Locust at the Wall"
+},
+{
+"i": 390,
+"k": "pose",
+"s": "Tiriang Mukhottanasana",
+"in": "Tiriang Mukhottanasana"
+},
+{
+"i": 391,
+"k": "pose",
+"s": "Upward Bow with Blocks",
+"in": "Urdhva Dhanurasana (blocks)"
+},
+{
+"i": 392,
+"k": "sanskrit",
+"s": "Urdhva Dhanurasana (blocks)",
+"in": "Upward Bow with Blocks"
+},
+{
+"i": 393,
+"k": "pose",
+"s": "Upward Plank with Bent Knees",
+"in": "Ardha Purvottanasana"
+},
+{
+"i": 394,
+"k": "sanskrit",
+"s": "Ardha Purvottanasana",
+"in": "Upward Plank with Bent Knees"
+},
+{
+"i": 395,
+"k": "pose",
+"s": "Upward Plank with Bent Knees at the Wall",
+"in": "Ardha Purvottanasana (wall)"
+},
+{
+"i": 396,
+"k": "sanskrit",
+"s": "Ardha Purvottanasana (wall)",
+"in": "Upward Plank with Bent Knees at the Wall"
+},
+{
+"i": 397,
+"k": "pose",
+"s": "Upward Plank with Bent Knees with Strap",
+"in": "Ardha Purvottanasana (strap)"
+},
+{
+"i": 398,
+"k": "sanskrit",
+"s": "Ardha Purvottanasana (strap)",
+"in": "Upward Plank with Bent Knees with Strap"
+},
+{
+"i": 399,
+"k": "pose",
+"s": "Upward-Facing Dog",
+"in": "Urdhva Mukha Svanasana"
+},
+{
+"i": 400,
+"k": "sanskrit",
+"s": "Urdhva Mukha Svanasana",
+"in": "Upward-Facing Dog"
+},
+{
+"i": 401,
+"k": "pose",
+"s": "Upward-Facing Dog at the Wall",
+"in": "Urdhva Mukha Svanasana (wall)"
+},
+{
+"i": 402,
+"k": "sanskrit",
+"s": "Urdhva Mukha Svanasana (wall)",
+"in": "Upward-Facing Dog at the Wall"
+},
+{
+"i": 403,
+"k": "pose",
+"s": "Upward-Facing Dog with Block",
+"in": "Urdhva Mukha Svanasana (block)"
+},
+{
+"i": 404,
+"k": "sanskrit",
+"s": "Urdhva Mukha Svanasana (block)",
+"in": "Upward-Facing Dog with Block"
+},
+{
+"i": 405,
+"k": "pose",
+"s": "Upward-Facing Dog with Strap",
+"in": "Urdhva Mukha Svanasana (strap)"
+},
+{
+"i": 406,
+"k": "sanskrit",
+"s": "Urdhva Mukha Svanasana (strap)",
+"in": "Upward-Facing Dog with Strap"
+},
+{
+"i": 407,
+"k": "pose",
+"s": "Ushtrasana Dynamic",
+"in": "Ushtrasana (dynamic)"
+},
+{
+"i": 408,
+"k": "sanskrit",
+"s": "Ushtrasana (dynamic)",
+"in": "Ushtrasana Dynamic"
+},
+{
+"i": 409,
+"k": "pose",
+"s": "Uttana Padasana",
+"in": "Uttana Padasana"
+},
+{
+"i": 410,
+"k": "pose",
+"s": "Viparita Chakrasana",
+"in": "Viparita Chakrasana"
+},
+{
+"i": 411,
+"k": "pose",
+"s": "Vyaghrasana Tiger",
+"in": "Vyaghrasana"
+},
+{
+"i": 412,
+"k": "sanskrit",
+"s": "Vyaghrasana",
+"in": "Vyaghrasana Tiger"
+},
+{
+"i": 413,
+"k": "pose",
+"s": "Wall Bridge",
+"in": "Setu Bandha (wall)"
+},
+{
+"i": 414,
+"k": "sanskrit",
+"s": "Setu Bandha (wall)",
+"in": "Wall Bridge"
+},
+{
+"i": 415,
+"k": "pose",
+"s": "Wheel Pose",
+"in": "Urdhva Dhanurasana"
+},
+{
+"i": 416,
+"k": "sanskrit",
+"s": "Urdhva Dhanurasana",
+"in": "Wheel Pose"
+},
+{
+"i": 417,
+"k": "pose",
+"s": "Wheel Pose at the Wall",
+"in": "Urdhva Dhanurasana (wall)"
+},
+{
+"i": 418,
+"k": "sanskrit",
+"s": "Urdhva Dhanurasana (wall)",
+"in": "Wheel Pose at the Wall"
+},
+{
+"i": 419,
+"k": "pose",
+"s": "Wheel Pose with Block",
+"in": "Urdhva Dhanurasana (block)"
+},
+{
+"i": 420,
+"k": "sanskrit",
+"s": "Urdhva Dhanurasana (block)",
+"in": "Wheel Pose with Block"
+},
+{
+"i": 421,
+"k": "pose",
+"s": "Wheel Pose with Strap",
+"in": "Urdhva Dhanurasana (strap)"
+},
+{
+"i": 422,
+"k": "sanskrit",
+"s": "Urdhva Dhanurasana (strap)",
+"in": "Wheel Pose with Strap"
+},
+{
+"i": 423,
+"k": "pose",
+"s": "Wheel from Standing",
+"in": "Urdhva Dhanurasana (drop-back)"
+},
+{
+"i": 424,
+"k": "sanskrit",
+"s": "Urdhva Dhanurasana (drop-back)",
+"in": "Wheel from Standing"
+},
+{
+"i": 425,
+"k": "pose",
+"s": "Wild Thing",
+"in": "Camatkarasana"
+},
+{
+"i": 426,
+"k": "sanskrit",
+"s": "Camatkarasana",
+"in": "Wild Thing"
+},
+{
+"i": 427,
+"k": "pose",
+"s": "Wild Thing at the Wall",
+"in": "Camatkarasana (wall)"
+},
+{
+"i": 428,
+"k": "sanskrit",
+"s": "Camatkarasana (wall)",
+"in": "Wild Thing at the Wall"
+},
+{
+"i": 429,
+"k": "pose",
+"s": "Wild Thing with Strap",
+"in": "Camatkarasana (strap)"
+},
+{
+"i": 430,
+"k": "sanskrit",
+"s": "Camatkarasana (strap)",
+"in": "Wild Thing with Strap"
+},
+{
+"i": 431,
+"k": "pose",
+"s": "Abdominal Lock",
+"in": "Uddiyana Bandha"
+},
+{
+"i": 432,
+"k": "sanskrit",
+"s": "Uddiyana Bandha",
+"in": "Abdominal Lock"
+},
+{
+"i": 433,
+"k": "pose",
+"s": "Consciousness Gesture",
+"in": "Chin Mudra"
+},
+{
+"i": 434,
+"k": "sanskrit",
+"s": "Chin Mudra",
+"in": "Consciousness Gesture"
+},
+{
+"i": 435,
+"k": "pose",
+"s": "Great Gesture",
+"in": "Maha Mudra"
+},
+{
+"i": 436,
+"k": "sanskrit",
+"s": "Maha Mudra",
+"in": "Great Gesture"
+},
+{
+"i": 437,
+"k": "pose",
+"s": "Great Lock",
+"in": "Maha Bandha"
+},
+{
+"i": 438,
+"k": "sanskrit",
+"s": "Maha Bandha",
+"in": "Great Lock"
+},
+{
+"i": 439,
+"k": "pose",
+"s": "Knowledge Gesture",
+"in": "Jnana Mudra"
+},
+{
+"i": 440,
+"k": "sanskrit",
+"s": "Jnana Mudra",
+"in": "Knowledge Gesture"
+},
+{
+"i": 441,
+"k": "pose",
+"s": "Life Gesture",
+"in": "Prana Mudra"
+},
+{
+"i": 442,
+"k": "sanskrit",
+"s": "Prana Mudra",
+"in": "Life Gesture"
+},
+{
+"i": 443,
+"k": "pose",
+"s": "Root Lock",
+"in": "Mula Bandha"
+},
+{
+"i": 444,
+"k": "sanskrit",
+"s": "Mula Bandha",
+"in": "Root Lock"
+},
+{
+"i": 445,
+"k": "pose",
+"s": "Throat Lock",
+"in": "Jalandhara Bandha"
+},
+{
+"i": 446,
+"k": "sanskrit",
+"s": "Jalandhara Bandha",
+"in": "Throat Lock"
+},
+{
+"i": 447,
+"k": "pose",
+"s": "Vital Air Gesture",
+"in": "Apana Mudra"
+},
+{
+"i": 448,
+"k": "sanskrit",
+"s": "Apana Mudra",
+"in": "Vital Air Gesture"
+},
+{
+"i": 449,
+"k": "pose",
+"s": "Alternate Leg Raises",
+"in": "Pada Sanchalanasana"
+},
+{
+"i": 450,
+"k": "sanskrit",
+"s": "Pada Sanchalanasana",
+"in": "Alternate Leg Raises"
+},
+{
+"i": 451,
+"k": "pose",
+"s": "Bird Dog",
+"in": "Chakravakasana (variation)"
+},
+{
+"i": 452,
+"k": "sanskrit",
+"s": "Chakravakasana (variation)",
+"in": "Bird Dog"
+},
+{
+"i": 453,
+"k": "pose",
+"s": "Boat Pose",
+"in": "Navasana"
+},
+{
+"i": 454,
+"k": "sanskrit",
+"s": "Navasana",
+"in": "Boat Pose"
+},
+{
+"i": 455,
+"k": "pose",
+"s": "Boat Rowing",
+"in": "Nauka Sanchalanasana"
+},
+{
+"i": 456,
+"k": "sanskrit",
+"s": "Nauka Sanchalanasana",
+"in": "Boat Rowing"
+},
+{
+"i": 457,
+"k": "pose",
+"s": "Boat to Low Boat",
+"in": "Navasana-Ardha Navasana"
+},
+{
+"i": 458,
+"k": "sanskrit",
+"s": "Navasana-Ardha Navasana",
+"in": "Boat to Low Boat"
+},
+{
+"i": 459,
+"k": "pose",
+"s": "Chaturanga to Upward Dog",
+"in": "Vinyasa transition"
+},
+{
+"i": 460,
+"k": "sanskrit",
+"s": "Vinyasa transition",
+"in": "Chaturanga to Upward Dog"
+},
+{
+"i": 461,
+"k": "pose",
+"s": "Cycling Legs",
+"in": "Pada Sanchalanasana (cycling)"
+},
+{
+"i": 462,
+"k": "sanskrit",
+"s": "Pada Sanchalanasana (cycling)",
+"in": "Cycling Legs"
+},
+{
+"i": 463,
+"k": "pose",
+"s": "Dolphin Plank",
+"in": "Makara Adho Mukha Svanasana"
+},
+{
+"i": 464,
+"k": "sanskrit",
+"s": "Makara Adho Mukha Svanasana",
+"in": "Dolphin Plank"
+},
+{
+"i": 465,
+"k": "pose",
+"s": "Double Leg Raises",
+"in": "Uttanapadasana"
+},
+{
+"i": 466,
+"k": "sanskrit",
+"s": "Uttanapadasana",
+"in": "Double Leg Raises"
+},
+{
+"i": 467,
+"k": "pose",
+"s": "Fallen Triangle",
+"in": "Patita Tarasana"
+},
+{
+"i": 468,
+"k": "sanskrit",
+"s": "Patita Tarasana",
+"in": "Fallen Triangle"
+},
+{
+"i": 469,
+"k": "pose",
+"s": "Forearm Plank",
+"in": "Phalakasana (forearm)"
+},
+{
+"i": 470,
+"k": "sanskrit",
+"s": "Phalakasana (forearm)",
+"in": "Forearm Plank"
+},
+{
+"i": 471,
+"k": "pose",
+"s": "Four-Limbed Staff Pose",
+"in": "Chaturanga Dandasana"
+},
+{
+"i": 472,
+"k": "sanskrit",
+"s": "Chaturanga Dandasana",
+"in": "Four-Limbed Staff Pose"
+},
+{
+"i": 473,
+"k": "pose",
+"s": "Frog in Lotus Roll",
+"in": "Garbha Pindasana (rolling)"
+},
+{
+"i": 474,
+"k": "sanskrit",
+"s": "Garbha Pindasana (rolling)",
+"in": "Frog in Lotus Roll"
+},
+{
+"i": 475,
+"k": "pose",
+"s": "Half Boat Pose",
+"in": "Ardha Navasana"
+},
+{
+"i": 476,
+"k": "sanskrit",
+"s": "Ardha Navasana",
+"in": "Half Boat Pose"
+},
+{
+"i": 477,
+"k": "pose",
+"s": "Hollow Body Hold",
+"in": "Uttana Padasana (variation)"
+},
+{
+"i": 478,
+"k": "sanskrit",
+"s": "Uttana Padasana (variation)",
+"in": "Hollow Body Hold"
+},
+{
+"i": 479,
+"k": "pose",
+"s": "Jump Back",
+"in": "Vinyasa (jump back)"
+},
+{
+"i": 480,
+"k": "sanskrit",
+"s": "Vinyasa (jump back)",
+"in": "Jump Back"
+},
+{
+"i": 481,
+"k": "pose",
+"s": "Jump Through",
+"in": "Vinyasa (jump through)"
+},
+{
+"i": 482,
+"k": "sanskrit",
+"s": "Vinyasa (jump through)",
+"in": "Jump Through"
+},
+{
+"i": 483,
+"k": "pose",
+"s": "Knee-to-Nose",
+"in": "Adho Mukha Svanasana (knee-nose)"
+},
+{
+"i": 484,
+"k": "sanskrit",
+"s": "Adho Mukha Svanasana (knee-nose)",
+"in": "Knee-to-Nose"
+},
+{
+"i": 485,
+"k": "pose",
+"s": "Kneeling Side Plank",
+"in": "Vasisthasana (kneeling)"
+},
+{
+"i": 486,
+"k": "sanskrit",
+"s": "Vasisthasana (kneeling)",
+"in": "Kneeling Side Plank"
+},
+{
+"i": 487,
+"k": "pose",
+"s": "Leg Lowering",
+"in": "Urdhva Prasarita Padasana"
+},
+{
+"i": 488,
+"k": "sanskrit",
+"s": "Urdhva Prasarita Padasana",
+"in": "Leg Lowering"
+},
+{
+"i": 489,
+"k": "pose",
+"s": "Navasana Ashtanga Five Rounds",
+"in": "Navasana (five rounds)"
+},
+{
+"i": 490,
+"k": "sanskrit",
+"s": "Navasana (five rounds)",
+"in": "Navasana Ashtanga Five Rounds"
+},
+{
+"i": 491,
+"k": "pose",
+"s": "One-Legged Boat Pose",
+"in": "Eka Pada Navasana"
+},
+{
+"i": 492,
+"k": "sanskrit",
+"s": "Eka Pada Navasana",
+"in": "One-Legged Boat Pose"
+},
+{
+"i": 493,
+"k": "pose",
+"s": "One-Legged Boat to Low Boat",
+"in": "Eka Pada Navasana-Ardha Navasana"
+},
+{
+"i": 494,
+"k": "sanskrit",
+"s": "Eka Pada Navasana-Ardha Navasana",
+"in": "One-Legged Boat to Low Boat"
+},
+{
+"i": 495,
+"k": "pose",
+"s": "One-Legged Chaturanga to Upward Dog",
+"in": "Eka Pada Vinyasa transition"
+},
+{
+"i": 496,
+"k": "sanskrit",
+"s": "Eka Pada Vinyasa transition",
+"in": "One-Legged Chaturanga to Upward Dog"
+},
+{
+"i": 497,
+"k": "pose",
+"s": "One-Legged Dolphin Plank",
+"in": "Eka Pada Makara Adho Mukha Svanasana"
+},
+{
+"i": 498,
+"k": "sanskrit",
+"s": "Eka Pada Makara Adho Mukha Svanasana",
+"in": "One-Legged Dolphin Plank"
+},
+{
+"i": 499,
+"k": "pose",
+"s": "One-Legged Forearm Plank",
+"in": "Eka Pada Phalakasana (forearm)"
+},
+{
+"i": 500,
+"k": "sanskrit",
+"s": "Eka Pada Phalakasana (forearm)",
+"in": "One-Legged Forearm Plank"
+},
+{
+"i": 501,
+"k": "pose",
+"s": "One-Legged Four-Limbed Staff Pose",
+"in": "Eka Pada Chaturanga Dandasana"
+},
+{
+"i": 502,
+"k": "sanskrit",
+"s": "Eka Pada Chaturanga Dandasana",
+"in": "One-Legged Four-Limbed Staff Pose"
+},
+{
+"i": 503,
+"k": "pose",
+"s": "One-Legged Half Boat Pose",
+"in": "Eka Pada Ardha Navasana"
+},
+{
+"i": 504,
+"k": "sanskrit",
+"s": "Eka Pada Ardha Navasana",
+"in": "One-Legged Half Boat Pose"
+},
+{
+"i": 505,
+"k": "pose",
+"s": "One-Legged Jump Back",
+"in": "Eka Pada Vinyasa (jump back)"
+},
+{
+"i": 506,
+"k": "sanskrit",
+"s": "Eka Pada Vinyasa (jump back)",
+"in": "One-Legged Jump Back"
+},
+{
+"i": 507,
+"k": "pose",
+"s": "One-Legged Jump Through",
+"in": "Eka Pada Vinyasa (jump through)"
+},
+{
+"i": 508,
+"k": "sanskrit",
+"s": "Eka Pada Vinyasa (jump through)",
+"in": "One-Legged Jump Through"
+},
+{
+"i": 509,
+"k": "pose",
+"s": "One-Legged Knee-to-Nose",
+"in": "Eka Pada Adho Mukha Svanasana (knee-nose)"
+},
+{
+"i": 510,
+"k": "sanskrit",
+"s": "Eka Pada Adho Mukha Svanasana (knee-nose)",
+"in": "One-Legged Knee-to-Nose"
+},
+{
+"i": 511,
+"k": "pose",
+"s": "One-Legged Plank Pose",
+"in": "Eka Pada Phalakasana"
+},
+{
+"i": 512,
+"k": "sanskrit",
+"s": "Eka Pada Phalakasana",
+"in": "One-Legged Plank Pose"
+},
+{
+"i": 513,
+"k": "pose",
+"s": "One-Legged Side Plank Knee Down",
+"in": "Eka Pada Vasisthasana (modified)"
+},
+{
+"i": 514,
+"k": "sanskrit",
+"s": "Eka Pada Vasisthasana (modified)",
+"in": "One-Legged Side Plank Knee Down"
+},
+{
+"i": 515,
+"k": "pose",
+"s": "Plank Pose",
+"in": "Phalakasana"
+},
+{
+"i": 516,
+"k": "sanskrit",
+"s": "Phalakasana",
+"in": "Plank Pose"
+},
+{
+"i": 517,
+"k": "pose",
+"s": "Rocking Boat",
+"in": "Naukasana (dynamic)"
+},
+{
+"i": 518,
+"k": "sanskrit",
+"s": "Naukasana (dynamic)",
+"in": "Rocking Boat"
+},
+{
+"i": 519,
+"k": "pose",
+"s": "Side Plank Knee Down",
+"in": "Vasisthasana (modified)"
+},
+{
+"i": 520,
+"k": "sanskrit",
+"s": "Vasisthasana (modified)",
+"in": "Side Plank Knee Down"
+},
+{
+"i": 521,
+"k": "pose",
+"s": "Stretch Pose",
+"in": "Kundalini Stretch Pose"
+},
+{
+"i": 522,
+"k": "sanskrit",
+"s": "Kundalini Stretch Pose",
+"in": "Stretch Pose"
+},
+{
+"i": 523,
+"k": "pose",
+"s": "Supine Bicycle",
+"in": "Pavanamuktasana (dynamic)"
+},
+{
+"i": 524,
+"k": "sanskrit",
+"s": "Pavanamuktasana (dynamic)",
+"in": "Supine Bicycle"
+},
+{
+"i": 525,
+"k": "pose",
+"s": "Tabletop",
+"in": "Bharmanasana"
+},
+{
+"i": 526,
+"k": "sanskrit",
+"s": "Bharmanasana",
+"in": "Tabletop"
+},
+{
+"i": 527,
+"k": "pose",
+"s": "Ubhaya Padangusthasana",
+"in": "Ubhaya Padangusthasana"
+},
+{
+"i": 528,
+"k": "pose",
+"s": "Urdhva Mukha Paschimottanasana",
+"in": "Urdhva Mukha Paschimottanasana"
+},
+{
+"i": 529,
+"k": "pose",
+"s": "Wall Plank",
+"in": "Phalakasana (wall)"
+},
+{
+"i": 530,
+"k": "sanskrit",
+"s": "Phalakasana (wall)",
+"in": "Wall Plank"
+},
+{
+"i": 531,
+"k": "pose",
+"s": "Both Legs Behind Head",
+"in": "Dwi Pada Sirsasana"
+},
+{
+"i": 532,
+"k": "sanskrit",
+"s": "Dwi Pada Sirsasana",
+"in": "Both Legs Behind Head"
+},
+{
+"i": 533,
+"k": "pose",
+"s": "Butterfly Fold",
+"in": "Baddha Konasana (forward)"
+},
+{
+"i": 534,
+"k": "sanskrit",
+"s": "Baddha Konasana (forward)",
+"in": "Butterfly Fold"
+},
+{
+"i": 535,
+"k": "pose",
+"s": "Butterfly Fold at the Wall",
+"in": "Baddha Konasana (forward) (wall)"
+},
+{
+"i": 536,
+"k": "sanskrit",
+"s": "Baddha Konasana (forward) (wall)",
+"in": "Butterfly Fold at the Wall"
+},
+{
+"i": 537,
+"k": "pose",
+"s": "Butterfly Fold with Block",
+"in": "Baddha Konasana (forward) (block)"
+},
+{
+"i": 538,
+"k": "sanskrit",
+"s": "Baddha Konasana (forward) (block)",
+"in": "Butterfly Fold with Block"
+},
+{
+"i": 539,
+"k": "pose",
+"s": "Butterfly Fold with Strap",
+"in": "Baddha Konasana (forward) (strap)"
+},
+{
+"i": 540,
+"k": "sanskrit",
+"s": "Baddha Konasana (forward) (strap)",
+"in": "Butterfly Fold with Strap"
+},
+{
+"i": 541,
+"k": "pose",
+"s": "Caterpillar",
+"in": "Yin Paschimottanasana"
+},
+{
+"i": 542,
+"k": "sanskrit",
+"s": "Yin Paschimottanasana",
+"in": "Caterpillar"
+},
+{
+"i": 543,
+"k": "pose",
+"s": "Chair Forward Fold",
+"in": "Uttanasana (chair)"
+},
+{
+"i": 544,
+"k": "sanskrit",
+"s": "Uttanasana (chair)",
+"in": "Chair Forward Fold"
+},
+{
+"i": 545,
+"k": "pose",
+"s": "Full Split",
+"in": "Hanumanasana"
+},
+{
+"i": 546,
+"k": "sanskrit",
+"s": "Hanumanasana",
+"in": "Full Split"
+},
+{
+"i": 547,
+"k": "pose",
+"s": "Full Split with Strap",
+"in": "Hanumanasana (strap)"
+},
+{
+"i": 548,
+"k": "sanskrit",
+"s": "Hanumanasana (strap)",
+"in": "Full Split with Strap"
+},
+{
+"i": 549,
+"k": "pose",
+"s": "Half Bound Lotus Forward Bend",
+"in": "Ardha Baddha Padma Paschimottanasana"
+},
+{
+"i": 550,
+"k": "sanskrit",
+"s": "Ardha Baddha Padma Paschimottanasana",
+"in": "Half Bound Lotus Forward Bend"
+},
+{
+"i": 551,
+"k": "pose",
+"s": "Half Butterfly",
+"in": "Yin Janu Sirsasana"
+},
+{
+"i": 552,
+"k": "sanskrit",
+"s": "Yin Janu Sirsasana",
+"in": "Half Butterfly"
+},
+{
+"i": 553,
+"k": "pose",
+"s": "Half Forward Fold",
+"in": "Ardha Uttanasana"
+},
+{
+"i": 554,
+"k": "sanskrit",
+"s": "Ardha Uttanasana",
+"in": "Half Forward Fold"
+},
+{
+"i": 555,
+"k": "pose",
+"s": "Half Forward Fold with Block",
+"in": "Ardha Uttanasana (block)"
+},
+{
+"i": 556,
+"k": "sanskrit",
+"s": "Ardha Uttanasana (block)",
+"in": "Half Forward Fold with Block"
+},
+{
+"i": 557,
+"k": "pose",
+"s": "Half Forward Fold with Strap",
+"in": "Ardha Uttanasana (strap)"
+},
+{
+"i": 558,
+"k": "sanskrit",
+"s": "Ardha Uttanasana (strap)",
+"in": "Half Forward Fold with Strap"
+},
+{
+"i": 559,
+"k": "pose",
+"s": "Half Split",
+"in": "Ardha Hanumanasana"
+},
+{
+"i": 560,
+"k": "sanskrit",
+"s": "Ardha Hanumanasana",
+"in": "Half Split"
+},
+{
+"i": 561,
+"k": "pose",
+"s": "Half Split at the Wall",
+"in": "Ardha Hanumanasana (wall)"
+},
+{
+"i": 562,
+"k": "sanskrit",
+"s": "Ardha Hanumanasana (wall)",
+"in": "Half Split at the Wall"
+},
+{
+"i": 563,
+"k": "pose",
+"s": "Half Split with Strap",
+"in": "Ardha Hanumanasana (strap)"
+},
+{
+"i": 564,
+"k": "sanskrit",
+"s": "Ardha Hanumanasana (strap)",
+"in": "Half Split with Strap"
+},
+{
+"i": 565,
+"k": "pose",
+"s": "Head-to-Knee Pose",
+"in": "Janu Sirsasana"
+},
+{
+"i": 566,
+"k": "sanskrit",
+"s": "Janu Sirsasana",
+"in": "Head-to-Knee Pose"
+},
+{
+"i": 567,
+"k": "pose",
+"s": "Head-to-Knee Pose at the Wall",
+"in": "Janu Sirsasana (wall)"
+},
+{
+"i": 568,
+"k": "sanskrit",
+"s": "Janu Sirsasana (wall)",
+"in": "Head-to-Knee Pose at the Wall"
+},
+{
+"i": 569,
+"k": "pose",
+"s": "Head-to-Knee Pose with Block",
+"in": "Janu Sirsasana (block)"
+},
+{
+"i": 570,
+"k": "sanskrit",
+"s": "Janu Sirsasana (block)",
+"in": "Head-to-Knee Pose with Block"
+},
+{
+"i": 571,
+"k": "pose",
+"s": "Head-to-Knee Pose with Strap",
+"in": "Janu Sirsasana (strap)"
+},
+{
+"i": 572,
+"k": "sanskrit",
+"s": "Janu Sirsasana (strap)",
+"in": "Head-to-Knee Pose with Strap"
+},
+{
+"i": 573,
+"k": "pose",
+"s": "Heron Pose",
+"in": "Krounchasana"
+},
+{
+"i": 574,
+"k": "sanskrit",
+"s": "Krounchasana",
+"in": "Heron Pose"
+},
+{
+"i": 575,
+"k": "pose",
+"s": "Heron Pose at the Wall",
+"in": "Krounchasana (wall)"
+},
+{
+"i": 576,
+"k": "sanskrit",
+"s": "Krounchasana (wall)",
+"in": "Heron Pose at the Wall"
+},
+{
+"i": 577,
+"k": "pose",
+"s": "Heron Pose with Block",
+"in": "Krounchasana (block)"
+},
+{
+"i": 578,
+"k": "sanskrit",
+"s": "Krounchasana (block)",
+"in": "Heron Pose with Block"
+},
+{
+"i": 579,
+"k": "pose",
+"s": "Heron Pose with Strap",
+"in": "Krounchasana (strap)"
+},
+{
+"i": 580,
+"k": "sanskrit",
+"s": "Krounchasana (strap)",
+"in": "Heron Pose with Strap"
+},
+{
+"i": 581,
+"k": "pose",
+"s": "Intense Side Stretch with Reverse Prayer",
+"in": "Parsvottanasana (paschim namaskar)"
+},
+{
+"i": 582,
+"k": "sanskrit",
+"s": "Parsvottanasana (paschim namaskar)",
+"in": "Intense Side Stretch with Reverse Prayer"
+},
+{
+"i": 583,
+"k": "pose",
+"s": "Intense Side Stretch with Reverse Prayer at the Wall",
+"in": "Parsvottanasana (paschim namaskar) (wall)"
+},
+{
+"i": 584,
+"k": "sanskrit",
+"s": "Parsvottanasana (paschim namaskar) (wall)",
+"in": "Intense Side Stretch with Reverse Prayer at the Wall"
+},
+{
+"i": 585,
+"k": "pose",
+"s": "Intense Side Stretch with Reverse Prayer with Block",
+"in": "Parsvottanasana (paschim namaskar) (block)"
+},
+{
+"i": 586,
+"k": "sanskrit",
+"s": "Parsvottanasana (paschim namaskar) (block)",
+"in": "Intense Side Stretch with Reverse Prayer with Block"
+},
+{
+"i": 587,
+"k": "pose",
+"s": "Intense Side Stretch with Reverse Prayer with Strap",
+"in": "Parsvottanasana (paschim namaskar) (strap)"
+},
+{
+"i": 588,
+"k": "sanskrit",
+"s": "Parsvottanasana (paschim namaskar) (strap)",
+"in": "Intense Side Stretch with Reverse Prayer with Strap"
+},
+{
+"i": 589,
+"k": "pose",
+"s": "Janu Sirsasana B",
+"in": "Janu Sirsasana B"
+},
+{
+"i": 590,
+"k": "pose",
+"s": "Janu Sirsasana C",
+"in": "Janu Sirsasana C"
+},
+{
+"i": 591,
+"k": "pose",
+"s": "Life Nerve Stretch",
+"in": "Kundalini Paschimottanasana"
+},
+{
+"i": 592,
+"k": "sanskrit",
+"s": "Kundalini Paschimottanasana",
+"in": "Life Nerve Stretch"
+},
+{
+"i": 593,
+"k": "pose",
+"s": "Middle Split",
+"in": "Samakonasana"
+},
+{
+"i": 594,
+"k": "sanskrit",
+"s": "Samakonasana",
+"in": "Middle Split"
+},
+{
+"i": 595,
+"k": "pose",
+"s": "Middle Split at the Wall",
+"in": "Samakonasana (wall)"
+},
+{
+"i": 596,
+"k": "sanskrit",
+"s": "Samakonasana (wall)",
+"in": "Middle Split at the Wall"
+},
+{
+"i": 597,
+"k": "pose",
+"s": "Middle Split with Strap",
+"in": "Samakonasana (strap)"
+},
+{
+"i": 598,
+"k": "sanskrit",
+"s": "Samakonasana (strap)",
+"in": "Middle Split with Strap"
+},
+{
+"i": 599,
+"k": "pose",
+"s": "Monkey Pose Prep with Blocks",
+"in": "Hanumanasana (blocks)"
+},
+{
+"i": 600,
+"k": "sanskrit",
+"s": "Hanumanasana (blocks)",
+"in": "Monkey Pose Prep with Blocks"
+},
+{
+"i": 601,
+"k": "pose",
+"s": "Neck Release in Fold",
+"in": "Uttanasana (neck)"
+},
+{
+"i": 602,
+"k": "sanskrit",
+"s": "Uttanasana (neck)",
+"in": "Neck Release in Fold"
+},
+{
+"i": 603,
+"k": "pose",
+"s": "One Leg Behind Head",
+"in": "Eka Pada Sirsasana"
+},
+{
+"i": 604,
+"k": "sanskrit",
+"s": "Eka Pada Sirsasana",
+"in": "One Leg Behind Head"
+},
+{
+"i": 605,
+"k": "pose",
+"s": "Padahastasana Hand Under Foot",
+"in": "Padahastasana"
+},
+{
+"i": 606,
+"k": "sanskrit",
+"s": "Padahastasana",
+"in": "Padahastasana Hand Under Foot"
+},
+{
+"i": 607,
+"k": "pose",
+"s": "Padangusthasana Big Toe Pose",
+"in": "Padangusthasana"
+},
+{
+"i": 608,
+"k": "sanskrit",
+"s": "Padangusthasana",
+"in": "Padangusthasana Big Toe Pose"
+},
+{
+"i": 609,
+"k": "pose",
+"s": "Prasarita Padottanasana A",
+"in": "Prasarita A"
+},
+{
+"i": 610,
+"k": "sanskrit",
+"s": "Prasarita A",
+"in": "Prasarita Padottanasana A"
+},
+{
+"i": 611,
+"k": "pose",
+"s": "Prasarita Padottanasana B",
+"in": "Prasarita B"
+},
+{
+"i": 612,
+"k": "sanskrit",
+"s": "Prasarita B",
+"in": "Prasarita Padottanasana B"
+},
+{
+"i": 613,
+"k": "pose",
+"s": "Prasarita Padottanasana D",
+"in": "Prasarita D"
+},
+{
+"i": 614,
+"k": "sanskrit",
+"s": "Prasarita D",
+"in": "Prasarita Padottanasana D"
+},
+{
+"i": 615,
+"k": "pose",
+"s": "Pyramid Pose",
+"in": "Parsvottanasana"
+},
+{
+"i": 616,
+"k": "sanskrit",
+"s": "Parsvottanasana",
+"in": "Pyramid Pose"
+},
+{
+"i": 617,
+"k": "pose",
+"s": "Pyramid Pose at the Wall",
+"in": "Parsvottanasana (wall)"
+},
+{
+"i": 618,
+"k": "sanskrit",
+"s": "Parsvottanasana (wall)",
+"in": "Pyramid Pose at the Wall"
+},
+{
+"i": 619,
+"k": "pose",
+"s": "Pyramid Pose with Block",
+"in": "Parsvottanasana (block)"
+},
+{
+"i": 620,
+"k": "sanskrit",
+"s": "Parsvottanasana (block)",
+"in": "Pyramid Pose with Block"
+},
+{
+"i": 621,
+"k": "pose",
+"s": "Pyramid Pose with Strap",
+"in": "Parsvottanasana (strap)"
+},
+{
+"i": 622,
+"k": "sanskrit",
+"s": "Parsvottanasana (strap)",
+"in": "Pyramid Pose with Strap"
+},
+{
+"i": 623,
+"k": "pose",
+"s": "Pyramid with Blocks",
+"in": "Parsvottanasana (blocks)"
+},
+{
+"i": 624,
+"k": "sanskrit",
+"s": "Parsvottanasana (blocks)",
+"in": "Pyramid with Blocks"
+},
+{
+"i": 625,
+"k": "pose",
+"s": "Rabbit Pose",
+"in": "Sasangasana"
+},
+{
+"i": 626,
+"k": "sanskrit",
+"s": "Sasangasana",
+"in": "Rabbit Pose"
+},
+{
+"i": 627,
+"k": "pose",
+"s": "Rag Doll",
+"in": "Uttanasana (bent knees)"
+},
+{
+"i": 628,
+"k": "sanskrit",
+"s": "Uttanasana (bent knees)",
+"in": "Rag Doll"
+},
+{
+"i": 629,
+"k": "pose",
+"s": "Rag Doll at the Wall",
+"in": "Uttanasana (bent knees) (wall)"
+},
+{
+"i": 630,
+"k": "sanskrit",
+"s": "Uttanasana (bent knees) (wall)",
+"in": "Rag Doll at the Wall"
+},
+{
+"i": 631,
+"k": "pose",
+"s": "Rag Doll with Strap",
+"in": "Uttanasana (bent knees) (strap)"
+},
+{
+"i": 632,
+"k": "sanskrit",
+"s": "Uttanasana (bent knees) (strap)",
+"in": "Rag Doll with Strap"
+},
+{
+"i": 633,
+"k": "pose",
+"s": "Ragdoll Sway",
+"in": "Uttanasana (sway)"
+},
+{
+"i": 634,
+"k": "sanskrit",
+"s": "Uttanasana (sway)",
+"in": "Ragdoll Sway"
+},
+{
+"i": 635,
+"k": "pose",
+"s": "Revolved Butterfly Fold",
+"in": "Parivrtta Baddha Konasana (forward)"
+},
+{
+"i": 636,
+"k": "sanskrit",
+"s": "Parivrtta Baddha Konasana (forward)",
+"in": "Revolved Butterfly Fold"
+},
+{
+"i": 637,
+"k": "pose",
+"s": "Revolved Caterpillar",
+"in": "Parivrtta Yin Paschimottanasana"
+},
+{
+"i": 638,
+"k": "sanskrit",
+"s": "Parivrtta Yin Paschimottanasana",
+"in": "Revolved Caterpillar"
+},
+{
+"i": 639,
+"k": "pose",
+"s": "Revolved Full Split",
+"in": "Parivrtta Hanumanasana"
+},
+{
+"i": 640,
+"k": "sanskrit",
+"s": "Parivrtta Hanumanasana",
+"in": "Revolved Full Split"
+},
+{
+"i": 641,
+"k": "pose",
+"s": "Revolved Half Forward Fold",
+"in": "Parivrtta Ardha Uttanasana"
+},
+{
+"i": 642,
+"k": "sanskrit",
+"s": "Parivrtta Ardha Uttanasana",
+"in": "Revolved Half Forward Fold"
+},
+{
+"i": 643,
+"k": "pose",
+"s": "Revolved Half Split",
+"in": "Parivrtta Ardha Hanumanasana"
+},
+{
+"i": 644,
+"k": "sanskrit",
+"s": "Parivrtta Ardha Hanumanasana",
+"in": "Revolved Half Split"
+},
+{
+"i": 645,
+"k": "pose",
+"s": "Revolved Heron Pose",
+"in": "Parivrtta Krounchasana"
+},
+{
+"i": 646,
+"k": "sanskrit",
+"s": "Parivrtta Krounchasana",
+"in": "Revolved Heron Pose"
+},
+{
+"i": 647,
+"k": "pose",
+"s": "Revolved Intense Side Stretch with Reverse Prayer",
+"in": "Parivrtta Parsvottanasana (paschim namaskar)"
+},
+{
+"i": 648,
+"k": "sanskrit",
+"s": "Parivrtta Parsvottanasana (paschim namaskar)",
+"in": "Revolved Intense Side Stretch with Reverse Prayer"
+},
+{
+"i": 649,
+"k": "pose",
+"s": "Revolved Middle Split",
+"in": "Parivrtta Samakonasana"
+},
+{
+"i": 650,
+"k": "sanskrit",
+"s": "Parivrtta Samakonasana",
+"in": "Revolved Middle Split"
+},
+{
+"i": 651,
+"k": "pose",
+"s": "Revolved Pyramid Pose",
+"in": "Parivrtta Parsvottanasana"
+},
+{
+"i": 652,
+"k": "sanskrit",
+"s": "Parivrtta Parsvottanasana",
+"in": "Revolved Pyramid Pose"
+},
+{
+"i": 653,
+"k": "pose",
+"s": "Revolved Rag Doll",
+"in": "Parivrtta Uttanasana (bent knees)"
+},
+{
+"i": 654,
+"k": "sanskrit",
+"s": "Parivrtta Uttanasana (bent knees)",
+"in": "Revolved Rag Doll"
+},
+{
+"i": 655,
+"k": "pose",
+"s": "Revolved Sage Marichi I",
+"in": "Parivrtta Marichyasana I"
+},
+{
+"i": 656,
+"k": "sanskrit",
+"s": "Parivrtta Marichyasana I",
+"in": "Revolved Sage Marichi I"
+},
+{
+"i": 657,
+"k": "pose",
+"s": "Revolved Seated Forward Bend",
+"in": "Parivrtta Paschimottanasana"
+},
+{
+"i": 658,
+"k": "sanskrit",
+"s": "Parivrtta Paschimottanasana",
+"in": "Revolved Seated Forward Bend"
+},
+{
+"i": 659,
+"k": "pose",
+"s": "Revolved Sleeping Tortoise",
+"in": "Parivrtta Supta Kurmasana"
+},
+{
+"i": 660,
+"k": "sanskrit",
+"s": "Parivrtta Supta Kurmasana",
+"in": "Revolved Sleeping Tortoise"
+},
+{
+"i": 661,
+"k": "pose",
+"s": "Revolved Standing Forward Fold",
+"in": "Parivrtta Uttanasana"
+},
+{
+"i": 662,
+"k": "sanskrit",
+"s": "Parivrtta Uttanasana",
+"in": "Revolved Standing Forward Fold"
+},
+{
+"i": 663,
+"k": "pose",
+"s": "Revolved Standing Forward Fold with Clasp",
+"in": "Parivrtta Uttanasana (clasp)"
+},
+{
+"i": 664,
+"k": "sanskrit",
+"s": "Parivrtta Uttanasana (clasp)",
+"in": "Revolved Standing Forward Fold with Clasp"
+},
+{
+"i": 665,
+"k": "pose",
+"s": "Revolved Tortoise Pose",
+"in": "Parivrtta Kurmasana"
+},
+{
+"i": 666,
+"k": "sanskrit",
+"s": "Parivrtta Kurmasana",
+"in": "Revolved Tortoise Pose"
+},
+{
+"i": 667,
+"k": "pose",
+"s": "Revolved Wide-Legged Forward Fold",
+"in": "Parivrtta Prasarita Padottanasana"
+},
+{
+"i": 668,
+"k": "sanskrit",
+"s": "Parivrtta Prasarita Padottanasana",
+"in": "Revolved Wide-Legged Forward Fold"
+},
+{
+"i": 669,
+"k": "pose",
+"s": "Revolved Wide-Legged Forward Fold with Clasp",
+"in": "Parivrtta Prasarita Padottanasana C"
+},
+{
+"i": 670,
+"k": "sanskrit",
+"s": "Parivrtta Prasarita Padottanasana C",
+"in": "Revolved Wide-Legged Forward Fold with Clasp"
+},
+{
+"i": 671,
+"k": "pose",
+"s": "Sage Marichi I",
+"in": "Marichyasana I"
+},
+{
+"i": 672,
+"k": "sanskrit",
+"s": "Marichyasana I",
+"in": "Sage Marichi I"
+},
+{
+"i": 673,
+"k": "pose",
+"s": "Sage Marichi I at the Wall",
+"in": "Marichyasana I (wall)"
+},
+{
+"i": 674,
+"k": "sanskrit",
+"s": "Marichyasana I (wall)",
+"in": "Sage Marichi I at the Wall"
+},
+{
+"i": 675,
+"k": "pose",
+"s": "Sage Marichi I with Block",
+"in": "Marichyasana I (block)"
+},
+{
+"i": 676,
+"k": "sanskrit",
+"s": "Marichyasana I (block)",
+"in": "Sage Marichi I with Block"
+},
+{
+"i": 677,
+"k": "pose",
+"s": "Sage Marichi I with Strap",
+"in": "Marichyasana I (strap)"
+},
+{
+"i": 678,
+"k": "sanskrit",
+"s": "Marichyasana I (strap)",
+"in": "Sage Marichi I with Strap"
+},
+{
+"i": 679,
+"k": "pose",
+"s": "Sage Marichi II",
+"in": "Marichyasana II"
+},
+{
+"i": 680,
+"k": "sanskrit",
+"s": "Marichyasana II",
+"in": "Sage Marichi II"
+},
+{
+"i": 681,
+"k": "pose",
+"s": "Seated Forward Bend",
+"in": "Paschimottanasana"
+},
+{
+"i": 682,
+"k": "sanskrit",
+"s": "Paschimottanasana",
+"in": "Seated Forward Bend"
+},
+{
+"i": 683,
+"k": "pose",
+"s": "Seated Forward Bend at the Wall",
+"in": "Paschimottanasana (wall)"
+},
+{
+"i": 684,
+"k": "sanskrit",
+"s": "Paschimottanasana (wall)",
+"in": "Seated Forward Bend at the Wall"
+},
+{
+"i": 685,
+"k": "pose",
+"s": "Seated Forward Bend with Block",
+"in": "Paschimottanasana (block)"
+},
+{
+"i": 686,
+"k": "sanskrit",
+"s": "Paschimottanasana (block)",
+"in": "Seated Forward Bend with Block"
+},
+{
+"i": 687,
+"k": "pose",
+"s": "Seated Forward Bend with Strap",
+"in": "Paschimottanasana (strap)"
+},
+{
+"i": 688,
+"k": "sanskrit",
+"s": "Paschimottanasana (strap)",
+"in": "Seated Forward Bend with Strap"
+},
+{
+"i": 689,
+"k": "pose",
+"s": "Shashankasana",
+"in": "Shashankasana"
+},
+{
+"i": 690,
+"k": "pose",
+"s": "Sleeping Tortoise",
+"in": "Supta Kurmasana"
+},
+{
+"i": 691,
+"k": "sanskrit",
+"s": "Supta Kurmasana",
+"in": "Sleeping Tortoise"
+},
+{
+"i": 692,
+"k": "pose",
+"s": "Sleeping Tortoise at the Wall",
+"in": "Supta Kurmasana (wall)"
+},
+{
+"i": 693,
+"k": "sanskrit",
+"s": "Supta Kurmasana (wall)",
+"in": "Sleeping Tortoise at the Wall"
+},
+{
+"i": 694,
+"k": "pose",
+"s": "Sleeping Tortoise with Block",
+"in": "Supta Kurmasana (block)"
+},
+{
+"i": 695,
+"k": "sanskrit",
+"s": "Supta Kurmasana (block)",
+"in": "Sleeping Tortoise with Block"
+},
+{
+"i": 696,
+"k": "pose",
+"s": "Sleeping Tortoise with Strap",
+"in": "Supta Kurmasana (strap)"
+},
+{
+"i": 697,
+"k": "sanskrit",
+"s": "Supta Kurmasana (strap)",
+"in": "Sleeping Tortoise with Strap"
+},
+{
+"i": 698,
+"k": "pose",
+"s": "Standing Forward Bend Dynamic",
+"in": "Padahastasana (dynamic)"
+},
+{
+"i": 699,
+"k": "sanskrit",
+"s": "Padahastasana (dynamic)",
+"in": "Standing Forward Bend Dynamic"
+},
+{
+"i": 700,
+"k": "pose",
+"s": "Standing Forward Fold",
+"in": "Uttanasana"
+},
+{
+"i": 701,
+"k": "sanskrit",
+"s": "Uttanasana",
+"in": "Standing Forward Fold"
+},
+{
+"i": 702,
+"k": "pose",
+"s": "Standing Forward Fold at the Wall",
+"in": "Uttanasana (wall)"
+},
+{
+"i": 703,
+"k": "sanskrit",
+"s": "Uttanasana (wall)",
+"in": "Standing Forward Fold at the Wall"
+},
+{
+"i": 704,
+"k": "pose",
+"s": "Standing Forward Fold with Block",
+"in": "Uttanasana (block)"
+},
+{
+"i": 705,
+"k": "sanskrit",
+"s": "Uttanasana (block)",
+"in": "Standing Forward Fold with Block"
+},
+{
+"i": 706,
+"k": "pose",
+"s": "Standing Forward Fold with Clasp",
+"in": "Uttanasana (clasp)"
+},
+{
+"i": 707,
+"k": "sanskrit",
+"s": "Uttanasana (clasp)",
+"in": "Standing Forward Fold with Clasp"
+},
+{
+"i": 708,
+"k": "pose",
+"s": "Standing Forward Fold with Clasp at the Wall",
+"in": "Uttanasana (clasp) (wall)"
+},
+{
+"i": 709,
+"k": "sanskrit",
+"s": "Uttanasana (clasp) (wall)",
+"in": "Standing Forward Fold with Clasp at the Wall"
+},
+{
+"i": 710,
+"k": "pose",
+"s": "Standing Forward Fold with Clasp with Strap",
+"in": "Uttanasana (clasp) (strap)"
+},
+{
+"i": 711,
+"k": "sanskrit",
+"s": "Uttanasana (clasp) (strap)",
+"in": "Standing Forward Fold with Clasp with Strap"
+},
+{
+"i": 712,
+"k": "pose",
+"s": "Standing Forward Fold with Strap",
+"in": "Uttanasana (strap)"
+},
+{
+"i": 713,
+"k": "sanskrit",
+"s": "Uttanasana (strap)",
+"in": "Standing Forward Fold with Strap"
+},
+{
+"i": 714,
+"k": "pose",
+"s": "Standing Half Forward Bend at Wall",
+"in": "Ardha Uttanasana (wall)"
+},
+{
+"i": 715,
+"k": "sanskrit",
+"s": "Ardha Uttanasana (wall)",
+"in": "Standing Half Forward Bend at Wall"
+},
+{
+"i": 716,
+"k": "pose",
+"s": "Standing Separate Leg Head to Knee",
+"in": "Dandayamana Bibhaktapada Janushirasana"
+},
+{
+"i": 717,
+"k": "sanskrit",
+"s": "Dandayamana Bibhaktapada Janushirasana",
+"in": "Standing Separate Leg Head to Knee"
+},
+{
+"i": 718,
+"k": "pose",
+"s": "Standing Separate Leg Stretching",
+"in": "Dandayamana Bibhaktapada Paschimottanasana"
+},
+{
+"i": 719,
+"k": "sanskrit",
+"s": "Dandayamana Bibhaktapada Paschimottanasana",
+"in": "Standing Separate Leg Stretching"
+},
+{
+"i": 720,
+"k": "pose",
+"s": "Standing Wide Fold with Blocks",
+"in": "Prasarita (blocks)"
+},
+{
+"i": 721,
+"k": "sanskrit",
+"s": "Prasarita (blocks)",
+"in": "Standing Wide Fold with Blocks"
+},
+{
+"i": 722,
+"k": "pose",
+"s": "Straddle Yin",
+"in": "Yin Upavistha Konasana"
+},
+{
+"i": 723,
+"k": "sanskrit",
+"s": "Yin Upavistha Konasana",
+"in": "Straddle Yin"
+},
+{
+"i": 724,
+"k": "pose",
+"s": "Swan Dive",
+"in": "Yin Uttanasana"
+},
+{
+"i": 725,
+"k": "sanskrit",
+"s": "Yin Uttanasana",
+"in": "Swan Dive"
+},
+{
+"i": 726,
+"k": "pose",
+"s": "Tortoise Pose",
+"in": "Kurmasana"
+},
+{
+"i": 727,
+"k": "sanskrit",
+"s": "Kurmasana",
+"in": "Tortoise Pose"
+},
+{
+"i": 728,
+"k": "pose",
+"s": "Tortoise Pose at the Wall",
+"in": "Kurmasana (wall)"
+},
+{
+"i": 729,
+"k": "sanskrit",
+"s": "Kurmasana (wall)",
+"in": "Tortoise Pose at the Wall"
+},
+{
+"i": 730,
+"k": "pose",
+"s": "Tortoise Pose with Block",
+"in": "Kurmasana (block)"
+},
+{
+"i": 731,
+"k": "sanskrit",
+"s": "Kurmasana (block)",
+"in": "Tortoise Pose with Block"
+},
+{
+"i": 732,
+"k": "pose",
+"s": "Tortoise Pose with Strap",
+"in": "Kurmasana (strap)"
+},
+{
+"i": 733,
+"k": "sanskrit",
+"s": "Kurmasana (strap)",
+"in": "Tortoise Pose with Strap"
+},
+{
+"i": 734,
+"k": "pose",
+"s": "Triang Mukha Eka Pada Paschimottanasana",
+"in": "Triang Mukhaikapada Paschimottanasana"
+},
+{
+"i": 735,
+"k": "sanskrit",
+"s": "Triang Mukhaikapada Paschimottanasana",
+"in": "Triang Mukha Eka Pada Paschimottanasana"
+},
+{
+"i": 736,
+"k": "pose",
+"s": "Upavistha Konasana A and B",
+"in": "Upavistha Konasana (Ashtanga)"
+},
+{
+"i": 737,
+"k": "sanskrit",
+"s": "Upavistha Konasana (Ashtanga)",
+"in": "Upavistha Konasana A and B"
+},
+{
+"i": 738,
+"k": "pose",
+"s": "Wide-Angle Seated Forward Bend",
+"in": "Upavistha Konasana"
+},
+{
+"i": 739,
+"k": "sanskrit",
+"s": "Upavistha Konasana",
+"in": "Wide-Angle Seated Forward Bend"
+},
+{
+"i": 740,
+"k": "pose",
+"s": "Wide-Angle Seated Forward Bend at the Wall",
+"in": "Upavistha Konasana (wall)"
+},
+{
+"i": 741,
+"k": "sanskrit",
+"s": "Upavistha Konasana (wall)",
+"in": "Wide-Angle Seated Forward Bend at the Wall"
+},
+{
+"i": 742,
+"k": "pose",
+"s": "Wide-Angle Seated Forward Bend with Block",
+"in": "Upavistha Konasana (block)"
+},
+{
+"i": 743,
+"k": "sanskrit",
+"s": "Upavistha Konasana (block)",
+"in": "Wide-Angle Seated Forward Bend with Block"
+},
+{
+"i": 744,
+"k": "pose",
+"s": "Wide-Angle Seated Forward Bend with Strap",
+"in": "Upavistha Konasana (strap)"
+},
+{
+"i": 745,
+"k": "sanskrit",
+"s": "Upavistha Konasana (strap)",
+"in": "Wide-Angle Seated Forward Bend with Strap"
+},
+{
+"i": 746,
+"k": "pose",
+"s": "Wide-Legged Forward Fold",
+"in": "Prasarita Padottanasana"
+},
+{
+"i": 747,
+"k": "sanskrit",
+"s": "Prasarita Padottanasana",
+"in": "Wide-Legged Forward Fold"
+},
+{
+"i": 748,
+"k": "pose",
+"s": "Wide-Legged Forward Fold at the Wall",
+"in": "Prasarita Padottanasana (wall)"
+},
+{
+"i": 749,
+"k": "sanskrit",
+"s": "Prasarita Padottanasana (wall)",
+"in": "Wide-Legged Forward Fold at the Wall"
+},
+{
+"i": 750,
+"k": "pose",
+"s": "Wide-Legged Forward Fold with Block",
+"in": "Prasarita Padottanasana (block)"
+},
+{
+"i": 751,
+"k": "sanskrit",
+"s": "Prasarita Padottanasana (block)",
+"in": "Wide-Legged Forward Fold with Block"
+},
+{
+"i": 752,
+"k": "pose",
+"s": "Wide-Legged Forward Fold with Clasp",
+"in": "Prasarita Padottanasana C"
+},
+{
+"i": 753,
+"k": "sanskrit",
+"s": "Prasarita Padottanasana C",
+"in": "Wide-Legged Forward Fold with Clasp"
+},
+{
+"i": 754,
+"k": "pose",
+"s": "Wide-Legged Forward Fold with Clasp at the Wall",
+"in": "Prasarita Padottanasana C (wall)"
+},
+{
+"i": 755,
+"k": "sanskrit",
+"s": "Prasarita Padottanasana C (wall)",
+"in": "Wide-Legged Forward Fold with Clasp at the Wall"
+},
+{
+"i": 756,
+"k": "pose",
+"s": "Wide-Legged Forward Fold with Clasp with Block",
+"in": "Prasarita Padottanasana C (block)"
+},
+{
+"i": 757,
+"k": "sanskrit",
+"s": "Prasarita Padottanasana C (block)",
+"in": "Wide-Legged Forward Fold with Clasp with Block"
+},
+{
+"i": 758,
+"k": "pose",
+"s": "Wide-Legged Forward Fold with Clasp with Strap",
+"in": "Prasarita Padottanasana C (strap)"
+},
+{
+"i": 759,
+"k": "sanskrit",
+"s": "Prasarita Padottanasana C (strap)",
+"in": "Wide-Legged Forward Fold with Clasp with Strap"
+},
+{
+"i": 760,
+"k": "pose",
+"s": "Wide-Legged Forward Fold with Strap",
+"in": "Prasarita Padottanasana (strap)"
+},
+{
+"i": 761,
+"k": "sanskrit",
+"s": "Prasarita Padottanasana (strap)",
+"in": "Wide-Legged Forward Fold with Strap"
+},
+{
+"i": 762,
+"k": "pose",
+"s": "Yoga Mudra in Lotus",
+"in": "Yoga Mudrasana"
+},
+{
+"i": 763,
+"k": "sanskrit",
+"s": "Yoga Mudrasana",
+"in": "Yoga Mudra in Lotus"
+},
+{
+"i": 764,
+"k": "pose",
+"s": "Yogic Sleep Pose",
+"in": "Yoganidrasana"
+},
+{
+"i": 765,
+"k": "sanskrit",
+"s": "Yoganidrasana",
+"in": "Yogic Sleep Pose"
+},
+{
+"i": 766,
+"k": "pose",
+"s": "Ananda Balasana Rock",
+"in": "Ananda Balasana (rocking)"
+},
+{
+"i": 767,
+"k": "sanskrit",
+"s": "Ananda Balasana (rocking)",
+"in": "Ananda Balasana Rock"
+},
+{
+"i": 768,
+"k": "pose",
+"s": "Baddha Konasana A and B",
+"in": "Baddha Konasana (Ashtanga)"
+},
+{
+"i": 769,
+"k": "sanskrit",
+"s": "Baddha Konasana (Ashtanga)",
+"in": "Baddha Konasana A and B"
+},
+{
+"i": 770,
+"k": "pose",
+"s": "Bound Angle Pose",
+"in": "Baddha Konasana"
+},
+{
+"i": 771,
+"k": "sanskrit",
+"s": "Baddha Konasana",
+"in": "Bound Angle Pose"
+},
+{
+"i": 772,
+"k": "pose",
+"s": "Bound Butterfly Flaps",
+"in": "Baddha Titali Asana"
+},
+{
+"i": 773,
+"k": "sanskrit",
+"s": "Baddha Titali Asana",
+"in": "Bound Butterfly Flaps"
+},
+{
+"i": 774,
+"k": "pose",
+"s": "Bound Compass Pose",
+"in": "Baddha Parivrtta Surya Yantrasana"
+},
+{
+"i": 775,
+"k": "sanskrit",
+"s": "Baddha Parivrtta Surya Yantrasana",
+"in": "Bound Compass Pose"
+},
+{
+"i": 776,
+"k": "pose",
+"s": "Bound Cow Face Pose",
+"in": "Baddha Gomukhasana"
+},
+{
+"i": 777,
+"k": "sanskrit",
+"s": "Baddha Gomukhasana",
+"in": "Bound Cow Face Pose"
+},
+{
+"i": 778,
+"k": "pose",
+"s": "Bound Cradle Stretch",
+"in": "Baddha Hindolasana"
+},
+{
+"i": 779,
+"k": "sanskrit",
+"s": "Baddha Hindolasana",
+"in": "Bound Cradle Stretch"
+},
+{
+"i": 780,
+"k": "pose",
+"s": "Bound Double Pigeon",
+"in": "Baddha Sukhasana Sarvangasana"
+},
+{
+"i": 781,
+"k": "sanskrit",
+"s": "Baddha Sukhasana Sarvangasana",
+"in": "Bound Double Pigeon"
+},
+{
+"i": 782,
+"k": "pose",
+"s": "Bound Downward Dog Split Twist",
+"in": "Baddha Eka Pada Adho Mukha (open hip)"
+},
+{
+"i": 783,
+"k": "sanskrit",
+"s": "Baddha Eka Pada Adho Mukha (open hip)",
+"in": "Bound Downward Dog Split Twist"
+},
+{
+"i": 784,
+"k": "pose",
+"s": "Bound Dragon Pose",
+"in": "Baddha Yin Lizard"
+},
+{
+"i": 785,
+"k": "sanskrit",
+"s": "Baddha Yin Lizard",
+"in": "Bound Dragon Pose"
+},
+{
+"i": 786,
+"k": "pose",
+"s": "Bound Firelog Pose",
+"in": "Baddha Agnistambhasana"
+},
+{
+"i": 787,
+"k": "sanskrit",
+"s": "Baddha Agnistambhasana",
+"in": "Bound Firelog Pose"
+},
+{
+"i": 788,
+"k": "pose",
+"s": "Bound Frog Pose",
+"in": "Baddha Bhekasana"
+},
+{
+"i": 789,
+"k": "sanskrit",
+"s": "Baddha Bhekasana",
+"in": "Bound Frog Pose"
+},
+{
+"i": 790,
+"k": "pose",
+"s": "Bound Garland Pose",
+"in": "Baddha Malasana"
+},
+{
+"i": 791,
+"k": "sanskrit",
+"s": "Baddha Malasana",
+"in": "Bound Garland Pose"
+},
+{
+"i": 792,
+"k": "pose",
+"s": "Bound Half Pigeon",
+"in": "Baddha Eka Pada Rajakapotasana (prep)"
+},
+{
+"i": 793,
+"k": "sanskrit",
+"s": "Baddha Eka Pada Rajakapotasana (prep)",
+"in": "Bound Half Pigeon"
+},
+{
+"i": 794,
+"k": "pose",
+"s": "Bound Happy Baby",
+"in": "Baddha Ananda Balasana"
+},
+{
+"i": 795,
+"k": "sanskrit",
+"s": "Baddha Ananda Balasana",
+"in": "Bound Happy Baby"
+},
+{
+"i": 796,
+"k": "pose",
+"s": "Bound Lizard Pose",
+"in": "Baddha Utthan Pristhasana"
+},
+{
+"i": 797,
+"k": "sanskrit",
+"s": "Baddha Utthan Pristhasana",
+"in": "Bound Lizard Pose"
+},
+{
+"i": 798,
+"k": "pose",
+"s": "Bound Low Lunge",
+"in": "Baddha Anjaneyasana"
+},
+{
+"i": 799,
+"k": "sanskrit",
+"s": "Baddha Anjaneyasana",
+"in": "Bound Low Lunge"
+},
+{
+"i": 800,
+"k": "pose",
+"s": "Bound Prenatal Wide Squat",
+"in": "Baddha Malasana (prenatal)"
+},
+{
+"i": 801,
+"k": "sanskrit",
+"s": "Baddha Malasana (prenatal)",
+"in": "Bound Prenatal Wide Squat"
+},
+{
+"i": 802,
+"k": "pose",
+"s": "Bound Reclined Big Toe Side",
+"in": "Baddha Supta Padangusthasana II"
+},
+{
+"i": 803,
+"k": "sanskrit",
+"s": "Baddha Supta Padangusthasana II",
+"in": "Bound Reclined Big Toe Side"
+},
+{
+"i": 804,
+"k": "pose",
+"s": "Bound Reclined Pigeon",
+"in": "Baddha Supta Kapotasana"
+},
+{
+"i": 805,
+"k": "sanskrit",
+"s": "Baddha Supta Kapotasana",
+"in": "Bound Reclined Pigeon"
+},
+{
+"i": 806,
+"k": "pose",
+"s": "Bound Runner's Lunge",
+"in": "Baddha Anjaneyasana (high)"
+},
+{
+"i": 807,
+"k": "sanskrit",
+"s": "Baddha Anjaneyasana (high)",
+"in": "Bound Runner's Lunge"
+},
+{
+"i": 808,
+"k": "pose",
+"s": "Bound Shoelace Pose",
+"in": "Baddha Yin Gomukhasana"
+},
+{
+"i": 809,
+"k": "sanskrit",
+"s": "Baddha Yin Gomukhasana",
+"in": "Bound Shoelace Pose"
+},
+{
+"i": 810,
+"k": "pose",
+"s": "Bound Side Lunge",
+"in": "Baddha Parsva Utkatasana"
+},
+{
+"i": 811,
+"k": "sanskrit",
+"s": "Baddha Parsva Utkatasana",
+"in": "Bound Side Lunge"
+},
+{
+"i": 812,
+"k": "pose",
+"s": "Bound Skandasana",
+"in": "Baddha Skandasana"
+},
+{
+"i": 813,
+"k": "sanskrit",
+"s": "Baddha Skandasana",
+"in": "Bound Skandasana"
+},
+{
+"i": 814,
+"k": "pose",
+"s": "Bound Sleeping Swan",
+"in": "Baddha Yin Pigeon"
+},
+{
+"i": 815,
+"k": "sanskrit",
+"s": "Baddha Yin Pigeon",
+"in": "Bound Sleeping Swan"
+},
+{
+"i": 816,
+"k": "pose",
+"s": "Bound Square Pose",
+"in": "Baddha Yin Agnistambhasana"
+},
+{
+"i": 817,
+"k": "sanskrit",
+"s": "Baddha Yin Agnistambhasana",
+"in": "Bound Square Pose"
+},
+{
+"i": 818,
+"k": "pose",
+"s": "Bound Standing Wide Squat",
+"in": "Baddha Prasarita Malasana"
+},
+{
+"i": 819,
+"k": "sanskrit",
+"s": "Baddha Prasarita Malasana",
+"in": "Bound Standing Wide Squat"
+},
+{
+"i": 820,
+"k": "pose",
+"s": "Butterfly Flaps",
+"in": "Titali Asana"
+},
+{
+"i": 821,
+"k": "sanskrit",
+"s": "Titali Asana",
+"in": "Butterfly Flaps"
+},
+{
+"i": 822,
+"k": "pose",
+"s": "Butterfly Flaps with Strap",
+"in": "Titali Asana (strap)"
+},
+{
+"i": 823,
+"k": "sanskrit",
+"s": "Titali Asana (strap)",
+"in": "Butterfly Flaps with Strap"
+},
+{
+"i": 824,
+"k": "pose",
+"s": "Chair Pigeon",
+"in": "Kapotasana (chair)"
+},
+{
+"i": 825,
+"k": "sanskrit",
+"s": "Kapotasana (chair)",
+"in": "Chair Pigeon"
+},
+{
+"i": 826,
+"k": "pose",
+"s": "Compass Pose",
+"in": "Parivrtta Surya Yantrasana"
+},
+{
+"i": 827,
+"k": "sanskrit",
+"s": "Parivrtta Surya Yantrasana",
+"in": "Compass Pose"
+},
+{
+"i": 828,
+"k": "pose",
+"s": "Compass Pose with Block",
+"in": "Parivrtta Surya Yantrasana (block)"
+},
+{
+"i": 829,
+"k": "sanskrit",
+"s": "Parivrtta Surya Yantrasana (block)",
+"in": "Compass Pose with Block"
+},
+{
+"i": 830,
+"k": "pose",
+"s": "Compass Pose with Strap",
+"in": "Parivrtta Surya Yantrasana (strap)"
+},
+{
+"i": 831,
+"k": "sanskrit",
+"s": "Parivrtta Surya Yantrasana (strap)",
+"in": "Compass Pose with Strap"
+},
+{
+"i": 832,
+"k": "pose",
+"s": "Cow Face Pose",
+"in": "Gomukhasana"
+},
+{
+"i": 833,
+"k": "sanskrit",
+"s": "Gomukhasana",
+"in": "Cow Face Pose"
+},
+{
+"i": 834,
+"k": "pose",
+"s": "Cow Face Pose with Block",
+"in": "Gomukhasana (block)"
+},
+{
+"i": 835,
+"k": "sanskrit",
+"s": "Gomukhasana (block)",
+"in": "Cow Face Pose with Block"
+},
+{
+"i": 836,
+"k": "pose",
+"s": "Cow Face Pose with Strap",
+"in": "Gomukhasana (strap)"
+},
+{
+"i": 837,
+"k": "sanskrit",
+"s": "Gomukhasana (strap)",
+"in": "Cow Face Pose with Strap"
+},
+{
+"i": 838,
+"k": "pose",
+"s": "Cradle Stretch",
+"in": "Hindolasana"
+},
+{
+"i": 839,
+"k": "sanskrit",
+"s": "Hindolasana",
+"in": "Cradle Stretch"
+},
+{
+"i": 840,
+"k": "pose",
+"s": "Cradle Stretch with Block",
+"in": "Hindolasana (block)"
+},
+{
+"i": 841,
+"k": "sanskrit",
+"s": "Hindolasana (block)",
+"in": "Cradle Stretch with Block"
+},
+{
+"i": 842,
+"k": "pose",
+"s": "Cradle Stretch with Strap",
+"in": "Hindolasana (strap)"
+},
+{
+"i": 843,
+"k": "sanskrit",
+"s": "Hindolasana (strap)",
+"in": "Cradle Stretch with Strap"
+},
+{
+"i": 844,
+"k": "pose",
+"s": "Crow Walking",
+"in": "Kauva Chalasana"
+},
+{
+"i": 845,
+"k": "sanskrit",
+"s": "Kauva Chalasana",
+"in": "Crow Walking"
+},
+{
+"i": 846,
+"k": "pose",
+"s": "Double Pigeon",
+"in": "Sukhasana Sarvangasana"
+},
+{
+"i": 847,
+"k": "sanskrit",
+"s": "Sukhasana Sarvangasana",
+"in": "Double Pigeon"
+},
+{
+"i": 848,
+"k": "pose",
+"s": "Double Pigeon with Block",
+"in": "Sukhasana Sarvangasana (block)"
+},
+{
+"i": 849,
+"k": "sanskrit",
+"s": "Sukhasana Sarvangasana (block)",
+"in": "Double Pigeon with Block"
+},
+{
+"i": 850,
+"k": "pose",
+"s": "Double Pigeon with Strap",
+"in": "Sukhasana Sarvangasana (strap)"
+},
+{
+"i": 851,
+"k": "sanskrit",
+"s": "Sukhasana Sarvangasana (strap)",
+"in": "Double Pigeon with Strap"
+},
+{
+"i": 852,
+"k": "pose",
+"s": "Downward Dog Split Twist",
+"in": "Eka Pada Adho Mukha (open hip)"
+},
+{
+"i": 853,
+"k": "sanskrit",
+"s": "Eka Pada Adho Mukha (open hip)",
+"in": "Downward Dog Split Twist"
+},
+{
+"i": 854,
+"k": "pose",
+"s": "Downward Dog Split Twist with Strap",
+"in": "Eka Pada Adho Mukha (open hip) (strap)"
+},
+{
+"i": 855,
+"k": "sanskrit",
+"s": "Eka Pada Adho Mukha (open hip) (strap)",
+"in": "Downward Dog Split Twist with Strap"
+},
+{
+"i": 856,
+"k": "pose",
+"s": "Dragon Pose",
+"in": "Yin Lizard"
+},
+{
+"i": 857,
+"k": "sanskrit",
+"s": "Yin Lizard",
+"in": "Dragon Pose"
+},
+{
+"i": 858,
+"k": "pose",
+"s": "Firelog Pose",
+"in": "Agnistambhasana"
+},
+{
+"i": 859,
+"k": "sanskrit",
+"s": "Agnistambhasana",
+"in": "Firelog Pose"
+},
+{
+"i": 860,
+"k": "pose",
+"s": "Firelog Pose with Block",
+"in": "Agnistambhasana (block)"
+},
+{
+"i": 861,
+"k": "sanskrit",
+"s": "Agnistambhasana (block)",
+"in": "Firelog Pose with Block"
+},
+{
+"i": 862,
+"k": "pose",
+"s": "Firelog Pose with Strap",
+"in": "Agnistambhasana (strap)"
+},
+{
+"i": 863,
+"k": "sanskrit",
+"s": "Agnistambhasana (strap)",
+"in": "Firelog Pose with Strap"
+},
+{
+"i": 864,
+"k": "pose",
+"s": "Frog Pose",
+"in": "Bhekasana"
+},
+{
+"i": 865,
+"k": "sanskrit",
+"s": "Bhekasana",
+"in": "Frog Pose"
+},
+{
+"i": 866,
+"k": "pose",
+"s": "Frog Pose with Block",
+"in": "Bhekasana (block)"
+},
+{
+"i": 867,
+"k": "sanskrit",
+"s": "Bhekasana (block)",
+"in": "Frog Pose with Block"
+},
+{
+"i": 868,
+"k": "pose",
+"s": "Frog Pose with Strap",
+"in": "Bhekasana (strap)"
+},
+{
+"i": 869,
+"k": "sanskrit",
+"s": "Bhekasana (strap)",
+"in": "Frog Pose with Strap"
+},
+{
+"i": 870,
+"k": "pose",
+"s": "Frog at Wall",
+"in": "Bhekasana (wall)"
+},
+{
+"i": 871,
+"k": "sanskrit",
+"s": "Bhekasana (wall)",
+"in": "Frog at Wall"
+},
+{
+"i": 872,
+"k": "pose",
+"s": "Garland Pose",
+"in": "Malasana"
+},
+{
+"i": 873,
+"k": "sanskrit",
+"s": "Malasana",
+"in": "Garland Pose"
+},
+{
+"i": 874,
+"k": "pose",
+"s": "Garland Pose with Block",
+"in": "Malasana (block)"
+},
+{
+"i": 875,
+"k": "sanskrit",
+"s": "Malasana (block)",
+"in": "Garland Pose with Block"
+},
+{
+"i": 876,
+"k": "pose",
+"s": "Garland Pose with Strap",
+"in": "Malasana (strap)"
+},
+{
+"i": 877,
+"k": "sanskrit",
+"s": "Malasana (strap)",
+"in": "Garland Pose with Strap"
+},
+{
+"i": 878,
+"k": "pose",
+"s": "Half Pigeon",
+"in": "Eka Pada Rajakapotasana (prep)"
+},
+{
+"i": 879,
+"k": "sanskrit",
+"s": "Eka Pada Rajakapotasana (prep)",
+"in": "Half Pigeon"
+},
+{
+"i": 880,
+"k": "pose",
+"s": "Half Pigeon with Block",
+"in": "Eka Pada Rajakapotasana (prep) (block)"
+},
+{
+"i": 881,
+"k": "sanskrit",
+"s": "Eka Pada Rajakapotasana (prep) (block)",
+"in": "Half Pigeon with Block"
+},
+{
+"i": 882,
+"k": "pose",
+"s": "Half Pigeon with Strap",
+"in": "Eka Pada Rajakapotasana (prep) (strap)"
+},
+{
+"i": 883,
+"k": "sanskrit",
+"s": "Eka Pada Rajakapotasana (prep) (strap)",
+"in": "Half Pigeon with Strap"
+},
+{
+"i": 884,
+"k": "pose",
+"s": "Happy Baby",
+"in": "Ananda Balasana"
+},
+{
+"i": 885,
+"k": "sanskrit",
+"s": "Ananda Balasana",
+"in": "Happy Baby"
+},
+{
+"i": 886,
+"k": "pose",
+"s": "Happy Baby with Strap",
+"in": "Ananda Balasana (strap)"
+},
+{
+"i": 887,
+"k": "sanskrit",
+"s": "Ananda Balasana (strap)",
+"in": "Happy Baby with Strap"
+},
+{
+"i": 888,
+"k": "pose",
+"s": "Lizard Pose",
+"in": "Utthan Pristhasana"
+},
+{
+"i": 889,
+"k": "sanskrit",
+"s": "Utthan Pristhasana",
+"in": "Lizard Pose"
+},
+{
+"i": 890,
+"k": "pose",
+"s": "Lizard Pose with Block",
+"in": "Utthan Pristhasana (block)"
+},
+{
+"i": 891,
+"k": "sanskrit",
+"s": "Utthan Pristhasana (block)",
+"in": "Lizard Pose with Block"
+},
+{
+"i": 892,
+"k": "pose",
+"s": "Lizard Pose with Strap",
+"in": "Utthan Pristhasana (strap)"
+},
+{
+"i": 893,
+"k": "sanskrit",
+"s": "Utthan Pristhasana (strap)",
+"in": "Lizard Pose with Strap"
+},
+{
+"i": 894,
+"k": "pose",
+"s": "Low Lunge",
+"in": "Anjaneyasana"
+},
+{
+"i": 895,
+"k": "sanskrit",
+"s": "Anjaneyasana",
+"in": "Low Lunge"
+},
+{
+"i": 896,
+"k": "pose",
+"s": "Low Lunge with Block",
+"in": "Anjaneyasana (block)"
+},
+{
+"i": 897,
+"k": "sanskrit",
+"s": "Anjaneyasana (block)",
+"in": "Low Lunge with Block"
+},
+{
+"i": 898,
+"k": "pose",
+"s": "Low Lunge with Strap",
+"in": "Anjaneyasana (strap)"
+},
+{
+"i": 899,
+"k": "sanskrit",
+"s": "Anjaneyasana (strap)",
+"in": "Low Lunge with Strap"
+},
+{
+"i": 900,
+"k": "pose",
+"s": "Lunge to Half Split Flow",
+"in": "Anjaneyasana-Ardha Hanumanasana"
+},
+{
+"i": 901,
+"k": "sanskrit",
+"s": "Anjaneyasana-Ardha Hanumanasana",
+"in": "Lunge to Half Split Flow"
+},
+{
+"i": 902,
+"k": "pose",
+"s": "Prenatal Wide Squat",
+"in": "Malasana (prenatal)"
+},
+{
+"i": 903,
+"k": "sanskrit",
+"s": "Malasana (prenatal)",
+"in": "Prenatal Wide Squat"
+},
+{
+"i": 904,
+"k": "pose",
+"s": "Reclined Big Toe Side",
+"in": "Supta Padangusthasana II"
+},
+{
+"i": 905,
+"k": "sanskrit",
+"s": "Supta Padangusthasana II",
+"in": "Reclined Big Toe Side"
+},
+{
+"i": 906,
+"k": "pose",
+"s": "Reclined Cow Face",
+"in": "Supta Gomukhasana"
+},
+{
+"i": 907,
+"k": "sanskrit",
+"s": "Supta Gomukhasana",
+"in": "Reclined Cow Face"
+},
+{
+"i": 908,
+"k": "pose",
+"s": "Reclined Pigeon",
+"in": "Supta Kapotasana"
+},
+{
+"i": 909,
+"k": "sanskrit",
+"s": "Supta Kapotasana",
+"in": "Reclined Pigeon"
+},
+{
+"i": 910,
+"k": "pose",
+"s": "Reclined Pigeon with Strap",
+"in": "Supta Kapotasana (strap)"
+},
+{
+"i": 911,
+"k": "sanskrit",
+"s": "Supta Kapotasana (strap)",
+"in": "Reclined Pigeon with Strap"
+},
+{
+"i": 912,
+"k": "pose",
+"s": "Revolved Butterfly Flaps",
+"in": "Parivrtta Titali Asana"
+},
+{
+"i": 913,
+"k": "sanskrit",
+"s": "Parivrtta Titali Asana",
+"in": "Revolved Butterfly Flaps"
+}
+]

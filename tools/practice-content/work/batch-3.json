@@ -1,0 +1,1799 @@
+[
+{
+"i": 782,
+"k": "title",
+"p": "listening-to-the-room",
+"s": "Listening to the Room"
+},
+{
+"i": 783,
+"k": "sanskrit",
+"p": "listening-to-the-room",
+"s": "Shravana Dharana",
+"in": "Listening to the Room"
+},
+{
+"i": 784,
+"k": "description",
+"p": "listening-to-the-room",
+"s": "No object, no mantra, no breath. Only whatever the ears are already doing. The easiest practice to do anywhere and the hardest to do for long."
+},
+{
+"i": 785,
+"k": "source",
+"p": "listening-to-the-room",
+"s": "Vijñāna Bhairava Tantra"
+},
+{
+"i": 786,
+"k": "cue",
+"p": "listening-to-the-room",
+"n": 0,
+"hold": 15,
+"s": "Sit however you are. The eyes can be open or closed."
+},
+{
+"i": 787,
+"k": "cue",
+"p": "listening-to-the-room",
+"n": 1,
+"hold": 20,
+"s": "Do not do anything to the breath. Leave it entirely alone."
+},
+{
+"i": 788,
+"k": "cue",
+"p": "listening-to-the-room",
+"n": 2,
+"hold": 25,
+"s": "Listen. Not for anything. Just listen."
+},
+{
+"i": 789,
+"k": "cue",
+"p": "listening-to-the-room",
+"n": 3,
+"hold": 30,
+"s": "Notice the loudest thing first, whatever it is."
+},
+{
+"i": 790,
+"k": "cue",
+"p": "listening-to-the-room",
+"n": 4,
+"hold": 35,
+"s": "Now notice something quieter behind it. Something you were not attending to a moment ago."
+},
+{
+"i": 791,
+"k": "cue",
+"p": "listening-to-the-room",
+"n": 5,
+"hold": 40,
+"s": "And something quieter than that."
+},
+{
+"i": 792,
+"k": "cue",
+"p": "listening-to-the-room",
+"n": 6,
+"hold": 50,
+"s": "Stop hunting and let the ears do what they do without direction. Everything at once, nothing chosen."
+},
+{
+"i": 793,
+"k": "cue",
+"p": "listening-to-the-room",
+"n": 7,
+"hold": 60,
+"s": "Sound is arriving whether you attend to it or not. The practice is only to stop filtering."
+},
+{
+"i": 794,
+"k": "cue",
+"p": "listening-to-the-room",
+"n": 8,
+"hold": 45,
+"s": "If a sound annoys you, that is fine. Annoyance is also arriving. Let that be heard too."
+},
+{
+"i": 795,
+"k": "cue",
+"p": "listening-to-the-room",
+"n": 9,
+"hold": 90,
+"s": "Stay open for as long as it holds."
+},
+{
+"i": 796,
+"k": "title",
+"p": "compassion",
+"s": "For Someone in Difficulty"
+},
+{
+"i": 797,
+"k": "sanskrit",
+"p": "compassion",
+"s": "Karuna Bhavana",
+"in": "For Someone in Difficulty"
+},
+{
+"i": 798,
+"k": "description",
+"p": "compassion",
+"s": "Turning toward suffering rather than away from it, with a wish rather than a plan. The practice for helplessness in the face of someone else's trouble."
+},
+{
+"i": 799,
+"k": "source",
+"p": "compassion",
+"s": "The second of the four brahmaviharas"
+},
+{
+"i": 800,
+"k": "caution",
+"p": "compassion",
+"s": "If you are in the middle of a crisis of your own, do Wishing Well first. Compassion practice draws on reserves you may not have today."
+},
+{
+"i": 801,
+"k": "cue",
+"p": "compassion",
+"n": 0,
+"hold": 15,
+"s": "Sit comfortably and let the breath settle."
+},
+{
+"i": 802,
+"k": "cue",
+"p": "compassion",
+"n": 1,
+"hold": 25,
+"s": "Start with yourself, and something in your own life that is genuinely hard."
+},
+{
+"i": 803,
+"k": "cue",
+"p": "compassion",
+"n": 2,
+"hold": 30,
+"s": "Say inwardly: this is difficult, and I wish it were lighter."
+},
+{
+"i": 804,
+"k": "cue",
+"p": "compassion",
+"n": 3,
+"hold": 35,
+"s": "Not fixing it. Only acknowledging it, which most of us skip."
+},
+{
+"i": 805,
+"k": "cue",
+"p": "compassion",
+"n": 4,
+"hold": 25,
+"s": "Now bring to mind someone you know who is struggling."
+},
+{
+"i": 806,
+"k": "cue",
+"p": "compassion",
+"n": 5,
+"hold": 40,
+"s": "May your pain be less. May you have some ease in it."
+},
+{
+"i": 807,
+"k": "cue",
+"p": "compassion",
+"n": 6,
+"hold": 45,
+"s": "Notice the pull to solve it. Let that go. The wish is the practice; the solving is a different activity."
+},
+{
+"i": 808,
+"k": "cue",
+"p": "compassion",
+"n": 7,
+"hold": 45,
+"s": "Widen it. Everyone awake right now for the same reason you sometimes are."
+},
+{
+"i": 809,
+"k": "cue",
+"p": "compassion",
+"n": 8,
+"hold": 75,
+"s": "May it be lighter. For all of them."
+},
+{
+"i": 810,
+"k": "cue",
+"p": "compassion",
+"n": 9,
+"hold": 40,
+"s": "Come back to your own breath. Let it be enough to have wished it."
+},
+{
+"i": 811,
+"k": "title",
+"p": "sympathetic-joy",
+"s": "Gladness at Another's Luck"
+},
+{
+"i": 812,
+"k": "sanskrit",
+"p": "sympathetic-joy",
+"s": "Mudita Bhavana",
+"in": "Gladness at Another's Luck"
+},
+{
+"i": 813,
+"k": "description",
+"p": "sympathetic-joy",
+"s": "The least practised of the four and the most useful in an envious month. Being pleased about something good that happened to someone else."
+},
+{
+"i": 814,
+"k": "source",
+"p": "sympathetic-joy",
+"s": "The third of the four brahmaviharas"
+},
+{
+"i": 815,
+"k": "cue",
+"p": "sympathetic-joy",
+"n": 0,
+"hold": 12,
+"s": "Sit comfortably."
+},
+{
+"i": 816,
+"k": "cue",
+"p": "sympathetic-joy",
+"n": 1,
+"hold": 28,
+"s": "Bring to mind something good that happened to someone you love. Something recent."
+},
+{
+"i": 817,
+"k": "cue",
+"p": "sympathetic-joy",
+"n": 2,
+"hold": 35,
+"s": "Let yourself be pleased about it. Say inwardly: I am glad that happened to you."
+},
+{
+"i": 818,
+"k": "cue",
+"p": "sympathetic-joy",
+"n": 3,
+"hold": 30,
+"s": "Notice how easy that is when you love the person."
+},
+{
+"i": 819,
+"k": "cue",
+"p": "sympathetic-joy",
+"n": 4,
+"hold": 30,
+"s": "Now someone you barely know, who has had some luck. A colleague, an acquaintance."
+},
+{
+"i": 820,
+"k": "cue",
+"p": "sympathetic-joy",
+"n": 5,
+"hold": 40,
+"s": "May it continue. May there be more of it."
+},
+{
+"i": 821,
+"k": "cue",
+"p": "sympathetic-joy",
+"n": 6,
+"hold": 40,
+"s": "Now, if you can, someone whose good fortune you found difficult. Something that made you feel behind."
+},
+{
+"i": 822,
+"k": "cue",
+"p": "sympathetic-joy",
+"n": 7,
+"hold": 50,
+"s": "May it continue. Their having it does not take it from you — that is the belief this practice is aimed at."
+},
+{
+"i": 823,
+"k": "cue",
+"p": "sympathetic-joy",
+"n": 8,
+"hold": 60,
+"s": "Sit with whatever came up. Envy is not a moral failure, only a place attention gets stuck."
+},
+{
+"i": 824,
+"k": "cue",
+"p": "sympathetic-joy",
+"n": 9,
+"hold": 40,
+"s": "Finish with the first person again. The easy one."
+},
+{
+"i": 825,
+"k": "title",
+"p": "equanimity",
+"s": "What Is Not Mine to Carry"
+},
+{
+"i": 826,
+"k": "sanskrit",
+"p": "equanimity",
+"s": "Upekkha Bhavana",
+"in": "What Is Not Mine to Carry"
+},
+{
+"i": 827,
+"k": "description",
+"p": "equanimity",
+"s": "The last of the four, and the one that keeps the other three from becoming exhausting. Caring without taking responsibility for the outcome."
+},
+{
+"i": 828,
+"k": "source",
+"p": "equanimity",
+"s": "The fourth of the four brahmaviharas"
+},
+{
+"i": 829,
+"k": "cue",
+"p": "equanimity",
+"n": 0,
+"hold": 15,
+"s": "Sit upright, and let the shoulders come down."
+},
+{
+"i": 830,
+"k": "cue",
+"p": "equanimity",
+"n": 1,
+"hold": 25,
+"s": "Bring to mind someone whose situation you have been carrying."
+},
+{
+"i": 831,
+"k": "cue",
+"p": "equanimity",
+"n": 2,
+"hold": 35,
+"s": "Notice where in the body you are holding it. Most people find the jaw, the shoulders, or the gut."
+},
+{
+"i": 832,
+"k": "cue",
+"p": "equanimity",
+"n": 3,
+"hold": 40,
+"s": "Say inwardly: I care about what happens to you, and it is not mine to decide."
+},
+{
+"i": 833,
+"k": "cue",
+"p": "equanimity",
+"n": 4,
+"hold": 40,
+"s": "Both halves are true. Dropping either one is how people burn out or go cold."
+},
+{
+"i": 834,
+"k": "cue",
+"p": "equanimity",
+"n": 5,
+"hold": 45,
+"s": "Again: I care about what happens to you. And it is not mine to decide."
+},
+{
+"i": 835,
+"k": "cue",
+"p": "equanimity",
+"n": 6,
+"hold": 40,
+"s": "Notice whether the holding place softened at all. It may not have yet."
+},
+{
+"i": 836,
+"k": "cue",
+"p": "equanimity",
+"n": 7,
+"hold": 50,
+"s": "Everyone is walking a road you did not build and cannot see the end of. Including you."
+},
+{
+"i": 837,
+"k": "cue",
+"p": "equanimity",
+"n": 8,
+"hold": 75,
+"s": "Rest there. Caring, and not carrying."
+},
+{
+"i": 838,
+"k": "cue",
+"p": "equanimity",
+"n": 9,
+"hold": 30,
+"s": "Come back and check the shoulders again."
+},
+{
+"i": 839,
+"k": "title",
+"p": "walking-meditation",
+"s": "Walking"
+},
+{
+"i": 840,
+"k": "sanskrit",
+"p": "walking-meditation",
+"s": "Chankramanam",
+"in": "Walking"
+},
+{
+"i": 841,
+"k": "description",
+"p": "walking-meditation",
+"s": "Ten paces one way, turn, ten paces back, at a quarter of normal speed. The practice for a body too restless to sit and a mind too busy to close its eyes."
+},
+{
+"i": 842,
+"k": "source",
+"p": "walking-meditation",
+"s": "Chankramanam; cankama in the Pali sources"
+},
+{
+"i": 843,
+"k": "caution",
+"p": "walking-meditation",
+"s": "Balance is reduced when walking this slowly. Use a wall or a rail if you need one."
+},
+{
+"i": 844,
+"k": "cue",
+"p": "walking-meditation",
+"n": 0,
+"hold": 18,
+"s": "Find a stretch of floor about ten paces long. Indoors is fine."
+},
+{
+"i": 845,
+"k": "cue",
+"p": "walking-meditation",
+"n": 1,
+"hold": 18,
+"s": "Stand at one end. Let the arms hang or clasp them behind you."
+},
+{
+"i": 846,
+"k": "cue",
+"p": "walking-meditation",
+"n": 2,
+"hold": 20,
+"s": "Look at the floor a few paces ahead. Not at your feet."
+},
+{
+"i": 847,
+"k": "cue",
+"p": "walking-meditation",
+"n": 3,
+"hold": 20,
+"s": "Now walk, at about a quarter of your normal speed."
+},
+{
+"i": 848,
+"k": "cue",
+"p": "walking-meditation",
+"n": 4,
+"hold": 35,
+"s": "Feel each foot: the heel arriving, the weight rolling forward, the toes leaving."
+},
+{
+"i": 849,
+"k": "cue",
+"p": "walking-meditation",
+"n": 5,
+"hold": 30,
+"s": "At the end, stop completely. Stand still for one breath before you turn."
+},
+{
+"i": 850,
+"k": "cue",
+"p": "walking-meditation",
+"n": 6,
+"hold": 35,
+"s": "Turn slowly and go back. The turn is part of it, not a gap between the parts."
+},
+{
+"i": 851,
+"k": "cue",
+"p": "walking-meditation",
+"n": 7,
+"hold": 120,
+"s": "Keep going. Ten paces, stop, turn, ten paces."
+},
+{
+"i": 852,
+"k": "cue",
+"p": "walking-meditation",
+"n": 8,
+"hold": 60,
+"s": "When the mind wanders — and it does, even walking — come back to the sole of whichever foot is on the floor."
+},
+{
+"i": 853,
+"k": "cue",
+"p": "walking-meditation",
+"n": 9,
+"hold": 40,
+"s": "Finish standing still at one end. Feel both feet at once."
+},
+{
+"i": 854,
+"k": "title",
+"p": "eating-with-attention",
+"s": "The First Three Mouthfuls"
+},
+{
+"i": 855,
+"k": "sanskrit",
+"p": "eating-with-attention",
+"s": "Ahara Dharana",
+"in": "The First Three Mouthfuls"
+},
+{
+"i": 856,
+"k": "description",
+"p": "eating-with-attention",
+"s": "Three mouthfuls eaten with full attention at the start of a meal. Ayurveda treats how you eat as seriously as what you eat, and this is why."
+},
+{
+"i": 857,
+"k": "source",
+"p": "eating-with-attention",
+"s": "Caraka Samhita on the manner of eating; sadvritta"
+},
+{
+"i": 858,
+"k": "caution",
+"p": "eating-with-attention",
+"s": "If you have a history of disordered eating, close attention to food can be counterproductive. Speak to someone who knows your history before using this."
+},
+{
+"i": 859,
+"k": "cue",
+"p": "eating-with-attention",
+"n": 0,
+"hold": 20,
+"s": "This one is done at the table, with food in front of you, before you start."
+},
+{
+"i": 860,
+"k": "cue",
+"p": "eating-with-attention",
+"n": 1,
+"hold": 25,
+"s": "Put down the phone. Turn off whatever is playing. The texts are unusually firm about this."
+},
+{
+"i": 861,
+"k": "cue",
+"p": "eating-with-attention",
+"n": 2,
+"hold": 30,
+"s": "Look at the food for a moment. Notice that you are about to eat, which most meals skip entirely."
+},
+{
+"i": 862,
+"k": "cue",
+"p": "eating-with-attention",
+"n": 3,
+"hold": 20,
+"s": "Take the first mouthful. Do not chew yet."
+},
+{
+"i": 863,
+"k": "cue",
+"p": "eating-with-attention",
+"n": 4,
+"hold": 35,
+"s": "Notice temperature first, then texture, then taste. In that order."
+},
+{
+"i": 864,
+"k": "cue",
+"p": "eating-with-attention",
+"n": 5,
+"hold": 40,
+"s": "Which of the six tastes is here? Sweet, sour, salty, pungent, bitter, astringent. Usually more than one."
+},
+{
+"i": 865,
+"k": "cue",
+"p": "eating-with-attention",
+"n": 6,
+"hold": 35,
+"s": "Now chew, and keep chewing past the point where you would normally swallow."
+},
+{
+"i": 866,
+"k": "cue",
+"p": "eating-with-attention",
+"n": 7,
+"hold": 40,
+"s": "Second mouthful. Same attention. Notice the taste has already changed because the first one is still there."
+},
+{
+"i": 867,
+"k": "cue",
+"p": "eating-with-attention",
+"n": 8,
+"hold": 40,
+"s": "Third mouthful. Then put the fork down for one breath before you carry on normally."
+},
+{
+"i": 868,
+"k": "cue",
+"p": "eating-with-attention",
+"n": 9,
+"hold": 30,
+"s": "Three mouthfuls is enough. The rest of the meal will be different anyway."
+},
+{
+"i": 869,
+"k": "title",
+"p": "sense-withdrawal",
+"s": "Drawing the Senses In"
+},
+{
+"i": 870,
+"k": "sanskrit",
+"p": "sense-withdrawal",
+"s": "Pratyahara",
+"in": "Drawing the Senses In"
+},
+{
+"i": 871,
+"k": "description",
+"p": "sense-withdrawal",
+"s": "Deliberately taking attention back from each sense in turn. The hinge between the outward limbs of yoga and the inward ones."
+},
+{
+"i": 872,
+"k": "source",
+"p": "sense-withdrawal",
+"s": "Yoga Sutras 2.54–55; the fifth limb"
+},
+{
+"i": 873,
+"k": "cue",
+"p": "sense-withdrawal",
+"n": 0,
+"hold": 15,
+"s": "Sit upright, eyes closed, somewhere reasonably quiet."
+},
+{
+"i": 874,
+"k": "cue",
+"p": "sense-withdrawal",
+"n": 1,
+"hold": 35,
+"s": "Start with sight, which is already handled — the eyes are closed. Notice what is left of it. Usually not nothing."
+},
+{
+"i": 875,
+"k": "cue",
+"p": "sense-withdrawal",
+"n": 2,
+"hold": 40,
+"s": "Now hearing. Do not block the sounds. Just stop going out to meet them."
+},
+{
+"i": 876,
+"k": "cue",
+"p": "sense-withdrawal",
+"n": 3,
+"hold": 40,
+"s": "Let sound arrive at the ear and stop there instead of travelling on into your attention."
+},
+{
+"i": 877,
+"k": "cue",
+"p": "sense-withdrawal",
+"n": 4,
+"hold": 35,
+"s": "Now smell. Whatever is in the room, let it be at the nose and no further."
+},
+{
+"i": 878,
+"k": "cue",
+"p": "sense-withdrawal",
+"n": 5,
+"hold": 35,
+"s": "Now taste. The mouth has a taste in it. Leave it in the mouth."
+},
+{
+"i": 879,
+"k": "cue",
+"p": "sense-withdrawal",
+"n": 6,
+"hold": 40,
+"s": "Now touch. The clothes, the seat, the air. All of it can stay at the skin."
+},
+{
+"i": 880,
+"k": "cue",
+"p": "sense-withdrawal",
+"n": 7,
+"hold": 45,
+"s": "Nothing has been shut out. You have only stopped sending attention outward to collect it."
+},
+{
+"i": 881,
+"k": "cue",
+"p": "sense-withdrawal",
+"n": 8,
+"hold": 60,
+"s": "Notice how much is left when the senses stop reporting. It is more than most people expect."
+},
+{
+"i": 882,
+"k": "cue",
+"p": "sense-withdrawal",
+"n": 9,
+"hold": 45,
+"s": "Come back out through the same doors, one at a time. Touch, taste, smell, hearing, sight."
+},
+{
+"i": 883,
+"k": "title",
+"p": "mantra-repetition",
+"s": "Repetition on Beads"
+},
+{
+"i": 884,
+"k": "sanskrit",
+"p": "mantra-repetition",
+"s": "Japa Mala",
+"in": "Repetition on Beads"
+},
+{
+"i": 885,
+"k": "description",
+"p": "mantra-repetition",
+"s": "One repetition per bead, once round the mala. The beads keep the count so the mind does not have to, which is more of a relief than it sounds."
+},
+{
+"i": 886,
+"k": "source",
+"p": "mantra-repetition",
+"s": "Japa yoga; the 108-bead mala"
+},
+{
+"i": 887,
+"k": "cue",
+"p": "mantra-repetition",
+"n": 0,
+"hold": 20,
+"s": "Sit upright with a mala in the right hand, or any string of beads."
+},
+{
+"i": 888,
+"k": "cue",
+"p": "mantra-repetition",
+"n": 1,
+"hold": 25,
+"s": "Hold it over the middle finger. The thumb moves the beads. The index finger stays off it."
+},
+{
+"i": 889,
+"k": "cue",
+"p": "mantra-repetition",
+"n": 2,
+"hold": 25,
+"s": "Find the larger bead — the meru. You start next to it and you do not cross it."
+},
+{
+"i": 890,
+"k": "cue",
+"p": "mantra-repetition",
+"n": 3,
+"hold": 25,
+"s": "Choose your word. Om, or a name, or a short phrase."
+},
+{
+"i": 891,
+"k": "cue",
+"p": "mantra-repetition",
+"n": 4,
+"hold": 30,
+"s": "One repetition, one bead. Say it inwardly, then move the thumb."
+},
+{
+"i": 892,
+"k": "cue",
+"p": "mantra-repetition",
+"n": 5,
+"hold": 45,
+"s": "The pace is whatever lets the word be complete. Not fast."
+},
+{
+"i": 893,
+"k": "cue",
+"p": "mantra-repetition",
+"n": 6,
+"hold": 120,
+"s": "Keep going. The hand will find its own rhythm and stop needing you."
+},
+{
+"i": 894,
+"k": "cue",
+"p": "mantra-repetition",
+"n": 7,
+"hold": 45,
+"s": "When you reach the meru, do not cross it. Turn the mala and come back the other way, or stop."
+},
+{
+"i": 895,
+"k": "cue",
+"p": "mantra-repetition",
+"n": 8,
+"hold": 120,
+"s": "A hundred and eight is a long time and that is the point."
+},
+{
+"i": 896,
+"k": "cue",
+"p": "mantra-repetition",
+"n": 9,
+"hold": 45,
+"s": "Put the mala down. Sit for a moment with the word still going without the beads."
+},
+{
+"i": 897,
+"k": "title",
+"p": "the-borrowed-body",
+"s": "Nothing Here Is Permanent"
+},
+{
+"i": 898,
+"k": "sanskrit",
+"p": "the-borrowed-body",
+"s": "Anitya Bhavana",
+"in": "Nothing Here Is Permanent"
+},
+{
+"i": 899,
+"k": "description",
+"p": "the-borrowed-body",
+"s": "A clear-eyed look at the fact that the body is on loan. Sobering rather than morbid, and it makes ordinary days noticeably better."
+},
+{
+"i": 900,
+"k": "source",
+"p": "the-borrowed-body",
+"s": "The classical impermanence contemplations"
+},
+{
+"i": 901,
+"k": "caution",
+"p": "the-borrowed-body",
+"s": "Not during acute grief or when you are unwell. This contemplation needs a steady day to be useful rather than frightening."
+},
+{
+"i": 902,
+"k": "cue",
+"p": "the-borrowed-body",
+"n": 0,
+"hold": 18,
+"s": "Sit comfortably. This one asks for a steady day."
+},
+{
+"i": 903,
+"k": "cue",
+"p": "the-borrowed-body",
+"n": 1,
+"hold": 25,
+"s": "Feel the body. Warm, breathing, working."
+},
+{
+"i": 904,
+"k": "cue",
+"p": "the-borrowed-body",
+"n": 2,
+"hold": 35,
+"s": "None of the material in it was yours ten years ago. Almost all of it has been replaced."
+},
+{
+"i": 905,
+"k": "cue",
+"p": "the-borrowed-body",
+"n": 3,
+"hold": 35,
+"s": "It came out of food, which came out of soil and light, and it is going back."
+},
+{
+"i": 906,
+"k": "cue",
+"p": "the-borrowed-body",
+"n": 4,
+"hold": 40,
+"s": "This is not a sad fact. It is only a fact, and it is true of everyone who has ever lived."
+},
+{
+"i": 907,
+"k": "cue",
+"p": "the-borrowed-body",
+"n": 5,
+"hold": 45,
+"s": "Consider that the body will end. Not today. But it will, and you will not be consulted about when."
+},
+{
+"i": 908,
+"k": "cue",
+"p": "the-borrowed-body",
+"n": 6,
+"hold": 40,
+"s": "Now notice that it is working perfectly well at this moment."
+},
+{
+"i": 909,
+"k": "cue",
+"p": "the-borrowed-body",
+"n": 7,
+"hold": 45,
+"s": "Both things are true at once. That is the whole contemplation."
+},
+{
+"i": 910,
+"k": "cue",
+"p": "the-borrowed-body",
+"n": 8,
+"hold": 60,
+"s": "Ask what, given that, actually matters this week. Do not answer quickly."
+},
+{
+"i": 911,
+"k": "cue",
+"p": "the-borrowed-body",
+"n": 9,
+"hold": 40,
+"s": "Come back to the breath. Borrowed, working, here now."
+},
+{
+"i": 912,
+"k": "title",
+"p": "morning-intention",
+"s": "Before the Day Starts"
+},
+{
+"i": 913,
+"k": "sanskrit",
+"p": "morning-intention",
+"s": "Sankalpa",
+"in": "Before the Day Starts"
+},
+{
+"i": 914,
+"k": "description",
+"p": "morning-intention",
+"s": "Three minutes before anything else — before the phone, before the kettle. The classical daily routine puts intention first for a reason."
+},
+{
+"i": 915,
+"k": "source",
+"p": "morning-intention",
+"s": "Dinacharya; the sankalpa of the yogic morning routine"
+},
+{
+"i": 916,
+"k": "cue",
+"p": "morning-intention",
+"n": 0,
+"hold": 22,
+"s": "Sit on the edge of the bed if that is where you are. This works before you have properly woken up."
+},
+{
+"i": 917,
+"k": "cue",
+"p": "morning-intention",
+"n": 1,
+"hold": 25,
+"s": "Do not look at the phone yet. Whatever is on it will still be there."
+},
+{
+"i": 918,
+"k": "cue",
+"p": "morning-intention",
+"n": 2,
+"hold": 35,
+"s": "Notice the body first. How it slept. Whether it is heavy or light this morning."
+},
+{
+"i": 919,
+"k": "cue",
+"p": "morning-intention",
+"n": 3,
+"hold": 40,
+"s": "That reading is useful — a heavy dull morning is kapha and wants movement; a wired restless one is vata and wants warmth and slowness."
+},
+{
+"i": 920,
+"k": "cue",
+"p": "morning-intention",
+"n": 4,
+"hold": 40,
+"s": "Now one intention for the day. One. Short enough to remember at four in the afternoon."
+},
+{
+"i": 921,
+"k": "cue",
+"p": "morning-intention",
+"n": 5,
+"hold": 40,
+"s": "Not a task. A quality. How you would like to meet whatever comes."
+},
+{
+"i": 922,
+"k": "cue",
+"p": "morning-intention",
+"n": 6,
+"hold": 35,
+"s": "Say it inwardly three times."
+},
+{
+"i": 923,
+"k": "cue",
+"p": "morning-intention",
+"n": 7,
+"hold": 30,
+"s": "Now let it go and stand up. It has been set."
+},
+{
+"i": 924,
+"k": "title",
+"p": "the-six-tastes",
+"s": "The Six Tastes"
+},
+{
+"i": 925,
+"k": "sanskrit",
+"p": "the-six-tastes",
+"s": "Shad Rasa Dharana",
+"in": "The Six Tastes"
+},
+{
+"i": 926,
+"k": "description",
+"p": "the-six-tastes",
+"s": "A short contemplation of what a balanced meal actually contains, done before eating. It changes what you reach for more reliably than a rule does."
+},
+{
+"i": 927,
+"k": "source",
+"p": "the-six-tastes",
+"s": "Caraka Samhita; the six rasas"
+},
+{
+"i": 928,
+"k": "caution",
+"p": "the-six-tastes",
+"s": "If you have a history of disordered eating, skip contemplations that focus on food."
+},
+{
+"i": 929,
+"k": "cue",
+"p": "the-six-tastes",
+"n": 0,
+"hold": 18,
+"s": "Sit in front of the meal without starting it."
+},
+{
+"i": 930,
+"k": "cue",
+"p": "the-six-tastes",
+"n": 1,
+"hold": 30,
+"s": "Ayurveda counts six tastes, not four food groups. Sweet, sour, salty, pungent, bitter, astringent."
+},
+{
+"i": 931,
+"k": "cue",
+"p": "the-six-tastes",
+"n": 2,
+"hold": 35,
+"s": "A complete meal has all six, weighted toward the ones your constitution needs."
+},
+{
+"i": 932,
+"k": "cue",
+"p": "the-six-tastes",
+"n": 3,
+"hold": 35,
+"s": "Look at what is in front of you and find them. Sweet is easy — grains, root vegetables, dairy."
+},
+{
+"i": 933,
+"k": "cue",
+"p": "the-six-tastes",
+"n": 4,
+"hold": 35,
+"s": "Sour? Lemon, yoghurt, anything fermented. Salty is usually obvious."
+},
+{
+"i": 934,
+"k": "cue",
+"p": "the-six-tastes",
+"n": 5,
+"hold": 40,
+"s": "Pungent — ginger, pepper, mustard, onion. Bitter — greens, turmeric. Astringent — lentils, beans, unripe fruit."
+},
+{
+"i": 935,
+"k": "cue",
+"p": "the-six-tastes",
+"n": 6,
+"hold": 40,
+"s": "Which ones are missing? Most Western meals are short on bitter and astringent, which is why they sit heavily."
+},
+{
+"i": 936,
+"k": "cue",
+"p": "the-six-tastes",
+"n": 7,
+"hold": 35,
+"s": "You do not have to fix it now. Just notice."
+},
+{
+"i": 937,
+"k": "cue",
+"p": "the-six-tastes",
+"n": 8,
+"hold": 30,
+"s": "Eat. The noticing will change next week's shopping more than a rule would."
+},
+{
+"i": 938,
+"k": "title",
+"p": "the-turn-of-the-season",
+"s": "The Turn of the Season"
+},
+{
+"i": 939,
+"k": "sanskrit",
+"p": "the-turn-of-the-season",
+"s": "Ritu Sandhi",
+"in": "The Turn of the Season"
+},
+{
+"i": 940,
+"k": "description",
+"p": "the-turn-of-the-season",
+"s": "A contemplation for the fortnight either side of a seasonal change — the period classical texts single out as the most destabilising of the year."
+},
+{
+"i": 941,
+"k": "source",
+"p": "the-turn-of-the-season",
+"s": "Ritucharya; the ritu sandhi"
+},
+{
+"i": 942,
+"k": "cue",
+"p": "the-turn-of-the-season",
+"n": 0,
+"hold": 20,
+"s": "Sit somewhere you can see or hear outside, if that is possible."
+},
+{
+"i": 943,
+"k": "cue",
+"p": "the-turn-of-the-season",
+"n": 1,
+"hold": 30,
+"s": "Bring to mind what season it actually is. Not the date — the weather."
+},
+{
+"i": 944,
+"k": "cue",
+"p": "the-turn-of-the-season",
+"n": 2,
+"hold": 35,
+"s": "Classical Ayurveda pays particular attention to the fortnight either side of a seasonal change."
+},
+{
+"i": 945,
+"k": "cue",
+"p": "the-turn-of-the-season",
+"n": 3,
+"hold": 40,
+"s": "That junction is when illness arrives, because the body is still running the last season's habits."
+},
+{
+"i": 946,
+"k": "cue",
+"p": "the-turn-of-the-season",
+"n": 4,
+"hold": 40,
+"s": "So: what is different outside now from a month ago? Light, temperature, damp, wind."
+},
+{
+"i": 947,
+"k": "cue",
+"p": "the-turn-of-the-season",
+"n": 5,
+"hold": 45,
+"s": "And what are you still doing that belonged to the last season? Eating cold food into autumn. Staying up as if it were still light at nine."
+},
+{
+"i": 948,
+"k": "cue",
+"p": "the-turn-of-the-season",
+"n": 6,
+"hold": 45,
+"s": "Pick one thing to change. Only one. The texts recommend changing gradually at a junction, not all at once."
+},
+{
+"i": 949,
+"k": "cue",
+"p": "the-turn-of-the-season",
+"n": 7,
+"hold": 60,
+"s": "Sit with the season as it actually is for a moment, rather than the one you had got used to."
+},
+{
+"i": 950,
+"k": "title",
+"p": "evening-review",
+"s": "Going Back Over the Day"
+},
+{
+"i": 951,
+"k": "sanskrit",
+"p": "evening-review",
+"s": "Sadvritta Anusmriti",
+"in": "Going Back Over the Day"
+},
+{
+"i": 952,
+"k": "description",
+"p": "evening-review",
+"s": "Retracing the day backwards, without judging any of it. Clears the mind before sleep better than trying not to think."
+},
+{
+"i": 953,
+"k": "source",
+"p": "evening-review",
+"s": "Caraka Samhita's sadvritta, recalled at day's end"
+},
+{
+"i": 954,
+"k": "caution",
+"p": "evening-review",
+"s": "If the review turns into self-criticism rather than recollection, stop and do Wishing Well instead. That is a different practice doing a different job."
+},
+{
+"i": 955,
+"k": "cue",
+"p": "evening-review",
+"n": 0,
+"hold": 18,
+"s": "Lie down or sit back. This is the last thing before sleep."
+},
+{
+"i": 956,
+"k": "cue",
+"p": "evening-review",
+"n": 1,
+"hold": 30,
+"s": "Start at now and work backwards. What happened in the last hour?"
+},
+{
+"i": 957,
+"k": "cue",
+"p": "evening-review",
+"n": 2,
+"hold": 35,
+"s": "Do not evaluate it. Just recall it, the way you would recall a film."
+},
+{
+"i": 958,
+"k": "cue",
+"p": "evening-review",
+"n": 3,
+"hold": 40,
+"s": "Back further. The evening. The end of the afternoon."
+},
+{
+"i": 959,
+"k": "cue",
+"p": "evening-review",
+"n": 4,
+"hold": 40,
+"s": "If you find yourself arguing with something that happened, notice that and keep moving backwards."
+},
+{
+"i": 960,
+"k": "cue",
+"p": "evening-review",
+"n": 5,
+"hold": 45,
+"s": "The middle of the day. The meal. The morning."
+},
+{
+"i": 961,
+"k": "cue",
+"p": "evening-review",
+"n": 6,
+"hold": 40,
+"s": "All the way back to waking up."
+},
+{
+"i": 962,
+"k": "cue",
+"p": "evening-review",
+"n": 7,
+"hold": 40,
+"s": "Now notice one thing from the day you are glad about. It can be very small."
+},
+{
+"i": 963,
+"k": "cue",
+"p": "evening-review",
+"n": 8,
+"hold": 60,
+"s": "And let the whole day go. It is finished, whatever it was."
+},
+{
+"i": 964,
+"k": "cue",
+"p": "evening-review",
+"n": 9,
+"hold": 60,
+"s": "Nothing left to review. Sleep from here."
+},
+{
+"i": 965,
+"k": "title",
+"p": "abhyanga-awareness",
+"s": "Oiling the Body"
+},
+{
+"i": 966,
+"k": "sanskrit",
+"p": "abhyanga-awareness",
+"s": "Abhyanga",
+"in": "Oiling the Body"
+},
+{
+"i": 967,
+"k": "description",
+"p": "abhyanga-awareness",
+"s": "Attention during the classical self-massage, which the texts prescribe daily and almost nobody does. Deeply pacifying for vata."
+},
+{
+"i": 968,
+"k": "source",
+"p": "abhyanga-awareness",
+"s": "Dinacharya; abhyanga, the daily self-massage"
+},
+{
+"i": 969,
+"k": "caution",
+"p": "abhyanga-awareness",
+"s": "Not over broken skin, an acute injury, or a fever. Not during acute indigestion."
+},
+{
+"i": 970,
+"k": "caution",
+"p": "abhyanga-awareness",
+"s": "Do not oil the body during the first days of menstruation, per classical guidance."
+},
+{
+"i": 971,
+"k": "cue",
+"p": "abhyanga-awareness",
+"n": 0,
+"hold": 25,
+"s": "Warm the oil first — sesame for vata, coconut for pitta, mustard or none for kapha."
+},
+{
+"i": 972,
+"k": "cue",
+"p": "abhyanga-awareness",
+"n": 1,
+"hold": 25,
+"s": "Start at the head if you are washing your hair, or at the feet if you are not."
+},
+{
+"i": 973,
+"k": "cue",
+"p": "abhyanga-awareness",
+"n": 2,
+"hold": 30,
+"s": "Long strokes along the limbs. Circles at the joints. That is the whole technique."
+},
+{
+"i": 974,
+"k": "cue",
+"p": "abhyanga-awareness",
+"n": 3,
+"hold": 40,
+"s": "Go slowly enough that you can feel the hand as well as the skin. Both ends of the touch."
+},
+{
+"i": 975,
+"k": "cue",
+"p": "abhyanga-awareness",
+"n": 4,
+"hold": 45,
+"s": "The arms, one at a time. Shoulder to hand, circles at the elbow and the wrist."
+},
+{
+"i": 976,
+"k": "cue",
+"p": "abhyanga-awareness",
+"n": 5,
+"hold": 45,
+"s": "The chest and belly, clockwise. Then the back as far as you reach."
+},
+{
+"i": 977,
+"k": "cue",
+"p": "abhyanga-awareness",
+"n": 6,
+"hold": 45,
+"s": "The legs. Long strokes down, circles at knee and ankle."
+},
+{
+"i": 978,
+"k": "cue",
+"p": "abhyanga-awareness",
+"n": 7,
+"hold": 50,
+"s": "The feet last, and give them longer than feels necessary. The texts are insistent about the feet."
+},
+{
+"i": 979,
+"k": "cue",
+"p": "abhyanga-awareness",
+"n": 8,
+"hold": 60,
+"s": "Now sit or stand for a few minutes and let the oil stay on before you wash."
+},
+{
+"i": 980,
+"k": "cue",
+"p": "abhyanga-awareness",
+"n": 9,
+"hold": 40,
+"s": "The word for oil and the word for love share a root in Sanskrit. That is not a coincidence."
+},
+{
+"i": 981,
+"k": "title",
+"p": "yogic-sleep",
+"s": "Yogic Sleep, Full Form"
+},
+{
+"i": 982,
+"k": "description",
+"p": "yogic-sleep",
+"s": "The complete form: intention, body rotation, breath, opposite sensations, brief imagery, and the intention again. The deepest rest in the library."
+},
+{
+"i": 983,
+"k": "source",
+"p": "yogic-sleep",
+"s": "Yoga Nidra lineage — the full form with sankalpa, rotation, opposites and visualisation"
+},
+{
+"i": 984,
+"k": "caution",
+"p": "yogic-sleep",
+"s": "Not a substitute for sleep, and not to be done driving or operating anything."
+},
+{
+"i": 985,
+"k": "cue",
+"p": "yogic-sleep",
+"n": 0,
+"hold": 25,
+"s": "Lie on your back. A pillow under the knees if the lower back asks for one. Get it right now, because you will not move again."
+},
+{
+"i": 986,
+"k": "cue",
+"p": "yogic-sleep",
+"n": 1,
+"hold": 25,
+"s": "The only instruction is to stay awake. Not alert — awake."
+},
+{
+"i": 987,
+"k": "cue",
+"p": "yogic-sleep",
+"n": 2,
+"hold": 45,
+"s": "Bring to mind a short intention. Present tense, positive, plainly true. Say it inwardly three times."
+},
+{
+"i": 988,
+"k": "cue",
+"p": "yogic-sleep",
+"n": 3,
+"hold": 30,
+"s": "Now let it go completely."
+},
+{
+"i": 989,
+"k": "cue",
+"p": "yogic-sleep",
+"n": 4,
+"hold": 16,
+"s": "Awareness to the right hand thumb, second finger, third, fourth, fifth. Palm. Back of the hand. Wrist. Elbow. Shoulder."
+},
+{
+"i": 990,
+"k": "cue",
+"p": "yogic-sleep",
+"n": 5,
+"hold": 16,
+"s": "Right armpit, right waist, right hip, thigh, knee, calf, ankle, heel, sole, right big toe."
+},
+{
+"i": 991,
+"k": "cue",
+"p": "yogic-sleep",
+"n": 6,
+"hold": 16,
+"s": "Left hand thumb, second finger, third, fourth, fifth. Palm. Back of the hand. Wrist. Elbow. Shoulder."
+},
+{
+"i": 992,
+"k": "cue",
+"p": "yogic-sleep",
+"n": 7,
+"hold": 16,
+"s": "Left armpit, left waist, left hip, thigh, knee, calf, ankle, heel, sole, left big toe."
+},
+{
+"i": 993,
+"k": "cue",
+"p": "yogic-sleep",
+"n": 8,
+"hold": 18,
+"s": "The back of the body. Right shoulder blade, left shoulder blade, the whole spine, the buttocks, the backs of both legs."
+},
+{
+"i": 994,
+"k": "cue",
+"p": "yogic-sleep",
+"n": 9,
+"hold": 20,
+"s": "The front. The forehead, both eyebrows, the space between them, both eyelids, both cheeks, the lips, the chin, the throat, the chest, the navel."
+},
+{
+"i": 995,
+"k": "cue",
+"p": "yogic-sleep",
+"n": 10,
+"hold": 60,
+"s": "The whole body at once. Every part you have just visited."
+},
+{
+"i": 996,
+"k": "cue",
+"p": "yogic-sleep",
+"n": 11,
+"hold": 40,
+"s": "Now the breath. Count backwards from twenty-seven, one number for each breath out."
+},
+{
+"i": 997,
+"k": "cue",
+"p": "yogic-sleep",
+"n": 12,
+"hold": 150,
+"s": "If you lose it, begin again at twenty-seven."
+},
+{
+"i": 998,
+"k": "cue",
+"p": "yogic-sleep",
+"n": 13,
+"hold": 60,
+"s": "Let the counting go. Now feel heaviness — the whole body heavy, sinking."
+},
+{
+"i": 999,
+"k": "cue",
+"p": "yogic-sleep",
+"n": 14,
+"hold": 60,
+"s": "And now lightness. The whole body light, floating, barely touching the floor."
+},
+{
+"i": 1000,
+"k": "cue",
+"p": "yogic-sleep",
+"n": 15,
+"hold": 60,
+"s": "Both at once, if you can. Heavy and light together."
+},
+{
+"i": 1001,
+"k": "cue",
+"p": "yogic-sleep",
+"n": 16,
+"hold": 75,
+"s": "Now an image, held loosely: a still lake at dusk, holding the whole sky."
+},
+{
+"i": 1002,
+"k": "cue",
+"p": "yogic-sleep",
+"n": 17,
+"hold": 45,
+"s": "Let the image go. Bring the intention back, in the same words as before."
+},
+{
+"i": 1003,
+"k": "cue",
+"p": "yogic-sleep",
+"n": 18,
+"hold": 45,
+"s": "Feel the floor. The room. Sounds outside. The breath moving on its own."
+},
+{
+"i": 1004,
+"k": "cue",
+"p": "yogic-sleep",
+"n": 19,
+"hold": 40,
+"s": "Move one finger. Then one toe. Come back in your own time, and slowly."
+},
+{
+"i": 1005,
+"k": "title",
+"p": "descent-into-sleep",
+"s": "Falling Asleep"
+},
+{
+"i": 1006,
+"k": "sanskrit",
+"p": "descent-into-sleep",
+"s": "Nidra Pravesha",
+"in": "Falling Asleep"
+},
+{
+"i": 1007,
+"k": "description",
+"p": "descent-into-sleep",
+"s": "Designed to be abandoned partway through. There is no ending, nothing to return from, and no chime."
+},
+{
+"i": 1008,
+"k": "source",
+"p": "descent-into-sleep",
+"s": "Modern synthesis of the yogic and clinical sleep-onset methods"
+},
+{
+"i": 1009,
+"k": "caution",
+"p": "descent-into-sleep",
+"s": "Do not listen while driving or doing anything else."
+},
+{
+"i": 1010,
+"k": "cue",
+"p": "descent-into-sleep",
+"n": 0,
+"hold": 25,
+"s": "Lie however you sleep. This one is meant to be left unfinished."
+},
+{
+"i": 1011,
+"k": "cue",
+"p": "descent-into-sleep",
+"n": 1,
+"hold": 30,
+"s": "You do not have to stay awake for this. If you go, you go."
+},
+{
+"i": 1012,
+"k": "cue",
+"p": "descent-into-sleep",
+"n": 2,
+"hold": 45,
+"s": "Let the out-breath be a little longer than the in. Do not count. Just let it lean that way."
+},
+{
+"i": 1013,
+"k": "cue",
+"p": "descent-into-sleep",
+"n": 3,
+"hold": 45,
+"s": "Now let the jaw be heavy. The tongue loose in the mouth."
+},
+{
+"i": 1014,
+"k": "cue",
+"p": "descent-into-sleep",
+"n": 4,
+"hold": 45,
+"s": "The space between the eyebrows, soft."
+},
+{
+"i": 1015,
+"k": "cue",
+"p": "descent-into-sleep",
+"n": 5,
+"hold": 50,
+"s": "The shoulders, further down than they were."
+},
+{
+"i": 1016,
+"k": "cue",
+"p": "descent-into-sleep",
+"n": 6,
+"hold": 50,
+"s": "The hands, open."
+},
+{
+"i": 1017,
+"k": "cue",
+"p": "descent-into-sleep",
+"n": 7,
+"hold": 60,
+"s": "The belly, doing its own breathing without any help."
+},
+{
+"i": 1018,
+"k": "cue",
+"p": "descent-into-sleep",
+"n": 8,
+"hold": 60,
+"s": "The legs, heavy all the way to the feet."
+},
+{
+"i": 1019,
+"k": "cue",
+"p": "descent-into-sleep",
+"n": 9,
+"hold": 90,
+"s": "Nothing left to hold. Nothing left to check."
+},
+{
+"i": 1020,
+"k": "cue",
+"p": "descent-into-sleep",
+"n": 10,
+"hold": 120,
+"s": "The bed is doing all the work now."
+},
+{
+"i": 1021,
+"k": "cue",
+"p": "descent-into-sleep",
+"n": 11,
+"hold": 150,
+"s": "Heavy. Warm. Nowhere to be."
+},
+{
+"i": 1022,
+"k": "cue",
+"p": "descent-into-sleep",
+"n": 12,
+"hold": 180,
+"s": "Nothing more. Sleep from here."
+}
+]

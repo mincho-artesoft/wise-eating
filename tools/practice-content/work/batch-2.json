@@ -1,0 +1,1981 @@
+[
+{
+"i": 516,
+"k": "title",
+"p": "humming-bee-breath",
+"s": "Humming Bee Breath"
+},
+{
+"i": 517,
+"k": "sanskrit",
+"p": "humming-bee-breath",
+"s": "Bhramari Pranayama",
+"in": "Humming Bee Breath"
+},
+{
+"i": 518,
+"k": "description",
+"p": "humming-bee-breath",
+"s": "A long hum on every out-breath with the ears closed. The vibration fills the skull and leaves very little room for anything else."
+},
+{
+"i": 519,
+"k": "source",
+"p": "humming-bee-breath",
+"s": "Hatha Yoga Pradipika; the bee breath"
+},
+{
+"i": 520,
+"k": "caution",
+"p": "humming-bee-breath",
+"s": "Not with an ear infection. Do not press hard on the eyes if using that variant."
+},
+{
+"i": 521,
+"k": "cue",
+"p": "humming-bee-breath",
+"n": 0,
+"hold": 15,
+"s": "Sit upright somewhere you will not be overheard, or where you do not mind being."
+},
+{
+"i": 522,
+"k": "cue",
+"p": "humming-bee-breath",
+"n": 1,
+"hold": 12,
+"s": "Breathe in through the nose, ordinarily."
+},
+{
+"i": 523,
+"k": "cue",
+"p": "humming-bee-breath",
+"n": 2,
+"hold": 25,
+"s": "On the way out, hum. Mouth closed, a low steady sound, all the way to the end of the breath."
+},
+{
+"i": 524,
+"k": "cue",
+"p": "humming-bee-breath",
+"n": 3,
+"hold": 30,
+"s": "Again. Let the hum be lower than feels natural. Low vibrates more."
+},
+{
+"i": 525,
+"k": "cue",
+"p": "humming-bee-breath",
+"n": 4,
+"hold": 20,
+"s": "Now close the ears with the thumbs, fingers resting lightly on the head."
+},
+{
+"i": 526,
+"k": "cue",
+"p": "humming-bee-breath",
+"n": 5,
+"hold": 30,
+"s": "Hum again. With the ears closed the sound is suddenly inside the skull."
+},
+{
+"i": 527,
+"k": "cue",
+"p": "humming-bee-breath",
+"n": 6,
+"hold": 45,
+"s": "Stay with it. Feel where it vibrates — the face, the teeth, the crown."
+},
+{
+"i": 528,
+"k": "cue",
+"p": "humming-bee-breath",
+"n": 7,
+"hold": 120,
+"s": "Ten more, each one as long as the breath allows."
+},
+{
+"i": 529,
+"k": "cue",
+"p": "humming-bee-breath",
+"n": 8,
+"hold": 60,
+"s": "Take the hands down. Do not hum. Listen."
+},
+{
+"i": 530,
+"k": "cue",
+"p": "humming-bee-breath",
+"n": 9,
+"hold": 30,
+"s": "The quiet after bhramari is the reason for the noise."
+},
+{
+"i": 531,
+"k": "title",
+"p": "hissing-breath",
+"s": "Hissing Breath"
+},
+{
+"i": 532,
+"k": "sanskrit",
+"p": "hissing-breath",
+"s": "Sitkari Pranayama",
+"in": "Hissing Breath"
+},
+{
+"i": 533,
+"k": "description",
+"p": "hissing-breath",
+"s": "The cooling breath for people who cannot curl the tongue. Air drawn in through the teeth, which cools it the same way."
+},
+{
+"i": 534,
+"k": "caution",
+"p": "hissing-breath",
+"s": "Skip with sensitive teeth or exposed roots — cold air on them is unpleasant."
+},
+{
+"i": 535,
+"k": "caution",
+"p": "hissing-breath",
+"s": "Not in cold weather."
+},
+{
+"i": 536,
+"k": "cue",
+"p": "hissing-breath",
+"n": 0,
+"hold": 12,
+"s": "Sit comfortably. Let the jaw be loose."
+},
+{
+"i": 537,
+"k": "cue",
+"p": "hissing-breath",
+"n": 1,
+"hold": 20,
+"s": "Bring the top and bottom teeth lightly together and part the lips, as if grimacing."
+},
+{
+"i": 538,
+"k": "cue",
+"p": "hissing-breath",
+"n": 2,
+"hold": 22,
+"s": "Breathe in through the teeth. There will be a hissing sound and the air will feel cold."
+},
+{
+"i": 539,
+"k": "cue",
+"p": "hissing-breath",
+"n": 3,
+"hold": 18,
+"s": "Close the mouth and breathe out slowly through the nose."
+},
+{
+"i": 540,
+"k": "cue",
+"p": "hissing-breath",
+"n": 4,
+"hold": 30,
+"s": "Again. In through the teeth, out through the nose."
+},
+{
+"i": 541,
+"k": "cue",
+"p": "hissing-breath",
+"n": 5,
+"hold": 100,
+"s": "Ten rounds. Stop before you feel chilled — this cools faster than it seems."
+},
+{
+"i": 542,
+"k": "cue",
+"p": "hissing-breath",
+"n": 6,
+"hold": 45,
+"s": "Now close the mouth. Breathe normally."
+},
+{
+"i": 543,
+"k": "cue",
+"p": "hissing-breath",
+"n": 7,
+"hold": 30,
+"s": "Notice the difference in the mouth and throat."
+},
+{
+"i": 544,
+"k": "title",
+"p": "equal-breath",
+"s": "Equal Breath"
+},
+{
+"i": 545,
+"k": "sanskrit",
+"p": "equal-breath",
+"s": "Sama Vritti",
+"in": "Equal Breath"
+},
+{
+"i": 546,
+"k": "description",
+"p": "equal-breath",
+"s": "In for four, out for four. The simplest ratio and the one to use when the breath is ragged and nothing else will settle it."
+},
+{
+"i": 547,
+"k": "source",
+"p": "equal-breath",
+"s": "Classical sama vritti"
+},
+{
+"i": 548,
+"k": "cue",
+"p": "equal-breath",
+"n": 0,
+"hold": 15,
+"s": "Sit or stand. This one works anywhere and nobody can tell you are doing it."
+},
+{
+"i": 549,
+"k": "cue",
+"p": "equal-breath",
+"n": 1,
+"hold": 15,
+"s": "Breathe in and count silently. One, two, three, four."
+},
+{
+"i": 550,
+"k": "cue",
+"p": "equal-breath",
+"n": 2,
+"hold": 15,
+"s": "Breathe out for the same count. One, two, three, four."
+},
+{
+"i": 551,
+"k": "cue",
+"p": "equal-breath",
+"n": 3,
+"hold": 25,
+"s": "If four is too long, use three. If it is too short, use five. Find the number that is comfortable and stay there."
+},
+{
+"i": 552,
+"k": "cue",
+"p": "equal-breath",
+"n": 4,
+"hold": 30,
+"s": "The point is not the number. The point is that both halves are the same."
+},
+{
+"i": 553,
+"k": "cue",
+"p": "equal-breath",
+"n": 5,
+"hold": 90,
+"s": "Ten rounds. Equal in, equal out."
+},
+{
+"i": 554,
+"k": "cue",
+"p": "equal-breath",
+"n": 6,
+"hold": 45,
+"s": "If the count slips, that is information — the breath wanted to be a different length. Adjust and carry on."
+},
+{
+"i": 555,
+"k": "cue",
+"p": "equal-breath",
+"n": 7,
+"hold": 90,
+"s": "Ten more."
+},
+{
+"i": 556,
+"k": "cue",
+"p": "equal-breath",
+"n": 8,
+"hold": 40,
+"s": "Stop counting. Let the breath choose its own length again."
+},
+{
+"i": 557,
+"k": "title",
+"p": "extended-exhale",
+"s": "Extended Exhale"
+},
+{
+"i": 558,
+"k": "sanskrit",
+"p": "extended-exhale",
+"s": "Visama Vritti",
+"in": "Extended Exhale"
+},
+{
+"i": 559,
+"k": "description",
+"p": "extended-exhale",
+"s": "Out for twice as long as in. The one breath practice with a direct, measurable calming effect, and the best thing to do at two in the morning."
+},
+{
+"i": 560,
+"k": "source",
+"p": "extended-exhale",
+"s": "Classical visama vritti"
+},
+{
+"i": 561,
+"k": "caution",
+"p": "extended-exhale",
+"s": "If lengthening the out-breath makes you gasp on the next one in, the ratio is too steep. Shorten it."
+},
+{
+"i": 562,
+"k": "cue",
+"p": "extended-exhale",
+"n": 0,
+"hold": 15,
+"s": "Sit or lie down. This works lying in the dark, which is often when it is needed."
+},
+{
+"i": 563,
+"k": "cue",
+"p": "extended-exhale",
+"n": 1,
+"hold": 12,
+"s": "Breathe in for a count of four."
+},
+{
+"i": 564,
+"k": "cue",
+"p": "extended-exhale",
+"n": 2,
+"hold": 20,
+"s": "Breathe out for a count of six. Slower than feels natural, but not strained."
+},
+{
+"i": 565,
+"k": "cue",
+"p": "extended-exhale",
+"n": 3,
+"hold": 25,
+"s": "Again. In for four, out for six."
+},
+{
+"i": 566,
+"k": "cue",
+"p": "extended-exhale",
+"n": 4,
+"hold": 35,
+"s": "When six is easy, go to eight. In for four, out for eight."
+},
+{
+"i": 567,
+"k": "cue",
+"p": "extended-exhale",
+"n": 5,
+"hold": 40,
+"s": "Never force the in-breath to be short. Only let the out-breath be long."
+},
+{
+"i": 568,
+"k": "cue",
+"p": "extended-exhale",
+"n": 6,
+"hold": 120,
+"s": "Ten rounds. The out-breath is where the nervous system settles, which is why we spend longer there."
+},
+{
+"i": 569,
+"k": "cue",
+"p": "extended-exhale",
+"n": 7,
+"hold": 150,
+"s": "Keep going for as long as you like. If you fall asleep doing this, it has worked."
+},
+{
+"i": 570,
+"k": "cue",
+"p": "extended-exhale",
+"n": 8,
+"hold": 40,
+"s": "If you are coming back rather than sleeping, let the ratio even out first."
+},
+{
+"i": 571,
+"k": "title",
+"p": "bellows-breath",
+"s": "Bellows Breath"
+},
+{
+"i": 572,
+"k": "sanskrit",
+"p": "bellows-breath",
+"s": "Bhastrika",
+"in": "Bellows Breath"
+},
+{
+"i": 573,
+"k": "description",
+"p": "bellows-breath",
+"s": "Forceful breathing in and out through the nose at speed. Strongly heating and strongly rousing. The most contraindicated practice in the library."
+},
+{
+"i": 574,
+"k": "source",
+"p": "bellows-breath",
+"s": "Hatha Yoga Pradipika; bhastrika"
+},
+{
+"i": 575,
+"k": "caution",
+"p": "bellows-breath",
+"s": "Do not practise in pregnancy."
+},
+{
+"i": 576,
+"k": "caution",
+"p": "bellows-breath",
+"s": "Do not practise with high blood pressure, heart disease, epilepsy, glaucoma, hernia, ulcer, or during menstruation."
+},
+{
+"i": 577,
+"k": "caution",
+"p": "bellows-breath",
+"s": "Not within two hours of eating."
+},
+{
+"i": 578,
+"k": "caution",
+"p": "bellows-breath",
+"s": "Stop immediately at any dizziness."
+},
+{
+"i": 579,
+"k": "caution",
+"p": "bellows-breath",
+"s": "Also avoid with detached retina. If you are new to it, do ten breaths, not thirty."
+},
+{
+"i": 580,
+"k": "cue",
+"p": "bellows-breath",
+"n": 0,
+"hold": 20,
+"s": "Read the cautions before starting this one. It is not for everyone and not for every day."
+},
+{
+"i": 581,
+"k": "cue",
+"p": "bellows-breath",
+"n": 1,
+"hold": 15,
+"s": "Sit upright, spine straight, hands on the knees."
+},
+{
+"i": 582,
+"k": "cue",
+"p": "bellows-breath",
+"n": 2,
+"hold": 15,
+"s": "Take two ordinary breaths first."
+},
+{
+"i": 583,
+"k": "cue",
+"p": "bellows-breath",
+"n": 3,
+"hold": 25,
+"s": "Now breathe in forcefully through the nose and out forcefully through the nose, at about one per second."
+},
+{
+"i": 584,
+"k": "cue",
+"p": "bellows-breath",
+"n": 4,
+"hold": 20,
+"s": "Both directions are active. The belly moves like a bellows."
+},
+{
+"i": 585,
+"k": "cue",
+"p": "bellows-breath",
+"n": 5,
+"hold": 45,
+"s": "Ten of those. Then stop and breathe normally."
+},
+{
+"i": 586,
+"k": "cue",
+"p": "bellows-breath",
+"n": 6,
+"hold": 40,
+"s": "Notice what happened. Heat, alertness, possibly a little light-headedness. If it is more than a little, stop here."
+},
+{
+"i": 587,
+"k": "cue",
+"p": "bellows-breath",
+"n": 7,
+"hold": 45,
+"s": "A second round of ten, if the first was comfortable."
+},
+{
+"i": 588,
+"k": "cue",
+"p": "bellows-breath",
+"n": 8,
+"hold": 60,
+"s": "Now stop entirely and let the breath find its own rhythm. Do not chase another round."
+},
+{
+"i": 589,
+"k": "cue",
+"p": "bellows-breath",
+"n": 9,
+"hold": 45,
+"s": "Sit still for a minute. The stillness after is as much the practice as the breathing."
+},
+{
+"i": 590,
+"k": "title",
+"p": "skull-shining-breath",
+"s": "Skull-Shining Breath"
+},
+{
+"i": 591,
+"k": "sanskrit",
+"p": "skull-shining-breath",
+"s": "Kapalabhati",
+"in": "Skull-Shining Breath"
+},
+{
+"i": 592,
+"k": "description",
+"p": "skull-shining-breath",
+"s": "Sharp exhalations from the belly with passive inhalations between. A cleansing practice rather than a breath practice, and classified that way in the texts."
+},
+{
+"i": 593,
+"k": "source",
+"p": "skull-shining-breath",
+"s": "Gheranda Samhita; one of the six shatkarma"
+},
+{
+"i": 594,
+"k": "caution",
+"p": "skull-shining-breath",
+"s": "Stop at any pain in the abdomen."
+},
+{
+"i": 595,
+"k": "cue",
+"p": "skull-shining-breath",
+"n": 0,
+"hold": 18,
+"s": "Read the cautions. This one has real ones."
+},
+{
+"i": 596,
+"k": "cue",
+"p": "skull-shining-breath",
+"n": 1,
+"hold": 18,
+"s": "Sit upright with the belly free. Rest one hand below the navel."
+},
+{
+"i": 597,
+"k": "cue",
+"p": "skull-shining-breath",
+"n": 2,
+"hold": 22,
+"s": "The whole practice is this: a sharp pull inward of the belly, which pushes the air out through the nose."
+},
+{
+"i": 598,
+"k": "cue",
+"p": "skull-shining-breath",
+"n": 3,
+"hold": 22,
+"s": "The in-breath is not done. It happens by itself when the belly releases."
+},
+{
+"i": 599,
+"k": "cue",
+"p": "skull-shining-breath",
+"n": 4,
+"hold": 20,
+"s": "Try one. Sharp out. Let the in happen."
+},
+{
+"i": 600,
+"k": "cue",
+"p": "skull-shining-breath",
+"n": 5,
+"hold": 45,
+"s": "Now twenty, at about one per second. Only the out-breath is active."
+},
+{
+"i": 601,
+"k": "cue",
+"p": "skull-shining-breath",
+"n": 6,
+"hold": 40,
+"s": "Stop. Breathe normally and notice the effect."
+},
+{
+"i": 602,
+"k": "cue",
+"p": "skull-shining-breath",
+"n": 7,
+"hold": 50,
+"s": "A second round of twenty, if that was comfortable. Never push past comfortable."
+},
+{
+"i": 603,
+"k": "cue",
+"p": "skull-shining-breath",
+"n": 8,
+"hold": 60,
+"s": "Stop, and sit completely still. Do not go for a third round on the first day."
+},
+{
+"i": 604,
+"k": "cue",
+"p": "skull-shining-breath",
+"n": 9,
+"hold": 45,
+"s": "The clarity afterwards is what the texts are describing. Sit in it."
+},
+{
+"i": 605,
+"k": "title",
+"p": "breath-of-fire",
+"s": "Breath of Fire"
+},
+{
+"i": 606,
+"k": "sanskrit",
+"p": "breath-of-fire",
+"s": "Agni Pran",
+"in": "Breath of Fire"
+},
+{
+"i": 607,
+"k": "description",
+"p": "breath-of-fire",
+"s": "Rapid even breathing through the nose, in and out at the same strength. Warming, and gentler than bhastrika, but still not a beginner's practice."
+},
+{
+"i": 608,
+"k": "source",
+"p": "breath-of-fire",
+"s": "Kundalini tradition; agni pran"
+},
+{
+"i": 609,
+"k": "cue",
+"p": "breath-of-fire",
+"n": 0,
+"hold": 18,
+"s": "Sit upright. Read the cautions if you have not."
+},
+{
+"i": 610,
+"k": "cue",
+"p": "breath-of-fire",
+"n": 1,
+"hold": 25,
+"s": "Unlike bhastrika, in and out are equal here — same speed, same strength, no emphasis on either."
+},
+{
+"i": 611,
+"k": "cue",
+"p": "breath-of-fire",
+"n": 2,
+"hold": 25,
+"s": "Start slowly. In, out, in, out, through the nose, belly moving."
+},
+{
+"i": 612,
+"k": "cue",
+"p": "breath-of-fire",
+"n": 3,
+"hold": 30,
+"s": "Now let it speed up until it is about two per second, still even."
+},
+{
+"i": 613,
+"k": "cue",
+"p": "breath-of-fire",
+"n": 4,
+"hold": 45,
+"s": "Thirty seconds. If it becomes ragged, slow down rather than stopping."
+},
+{
+"i": 614,
+"k": "cue",
+"p": "breath-of-fire",
+"n": 5,
+"hold": 45,
+"s": "Stop. Breathe normally. Feel the heat."
+},
+{
+"i": 615,
+"k": "cue",
+"p": "breath-of-fire",
+"n": 6,
+"hold": 50,
+"s": "One more round of thirty seconds."
+},
+{
+"i": 616,
+"k": "cue",
+"p": "breath-of-fire",
+"n": 7,
+"hold": 60,
+"s": "Stop and sit. Let the breath come all the way back to normal before you move."
+},
+{
+"i": 617,
+"k": "title",
+"p": "standing-deep-breathing",
+"s": "Standing Deep Breathing"
+},
+{
+"i": 618,
+"k": "sanskrit",
+"p": "standing-deep-breathing",
+"s": "Pranayama (standing)",
+"in": "Standing Deep Breathing"
+},
+{
+"i": 619,
+"k": "description",
+"p": "standing-deep-breathing",
+"s": "Full breaths taken standing, with the arms. The practice to use when sitting still is not going to happen — first thing, or at a desk after too long."
+},
+{
+"i": 620,
+"k": "source",
+"p": "standing-deep-breathing",
+"s": "Modern hatha opening sequence"
+},
+{
+"i": 621,
+"k": "caution",
+"p": "standing-deep-breathing",
+"s": "Lower the arms if you have a shoulder injury; the breath matters, not the reach."
+},
+{
+"i": 622,
+"k": "cue",
+"p": "standing-deep-breathing",
+"n": 0,
+"hold": 15,
+"s": "Stand with the feet under the hips. Let the arms hang."
+},
+{
+"i": 623,
+"k": "cue",
+"p": "standing-deep-breathing",
+"n": 1,
+"hold": 15,
+"s": "Breathe out completely first. Empty before you fill."
+},
+{
+"i": 624,
+"k": "cue",
+"p": "standing-deep-breathing",
+"n": 2,
+"hold": 20,
+"s": "Now breathe in and let the arms float out and up, overhead."
+},
+{
+"i": 625,
+"k": "cue",
+"p": "standing-deep-breathing",
+"n": 3,
+"hold": 18,
+"s": "Breathe out and let them come down the same way."
+},
+{
+"i": 626,
+"k": "cue",
+"p": "standing-deep-breathing",
+"n": 4,
+"hold": 25,
+"s": "The arms are following the breath, not leading it. If they arrive first, slow them down."
+},
+{
+"i": 627,
+"k": "cue",
+"p": "standing-deep-breathing",
+"n": 5,
+"hold": 90,
+"s": "Ten of those, unhurried."
+},
+{
+"i": 628,
+"k": "cue",
+"p": "standing-deep-breathing",
+"n": 6,
+"hold": 45,
+"s": "Now the same breath without the arms. Just standing."
+},
+{
+"i": 629,
+"k": "cue",
+"p": "standing-deep-breathing",
+"n": 7,
+"hold": 45,
+"s": "Feel the floor under both feet, and the breath moving the whole torso."
+},
+{
+"i": 630,
+"k": "cue",
+"p": "standing-deep-breathing",
+"n": 8,
+"hold": 30,
+"s": "Stand still for a moment before you go back to what you were doing."
+},
+{
+"i": 631,
+"k": "title",
+"p": "the-standing-stone",
+"s": "The Standing Stone"
+},
+{
+"i": 632,
+"k": "description",
+"p": "the-standing-stone",
+"s": "A single upright stone in an empty field, weathered and unmoved. For the days when everything is in motion and nothing is holding."
+},
+{
+"i": 633,
+"k": "cue",
+"p": "the-standing-stone",
+"n": 0,
+"hold": 12,
+"s": "Close the eyes and let the breath settle."
+},
+{
+"i": 634,
+"k": "cue",
+"p": "the-standing-stone",
+"n": 1,
+"hold": 22,
+"s": "A field, open in every direction, and one standing stone in it."
+},
+{
+"i": 635,
+"k": "cue",
+"p": "the-standing-stone",
+"n": 2,
+"hold": 22,
+"s": "Taller than you. Older than anything you can name."
+},
+{
+"i": 636,
+"k": "cue",
+"p": "the-standing-stone",
+"n": 3,
+"hold": 30,
+"s": "Somebody put it there. Everyone who knew why is gone, and the stone is still standing."
+},
+{
+"i": 637,
+"k": "cue",
+"p": "the-standing-stone",
+"n": 4,
+"hold": 30,
+"s": "Weather has been arriving at it for four thousand years. Rain, frost, sun, snow."
+},
+{
+"i": 638,
+"k": "cue",
+"p": "the-standing-stone",
+"n": 5,
+"hold": 35,
+"s": "None of it moved the stone. It only changed the surface."
+},
+{
+"i": 639,
+"k": "cue",
+"p": "the-standing-stone",
+"n": 6,
+"hold": 40,
+"s": "Put your hand flat on it. Cold, rough, absolutely solid."
+},
+{
+"i": 640,
+"k": "cue",
+"p": "the-standing-stone",
+"n": 7,
+"hold": 75,
+"s": "Stand next to it for a while. Nothing is asked of you here."
+},
+{
+"i": 641,
+"k": "cue",
+"p": "the-standing-stone",
+"n": 8,
+"hold": 40,
+"s": "The stone will be there tomorrow whether you come back or not."
+},
+{
+"i": 642,
+"k": "title",
+"p": "the-root-system",
+"s": "What Is Under the Field"
+},
+{
+"i": 643,
+"k": "description",
+"p": "the-root-system",
+"s": "The hidden half of a meadow — the roots, deeper than the grass is tall. For when the visible part of your life feels thin."
+},
+{
+"i": 644,
+"k": "cue",
+"p": "the-root-system",
+"n": 0,
+"hold": 10,
+"s": "Let the eyes close."
+},
+{
+"i": 645,
+"k": "cue",
+"p": "the-root-system",
+"n": 1,
+"hold": 22,
+"s": "A meadow at the end of summer. Grass to the knee, moving slightly."
+},
+{
+"i": 646,
+"k": "cue",
+"p": "the-root-system",
+"n": 2,
+"hold": 22,
+"s": "Now go under it. Below the surface, into the dark."
+},
+{
+"i": 647,
+"k": "cue",
+"p": "the-root-system",
+"n": 3,
+"hold": 28,
+"s": "The roots go down further than the grass goes up. Much further."
+},
+{
+"i": 648,
+"k": "cue",
+"p": "the-root-system",
+"n": 4,
+"hold": 30,
+"s": "They are threaded through each other, holding the whole field together from underneath."
+},
+{
+"i": 649,
+"k": "cue",
+"p": "the-root-system",
+"n": 5,
+"hold": 40,
+"s": "This is where the field survives the winter. Everything above it will die back and none of this will."
+},
+{
+"i": 650,
+"k": "cue",
+"p": "the-root-system",
+"n": 6,
+"hold": 60,
+"s": "Stay down here where it is dark and cool and dense."
+},
+{
+"i": 651,
+"k": "cue",
+"p": "the-root-system",
+"n": 7,
+"hold": 45,
+"s": "Whatever is visible about your life is the grass. This is the rest of it."
+},
+{
+"i": 652,
+"k": "cue",
+"p": "the-root-system",
+"n": 8,
+"hold": 30,
+"s": "Come back up slowly, through the soil, into the light."
+},
+{
+"i": 653,
+"k": "title",
+"p": "rain-on-the-roof",
+"s": "Rain on the Roof"
+},
+{
+"i": 654,
+"k": "description",
+"p": "rain-on-the-roof",
+"s": "Inside, dry and warm, with rain coming down steadily outside. The most reliably comforting image in the set."
+},
+{
+"i": 655,
+"k": "cue",
+"p": "rain-on-the-roof",
+"n": 0,
+"hold": 15,
+"s": "Lie down or sit back. Get properly comfortable."
+},
+{
+"i": 656,
+"k": "cue",
+"p": "rain-on-the-roof",
+"n": 1,
+"hold": 20,
+"s": "You are inside. It is raining, and has been for a while."
+},
+{
+"i": 657,
+"k": "cue",
+"p": "rain-on-the-roof",
+"n": 2,
+"hold": 30,
+"s": "Listen to it on the roof. Not a downpour. Steady, unhurried, going on all evening."
+},
+{
+"i": 658,
+"k": "cue",
+"p": "rain-on-the-roof",
+"n": 3,
+"hold": 30,
+"s": "Every now and then the wind changes and it comes harder against one window."
+},
+{
+"i": 659,
+"k": "cue",
+"p": "rain-on-the-roof",
+"n": 4,
+"hold": 35,
+"s": "Nothing out there needs you. Nothing is expected."
+},
+{
+"i": 660,
+"k": "cue",
+"p": "rain-on-the-roof",
+"n": 5,
+"hold": 45,
+"s": "The rain will keep going whether you sleep or not."
+},
+{
+"i": 661,
+"k": "cue",
+"p": "rain-on-the-roof",
+"n": 6,
+"hold": 90,
+"s": "Warm, dry, indoors, and the sound of water on the roof."
+},
+{
+"i": 662,
+"k": "cue",
+"p": "rain-on-the-roof",
+"n": 7,
+"hold": 60,
+"s": "Let the listening go soft. Let the sound take over."
+},
+{
+"i": 663,
+"k": "title",
+"p": "the-slow-river",
+"s": "The Slow River"
+},
+{
+"i": 664,
+"k": "description",
+"p": "the-slow-river",
+"s": "A wide river moving too slowly to see, carrying everything downstream without effort. For letting go of something you have been holding."
+},
+{
+"i": 665,
+"k": "cue",
+"p": "the-slow-river",
+"n": 0,
+"hold": 12,
+"s": "Sit or lie down. Let the eyes close."
+},
+{
+"i": 666,
+"k": "cue",
+"p": "the-slow-river",
+"n": 1,
+"hold": 25,
+"s": "A wide river, deep and slow. So slow that from the bank it looks still."
+},
+{
+"i": 667,
+"k": "cue",
+"p": "the-slow-river",
+"n": 2,
+"hold": 30,
+"s": "It is not still. A leaf on the surface proves it — going, but taking its time."
+},
+{
+"i": 668,
+"k": "cue",
+"p": "the-slow-river",
+"n": 3,
+"hold": 40,
+"s": "Everything the river carries, it carries without any effort. It does not lift or push. It simply moves and things move with it."
+},
+{
+"i": 669,
+"k": "cue",
+"p": "the-slow-river",
+"n": 4,
+"hold": 35,
+"s": "Put something on the water. Something you have been carrying and are tired of."
+},
+{
+"i": 670,
+"k": "cue",
+"p": "the-slow-river",
+"n": 5,
+"hold": 40,
+"s": "You do not have to throw it. Just set it down on the surface and let go of the edge."
+},
+{
+"i": 671,
+"k": "cue",
+"p": "the-slow-river",
+"n": 6,
+"hold": 60,
+"s": "Watch it move away. Slowly. It may take a long time to be out of sight."
+},
+{
+"i": 672,
+"k": "cue",
+"p": "the-slow-river",
+"n": 7,
+"hold": 60,
+"s": "The river does not know what it is carrying and does not need to."
+},
+{
+"i": 673,
+"k": "cue",
+"p": "the-slow-river",
+"n": 8,
+"hold": 30,
+"s": "Come back to the bank when you are ready."
+},
+{
+"i": 674,
+"k": "title",
+"p": "the-candle",
+"s": "One Candle"
+},
+{
+"i": 675,
+"k": "description",
+"p": "the-candle",
+"s": "A single flame in a dark room, upright and unmoving. The classical concentration image, done with the eyes closed rather than open."
+},
+{
+"i": 676,
+"k": "cue",
+"p": "the-candle",
+"n": 0,
+"hold": 12,
+"s": "Sit upright, and let the eyes close."
+},
+{
+"i": 677,
+"k": "cue",
+"p": "the-candle",
+"n": 1,
+"hold": 22,
+"s": "One candle, in a room with no other light and no draught."
+},
+{
+"i": 678,
+"k": "cue",
+"p": "the-candle",
+"n": 2,
+"hold": 28,
+"s": "The flame is perfectly upright. Bright at the tip, blue at the base, still."
+},
+{
+"i": 679,
+"k": "cue",
+"p": "the-candle",
+"n": 3,
+"hold": 25,
+"s": "It does not flicker, because nothing is disturbing it."
+},
+{
+"i": 680,
+"k": "cue",
+"p": "the-candle",
+"n": 4,
+"hold": 35,
+"s": "Look at the darkest part, just above the wick. That is where the flame is not yet flame."
+},
+{
+"i": 681,
+"k": "cue",
+"p": "the-candle",
+"n": 5,
+"hold": 40,
+"s": "If the image slips or fades, that is expected. Bring it back. That bringing back is the practice."
+},
+{
+"i": 682,
+"k": "cue",
+"p": "the-candle",
+"n": 6,
+"hold": 90,
+"s": "One flame. Upright. Steady."
+},
+{
+"i": 683,
+"k": "cue",
+"p": "the-candle",
+"n": 7,
+"hold": 45,
+"s": "Now let the flame go out and stay with the after-image in the dark."
+},
+{
+"i": 684,
+"k": "title",
+"p": "first-light-on-snow",
+"s": "First Light on Snow"
+},
+{
+"i": 685,
+"k": "description",
+"p": "first-light-on-snow",
+"s": "Sunrise reaching a snowfield — cold ground, warm light. Rousing without heat, which makes it the morning scene for someone who runs hot."
+},
+{
+"i": 686,
+"k": "cue",
+"p": "first-light-on-snow",
+"n": 0,
+"hold": 15,
+"s": "Sit upright. The spine long, the head level."
+},
+{
+"i": 687,
+"k": "cue",
+"p": "first-light-on-snow",
+"n": 1,
+"hold": 25,
+"s": "A wide snowfield before dawn. Blue, silent, absolutely cold."
+},
+{
+"i": 688,
+"k": "cue",
+"p": "first-light-on-snow",
+"n": 2,
+"hold": 30,
+"s": "The light is coming but has not arrived. The sky is getting paler at one edge."
+},
+{
+"i": 689,
+"k": "cue",
+"p": "first-light-on-snow",
+"n": 3,
+"hold": 35,
+"s": "Then the first of the sun touches the top of the snow, and that edge turns gold."
+},
+{
+"i": 690,
+"k": "cue",
+"p": "first-light-on-snow",
+"n": 4,
+"hold": 40,
+"s": "Watch the line of light move down the field toward you. Slowly. It takes minutes."
+},
+{
+"i": 691,
+"k": "cue",
+"p": "first-light-on-snow",
+"n": 5,
+"hold": 45,
+"s": "The snow does not melt. It is still cold. But it is lit now, and that is a different thing."
+},
+{
+"i": 692,
+"k": "cue",
+"p": "first-light-on-snow",
+"n": 6,
+"hold": 60,
+"s": "The light reaches where you are standing."
+},
+{
+"i": 693,
+"k": "cue",
+"p": "first-light-on-snow",
+"n": 7,
+"hold": 60,
+"s": "Warmth on the face, cold underfoot, both entirely clear."
+},
+{
+"i": 694,
+"k": "title",
+"p": "high-cloud",
+"s": "High Cloud"
+},
+{
+"i": 695,
+"k": "description",
+"p": "high-cloud",
+"s": "Cloud moving fast across a sky, seen from below. For a mind that is already moving quickly and does not need slowing so much as widening."
+},
+{
+"i": 696,
+"k": "cue",
+"p": "high-cloud",
+"n": 0,
+"hold": 15,
+"s": "Lie back if you can, or sit and tip the head slightly."
+},
+{
+"i": 697,
+"k": "cue",
+"p": "high-cloud",
+"n": 1,
+"hold": 28,
+"s": "A bright day with high cloud moving fast. Not storm cloud. The thin high kind."
+},
+{
+"i": 698,
+"k": "cue",
+"p": "high-cloud",
+"n": 2,
+"hold": 30,
+"s": "It is going somewhere at speed, and it is completely silent about it."
+},
+{
+"i": 699,
+"k": "cue",
+"p": "high-cloud",
+"n": 3,
+"hold": 35,
+"s": "Down here nothing is moving. The speed is all up there."
+},
+{
+"i": 700,
+"k": "cue",
+"p": "high-cloud",
+"n": 4,
+"hold": 45,
+"s": "Watch one piece of cloud cross the whole sky and go."
+},
+{
+"i": 701,
+"k": "cue",
+"p": "high-cloud",
+"n": 5,
+"hold": 40,
+"s": "Another one is already coming. There is always another one."
+},
+{
+"i": 702,
+"k": "cue",
+"p": "high-cloud",
+"n": 6,
+"hold": 75,
+"s": "Let your thoughts be the cloud. Fast, silent, passing, and none of them yours to hold."
+},
+{
+"i": 703,
+"k": "cue",
+"p": "high-cloud",
+"n": 7,
+"hold": 60,
+"s": "The sky does not go anywhere. Only what crosses it."
+},
+{
+"i": 704,
+"k": "title",
+"p": "the-open-window",
+"s": "The Open Window"
+},
+{
+"i": 705,
+"k": "description",
+"p": "the-open-window",
+"s": "A window opened onto a spring morning, and the first air of the year coming in. For rooms and days that have gone stale."
+},
+{
+"i": 706,
+"k": "cue",
+"p": "the-open-window",
+"n": 0,
+"hold": 15,
+"s": "Sit upright near where you imagine the window to be."
+},
+{
+"i": 707,
+"k": "cue",
+"p": "the-open-window",
+"n": 1,
+"hold": 25,
+"s": "A room that has been closed all winter. You can smell that it has."
+},
+{
+"i": 708,
+"k": "cue",
+"p": "the-open-window",
+"n": 2,
+"hold": 28,
+"s": "Now the window opens. The first air of the year comes in."
+},
+{
+"i": 709,
+"k": "cue",
+"p": "the-open-window",
+"n": 3,
+"hold": 35,
+"s": "It is colder than the room and much cleaner. You can feel exactly where it reaches."
+},
+{
+"i": 710,
+"k": "cue",
+"p": "the-open-window",
+"n": 4,
+"hold": 30,
+"s": "The curtain moves. Dust turns over in the light."
+},
+{
+"i": 711,
+"k": "cue",
+"p": "the-open-window",
+"n": 5,
+"hold": 45,
+"s": "Breathe that air. It has come a long way and touched nothing on the way."
+},
+{
+"i": 712,
+"k": "cue",
+"p": "the-open-window",
+"n": 6,
+"hold": 60,
+"s": "The room is changing while you sit in it. The staleness is going out the same window."
+},
+{
+"i": 713,
+"k": "cue",
+"p": "the-open-window",
+"n": 7,
+"hold": 45,
+"s": "Leave it open."
+},
+{
+"i": 714,
+"k": "title",
+"p": "the-empty-room",
+"s": "The Empty Room"
+},
+{
+"i": 715,
+"k": "description",
+"p": "the-empty-room",
+"s": "A room with nothing in it. Not abandoned, not waiting — simply empty, and large. For when everything is too full."
+},
+{
+"i": 716,
+"k": "source",
+"p": "the-empty-room",
+"s": "Pancha mahabhuta — ether"
+},
+{
+"i": 717,
+"k": "caution",
+"p": "the-empty-room",
+"s": "If emptiness reads as loneliness rather than spaciousness, use Rain on the Roof instead."
+},
+{
+"i": 718,
+"k": "cue",
+"p": "the-empty-room",
+"n": 1,
+"hold": 25,
+"s": "A large room with nothing in it. Bare floor, tall windows, white walls."
+},
+{
+"i": 719,
+"k": "cue",
+"p": "the-empty-room",
+"n": 2,
+"hold": 28,
+"s": "No furniture. Nothing on the walls. Nothing to do in here."
+},
+{
+"i": 720,
+"k": "cue",
+"p": "the-empty-room",
+"n": 3,
+"hold": 30,
+"s": "It is not abandoned. It is clean and light and simply empty."
+},
+{
+"i": 721,
+"k": "cue",
+"p": "the-empty-room",
+"n": 4,
+"hold": 40,
+"s": "Notice that the room is not lacking anything. It is complete as it is."
+},
+{
+"i": 722,
+"k": "cue",
+"p": "the-empty-room",
+"n": 5,
+"hold": 45,
+"s": "Walk to the middle of it and stand there."
+},
+{
+"i": 723,
+"k": "cue",
+"p": "the-empty-room",
+"n": 6,
+"hold": 45,
+"s": "Your footsteps sound different in an empty room. Listen to that."
+},
+{
+"i": 724,
+"k": "cue",
+"p": "the-empty-room",
+"n": 7,
+"hold": 75,
+"s": "Nothing here needs arranging, deciding, or finishing."
+},
+{
+"i": 725,
+"k": "cue",
+"p": "the-empty-room",
+"n": 8,
+"hold": 40,
+"s": "Leave it empty when you go."
+},
+{
+"i": 726,
+"k": "title",
+"p": "before-the-sound",
+"s": "Before the Sound"
+},
+{
+"i": 727,
+"k": "description",
+"p": "before-the-sound",
+"s": "The silence a sound comes out of, rather than the one it leaves behind. The subtlest scene in the set and the one that repays repetition."
+},
+{
+"i": 728,
+"k": "cue",
+"p": "before-the-sound",
+"n": 0,
+"hold": 15,
+"s": "Sit upright somewhere genuinely quiet."
+},
+{
+"i": 729,
+"k": "cue",
+"p": "before-the-sound",
+"n": 1,
+"hold": 30,
+"s": "Listen to the room. Whatever is there — a fridge, traffic, your own ears."
+},
+{
+"i": 730,
+"k": "cue",
+"p": "before-the-sound",
+"n": 2,
+"hold": 40,
+"s": "Now listen underneath all of it, for whatever is left when you subtract each one."
+},
+{
+"i": 731,
+"k": "cue",
+"p": "before-the-sound",
+"n": 3,
+"hold": 45,
+"s": "There is something there that sounds arrive into. It is not silence exactly. It is more like room."
+},
+{
+"i": 732,
+"k": "cue",
+"p": "before-the-sound",
+"n": 4,
+"hold": 45,
+"s": "Every sound you have ever heard came out of that and went back into it."
+},
+{
+"i": 733,
+"k": "cue",
+"p": "before-the-sound",
+"n": 5,
+"hold": 60,
+"s": "Do not try to hear it. Just stop excluding it."
+},
+{
+"i": 734,
+"k": "cue",
+"p": "before-the-sound",
+"n": 6,
+"hold": 90,
+"s": "Stay there."
+},
+{
+"i": 735,
+"k": "cue",
+"p": "before-the-sound",
+"n": 7,
+"hold": 40,
+"s": "Let the ordinary sounds come back. They were never in the way."
+},
+{
+"i": 736,
+"k": "title",
+"p": "eye-cleansing-gaze",
+"s": "Steady Gazing"
+},
+{
+"i": 737,
+"k": "sanskrit",
+"p": "eye-cleansing-gaze",
+"s": "Trataka",
+"in": "Steady Gazing"
+},
+{
+"i": 738,
+"k": "description",
+"p": "eye-cleansing-gaze",
+"s": "Looking at one point without blinking until the eyes water, then closing them and watching the after-image. Rousing, and the strongest concentration practice here."
+},
+{
+"i": 739,
+"k": "source",
+"p": "eye-cleansing-gaze",
+"s": "Gheranda Samhita; trataka"
+},
+{
+"i": 740,
+"k": "caution",
+"p": "eye-cleansing-gaze",
+"s": "Not with glaucoma, recent eye surgery, or epilepsy — a flickering flame can be a trigger."
+},
+{
+"i": 741,
+"k": "caution",
+"p": "eye-cleansing-gaze",
+"s": "Use a steady object rather than a candle if you wear contact lenses."
+},
+{
+"i": 742,
+"k": "caution",
+"p": "eye-cleansing-gaze",
+"s": "Stop if the eyes hurt rather than simply water."
+},
+{
+"i": 743,
+"k": "cue",
+"p": "eye-cleansing-gaze",
+"n": 0,
+"hold": 20,
+"s": "Set a candle, or any small steady object, at arm's length and level with the eyes."
+},
+{
+"i": 744,
+"k": "cue",
+"p": "eye-cleansing-gaze",
+"n": 1,
+"hold": 18,
+"s": "Sit upright. The head does not move for the next few minutes."
+},
+{
+"i": 745,
+"k": "cue",
+"p": "eye-cleansing-gaze",
+"n": 2,
+"hold": 25,
+"s": "Look at it. Not at the whole flame — at one point, the base of it."
+},
+{
+"i": 746,
+"k": "cue",
+"p": "eye-cleansing-gaze",
+"n": 3,
+"hold": 35,
+"s": "Do not blink if you can help it. When the eyes water, that is the practice working, not failing."
+},
+{
+"i": 747,
+"k": "cue",
+"p": "eye-cleansing-gaze",
+"n": 4,
+"hold": 60,
+"s": "Keep looking. Thirty seconds to a minute is plenty at first."
+},
+{
+"i": 748,
+"k": "cue",
+"p": "eye-cleansing-gaze",
+"n": 5,
+"hold": 20,
+"s": "Now close the eyes. There will be an after-image."
+},
+{
+"i": 749,
+"k": "cue",
+"p": "eye-cleansing-gaze",
+"n": 6,
+"hold": 45,
+"s": "Watch it. It will drift and change colour and slowly go."
+},
+{
+"i": 750,
+"k": "cue",
+"p": "eye-cleansing-gaze",
+"n": 7,
+"hold": 40,
+"s": "When it is gone, open the eyes and look again."
+},
+{
+"i": 751,
+"k": "cue",
+"p": "eye-cleansing-gaze",
+"n": 8,
+"hold": 90,
+"s": "Three rounds is enough. Concentration built this way is unusually stable."
+},
+{
+"i": 752,
+"k": "cue",
+"p": "eye-cleansing-gaze",
+"n": 9,
+"hold": 45,
+"s": "Finish with the eyes closed. Let them rest."
+},
+{
+"i": 753,
+"k": "title",
+"p": "neti-neti",
+"s": "Not This, Not This"
+},
+{
+"i": 754,
+"k": "sanskrit",
+"p": "neti-neti",
+"s": "Neti Neti",
+"in": "Not This, Not This"
+},
+{
+"i": 755,
+"k": "description",
+"p": "neti-neti",
+"s": "Setting aside everything you can observe, on the grounds that whatever is observing cannot be the thing observed. The most demanding practice here."
+},
+{
+"i": 756,
+"k": "source",
+"p": "neti-neti",
+"s": "Brihadaranyaka Upanishad"
+},
+{
+"i": 757,
+"k": "caution",
+"p": "neti-neti",
+"s": "Inquiry into the sense of self can be destabilising if you are already feeling unreal or detached. Use a grounding practice instead on those days."
+},
+{
+"i": 758,
+"k": "cue",
+"p": "neti-neti",
+"n": 0,
+"hold": 18,
+"s": "Sit upright. This one is more like thinking than like resting."
+},
+{
+"i": 759,
+"k": "cue",
+"p": "neti-neti",
+"n": 1,
+"hold": 28,
+"s": "Notice your hands. You can feel them, so they are something you are aware of."
+},
+{
+"i": 760,
+"k": "cue",
+"p": "neti-neti",
+"n": 2,
+"hold": 32,
+"s": "Whatever is aware of your hands cannot be your hands. Set the hands aside. Not this."
+},
+{
+"i": 761,
+"k": "cue",
+"p": "neti-neti",
+"n": 3,
+"hold": 32,
+"s": "Notice the breath. You can observe it. So it too is being observed. Not this."
+},
+{
+"i": 762,
+"k": "cue",
+"p": "neti-neti",
+"n": 4,
+"hold": 30,
+"s": "Notice a sound. Observed, therefore not the observer. Not this."
+},
+{
+"i": 763,
+"k": "cue",
+"p": "neti-neti",
+"n": 5,
+"hold": 35,
+"s": "Notice a thought. You saw it arrive. Not this either."
+},
+{
+"i": 764,
+"k": "cue",
+"p": "neti-neti",
+"n": 6,
+"hold": 35,
+"s": "Notice a feeling, and the same is true of it. Not this."
+},
+{
+"i": 765,
+"k": "cue",
+"p": "neti-neti",
+"n": 7,
+"hold": 50,
+"s": "Now look for the one doing the noticing. You will not find it as an object, because it is not one."
+},
+{
+"i": 766,
+"k": "cue",
+"p": "neti-neti",
+"n": 8,
+"hold": 90,
+"s": "Rest in not finding. That is not a failure of the method. It is the method."
+},
+{
+"i": 767,
+"k": "cue",
+"p": "neti-neti",
+"n": 9,
+"hold": 30,
+"s": "Come back gently. Pick the hands back up."
+},
+{
+"i": 768,
+"k": "title",
+"p": "the-heart-space",
+"s": "The Space in the Heart"
+},
+{
+"i": 769,
+"k": "sanskrit",
+"p": "the-heart-space",
+"s": "Hridaya Akasha",
+"in": "The Space in the Heart"
+},
+{
+"i": 770,
+"k": "description",
+"p": "the-heart-space",
+"s": "Attention resting in the middle of the chest, in the space the texts call the inner ether. Steadying without being heavy."
+},
+{
+"i": 771,
+"k": "source",
+"p": "the-heart-space",
+"s": "Chandogya Upanishad"
+},
+{
+"i": 772,
+"k": "cue",
+"p": "the-heart-space",
+"n": 0,
+"hold": 18,
+"s": "Sit or lie down. Rest one hand on the centre of the chest."
+},
+{
+"i": 773,
+"k": "cue",
+"p": "the-heart-space",
+"n": 1,
+"hold": 25,
+"s": "Feel the hand rise and fall. Do not change the breath to make it clearer."
+},
+{
+"i": 774,
+"k": "cue",
+"p": "the-heart-space",
+"n": 2,
+"hold": 30,
+"s": "Now find the space under the hand. Not the heartbeat — the room around it."
+},
+{
+"i": 775,
+"k": "cue",
+"p": "the-heart-space",
+"n": 3,
+"hold": 35,
+"s": "The texts say there is a space in there the size of a thumb, and that it contains everything."
+},
+{
+"i": 776,
+"k": "cue",
+"p": "the-heart-space",
+"n": 4,
+"hold": 30,
+"s": "You do not have to believe that. Just look for the space."
+},
+{
+"i": 777,
+"k": "cue",
+"p": "the-heart-space",
+"n": 5,
+"hold": 45,
+"s": "Breathe into it. Not literally — direct attention there on the in-breath and leave it there on the out."
+},
+{
+"i": 778,
+"k": "cue",
+"p": "the-heart-space",
+"n": 6,
+"hold": 45,
+"s": "If there is grief in the chest, it will show up here. Let it be in the space rather than pushing it out."
+},
+{
+"i": 779,
+"k": "cue",
+"p": "the-heart-space",
+"n": 7,
+"hold": 60,
+"s": "The space is bigger than what is in it. That is the whole point of the image."
+},
+{
+"i": 780,
+"k": "cue",
+"p": "the-heart-space",
+"n": 8,
+"hold": 75,
+"s": "Stay as long as you like."
+},
+{
+"i": 781,
+"k": "cue",
+"p": "the-heart-space",
+"n": 9,
+"hold": 40,
+"s": "Take the hand away and see if the space stays findable without it."
+}
+]

@@ -1,0 +1,1444 @@
+[
+{
+"i": 0,
+"k": "breath",
+"s": "Alternating nostrils"
+},
+{
+"i": 1,
+"k": "breath",
+"s": "Belly, ribs, chest"
+},
+{
+"i": 2,
+"k": "breath",
+"s": "Breath of fire"
+},
+{
+"i": 3,
+"k": "breath",
+"s": "Chanted rhythm"
+},
+{
+"i": 4,
+"k": "breath",
+"s": "Deep in and out"
+},
+{
+"i": 5,
+"k": "breath",
+"s": "Equal counts"
+},
+{
+"i": 6,
+"k": "breath",
+"s": "Even ujjayi"
+},
+{
+"i": 7,
+"k": "breath",
+"s": "Exhale then inhale"
+},
+{
+"i": 8,
+"k": "breath",
+"s": "Exhale to draw in"
+},
+{
+"i": 9,
+"k": "breath",
+"s": "Exhale to fold"
+},
+{
+"i": 10,
+"k": "breath",
+"s": "Exhale to lift"
+},
+{
+"i": 11,
+"k": "breath",
+"s": "Exhale to lower"
+},
+{
+"i": 12,
+"k": "breath",
+"s": "Exhale to round"
+},
+{
+"i": 13,
+"k": "breath",
+"s": "Exhale to turn"
+},
+{
+"i": 14,
+"k": "breath",
+"s": "Exhale twice inhale"
+},
+{
+"i": 15,
+"k": "breath",
+"s": "Forceful both ways"
+},
+{
+"i": 16,
+"k": "breath",
+"s": "Held on exhale"
+},
+{
+"i": 17,
+"k": "breath",
+"s": "Humming exhale"
+},
+{
+"i": 18,
+"k": "breath",
+"s": "Inhale through rolled tongue"
+},
+{
+"i": 19,
+"k": "breath",
+"s": "Inhale through teeth"
+},
+{
+"i": 20,
+"k": "breath",
+"s": "Inhale to arch"
+},
+{
+"i": 21,
+"k": "breath",
+"s": "Inhale to float"
+},
+{
+"i": 22,
+"k": "breath",
+"s": "Inhale to lengthen"
+},
+{
+"i": 23,
+"k": "breath",
+"s": "Inhale to lift"
+},
+{
+"i": 24,
+"k": "breath",
+"s": "Inhale to open"
+},
+{
+"i": 25,
+"k": "breath",
+"s": "Inhale to rise"
+},
+{
+"i": 26,
+"k": "breath",
+"s": "Long deep breath"
+},
+{
+"i": 27,
+"k": "breath",
+"s": "Natural"
+},
+{
+"i": 28,
+"k": "breath",
+"s": "On empty breath"
+},
+{
+"i": 29,
+"k": "breath",
+"s": "On full exhale"
+},
+{
+"i": 30,
+"k": "breath",
+"s": "On retention"
+},
+{
+"i": 31,
+"k": "breath",
+"s": "One breath per movement"
+},
+{
+"i": 32,
+"k": "breath",
+"s": "Rapid diaphragmatic"
+},
+{
+"i": 33,
+"k": "breath",
+"s": "Ratio-counted"
+},
+{
+"i": 34,
+"k": "breath",
+"s": "Sharp exhales"
+},
+{
+"i": 35,
+"k": "breath",
+"s": "Slow and even"
+},
+{
+"i": 36,
+"k": "breath",
+"s": "Slow and quiet"
+},
+{
+"i": 37,
+"k": "breath",
+"s": "Steady ujjayi"
+},
+{
+"i": 38,
+"k": "breath",
+"s": "Throat-constricted"
+},
+{
+"i": 39,
+"k": "breath",
+"s": "With held phases"
+},
+{
+"i": 40,
+"k": "breath",
+"s": "With the breath"
+},
+{
+"i": 41,
+"k": "gaze",
+"s": "Ankle"
+},
+{
+"i": 42,
+"k": "gaze",
+"s": "Backward"
+},
+{
+"i": 43,
+"k": "gaze",
+"s": "Between feet"
+},
+{
+"i": 44,
+"k": "gaze",
+"s": "Chest"
+},
+{
+"i": 45,
+"k": "gaze",
+"s": "Downward"
+},
+{
+"i": 46,
+"k": "gaze",
+"s": "Eyes closed"
+},
+{
+"i": 47,
+"k": "gaze",
+"s": "Fixed flame"
+},
+{
+"i": 48,
+"k": "gaze",
+"s": "Fixed point"
+},
+{
+"i": 49,
+"k": "gaze",
+"s": "Floor"
+},
+{
+"i": 50,
+"k": "gaze",
+"s": "Floor ahead"
+},
+{
+"i": 51,
+"k": "gaze",
+"s": "Floor behind"
+},
+{
+"i": 52,
+"k": "gaze",
+"s": "Forward"
+},
+{
+"i": 53,
+"k": "gaze",
+"s": "Front hand"
+},
+{
+"i": 54,
+"k": "gaze",
+"s": "Knee"
+},
+{
+"i": 55,
+"k": "gaze",
+"s": "Nasagra"
+},
+{
+"i": 56,
+"k": "gaze",
+"s": "Navel"
+},
+{
+"i": 57,
+"k": "gaze",
+"s": "Opposite hand"
+},
+{
+"i": 58,
+"k": "gaze",
+"s": "Over shoulder"
+},
+{
+"i": 59,
+"k": "gaze",
+"s": "Side"
+},
+{
+"i": 60,
+"k": "gaze",
+"s": "Single point"
+},
+{
+"i": 61,
+"k": "gaze",
+"s": "Toes"
+},
+{
+"i": 62,
+"k": "gaze",
+"s": "Upward"
+},
+{
+"i": 63,
+"k": "gaze",
+"s": "Varies"
+},
+{
+"i": 64,
+"k": "gaze",
+"s": "Wall"
+},
+{
+"i": 65,
+"k": "pose_caution",
+"s": "ankle injury"
+},
+{
+"i": 66,
+"k": "pose_caution",
+"s": "anxiety disorders"
+},
+{
+"i": 67,
+"k": "pose_caution",
+"s": "asthma"
+},
+{
+"i": 68,
+"k": "pose_caution",
+"s": "balance disorders"
+},
+{
+"i": 69,
+"k": "pose_caution",
+"s": "carpal tunnel"
+},
+{
+"i": 70,
+"k": "pose_caution",
+"s": "cold weather"
+},
+{
+"i": 71,
+"k": "pose_caution",
+"s": "disc injury"
+},
+{
+"i": 72,
+"k": "pose_caution",
+"s": "ear infection"
+},
+{
+"i": 73,
+"k": "pose_caution",
+"s": "epilepsy"
+},
+{
+"i": 74,
+"k": "pose_caution",
+"s": "glaucoma"
+},
+{
+"i": 75,
+"k": "pose_caution",
+"s": "groin strain"
+},
+{
+"i": 76,
+"k": "pose_caution",
+"s": "hamstring strain"
+},
+{
+"i": 77,
+"k": "pose_caution",
+"s": "heart conditions"
+},
+{
+"i": 78,
+"k": "pose_caution",
+"s": "hernia"
+},
+{
+"i": 79,
+"k": "pose_caution",
+"s": "high blood pressure"
+},
+{
+"i": 80,
+"k": "pose_caution",
+"s": "high blood pressure with retention"
+},
+{
+"i": 81,
+"k": "pose_caution",
+"s": "hip injury"
+},
+{
+"i": 82,
+"k": "pose_caution",
+"s": "knee injury"
+},
+{
+"i": 83,
+"k": "pose_caution",
+"s": "late pregnancy"
+},
+{
+"i": 84,
+"k": "pose_caution",
+"s": "late pregnancy without support"
+},
+{
+"i": 85,
+"k": "pose_caution",
+"s": "low back injury"
+},
+{
+"i": 86,
+"k": "pose_caution",
+"s": "low blood pressure"
+},
+{
+"i": 87,
+"k": "pose_caution",
+"s": "menstruation"
+},
+{
+"i": 88,
+"k": "pose_caution",
+"s": "migraine"
+},
+{
+"i": 89,
+"k": "pose_caution",
+"s": "nasal congestion"
+},
+{
+"i": 90,
+"k": "pose_caution",
+"s": "neck injury"
+},
+{
+"i": 91,
+"k": "pose_caution",
+"s": "pelvic instability"
+},
+{
+"i": 92,
+"k": "pose_caution",
+"s": "pregnancy"
+},
+{
+"i": 93,
+"k": "pose_caution",
+"s": "pregnancy after first trimester"
+},
+{
+"i": 94,
+"k": "pose_caution",
+"s": "recent abdominal surgery"
+},
+{
+"i": 95,
+"k": "pose_caution",
+"s": "recent eye surgery"
+},
+{
+"i": 96,
+"k": "pose_caution",
+"s": "recent surgery"
+},
+{
+"i": 97,
+"k": "pose_caution",
+"s": "sacroiliac injury"
+},
+{
+"i": 98,
+"k": "pose_caution",
+"s": "sciatica"
+},
+{
+"i": 99,
+"k": "pose_caution",
+"s": "sensitive teeth"
+},
+{
+"i": 100,
+"k": "pose_caution",
+"s": "shoulder impingement"
+},
+{
+"i": 101,
+"k": "pose_caution",
+"s": "shoulder injury"
+},
+{
+"i": 102,
+"k": "pose_caution",
+"s": "ulcer"
+},
+{
+"i": 103,
+"k": "pose_caution",
+"s": "vertigo"
+},
+{
+"i": 104,
+"k": "pose_caution",
+"s": "wrist injury"
+},
+{
+"i": 105,
+"k": "sequence_school",
+"s": "Hatha"
+},
+{
+"i": 106,
+"k": "sequence_school",
+"s": "Iyengar"
+},
+{
+"i": 107,
+"k": "sequence_school",
+"s": "Restorative"
+},
+{
+"i": 108,
+"k": "sequence_school",
+"s": "Vinyasa"
+},
+{
+"i": 109,
+"k": "sequence_school",
+"s": "Yin"
+},
+{
+"i": 110,
+"k": "sequence_intent",
+"s": "Back Care"
+},
+{
+"i": 111,
+"k": "sequence_intent",
+"s": "Calming"
+},
+{
+"i": 112,
+"k": "sequence_intent",
+"s": "Cooling"
+},
+{
+"i": 113,
+"k": "sequence_intent",
+"s": "Digestive"
+},
+{
+"i": 114,
+"k": "sequence_intent",
+"s": "Energising"
+},
+{
+"i": 115,
+"k": "sequence_intent",
+"s": "Evening"
+},
+{
+"i": 116,
+"k": "sequence_intent",
+"s": "Flexibility"
+},
+{
+"i": 117,
+"k": "sequence_intent",
+"s": "Morning"
+},
+{
+"i": 118,
+"k": "sequence_intent",
+"s": "Strength"
+},
+{
+"i": 119,
+"k": "sequence_season",
+"s": "Grishma (summer)"
+},
+{
+"i": 120,
+"k": "sequence_season",
+"s": "Hemanta (early winter)"
+},
+{
+"i": 121,
+"k": "sequence_season",
+"s": "Sharad (autumn)"
+},
+{
+"i": 122,
+"k": "sequence_season",
+"s": "Shishira (late winter)"
+},
+{
+"i": 123,
+"k": "sequence_season",
+"s": "Varsha (monsoon)"
+},
+{
+"i": 124,
+"k": "sequence_season",
+"s": "Vasanta (spring)"
+},
+{
+"i": 125,
+"k": "sequence_stage",
+"s": "back"
+},
+{
+"i": 126,
+"k": "sequence_stage",
+"s": "balance"
+},
+{
+"i": 127,
+"k": "sequence_stage",
+"s": "core"
+},
+{
+"i": 128,
+"k": "sequence_stage",
+"s": "fold"
+},
+{
+"i": 129,
+"k": "sequence_stage",
+"s": "hips"
+},
+{
+"i": 130,
+"k": "sequence_stage",
+"s": "invert"
+},
+{
+"i": 131,
+"k": "sequence_stage",
+"s": "open"
+},
+{
+"i": 132,
+"k": "sequence_stage",
+"s": "rest"
+},
+{
+"i": 133,
+"k": "sequence_stage",
+"s": "salute"
+},
+{
+"i": 134,
+"k": "sequence_stage",
+"s": "standing"
+},
+{
+"i": 135,
+"k": "sequence_stage",
+"s": "twist"
+},
+{
+"i": 136,
+"k": "sequence_stage",
+"s": "warm"
+},
+{
+"i": 137,
+"k": "sequence_note_sentence",
+"s": "Almost entirely supported and passive; nothing is held by muscle."
+},
+{
+"i": 138,
+"k": "sequence_note_sentence",
+"s": "Avoids deep flexion and loaded rotation; built around gentle extension."
+},
+{
+"i": 139,
+"k": "sequence_note_sentence",
+"s": "Breath-linked movement with short holds and frequent salutations."
+},
+{
+"i": 140,
+"k": "sequence_note_sentence",
+"s": "Built for the kapha hours after waking, when the body is heavy and cold."
+},
+{
+"i": 141,
+"k": "sequence_note_sentence",
+"s": "Built to close the day; no strong backbends, no heating breath."
+},
+{
+"i": 142,
+"k": "sequence_note_sentence",
+"s": "Cooling and non-competitive; built for heat, irritability and the summer months."
+},
+{
+"i": 143,
+"k": "sequence_note_sentence",
+"s": "Few shapes held for minutes, targeting connective tissue rather than muscle."
+},
+{
+"i": 144,
+"k": "sequence_note_sentence",
+"s": "Fully supported shapes; nothing held by muscular effort."
+},
+{
+"i": 145,
+"k": "sequence_note_sentence",
+"s": "Heating and stimulating; built to lift heaviness and inertia."
+},
+{
+"i": 146,
+"k": "sequence_note_sentence",
+"s": "Longer static holds, classical shapes, little flowing."
+},
+{
+"i": 147,
+"k": "sequence_note_sentence",
+"s": "Precise alignment with props, held long enough to correct."
+},
+{
+"i": 148,
+"k": "sequence_note_sentence",
+"s": "Slow, grounding and warm; built to settle a scattered or anxious system."
+},
+{
+"i": 149,
+"k": "sequence_note_sentence",
+"s": "Twists and gentle compression, taken well away from meals."
+},
+{
+"i": 150,
+"k": "sequence_note_sentence",
+"s": "Weighted toward holds, core and arm balances."
+},
+{
+"i": 151,
+"k": "sequence_note_sentence",
+"s": "Weighted toward long holds in folds and hip openers."
+},
+{
+"i": 152,
+"k": "sequence_title_word",
+"s": "min"
+},
+{
+"i": 153,
+"k": "sequence_title_word",
+"s": "Level"
+},
+{
+"i": 154,
+"k": "pose_description",
+"s": "An arm balance with one leg behind the head and the other extended straight up.",
+"in": "Chakorasana (Chakorasana)"
+},
+{
+"i": 155,
+"k": "pose_description",
+"s": "Crow with the arms straight and the knees high in the armpits. Considerably harder than bent-arm crow and often confused with it.",
+"in": "Crane Pose (Bakasana (straight arm))"
+},
+{
+"i": 156,
+"k": "pose_description",
+"s": "Knees resting on the upper arms with the feet lifting. The first arm balance most practitioners achieve, and more about weight shift than strength.",
+"in": "Crow Pose (Bakasana)"
+},
+{
+"i": 157,
+"k": "pose_description",
+"s": "Lowering from crow into tripod headstand and back. A controlled strength transition, not a drop.",
+"in": "Crow to Headstand Transition (Bakasana-Sirsasana)"
+},
+{
+"i": 158,
+"k": "pose_description",
+"s": "Crow lowering the crown lightly to the floor as preparation for tripod headstand.",
+"in": "Crow with Head Down (Bakasana (tripod prep))"
+},
+{
+"i": 159,
+"k": "pose_description",
+"s": "A side arm balance with one leg behind the head. Balance, rotation and extreme hip range together.",
+"in": "Destroyer of the Universe (Kala Bhairavasana)"
+},
+{
+"i": 160,
+"k": "pose_description",
+"s": "Legs threaded around one arm and extended sideways while the elbows bend. Named for the sage born with eight bends in his body.",
+"in": "Eight-Angle Pose (Astavakrasana)"
+},
+{
+"i": 161,
+"k": "pose_description",
+"s": "One leg hooked over the upper arm with the body lifting on the hands.",
+"in": "Elephant Trunk Pose (Eka Hasta Bhujasana)"
+},
+{
+"i": 162,
+"k": "pose_description",
+"s": "Seated on the hands with both legs extending forward and up. Requires open hamstrings as much as arm strength.",
+"in": "Firefly Pose (Tittibhasana)"
+},
+{
+"i": 163,
+"k": "pose_description",
+"s": "One shin hooked across the upper arms with the other leg extending straight back. A hip opener and an arm balance at the same time.",
+"in": "Flying Pigeon (Eka Pada Galavasana)"
+},
+{
+"i": 164,
+"k": "pose_description",
+"s": "A deeply twisted arm balance with one foot hooked over the opposite arm. One of the more advanced rotational balances.",
+"in": "Grasshopper Pose (Parsva Bhuja Dandasana)"
+},
+{
+"i": 165,
+"k": "pose_description",
+"s": "A twisted arm balance with one foot hooked across the opposite arm and the other leg extended.",
+"in": "Grasshopper Variation (Maksikanagasana)"
+},
+{
+"i": 166,
+"k": "pose_description",
+"s": "An arm balance with one leg forward and straight and the other back, like a hurdler mid-stride.",
+"in": "Hurdler Pose (Eka Pada Koundinyasana (hurdle))"
+},
+{
+"i": 167,
+"k": "pose_description",
+"s": "Crane Pose with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Crane Pose (Eka Pada Bakasana (straight arm))"
+},
+{
+"i": 168,
+"k": "pose_description",
+"s": "Crow to Headstand Transition with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Crow to Headstand Transition (Eka Pada Bakasana-Sirsasana)"
+},
+{
+"i": 169,
+"k": "pose_description",
+"s": "Eight-Angle Pose with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Eight-Angle Pose (Eka Pada Astavakrasana)"
+},
+{
+"i": 170,
+"k": "pose_description",
+"s": "Firefly Pose with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Firefly Pose (Eka Pada Tittibhasana)"
+},
+{
+"i": 171,
+"k": "pose_description",
+"s": "Grasshopper Pose with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Grasshopper Pose (Eka Pada Parsva Bhuja Dandasana)"
+},
+{
+"i": 172,
+"k": "pose_description",
+"s": "Peacock Pose with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Peacock Pose (Eka Pada Mayurasana)"
+},
+{
+"i": 173,
+"k": "pose_description",
+"s": "Rooster Pose with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Rooster Pose (Eka Pada Kukkutasana)"
+},
+{
+"i": 174,
+"k": "pose_description",
+"s": "Sage Vasistha's Pose with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Sage Vasistha's Pose (Eka Pada Vasisthasana)"
+},
+{
+"i": 175,
+"k": "pose_description",
+"s": "Scale Pose with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Scale Pose (Eka Pada Tolasana)"
+},
+{
+"i": 176,
+"k": "pose_description",
+"s": "Shoulder-Pressing Pose with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Shoulder-Pressing Pose (Eka Pada Bhujapidasana)"
+},
+{
+"i": 177,
+"k": "pose_description",
+"s": "Side Crow with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Side Crow (Eka Pada Parsva Bakasana)"
+},
+{
+"i": 178,
+"k": "pose_description",
+"s": "Side Plank with Leg Lift with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Side Plank with Leg Lift (Eka Pada Vasisthasana (variation))"
+},
+{
+"i": 179,
+"k": "pose_description",
+"s": "Staff Pose Lift with one leg lifted. Halving the base doubles the demand on the supporting side and exposes any left-to-right imbalance immediately.",
+"in": "One-Legged Staff Pose Lift (Eka Pada Utpluthih)"
+},
+{
+"i": 180,
+"k": "pose_description",
+"s": "Peacock pose with the legs in lotus. Adds the knee demand of lotus to an already extreme wrist load.",
+"in": "Peacock Feather Pose (Mayurasana (lotus))"
+},
+{
+"i": 181,
+"k": "pose_description",
+"s": "Balanced horizontally on the elbows pressed into the belly. Classically said to digest even the most difficult food, and brutal on the wrists.",
+"in": "Peacock Pose (Mayurasana)"
+},
+{
+"i": 182,
+"k": "pose_description",
+"s": "Arms threaded through a lotus and the body lifted. Demands full lotus before the balance can even be attempted.",
+"in": "Rooster Pose (Kukkutasana)"
+},
+{
+"i": 183,
+"k": "pose_description",
+"s": "Arms threaded through a lotus and the whole body rocking or balancing. From the Ashtanga primary series.",
+"in": "Rooster in Lotus (Garbha Pindasana)"
+},
+{
+"i": 184,
+"k": "pose_description",
+"s": "A twisted arm balance with the legs extended in opposite directions.",
+"in": "Sage Koundinya I (Eka Pada Koundinyasana I)"
+},
+{
+"i": 185,
+"k": "pose_description",
+"s": "An open-legged arm balance with one leg forward over the arm and one extended back.",
+"in": "Sage Koundinya II (Eka Pada Koundinyasana II)"
+},
+{
+"i": 186,
+"k": "pose_description",
+"s": "A side plank on one hand with the body in a single line. Builds lateral core strength that plank alone does not reach.",
+"in": "Sage Vasistha's Pose (Vasisthasana)"
+},
+{
+"i": 187,
+"k": "pose_description",
+"s": "A forearm balance with the legs in lotus folded toward the head.",
+"in": "Sayanasana (Sayanasana)"
+},
+{
+"i": 188,
+"k": "pose_description",
+"s": "Lifting the whole lotus-seated body clear of the floor. A pure strength lift with no momentum available.",
+"in": "Scale Pose (Tolasana)"
+},
+{
+"i": 189,
+"k": "pose_description",
+"s": "Legs hooked over the shoulders with the feet crossed in front. A compact, compressed arm balance from the Ashtanga primary series.",
+"in": "Shoulder-Pressing Pose (Bhujapidasana)"
+},
+{
+"i": 190,
+"k": "pose_description",
+"s": "A twisted arm balance with both knees resting on one upper arm. Rotation and balance combined, and a common gateway to the harder balances.",
+"in": "Side Crow (Parsva Bakasana)"
+},
+{
+"i": 191,
+"k": "pose_description",
+"s": "Side plank with the top leg lifted or caught at the toe. Adds hamstring length and a balance demand to the side hold.",
+"in": "Side Plank with Leg Lift (Vasisthasana (variation))"
+},
+{
+"i": 192,
+"k": "pose_description",
+"s": "Side crow with the legs extending straight rather than stacked.",
+"in": "Sideways Crow (Parsva Bakasana (extended))"
+},
+{
+"i": 193,
+"k": "pose_description",
+"s": "Crow with one leg extending straight back. Requires real core control to avoid collapsing forward.",
+"in": "Split Arm Balance (Eka Pada Bakasana)"
+},
+{
+"i": 194,
+"k": "pose_description",
+"s": "Lifting the whole crossed-legged body clear of the floor on the hands. The closing lift of the Ashtanga series and a pure test of core and shoulder strength.",
+"in": "Staff Pose Lift (Utpluthih)"
+},
+{
+"i": 195,
+"k": "pose_description",
+"s": "The closing lift of the Ashtanga sequence, held for twenty-five breaths in the traditional count.",
+"in": "Tolasana Lift (Tolasana (Ashtanga))"
+},
+{
+"i": 196,
+"k": "pose_description",
+"s": "Both legs hooked over the upper arms with the feet crossed. The compressed precursor to firefly.",
+"in": "Two-Footed Arm Balance (Dwi Hasta Bhujasana)"
+},
+{
+"i": 197,
+"k": "pose_description",
+"s": "The full cobra with the arms straight, the head reaching back and the feet approaching the crown.",
+"in": "Bhujangasana Full (Bhujangasana (full))"
+},
+{
+"i": 198,
+"k": "pose_description",
+"s": "Lying prone, ankles caught in the hands, chest and thighs lifting into a bow. Strong compression of the low back and full opening of the front.",
+"in": "Bow Pose (Dhanurasana)"
+},
+{
+"i": 199,
+"k": "pose_description",
+"s": "Bow Pose practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Bow Pose at the Wall (Dhanurasana (wall))"
+},
+{
+"i": 200,
+"k": "pose_description",
+"s": "Bow Pose taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Bow Pose with Block (Dhanurasana (block))"
+},
+{
+"i": 201,
+"k": "pose_description",
+"s": "Bow pose taken until the feet touch the crown.",
+"in": "Bow with Feet to Head (Ganda Bherundasana (bow))"
+},
+{
+"i": 202,
+"k": "pose_description",
+"s": "Bow approached with a strap around the ankles. Lets the chest open before the shoulders can reach.",
+"in": "Bow with Strap (Dhanurasana (strap))"
+},
+{
+"i": 203,
+"k": "pose_description",
+"s": "Feet planted and hips lifting with the shoulders rolled beneath. The entry backbend and a safe preparation for wheel.",
+"in": "Bridge Pose (Setu Bandha Sarvangasana)"
+},
+{
+"i": 204,
+"k": "pose_description",
+"s": "Bridge Pose practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Bridge Pose at the Wall (Setu Bandha Sarvangasana (wall))"
+},
+{
+"i": 205,
+"k": "pose_description",
+"s": "Bridge Pose taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Bridge Pose with Block (Setu Bandha Sarvangasana (block))"
+},
+{
+"i": 206,
+"k": "pose_description",
+"s": "Bridge Pose approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Bridge Pose with Strap (Setu Bandha Sarvangasana (strap))"
+},
+{
+"i": 207,
+"k": "pose_description",
+"s": "Rolling the spine up and down from a bridge one vertebra at a time.",
+"in": "Bridge Rolls (Setu Bandha (dynamic))"
+},
+{
+"i": 208,
+"k": "pose_description",
+"s": "Bridge with a block squeezed between the thighs so the adductors and glutes engage together.",
+"in": "Bridge with Block Between Thighs (Setu Bandha (thigh block))"
+},
+{
+"i": 209,
+"k": "pose_description",
+"s": "Bridge with the hands clasped beneath the body and the shoulders rolling under.",
+"in": "Bridge with Clasp (Setu Bandha (clasp))"
+},
+{
+"i": 210,
+"k": "pose_description",
+"s": "A standing chest opener with the arms bent at ninety degrees and the elbows drawing back.",
+"in": "Cactus Arms Backbend (Urdhva Hastasana (cactus))"
+},
+{
+"i": 211,
+"k": "pose_description",
+"s": "Kneeling and arching back with hands reaching for the heels. Opens the whole front body and is famously destabilising emotionally.",
+"in": "Camel Pose (Ustrasana)"
+},
+{
+"i": 212,
+"k": "pose_description",
+"s": "Camel Pose practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Camel Pose at the Wall (Ustrasana (wall))"
+},
+{
+"i": 213,
+"k": "pose_description",
+"s": "Camel Pose taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Camel Pose with Block (Ustrasana (block))"
+},
+{
+"i": 214,
+"k": "pose_description",
+"s": "Camel Pose approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Camel Pose with Strap (Ustrasana (strap))"
+},
+{
+"i": 215,
+"k": "pose_description",
+"s": "Camel with blocks beside the ankles to shorten the reach. Lets the chest open before the spine has to.",
+"in": "Camel on Blocks (Ustrasana (blocks))"
+},
+{
+"i": 216,
+"k": "pose_description",
+"s": "Alternating between camel and child's pose. Backbend and counterpose in one breath cycle.",
+"in": "Camel to Child Flow (Ustrasana-Balasana)"
+},
+{
+"i": 217,
+"k": "pose_description",
+"s": "Camel with the hands supporting the low back rather than reaching for the heels. The right entry for almost everyone.",
+"in": "Camel with Hands on Sacrum (Ustrasana (hands on back))"
+},
+{
+"i": 218,
+"k": "pose_description",
+"s": "Camel with Hands on Sacrum practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Camel with Hands on Sacrum at the Wall (Ustrasana (hands on back) (wall))"
+},
+{
+"i": 219,
+"k": "pose_description",
+"s": "On hands and knees with the spine rounding toward the ceiling. Half of the most-taught spinal warm-up in yoga.",
+"in": "Cat Pose (Marjaryasana)"
+},
+{
+"i": 220,
+"k": "pose_description",
+"s": "Cat Pose taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Cat Pose with Block (Marjaryasana (block))"
+},
+{
+"i": 221,
+"k": "pose_description",
+"s": "Cat Pose approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Cat Pose with Strap (Marjaryasana (strap))"
+},
+{
+"i": 222,
+"k": "pose_description",
+"s": "Chest and chin on the floor with the legs arching overhead. Among the most extreme shapes in the catalogue and rarely appropriate.",
+"in": "Chin Stand (Ganda Bherundasana)"
+},
+{
+"i": 223,
+"k": "pose_description",
+"s": "Chin Stand practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Chin Stand at the Wall (Ganda Bherundasana (wall))"
+},
+{
+"i": 224,
+"k": "pose_description",
+"s": "Chin Stand approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Chin Stand with Strap (Ganda Bherundasana (strap))"
+},
+{
+"i": 225,
+"k": "pose_description",
+"s": "Cobra taken to full depth with the feet reaching toward the head.",
+"in": "Cobra Full Expression (Raja Bhujangasana)"
+},
+{
+"i": 226,
+"k": "pose_description",
+"s": "A low chest lift with the legs and pelvis grounded and very little arm push. The gentler backbend of the sun salutation family.",
+"in": "Cobra Pose (Bhujangasana)"
+},
+{
+"i": 227,
+"k": "pose_description",
+"s": "Cobra Pose taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Cobra Pose with Block (Bhujangasana (block))"
+},
+{
+"i": 228,
+"k": "pose_description",
+"s": "Cobra Pose approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Cobra Pose with Strap (Bhujangasana (strap))"
+},
+{
+"i": 229,
+"k": "pose_description",
+"s": "A standing chest opener with hands on a wall. Teaches the thoracic extension of cobra without the floor.",
+"in": "Cobra at Wall (Bhujangasana (wall))"
+},
+{
+"i": 230,
+"k": "pose_description",
+"s": "Cobra held with the hands hovering off the floor. Proves the lift is coming from the back and not the arms.",
+"in": "Cobra with Hands Lifted (Bhujangasana (hands off))"
+},
+{
+"i": 231,
+"k": "pose_description",
+"s": "Cobra with Hands Lifted practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Cobra with Hands Lifted at the Wall (Bhujangasana (hands off) (wall))"
+},
+{
+"i": 232,
+"k": "pose_description",
+"s": "On hands and knees with the belly dropping and the chest lifting. The other half of cat-cow, and the gentlest backbend available.",
+"in": "Cow Pose (Bitilasana)"
+},
+{
+"i": 233,
+"k": "pose_description",
+"s": "Cow Pose taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Cow Pose with Block (Bitilasana (block))"
+},
+{
+"i": 234,
+"k": "pose_description",
+"s": "Cow Pose approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Cow Pose with Strap (Bitilasana (strap))"
+},
+{
+"i": 235,
+"k": "pose_description",
+"s": "The inverted staff pose, a deep backbend supported on the forearms and the crown.",
+"in": "Dwi Pada Viparita Dandasana (Dwi Pada Viparita Dandasana)"
+},
+{
+"i": 236,
+"k": "pose_description",
+"s": "An inverted staff backbend on the forearms with one leg lifted to vertical.",
+"in": "Eka Pada Viparita Dandasana (Eka Pada Viparita Dandasana)"
+},
+{
+"i": 237,
+"k": "pose_description",
+"s": "Reclined with the chest lifting and the crown resting lightly on the floor. The classical counterpose to shoulderstand.",
+"in": "Fish Pose (Matsyasana)"
+},
+{
+"i": 238,
+"k": "pose_description",
+"s": "Fish Pose practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Fish Pose at the Wall (Matsyasana (wall))"
+},
+{
+"i": 239,
+"k": "pose_description",
+"s": "Fish Pose taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Fish Pose with Block (Matsyasana (block))"
+},
+{
+"i": 240,
+"k": "pose_description",
+"s": "Fish Pose approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Fish Pose with Strap (Matsyasana (strap))"
+},
+{
+"i": 241,
+"k": "pose_description",
+"s": "Fish pose with the legs bound in lotus. The classical full expression of the pose.",
+"in": "Fish in Lotus (Matsyasana (lotus))"
+},
+{
+"i": 242,
+"k": "pose_description",
+"s": "Kneeling and reclining fully back onto the floor with the knees together. Extremely demanding on the knee.",
+"in": "Fixed Firm Pose (Supta Vajrasana)"
+},
+{
+"i": 243,
+"k": "pose_description",
+"s": "Flipping from downward dog through side plank into a one-handed backbend. Entirely modern and popular in flow classes.",
+"in": "Flip Dog (Camatkarasana (flip))"
+},
+{
+"i": 244,
+"k": "pose_description",
+"s": "Chest and chin grounded with the legs lifting and arching overhead.",
+"in": "Formidable Face Pose (Ganda Bherundasana (prep))"
+},
+{
+"i": 245,
+"k": "pose_description",
+"s": "Kneeling and arching all the way back until the hands reach the feet. Among the deepest backbends in the tradition.",
+"in": "Full Pigeon (Kapotasana)"
+},
+{
+"i": 246,
+"k": "pose_description",
+"s": "A supported neck arch with the crown grounded and the shoulders lifted. To be entered very slowly.",
+"in": "Grivasana Neck Pose (Grivasana)"
+},
+{
+"i": 247,
+"k": "pose_description",
+"s": "Prone with one foot pressed toward the hip. A quadriceps and hip flexor opener with a mild chest lift.",
+"in": "Half Frog (Ardha Bhekasana)"
+},
+{
+"i": 248,
+"k": "pose_description",
+"s": "Half Frog practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Half Frog at the Wall (Ardha Bhekasana (wall))"
+},
+{
+"i": 249,
+"k": "pose_description",
+"s": "Locust with one leg lifting at a time. Halves the load and lets a weaker side be trained honestly.",
+"in": "Half Locust (Ardha Salabhasana)"
+},
+{
+"i": 250,
+"k": "pose_description",
+"s": "Half Locust practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Half Locust at the Wall (Ardha Salabhasana (wall))"
+},
+{
+"i": 251,
+"k": "pose_description",
+"s": "Half Locust taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Half Locust with Block (Ardha Salabhasana (block))"
+},
+{
+"i": 252,
+"k": "pose_description",
+"s": "Half Locust approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Half Locust with Strap (Ardha Salabhasana (strap))"
+},
+{
+"i": 253,
+"k": "pose_description",
+"s": "The shoulder pose, a bridge entered by gripping the ankles with the feet close to the buttocks.",
+"in": "Kandharasana (Kandharasana)"
+},
+{
+"i": 254,
+"k": "pose_description",
+"s": "The full pigeon backbend with the forearms on the floor and the head at the feet.",
+"in": "Kapotasana Full (Kapotasana (full))"
+},
+{
+"i": 255,
+"k": "pose_description",
+"s": "Pigeon with the back foot caught overhead and the spine arching. A deep backbend that needs the hip flexors open first.",
+"in": "King Pigeon (Eka Pada Rajakapotasana)"
+},
+{
+"i": 256,
+"k": "pose_description",
+"s": "King Pigeon practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "King Pigeon at the Wall (Eka Pada Rajakapotasana (wall))"
+},
+{
+"i": 257,
+"k": "pose_description",
+"s": "King Pigeon taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "King Pigeon with Block (Eka Pada Rajakapotasana (block))"
+},
+{
+"i": 258,
+"k": "pose_description",
+"s": "Kneeling and arching back until the crown touches the floor with the thighs still working. A controlled descent that demands quadriceps strength.",
+"in": "Little Thunderbolt (Laghu Vajrasana)"
+},
+{
+"i": 259,
+"k": "pose_description",
+"s": "Little Thunderbolt practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Little Thunderbolt at the Wall (Laghu Vajrasana (wall))"
+},
+{
+"i": 260,
+"k": "pose_description",
+"s": "Little Thunderbolt taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Little Thunderbolt with Block (Laghu Vajrasana (block))"
+},
+{
+"i": 261,
+"k": "pose_description",
+"s": "Little Thunderbolt approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Little Thunderbolt with Strap (Laghu Vajrasana (strap))"
+},
+{
+"i": 262,
+"k": "pose_description",
+"s": "Prone with the chest, arms and legs lifting away from the floor. The best strengthener for the posterior chain in the whole repertoire.",
+"in": "Locust Pose (Salabhasana)"
+},
+{
+"i": 263,
+"k": "pose_description",
+"s": "Locust Pose practised with the wall as a reference. The wall removes the fear of falling and lets the alignment be felt rather than guessed, which is how the shape should be learned before it is held alone.",
+"in": "Locust Pose at the Wall (Salabhasana (wall))"
+},
+{
+"i": 264,
+"k": "pose_description",
+"s": "Locust Pose taken with a block under the supporting hand or beneath the seat. The prop shortens the distance to the floor so the spine can stay long instead of rounding to reach it.",
+"in": "Locust Pose with Block (Salabhasana (block))"
+},
+{
+"i": 265,
+"k": "pose_description",
+"s": "Locust Pose approached with a strap. The strap stands in for a reach the shoulders or hamstrings cannot yet make, so the shape is entered honestly rather than forced into a rounded compromise.",
+"in": "Locust Pose with Strap (Salabhasana (strap))"
+}
+]

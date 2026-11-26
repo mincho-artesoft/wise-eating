@@ -1,0 +1,1682 @@
+[
+{
+"i": 0,
+"k": "kind",
+"p": "labels",
+"s": "kriya"
+},
+{
+"i": 1,
+"k": "kind",
+"p": "labels",
+"s": "meditation"
+},
+{
+"i": 2,
+"k": "kind",
+"p": "labels",
+"s": "pranayama"
+},
+{
+"i": 3,
+"k": "kind",
+"p": "labels",
+"s": "relaxation"
+},
+{
+"i": 4,
+"k": "kind",
+"p": "labels",
+"s": "visualisation"
+},
+{
+"i": 5,
+"k": "posture",
+"p": "labels",
+"s": "any"
+},
+{
+"i": 6,
+"k": "posture",
+"p": "labels",
+"s": "seated"
+},
+{
+"i": 7,
+"k": "posture",
+"p": "labels",
+"s": "standing"
+},
+{
+"i": 8,
+"k": "posture",
+"p": "labels",
+"s": "supine"
+},
+{
+"i": 9,
+"k": "posture",
+"p": "labels",
+"s": "walking"
+},
+{
+"i": 10,
+"k": "eyes",
+"p": "labels",
+"s": "closed"
+},
+{
+"i": 11,
+"k": "eyes",
+"p": "labels",
+"s": "open"
+},
+{
+"i": 12,
+"k": "eyes",
+"p": "labels",
+"s": "soft-open"
+},
+{
+"i": 13,
+"k": "guna",
+"p": "labels",
+"s": "rajasic"
+},
+{
+"i": 14,
+"k": "guna",
+"p": "labels",
+"s": "sattvic"
+},
+{
+"i": 15,
+"k": "agni_effect",
+"p": "labels",
+"s": "cools"
+},
+{
+"i": 16,
+"k": "agni_effect",
+"p": "labels",
+"s": "kindles"
+},
+{
+"i": 17,
+"k": "agni_effect",
+"p": "labels",
+"s": "neutral"
+},
+{
+"i": 18,
+"k": "time_of_day",
+"p": "labels",
+"s": "afternoon"
+},
+{
+"i": 19,
+"k": "time_of_day",
+"p": "labels",
+"s": "dawn"
+},
+{
+"i": 20,
+"k": "time_of_day",
+"p": "labels",
+"s": "evening"
+},
+{
+"i": 21,
+"k": "time_of_day",
+"p": "labels",
+"s": "midday"
+},
+{
+"i": 22,
+"k": "time_of_day",
+"p": "labels",
+"s": "morning"
+},
+{
+"i": 23,
+"k": "time_of_day",
+"p": "labels",
+"s": "night"
+},
+{
+"i": 24,
+"k": "season",
+"p": "labels",
+"s": "grishma"
+},
+{
+"i": 25,
+"k": "season",
+"p": "labels",
+"s": "hemanta"
+},
+{
+"i": 26,
+"k": "season",
+"p": "labels",
+"s": "sharad"
+},
+{
+"i": 27,
+"k": "season",
+"p": "labels",
+"s": "shishira"
+},
+{
+"i": 28,
+"k": "season",
+"p": "labels",
+"s": "varsha"
+},
+{
+"i": 29,
+"k": "season",
+"p": "labels",
+"s": "vasanta"
+},
+{
+"i": 30,
+"k": "goal",
+"p": "labels",
+"s": "anger"
+},
+{
+"i": 31,
+"k": "goal",
+"p": "labels",
+"s": "anxiety"
+},
+{
+"i": 32,
+"k": "goal",
+"p": "labels",
+"s": "connection"
+},
+{
+"i": 33,
+"k": "goal",
+"p": "labels",
+"s": "digestion"
+},
+{
+"i": 34,
+"k": "goal",
+"p": "labels",
+"s": "energy"
+},
+{
+"i": 35,
+"k": "goal",
+"p": "labels",
+"s": "focus"
+},
+{
+"i": 36,
+"k": "goal",
+"p": "labels",
+"s": "grief"
+},
+{
+"i": 37,
+"k": "goal",
+"p": "labels",
+"s": "perspective"
+},
+{
+"i": 38,
+"k": "goal",
+"p": "labels",
+"s": "recovery"
+},
+{
+"i": 39,
+"k": "goal",
+"p": "labels",
+"s": "sleep"
+},
+{
+"i": 40,
+"k": "goal",
+"p": "labels",
+"s": "stress"
+},
+{
+"i": 41,
+"k": "technique",
+"p": "labels",
+"s": "attention-on-the-gap"
+},
+{
+"i": 42,
+"k": "technique",
+"p": "labels",
+"s": "body-anchoring"
+},
+{
+"i": 43,
+"k": "technique",
+"p": "labels",
+"s": "body-rotation"
+},
+{
+"i": 44,
+"k": "technique",
+"p": "labels",
+"s": "breath-counting"
+},
+{
+"i": 45,
+"k": "technique",
+"p": "labels",
+"s": "breath-lengthening"
+},
+{
+"i": 46,
+"k": "technique",
+"p": "labels",
+"s": "breath-with-movement"
+},
+{
+"i": 47,
+"k": "technique",
+"p": "labels",
+"s": "contemplation"
+},
+{
+"i": 48,
+"k": "technique",
+"p": "labels",
+"s": "cooling-inhalation"
+},
+{
+"i": 49,
+"k": "technique",
+"p": "labels",
+"s": "element-visualisation"
+},
+{
+"i": 50,
+"k": "technique",
+"p": "labels",
+"s": "fixed-gaze"
+},
+{
+"i": 51,
+"k": "technique",
+"p": "labels",
+"s": "forceful-breathing"
+},
+{
+"i": 52,
+"k": "technique",
+"p": "labels",
+"s": "forceful-exhalation"
+},
+{
+"i": 53,
+"k": "technique",
+"p": "labels",
+"s": "glottal-restriction"
+},
+{
+"i": 54,
+"k": "technique",
+"p": "labels",
+"s": "heart-cultivation"
+},
+{
+"i": 55,
+"k": "technique",
+"p": "labels",
+"s": "inquiry"
+},
+{
+"i": 56,
+"k": "technique",
+"p": "labels",
+"s": "interior-space"
+},
+{
+"i": 57,
+"k": "technique",
+"p": "labels",
+"s": "mantra"
+},
+{
+"i": 58,
+"k": "technique",
+"p": "labels",
+"s": "mantra-on-breath"
+},
+{
+"i": 59,
+"k": "technique",
+"p": "labels",
+"s": "mantra-with-beads"
+},
+{
+"i": 60,
+"k": "technique",
+"p": "labels",
+"s": "movement-attention"
+},
+{
+"i": 61,
+"k": "technique",
+"p": "labels",
+"s": "nidra"
+},
+{
+"i": 62,
+"k": "technique",
+"p": "labels",
+"s": "nostril-alternation"
+},
+{
+"i": 63,
+"k": "technique",
+"p": "labels",
+"s": "open-awareness"
+},
+{
+"i": 64,
+"k": "technique",
+"p": "labels",
+"s": "open-listening"
+},
+{
+"i": 65,
+"k": "technique",
+"p": "labels",
+"s": "progressive-release"
+},
+{
+"i": 66,
+"k": "technique",
+"p": "labels",
+"s": "rapid-diaphragmatic"
+},
+{
+"i": 67,
+"k": "technique",
+"p": "labels",
+"s": "ratio-breathing"
+},
+{
+"i": 68,
+"k": "technique",
+"p": "labels",
+"s": "sense-withdrawal"
+},
+{
+"i": 69,
+"k": "technique",
+"p": "labels",
+"s": "sensory-attention"
+},
+{
+"i": 70,
+"k": "technique",
+"p": "labels",
+"s": "sleep-onset"
+},
+{
+"i": 71,
+"k": "technique",
+"p": "labels",
+"s": "sound-and-silence"
+},
+{
+"i": 72,
+"k": "technique",
+"p": "labels",
+"s": "sound-decay"
+},
+{
+"i": 73,
+"k": "technique",
+"p": "labels",
+"s": "thermal-awareness"
+},
+{
+"i": 74,
+"k": "technique",
+"p": "labels",
+"s": "touch-attention"
+},
+{
+"i": 75,
+"k": "technique",
+"p": "labels",
+"s": "visualisation-internal"
+},
+{
+"i": 76,
+"k": "technique",
+"p": "labels",
+"s": "vocal-vibration"
+},
+{
+"i": 77,
+"k": "theme",
+"p": "labels",
+"s": "acceptance"
+},
+{
+"i": 78,
+"k": "theme",
+"p": "labels",
+"s": "after-eating"
+},
+{
+"i": 79,
+"k": "theme",
+"p": "labels",
+"s": "after-practice"
+},
+{
+"i": 80,
+"k": "theme",
+"p": "labels",
+"s": "agni"
+},
+{
+"i": 81,
+"k": "theme",
+"p": "labels",
+"s": "anywhere"
+},
+{
+"i": 82,
+"k": "theme",
+"p": "labels",
+"s": "awe"
+},
+{
+"i": 83,
+"k": "theme",
+"p": "labels",
+"s": "balance"
+},
+{
+"i": 84,
+"k": "theme",
+"p": "labels",
+"s": "bedtime"
+},
+{
+"i": 85,
+"k": "theme",
+"p": "labels",
+"s": "before-meditation"
+},
+{
+"i": 86,
+"k": "theme",
+"p": "labels",
+"s": "before-sleep"
+},
+{
+"i": 87,
+"k": "theme",
+"p": "labels",
+"s": "beginner"
+},
+{
+"i": 88,
+"k": "theme",
+"p": "labels",
+"s": "boundaries"
+},
+{
+"i": 89,
+"k": "theme",
+"p": "labels",
+"s": "burnout"
+},
+{
+"i": 90,
+"k": "theme",
+"p": "labels",
+"s": "cannot-sit-still"
+},
+{
+"i": 91,
+"k": "theme",
+"p": "labels",
+"s": "caregiving"
+},
+{
+"i": 92,
+"k": "theme",
+"p": "labels",
+"s": "clarity"
+},
+{
+"i": 93,
+"k": "theme",
+"p": "labels",
+"s": "clearing"
+},
+{
+"i": 94,
+"k": "theme",
+"p": "labels",
+"s": "closure"
+},
+{
+"i": 95,
+"k": "theme",
+"p": "labels",
+"s": "clutter"
+},
+{
+"i": 96,
+"k": "theme",
+"p": "labels",
+"s": "cold"
+},
+{
+"i": 97,
+"k": "theme",
+"p": "labels",
+"s": "comfort"
+},
+{
+"i": 98,
+"k": "theme",
+"p": "labels",
+"s": "comparison"
+},
+{
+"i": 99,
+"k": "theme",
+"p": "labels",
+"s": "compassion-fatigue"
+},
+{
+"i": 100,
+"k": "theme",
+"p": "labels",
+"s": "concentration"
+},
+{
+"i": 101,
+"k": "theme",
+"p": "labels",
+"s": "counting"
+},
+{
+"i": 102,
+"k": "theme",
+"p": "labels",
+"s": "deep-rest"
+},
+{
+"i": 103,
+"k": "theme",
+"p": "labels",
+"s": "depletion"
+},
+{
+"i": 104,
+"k": "theme",
+"p": "labels",
+"s": "desk"
+},
+{
+"i": 105,
+"k": "theme",
+"p": "labels",
+"s": "devotion"
+},
+{
+"i": 106,
+"k": "theme",
+"p": "labels",
+"s": "dinacharya"
+},
+{
+"i": 107,
+"k": "theme",
+"p": "labels",
+"s": "dissociation"
+},
+{
+"i": 108,
+"k": "theme",
+"p": "labels",
+"s": "dullness"
+},
+{
+"i": 109,
+"k": "theme",
+"p": "labels",
+"s": "eating"
+},
+{
+"i": 110,
+"k": "theme",
+"p": "labels",
+"s": "envy"
+},
+{
+"i": 111,
+"k": "theme",
+"p": "labels",
+"s": "exhaustion"
+},
+{
+"i": 112,
+"k": "theme",
+"p": "labels",
+"s": "gratitude"
+},
+{
+"i": 113,
+"k": "theme",
+"p": "labels",
+"s": "grounding"
+},
+{
+"i": 114,
+"k": "theme",
+"p": "labels",
+"s": "habit"
+},
+{
+"i": 115,
+"k": "theme",
+"p": "labels",
+"s": "heartache"
+},
+{
+"i": 116,
+"k": "theme",
+"p": "labels",
+"s": "heat"
+},
+{
+"i": 117,
+"k": "theme",
+"p": "labels",
+"s": "heaviness"
+},
+{
+"i": 118,
+"k": "theme",
+"p": "labels",
+"s": "helplessness"
+},
+{
+"i": 119,
+"k": "theme",
+"p": "labels",
+"s": "identity"
+},
+{
+"i": 120,
+"k": "theme",
+"p": "labels",
+"s": "insomnia"
+},
+{
+"i": 121,
+"k": "theme",
+"p": "labels",
+"s": "irritability"
+},
+{
+"i": 122,
+"k": "theme",
+"p": "labels",
+"s": "lethargy"
+},
+{
+"i": 123,
+"k": "theme",
+"p": "labels",
+"s": "letting-go"
+},
+{
+"i": 124,
+"k": "theme",
+"p": "labels",
+"s": "listening"
+},
+{
+"i": 125,
+"k": "theme",
+"p": "labels",
+"s": "loneliness"
+},
+{
+"i": 126,
+"k": "theme",
+"p": "labels",
+"s": "loss"
+},
+{
+"i": 127,
+"k": "theme",
+"p": "labels",
+"s": "mortality"
+},
+{
+"i": 128,
+"k": "theme",
+"p": "labels",
+"s": "night-waking"
+},
+{
+"i": 129,
+"k": "theme",
+"p": "labels",
+"s": "overstimulation"
+},
+{
+"i": 130,
+"k": "theme",
+"p": "labels",
+"s": "overthinking"
+},
+{
+"i": 131,
+"k": "theme",
+"p": "labels",
+"s": "overwhelm"
+},
+{
+"i": 132,
+"k": "theme",
+"p": "labels",
+"s": "overwork"
+},
+{
+"i": 133,
+"k": "theme",
+"p": "labels",
+"s": "panic"
+},
+{
+"i": 134,
+"k": "theme",
+"p": "labels",
+"s": "practice-breath"
+},
+{
+"i": 135,
+"k": "theme",
+"p": "labels",
+"s": "presence"
+},
+{
+"i": 136,
+"k": "theme",
+"p": "labels",
+"s": "priorities"
+},
+{
+"i": 137,
+"k": "theme",
+"p": "labels",
+"s": "racing-thoughts"
+},
+{
+"i": 138,
+"k": "theme",
+"p": "labels",
+"s": "resentment"
+},
+{
+"i": 139,
+"k": "theme",
+"p": "labels",
+"s": "restlessness"
+},
+{
+"i": 140,
+"k": "theme",
+"p": "labels",
+"s": "ritucharya"
+},
+{
+"i": 141,
+"k": "theme",
+"p": "labels",
+"s": "routine"
+},
+{
+"i": 142,
+"k": "theme",
+"p": "labels",
+"s": "rumination"
+},
+{
+"i": 143,
+"k": "theme",
+"p": "labels",
+"s": "screens"
+},
+{
+"i": 144,
+"k": "theme",
+"p": "labels",
+"s": "seasons"
+},
+{
+"i": 145,
+"k": "theme",
+"p": "labels",
+"s": "self-care"
+},
+{
+"i": 146,
+"k": "theme",
+"p": "labels",
+"s": "self-criticism"
+},
+{
+"i": 147,
+"k": "theme",
+"p": "labels",
+"s": "shelter"
+},
+{
+"i": 148,
+"k": "theme",
+"p": "labels",
+"s": "sluggishness"
+},
+{
+"i": 149,
+"k": "theme",
+"p": "labels",
+"s": "smallness"
+},
+{
+"i": 150,
+"k": "theme",
+"p": "labels",
+"s": "space"
+},
+{
+"i": 151,
+"k": "theme",
+"p": "labels",
+"s": "spring"
+},
+{
+"i": 152,
+"k": "theme",
+"p": "labels",
+"s": "stagnation"
+},
+{
+"i": 153,
+"k": "theme",
+"p": "labels",
+"s": "steadiness"
+},
+{
+"i": 154,
+"k": "theme",
+"p": "labels",
+"s": "steadying"
+},
+{
+"i": 155,
+"k": "theme",
+"p": "labels",
+"s": "stillness"
+},
+{
+"i": 156,
+"k": "theme",
+"p": "labels",
+"s": "structure"
+},
+{
+"i": 157,
+"k": "theme",
+"p": "labels",
+"s": "subtlety"
+},
+{
+"i": 158,
+"k": "theme",
+"p": "labels",
+"s": "summer"
+},
+{
+"i": 159,
+"k": "theme",
+"p": "labels",
+"s": "tension"
+},
+{
+"i": 160,
+"k": "theme",
+"p": "labels",
+"s": "touch"
+},
+{
+"i": 161,
+"k": "theme",
+"p": "labels",
+"s": "transition"
+},
+{
+"i": 162,
+"k": "theme",
+"p": "labels",
+"s": "travel"
+},
+{
+"i": 163,
+"k": "theme",
+"p": "labels",
+"s": "waking-up"
+},
+{
+"i": 164,
+"k": "title",
+"p": "so-hum-breath",
+"s": "So Hum"
+},
+{
+"i": 165,
+"k": "sanskrit",
+"p": "so-hum-breath",
+"s": "So'ham",
+"in": "So Hum"
+},
+{
+"i": 166,
+"k": "description",
+"p": "so-hum-breath",
+"s": "The oldest mantra in the tradition is the sound the breath already makes. Nothing is added — you listen for what is there and let it hold your attention."
+},
+{
+"i": 167,
+"k": "source",
+"p": "so-hum-breath",
+"s": "Upanishadic; Isha and Hamsa traditions"
+},
+{
+"i": 168,
+"k": "cue",
+"p": "so-hum-breath",
+"n": 0,
+"hold": 8,
+"s": "Sit so that the weight of your upper body drops straight down into the floor. Let the hands rest where they fall."
+},
+{
+"i": 169,
+"k": "cue",
+"p": "so-hum-breath",
+"n": 1,
+"hold": 15,
+"s": "Do nothing to the breath. Let it be as short or as shallow as it wants to be for now."
+},
+{
+"i": 170,
+"k": "cue",
+"p": "so-hum-breath",
+"n": 2,
+"hold": 12,
+"s": "Notice that the in-breath makes a faint sound at the back of the throat. Something like so."
+},
+{
+"i": 171,
+"k": "cue",
+"p": "so-hum-breath",
+"n": 3,
+"hold": 12,
+"s": "And the out-breath makes a different one. Something like hum."
+},
+{
+"i": 172,
+"k": "cue",
+"p": "so-hum-breath",
+"n": 4,
+"hold": 20,
+"s": "So on the way in. Hum on the way out. You are not saying it. You are noticing that it is already being said."
+},
+{
+"i": 173,
+"k": "cue",
+"p": "so-hum-breath",
+"n": 5,
+"hold": 18,
+"s": "If the breath is too quiet to hear, imagine the sound instead. It works the same way."
+},
+{
+"i": 174,
+"k": "cue",
+"p": "so-hum-breath",
+"n": 6,
+"hold": 40,
+"s": "So. Hum. Nothing else to do with it."
+},
+{
+"i": 175,
+"k": "cue",
+"p": "so-hum-breath",
+"n": 7,
+"hold": 30,
+"s": "When you notice you have gone somewhere else — and you will — that noticing is not a failure. It is the practice. Come back to so."
+},
+{
+"i": 176,
+"k": "cue",
+"p": "so-hum-breath",
+"n": 8,
+"hold": 60,
+"s": "So on the way in. Hum on the way out."
+},
+{
+"i": 177,
+"k": "cue",
+"p": "so-hum-breath",
+"n": 9,
+"hold": 45,
+"s": "Let the mantra go. Sit with whatever is left."
+},
+{
+"i": 178,
+"k": "cue",
+"p": "so-hum-breath",
+"n": 10,
+"hold": 15,
+"s": "Let the breath come back under its own management. Feel the floor again."
+},
+{
+"i": 179,
+"k": "title",
+"p": "counting-the-exhale",
+"s": "Counting the Exhale"
+},
+{
+"i": 180,
+"k": "sanskrit",
+"p": "counting-the-exhale",
+"s": "Sankhya Pranadharana",
+"in": "Counting the Exhale"
+},
+{
+"i": 181,
+"k": "description",
+"p": "counting-the-exhale",
+"s": "Counting only the out-breath, ten at a time. The narrowest possible task, which is why it works on a mind too busy for anything wider."
+},
+{
+"i": 182,
+"k": "source",
+"p": "counting-the-exhale",
+"s": "Common to Yogic and Chan/Zen practice"
+},
+{
+"i": 183,
+"k": "cue",
+"p": "counting-the-exhale",
+"n": 0,
+"hold": 10,
+"s": "Sit upright but not stiff. The spine long, the shoulders heavy."
+},
+{
+"i": 184,
+"k": "cue",
+"p": "counting-the-exhale",
+"n": 1,
+"hold": 12,
+"s": "Breathe in without counting. Then, as the breath leaves, count one."
+},
+{
+"i": 185,
+"k": "cue",
+"p": "counting-the-exhale",
+"n": 2,
+"hold": 14,
+"s": "In again, no count. Out — two."
+},
+{
+"i": 186,
+"k": "cue",
+"p": "counting-the-exhale",
+"n": 3,
+"hold": 16,
+"s": "Only the out-breath carries a number. The in-breath is free."
+},
+{
+"i": 187,
+"k": "cue",
+"p": "counting-the-exhale",
+"n": 4,
+"hold": 45,
+"s": "Go up to ten, then begin again at one."
+},
+{
+"i": 188,
+"k": "cue",
+"p": "counting-the-exhale",
+"n": 5,
+"hold": 40,
+"s": "If you find yourself at fifteen, the mind has gone for a walk. No matter. Start again at one."
+},
+{
+"i": 189,
+"k": "cue",
+"p": "counting-the-exhale",
+"n": 6,
+"hold": 60,
+"s": "If you lose the number entirely, start again at one. Beginning again is not starting over."
+},
+{
+"i": 190,
+"k": "cue",
+"p": "counting-the-exhale",
+"n": 7,
+"hold": 90,
+"s": "Keep counting. One to ten, then one again."
+},
+{
+"i": 191,
+"k": "cue",
+"p": "counting-the-exhale",
+"n": 8,
+"hold": 40,
+"s": "Now let the counting fall away and just breathe."
+},
+{
+"i": 192,
+"k": "cue",
+"p": "counting-the-exhale",
+"n": 9,
+"hold": 20,
+"s": "Notice whether the breath is different from when you began. It usually is."
+},
+{
+"i": 193,
+"k": "title",
+"p": "the-pause-between-breaths",
+"s": "The Pause Between Breaths"
+},
+{
+"i": 194,
+"k": "sanskrit",
+"p": "the-pause-between-breaths",
+"s": "Kumbhaka Dharana",
+"in": "The Pause Between Breaths"
+},
+{
+"i": 195,
+"k": "description",
+"p": "the-pause-between-breaths",
+"s": "Between the breath going out and the breath coming in there is a gap. The instruction is simply to be awake inside it. Nothing is held or forced."
+},
+{
+"i": 196,
+"k": "source",
+"p": "the-pause-between-breaths",
+"s": "Vijñāna Bhairava Tantra — the technique of attending to the turn of the breath"
+},
+{
+"i": 197,
+"k": "caution",
+"p": "the-pause-between-breaths",
+"s": "Do not hold or lengthen the breath. If you have a respiratory condition, high blood pressure, or are pregnant, observe the pause without altering it."
+},
+{
+"i": 198,
+"k": "cue",
+"p": "the-pause-between-breaths",
+"n": 0,
+"hold": 10,
+"s": "Sit where you will not need to move for a while."
+},
+{
+"i": 199,
+"k": "cue",
+"p": "the-pause-between-breaths",
+"n": 1,
+"hold": 20,
+"s": "Let the breath find its own rhythm. This practice never asks you to change it."
+},
+{
+"i": 200,
+"k": "cue",
+"p": "the-pause-between-breaths",
+"n": 2,
+"hold": 18,
+"s": "Follow one breath all the way out. Notice that at the very end, before the next one starts, there is a pause."
+},
+{
+"i": 201,
+"k": "cue",
+"p": "the-pause-between-breaths",
+"n": 3,
+"hold": 20,
+"s": "It might be half a second. It does not matter how long it is. Only that you are awake inside it."
+},
+{
+"i": 202,
+"k": "cue",
+"p": "the-pause-between-breaths",
+"n": 4,
+"hold": 45,
+"s": "Rest your attention there. At the bottom of the breath, in the turn."
+},
+{
+"i": 203,
+"k": "cue",
+"p": "the-pause-between-breaths",
+"n": 5,
+"hold": 30,
+"s": "There is a second gap, at the top, after the in-breath completes. Find that one too."
+},
+{
+"i": 204,
+"k": "cue",
+"p": "the-pause-between-breaths",
+"n": 6,
+"hold": 60,
+"s": "Two still points in every breath. Nothing is being held. You are only noticing what was always there."
+},
+{
+"i": 205,
+"k": "cue",
+"p": "the-pause-between-breaths",
+"n": 7,
+"hold": 40,
+"s": "If the breath starts to feel effortful, you are interfering. Let it go entirely for three breaths, then return."
+},
+{
+"i": 206,
+"k": "cue",
+"p": "the-pause-between-breaths",
+"n": 8,
+"hold": 90,
+"s": "Stay with the turn of the breath."
+},
+{
+"i": 207,
+"k": "cue",
+"p": "the-pause-between-breaths",
+"n": 9,
+"hold": 25,
+"s": "Let the attention widen again. Feel the whole body breathing."
+},
+{
+"i": 208,
+"k": "title",
+"p": "cooling-attention",
+"s": "Cooling Attention"
+},
+{
+"i": 209,
+"k": "sanskrit",
+"p": "cooling-attention",
+"s": "Shita Dharana",
+"in": "Cooling Attention"
+},
+{
+"i": 210,
+"k": "description",
+"p": "cooling-attention",
+"s": "For heat — in the body, in the temper, in the hour after an argument. Attention rests on the coolest sensations available and lets the rest follow."
+},
+{
+"i": 211,
+"k": "source",
+"p": "cooling-attention",
+"s": "Ayurvedic sitali principle, adapted as attention rather than breath technique"
+},
+{
+"i": 212,
+"k": "cue",
+"p": "cooling-attention",
+"n": 0,
+"hold": 12,
+"s": "Sit somewhere you are not too warm. Loosen anything tight at the neck or waist."
+},
+{
+"i": 213,
+"k": "cue",
+"p": "cooling-attention",
+"n": 1,
+"hold": 18,
+"s": "Take one slow breath in through the nose and notice something specific: the air is cooler going in than coming out."
+},
+{
+"i": 214,
+"k": "cue",
+"p": "cooling-attention",
+"n": 2,
+"hold": 20,
+"s": "Find that coolness at the rim of the nostrils. It is faint. Look for it anyway."
+},
+{
+"i": 215,
+"k": "cue",
+"p": "cooling-attention",
+"n": 3,
+"hold": 45,
+"s": "Every in-breath brings it back. Stay at the nostrils and let the coolness arrive again and again."
+},
+{
+"i": 216,
+"k": "cue",
+"p": "cooling-attention",
+"n": 4,
+"hold": 25,
+"s": "Now widen a little. Where else is the body cool? The palms, perhaps. The skin behind the ears."
+},
+{
+"i": 217,
+"k": "cue",
+"p": "cooling-attention",
+"n": 5,
+"hold": 40,
+"s": "Do not go looking for heat. Only for the cool places, and rest there."
+},
+{
+"i": 218,
+"k": "cue",
+"p": "cooling-attention",
+"n": 6,
+"hold": 35,
+"s": "If a hot thought arrives — something someone said, something unfinished — notice where it lands in the body, and then return to the coolest place you can find."
+},
+{
+"i": 219,
+"k": "cue",
+"p": "cooling-attention",
+"n": 7,
+"hold": 75,
+"s": "Cool air at the nostrils. Cool skin at the palms. Nothing to solve."
+},
+{
+"i": 220,
+"k": "cue",
+"p": "cooling-attention",
+"n": 8,
+"hold": 30,
+"s": "Let the whole face soften. The jaw, the space between the eyebrows."
+},
+{
+"i": 221,
+"k": "cue",
+"p": "cooling-attention",
+"n": 9,
+"hold": 20,
+"s": "Come back slowly. Heat does not leave in a hurry, and it does not need to."
+},
+{
+"i": 222,
+"k": "title",
+"p": "weight-and-contact",
+"s": "Weight and Contact"
+},
+{
+"i": 223,
+"k": "sanskrit",
+"p": "weight-and-contact",
+"s": "Sparsha Dharana",
+"in": "Weight and Contact"
+},
+{
+"i": 224,
+"k": "description",
+"p": "weight-and-contact",
+"s": "Attention on the places where the body meets the floor. The most reliable practice for a mind that will not settle, because weight cannot be argued with."
+},
+{
+"i": 225,
+"k": "source",
+"p": "weight-and-contact",
+"s": "Vijñāna Bhairava Tantra — attention on the point of contact"
+},
+{
+"i": 226,
+"k": "caution",
+"p": "weight-and-contact",
+"s": "Attention on bodily sensation can be destabilising during a dissociative episode. If the body starts to feel unreal rather than heavy, open the eyes and name three things in the room instead."
+},
+{
+"i": 227,
+"k": "cue",
+"p": "weight-and-contact",
+"n": 0,
+"hold": 10,
+"s": "Sit or lie down. Whichever lets you be heaviest."
+},
+{
+"i": 228,
+"k": "cue",
+"p": "weight-and-contact",
+"n": 1,
+"hold": 18,
+"s": "Find where the body touches the floor. The sitting bones, the backs of the legs, the heels."
+},
+{
+"i": 229,
+"k": "cue",
+"p": "weight-and-contact",
+"n": 2,
+"hold": 22,
+"s": "Do not describe it. Just feel it. The pressure, the temperature, the exact edge where you stop and the floor begins."
+},
+{
+"i": 230,
+"k": "cue",
+"p": "weight-and-contact",
+"n": 3,
+"hold": 25,
+"s": "Now let weight go into those places. As if you were slightly heavier than you thought."
+},
+{
+"i": 231,
+"k": "cue",
+"p": "weight-and-contact",
+"n": 4,
+"hold": 40,
+"s": "The floor is holding all of it. It has been the whole time."
+},
+{
+"i": 232,
+"k": "cue",
+"p": "weight-and-contact",
+"n": 5,
+"hold": 30,
+"s": "Move to the hands. Wherever they rest, feel the contact — the weight of them, the warmth underneath."
+},
+{
+"i": 233,
+"k": "cue",
+"p": "weight-and-contact",
+"n": 6,
+"hold": 60,
+"s": "Now the whole underside of the body at once. Every place that is being supported."
+},
+{
+"i": 234,
+"k": "cue",
+"p": "weight-and-contact",
+"n": 7,
+"hold": 45,
+"s": "If the mind lifts off into planning, it will. Come back to weight. Weight is always here and it is never interesting, which is exactly what makes it useful."
+},
+{
+"i": 235,
+"k": "cue",
+"p": "weight-and-contact",
+"n": 8,
+"hold": 90,
+"s": "Heavy, supported, still."
+},
+{
+"i": 236,
+"k": "cue",
+"p": "weight-and-contact",
+"n": 9,
+"hold": 20,
+"s": "Before you move, notice the difference between the body you sat down with and this one."
+},
+{
+"i": 237,
+"k": "title",
+"p": "rotation-of-awareness",
+"s": "Rotation of Awareness"
+},
+{
+"i": 238,
+"k": "sanskrit",
+"p": "rotation-of-awareness",
+"s": "Chidakasha Dharana",
+"in": "Rotation of Awareness"
+},
+{
+"i": 239,
+"k": "description",
+"p": "rotation-of-awareness",
+"s": "Attention moves through the body in a fixed order, resting a moment in each place. The order never changes, which is what makes it restful — there is nothing to decide."
+},
+{
+"i": 240,
+"k": "source",
+"p": "rotation-of-awareness",
+"s": "Yoga Nidra lineage; the 61-point rotation, shortened"
+},
+{
+"i": 241,
+"k": "caution",
+"p": "rotation-of-awareness",
+"s": "Sustained inward attention can be destabilising for people with PTSD or dissociative symptoms. Keep the eyes softly open, or stop, if it becomes uncomfortable."
+},
+{
+"i": 242,
+"k": "cue",
+"p": "rotation-of-awareness",
+"n": 0,
+"hold": 12,
+"s": "Lie on your back, arms a little away from the sides, palms up."
+},
+{
+"i": 243,
+"k": "cue",
+"p": "rotation-of-awareness",
+"n": 1,
+"hold": 12,
+"s": "We will move through the body in a fixed order. You do not have to remember it. Just follow."
+},
+{
+"i": 244,
+"k": "cue",
+"p": "rotation-of-awareness",
+"n": 2,
+"hold": 8,
+"s": "Right hand thumb. Second finger. Third. Fourth. Fifth. The palm. The back of the hand. The wrist."
+},
+{
+"i": 245,
+"k": "cue",
+"p": "rotation-of-awareness",
+"n": 3,
+"hold": 8,
+"s": "The forearm. The elbow. The upper arm. The shoulder. The armpit. The right side of the waist. The right hip."
+},
+{
+"i": 246,
+"k": "cue",
+"p": "rotation-of-awareness",
+"n": 4,
+"hold": 10,
+"s": "The right thigh. The knee. The calf. The ankle. The heel. The sole of the right foot. The right big toe."
+},
+{
+"i": 247,
+"k": "cue",
+"p": "rotation-of-awareness",
+"n": 5,
+"hold": 8,
+"s": "Now the same on the left. Left hand thumb. Second finger. Third. Fourth. Fifth. The palm. The wrist."
+},
+{
+"i": 248,
+"k": "cue",
+"p": "rotation-of-awareness",
+"n": 6,
+"hold": 8,
+"s": "The forearm. The elbow. The upper arm. The shoulder. The left side of the waist. The left hip."
+},
+{
+"i": 249,
+"k": "cue",
+"p": "rotation-of-awareness",
+"n": 7,
+"hold": 10,
+"s": "The left thigh. The knee. The calf. The ankle. The heel. The sole of the left foot. The left big toe."
+},
+{
+"i": 250,
+"k": "cue",
+"p": "rotation-of-awareness",
+"n": 8,
+"hold": 12,
+"s": "Now the back of the body. The right shoulder blade. The left. The whole spine, from the base to the neck."
+},
+{
+"i": 251,
+"k": "cue",
+"p": "rotation-of-awareness",
+"n": 9,
+"hold": 12,
+"s": "The back of the head. The crown. The forehead. The right eyebrow. The left. The space between them."
+},
+{
+"i": 252,
+"k": "cue",
+"p": "rotation-of-awareness",
+"n": 10,
+"hold": 12,
+"s": "The right eyelid. The left. The right cheek. The left. The upper lip. The lower lip. The chin. The throat."
+},
+{
+"i": 253,
+"k": "cue",
+"p": "rotation-of-awareness",
+"n": 11,
+"hold": 20,
+"s": "The chest. The stomach. The navel. The whole front of the body at once."
+},
+{
+"i": 254,
+"k": "cue",
+"p": "rotation-of-awareness",
+"n": 12,
+"hold": 60,
+"s": "Now the whole body at once. Every part you just visited, all together."
+},
+{
+"i": 255,
+"k": "cue",
+"p": "rotation-of-awareness",
+"n": 13,
+"hold": 90,
+"s": "Stay here. Nothing to do."
+},
+{
+"i": 256,
+"k": "cue",
+"p": "rotation-of-awareness",
+"n": 14,
+"hold": 25,
+"s": "When you are ready, let one hand move. Then the other. Take your time coming back."
+}
+]
