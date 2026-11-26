@@ -77,7 +77,10 @@ those.
   for these two unless Mincho asks; the lookup (English string → translation,
   the same shape as `RecipeContentLocalizer`) and the sequence title built
   from its parts are a separate piece of work.
-- The narration stays English. Translated cues are subtitles.
+- The narration in other languages is a separate job that starts from the
+  finished cue translations: `tools/practice-narration/NEON-elevenlabs-narration.md`.
+  Until a language has its own audio, its translated cues are subtitles over
+  the English voice.
 
 ## If the English changes
 

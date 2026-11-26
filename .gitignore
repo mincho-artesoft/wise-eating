@@ -69,3 +69,5 @@ tools/recipe-content/work/
 tools/yoga-names/work/*/
 tools/yoga-content/work/*/
 tools/practice-content/work/*/
+# Generated narration in other languages (about 60 MB a language)
+tools/practice-narration/out/
