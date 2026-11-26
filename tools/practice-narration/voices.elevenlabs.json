@@ -1,0 +1,241 @@
+{
+  "schema": "wise-eating-elevenlabs-voices/v2",
+  "strategy": "single_native_voice_per_language_on_eleven_v4",
+  "default_model": "eleven_v4",
+  "output_format": "mp3_44100_128",
+  "mastering": {
+    "sample_rate_hz": 24000,
+    "channels": 1,
+    "codec": "mp3",
+    "bitrate_kbps": 96,
+    "target_lufs": -16.0,
+    "target_true_peak_db": -1.8,
+    "target_lra": 7.0,
+    "trim_threshold_db": -48,
+    "pad_start_ms": 60,
+    "pad_end_ms": 120
+  },
+  "models": {
+    "eleven_v4": {
+      "supports_speed": false,
+      "supports_style": false,
+      "supports_speaker_boost": false,
+      "supports_language_code": true,
+      "supports_previous_next_text": true,
+      "supports_seed": true
+    },
+    "eleven_multilingual_v2": {
+      "supports_speed": true,
+      "supports_style": true,
+      "supports_speaker_boost": true,
+      "supports_language_code": false,
+      "supports_previous_next_text": true,
+      "supports_seed": true
+    }
+  },
+  "language_voices": {
+    "fr": {
+      "voice_id": "kwhMCf63M8O3rCfnQ3oQ",
+      "short_name": "Caroline",
+      "library_name": "Caroline - Warm, Sweet and Soft",
+      "origin": "shared_voice_library",
+      "category": "high_quality",
+      "native_language": "fr",
+      "accent": "standard",
+      "notice_period_days": 730,
+      "rate_multiplier": 1.0,
+      "usage_1y": 147120092,
+      "seed": 7302,
+      "model_id": "eleven_v4",
+      "settings": {
+        "eleven_v4": {
+          "stability": 0.85,
+          "similarity_boost": 0.78
+        }
+      }
+    },
+    "es-MX": {
+      "voice_id": "ZIxEPysv7w52OU1uxmur",
+      "short_name": "Lili",
+      "library_name": "Lili - Soothing, Too-polished",
+      "origin": "shared_voice_library",
+      "category": "professional",
+      "native_language": "es",
+      "accent": "latin american",
+      "notice_period_days": 730,
+      "rate_multiplier": 1.0,
+      "usage_1y": 1624021,
+      "seed": 7101,
+      "model_id": "eleven_v4",
+      "settings": {
+        "eleven_v4": {
+          "stability": 0.85,
+          "similarity_boost": 0.78
+        }
+      }
+    },
+    "de": {
+      "voice_id": "lg8F3Gh5vb5szDxQyvvE",
+      "short_name": "Ela",
+      "library_name": "Ela - Meditative & Soothing",
+      "origin": "shared_voice_library",
+      "category": "high_quality",
+      "native_language": "de",
+      "accent": "standard",
+      "notice_period_days": 730,
+      "rate_multiplier": 1.0,
+      "usage_1y": 5304252,
+      "seed": 7202,
+      "model_id": "eleven_v4",
+      "settings": {
+        "eleven_v4": {
+          "stability": 0.85,
+          "similarity_boost": 0.78
+        }
+      }
+    },
+    "bg": {
+      "voice_id": "dla3HDm9DVbvkFTOnxbW",
+      "short_name": "MarMar",
+      "library_name": "MarMar - Warm Bulgarian Narration",
+      "origin": "shared_voice_library",
+      "category": "professional",
+      "native_language": "bg",
+      "accent": "standard",
+      "notice_period_days": 730,
+      "rate_multiplier": 1.0,
+      "usage_1y": 479308,
+      "seed": 4404,
+      "model_id": "eleven_v4",
+      "note": "Pilot reference only; full bg library not generated.",
+      "settings": {
+        "eleven_v4": {
+          "stability": 0.88,
+          "similarity_boost": 0.78
+        }
+      }
+    }
+  },
+  "language_pilots": {
+    "es-MX": {
+      "A": {
+        "voice_id": "ZIxEPysv7w52OU1uxmur",
+        "short_name": "Lili",
+        "library_name": "Lili - Soothing, Too-polished",
+        "origin": "shared_voice_library",
+        "category": "professional",
+        "native_language": "es",
+        "accent": "latin american",
+        "notice_period_days": 730,
+        "rate_multiplier": 1.0,
+        "seed": 7101,
+        "model_id": "eleven_v4",
+        "settings": {
+          "eleven_v4": {
+            "stability": 0.85,
+            "similarity_boost": 0.78
+          }
+        }
+      },
+      "B": {
+        "voice_id": "fuVibWsnIUtzBVjB2PCa",
+        "short_name": "Ximena",
+        "library_name": "Ximena - Gentle and Immersive",
+        "origin": "shared_voice_library",
+        "category": "high_quality",
+        "native_language": "es",
+        "accent": "mexican",
+        "notice_period_days": 4015,
+        "rate_multiplier": 1.0,
+        "seed": 7102,
+        "model_id": "eleven_v4",
+        "settings": {
+          "eleven_v4": {
+            "stability": 0.85,
+            "similarity_boost": 0.78
+          }
+        }
+      }
+    },
+    "de": {
+      "A": {
+        "voice_id": "a0CA83xXpwCwAaIpZXae",
+        "short_name": "Zen",
+        "library_name": "Zen - Meditation german",
+        "origin": "shared_voice_library",
+        "category": "high_quality",
+        "native_language": "de",
+        "accent": "standard",
+        "notice_period_days": 730,
+        "rate_multiplier": 1.0,
+        "seed": 7201,
+        "model_id": "eleven_v4",
+        "settings": {
+          "eleven_v4": {
+            "stability": 0.85,
+            "similarity_boost": 0.78
+          }
+        }
+      },
+      "B": {
+        "voice_id": "lg8F3Gh5vb5szDxQyvvE",
+        "short_name": "Ela",
+        "library_name": "Ela - Meditative & Soothing",
+        "origin": "shared_voice_library",
+        "category": "high_quality",
+        "native_language": "de",
+        "accent": "standard",
+        "notice_period_days": 730,
+        "rate_multiplier": 1.0,
+        "seed": 7202,
+        "model_id": "eleven_v4",
+        "settings": {
+          "eleven_v4": {
+            "stability": 0.85,
+            "similarity_boost": 0.78
+          }
+        }
+      }
+    },
+    "fr": {
+      "A": {
+        "voice_id": "hndZlkpVm5i9lXBY9CKj",
+        "short_name": "Mila",
+        "library_name": "Mila - Soft Soothing Meditation & Sleep Voice",
+        "origin": "shared_voice_library",
+        "category": "professional",
+        "native_language": "fr",
+        "accent": "parisian",
+        "notice_period_days": 730,
+        "rate_multiplier": 1.0,
+        "seed": 7301,
+        "model_id": "eleven_v4",
+        "settings": {
+          "eleven_v4": {
+            "stability": 0.85,
+            "similarity_boost": 0.78
+          }
+        }
+      },
+      "B": {
+        "voice_id": "kwhMCf63M8O3rCfnQ3oQ",
+        "short_name": "Caroline",
+        "library_name": "Caroline - Warm, Sweet and Soft",
+        "origin": "shared_voice_library",
+        "category": "high_quality",
+        "native_language": "fr",
+        "accent": "standard",
+        "notice_period_days": 730,
+        "rate_multiplier": 1.0,
+        "seed": 7302,
+        "model_id": "eleven_v4",
+        "settings": {
+          "eleven_v4": {
+            "stability": 0.85,
+            "similarity_boost": 0.78
+          }
+        }
+      }
+    }
+  }
+}
