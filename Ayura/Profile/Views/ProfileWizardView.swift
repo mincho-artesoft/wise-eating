@@ -56,19 +56,19 @@ fileprivate enum WizardStep: Int, Identifiable {
 
     var title: String {
         switch self {
-        case .name: "What's your name?"
-        case .photo: "Add your photo"
-        case .birthday: "When is your birthday?"
-        case .gender: "What's your biological sex?"
-        case .height: "What's your height?"
-        case .weight: "What's your weight?"
-        case .meals: "Meal Times"
-        case .trainings: "Workout Times"
-        case .vitamins: "Priority Vitamins"
-        case .minerals: "Priority Minerals"
-        case .allergens: "Any Allergies?"
-        case .constitution: "Your traditional constitution"
-        case .summary: "Confirm Your Details"
+        case .name: String(localized: "What's your name?")
+        case .photo: String(localized: "Add your photo")
+        case .birthday: String(localized: "When is your birthday?")
+        case .gender: String(localized: "What's your biological sex?")
+        case .height: String(localized: "What's your height?")
+        case .weight: String(localized: "What's your weight?")
+        case .meals: String(localized: "Meal Times")
+        case .trainings: String(localized: "Workout Times")
+        case .vitamins: String(localized: "Priority Vitamins")
+        case .minerals: String(localized: "Priority Minerals")
+        case .allergens: String(localized: "Any Allergies?")
+        case .constitution: String(localized: "Your traditional constitution")
+        case .summary: String(localized: "Confirm Your Details")
         case .welcome: String(localized: "Welcome")
         case .aboutYou: String(localized: "About you")
         case .body: String(localized: "Height and weight")
@@ -77,19 +77,19 @@ fileprivate enum WizardStep: Int, Identifiable {
     
     var subtitle: String {
         switch self {
-        case .name: "Let's get to know you better"
-        case .photo: "Choose a profile picture that represents you"
-        case .birthday: "This helps us calculate your nutritional needs."
-        case .gender: "This helps tailor recommendations."
-        case .height: "We use this for calorie calculations."
-        case .weight: "We use this for calorie calculations."
-        case .meals: "Set your daily meal schedule."
-        case .trainings: "Set your daily workout schedule."
-        case .vitamins: "Select vitamins you want to track."
-        case .minerals: "Select minerals you want to track."
-        case .allergens: "Select any allergies you have."
-        case .constitution: "Choose your constitution or answer 12 questions."
-        case .summary: "Please review your information."
+        case .name: String(localized: "Let's get to know you better")
+        case .photo: String(localized: "Choose a profile picture that represents you")
+        case .birthday: String(localized: "This helps us calculate your nutritional needs.")
+        case .gender: String(localized: "This helps tailor recommendations.")
+        case .height: String(localized: "We use this for calorie calculations.")
+        case .weight: String(localized: "We use this for calorie calculations.")
+        case .meals: String(localized: "Set your daily meal schedule.")
+        case .trainings: String(localized: "Set your daily workout schedule.")
+        case .vitamins: String(localized: "Select vitamins you want to track.")
+        case .minerals: String(localized: "Select minerals you want to track.")
+        case .allergens: String(localized: "Select any allergies you have.")
+        case .constitution: String(localized: "Choose your constitution or answer 12 questions.")
+        case .summary: String(localized: "Please review your information.")
         case .welcome: String(localized: "Food, yoga and guided practices chosen for your constitution.")
         case .aboutYou: String(localized: "Your age and sex set your nutritional needs.")
         case .body: String(localized: "Used for your calorie and nutrient targets.")
@@ -128,8 +128,8 @@ struct ProfileWizardView: View {
     @State private var offerSettingsInAlert = false
     @State private var alertMessage = ""
     @State private var isSaving = false
-    @State private var constitutionStepTitle = "Your traditional constitution"
-    @State private var constitutionStepSubtitle = "Choose your constitution or answer 12 questions."
+    @State private var constitutionStepTitle = String(localized: "Your traditional constitution")
+    @State private var constitutionStepSubtitle = String(localized: "Choose your constitution or answer 12 questions.")
     private let genders = ["Male", "Female"]
     
     @State private var generatePlanOnFinish = false
@@ -489,6 +489,9 @@ struct ProfileWizardView: View {
                  ? (currentStep == .welcome ? "Ayurveda & Asana Yoga" : String(localized: "Your profile"))
                  : String(localized: "New Profile"))
                 .font(.headline)
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
+                .fixedSize(horizontal: true, vertical: false)
             Spacer()
             
             Button("Close", action: { onDismiss(nil) }).hidden()
@@ -1446,7 +1449,7 @@ struct ProfileWizardView: View {
             
             guard let weightDisplay = UnitConversion.parseDecimal(data.weight),
                   let heightDisplay = UnitConversion.parseDecimal(data.height) else {
-                alertMessage = "Please enter valid numbers for weight and height."
+                alertMessage = String(localized: "Please enter valid numbers for weight and height.")
                 showAlert = true
                 return
             }
@@ -1464,7 +1467,7 @@ struct ProfileWizardView: View {
             guard await calVM.requestCalendarAccessIfNeeded() else {
                 alertMessage = isNewFlow
                     ? String(localized: "Your profile and daily plan are kept in your own calendar, so the app needs calendar access to finish. You can allow it in Settings.")
-                    : "Calendar access is required. Please grant permission in Settings."
+                    : String(localized: "Calendar access is required. Please grant permission in Settings.")
                 offerSettingsInAlert = isNewFlow
                 showAlert = true
                 return
@@ -1529,7 +1532,7 @@ struct ProfileWizardView: View {
                 }
 
             } catch {
-                alertMessage = "Failed to save profile: \(error.localizedDescription)"
+                alertMessage = String(localized: "Failed to save profile: \(error.localizedDescription)")
                 showAlert = true
             }
         }

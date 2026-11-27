@@ -1,0 +1,244 @@
+[
+{
+"i": 1429,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "What's your name?",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .name: String(localized: \"What's your name?\")",
+"above": "var title: String {"
+},
+{
+"i": 1430,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Add your photo",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .photo: String(localized: \"Add your photo\")",
+"above": "case .name: String(localized: \"What's your name?\")"
+},
+{
+"i": 1431,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "When is your birthday?",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .birthday: String(localized: \"When is your birthday?\")",
+"above": "case .photo: String(localized: \"Add your photo\")"
+},
+{
+"i": 1432,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "What's your biological sex?",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .gender: String(localized: \"What's your biological sex?\")",
+"above": "case .birthday: String(localized: \"When is your birthday?\")"
+},
+{
+"i": 1433,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "What's your height?",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .height: String(localized: \"What's your height?\")",
+"above": "case .gender: String(localized: \"What's your biological sex?\")"
+},
+{
+"i": 1434,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "What's your weight?",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .weight: String(localized: \"What's your weight?\")",
+"above": "case .height: String(localized: \"What's your height?\")"
+},
+{
+"i": 1435,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Meal Times",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .meals: String(localized: \"Meal Times\")",
+"above": "case .weight: String(localized: \"What's your weight?\")"
+},
+{
+"i": 1436,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Workout Times",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .trainings: String(localized: \"Workout Times\")",
+"above": "case .meals: String(localized: \"Meal Times\")"
+},
+{
+"i": 1437,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Any Allergies?",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .allergens: String(localized: \"Any Allergies?\")",
+"above": "case .minerals: String(localized: \"Priority Minerals\")"
+},
+{
+"i": 1438,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Confirm Your Details",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .summary: String(localized: \"Confirm Your Details\")",
+"above": "case .constitution: String(localized: \"Your traditional constitution\")"
+},
+{
+"i": 1439,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Let's get to know you better",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .name: String(localized: \"Let's get to know you better\")",
+"above": "var subtitle: String {"
+},
+{
+"i": 1440,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Choose a profile picture that represents you",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .photo: String(localized: \"Choose a profile picture that represents you\")",
+"above": "case .name: String(localized: \"Let's get to know you better\")"
+},
+{
+"i": 1441,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "This helps us calculate your nutritional needs.",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .birthday: String(localized: \"This helps us calculate your nutritional needs.\")",
+"above": "case .photo: String(localized: \"Choose a profile picture that represents you\")"
+},
+{
+"i": 1442,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "This helps tailor recommendations.",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .gender: String(localized: \"This helps tailor recommendations.\")",
+"above": "case .birthday: String(localized: \"This helps us calculate your nutritional needs.\")"
+},
+{
+"i": 1443,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "We use this for calorie calculations.",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .height: String(localized: \"We use this for calorie calculations.\")",
+"above": "case .gender: String(localized: \"This helps tailor recommendations.\")"
+},
+{
+"i": 1444,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Set your daily meal schedule.",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .meals: String(localized: \"Set your daily meal schedule.\")",
+"above": "case .weight: String(localized: \"We use this for calorie calculations.\")"
+},
+{
+"i": 1445,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Set your daily workout schedule.",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .trainings: String(localized: \"Set your daily workout schedule.\")",
+"above": "case .meals: String(localized: \"Set your daily meal schedule.\")"
+},
+{
+"i": 1446,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Select vitamins you want to track.",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .vitamins: String(localized: \"Select vitamins you want to track.\")",
+"above": "case .trainings: String(localized: \"Set your daily workout schedule.\")"
+},
+{
+"i": 1447,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Select minerals you want to track.",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .minerals: String(localized: \"Select minerals you want to track.\")",
+"above": "case .vitamins: String(localized: \"Select vitamins you want to track.\")"
+},
+{
+"i": 1448,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Select any allergies you have.",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .allergens: String(localized: \"Select any allergies you have.\")",
+"above": "case .minerals: String(localized: \"Select minerals you want to track.\")"
+},
+{
+"i": 1449,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Please review your information.",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .summary: String(localized: \"Please review your information.\")",
+"above": "case .constitution: String(localized: \"Choose your constitution or answer 12 questions.\")"
+},
+{
+"i": 1450,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Calendar access is required. Please grant permission in Settings.",
+"in": [
+"ProfileWizardView"
+],
+"code": ": String(localized: \"Calendar access is required. Please grant permission in Settings.\")",
+"above": "let chosenAllergens = data.selectedAllergens.compactMap { Allergen(rawValue: $0) }"
+}
+]
