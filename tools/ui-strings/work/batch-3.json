@@ -1,0 +1,575 @@
+[
+{
+"i": 621,
+"k": "button",
+"p": "onboarding-paywall",
+"s": "Answer 12 questions instead",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Button(\"Answer 12 questions instead\") {"
+},
+{
+"i": 622,
+"k": "button",
+"p": "onboarding-paywall",
+"s": "Continue",
+"in": [
+"AyurvedaConstitutionViews",
+"ProfileWizardView"
+],
+"code": "Button(\"Continue\", action: completeDeclaredSelection)"
+},
+{
+"i": 623,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Question %lld of 12",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Text(\"Question \\(questionIndex + 1) of 12\")",
+"plural": true
+},
+{
+"i": 624,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "This is a correspondence to a traditional wellness typology. It is informational only, is not medical advice, and does not diagnose or treat any condition.",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "\"This is a correspondence to a traditional wellness typology. It is informational only, is not medical advice, and does not diagnose or treat any condition.\""
+},
+{
+"i": 625,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Change Ayurvedic profile",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Text(\"Change Ayurvedic profile\")"
+},
+{
+"i": 626,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Add an optional traditional profile to personalize Ayurvedic food ranking and explanations.",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "\"Add an optional traditional profile to personalize Ayurvedic food ranking and explanations.\""
+},
+{
+"i": 627,
+"k": "button",
+"p": "onboarding-paywall",
+"s": "I already know my constitution",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Button(\"I already know my constitution\") {"
+},
+{
+"i": 628,
+"k": "button",
+"p": "onboarding-paywall",
+"s": "Help me work it out",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Button(\"Help me work it out\") {"
+},
+{
+"i": 629,
+"k": "label",
+"p": "onboarding-paywall",
+"s": "Ayurvedic check-in",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Label(\"Ayurvedic check-in\", systemImage: \"leaf.circle.fill\")"
+},
+{
+"i": 630,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Optionally update how sleep, digestion, appetite, energy and skin have felt over the past week or two.",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "\"Optionally update how sleep, digestion, appetite, energy and skin have felt over the past week or two.\""
+},
+{
+"i": 631,
+"k": "button",
+"p": "onboarding-paywall",
+"s": "Not now",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Button(\"Not now\") {"
+},
+{
+"i": 632,
+"k": "button",
+"p": "onboarding-paywall",
+"s": "Check in",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Button(\"Check in\") {"
+},
+{
+"i": 633,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Review my answers",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "DisclosureGroup(\"Review my answers\") {"
+},
+{
+"i": 634,
+"k": "button",
+"p": "onboarding-paywall",
+"s": "Choose a known constitution",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Button(\"Choose a known constitution\") {"
+},
+{
+"i": 635,
+"k": "button",
+"p": "onboarding-paywall",
+"s": "Answer the 12 questions again",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Button(\"Answer the 12 questions again\") {"
+},
+{
+"i": 636,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Change profile",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Text(\"Change profile\")"
+},
+{
+"i": 637,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Over the past week or two",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Text(\"Over the past week or two\")"
+},
+{
+"i": 638,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Review",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "? \"Review\""
+},
+{
+"i": 639,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Your current pattern",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Text(\"Your current pattern\")"
+},
+{
+"i": 640,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "A fresh check-in influences food ranking more than the long-term profile. Its influence starts to fade after seven days and reaches zero after 30 days.",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "\"A fresh check-in influences food ranking more than the long-term profile. Its influence starts to fade after seven days and reaches zero after 30 days.\""
+},
+{
+"i": 641,
+"k": "button",
+"p": "onboarding-paywall",
+"s": "Save check-in",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Button(\"Save check-in\") {"
+},
+{
+"i": 642,
+"k": "button",
+"p": "onboarding-paywall",
+"s": "Go back",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Button(\"Go back\") {"
+},
+{
+"i": 643,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Personal Ayurvedic fit is not set",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Text(\"Personal Ayurvedic fit is not set\")"
+},
+{
+"i": 644,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Add an optional traditional profile to personalize this explanation.",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "\"Add an optional traditional profile to personalize this explanation.\""
+},
+{
+"i": 645,
+"k": "button",
+"p": "onboarding-paywall",
+"s": "Set up profile",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Button(\"Set up profile\") {"
+},
+{
+"i": 646,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Personal fit changes ranking only; it never hides this food.",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Text(\"Personal fit changes ranking only; it never hides this food.\")"
+},
+{
+"i": 647,
+"k": "label",
+"p": "onboarding-paywall",
+"s": "No Ayurvedic profile",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Label(\"No Ayurvedic profile\", systemImage: \"questionmark.circle\")"
+},
+{
+"i": 648,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Step %lld of %lld",
+"in": [
+"ProfileWizardView"
+],
+"code": "Text(\"Step \\(currentStepIndex + 1) of \\(totalSteps)\")"
+},
+{
+"i": 649,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Saving Profile...",
+"in": [
+"ProfileWizardView"
+],
+"code": "ProgressView(\"Saving Profile...\")"
+},
+{
+"i": 650,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "New Profile",
+"in": [
+"ProfileWizardView"
+],
+"code": "Text(\"New Profile\")"
+},
+{
+"i": 651,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Save Profile",
+"in": [
+"ProfileWizardView"
+],
+"code": "Text(currentStep == .summary ? \"Save Profile\" : \"Continue\")"
+},
+{
+"i": 652,
+"k": "accessibility",
+"p": "onboarding-paywall",
+"s": "Change profile photo",
+"in": [
+"ProfileWizardView"
+],
+"code": ".accessibilityLabel(\"Change profile photo\")"
+},
+{
+"i": 653,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "in",
+"in": [
+"ProfileWizardView"
+],
+"code": "Text(isImperial ? \"in\" : \"cm\")"
+},
+{
+"i": 654,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "cm",
+"in": [
+"ProfileWizardView"
+],
+"code": "Text(isImperial ? \"in\" : \"cm\")"
+},
+{
+"i": 655,
+"k": "label",
+"p": "onboarding-paywall",
+"s": "Whole",
+"in": [
+"ProfileWizardView"
+],
+"code": "Picker(\"Whole\", selection: weightWholeBinding) {"
+},
+{
+"i": 656,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "lbs",
+"in": [
+"ProfileWizardView"
+],
+"code": "Text(isImperial ? \"lbs\" : \"kg\")"
+},
+{
+"i": 657,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "kg",
+"in": [
+"ProfileWizardView"
+],
+"code": "Text(isImperial ? \"lbs\" : \"kg\")"
+},
+{
+"i": 658,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "This profile will have its own private storage and shopping lists.",
+"in": [
+"ProfileWizardView"
+],
+"code": "Text(\"This profile will have its own private storage and shopping lists.\")"
+},
+{
+"i": 659,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Generate First Weekly Meal Plan",
+"in": [
+"ProfileWizardView"
+],
+"code": "Text(\"Generate First Weekly Meal Plan\")"
+},
+{
+"i": 660,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Uses USDA foods, respecting your allergens and nutrient priorities.",
+"in": [
+"ProfileWizardView"
+],
+"code": "Text(\"Uses USDA foods, respecting your allergens and nutrient priorities.\")"
+},
+{
+"i": 661,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Remove Ads Plan",
+"in": [
+"FeatureRow"
+],
+"code": "Text(\"Remove Ads Plan\")"
+},
+{
+"i": 662,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Advanced Plan",
+"in": [
+"FeatureRow"
+],
+"code": "Text(\"Advanced Plan\")"
+},
+{
+"i": 663,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Premium Plan",
+"in": [
+"FeatureRow"
+],
+"code": "Text(\"Premium Plan\")"
+},
+{
+"i": 664,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Base Plan",
+"in": [
+"FeatureRow"
+],
+"code": "Text(\"Base Plan\")"
+},
+{
+"i": 665,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "%lld %@ free",
+"in": [
+"SubscriptionCard"
+],
+"code": "Text(\"\\(intro.period.value) \\(unit) free\")"
+},
+{
+"i": 666,
+"k": "label",
+"p": "onboarding-paywall",
+"s": "Manage Subscription",
+"in": [
+"SubscriptionListView"
+],
+"code": "Label(\"Manage Subscription\", systemImage: \"creditcard\")"
+},
+{
+"i": 667,
+"k": "label",
+"p": "onboarding-paywall",
+"s": "Restore Purchases",
+"in": [
+"SubscriptionListView",
+"SubscriptionView"
+],
+"code": "Label(\"Restore Purchases\", systemImage: \"arrow.trianglehead.2.clockwise\")"
+},
+{
+"i": 668,
+"k": "label",
+"p": "onboarding-paywall",
+"s": "Privacy Policy",
+"in": [
+"SubscriptionListView"
+],
+"code": "Label(\"Privacy Policy\", systemImage: \"lock.shield\")"
+},
+{
+"i": 669,
+"k": "label",
+"p": "onboarding-paywall",
+"s": "Terms of Use (EULA)",
+"in": [
+"SubscriptionListView"
+],
+"code": "Label(\"Terms of Use (EULA)\", systemImage: \"doc.text\")"
+},
+{
+"i": 670,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Your current plan is %@ %@",
+"in": [
+"SubscriptionListView"
+],
+"code": "Text(\"Your current plan is \\(planType) \\(period)\")"
+},
+{
+"i": 671,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Renews on %@",
+"in": [
+"SubscriptionListView"
+],
+"code": "Text(\"Renews on \\(expiry.formatted(date: .abbreviated, time: .omitted))\")"
+},
+{
+"i": 672,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "%@ – %@ subscription.",
+"in": [
+"SubscriptionListView"
+],
+"code": "Text(\"\\(product.displayName) – \\(periodDescription) subscription.\")"
+},
+{
+"i": 673,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Price: %@. The subscription renews automatically unless cancelled at least 24 hours before the end of the current period.",
+"in": [
+"SubscriptionListView"
+],
+"code": "Text(\"Price: \\(product.displayPrice). The subscription renews automatically unless cancelled at least 24 hours before the end of the current period.\")"
+},
+{
+"i": 674,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Payment will be charged to your Apple ID account.",
+"in": [
+"SubscriptionListView"
+],
+"code": "Text(\"Payment will be charged to your Apple ID account.\")"
+},
+{
+"i": 675,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Upgrade Required",
+"in": [
+"SubscriptionView"
+],
+"code": "title: Text(\"Upgrade Required\"),"
+},
+{
+"i": 676,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Upgrade plan & Support Us",
+"in": [
+"UpdatePlanBanner"
+],
+"code": "Text(\"Upgrade plan & Support Us\")"
+},
+{
+"i": 677,
+"k": "accessibility",
+"p": "onboarding-paywall",
+"s": "Dismiss banner",
+"in": [
+"UpdatePlanBanner"
+],
+"code": ".accessibilityLabel(\"Dismiss banner\")"
+}
+]

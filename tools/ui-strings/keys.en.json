@@ -1,0 +1,6387 @@
+[
+{
+"k": "text",
+"p": "AI",
+"s": "Delete this job?",
+"in": [
+"AIGenerationHostView"
+],
+"code": "\"Delete this job?\","
+},
+{
+"k": "button",
+"p": "AI",
+"s": "Delete",
+"in": [
+"AIDailyMealGeneratorView",
+"AIDailyTrainingGeneratorView",
+"AIGenerationHostView",
+"BarcodeScannerView"
+],
+"code": "Button(\"Delete\", role: .destructive) {"
+},
+{
+"k": "button",
+"p": "AI",
+"s": "Cancel",
+"in": [
+"AIDailyMealGeneratorView",
+"AIDailyTrainingGeneratorView",
+"AIGenerationHostView",
+"BarcodeScannerView"
+],
+"code": "Button(\"Cancel\", role: .cancel) {"
+},
+{
+"k": "text",
+"p": "AI",
+"s": "This will remove the job from your history. This action cannot be undone.",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Text(\"This will remove the job from your history. This action cannot be undone.\")"
+},
+{
+"k": "text",
+"p": "AI",
+"s": "AI Generation Jobs (Demo)",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Text(\"AI Generation Jobs (Demo)\")"
+},
+{
+"k": "text",
+"p": "AI",
+"s": "No AI Generation History",
+"in": [
+"AIGenerationHostView"
+],
+"code": "\"No AI Generation History\","
+},
+{
+"k": "text",
+"p": "AI",
+"s": "Tap the ✨ button on training screens to start a new generation.",
+"in": [
+"AIGenerationHostView"
+],
+"code": "description: Text(\"Tap the ✨ button on training screens to start a new generation.\")"
+},
+{
+"k": "text",
+"p": "AI",
+"s": "General",
+"in": [
+"AIGenerationHostView",
+"ExerciseItemEditorView",
+"FoodItemEditorView",
+"FoodItemMenuEditorView"
+],
+"code": "Text(\"General\")"
+},
+{
+"k": "text",
+"p": "AI",
+"s": "Select which additional nutrient data to generate when creating new foods with AI. Enabling these may slightly increase generation time.",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Text(\"Select which additional nutrient data to generate when creating new foods with AI. Enabling these may slightly increase generation time.\")"
+},
+{
+"k": "text",
+"p": "AI",
+"s": "Food Generation",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Text(\"Food Generation\")"
+},
+{
+"k": "text",
+"p": "AI",
+"s": "%@ for %@",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Text(\"\\(job.jobType.rawValue) for \\(job.profile?.name ?? \"Deleted Profile\")\")"
+},
+{
+"k": "text",
+"p": "AI",
+"s": "Created: %@",
+"in": [
+"AIGenerationHostView",
+"FoodItemListView",
+"MealPlanPickerView",
+"NutritionsDetailView"
+],
+"code": "Text(\"Created: \\(job.creationDate.formatted(date: .abbreviated, time: .shortened))\")"
+},
+{
+"k": "text",
+"p": "AI",
+"s": "Error: %@",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Text(\"Error: \\(job.failureReason ?? \"Unknown error\")\")"
+},
+{
+"k": "label",
+"p": "AI",
+"s": "Preview & Save Plan",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Label(\"Preview & Save Plan\", systemImage: \"square.and.arrow.down.on.square\")"
+},
+{
+"k": "label",
+"p": "AI",
+"s": "Preview & Apply Day Plan",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Label(\"Preview & Apply Day Plan\", systemImage: \"doc.text.image\")"
+},
+{
+"k": "label",
+"p": "AI",
+"s": "Preview & Save Recipe",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Label(\"Preview & Save Recipe\", systemImage: \"square.and.arrow.down.on.square\")"
+},
+{
+"k": "label",
+"p": "AI",
+"s": "Preview & Save Menu",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Label(\"Preview & Save Menu\", systemImage: \"square.and.arrow.down.on.square\")"
+},
+{
+"k": "label",
+"p": "AI",
+"s": "Preview & Save Food",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Label(\"Preview & Save Food\", systemImage: \"square.and.arrow.down.on.square\")"
+},
+{
+"k": "label",
+"p": "AI",
+"s": "Preview & Save Exercise",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Label(\"Preview & Save Exercise\", systemImage: \"square.and.arrow.down.on.square\")"
+},
+{
+"k": "label",
+"p": "AI",
+"s": "Preview & Save Workout",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Label(\"Preview & Save Workout\", systemImage: \"square.and.arrow.down.on.square\")"
+},
+{
+"k": "text",
+"p": "AI",
+"s": "AI Meal Plan Generator",
+"in": [
+"AIPlanGenerationView"
+],
+"code": "Text(\"AI Meal Plan Generator\")"
+},
+{
+"k": "text",
+"p": "AI",
+"s": "Ready to create a personalized meal plan based on your profile?",
+"in": [
+"AIPlanGenerationView"
+],
+"code": "Text(\"Ready to create a personalized meal plan based on your profile?\")"
+},
+{
+"k": "label",
+"p": "AI",
+"s": "Generate Plan",
+"in": [
+"AIPlanGenerationView"
+],
+"code": "Label(\"Generate Plan\", systemImage: \"sparkles\")"
+},
+{
+"k": "button",
+"p": "AI",
+"s": "Not Now",
+"in": [
+"AIPlanGenerationView"
+],
+"code": "Button(\"Not Now\", action: onDismiss)"
+},
+{
+"k": "text",
+"p": "AI",
+"s": "Select Plan Duration",
+"in": [
+"AIPlanGenerationView"
+],
+"code": "Text(\"Select Plan Duration\")"
+},
+{
+"k": "text",
+"p": "AI",
+"s": "%lld",
+"in": [
+"AIPlanGenerationView",
+"DailyTrainingPlanView",
+"ExerciseLogEntryView",
+"MealPlanAddDestinationView"
+],
+"code": "Text(\"\\(day)\")",
+"plural": true
+},
+{
+"k": "text",
+"p": "AI",
+"s": "Select Meals to Generate",
+"in": [
+"AIPlanGenerationView"
+],
+"code": "Text(\"Select Meals to Generate\")"
+},
+{
+"k": "text",
+"p": "Analytics",
+"s": "No Data",
+"in": [
+"AnalyticsChartView"
+],
+"code": "\"No Data\","
+},
+{
+"k": "text",
+"p": "Analytics",
+"s": "No HealthKit sleep data found for this period.",
+"in": [
+"AnalyticsChartView"
+],
+"code": "? \"No HealthKit sleep data found for this period.\""
+},
+{
+"k": "text",
+"p": "Analytics",
+"s": "No workout or activity calories found for this period.",
+"in": [
+"AnalyticsChartView"
+],
+"code": "? \"No workout or activity calories found for this period.\""
+},
+{
+"k": "text",
+"p": "Analytics",
+"s": "No meal or activity data found for this period.",
+"in": [
+"AnalyticsChartView"
+],
+"code": "? \"No meal or activity data found for this period.\""
+},
+{
+"k": "text",
+"p": "Analytics",
+"s": "This metric will appear after it is changed in the profile editor.",
+"in": [
+"AnalyticsChartView"
+],
+"code": "? \"This metric will appear after it is changed in the profile editor.\""
+},
+{
+"k": "text",
+"p": "Analytics",
+"s": "No meal data found for this metric.",
+"in": [
+"AnalyticsChartView"
+],
+"code": ": \"No meal data found for this metric.\""
+},
+{
+"k": "text",
+"p": "Analytics",
+"s": "Deficit",
+"in": [
+"AnalyticsChartView"
+],
+"code": "Text(\"Deficit\")"
+},
+{
+"k": "text",
+"p": "Analytics",
+"s": "Surplus",
+"in": [
+"AnalyticsChartView"
+],
+"code": "Text(\"Surplus\")"
+},
+{
+"k": "text",
+"p": "Analytics",
+"s": "MAX: %@ %@",
+"in": [
+"AnalyticsChartView"
+],
+"code": "Text(\"MAX: \\(max.clean) \\(requirements.unit ?? \"\")\")"
+},
+{
+"k": "text",
+"p": "Analytics",
+"s": "Analytics",
+"in": [
+"AnalyticsToolbarView"
+],
+"code": "Text(\"Analytics\")"
+},
+{
+"k": "text",
+"p": "Analytics",
+"s": "Select Metrics",
+"in": [
+"AnalyticsView"
+],
+"code": "Text(\"Select Metrics\").font(.headline).foregroundColor(effectManager.currentGlobalAccentColor)"
+},
+{
+"k": "button",
+"p": "Analytics",
+"s": "Done",
+"in": [
+"AIDailyMealGeneratorView",
+"AIDailyTrainingGeneratorView",
+"AnalyticsView",
+"AyurvedaSearchFiltersView"
+],
+"code": "Button(\"Done\") { withAnimation { presentedSheet = nil } }"
+},
+{
+"k": "accessibility",
+"p": "Ayurveda",
+"s": "Selected",
+"in": [
+"AyurvedaChip",
+"EffectSegmentPicker",
+"FoodSearchView"
+],
+"code": ".accessibilityValue(isSelected ? \"Selected\" : \"Not selected\")"
+},
+{
+"k": "accessibility",
+"p": "Ayurveda",
+"s": "Not selected",
+"in": [
+"AyurvedaChip",
+"EffectSegmentPicker"
+],
+"code": ".accessibilityValue(isSelected ? \"Selected\" : \"Not selected\")"
+},
+{
+"k": "accessibility",
+"p": "Ayurveda",
+"s": "Double tap to deselect",
+"in": [
+"AyurvedaChip"
+],
+"code": ".accessibilityHint(isSelected ? \"Double tap to deselect\" : \"Double tap to select\")"
+},
+{
+"k": "accessibility",
+"p": "Ayurveda",
+"s": "Double tap to select",
+"in": [
+"AyurvedaChip",
+"EffectSegmentPicker"
+],
+"code": ".accessibilityHint(isSelected ? \"Double tap to deselect\" : \"Double tap to select\")"
+},
+{
+"k": "text",
+"p": "Ayurveda",
+"s": "Dosha Effects",
+"in": [
+"AyurvedaEditorSection",
+"YogaExerciseViews"
+],
+"code": "Text(\"Dosha Effects\")"
+},
+{
+"k": "accessibility",
+"p": "Ayurveda",
+"s": "Virya energy",
+"in": [
+"AyurvedaEditorSection"
+],
+"code": ".accessibilityLabel(\"Virya energy\")"
+},
+{
+"k": "accessibility",
+"p": "Ayurveda",
+"s": "Vipaka post-digestive effect",
+"in": [
+"AyurvedaEditorSection"
+],
+"code": ".accessibilityLabel(\"Vipaka post-digestive effect\")"
+},
+{
+"k": "label",
+"p": "Ayurveda",
+"s": "Set manually",
+"in": [
+"AyurvedaEditorSection",
+"YogaExerciseViews"
+],
+"code": "Toggle(\"Set manually\", isOn: $isManualOverride)"
+},
+{
+"k": "text",
+"p": "Ayurveda",
+"s": "Add ingredients to see a live Ayurveda preview.",
+"in": [
+"AyurvedaEditorSection"
+],
+"code": "Text(\"Add ingredients to see a live Ayurveda preview.\")"
+},
+{
+"k": "text",
+"p": "Ayurveda",
+"s": "Computed from your ingredients — updates automatically",
+"in": [
+"AyurvedaEditorSection"
+],
+"code": "Text(\"Computed from your ingredients — updates automatically\")"
+},
+{
+"k": "text",
+"p": "Ayurveda",
+"s": "Not enough recognizable ingredients yet.",
+"in": [
+"AyurvedaEditorSection"
+],
+"code": "Text(\"Not enough recognizable ingredients yet.\")"
+},
+{
+"k": "label",
+"p": "Ayurveda",
+"s": "Virya (energy)",
+"in": [
+"AyurvedaEditorSection"
+],
+"code": "Label(\"Virya (energy)\", systemImage: \"bolt.fill\")"
+},
+{
+"k": "text",
+"p": "Ayurveda",
+"s": "Ayurveda debug: %@",
+"in": [
+"AyurvedaSectionView"
+],
+"code": "Text(\"Ayurveda debug: \\(debugFailure)\")"
+},
+{
+"k": "text",
+"p": "Ayurveda",
+"s": "Ayurveda",
+"in": [
+"AyurvedaSectionView",
+"ExerciseItemEditorView",
+"YogaExerciseViews"
+],
+"code": "Text(\"Ayurveda\")"
+},
+{
+"k": "text",
+"p": "Ayurveda",
+"s": "Doshas",
+"in": [
+"DoshaBarsView",
+"FoodItemRowView"
+],
+"code": "Text(\"Doshas\")"
+},
+{
+"k": "accessibility",
+"p": "Ayurveda",
+"s": "Dosha display",
+"in": [
+"DoshaBarsView"
+],
+"code": ".accessibilityLabel(\"Dosha display\")"
+},
+{
+"k": "accessibility",
+"p": "Ayurveda",
+"s": "Dosha effect legend",
+"in": [
+"DoshaBarsView"
+],
+"code": ".accessibilityLabel(\"Dosha effect legend\")"
+},
+{
+"k": "text",
+"p": "Ayurveda",
+"s": "%@ %lld%%",
+"in": [
+"DoshaBarsView"
+],
+"code": "Text(\"\\(item.label) \\(item.value)%\")"
+},
+{
+"k": "accessibility",
+"p": "Ayurveda",
+"s": "%@ effect",
+"in": [
+"DoshaScaleSelector"
+],
+"code": ".accessibilityLabel(\"\\(name) effect\")"
+},
+{
+"k": "accessibility",
+"p": "Ayurveda",
+"s": "Adjusts dosha effect",
+"in": [
+"DoshaScaleSelector"
+],
+"code": ".accessibilityHint(\"Adjusts dosha effect\")"
+},
+{
+"k": "accessibility",
+"p": "Ayurveda",
+"s": "Double tap to clear",
+"in": [
+"EffectSegmentPicker"
+],
+"code": ".accessibilityHint(isSelected ? \"Double tap to clear\" : \"Double tap to select\")"
+},
+{
+"k": "text",
+"p": "Ayurveda",
+"s": "Recipe Nutrition",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "Text(\"Recipe Nutrition\")"
+},
+{
+"k": "label",
+"p": "Ayurveda",
+"s": "Nutrition basis",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "Picker(\"Nutrition basis\", selection: $basis) {"
+},
+{
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Scanned Barcode",
+"in": [
+"BarcodeRowView"
+],
+"code": "Text(\"Scanned Barcode\")"
+},
+{
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Searching in your local database…",
+"in": [
+"BarcodeRowView"
+],
+"code": "Text(\"Searching in your local database…\")"
+},
+{
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Looking up product…",
+"in": [
+"BarcodeRowView"
+],
+"code": "Text(\"Looking up product…\")"
+},
+{
+"k": "label",
+"p": "BarcodeScanner",
+"s": "Reliable local match",
+"in": [
+"BarcodeRowView"
+],
+"code": "Label(\"Reliable local match\", systemImage: \"checkmark.shield.fill\")"
+},
+{
+"k": "text",
+"p": "BarcodeScanner",
+"s": "No reliable match in your database",
+"in": [
+"BarcodeRowView"
+],
+"code": "Text(\"No reliable match in your database\")"
+},
+{
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Product with this code not found",
+"in": [
+"BarcodeRowView"
+],
+"code": "Text(\"Product with this code not found\")"
+},
+{
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Invalid Code",
+"in": [
+"BarcodeRowView"
+],
+"code": "Text(\"Invalid Code\")"
+},
+{
+"k": "text",
+"p": "BarcodeScanner",
+"s": "The scanned code is not a valid product barcode.",
+"in": [
+"BarcodeRowView"
+],
+"code": "Text(\"The scanned code is not a valid product barcode.\")"
+},
+{
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Requesting Camera Access…",
+"in": [
+"BarcodeScannerView"
+],
+"code": "Text(\"Requesting Camera Access…\")"
+},
+{
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Live preview is OFF",
+"in": [
+"BarcodeScannerView"
+],
+"code": "Text(\"Live preview is OFF\")"
+},
+{
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Tap “Live Off” to enable camera",
+"in": [
+"BarcodeScannerView"
+],
+"code": "Text(\"Tap “Live Off” to enable camera\")"
+},
+{
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Scanned",
+"in": [
+"BarcodeScannerView"
+],
+"code": "Text(\"Scanned\")"
+},
+{
+"k": "text",
+"p": "BarcodeScanner",
+"s": "No scanned barcodes",
+"in": [
+"BarcodeScannerView"
+],
+"code": "Text(\"No scanned barcodes\")"
+},
+{
+"k": "alert",
+"p": "BarcodeScanner",
+"s": "Camera access needed",
+"in": [
+"BarcodeScannerView"
+],
+"code": ".alert(\"Camera access needed\", isPresented: $showPermissionAlert) {"
+},
+{
+"k": "button",
+"p": "BarcodeScanner",
+"s": "OK",
+"in": [
+"AIDailyMealGeneratorView",
+"AIDailyTrainingGeneratorView",
+"BarcodeScannerView",
+"DailyMealPlanView"
+],
+"code": "Button(\"OK\", role: .cancel) { }"
+},
+{
+"k": "text",
+"p": "BarcodeScanner",
+"s": "To use the live preview, allow camera access in Settings.",
+"in": [
+"BarcodeScannerView"
+],
+"code": "Text(\"To use the live preview, allow camera access in Settings.\")"
+},
+{
+"k": "alert",
+"p": "BarcodeScanner",
+"s": "Error",
+"in": [
+"BarcodeScannerView",
+"DailyMealPlanView",
+"DailyTrainingPlanView",
+"ExerciseItemEditorView"
+],
+"code": ".alert(\"Error\", isPresented: $showAlert) {"
+},
+{
+"k": "alert",
+"p": "BarcodeScanner",
+"s": "Delete Item",
+"in": [
+"BarcodeScannerView",
+"FoodItemListView",
+"ShoppingListDetailView",
+"StorageListView"
+],
+"code": ".alert(\"Delete Item\", isPresented: $isShowingDeleteScannedItemAlert) {"
+},
+{
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Are you sure you want to delete this scanned barcode?",
+"in": [
+"BarcodeScannerView"
+],
+"code": "Text(\"Are you sure you want to delete this scanned barcode?\")"
+},
+{
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Add Item?",
+"in": [
+"BarcodeScannerView"
+],
+"code": "\"Add Item?\","
+},
+{
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Add \"%@\"",
+"in": [
+"BarcodeScannerView"
+]
+},
+{
+"k": "button",
+"p": "BarcodeScanner",
+"s": "Create New Food: \"%@\"",
+"in": [
+"BarcodeScannerView"
+],
+"code": "Button(\"Create New Food: \\\"\\(productName)\\\"\") {"
+},
+{
+"k": "button",
+"p": "BarcodeScanner",
+"s": "Create New Food with AI: \"%@\"",
+"in": [
+"BarcodeScannerView"
+],
+"code": "Button(\"Create New Food with AI: \\\"\\(productName)\\\"\") {"
+},
+{
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Found \"%@\" in your database. You can add it, or create a new entry for \"%@\".",
+"in": [
+"BarcodeScannerView"
+]
+},
+{
+"k": "text",
+"p": "BarcodeScanner",
+"s": "\"%@\" was not found in your database. You can create a new entry for it.",
+"in": [
+"BarcodeScannerView"
+],
+"code": "Text(\"\\\"\\(productName)\\\" was not found in your database. You can create a new entry for it.\")"
+},
+{
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Add this item to %@?",
+"in": [
+"BarcodeScannerView"
+],
+"code": "Text(\"Add this item to \\(destination)?\")"
+},
+{
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Generation Scheduled",
+"in": [
+"AIDailyMealGeneratorView",
+"AIDailyTrainingGeneratorView",
+"BarcodeScannerView",
+"FoodItemEditorView"
+],
+"code": "Text(\"Generation Scheduled\")"
+},
+{
+"k": "text",
+"p": "BarcodeScanner",
+"s": "You'll be notified when your food is ready.",
+"in": [
+"BarcodeScannerView",
+"FoodItemEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "Text(\"You'll be notified when your food is ready.\")"
+},
+{
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Unknown Camera Error",
+"in": [
+"CameraPicker"
+],
+"code": "ContentUnavailableView(\"Unknown Camera Error\", systemImage: \"camera.badge.ellipsis\")"
+},
+{
+"k": "text",
+"p": "Calendar",
+"s": "%lld min total",
+"in": [
+"EventView",
+"TrainingSummaryRowEventView"
+],
+"code": "Text(\"\\(durationMinutes) min total\")",
+"plural": true
+},
+{
+"k": "text",
+"p": "Calendar",
+"s": "%lld min",
+"in": [
+"ExerciseRowEventView",
+"FoodItemDetailView"
+],
+"code": "Text(\"\\(Int(duration)) min\")",
+"plural": true
+},
+{
+"k": "text",
+"p": "Calendar",
+"s": "%.0f kcal burned",
+"in": [
+"ExerciseRowEventView",
+"NetBalanceDetailRingView",
+"TrainingSummaryRowEventView"
+],
+"code": "Text(\"\\(caloriesBurned, specifier: \"%.0f\") kcal burned\")"
+},
+{
+"k": "text",
+"p": "Calendar",
+"s": "Meal",
+"in": [
+"MealSummaryRowEventView"
+],
+"code": "Text(\"Meal\")"
+},
+{
+"k": "text",
+"p": "Calendar",
+"s": "%lld item%@ bought",
+"in": [
+"ShoppingListRowsView"
+],
+"code": "Text(\"\\(itemsPendingCount) item\\(itemsPendingCount > 1 ? \"s\" : \"\") bought\")",
+"note": "the %@ after the noun is the English plural ending ('s' or nothing): leave it out and word the translation so that it reads with any number"
+},
+{
+"k": "text",
+"p": "Calendar",
+"s": "%llds",
+"in": [
+"ShoppingListRowsView"
+],
+"code": "Text(\"\\(Int(ceil(timeRemaining)))s\")",
+"plural": true
+},
+{
+"k": "text",
+"p": "Calendar",
+"s": "Undo",
+"in": [
+"ShoppingListRowsView"
+],
+"code": "Text(\"Undo\")"
+},
+{
+"k": "text",
+"p": "Calendar",
+"s": "All items bought!",
+"in": [
+"ShoppingListRowsView"
+],
+"code": "Text(\"All items bought!\")"
+},
+{
+"k": "text",
+"p": "Calendar",
+"s": "Workout Summary",
+"in": [
+"TrainingSummaryRowEventView"
+],
+"code": "Text(\"Workout Summary\")"
+},
+{
+"k": "label",
+"p": "Calendar",
+"s": "Notes",
+"in": [
+"MealActionMenuView",
+"NodesListView",
+"NutritionsDetailView",
+"TrainingActionMenuView"
+],
+"code": "Label(\"Notes\", systemImage: \"list.clipboard\")"
+},
+{
+"k": "text",
+"p": "CustomViews",
+"s": "Search...",
+"in": [
+"ColorMultiSelectGridView",
+"DropdownMenu",
+"IconMultiSelectGridView",
+"LiquidTabBar"
+],
+"code": "Text(\"Search...\")"
+},
+{
+"k": "placeholder",
+"p": "CustomViews",
+"s": "Search…",
+"in": [
+"DropdownMenu"
+],
+"code": "TextField(\"Search…\", text: $searchText, prompt: Text(\"Search...\")"
+},
+{
+"k": "button",
+"p": "CustomViews",
+"s": "Deselect all",
+"in": [
+"DropdownMenu"
+],
+"code": "Button(allSelected ? \"Deselect all\" : \"Select all\") {"
+},
+{
+"k": "button",
+"p": "CustomViews",
+"s": "Select all",
+"in": [
+"DropdownMenu"
+],
+"code": "Button(allSelected ? \"Deselect all\" : \"Select all\") {"
+},
+{
+"k": "text",
+"p": "CustomViews",
+"s": "+ %lld more",
+"in": [
+"MultiSelectDropdown"
+],
+"code": "Text(\"+ \\(remaining) more\")",
+"plural": true
+},
+{
+"k": "text",
+"p": "CustomViews",
+"s": "Live Effect Controls",
+"in": [
+"EffectControlPanelView"
+],
+"code": "Text(\"Live Effect Controls\").font(.headline)"
+},
+{
+"k": "text",
+"p": "CustomViews",
+"s": "Saturation",
+"in": [
+"EffectControlPanelView"
+],
+"code": "Text(\"Saturation\").frame(width: 100, alignment: .leading)"
+},
+{
+"k": "text",
+"p": "CustomViews",
+"s": "Brightness",
+"in": [
+"EffectControlPanelView"
+],
+"code": "Text(\"Brightness\").frame(width: 100, alignment: .leading)"
+},
+{
+"k": "text",
+"p": "CustomViews",
+"s": "Opacity",
+"in": [
+"EffectControlPanelView"
+],
+"code": "Text(\"Opacity\").frame(width: 100, alignment: .leading)"
+},
+{
+"k": "label",
+"p": "CustomViews",
+"s": "Use Apple Material",
+"in": [
+"EffectControlPanelView"
+],
+"code": "Toggle(\"Use Apple Material\", isOn: $effectManager.config.useAppleMaterial.animation())"
+},
+{
+"k": "label",
+"p": "CustomViews",
+"s": "Contrast Scrim",
+"in": [
+"EffectControlPanelView"
+],
+"code": "Toggle(\"Contrast Scrim\", isOn: $effectManager.config.useScrim)"
+},
+{
+"k": "button",
+"p": "CustomViews",
+"s": "Save",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "Button(themeToEdit == nil ? \"Save\" : \"Update\", action: saveTheme)"
+},
+{
+"k": "button",
+"p": "CustomViews",
+"s": "Update",
+"in": [
+"PromptEditorView",
+"ThemeEditorView"
+],
+"code": "Button(themeToEdit == nil ? \"Save\" : \"Update\", action: saveTheme)"
+},
+{
+"k": "text",
+"p": "CustomViews",
+"s": "Live Preview",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Live Preview\")"
+},
+{
+"k": "text",
+"p": "CustomViews",
+"s": "Theme Name",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Theme Name\")"
+},
+{
+"k": "placeholder",
+"p": "CustomViews",
+"s": "e.g., Sunset Bliss",
+"in": [
+"ThemeEditorView"
+],
+"code": "TextField(\"My Awesome Theme\", text: $themeName, prompt: Text(\"e.g., Sunset Bliss\").foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.6)))"
+},
+{
+"k": "placeholder",
+"p": "CustomViews",
+"s": "My Awesome Theme",
+"in": [
+"ThemeEditorView"
+],
+"code": "TextField(\"My Awesome Theme\", text: $themeName, prompt: Text(\"e.g., Sunset Bliss\").foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.6)))"
+},
+{
+"k": "text",
+"p": "CustomViews",
+"s": "Colors",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Colors\")"
+},
+{
+"k": "text",
+"p": "CustomViews",
+"s": "Color %lld",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Color \\(index + 1)\")",
+"plural": true
+},
+{
+"k": "label",
+"p": "CustomViews",
+"s": "Add New Color",
+"in": [
+"ThemeEditorView"
+],
+"code": "Label(\"Add New Color\", systemImage: \"plus\")"
+},
+{
+"k": "text",
+"p": "CustomViews",
+"s": "Gradient Direction",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Gradient Direction\")"
+},
+{
+"k": "label",
+"p": "CustomViews",
+"s": "Start Point",
+"in": [
+"ThemeEditorView"
+],
+"code": "Picker(\"Start Point\", selection: $startPoint) {"
+},
+{
+"k": "text",
+"p": "CustomViews",
+"s": "Top Leading",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Top Leading\").tag(UnitPoint.topLeading)"
+},
+{
+"k": "text",
+"p": "CustomViews",
+"s": "Top",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Top\").tag(UnitPoint.top)"
+},
+{
+"k": "text",
+"p": "CustomViews",
+"s": "Top Trailing",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Top Trailing\").tag(UnitPoint.topTrailing)"
+},
+{
+"k": "text",
+"p": "CustomViews",
+"s": "Leading",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Leading\").tag(UnitPoint.leading)"
+},
+{
+"k": "text",
+"p": "CustomViews",
+"s": "Center",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Center\").tag(UnitPoint.center)"
+},
+{
+"k": "label",
+"p": "CustomViews",
+"s": "End Point",
+"in": [
+"ThemeEditorView"
+],
+"code": "Picker(\"End Point\", selection: $endPoint) {"
+},
+{
+"k": "text",
+"p": "CustomViews",
+"s": "Bottom Trailing",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Bottom Trailing\").tag(UnitPoint.bottomTrailing)"
+},
+{
+"k": "text",
+"p": "CustomViews",
+"s": "Bottom",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Bottom\").tag(UnitPoint.bottom)"
+},
+{
+"k": "text",
+"p": "CustomViews",
+"s": "Bottom Leading",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Bottom Leading\").tag(UnitPoint.bottomLeading)"
+},
+{
+"k": "text",
+"p": "CustomViews",
+"s": "Trailing",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Trailing\").tag(UnitPoint.trailing)"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Exercise Details",
+"in": [
+"ExerciseItemDetailView"
+],
+"code": "Text(\"Exercise Details\").font(.headline)"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Intensity",
+"in": [
+"ExerciseItemDetailView"
+],
+"code": "Label { Text(\"Intensity\") } icon: {"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "%@ METs",
+"in": [
+"ExerciseItemDetailView"
+],
+"code": "Text(\"\\(met.clean) METs\").font(.title.weight(.bold))"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Burn (30 min)",
+"in": [
+"ExerciseItemDetailView"
+],
+"code": "Label { Text(\"Burn (30 min)\") } icon: {"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "%.0f kcal",
+"in": [
+"CaloriesDetailRingView",
+"ExerciseCalorieRowView",
+"ExerciseItemDetailView",
+"HealthActivityCalorieRowView"
+],
+"code": "Text(\"\\(calories, specifier: \"%.0f\") kcal\")"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Min. Age",
+"in": [
+"ExerciseItemDetailView",
+"FoodItemDetailView"
+],
+"code": "Label { Text(\"Min. Age\") } icon: {"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "%lld mo",
+"in": [
+"ExerciseItemDetailView",
+"FoodItemDetailView"
+],
+"code": "Text(\"\\(item.minimalAgeMonths) mo\")",
+"plural": true
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "%@ sec",
+"in": [
+"ExerciseItemDetailView",
+"WorkoutEditorView"
+],
+"code": "Text(\"\\(link.durationSeconds.clean) sec\")"
+},
+{
+"k": "label",
+"p": "Exercise",
+"s": "Exercise details",
+"in": [
+"ExerciseItemDetailView"
+],
+"code": "Label(\"Exercise details\", systemImage: \"figure.yoga\")"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Back",
+"in": [
+"AyurvedaConstitutionViews",
+"ExerciseItemDetailView",
+"FoodItemDetailView",
+"MealEditorView"
+],
+"code": "Text(\"Back\")"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Linked Notes",
+"in": [
+"ExerciseItemDetailView",
+"FoodItemDetailView"
+],
+"code": "Text(\"Linked Notes\")"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "No Linked Notes",
+"in": [
+"ExerciseItemDetailView",
+"FoodItemDetailView"
+],
+"code": "\"No Linked Notes\","
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "You haven't linked this exercise to any notes yet.",
+"in": [
+"ExerciseItemDetailView"
+],
+"code": "description: Text(\"You haven't linked this exercise to any notes yet.\")"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Saving…",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "Text(\"Saving…\")"
+},
+{
+"k": "accessibility",
+"p": "Exercise",
+"s": "Saving",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": ".accessibilityLabel(\"Saving\")"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Select photo source",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "\"Select photo source\","
+},
+{
+"k": "button",
+"p": "Exercise",
+"s": "Take Photo",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "Button(\"Take Photo\") {"
+},
+{
+"k": "button",
+"p": "Exercise",
+"s": "Choose from Library",
+"in": [
+"ExerciseItemEditorView",
+"WorkoutEditorView"
+],
+"code": "Button(\"Choose from Library\") {"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Description",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemEditorView"
+],
+"code": "Text(\"Description\")"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Gallery",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"WorkoutEditorView"
+],
+"code": "Text(\"Gallery\")"
+},
+{
+"k": "button",
+"p": "Exercise",
+"s": "Set as main",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"WorkoutEditorView"
+],
+"code": "Button(\"Set as main\") {"
+},
+{
+"k": "button",
+"p": "Exercise",
+"s": "Change",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"WorkoutEditorView"
+],
+"code": "Button(\"Change\") {"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Remove",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"MealPlanEditorView"
+],
+"code": "Text(\"Remove\")"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Primary Muscles",
+"in": [
+"ExerciseItemEditorView",
+"WorkoutEditorView"
+],
+"code": "Text(\"Primary Muscles\")"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Select %@",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemEditorView",
+"ProfileEditorView"
+],
+"code": "Text(\"Select \\(openMenu.title)\")"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Generating Details...",
+"in": [
+"ExerciseItemEditorView"
+],
+"code": "Text(\"Generating Details...\").fontWeight(.bold)"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "AI is fetching data for your exercise.",
+"in": [
+"ExerciseItemEditorView"
+],
+"code": "Text(\"AI is fetching data for your exercise.\").font(.caption)"
+},
+{
+"k": "alert",
+"p": "Exercise",
+"s": "Delete Exercise",
+"in": [
+"ExerciseListView",
+"TrainingView"
+],
+"code": ".alert(\"Delete Exercise\", isPresented: $isShowingDeleteItemConfirmation) {"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "This exercise is used in %lld workouts or training plans.\nIf you delete it, it will be removed from those workouts and plans.\n\nAre you sure you want to continue?",
+"in": [
+"ExerciseListView"
+],
+"code": "This exercise is used in \\(itemUsageCount) workouts or training plans.",
+"plural": true
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Are you sure you want to delete '%@'? This action cannot be undone.",
+"in": [
+"ExerciseListView",
+"FoodItemListView",
+"ProfileListView"
+],
+"code": "Text(\"Are you sure you want to delete '\\(item.name)'? This action cannot be undone.\")"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Delete Training Plan",
+"in": [
+"ExerciseListView"
+],
+"code": "planToDeleteName.isEmpty ? \"Delete Training Plan\" : \"Delete \\\"\\(planToDeleteName)\\\"\","
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Delete \"%@\"",
+"in": [
+"ExerciseListView"
+]
+},
+{
+"k": "button",
+"p": "Exercise",
+"s": "Delete Plan Only",
+"in": [
+"ExerciseListView",
+"FoodItemListView"
+],
+"code": "Button(\"Delete Plan Only\", role: .destructive) {"
+},
+{
+"k": "button",
+"p": "Exercise",
+"s": "Delete Plan & Workouts",
+"in": [
+"ExerciseListView"
+],
+"code": "Button(\"Delete Plan & Workouts\", role: .destructive) {"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "This training plan has %lld linked workout(s).\n\n• \"Delete Plan Only\" will remove the plan but keep the workouts in your exercise library.\n• \"Delete Plan & Workouts\" will delete the plan and those linked workouts as well.\n\nWhat would you like to do?",
+"in": [
+"ExerciseListView"
+],
+"code": "This training plan has \\(planToDeleteLinkedWorkoutCount) linked workout(s).",
+"plural": true
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Are you sure you want to delete this training plan? This action cannot be undone.",
+"in": [
+"ExerciseListView"
+],
+"code": "Text(\"Are you sure you want to delete this training plan? This action cannot be undone.\")"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Default Exercises",
+"in": [
+"ExerciseListView"
+],
+"code": "if vm.filter == .default { Text(\"Default Exercises\").font(.title.bold()) }"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Favorite Exercises",
+"in": [
+"ExerciseListView"
+],
+"code": "else if vm.filter == .favorites { Text(\"Favorite Exercises\").font(.title.bold()) }"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Exercises",
+"in": [
+"ExerciseListView",
+"TrainingView",
+"WorkoutEditorView"
+],
+"code": "else if vm.filter == .all { Text(\"Exercises\").font(.title.bold()) }"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "My Workouts",
+"in": [
+"ExerciseListView"
+],
+"code": "else if vm.filter == .workouts { Text(\"My Workouts\").font(.title.bold()) }"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Training Plans",
+"in": [
+"ExerciseListView"
+],
+"code": "else if vm.filter == .plans { Text(\"Training Plans\").font(.title.bold()) }"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "No Training Plans",
+"in": [
+"ExerciseListView",
+"TrainingPlanPickerView"
+],
+"code": "\"No Training Plans\","
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Create your first training plan.",
+"in": [
+"ExerciseListView"
+],
+"code": "description: Text(\"Create your first training plan.\")"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "No Results for \"%@\"",
+"in": [
+"ExerciseListView"
+],
+"code": "\"No Results for \\\"\\(globalSearchText)\\\"\","
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Check the spelling or try a new search.",
+"in": [
+"ExerciseListView"
+],
+"code": "Text(\"Check the spelling or try a new search.\")"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "%lldy+",
+"in": [
+"ExerciseListView"
+],
+"code": "Text(\"\\(Int(planWrapper.minAgeMonths / 12))y+\")",
+"plural": true
+},
+{
+"k": "accessibility",
+"p": "Exercise",
+"s": "Delete %@",
+"in": [
+"ExerciseListView",
+"FoodItemListView",
+"NodesListView",
+"ProfileListView"
+],
+"code": ".accessibilityLabel(\"Delete \\(planWrapper.name)\")"
+},
+{
+"k": "accessibility",
+"p": "Exercise",
+"s": "Edit %@",
+"in": [
+"ExerciseListView",
+"FoodItemListView",
+"ProfileListView"
+],
+"code": ".accessibilityLabel(\"Edit \\(planWrapper.name)\")"
+},
+{
+"k": "accessibility",
+"p": "Exercise",
+"s": "Add %@",
+"in": [
+"ExerciseListView",
+"FoodItemListView"
+],
+"code": ".accessibilityLabel(\"Add \\(vm.filter.rawValue)\")"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Delete Prompt?",
+"in": [
+"AIDailyMealGeneratorView",
+"AIDailyTrainingGeneratorView",
+"FoodItemMenuEditorView",
+"MealPlanEditorView"
+],
+"code": "\"Delete Prompt?\", isPresented: $isShowingDeletePromptConfirmation, presenting: promptToDelete"
+},
+{
+"k": "message",
+"p": "Exercise",
+"s": "Are you sure you want to delete this prompt? This action cannot be undone.",
+"in": [
+"AIDailyMealGeneratorView",
+"AIDailyTrainingGeneratorView",
+"FoodItemMenuEditorView",
+"MealPlanEditorView"
+],
+"code": "} message: { _ in Text(\"Are you sure you want to delete this prompt? This action cannot be undone.\") }"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Prompts",
+"in": [
+"AIDailyMealGeneratorView",
+"AIDailyTrainingGeneratorView",
+"FoodItemMenuEditorView",
+"MealPlanEditorView"
+],
+"code": "Text(\"Prompts\")"
+},
+{
+"k": "label",
+"p": "Exercise",
+"s": "New Prompt",
+"in": [
+"AIDailyMealGeneratorView",
+"AIDailyTrainingGeneratorView",
+"FoodItemMenuEditorView",
+"MealPlanEditorView"
+],
+"code": "Label(\"New Prompt\", systemImage: \"plus.bubble\")"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "N/A",
+"in": [
+"WorkoutEditorView"
+],
+"code": "Text(\"N/A\")",
+"note": "not available"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "No Exercises",
+"in": [
+"WorkoutDetailRingView",
+"WorkoutEditorView"
+],
+"code": "\"No Exercises\","
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Use the search above to add exercises to this workout.",
+"in": [
+"WorkoutEditorView"
+],
+"code": "description: Text(\"Use the search above to add exercises to this workout.\")"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "No results found.",
+"in": [
+"FoodSearchPanelView",
+"TrainingPlanEditorView",
+"TrainingView",
+"WorkoutEditorView"
+],
+"code": "Text(\"No results found.\")"
+},
+{
+"k": "accessibility",
+"p": "Exercise",
+"s": "Favorites",
+"in": [
+"FoodItemListView",
+"FoodSearchPanelView",
+"FoodSearchView",
+"TrainingPlanEditorView"
+],
+"code": ".accessibilityLabel(\"Favorites\")"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Workout notes, instructions, etc.",
+"in": [
+"WorkoutEditorView"
+],
+"code": "Text(\"Workout notes, instructions, etc.\")"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Select Prompts",
+"in": [
+"AIDailyMealGeneratorView",
+"AIDailyTrainingGeneratorView",
+"FoodItemMenuEditorView",
+"MealPlanEditorView"
+],
+"code": "Text(\"Select Prompts\").font(.headline).foregroundColor(effectManager.currentGlobalAccentColor)"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "Generating Workout...",
+"in": [
+"TrainingView",
+"WorkoutEditorView"
+],
+"code": "Text(\"Generating Workout...\").fontWeight(.bold)"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "AI is creating your workout. You'll be notified.",
+"in": [
+"WorkoutEditorView"
+],
+"code": "Text(\"AI is creating your workout. You'll be notified.\").font(.caption)"
+},
+{
+"k": "text",
+"p": "Exercise",
+"s": "sec",
+"in": [
+"ExerciseCalorieRowView",
+"SelectedExerciseRowView",
+"TrainingPlanExerciseDetailRow",
+"TrainingPlanExerciseRowView"
+],
+"code": "Text(\"sec\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Generate Daily Workouts",
+"in": [
+"AIDailyTrainingGeneratorView"
+],
+"code": "Text(\"Generate Daily Workouts\").font(.headline)"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "You'll be notified when your plan is ready.",
+"in": [
+"AIDailyMealGeneratorView",
+"AIDailyTrainingGeneratorView",
+"MealPlanEditorView",
+"NutritionsDetailView"
+],
+"code": "Text(\"You'll be notified when your plan is ready.\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "kcal",
+"in": [
+"CalorieBurnRingView",
+"NetBalanceRingView",
+"NutrientProportionData",
+"SearchResultRow"
+],
+"code": "Text(\"kcal\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "%lld sets",
+"in": [
+"ExerciseLogEntryView",
+"TrainingPlanExerciseDetailRow"
+],
+"code": "Text(\"\\(exerciseLog.sets.count) sets\")",
+"plural": true
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Add Set",
+"in": [
+"ExerciseLogEntryView",
+"TrainingPlanExerciseRowView"
+],
+"code": "Text(\"Add Set\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Set %lld",
+"in": [
+"ExerciseLogEntryView",
+"TrainingPlanExerciseDetailRow",
+"TrainingPlanExerciseRowView"
+],
+"code": "Text(\"Set \\(setIndex + 1)\")",
+"plural": true
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "To Failure",
+"in": [
+"ExerciseLogEntryView",
+"TrainingPlanExerciseDetailRow",
+"TrainingPlanExerciseRowView"
+],
+"code": "Text(\"To Failure\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Weight",
+"in": [
+"ExerciseLogEntryView",
+"TrainingPlanExerciseRowView"
+],
+"code": "Text(\"Weight\")"
+},
+{
+"k": "label",
+"p": "Fitness",
+"s": "Weight Whole",
+"in": [
+"ExerciseLogEntryView",
+"TrainingPlanExerciseRowView"
+],
+"code": "Picker(\"Weight Whole\", selection: weightWholeBinding(for: setBinding)) {"
+},
+{
+"k": "label",
+"p": "Fitness",
+"s": "Weight Decimal",
+"in": [
+"ExerciseLogEntryView",
+"TrainingPlanExerciseRowView"
+],
+"code": "Picker(\"Weight Decimal\", selection: weightDecimalBinding(for: setBinding)) {"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Time Based",
+"in": [
+"ExerciseLogEntryView",
+"TrainingPlanExerciseRowView"
+],
+"code": "Text(\"Time Based\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Sec",
+"in": [
+"ExerciseLogEntryView",
+"TrainingPlanExerciseRowView"
+],
+"code": "Text(\"Sec\").tag(TimeUnit.seconds)"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Min",
+"in": [
+"ExerciseLogEntryView",
+"TrainingPlanExerciseRowView"
+],
+"code": "Text(\"Min\").tag(TimeUnit.minutes)"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Daily Activity Total",
+"in": [
+"HealthActivityCalorieRowView"
+],
+"code": "Text(\"Daily Activity Total\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "%@ steps",
+"in": [
+"HealthActivityCalorieRowView"
+],
+"code": "Text(\"\\(activity.stepCount.formatted()) steps\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "HealthKit active energy",
+"in": [
+"HealthActivityCalorieRowView"
+],
+"code": "Text(\"HealthKit active energy\")"
+},
+{
+"k": "button",
+"p": "Fitness",
+"s": "Close",
+"in": [
+"CaloriesDetailRingView",
+"DailyAyurvedaSummaryView",
+"GoalsDetailRingView",
+"MacrosDetailRingView"
+],
+"code": "Button(\"Close\", action: onDismiss)"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Net Calorie Balance",
+"in": [
+"NetBalanceDetailRingView"
+],
+"code": "Text(\"Net Calorie Balance\").font(.headline)"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Health Activity",
+"in": [
+"NetBalanceDetailRingView",
+"TotalBurnedDetailRingView"
+],
+"code": "Text(\"Health Activity\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "No Exercises Logged",
+"in": [
+"NetBalanceDetailRingView",
+"TotalBurnedDetailRingView"
+],
+"code": "ContentUnavailableView(\"No Exercises Logged\", systemImage: \"dumbbell\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Calories Consumed:",
+"in": [
+"NetBalanceDetailRingView"
+],
+"code": "HStack { Text(\"Calories Consumed:\"); Spacer(); Text(\"\\(totalConsumed, specifier: \"%.0f\") kcal\") }"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Calories Burned:",
+"in": [
+"NetBalanceDetailRingView"
+],
+"code": "HStack { Text(\"Calories Burned:\"); Spacer(); Text(\"-\\(totalBurned, specifier: \"%.0f\") kcal\") }"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "-%.0f kcal",
+"in": [
+"NetBalanceDetailRingView"
+],
+"code": "HStack { Text(\"Calories Burned:\"); Spacer(); Text(\"-\\(totalBurned, specifier: \"%.0f\") kcal\") }"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Net Balance:",
+"in": [
+"NetBalanceDetailRingView"
+],
+"code": "Text(\"Net Balance:\").fontWeight(.bold)"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "%+.0f kcal",
+"in": [
+"NetBalanceDetailRingView"
+],
+"code": "Text(\"\\(netBalance, specifier: \"%+.0f\") kcal\").fontWeight(.bold)"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Exercises Today",
+"in": [
+"NetBalanceDetailRingView"
+],
+"code": "Text(\"Exercises Today\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Nodes: %lld",
+"in": [
+"SelectedExerciseRowView",
+"SelectedFoodRowView"
+],
+"code": "Text(\"Nodes: \\(nodes.count)\")",
+"plural": true
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Total Burned Today",
+"in": [
+"TotalBurnedDetailRingView"
+],
+"code": "Text(\"Total Burned Today\").font(.headline)"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "No Results",
+"in": [
+"TotalBurnedDetailRingView"
+],
+"code": "ContentUnavailableView(selectedMuscleGroup == nil ? \"No Exercises Logged\" : \"No Results\", systemImage: \"dumbbell\", description: Text(message))"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Total Burned Today:",
+"in": [
+"TotalBurnedDetailRingView"
+],
+"code": "Text(\"Total Burned Today:\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "All Exercises Today",
+"in": [
+"TotalBurnedDetailRingView"
+],
+"code": "Text(selectedMuscleGroup == nil ? \"All Exercises Today\" : \"Filtered Exercises\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Filtered Exercises",
+"in": [
+"TotalBurnedDetailRingView"
+],
+"code": "Text(selectedMuscleGroup == nil ? \"All Exercises Today\" : \"Filtered Exercises\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Workout Actions",
+"in": [
+"TrainingActionMenuView"
+],
+"code": "Text(\"Workout Actions\").font(.headline)"
+},
+{
+"k": "label",
+"p": "Fitness",
+"s": "Generate with AI",
+"in": [
+"MealActionMenuView",
+"TrainingActionMenuView"
+],
+"code": "Label(\"Generate with AI\", systemImage: \"sparkles\")"
+},
+{
+"k": "label",
+"p": "Fitness",
+"s": "Copy to New Training Plan",
+"in": [
+"TrainingActionMenuView"
+],
+"code": "Label(\"Copy to New Training Plan\", systemImage: \"doc.on.doc\")"
+},
+{
+"k": "label",
+"p": "Fitness",
+"s": "Add to Existing Training Plan",
+"in": [
+"TrainingActionMenuView"
+],
+"code": "Label(\"Add to Existing Training Plan\", systemImage: \"plus.rectangle.on.rectangle\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Workout Name",
+"in": [
+"TrainingEditorView"
+],
+"code": "Text(\"Workout Name\")"
+},
+{
+"k": "placeholder",
+"p": "Fitness",
+"s": "e.g., Morning Run",
+"in": [
+"TrainingEditorView"
+],
+"code": "TextField(\"\", text: $draft.name, prompt: Text(\"e.g., Morning Run\").foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.6)))"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Start Time",
+"in": [
+"TrainingEditorView"
+],
+"code": "Text(\"Start Time\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "End Time",
+"in": [
+"TrainingEditorView"
+],
+"code": "Text(\"End Time\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Reminder",
+"in": [
+"MealEditorView",
+"ShoppingListDetailView",
+"TrainingEditorView"
+],
+"code": "Text(\"Reminder\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Notifications are disabled. Please enable them in Settings if you want to use reminders for your workouts.",
+"in": [
+"TrainingEditorView"
+],
+"code": "Text(\"Notifications are disabled. Please enable them in Settings if you want to use reminders for your workouts.\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Add Workout",
+"in": [
+"ProfileEditorView",
+"ProfileWizardView",
+"TrainingEditorView"
+],
+"code": "Text(isNew ? \"Add Workout\" : \"Edit Workout\").font(.headline)"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Edit Workout",
+"in": [
+"TrainingEditorView"
+],
+"code": "Text(isNew ? \"Add Workout\" : \"Edit Workout\").font(.headline)"
+},
+{
+"k": "label",
+"p": "Fitness",
+"s": "Add as New Day",
+"in": [
+"MealPlanAddDestinationView",
+"TrainingPlanAddDestinationView"
+],
+"code": "Label(\"Add as New Day\", systemImage: \"plus.square.on.square\")"
+},
+{
+"k": "label",
+"p": "Fitness",
+"s": "Replace an Existing Day",
+"in": [
+"MealPlanAddDestinationView",
+"TrainingPlanAddDestinationView"
+],
+"code": "Label(\"Replace an Existing Day\", systemImage: \"arrow.triangle.2.circlepath\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Choose Destination",
+"in": [
+"MealPlanAddDestinationView",
+"TrainingPlanAddDestinationView"
+],
+"code": "Text(\"Choose Destination\").font(.headline)"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Day %lld",
+"in": [
+"MealPlanAddDestinationView",
+"MealPlanDetailView",
+"MealPlanEditorView",
+"MealPlanPreviewView"
+],
+"code": "Text(day.isRestDay ? \"Day \\(dayIndex): Rest Day\" : \"Day \\(dayIndex)\")",
+"plural": true
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Day %lld: Rest Day",
+"in": [
+"TrainingPlanAddDestinationView",
+"TrainingPlanDetailView",
+"TrainingPlanEditorView",
+"TrainingPlanPreviewView"
+],
+"code": "Text(day.isRestDay ? \"Day \\(dayIndex): Rest Day\" : \"Day \\(dayIndex)\")",
+"plural": true
+},
+{
+"k": "button",
+"p": "Fitness",
+"s": "Replace This Day",
+"in": [
+"MealPlanAddDestinationView",
+"TrainingPlanAddDestinationView"
+],
+"code": "Button(\"Replace This Day\") { replace(day: day) }"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "No exercises planned for this workout.",
+"in": [
+"DailyTrainingPlanView",
+"TrainingPlanAddDestinationView",
+"TrainingPlanDetailView",
+"TrainingPlanPreviewView"
+],
+"code": "Text(\"No exercises planned for this workout.\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "No Workouts to Add",
+"in": [
+"TrainingPlanAddWorkoutsView"
+],
+"code": "ContentUnavailableView(\"No Workouts to Add\", systemImage: \"dumbbell.fill\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Select Workouts to Add",
+"in": [
+"TrainingPlanAddWorkoutsView"
+],
+"code": "Text(\"Select Workouts to Add\").font(.headline)"
+},
+{
+"k": "button",
+"p": "Fitness",
+"s": "Next",
+"in": [
+"AyurvedaConstitutionViews",
+"MealPlanAddMealsView",
+"TrainingPlanAddWorkoutsView"
+],
+"code": "Button(\"Next\") {"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "%lld exercises",
+"in": [
+"TrainingPlanAddWorkoutsView",
+"TrainingSelectionForPlanView"
+],
+"code": "Text(\"\\(training.exercises(using: modelContext).count) exercises\")",
+"plural": true
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "%lld day%@",
+"in": [
+"FoodItemListView",
+"MealPlanPickerView",
+"NutritionsDetailView",
+"TrainingPlanPickerView"
+],
+"code": "Text(\"\\(plan.days.count) day\\(plan.days.count == 1 ? \"\" : \"s\")\")",
+"note": "the %@ after the noun is the English plural ending ('s' or nothing): leave it out and word the translation so that it reads with any number"
+},
+{
+"k": "button",
+"p": "Fitness",
+"s": "Add to Training",
+"in": [
+"TrainingPlanPreviewView"
+],
+"code": "Button(\"Add to Training\") { onAdd(selectedDays) } // Използваме избраните дни"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "No workout selected.",
+"in": [
+"TrainingPlanDetailView",
+"TrainingPlanPreviewView"
+],
+"code": "Text(\"No workout selected.\").font(.caption).italic().opacity(0.7)"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "No Workouts to Copy",
+"in": [
+"TrainingSelectionForPlanView"
+],
+"code": "ContentUnavailableView(\"No Workouts to Copy\", systemImage: \"dumbbell.fill\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Select Workouts",
+"in": [
+"TrainingSelectionForPlanView"
+],
+"code": "Text(\"Select Workouts\").font(.headline)"
+},
+{
+"k": "button",
+"p": "Fitness",
+"s": "Create",
+"in": [
+"MealSelectionForPlanView",
+"TrainingSelectionForPlanView"
+],
+"code": "Button(\"Create\") { handleCreateAction() }"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Workout",
+"in": [
+"TrainingSummaryView"
+],
+"code": "Text(\"Workout\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Total Burned",
+"in": [
+"TrainingSummaryView"
+],
+"code": "Text(\"Total Burned\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Net Balance",
+"in": [
+"TrainingSummaryView"
+],
+"code": "Text(\"Net Balance\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Are you sure you want to delete '%@' from your workout? This action cannot be undone.",
+"in": [
+"TrainingView"
+],
+"code": "Text(\"Are you sure you want to delete '\\(exerciseToDelete?.name ?? \"this exercise\")' from your workout? This action cannot be undone.\")"
+},
+{
+"k": "alert",
+"p": "Fitness",
+"s": "Add Trainings from Plan",
+"in": [
+"TrainingView"
+],
+"code": ".confirmationDialog(\"Add Trainings from Plan\", isPresented: .constant(trainingPlanDaysToAdd != nil), titleVisibility: .visible, actions: {"
+},
+{
+"k": "button",
+"p": "Fitness",
+"s": "Add to Existing Workouts",
+"in": [
+"DailyTrainingPlanView",
+"TrainingView"
+],
+"code": "Button(\"Add to Existing Workouts\") { processTrainingPlanAddition(mode: .append) }"
+},
+{
+"k": "button",
+"p": "Fitness",
+"s": "Overwrite Existing Workouts",
+"in": [
+"DailyTrainingPlanView",
+"TrainingView"
+],
+"code": "Button(\"Overwrite Existing Workouts\", role: .destructive) { processTrainingPlanAddition(mode: .overwrite) }"
+},
+{
+"k": "message",
+"p": "Fitness",
+"s": "This will add workouts for %lld day(s), starting from %@. How should workouts for a specific time slot be added?",
+"in": [
+"TrainingView"
+],
+"code": "}, message: { Text(\"This will add workouts for \\(trainingPlanDaysToAdd?.count ?? 0) day(s), starting from \\(chosenDate.formatted(date: .abbreviated, time: .omit"
+},
+{
+"k": "alert",
+"p": "Fitness",
+"s": "AI Error",
+"in": [
+"TrainingView"
+],
+"code": ".alert(\"AI Error\", isPresented: $showAlert) {"
+},
+{
+"k": "alert",
+"p": "Fitness",
+"s": "Delete Note",
+"in": [
+"NutritionsDetailView",
+"TrainingView"
+],
+"code": ".alert(\"Delete Note\", isPresented: $isShowingDeleteNodeConfirmation) {"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Are you sure you want to delete this note? This action cannot be undone.",
+"in": [
+"NutritionsDetailView",
+"TrainingView"
+],
+"code": "Text(\"Are you sure you want to delete this note? This action cannot be undone.\")"
+},
+{
+"k": "button",
+"p": "Fitness",
+"s": "Exercises List",
+"in": [
+"TrainingView"
+],
+"code": "Button(\"Exercises List\") {"
+},
+{
+"k": "button",
+"p": "Fitness",
+"s": "Load Plan",
+"in": [
+"NutritionsDetailView",
+"TrainingView"
+],
+"code": "Button(\"Load Plan\") {"
+},
+{
+"k": "button",
+"p": "Fitness",
+"s": "Actions",
+"in": [
+"NutritionsDetailView",
+"TrainingView"
+],
+"code": "Button(\"Actions\") {"
+},
+{
+"k": "label",
+"p": "Fitness",
+"s": "View Details",
+"in": [
+"MealPlanDetailView",
+"MealPlanEditorView",
+"NutritionsDetailView",
+"TrainingPlanDetailView"
+],
+"code": "Label(\"View Details\", systemImage: \"info.circle\")"
+},
+{
+"k": "label",
+"p": "Fitness",
+"s": "Remove from Workout",
+"in": [
+"TrainingView"
+],
+"code": "Label(\"Remove from Workout\", systemImage: \"trash\")"
+},
+{
+"k": "accessibility",
+"p": "Fitness",
+"s": "Delete training exercise %@",
+"in": [
+"TrainingView"
+],
+"code": ".accessibilityLabel(\"Delete training exercise \\(exercise.name)\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Please select a workout from the timeline.",
+"in": [
+"TrainingView"
+],
+"code": "Text(\"Please select a workout from the timeline.\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Muscle Groups",
+"in": [
+"TrainingView"
+],
+"code": "Text(\"Muscle Groups\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Selected: %@",
+"in": [
+"FoodSearchPanelView",
+"TrainingPlanEditorView",
+"TrainingView"
+],
+"code": "Text(\"Selected: \\(group.rawValue)\")"
+},
+{
+"k": "accessibility",
+"p": "Fitness",
+"s": "Workouts",
+"in": [
+"ProfileEditorView",
+"TrainingPlanEditorView",
+"TrainingView"
+],
+"code": ".accessibilityLabel(\"Workouts\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "AI is creating your exercises. You'll be notified.",
+"in": [
+"TrainingView"
+],
+"code": "Text(\"AI is creating your exercises. You'll be notified.\").font(.caption)"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Add Note",
+"in": [
+"NodesListView",
+"NutritionsDetailView",
+"TrainingView"
+],
+"code": "Text(\"Add Note\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "No Nodes for this Day",
+"in": [
+"NutritionsDetailView",
+"TrainingView"
+],
+"code": "ContentUnavailableView(\"No Nodes for this Day\", systemImage: \"note.text\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Workout Log",
+"in": [
+"WorkoutDetailRingView"
+],
+"code": "Text(\"Workout Log\").font(.headline)"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Total Burned:",
+"in": [
+"WorkoutDetailRingView"
+],
+"code": "Text(\"Total Burned:\")"
+},
+{
+"k": "text",
+"p": "Fitness",
+"s": "Logged Exercises",
+"in": [
+"WorkoutDetailRingView"
+],
+"code": "Text(\"Logged Exercises\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Daily Needs by Group",
+"in": [
+"MineralRowView",
+"VitaminRowView"
+],
+"code": "Text(\"Daily Needs by Group\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Min: %@",
+"in": [
+"MineralRowView",
+"VitaminRowView"
+],
+"code": "Text(\"Min: \\(dailyNeedFormatted)\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Max: %@",
+"in": [
+"MineralRowView",
+"VitaminRowView"
+],
+"code": "Text(\"Max: \\(upperFormatted)\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Food Details",
+"in": [
+"FoodItemDetailView"
+],
+"code": "Text(\"Food Details\").font(.headline)"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Energy",
+"in": [
+"FoodItemDetailView"
+],
+"code": "Label { Text(\"Energy\") } icon: {"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "%@ kcal",
+"in": [
+"FoodItemDetailView"
+],
+"code": "Text(\"\\(kcal.clean) kcal\").font(.title.weight(.bold))"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Serving Size",
+"in": [
+"FoodItemDetailView"
+],
+"code": "Text(\"Serving Size\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Prep Time",
+"in": [
+"FoodItemDetailView"
+],
+"code": "Label { Text(\"Prep Time\") } icon: {"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Non-portioned",
+"in": [
+"FoodItemDetailView"
+],
+"code": "Text(\"Non-portioned\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "You haven't linked this food item to any notes yet.",
+"in": [
+"FoodItemDetailView"
+],
+"code": "description: Text(\"You haven't linked this food item to any notes yet.\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Acidic",
+"in": [
+"FoodItemDetailView"
+],
+"code": "Text(\"Acidic\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Neutral",
+"in": [
+"FoodItemDetailView"
+],
+"code": "Text(\"Neutral\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Alkaline",
+"in": [
+"FoodItemDetailView"
+],
+"code": "Text(\"Alkaline\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Add Food",
+"in": [
+"FoodItemEditorView"
+],
+"code": "Text(food == nil ? \"Add Food\" : \"Edit Food\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Edit Food",
+"in": [
+"FoodItemEditorView"
+],
+"code": "Text(food == nil ? \"Add Food\" : \"Edit Food\")"
+},
+{
+"k": "placeholder",
+"p": "Food",
+"s": "Blueberries",
+"in": [
+"FoodItemEditorView"
+],
+"code": "prompt: Text(\"Blueberries\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "⚠️ This food contains allergens the user is sensitive to.",
+"in": [
+"FoodItemEditorView"
+],
+"code": "Text(\"⚠️ This food contains allergens the user is sensitive to.\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Food allergens: %@",
+"in": [
+"FoodItemEditorView"
+],
+"code": "Text(\"Food allergens: \\(foodAllergenNames)\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "User allergens: %@",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "Text(\"User allergens: \\(userAllergenNames)\")"
+},
+{
+"k": "accessibility",
+"p": "Food",
+"s": "empty",
+"in": [
+"FoodItemEditorView"
+],
+"code": ".accessibilityValue(imageData == nil ? \"empty\" : \"image\")"
+},
+{
+"k": "accessibility",
+"p": "Food",
+"s": "image",
+"in": [
+"FoodItemEditorView"
+],
+"code": ".accessibilityValue(imageData == nil ? \"empty\" : \"image\")"
+},
+{
+"k": "button",
+"p": "Food",
+"s": "Photo Library",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"ProfileEditorView"
+],
+"code": "Button(\"Photo Library\") {"
+},
+{
+"k": "button",
+"p": "Food",
+"s": "Image Gallery",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "Button(\"Image Gallery\") {"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Weight / serving",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "Text(\"Weight / serving\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Totals",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "Text(\"Totals\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Saturated Fatty Acids (SFA)",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "Text(\"Saturated Fatty Acids (SFA)\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Monounsaturated Fatty Acids (MUFA)",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "Text(\"Monounsaturated Fatty Acids (MUFA)\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Trans Fatty Acids (TFA)",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "Text(\"Trans Fatty Acids (TFA)\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Polyunsaturated Fatty Acids (PUFA)",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "Text(\"Polyunsaturated Fatty Acids (PUFA)\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "This food item is used in %lld recipes or menu or meal plans.\nIf you delete it, it will be removed from those places.\n\nAre you sure you want to continue?",
+"in": [
+"FoodItemListView"
+],
+"code": "This food item is used in \\(itemUsageCount) recipes or menu or meal plans.",
+"plural": true
+},
+{
+"k": "alert",
+"p": "Food",
+"s": "Delete Meal Plan",
+"in": [
+"FoodItemListView"
+],
+"code": ".alert(\"Delete Meal Plan\", isPresented: $isShowingDeletePlanConfirmation) {"
+},
+{
+"k": "button",
+"p": "Food",
+"s": "Delete Plan & Menus",
+"in": [
+"FoodItemListView"
+],
+"code": "Button(\"Delete Plan & Menus\", role: .destructive) {"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "This meal plan has %lld linked menu(s).\n\n• \"Delete Plan Only\" will remove the plan but keep the menus wherever they are used.\n• \"Delete Plan & Menus\" will delete the plan and those linked menus as well.\n\nWhat would you like to do?",
+"in": [
+"FoodItemListView"
+],
+"code": "This meal plan has \\(linkedMenuCount) linked menu(s).",
+"plural": true
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Are you sure you want to delete the meal plan '%@'? This action cannot be undone.",
+"in": [
+"FoodItemListView"
+],
+"code": "Text(\"Are you sure you want to delete the meal plan '\\(plan.name)'? This action cannot be undone.\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Are you sure you want to delete this meal plan?",
+"in": [
+"FoodItemListView"
+],
+"code": "Text(\"Are you sure you want to delete this meal plan?\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Default list",
+"in": [
+"FoodItemListView"
+],
+"code": "if vm.filter == .default { Text(\"Default list\").font(.title.bold()) }"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Food list",
+"in": [
+"FoodItemListView"
+],
+"code": "else if vm.filter == .foods { Text(\"Food list\").font(.title.bold()) }"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Recipes list",
+"in": [
+"FoodItemListView"
+],
+"code": "else if vm.filter == .recipes { Text(\"Recipes list\").font(.title.bold()) }"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Menus list",
+"in": [
+"FoodItemListView"
+],
+"code": "else if vm.filter == .menus { Text(\"Menus list\").font(.title.bold()) }"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Meal Plans",
+"in": [
+"FoodItemListView"
+],
+"code": "else if vm.filter == .plans { Text(\"Meal Plans\").font(.title.bold()) }"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "No Meal Plans",
+"in": [
+"FoodItemListView",
+"MealPlanPickerView",
+"NutritionsDetailView"
+],
+"code": "\"No Meal Plans\","
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Create your first meal plan by tapping the '+' button below.",
+"in": [
+"FoodItemListView"
+],
+"code": "description: Text(\"Create your first meal plan by tapping the '+' button below.\")"
+},
+{
+"k": "accessibility",
+"p": "Food",
+"s": "Duplicate %@",
+"in": [
+"FoodItemListView",
+"ShoppingListView"
+],
+"code": ".accessibilityLabel(\"Duplicate \\(item.name)\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "⚠️ This recipe contains allergens the user is sensitive to.",
+"in": [
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "Text(\"⚠️ This recipe contains allergens the user is sensitive to.\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Menu allergens: %@",
+"in": [
+"FoodItemMenuEditorView"
+],
+"code": "Text(\"Menu allergens: \\(foodAllergenNames)\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Recipe instructions, notes, etc.",
+"in": [
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "Text(\"Recipe instructions, notes, etc.\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "You'll be notified when your menu is ready.",
+"in": [
+"FoodItemMenuEditorView"
+],
+"code": "Text(\"You'll be notified when your menu is ready.\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Recipe allergens: %@",
+"in": [
+"FoodItemReceptEditorView"
+],
+"code": "Text(\"Recipe allergens: \\(foodAllergenNames)\")"
+},
+{
+"k": "accessibility",
+"p": "Food",
+"s": "Recipes",
+"in": [
+"FoodSearchPanelView",
+"FoodSearchView"
+],
+"code": ".accessibilityLabel(\"Recipes\").foregroundStyle(effectManager.currentGlobalAccentColor).padding(.horizontal, 12).padding(.vertical, 8)"
+},
+{
+"k": "accessibility",
+"p": "Food",
+"s": "Menus",
+"in": [
+"FoodSearchPanelView",
+"FoodSearchView"
+],
+"code": ".accessibilityLabel(\"Menus\").foregroundStyle(effectManager.currentGlobalAccentColor).padding(.horizontal, 12).padding(.vertical, 8)"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "pH Low ↑",
+"in": [
+"FoodSearchPanelView"
+],
+"code": "if phState == \"ph_low\" { Text(\"pH Low ↑\").font(.caption.weight(.semibold)) }"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "pH High ↓",
+"in": [
+"FoodSearchPanelView"
+],
+"code": "else if phState == \"ph_high\" { Text(\"pH High ↓\").font(.caption.weight(.semibold)) }"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "pH Neutral ≈",
+"in": [
+"FoodSearchPanelView"
+],
+"code": "else if phState == \"ph_neutral\" { Text(\"pH Neutral ≈\").font(.caption.weight(.semibold)) }"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "pH Sort",
+"in": [
+"FoodSearchPanelView"
+],
+"code": "else { Text(\"pH Sort\").font(.caption.weight(.semibold)) }"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Use",
+"in": [
+"FoodFullScreenDetailView"
+],
+"code": "Text(\"Use\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Welcome to the App",
+"in": [
+"TestView"
+],
+"code": "Text(\"Welcome to the App\")"
+},
+{
+"k": "button",
+"p": "Food",
+"s": "Open Food Gallery",
+"in": [
+"TestView"
+],
+"code": "Button(\"Open Food Gallery\") {"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Food Gallery",
+"in": [
+"VideoGalleryFoodSheet"
+],
+"code": "Text(\"Food Gallery\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "Search foods...",
+"in": [
+"VideoGalleryFoodSheet"
+],
+"code": "Text(\"Search foods...\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "per 100 g",
+"in": [
+"SearchResultRow"
+],
+"code": "Text(\"per 100 g\")"
+},
+{
+"k": "text",
+"p": "Food",
+"s": "pH: %@",
+"in": [
+"SearchResultRow"
+],
+"code": "Text(\"pH: \\(String(format: \"%.1f\", item.ph))\")"
+},
+{
+"k": "text",
+"p": "FoodSearch",
+"s": "Double tap to cycle through pacifies, neutral, aggravates, and off",
+"in": [
+"AyurvedaSearchChips"
+],
+"code": "\"Double tap to cycle through pacifies, neutral, aggravates, and off\""
+},
+{
+"k": "text",
+"p": "FoodSearch",
+"s": "Ayurvedic effects unavailable",
+"in": [
+"AyurvedaSearchChips",
+"DailyAyurvedaSummaryView"
+],
+"code": "Text(\"Ayurvedic effects unavailable\")"
+},
+{
+"k": "accessibility",
+"p": "FoodSearch",
+"s": "Ayurvedic dosha effects",
+"in": [
+"AyurvedaSearchChips"
+],
+"code": ".accessibilityLabel(\"Ayurvedic dosha effects\")"
+},
+{
+"k": "accessibility",
+"p": "FoodSearch",
+"s": "Requested Ayurvedic properties",
+"in": [
+"AyurvedaSearchChips"
+],
+"code": ".accessibilityLabel(\"Requested Ayurvedic properties\")"
+},
+{
+"k": "text",
+"p": "FoodSearch",
+"s": "Dosha choices change ranking only. Foods that aggravate the selected dosha remain visible.",
+"in": [
+"AyurvedaSearchFiltersView"
+],
+"code": "Text(\"Dosha choices change ranking only. Foods that aggravate the selected dosha remain visible.\")"
+},
+{
+"k": "heading",
+"p": "FoodSearch",
+"s": "Dosha effect",
+"in": [
+"AyurvedaSearchFiltersView"
+],
+"code": "Section(\"Dosha effect\") {"
+},
+{
+"k": "text",
+"p": "FoodSearch",
+"s": "Rasa · taste",
+"in": [
+"AyurvedaSearchFiltersView"
+],
+"code": "Text(\"Rasa · taste\")"
+},
+{
+"k": "text",
+"p": "FoodSearch",
+"s": "Multiple tastes are combined with OR.",
+"in": [
+"AyurvedaSearchFiltersView"
+],
+"code": "Text(\"Multiple tastes are combined with OR.\")"
+},
+{
+"k": "heading",
+"p": "FoodSearch",
+"s": "Virya · energy",
+"in": [
+"AyurvedaSearchFiltersView"
+],
+"code": "Section(\"Virya · energy\") {"
+},
+{
+"k": "heading",
+"p": "FoodSearch",
+"s": "Digestion",
+"in": [
+"AyurvedaSearchFiltersView"
+],
+"code": "Section(\"Digestion\") {"
+},
+{
+"k": "text",
+"p": "FoodSearch",
+"s": "Easy on digestion",
+"in": [
+"AyurvedaSearchFiltersView"
+],
+"code": "\"Easy on digestion\","
+},
+{
+"k": "text",
+"p": "FoodSearch",
+"s": "Uses digestibility and agni effect together.",
+"in": [
+"AyurvedaSearchFiltersView"
+],
+"code": "Text(\"Uses digestibility and agni effect together.\")"
+},
+{
+"k": "heading",
+"p": "FoodSearch",
+"s": "Gunas · qualities",
+"in": [
+"AyurvedaSearchFiltersView"
+],
+"code": "Section(\"Gunas · qualities\") {"
+},
+{
+"k": "title",
+"p": "FoodSearch",
+"s": "Ayurvedic filters",
+"in": [
+"AyurvedaSearchFiltersView"
+],
+"code": ".navigationTitle(\"Ayurvedic filters\")"
+},
+{
+"k": "button",
+"p": "FoodSearch",
+"s": "Clear",
+"in": [
+"AyurvedaSearchFiltersView",
+"NodesListView"
+],
+"code": "Button(\"Clear\") {"
+},
+{
+"k": "button",
+"p": "FoodSearch",
+"s": "Any effect",
+"in": [
+"AyurvedaSearchFiltersView"
+],
+"code": "Button(\"Any effect\") {"
+},
+{
+"k": "text",
+"p": "FoodSearch",
+"s": "Lower-confidence Ayurvedic profile",
+"in": [
+"AyurvedaSearchFiltersView"
+],
+"code": "\"Lower-confidence Ayurvedic profile\","
+},
+{
+"k": "title",
+"p": "FoodSearch",
+"s": "Ayurveda & Asana Yoga",
+"in": [
+"FoodSearchView"
+],
+"code": ".navigationTitle(\"Ayurveda & Asana Yoga\")"
+},
+{
+"k": "placeholder",
+"p": "FoodSearch",
+"s": "Search (e.g. 'Tomato', 'Milk 2%', 'No Dairy')",
+"in": [
+"FoodSearchView"
+],
+"code": "TextField(\"Search (e.g. 'Tomato', 'Milk 2%', 'No Dairy')\", text: $searchText)"
+},
+{
+"k": "text",
+"p": "FoodSearch",
+"s": "Indexing Database...",
+"in": [
+"FoodSearchView"
+],
+"code": "Text(\"Indexing Database...\")"
+},
+{
+"k": "label",
+"p": "FoodSearch",
+"s": "Ayurvedic matches",
+"in": [
+"FoodSearchView"
+],
+"code": "Label(\"Ayurvedic matches\", systemImage: \"leaf.fill\")"
+},
+{
+"k": "text",
+"p": "FoodSearch",
+"s": "Dosha choices reorder these foods; they do not hide aggravating results.",
+"in": [
+"FoodSearchView"
+],
+"code": "Text(\"Dosha choices reorder these foods; they do not hide aggravating results.\")"
+},
+{
+"k": "text",
+"p": "FoodSearch",
+"s": "No Ayurvedic profile yet",
+"in": [
+"FoodSearchView"
+],
+"code": "\"No Ayurvedic profile yet\","
+},
+{
+"k": "text",
+"p": "FoodSearch",
+"s": "These foods still match your text and safety filters, but cannot be evaluated against the selected Ayurvedic facets.",
+"in": [
+"FoodSearchView"
+],
+"code": "Text(\"These foods still match your text and safety filters, but cannot be evaluated against the selected Ayurvedic facets.\")"
+},
+{
+"k": "heading",
+"p": "FoodSearch",
+"s": "Results",
+"in": [
+"FoodSearchView"
+],
+"code": "Section(\"Results\") {"
+},
+{
+"k": "text",
+"p": "FoodSearch",
+"s": "per 100g",
+"in": [
+"FoodSearchView"
+],
+"code": "Text(\"per 100g\")"
+},
+{
+"k": "text",
+"p": "FoodSearch",
+"s": "Age: %@",
+"in": [
+"FoodSearchView",
+"ProfileListView"
+],
+"code": "Text(\"Age: \\(age)\")"
+},
+{
+"k": "text",
+"p": "FoodSearch",
+"s": "pH:",
+"in": [
+"FoodSearchView"
+],
+"code": "Text(\"pH:\")"
+},
+{
+"k": "accessibility",
+"p": "FoodSearch",
+"s": "no data",
+"in": [
+"FoodSearchView"
+],
+"code": ".accessibilityLabel(\"no data\")"
+},
+{
+"k": "text",
+"p": "FoodSearch",
+"s": "Calories:",
+"in": [
+"FoodSearchView"
+],
+"code": "Text(\"Calories:\")"
+},
+{
+"k": "text",
+"p": "FoodSearch",
+"s": "• Protein:",
+"in": [
+"FoodSearchView"
+],
+"code": "Text(\"• Protein:\")"
+},
+{
+"k": "text",
+"p": "FoodSearch",
+"s": "• Fat:",
+"in": [
+"FoodSearchView"
+],
+"code": "Text(\"• Fat:\")"
+},
+{
+"k": "text",
+"p": "FoodSearch",
+"s": "• Carbs:",
+"in": [
+"FoodSearchView"
+],
+"code": "Text(\"• Carbs:\")"
+},
+{
+"k": "text",
+"p": "Main",
+"s": "We couldn't prepare your data",
+"in": [
+"AyurvedaAsanaYogaApp"
+],
+"code": "Text(\"We couldn't prepare your data\")"
+},
+{
+"k": "text",
+"p": "Main",
+"s": "Preparing database…",
+"in": [
+"DatabaseLoadingView"
+],
+"code": "Text(\"Preparing database…\")"
+},
+{
+"k": "text",
+"p": "Main",
+"s": "Notification History",
+"in": [
+"NotificationHistoryView"
+],
+"code": "Text(\"Notification History\").font(.headline)"
+},
+{
+"k": "button",
+"p": "Main",
+"s": "Clear All",
+"in": [
+"NotificationHistoryView"
+],
+"code": "Button(\"Clear All\", action: clearAllNotifications)"
+},
+{
+"k": "text",
+"p": "Main",
+"s": "No Unread Notifications",
+"in": [
+"NotificationHistoryView"
+],
+"code": "\"No Unread Notifications\","
+},
+{
+"k": "text",
+"p": "Main",
+"s": "You're all caught up!",
+"in": [
+"NotificationHistoryView"
+],
+"code": "description: Text(\"You're all caught up!\")"
+},
+{
+"k": "text",
+"p": "Meal",
+"s": "Suggested Meals",
+"in": [
+"DailyMealPlanView"
+],
+"code": "Text(\"Suggested Meals\")"
+},
+{
+"k": "text",
+"p": "Meal",
+"s": "Add to date:",
+"in": [
+"DailyMealPlanView"
+],
+"code": "Text(\"Add to date:\")"
+},
+{
+"k": "text",
+"p": "Meal",
+"s": "No items planned for this meal.",
+"in": [
+"DailyMealPlanView",
+"MealPlanDetailView",
+"PagedMealContentView"
+],
+"code": "Text(\"No items planned for this meal.\")"
+},
+{
+"k": "alert",
+"p": "Meal",
+"s": "Add Meals from Plan",
+"in": [
+"DailyMealPlanView",
+"NutritionsDetailView"
+],
+"code": ".confirmationDialog(\"Add Meals from Plan\", isPresented: $isShowingConfirmation, titleVisibility: .visible) {"
+},
+{
+"k": "button",
+"p": "Meal",
+"s": "Add to Existing Meals",
+"in": [
+"DailyMealPlanView",
+"NutritionsDetailView"
+],
+"code": "Button(\"Add to Existing Meals\") { processMealPlanAddition(mode: .append) }"
+},
+{
+"k": "button",
+"p": "Meal",
+"s": "Overwrite Existing Meals",
+"in": [
+"DailyMealPlanView",
+"NutritionsDetailView"
+],
+"code": "Button(\"Overwrite Existing Meals\", role: .destructive) { processMealPlanAddition(mode: .overwrite) }"
+},
+{
+"k": "text",
+"p": "Meal",
+"s": "This will add meals for %@. How should meals for a specific time slot be added?",
+"in": [
+"DailyMealPlanView"
+],
+"code": "Text(\"This will add meals for \\(targetDate.formatted(date: .abbreviated, time: .omitted)). How should meals for a specific time slot be added?\")"
+},
+{
+"k": "text",
+"p": "Meal",
+"s": "Day Meal Plan",
+"in": [
+"DailyMealPlanView"
+],
+"code": "Text(\"Day Meal Plan\").font(.headline)"
+},
+{
+"k": "button",
+"p": "Meal",
+"s": "Add to Day",
+"in": [
+"DailyMealPlanView",
+"DailyTrainingPlanView"
+],
+"code": "Button(\"Add to Day\") {"
+},
+{
+"k": "text",
+"p": "Meal",
+"s": "Meal name",
+"in": [
+"MealEditorView"
+],
+"code": "Text(\"Meal name\")"
+},
+{
+"k": "placeholder",
+"p": "Meal",
+"s": "Breakfast",
+"in": [
+"MealEditorView"
+],
+"code": "TextField(\"\", text: $draft.name, prompt: Text(\"Breakfast\").foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.6)))"
+},
+{
+"k": "text",
+"p": "Meal",
+"s": "Start",
+"in": [
+"MealEditorView"
+],
+"code": "Text(\"Start\")"
+},
+{
+"k": "text",
+"p": "Meal",
+"s": "End",
+"in": [
+"MealEditorView"
+],
+"code": "Text(\"End\")"
+},
+{
+"k": "text",
+"p": "Meal",
+"s": "Notifications are disabled. Please enable them in Settings if you want to use reminders for your meals.",
+"in": [
+"MealEditorView"
+],
+"code": "Text(\"Notifications are disabled. Please enable them in Settings if you want to use reminders for your meals.\")"
+},
+{
+"k": "text",
+"p": "Meal",
+"s": "Add Meal",
+"in": [
+"MealEditorView",
+"ProfileEditorView",
+"ProfileWizardView"
+],
+"code": "Text(isNew ? \"Add Meal\" : \"Edit Meal\").font(.headline)"
+},
+{
+"k": "text",
+"p": "Meal",
+"s": "Edit Meal",
+"in": [
+"MealEditorView"
+],
+"code": "Text(isNew ? \"Add Meal\" : \"Edit Meal\").font(.headline)"
+},
+{
+"k": "text",
+"p": "Meal",
+"s": "Minimum Age:",
+"in": [
+"MealPlanDetailView",
+"TrainingPlanDetailView"
+],
+"code": "Text(\"Minimum Age:\")"
+},
+{
+"k": "text",
+"p": "Meal",
+"s": "%lld months",
+"in": [
+"MealPlanDetailView",
+"TrainingPlanDetailView"
+],
+"code": "Text(\"\\(plan.minAgeMonths) months\")",
+"plural": true
+},
+{
+"k": "text",
+"p": "Meal",
+"s": "New Meal Plan",
+"in": [
+"MealPlanEditorView"
+],
+"code": "Text(planToEdit == nil && sourceAIGenerationJobID == nil ? \"New Meal Plan\" : \"Edit Meal Plan\").font(.headline)"
+},
+{
+"k": "text",
+"p": "Meal",
+"s": "Edit Meal Plan",
+"in": [
+"MealPlanEditorView"
+],
+"code": "Text(planToEdit == nil && sourceAIGenerationJobID == nil ? \"New Meal Plan\" : \"Edit Meal Plan\").font(.headline)"
+},
+{
+"k": "label",
+"p": "Meal",
+"s": "Add Day",
+"in": [
+"MealPlanEditorView",
+"TrainingPlanEditorView"
+],
+"code": "Label(\"Add Day\", systemImage: \"plus\")"
+},
+{
+"k": "placeholder",
+"p": "Meal",
+"s": "e.g., High-Protein Week",
+"in": [
+"MealPlanEditorView"
+],
+"code": "TextField(\"\", text: $name, prompt: Text(\"e.g., High-Protein Week\").foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.6)))"
+},
+{
+"k": "text",
+"p": "Meal",
+"s": "Tap search to add",
+"in": [
+"MealPlanEditorView"
+],
+"code": "Text(\"Tap search to add\")"
+},
+{
+"k": "text",
+"p": "Meal",
+"s": "Kcal",
+"in": [
+"MealPlanEntryDetailRowView",
+"MealPlanEntryRowView",
+"SelectableFoodRowNode",
+"SelectedFoodRowView"
+],
+"code": "Text(\"Kcal\")"
+},
+{
+"k": "text",
+"p": "Nodes",
+"s": "Enter your thoughts, notes, or observations...",
+"in": [
+"NodeEditorView"
+],
+"code": "Text(\"Enter your thoughts, notes, or observations...\")"
+},
+{
+"k": "text",
+"p": "Nodes",
+"s": "Unable to Save",
+"in": [
+"NodeEditorView",
+"ShoppingListDetailView",
+"StorageEditorViev"
+],
+"code": "\"Unable to Save\","
+},
+{
+"k": "text",
+"p": "Nodes",
+"s": "New Node",
+"in": [
+"NodeEditorView"
+],
+"code": "Text(nodeToEdit == nil ? \"New Node\" : \"Edit Node\").font(.headline)"
+},
+{
+"k": "text",
+"p": "Nodes",
+"s": "Edit Node",
+"in": [
+"NodeEditorView"
+],
+"code": "Text(nodeToEdit == nil ? \"New Node\" : \"Edit Node\").font(.headline)"
+},
+{
+"k": "text",
+"p": "Nodes",
+"s": "Date:",
+"in": [
+"NodeEditorView"
+],
+"code": "Text(\"Date:\")"
+},
+{
+"k": "text",
+"p": "Nodes",
+"s": "Link Foods from this Day",
+"in": [
+"NodeEditorView"
+],
+"code": "Text(\"Link Foods from this Day\")"
+},
+{
+"k": "text",
+"p": "Nodes",
+"s": "No foods logged in calendar for this day.",
+"in": [
+"NodeEditorView"
+],
+"code": "Text(\"No foods logged in calendar for this day.\")"
+},
+{
+"k": "text",
+"p": "Nodes",
+"s": "Link Exercises from this Day",
+"in": [
+"NodeEditorView"
+],
+"code": "Text(\"Link Exercises from this Day\")"
+},
+{
+"k": "text",
+"p": "Nodes",
+"s": "No workouts logged in calendar for this day.",
+"in": [
+"NodeEditorView"
+],
+"code": "Text(\"No workouts logged in calendar for this day.\")"
+},
+{
+"k": "alert",
+"p": "Nodes",
+"s": "Delete Node",
+"in": [
+"NodesListView"
+],
+"code": ".alert(\"Delete Node\", isPresented: $isShowingDeleteConfirmation, presenting: nodeToDelete) { node in"
+},
+{
+"k": "text",
+"p": "Nodes",
+"s": "Are you sure you want to delete the node titled \"%@\"? This action cannot be undone.",
+"in": [
+"NodesListView"
+],
+"code": "Text(\"Are you sure you want to delete the node titled \\\"\\(node.textContent ?? \"Untitled\")\\\"? This action cannot be undone.\")"
+},
+{
+"k": "text",
+"p": "Nodes",
+"s": "Select Date Range",
+"in": [
+"NodesListView"
+],
+"code": "Text(\"Select Date Range\")"
+},
+{
+"k": "accessibility",
+"p": "Nodes",
+"s": "Open profiles",
+"in": [
+"NodesListView",
+"PracticesView"
+],
+"code": ".accessibilityLabel(\"Open profiles\")"
+},
+{
+"k": "text",
+"p": "Nodes",
+"s": "%@ kcal / %@",
+"in": [
+"SelectableFoodRowNode"
+],
+"code": "Text(\"\\(kcal.clean) kcal / \\(formattedWeight(weight))\")"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Generate Daily Meals",
+"in": [
+"AIDailyMealGeneratorView"
+],
+"code": "Text(\"Generate Daily Meals\").font(.headline)"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Calorie Breakdown",
+"in": [
+"CaloriesDetailRingView"
+],
+"code": "Text(\"Calorie Breakdown\").font(.headline).foregroundColor(effectManager.currentGlobalAccentColor)"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Consumed:",
+"in": [
+"CaloriesDetailRingView"
+],
+"code": "HStack { Text(\"Consumed:\"); Spacer(); Text(\"\\(totalCalories, specifier: \"%.0f\") kcal\") }"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Target:",
+"in": [
+"CaloriesDetailRingView"
+],
+"code": "HStack { Text(\"Target:\"); Spacer(); Text(\"\\(targetCalories, specifier: \"%.0f\") kcal\") }"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Remaining:",
+"in": [
+"CaloriesDetailRingView"
+],
+"code": "Text(\"Remaining:\")"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Consumed Foods by Calories",
+"in": [
+"CaloriesDetailRingView"
+],
+"code": "Text(\"Consumed Foods by Calories\")"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "No Foods to Display",
+"in": [
+"CaloriesDetailRingView",
+"GoalsDetailRingView",
+"MacrosDetailRingView"
+],
+"code": "ContentUnavailableView(\"No Foods to Display\", systemImage: \"fork.knife.circle\")"
+},
+{
+"k": "accessibility",
+"p": "Nutrient",
+"s": "%@. Fit %@.",
+"in": [
+"DailyAyurvedaSummaryView"
+],
+"code": "\"\\(accessibilityContext). Fit \\(fitLabel).\""
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "%@ effect %@",
+"in": [
+"DailyAyurvedaSummaryView"
+],
+"code": "\"\\(dosha.displayName) effect \\(signedValue(clampedValue))\""
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Create an Ayurvedic profile for %@ to see personal fit.",
+"in": [
+"DailyAyurvedaSummaryView"
+],
+"code": "\"Create an Ayurvedic profile for \\(profileName) to see personal fit.\","
+},
+{
+"k": "label",
+"p": "Nutrient",
+"s": "Fit: %@",
+"in": [
+"DailyAyurvedaSummaryView"
+],
+"code": "\"Fit: \\(fitLabel(fit.direction))\","
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Metal\nError",
+"in": [
+"GlassWaterTrackerView"
+],
+"code": "ZStack { Circle().stroke(Color.gray, lineWidth: 4); Text(\"Metal\\nError\").font(.caption2).multilineTextAlignment(.center).foregroundColor(.gray) }"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "%lld / %lld",
+"in": [
+"GoalRingView",
+"RingsSummaryRow"
+],
+"code": "Text(\"\\(achieved) / \\(total)\")"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Priority Nutrients",
+"in": [
+"GoalsDetailRingView"
+],
+"code": "Text(\"Priority Nutrients\").font(.headline).foregroundColor(effectManager.currentGlobalAccentColor)"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "All Consumed Foods",
+"in": [
+"GoalsDetailRingView",
+"MacrosDetailRingView"
+],
+"code": "Text(localSelectedNutrientID == nil ? \"All Consumed Foods\" : \"Foods Containing Selected Nutrient\")"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Foods Containing Selected Nutrient",
+"in": [
+"GoalsDetailRingView"
+],
+"code": "Text(localSelectedNutrientID == nil ? \"All Consumed Foods\" : \"Foods Containing Selected Nutrient\")"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "C",
+"in": [
+"MacroCPFRingView"
+],
+"code": "Text(\"C\")",
+"note": "initial of Carbohydrates in the macro ring"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "P",
+"in": [
+"MacroCPFRingView"
+],
+"code": "Text(\"P\")",
+"note": "initial of Protein in the macro ring"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "F",
+"in": [
+"MacroCPFRingView"
+],
+"code": "Text(\"F\")",
+"note": "initial of Fat in the macro ring"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Macronutrient",
+"in": [
+"MacrosDetailRingView"
+],
+"code": "Text(\"Macronutrient\").font(.headline).foregroundColor(effectManager.currentGlobalAccentColor)"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Daily Totals",
+"in": [
+"MacrosDetailRingView"
+],
+"code": "Text(\"Daily Totals\")"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Foods by Selected Macronutrient",
+"in": [
+"MacrosDetailRingView"
+],
+"code": "Text(selectedMacro == nil ? \"All Consumed Foods\" : \"Foods by Selected Macronutrient\")"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Meal Actions",
+"in": [
+"MealActionMenuView"
+],
+"code": "Text(\"Meal Actions\").font(.headline)"
+},
+{
+"k": "label",
+"p": "Nutrient",
+"s": "Scan Barcode",
+"in": [
+"MealActionMenuView"
+],
+"code": "Label(\"Scan Barcode\", systemImage: \"barcode.viewfinder\")"
+},
+{
+"k": "label",
+"p": "Nutrient",
+"s": "Copy to New Meal Plan",
+"in": [
+"MealActionMenuView"
+],
+"code": "Label(\"Copy to New Meal Plan\", systemImage: \"doc.on.doc\")"
+},
+{
+"k": "label",
+"p": "Nutrient",
+"s": "Add to Existing Meal Plan",
+"in": [
+"MealActionMenuView"
+],
+"code": "Label(\"Add to Existing Meal Plan\", systemImage: \"plus.rectangle.on.rectangle\")"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "No Meals to Add",
+"in": [
+"MealPlanAddMealsView"
+],
+"code": "ContentUnavailableView(\"No Meals to Add\", systemImage: \"fork.knife.circle\")"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Select Meals to Add",
+"in": [
+"MealPlanAddMealsView"
+],
+"code": "Text(\"Select Meals to Add\")"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "%lld items",
+"in": [
+"MealPlanAddMealsView",
+"MealSelectionForPlanView"
+],
+"code": "Text(\"\\(meal.foods(using: modelContext).count) items\")",
+"plural": true
+},
+{
+"k": "button",
+"p": "Nutrient",
+"s": "Add to Meal",
+"in": [
+"MealPlanPreviewView"
+],
+"code": "Button(\"Add to Meal\") {"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "No Meals to Copy",
+"in": [
+"MealSelectionForPlanView"
+],
+"code": "ContentUnavailableView(\"No Meals to Copy\", systemImage: \"fork.knife.circle\")"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Select Meals",
+"in": [
+"MealSelectionForPlanView"
+],
+"code": "Text(\"Select Meals\")"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "%lld%%",
+"in": [
+"AyurvedaConstitutionViews",
+"NutrientRingView",
+"ProfileWizardView"
+],
+"code": "Text(\"\\(percent)%\")",
+"plural": true
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Nutrients",
+"in": [
+"NutrientsSection"
+],
+"code": "Text(\"Nutrients\")"
+},
+{
+"k": "alert",
+"p": "Nutrient",
+"s": "Delete Food",
+"in": [
+"NutritionsDetailView"
+],
+"code": ".alert(\"Delete Food\", isPresented: $isShowingDeleteItemConfirmation, actions: {"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Are you sure you want to delete '%@' from the meal? This will not affect your stored items.",
+"in": [
+"NutritionsDetailView"
+],
+"code": "Text(\"Are you sure you want to delete '\\(itemToDelete?.name ?? \"this food\")' from the meal? This will not affect your stored items.\")"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "This will add meals for %lld day(s), starting from %@. How should meals for a specific time slot be added?",
+"in": [
+"NutritionsDetailView"
+],
+"code": "Text(\"This will add meals for \\(planDaysToAdd?.count ?? 0) day(s), starting from \\(chosenDate.formatted(date: .abbreviated, time: .omitted)). How should meals f"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Adding Meals...",
+"in": [
+"NutritionsDetailView"
+],
+"code": "Text(\"Adding Meals...\")"
+},
+{
+"k": "accessibility",
+"p": "Nutrient",
+"s": "Adding Meals",
+"in": [
+"NutritionsDetailView"
+],
+"code": ".accessibilityLabel(\"Adding Meals\")"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Foods",
+"in": [
+"NutritionsDetailView"
+],
+"code": "Text(\"Foods\")"
+},
+{
+"k": "button",
+"p": "Nutrient",
+"s": "Foods List",
+"in": [
+"NutritionsDetailView"
+],
+"code": "Button(\"Foods List\") {"
+},
+{
+"k": "label",
+"p": "Nutrient",
+"s": "Remove from Meal",
+"in": [
+"NutritionsDetailView"
+],
+"code": "Label(\"Remove from Meal\", systemImage: \"trash\")"
+},
+{
+"k": "accessibility",
+"p": "Nutrient",
+"s": "Delete meal food %@",
+"in": [
+"NutritionsDetailView"
+],
+"code": ".accessibilityLabel(\"Delete meal food \\(item.name)\")"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Add from Meal Plan",
+"in": [
+"NutritionsDetailView"
+],
+"code": "Text(\"Add from Meal Plan\").font(.headline)"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Water",
+"in": [
+"RingsSummaryRow"
+],
+"code": "Text(\"Water\")"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Goals",
+"in": [
+"RingsSummaryRow"
+],
+"code": "Text(\"Goals\")"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Calories",
+"in": [
+"RingsSummaryRow"
+],
+"code": "Text(\"Calories\")"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Macros",
+"in": [
+"RingsSummaryRow"
+],
+"code": "Text(\"Macros\")"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "Quantity exceeds stock",
+"in": [
+"SelectedFoodRowView"
+],
+"code": "Text(\"Quantity exceeds stock\")"
+},
+{
+"k": "accessibility",
+"p": "Nutrient",
+"s": "Water intake",
+"in": [
+"WaterTrackerView"
+],
+"code": ".accessibilityLabel(\"Water intake\")"
+},
+{
+"k": "accessibility",
+"p": "Nutrient",
+"s": "%lld of %lld",
+"in": [
+"WaterTrackerView"
+],
+"code": ".accessibilityValue(\"\\(consumed) of \\(goal)\")"
+},
+{
+"k": "text",
+"p": "Nutrient",
+"s": "of %lld",
+"in": [
+"WaterTrackerView"
+],
+"code": "Text(\"of \\(max(goal, 0))\")",
+"plural": true
+},
+{
+"k": "accessibility",
+"p": "Practices",
+"s": "Artwork for %@",
+"in": [
+"PracticeArtworkView"
+],
+"code": ".accessibilityLabel(\"Artwork for \\(practice.title)\")"
+},
+{
+"k": "text",
+"p": "Practices",
+"s": "Practice Details",
+"in": [
+"PracticeEntryView"
+],
+"code": "Text(\"Practice Details\")"
+},
+{
+"k": "accessibility",
+"p": "Practices",
+"s": "Returns to the practices list",
+"in": [
+"PracticeEntryView"
+],
+"code": ".accessibilityHint(\"Returns to the practices list\")"
+},
+{
+"k": "text",
+"p": "Practices",
+"s": "Opens the practice image full screen",
+"in": [
+"PracticeEntryView"
+],
+"code": "artworkImage == nil ? \"\" : \"Opens the practice image full screen\""
+},
+{
+"k": "text",
+"p": "Practices",
+"s": "TRADITION",
+"in": [
+"PracticeEntryView"
+],
+"code": "Text(\"TRADITION\")"
+},
+{
+"k": "text",
+"p": "Practices",
+"s": "Options shorter than the spoken practice were hidden.",
+"in": [
+"PracticeEntryView"
+],
+"code": "Text(\"Options shorter than the spoken practice were hidden.\")"
+},
+{
+"k": "button",
+"p": "Practices",
+"s": "No ambience",
+"in": [
+"PracticeEntryView"
+],
+"code": "Button(\"No ambience\") { selectedAmbienceName = nil }"
+},
+{
+"k": "text",
+"p": "Practices",
+"s": "Begin",
+"in": [
+"PracticeEntryView"
+],
+"code": "Text(\"Begin\")"
+},
+{
+"k": "accessibility",
+"p": "Practices",
+"s": "Starts the guided practice",
+"in": [
+"PracticeEntryView"
+],
+"code": ".accessibilityHint(\"Starts the guided practice\")"
+},
+{
+"k": "text",
+"p": "Practices",
+"s": "Remove from Favorites",
+"in": [
+"PracticeFavoriteButton"
+],
+"code": "isFavorite ? \"Remove from Favorites\" : \"Add to Favorites\""
+},
+{
+"k": "text",
+"p": "Practices",
+"s": "Add to Favorites",
+"in": [
+"PracticeFavoriteButton"
+],
+"code": "isFavorite ? \"Remove from Favorites\" : \"Add to Favorites\""
+},
+{
+"k": "text",
+"p": "Practices",
+"s": "No practice history",
+"in": [
+"PracticeHistoryView"
+],
+"code": "\"No practice history\","
+},
+{
+"k": "text",
+"p": "Practices",
+"s": "Practices you start will appear here with their start and end times.",
+"in": [
+"PracticeHistoryView"
+],
+"code": "description: Text(\"Practices you start will appear here with their start and end times.\")"
+},
+{
+"k": "text",
+"p": "Practices",
+"s": "Practice History",
+"in": [
+"PracticeHistoryView"
+],
+"code": "Text(\"Practice History\")"
+},
+{
+"k": "text",
+"p": "Practices",
+"s": "Practice complete",
+"in": [
+"PracticePlayerView"
+],
+"code": "Text(\"Practice complete\")"
+},
+{
+"k": "text",
+"p": "Practices",
+"s": "Tap to close",
+"in": [
+"PracticePlayerView"
+],
+"code": "Text(\"Tap to close\")"
+},
+{
+"k": "accessibility",
+"p": "Practices",
+"s": "Practice player",
+"in": [
+"PracticePlayerView"
+],
+"code": ".accessibilityLabel(\"Practice player\")"
+},
+{
+"k": "accessibility",
+"p": "Practices",
+"s": "Tap to move to the next instruction",
+"in": [
+"PracticePlayerView"
+],
+"code": ".accessibilityHint(\"Tap to move to the next instruction\")"
+},
+{
+"k": "accessibility",
+"p": "Practices",
+"s": "End practice",
+"in": [
+"PracticePlayerView"
+],
+"code": ".accessibilityLabel(\"End practice\")"
+},
+{
+"k": "text",
+"p": "Practices",
+"s": "Preparing practices…",
+"in": [
+"PracticesView"
+],
+"code": "ProgressView(\"Preparing practices…\")"
+},
+{
+"k": "text",
+"p": "Practices",
+"s": "No favorite practices",
+"in": [
+"PracticesView"
+],
+"code": "\"No favorite practices\","
+},
+{
+"k": "text",
+"p": "Practices",
+"s": "Tap the star on a practice to add it to Favorites.",
+"in": [
+"PracticesView"
+],
+"code": "\"Tap the star on a practice to add it to Favorites.\""
+},
+{
+"k": "text",
+"p": "Practices",
+"s": "No practices",
+"in": [
+"PracticesView"
+],
+"code": "\"No practices\","
+},
+{
+"k": "text",
+"p": "Practices",
+"s": "No practices match this filter.",
+"in": [
+"PracticesView"
+],
+"code": "description: Text(\"No practices match this filter.\")"
+},
+{
+"k": "text",
+"p": "Practices",
+"s": "Practices",
+"in": [
+"PracticesView"
+],
+"code": "Text(\"Practices\")"
+},
+{
+"k": "text",
+"p": "Practices",
+"s": "Meditation, breath and deep rest",
+"in": [
+"PracticesView"
+],
+"code": "Text(\"Meditation, breath and deep rest\")"
+},
+{
+"k": "label",
+"p": "Practices",
+"s": "History",
+"in": [
+"PracticesView"
+],
+"code": "Label(\"History\", systemImage: \"clock.arrow.circlepath\")"
+},
+{
+"k": "accessibility",
+"p": "Practices",
+"s": "Shows the history of completed and ended practices",
+"in": [
+"PracticesView"
+],
+"code": ".accessibilityHint(\"Shows the history of completed and ended practices\")"
+},
+{
+"k": "text",
+"p": "Practices",
+"s": "RIGHT NOW",
+"in": [
+"PracticesView"
+],
+"code": "Text(\"RIGHT NOW\")"
+},
+{
+"k": "text",
+"p": "Practices",
+"s": "Suggested",
+"in": [
+"PracticesView"
+],
+"code": "Text(\"Suggested\")"
+},
+{
+"k": "accessibility",
+"p": "Practices",
+"s": "Opens practice details",
+"in": [
+"PracticesView"
+],
+"code": ".accessibilityHint(\"Opens practice details\")"
+},
+{
+"k": "text",
+"p": "Profile",
+"s": "Add Profile",
+"in": [
+"ProfileEditorView"
+],
+"code": "Text(profile == nil ? \"Add Profile\" : \"Edit Profile\")"
+},
+{
+"k": "text",
+"p": "Profile",
+"s": "Edit Profile",
+"in": [
+"ProfileEditorView"
+],
+"code": "Text(profile == nil ? \"Add Profile\" : \"Edit Profile\")"
+},
+{
+"k": "text",
+"p": "Profile",
+"s": "Personal Information",
+"in": [
+"ProfileEditorView"
+],
+"code": "Text(\"Personal Information\")"
+},
+{
+"k": "placeholder",
+"p": "Profile",
+"s": "John Appleseed",
+"in": [
+"ProfileEditorView"
+],
+"code": "TextField(\"\", text: $name, prompt: Text(\"John Appleseed\").foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.6)))"
+},
+{
+"k": "label",
+"p": "Profile",
+"s": "Select Gender",
+"in": [
+"ProfileEditorView"
+],
+"code": "Picker(\"Select Gender\", selection: $gender) {"
+},
+{
+"k": "text",
+"p": "Profile",
+"s": "Ayurvedic Profile",
+"in": [
+"ProfileEditorView"
+],
+"code": "Text(\"Ayurvedic Profile\")"
+},
+{
+"k": "text",
+"p": "Profile",
+"s": "Data Management",
+"in": [
+"ProfileEditorView"
+],
+"code": "Text(\"Data Management\")"
+},
+{
+"k": "text",
+"p": "Profile",
+"s": "Separate Storage & Lists",
+"in": [
+"ProfileEditorView",
+"ProfileWizardView"
+],
+"code": "Text(\"Separate Storage & Lists\")"
+},
+{
+"k": "text",
+"p": "Profile",
+"s": "When on, this profile will have its own private storage and shopping lists. Otherwise, it will use the shared global data.",
+"in": [
+"ProfileEditorView"
+],
+"code": "Text(\"When on, this profile will have its own private storage and shopping lists. Otherwise, it will use the shared global data.\")"
+},
+{
+"k": "text",
+"p": "Profile",
+"s": "Priority Vitamins",
+"in": [
+"ProfileEditorView"
+],
+"code": "Text(\"Priority Vitamins\")"
+},
+{
+"k": "text",
+"p": "Profile",
+"s": "Priority Minerals",
+"in": [
+"ProfileEditorView"
+],
+"code": "Text(\"Priority Minerals\")"
+},
+{
+"k": "text",
+"p": "Profile",
+"s": "Allergens",
+"in": [
+"ProfileEditorView"
+],
+"code": "Text(\"Allergens\")"
+},
+{
+"k": "text",
+"p": "Profile",
+"s": "Meals",
+"in": [
+"ProfileEditorView"
+],
+"code": "Text(\"Meals\")"
+},
+{
+"k": "text",
+"p": "Profile",
+"s": "Select date",
+"in": [
+"ProfileEditorView"
+],
+"code": "Label { Text(\"Select date\") } icon: { Image(systemName: \"calendar\").foregroundColor(effectManager.currentGlobalAccentColor) }.lineLimit(1)"
+},
+{
+"k": "alert",
+"p": "Profile",
+"s": "Delete Profile",
+"in": [
+"ProfileListView"
+],
+"code": ".alert(\"Delete Profile\", isPresented: $showingDeleteConfirmation) {"
+},
+{
+"k": "alert",
+"p": "Profile",
+"s": "Live Activity",
+"in": [
+"ProfileListView"
+],
+"code": ".alert(\"Live Activity\", isPresented: $showingLiveActivityError) {"
+},
+{
+"k": "text",
+"p": "Profile",
+"s": "Stop",
+"in": [
+"ProfileListView"
+],
+"code": "Text(liveActivityManager.isRunning ? \"Stop\" : \"Live\")"
+},
+{
+"k": "text",
+"p": "Profile",
+"s": "Live",
+"in": [
+"ProfileListView"
+],
+"code": "Text(liveActivityManager.isRunning ? \"Stop\" : \"Live\")"
+},
+{
+"k": "text",
+"p": "Profile",
+"s": "Stop next activity Live Activity",
+"in": [
+"ProfileListView"
+],
+"code": "? \"Stop next activity Live Activity\""
+},
+{
+"k": "text",
+"p": "Profile",
+"s": "Start next activity Live Activity",
+"in": [
+"ProfileListView"
+],
+"code": ": \"Start next activity Live Activity\""
+},
+{
+"k": "accessibility",
+"p": "Profile",
+"s": "Add profile",
+"in": [
+"ProfileListView"
+],
+"code": ".accessibilityLabel(\"Add profile\")"
+},
+{
+"k": "text",
+"p": "Profile",
+"s": "Weight: %@ %@",
+"in": [
+"ProfileListView"
+],
+"code": "Text(\"Weight: \\(formattedWeight) \\(weightUnit)\")"
+},
+{
+"k": "text",
+"p": "Profile",
+"s": "Height: %@ %@",
+"in": [
+"ProfileListView"
+],
+"code": "Text(\"Height: \\(formattedHeight) \\(heightUnit)\")"
+},
+{
+"k": "text",
+"p": "Profile",
+"s": "Upgrade to the %@ plan to unlock and use this profile.",
+"in": [
+"ProfileListView"
+],
+"code": "Text(\"Upgrade to the \\(plan) plan to unlock and use this profile.\")"
+},
+{
+"k": "text",
+"p": "Profile",
+"s": "HealthKit profile",
+"in": [
+"ProfileListView"
+],
+"code": "isHealthKitProfile ? \"HealthKit profile\" : \"Use HealthKit\","
+},
+{
+"k": "text",
+"p": "Profile",
+"s": "Use HealthKit",
+"in": [
+"ProfileListView"
+],
+"code": "isHealthKitProfile ? \"HealthKit profile\" : \"Use HealthKit\","
+},
+{
+"k": "text",
+"p": "Profile",
+"s": "Current HealthKit profile",
+"in": [
+"ProfileListView"
+],
+"code": "? \"Current HealthKit profile\""
+},
+{
+"k": "text",
+"p": "Profile",
+"s": "Use HealthKit for %@",
+"in": [
+"ProfileListView"
+],
+"code": ": \"Use HealthKit for \\(profile.name)\""
+},
+{
+"k": "text",
+"p": "Prompt",
+"s": "Edit Prompt",
+"in": [
+"PromptEditorView"
+],
+"code": "Text(isEditing ? \"Edit Prompt\" : \"New Prompt\").font(.headline)"
+},
+{
+"k": "text",
+"p": "Prompt",
+"s": "Generate a vegan weekly menu",
+"in": [
+"PromptEditorView"
+],
+"code": "Text(\"Generate a vegan weekly menu\")"
+},
+{
+"k": "text",
+"p": "Settings",
+"s": "Add Theme",
+"in": [
+"AddThemeButton"
+],
+"code": "Text(\"Add Theme\")"
+},
+{
+"k": "text",
+"p": "Settings",
+"s": "Add New",
+"in": [
+"ImagePickerButton"
+],
+"code": "Text(\"Add New\")"
+},
+{
+"k": "text",
+"p": "Settings",
+"s": "Recent",
+"in": [
+"RecentImageButton"
+],
+"code": "Text(\"Recent\")"
+},
+{
+"k": "label",
+"p": "Settings",
+"s": "Ad privacy choices",
+"in": [
+"SettingsView"
+],
+"code": "Label(\"Ad privacy choices\", systemImage: \"hand.raised\")"
+},
+{
+"k": "text",
+"p": "Settings",
+"s": "Appearance",
+"in": [
+"SettingsView"
+],
+"code": "Text(\"Appearance\")"
+},
+{
+"k": "text",
+"p": "Settings",
+"s": "Choose a theme or a background image to change the application's appearance.",
+"in": [
+"SettingsView"
+],
+"code": "Text(\"Choose a theme or a background image to change the application's appearance.\")"
+},
+{
+"k": "label",
+"p": "Settings",
+"s": "Replace",
+"in": [
+"SettingsView"
+],
+"code": "} label: { Label(\"Replace\", systemImage: \"arrow.triangle.2.circlepath\") }"
+},
+{
+"k": "label",
+"p": "Settings",
+"s": "Edit",
+"in": [
+"SettingsView"
+],
+"code": "Label(\"Edit\", systemImage: \"pencil\")"
+},
+{
+"k": "text",
+"p": "Settings",
+"s": "Notifications",
+"in": [
+"SettingsView"
+],
+"code": "Text(\"Notifications\")"
+},
+{
+"k": "text",
+"p": "Settings",
+"s": "Checking notification permission…",
+"in": [
+"SettingsView"
+],
+"code": "Text(\"Checking notification permission…\")"
+},
+{
+"k": "text",
+"p": "Settings",
+"s": "Allow notifications in Ayura",
+"in": [
+"SettingsView"
+],
+"code": "Text(\"Allow notifications in Ayura\")"
+},
+{
+"k": "text",
+"p": "Settings",
+"s": "Controls reminders and updates for the entire app.",
+"in": [
+"SettingsView"
+],
+"code": "Text(\"Controls reminders and updates for the entire app.\")"
+},
+{
+"k": "label",
+"p": "Settings",
+"s": "Notifications are disabled in iOS",
+"in": [
+"SettingsView"
+],
+"code": "Label(\"Notifications are disabled in iOS\", systemImage: \"bell.slash.fill\")"
+},
+{
+"k": "text",
+"p": "Settings",
+"s": "Open Settings → Apps → Ayura → Notifications and turn on Allow Notifications.",
+"in": [
+"SettingsView"
+],
+"code": "Text(\"Open Settings → Apps → Ayura → Notifications and turn on Allow Notifications.\")"
+},
+{
+"k": "label",
+"p": "Settings",
+"s": "Open iOS Settings",
+"in": [
+"SettingsView"
+],
+"code": "Label(\"Open iOS Settings\", systemImage: \"gear\")"
+},
+{
+"k": "text",
+"p": "ShoppingList",
+"s": "All Lists",
+"in": [
+"ShoppingListAnalyticsView",
+"ShoppingListDetailView"
+],
+"code": "HStack { Image(systemName: \"chevron.backward\"); Text(\"All Lists\") }"
+},
+{
+"k": "text",
+"p": "ShoppingList",
+"s": "List Analytics",
+"in": [
+"ShoppingListAnalyticsView"
+],
+"code": "Text(\"List Analytics\").font(.headline)"
+},
+{
+"k": "label",
+"p": "ShoppingList",
+"s": "No Spending Data",
+"in": [
+"ShoppingListAnalyticsView"
+],
+"code": "Label(\"No Spending Data\", systemImage: \"chart.bar.xaxis.ascending\")"
+},
+{
+"k": "text",
+"p": "ShoppingList",
+"s": "No completed lists with prices found for this period.",
+"in": [
+"ShoppingListAnalyticsView"
+],
+"code": "Text(\"No completed lists with prices found for this period.\")"
+},
+{
+"k": "text",
+"p": "ShoppingList",
+"s": "Weekly Spending",
+"in": [
+"ShoppingListAnalyticsView"
+],
+"code": "Text(selectedMode == .weekly ? \"Weekly Spending\" : \"Monthly Spending\")"
+},
+{
+"k": "text",
+"p": "ShoppingList",
+"s": "Monthly Spending",
+"in": [
+"ShoppingListAnalyticsView"
+],
+"code": "Text(selectedMode == .weekly ? \"Weekly Spending\" : \"Monthly Spending\")"
+},
+{
+"k": "text",
+"p": "ShoppingList",
+"s": "Spent: %@",
+"in": [
+"ShoppingListAnalyticsView"
+],
+"code": "Text(\"Spent: \\(p.totalSpent, format: .currency(code: GlobalState.currencyCode))\")"
+},
+{
+"k": "text",
+"p": "ShoppingList",
+"s": "Are you sure you want to delete '%@' from the list? This action cannot be undone.",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "Text(\"Are you sure you want to delete '\\(itemToDelete?.name ?? \"this item\")' from the list? This action cannot be undone.\")"
+},
+{
+"k": "text",
+"p": "ShoppingList",
+"s": "Purchased:",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "Text(\"Purchased:\").font(.caption).foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))"
+},
+{
+"k": "text",
+"p": "ShoppingList",
+"s": "Total:",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "Text(\"Total:\").font(.caption).foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))"
+},
+{
+"k": "placeholder",
+"p": "ShoppingList",
+"s": "Friday market",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "TextField(\"\", text: $editableName, prompt: Text(\"Friday market\").foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.6)))"
+},
+{
+"k": "text",
+"p": "ShoppingList",
+"s": "Date & Time",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "Text(\"Date & Time\")"
+},
+{
+"k": "text",
+"p": "ShoppingList",
+"s": "Notifications are disabled. Please enable them in Settings.",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "Text(\"Notifications are disabled. Please enable them in Settings.\")"
+},
+{
+"k": "text",
+"p": "ShoppingList",
+"s": "Items",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "Text(\"Items\")"
+},
+{
+"k": "button",
+"p": "ShoppingList",
+"s": "Deselect Newly Bought",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "Button(areAllItemsBought ? \"Deselect Newly Bought\" : \"Mark All As Bought\", action: toggleAllItemsBought)"
+},
+{
+"k": "button",
+"p": "ShoppingList",
+"s": "Mark All As Bought",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "Button(areAllItemsBought ? \"Deselect Newly Bought\" : \"Mark All As Bought\", action: toggleAllItemsBought)"
+},
+{
+"k": "text",
+"p": "ShoppingList",
+"s": "The list is empty. Add items from suggestions or use search.",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "Text(\"The list is empty. Add items from suggestions or use search.\")"
+},
+{
+"k": "text",
+"p": "ShoppingList",
+"s": "Suggestions",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "Text(\"Suggestions\")"
+},
+{
+"k": "text",
+"p": "ShoppingList",
+"s": "Low stock: %lld g",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "Text(\"Low stock: \\(Int(storageItem.totalQuantity)) g\").font(.caption).foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))",
+"plural": true
+},
+{
+"k": "text",
+"p": "ShoppingList",
+"s": "Recently used",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "Text(\"Recently used\").font(.caption).foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))"
+},
+{
+"k": "text",
+"p": "ShoppingList",
+"s": "Shopping Lists",
+"in": [
+"ShoppingListView"
+],
+"code": "Text(\"Shopping Lists\").font(.title.bold()).foregroundColor(effectManager.currentGlobalAccentColor)"
+},
+{
+"k": "text",
+"p": "ShoppingList",
+"s": "Create your first list by tapping the “+” button below.",
+"in": [
+"ShoppingListView"
+],
+"code": "ContentUnavailableView(\"No Shopping Lists\", systemImage: \"cart.badge.plus\", description: Text(\"Create your first list by tapping the “+” button below.\")).foregr"
+},
+{
+"k": "text",
+"p": "ShoppingList",
+"s": "No Shopping Lists",
+"in": [
+"ShoppingListView"
+],
+"code": "ContentUnavailableView(\"No Shopping Lists\", systemImage: \"cart.badge.plus\", description: Text(\"Create your first list by tapping the “+” button below.\")).foregr"
+},
+{
+"k": "alert",
+"p": "ShoppingList",
+"s": "Delete List",
+"in": [
+"ShoppingListView"
+],
+"code": ".alert(\"Delete List\", isPresented: $isShowingDeleteListConfirmation) {"
+},
+{
+"k": "text",
+"p": "ShoppingList",
+"s": "Are you sure you want to delete the list '%@'? This action cannot be undone.",
+"in": [
+"ShoppingListView"
+],
+"code": "Text(\"Are you sure you want to delete the list '\\(listToDelete?.name ?? \"this list\")'? This action cannot be undone.\")"
+},
+{
+"k": "text",
+"p": "ShoppingList",
+"s": "Items: %lld | Total: %@",
+"in": [
+"ShoppingListView"
+],
+"code": "Text(\"Items: \\(list.items.count) | Total: \\(list.totalPrice, format: .currency(code: GlobalState.currencyCode))\")"
+},
+{
+"k": "accessibility",
+"p": "ShoppingList",
+"s": "Add Shopping List",
+"in": [
+"ShoppingListView"
+],
+"code": ".accessibilityLabel(\"Add Shopping List\")"
+},
+{
+"k": "text",
+"p": "Storage",
+"s": "Quantity",
+"in": [
+"BatchCardView",
+"BatchEditRow"
+],
+"code": "Text(\"Quantity\")"
+},
+{
+"k": "text",
+"p": "Storage",
+"s": "Has Expiration Date",
+"in": [
+"BatchCardView",
+"BatchEditRow"
+],
+"code": "Text(\"Has Expiration Date\")"
+},
+{
+"k": "text",
+"p": "Storage",
+"s": "Expires on",
+"in": [
+"BatchCardView",
+"BatchEditRow"
+],
+"code": "Text(\"Expires on\")"
+},
+{
+"k": "label",
+"p": "Storage",
+"s": "Delete Batch",
+"in": [
+"BatchCardView",
+"BatchEditRow",
+"StorageBatchEditorContent"
+],
+"code": "Label(\"Delete Batch\", systemImage: \"minus.circle\")"
+},
+{
+"k": "text",
+"p": "Storage",
+"s": "Available: %@ %@",
+"in": [
+"ConsumeStockViewContent"
+],
+"code": "Text(\"Available: \\(availableDisplay.value) \\(availableDisplay.unit)\")"
+},
+{
+"k": "text",
+"p": "Storage",
+"s": "Consume",
+"in": [
+"ConsumeStockViewContent"
+],
+"code": "Text(\"Consume\")"
+},
+{
+"k": "text",
+"p": "Storage",
+"s": "In storage: %@ %@",
+"in": [
+"FoodItemRowStorageView"
+],
+"code": "Text(\"In storage: \\(displayWeight.value) \\(displayWeight.unit)\")"
+},
+{
+"k": "label",
+"p": "Storage",
+"s": "Add Batch",
+"in": [
+"ProductCard"
+],
+"code": "Label(\"Add Batch\", systemImage: \"plus\")"
+},
+{
+"k": "text",
+"p": "Storage",
+"s": "No batches found. Add a new one to get started.",
+"in": [
+"StorageBatchEditorContent"
+],
+"code": "Text(\"No batches found. Add a new one to get started.\")"
+},
+{
+"k": "label",
+"p": "Storage",
+"s": "Add Another Batch",
+"in": [
+"StorageBatchEditorContent"
+],
+"code": "Label(\"Add Another Batch\", systemImage: \"plus\")"
+},
+{
+"k": "text",
+"p": "Storage",
+"s": "Are you sure you want to delete this batch (%@ %@, expires: %@)? This action cannot be undone.",
+"in": [
+"StorageBatchEditorContent"
+],
+"code": "Text(\"Are you sure you want to delete this batch (\\(quantityDisplay.value) \\(quantityDisplay.unit), expires: \\(expirationString))? This action cannot be undone."
+},
+{
+"k": "text",
+"p": "Storage",
+"s": "Add to Storage",
+"in": [
+"StorageEditorViev",
+"StorageListView"
+],
+"code": "Text(\"Add to Storage\")"
+},
+{
+"k": "text",
+"p": "Storage",
+"s": "Are you sure you want to delete '%@' from your storage? This action cannot be undone.",
+"in": [
+"StorageListView"
+],
+"code": "Text(\"Are you sure you want to delete '\\(itemToDelete?.food?.name ?? \"this item\")' from your storage? This action cannot be undone.\")"
+},
+{
+"k": "text",
+"p": "Storage",
+"s": "Storage",
+"in": [
+"StorageListView"
+],
+"code": "Text(\"Storage\")"
+},
+{
+"k": "label",
+"p": "Storage",
+"s": "No Items in Storage",
+"in": [
+"StorageListView"
+],
+"code": "Label(\"No Items in Storage\", systemImage: \"archivebox\")"
+},
+{
+"k": "text",
+"p": "Storage",
+"s": "Tap the '+' button to add your first item.",
+"in": [
+"StorageListView"
+],
+"code": "Text(\"Tap the '+' button to add your first item.\")"
+},
+{
+"k": "text",
+"p": "Storage",
+"s": "Current Status",
+"in": [
+"TransactionHistoryContent"
+],
+"code": "Text(\"Current Status\")"
+},
+{
+"k": "text",
+"p": "Storage",
+"s": "Available Quantity",
+"in": [
+"TransactionHistoryContent"
+],
+"code": "Text(\"Available Quantity\")"
+},
+{
+"k": "label",
+"p": "Storage",
+"s": "No History",
+"in": [
+"TransactionHistoryContent"
+],
+"code": "Label(\"No History\", systemImage: \"clock.arrow.circlepath\")"
+},
+{
+"k": "text",
+"p": "Storage",
+"s": "No transactions have been recorded for this item yet.",
+"in": [
+"TransactionHistoryContent"
+],
+"code": "Text(\"No transactions have been recorded for this item yet.\")"
+},
+{
+"k": "alert",
+"p": "TrainingPlan",
+"s": "Add Workouts to Calendar",
+"in": [
+"DailyTrainingPlanView"
+],
+"code": ".confirmationDialog(\"Add Workouts to Calendar\", isPresented: $isShowingConfirmation, titleVisibility: .visible) {"
+},
+{
+"k": "text",
+"p": "TrainingPlan",
+"s": "This will add workouts for %@. How should workouts for a specific time slot be handled?",
+"in": [
+"DailyTrainingPlanView"
+],
+"code": "Text(\"This will add workouts for \\(targetDate.formatted(date: .abbreviated, time: .omitted)). How should workouts for a specific time slot be handled?\")"
+},
+{
+"k": "text",
+"p": "TrainingPlan",
+"s": "AI Daily Workout Plan",
+"in": [
+"DailyTrainingPlanView"
+],
+"code": "Text(\"AI Daily Workout Plan\").font(.headline)"
+},
+{
+"k": "text",
+"p": "TrainingPlan",
+"s": "Suggested Workouts",
+"in": [
+"DailyTrainingPlanView"
+],
+"code": "Text(\"Suggested Workouts\")"
+},
+{
+"k": "text",
+"p": "TrainingPlan",
+"s": "New Training Plan",
+"in": [
+"TrainingPlanEditorView"
+],
+"code": "Text(planToEdit == nil ? \"New Training Plan\" : \"Edit Training Plan\").font(.headline)"
+},
+{
+"k": "text",
+"p": "TrainingPlan",
+"s": "Edit Training Plan",
+"in": [
+"TrainingPlanEditorView"
+],
+"code": "Text(planToEdit == nil ? \"New Training Plan\" : \"Edit Training Plan\").font(.headline)"
+},
+{
+"k": "placeholder",
+"p": "TrainingPlan",
+"s": "e.g., Strength Phase 1",
+"in": [
+"TrainingPlanEditorView"
+],
+"code": "TextField(\"\", text: $name, prompt: Text(\"e.g., Strength Phase 1\").foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.6)))"
+},
+{
+"k": "text",
+"p": "TrainingPlan",
+"s": "Select a workout to add exercises.",
+"in": [
+"TrainingPlanEditorView"
+],
+"code": "Text(\"Select a workout to add exercises.\")"
+},
+{
+"k": "text",
+"p": "TrainingPlan",
+"s": "Tap search to add exercises.",
+"in": [
+"TrainingPlanEditorView"
+],
+"code": "Text(\"Tap search to add exercises.\")"
+},
+{
+"k": "text",
+"p": "TrainingPlan",
+"s": "Generating Plan...",
+"in": [
+"TrainingPlanEditorView"
+],
+"code": "Text(\"Generating Plan...\").fontWeight(.bold)"
+},
+{
+"k": "label",
+"p": "TrainingPlan",
+"s": "Skip Day",
+"in": [
+"TrainingPlanEditorView"
+],
+"code": "Label(\"Skip Day\", systemImage: \"powersleep\")"
+},
+{
+"k": "text",
+"p": "TrainingPlan",
+"s": "No sets detailed.",
+"in": [
+"TrainingPlanExerciseDetailRow"
+],
+"code": "Text(\"No sets detailed.\")"
+},
+{
+"k": "text",
+"p": "TrainingPlan",
+"s": "%lld %@",
+"in": [
+"TrainingPlanExerciseDetailRow"
+],
+"code": "Text(\"\\(val) \\(unitText)\")"
+},
+{
+"k": "text",
+"p": "TrainingPlan",
+"s": "%lld sets planned",
+"in": [
+"TrainingPlanExerciseRowView"
+],
+"code": "Text(\"\\(link.sets.count) sets planned\")",
+"plural": true
+},
+{
+"k": "text",
+"p": "Yoga",
+"s": "Calculated from the exercises — updates automatically",
+"in": [
+"YogaExerciseViews"
+],
+"code": "Text(\"Calculated from the exercises — updates automatically\")"
+},
+{
+"k": "text",
+"p": "Yoga",
+"s": "Add exercises with Ayurveda data to see a live preview.",
+"in": [
+"YogaExerciseViews"
+],
+"code": "Text(\"Add exercises with Ayurveda data to see a live preview.\")"
+},
+{
+"k": "text",
+"p": "Yoga",
+"s": "Calculated from %lld exercise%@ in this workout.",
+"in": [
+"YogaExerciseViews"
+],
+"code": "? \"Calculated from \\(yogaEntries.count) exercise\\(yogaEntries.count == 1 ? \"\" : \"s\") in this workout.\"",
+"note": "the %@ after the noun is the English plural ending ('s' or nothing): leave it out and word the translation so that it reads with any number"
+},
+{
+"k": "text",
+"p": "Yoga",
+"s": "Ayurveda effects set manually.",
+"in": [
+"YogaExerciseViews"
+],
+"code": ": \"Ayurveda effects set manually.\""
+},
+{
+"k": "permission",
+"p": "permissions",
+"s": "Ayurveda & Asana Yoga reads and updates your calendar to save your meals, shopping lists, and workouts.",
+"key": "NSCalendarsFullAccessUsageDescription",
+"note": "shown by iOS when it asks for this permission; the app name stays in English"
+},
+{
+"k": "permission",
+"p": "permissions",
+"s": "Ayurveda & Asana Yoga uses your calendar to save your meals, shopping lists, and workouts.",
+"key": "NSCalendarsUsageDescription",
+"note": "shown by iOS when it asks for this permission; the app name stays in English"
+},
+{
+"k": "permission",
+"p": "permissions",
+"s": "Camera is used to scan barcodes and food items so you can quickly add them to the app.",
+"key": "NSCameraUsageDescription",
+"note": "shown by iOS when it asks for this permission; the app name stays in English"
+},
+{
+"k": "permission",
+"p": "permissions",
+"s": "Ayurveda & Asana Yoga reads your sleep, steps, active energy, and workouts to highlight sleep and include daily activity in calorie totals.",
+"key": "NSHealthShareUsageDescription",
+"note": "shown by iOS when it asks for this permission; the app name stays in English"
+},
+{
+"k": "permission",
+"p": "permissions",
+"s": "Ayurveda & Asana Yoga writes workout and activity data to Health when you choose to save or test these features.",
+"key": "NSHealthUpdateUsageDescription",
+"note": "shown by iOS when it asks for this permission; the app name stays in English"
+},
+{
+"k": "permission",
+"p": "permissions",
+"s": "Ayurveda & Asana Yoga needs to connect to your local server to sync your health data across devices.",
+"key": "NSLocalNetworkUsageDescription",
+"note": "shown by iOS when it asks for this permission; the app name stays in English"
+},
+{
+"k": "button",
+"p": "onboarding-paywall",
+"s": "Answer 12 questions instead",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Button(\"Answer 12 questions instead\") {"
+},
+{
+"k": "button",
+"p": "onboarding-paywall",
+"s": "Continue",
+"in": [
+"AyurvedaConstitutionViews",
+"ProfileWizardView"
+],
+"code": "Button(\"Continue\", action: completeDeclaredSelection)"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Question %lld of 12",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Text(\"Question \\(questionIndex + 1) of 12\")",
+"plural": true
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "This is a correspondence to a traditional wellness typology. It is informational only, is not medical advice, and does not diagnose or treat any condition.",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "\"This is a correspondence to a traditional wellness typology. It is informational only, is not medical advice, and does not diagnose or treat any condition.\""
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Change Ayurvedic profile",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Text(\"Change Ayurvedic profile\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Add an optional traditional profile to personalize Ayurvedic food ranking and explanations.",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "\"Add an optional traditional profile to personalize Ayurvedic food ranking and explanations.\""
+},
+{
+"k": "button",
+"p": "onboarding-paywall",
+"s": "I already know my constitution",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Button(\"I already know my constitution\") {"
+},
+{
+"k": "button",
+"p": "onboarding-paywall",
+"s": "Help me work it out",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Button(\"Help me work it out\") {"
+},
+{
+"k": "label",
+"p": "onboarding-paywall",
+"s": "Ayurvedic check-in",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Label(\"Ayurvedic check-in\", systemImage: \"leaf.circle.fill\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Optionally update how sleep, digestion, appetite, energy and skin have felt over the past week or two.",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "\"Optionally update how sleep, digestion, appetite, energy and skin have felt over the past week or two.\""
+},
+{
+"k": "button",
+"p": "onboarding-paywall",
+"s": "Not now",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Button(\"Not now\") {"
+},
+{
+"k": "button",
+"p": "onboarding-paywall",
+"s": "Check in",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Button(\"Check in\") {"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Review my answers",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "DisclosureGroup(\"Review my answers\") {"
+},
+{
+"k": "button",
+"p": "onboarding-paywall",
+"s": "Choose a known constitution",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Button(\"Choose a known constitution\") {"
+},
+{
+"k": "button",
+"p": "onboarding-paywall",
+"s": "Answer the 12 questions again",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Button(\"Answer the 12 questions again\") {"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Change profile",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Text(\"Change profile\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Over the past week or two",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Text(\"Over the past week or two\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Review",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "? \"Review\""
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Your current pattern",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Text(\"Your current pattern\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "A fresh check-in influences food ranking more than the long-term profile. Its influence starts to fade after seven days and reaches zero after 30 days.",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "\"A fresh check-in influences food ranking more than the long-term profile. Its influence starts to fade after seven days and reaches zero after 30 days.\""
+},
+{
+"k": "button",
+"p": "onboarding-paywall",
+"s": "Save check-in",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Button(\"Save check-in\") {"
+},
+{
+"k": "button",
+"p": "onboarding-paywall",
+"s": "Go back",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Button(\"Go back\") {"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Personal Ayurvedic fit is not set",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Text(\"Personal Ayurvedic fit is not set\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Add an optional traditional profile to personalize this explanation.",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "\"Add an optional traditional profile to personalize this explanation.\""
+},
+{
+"k": "button",
+"p": "onboarding-paywall",
+"s": "Set up profile",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Button(\"Set up profile\") {"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Personal fit changes ranking only; it never hides this food.",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Text(\"Personal fit changes ranking only; it never hides this food.\")"
+},
+{
+"k": "label",
+"p": "onboarding-paywall",
+"s": "No Ayurvedic profile",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Label(\"No Ayurvedic profile\", systemImage: \"questionmark.circle\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Step %lld of %lld",
+"in": [
+"ProfileWizardView"
+],
+"code": "Text(\"Step \\(currentStepIndex + 1) of \\(totalSteps)\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Saving Profile...",
+"in": [
+"ProfileWizardView"
+],
+"code": "ProgressView(\"Saving Profile...\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "New Profile",
+"in": [
+"ProfileWizardView"
+],
+"code": "Text(\"New Profile\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Save Profile",
+"in": [
+"ProfileWizardView"
+],
+"code": "Text(currentStep == .summary ? \"Save Profile\" : \"Continue\")"
+},
+{
+"k": "accessibility",
+"p": "onboarding-paywall",
+"s": "Change profile photo",
+"in": [
+"ProfileWizardView"
+],
+"code": ".accessibilityLabel(\"Change profile photo\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "in",
+"in": [
+"ProfileWizardView"
+],
+"code": "Text(isImperial ? \"in\" : \"cm\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "cm",
+"in": [
+"ProfileWizardView"
+],
+"code": "Text(isImperial ? \"in\" : \"cm\")"
+},
+{
+"k": "label",
+"p": "onboarding-paywall",
+"s": "Whole",
+"in": [
+"ProfileWizardView"
+],
+"code": "Picker(\"Whole\", selection: weightWholeBinding) {"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "lbs",
+"in": [
+"ProfileWizardView"
+],
+"code": "Text(isImperial ? \"lbs\" : \"kg\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "kg",
+"in": [
+"ProfileWizardView"
+],
+"code": "Text(isImperial ? \"lbs\" : \"kg\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "This profile will have its own private storage and shopping lists.",
+"in": [
+"ProfileWizardView"
+],
+"code": "Text(\"This profile will have its own private storage and shopping lists.\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Generate First Weekly Meal Plan",
+"in": [
+"ProfileWizardView"
+],
+"code": "Text(\"Generate First Weekly Meal Plan\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Uses USDA foods, respecting your allergens and nutrient priorities.",
+"in": [
+"ProfileWizardView"
+],
+"code": "Text(\"Uses USDA foods, respecting your allergens and nutrient priorities.\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Remove Ads Plan",
+"in": [
+"FeatureRow"
+],
+"code": "Text(\"Remove Ads Plan\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Advanced Plan",
+"in": [
+"FeatureRow"
+],
+"code": "Text(\"Advanced Plan\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Premium Plan",
+"in": [
+"FeatureRow"
+],
+"code": "Text(\"Premium Plan\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Base Plan",
+"in": [
+"FeatureRow"
+],
+"code": "Text(\"Base Plan\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "%lld %@ free",
+"in": [
+"SubscriptionCard"
+],
+"code": "Text(\"\\(intro.period.value) \\(unit) free\")"
+},
+{
+"k": "label",
+"p": "onboarding-paywall",
+"s": "Manage Subscription",
+"in": [
+"SubscriptionListView"
+],
+"code": "Label(\"Manage Subscription\", systemImage: \"creditcard\")"
+},
+{
+"k": "label",
+"p": "onboarding-paywall",
+"s": "Restore Purchases",
+"in": [
+"SubscriptionListView",
+"SubscriptionView"
+],
+"code": "Label(\"Restore Purchases\", systemImage: \"arrow.trianglehead.2.clockwise\")"
+},
+{
+"k": "label",
+"p": "onboarding-paywall",
+"s": "Privacy Policy",
+"in": [
+"SubscriptionListView"
+],
+"code": "Label(\"Privacy Policy\", systemImage: \"lock.shield\")"
+},
+{
+"k": "label",
+"p": "onboarding-paywall",
+"s": "Terms of Use (EULA)",
+"in": [
+"SubscriptionListView"
+],
+"code": "Label(\"Terms of Use (EULA)\", systemImage: \"doc.text\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Your current plan is %@ %@",
+"in": [
+"SubscriptionListView"
+],
+"code": "Text(\"Your current plan is \\(planType) \\(period)\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Renews on %@",
+"in": [
+"SubscriptionListView"
+],
+"code": "Text(\"Renews on \\(expiry.formatted(date: .abbreviated, time: .omitted))\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "%@ – %@ subscription.",
+"in": [
+"SubscriptionListView"
+],
+"code": "Text(\"\\(product.displayName) – \\(periodDescription) subscription.\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Price: %@. The subscription renews automatically unless cancelled at least 24 hours before the end of the current period.",
+"in": [
+"SubscriptionListView"
+],
+"code": "Text(\"Price: \\(product.displayPrice). The subscription renews automatically unless cancelled at least 24 hours before the end of the current period.\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Payment will be charged to your Apple ID account.",
+"in": [
+"SubscriptionListView"
+],
+"code": "Text(\"Payment will be charged to your Apple ID account.\")"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Upgrade Required",
+"in": [
+"SubscriptionView"
+],
+"code": "title: Text(\"Upgrade Required\"),"
+},
+{
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Upgrade plan & Support Us",
+"in": [
+"UpdatePlanBanner"
+],
+"code": "Text(\"Upgrade plan & Support Us\")"
+},
+{
+"k": "accessibility",
+"p": "onboarding-paywall",
+"s": "Dismiss banner",
+"in": [
+"UpdatePlanBanner"
+],
+"code": ".accessibilityLabel(\"Dismiss banner\")"
+}
+]

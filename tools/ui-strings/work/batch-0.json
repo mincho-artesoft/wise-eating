@@ -1,0 +1,3058 @@
+[
+{
+"i": 0,
+"k": "text",
+"p": "AI",
+"s": "Delete this job?",
+"in": [
+"AIGenerationHostView"
+],
+"code": "\"Delete this job?\","
+},
+{
+"i": 1,
+"k": "button",
+"p": "AI",
+"s": "Delete",
+"in": [
+"AIDailyMealGeneratorView",
+"AIDailyTrainingGeneratorView",
+"AIGenerationHostView",
+"BarcodeScannerView"
+],
+"code": "Button(\"Delete\", role: .destructive) {"
+},
+{
+"i": 2,
+"k": "button",
+"p": "AI",
+"s": "Cancel",
+"in": [
+"AIDailyMealGeneratorView",
+"AIDailyTrainingGeneratorView",
+"AIGenerationHostView",
+"BarcodeScannerView"
+],
+"code": "Button(\"Cancel\", role: .cancel) {"
+},
+{
+"i": 3,
+"k": "text",
+"p": "AI",
+"s": "This will remove the job from your history. This action cannot be undone.",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Text(\"This will remove the job from your history. This action cannot be undone.\")"
+},
+{
+"i": 4,
+"k": "text",
+"p": "AI",
+"s": "AI Generation Jobs (Demo)",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Text(\"AI Generation Jobs (Demo)\")"
+},
+{
+"i": 5,
+"k": "text",
+"p": "AI",
+"s": "No AI Generation History",
+"in": [
+"AIGenerationHostView"
+],
+"code": "\"No AI Generation History\","
+},
+{
+"i": 6,
+"k": "text",
+"p": "AI",
+"s": "Tap the ✨ button on training screens to start a new generation.",
+"in": [
+"AIGenerationHostView"
+],
+"code": "description: Text(\"Tap the ✨ button on training screens to start a new generation.\")"
+},
+{
+"i": 7,
+"k": "text",
+"p": "AI",
+"s": "General",
+"in": [
+"AIGenerationHostView",
+"ExerciseItemEditorView",
+"FoodItemEditorView",
+"FoodItemMenuEditorView"
+],
+"code": "Text(\"General\")"
+},
+{
+"i": 8,
+"k": "text",
+"p": "AI",
+"s": "Select which additional nutrient data to generate when creating new foods with AI. Enabling these may slightly increase generation time.",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Text(\"Select which additional nutrient data to generate when creating new foods with AI. Enabling these may slightly increase generation time.\")"
+},
+{
+"i": 9,
+"k": "text",
+"p": "AI",
+"s": "Food Generation",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Text(\"Food Generation\")"
+},
+{
+"i": 10,
+"k": "text",
+"p": "AI",
+"s": "%@ for %@",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Text(\"\\(job.jobType.rawValue) for \\(job.profile?.name ?? \"Deleted Profile\")\")"
+},
+{
+"i": 11,
+"k": "text",
+"p": "AI",
+"s": "Created: %@",
+"in": [
+"AIGenerationHostView",
+"FoodItemListView",
+"MealPlanPickerView",
+"NutritionsDetailView"
+],
+"code": "Text(\"Created: \\(job.creationDate.formatted(date: .abbreviated, time: .shortened))\")"
+},
+{
+"i": 12,
+"k": "text",
+"p": "AI",
+"s": "Error: %@",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Text(\"Error: \\(job.failureReason ?? \"Unknown error\")\")"
+},
+{
+"i": 13,
+"k": "label",
+"p": "AI",
+"s": "Preview & Save Plan",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Label(\"Preview & Save Plan\", systemImage: \"square.and.arrow.down.on.square\")"
+},
+{
+"i": 14,
+"k": "label",
+"p": "AI",
+"s": "Preview & Apply Day Plan",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Label(\"Preview & Apply Day Plan\", systemImage: \"doc.text.image\")"
+},
+{
+"i": 15,
+"k": "label",
+"p": "AI",
+"s": "Preview & Save Recipe",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Label(\"Preview & Save Recipe\", systemImage: \"square.and.arrow.down.on.square\")"
+},
+{
+"i": 16,
+"k": "label",
+"p": "AI",
+"s": "Preview & Save Menu",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Label(\"Preview & Save Menu\", systemImage: \"square.and.arrow.down.on.square\")"
+},
+{
+"i": 17,
+"k": "label",
+"p": "AI",
+"s": "Preview & Save Food",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Label(\"Preview & Save Food\", systemImage: \"square.and.arrow.down.on.square\")"
+},
+{
+"i": 18,
+"k": "label",
+"p": "AI",
+"s": "Preview & Save Exercise",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Label(\"Preview & Save Exercise\", systemImage: \"square.and.arrow.down.on.square\")"
+},
+{
+"i": 19,
+"k": "label",
+"p": "AI",
+"s": "Preview & Save Workout",
+"in": [
+"AIGenerationHostView"
+],
+"code": "Label(\"Preview & Save Workout\", systemImage: \"square.and.arrow.down.on.square\")"
+},
+{
+"i": 20,
+"k": "text",
+"p": "AI",
+"s": "AI Meal Plan Generator",
+"in": [
+"AIPlanGenerationView"
+],
+"code": "Text(\"AI Meal Plan Generator\")"
+},
+{
+"i": 21,
+"k": "text",
+"p": "AI",
+"s": "Ready to create a personalized meal plan based on your profile?",
+"in": [
+"AIPlanGenerationView"
+],
+"code": "Text(\"Ready to create a personalized meal plan based on your profile?\")"
+},
+{
+"i": 22,
+"k": "label",
+"p": "AI",
+"s": "Generate Plan",
+"in": [
+"AIPlanGenerationView"
+],
+"code": "Label(\"Generate Plan\", systemImage: \"sparkles\")"
+},
+{
+"i": 23,
+"k": "button",
+"p": "AI",
+"s": "Not Now",
+"in": [
+"AIPlanGenerationView"
+],
+"code": "Button(\"Not Now\", action: onDismiss)"
+},
+{
+"i": 24,
+"k": "text",
+"p": "AI",
+"s": "Select Plan Duration",
+"in": [
+"AIPlanGenerationView"
+],
+"code": "Text(\"Select Plan Duration\")"
+},
+{
+"i": 25,
+"k": "text",
+"p": "AI",
+"s": "%lld",
+"in": [
+"AIPlanGenerationView",
+"DailyTrainingPlanView",
+"ExerciseLogEntryView",
+"MealPlanAddDestinationView"
+],
+"code": "Text(\"\\(day)\")",
+"plural": true
+},
+{
+"i": 26,
+"k": "text",
+"p": "AI",
+"s": "Select Meals to Generate",
+"in": [
+"AIPlanGenerationView"
+],
+"code": "Text(\"Select Meals to Generate\")"
+},
+{
+"i": 27,
+"k": "text",
+"p": "Analytics",
+"s": "No Data",
+"in": [
+"AnalyticsChartView"
+],
+"code": "\"No Data\","
+},
+{
+"i": 28,
+"k": "text",
+"p": "Analytics",
+"s": "No HealthKit sleep data found for this period.",
+"in": [
+"AnalyticsChartView"
+],
+"code": "? \"No HealthKit sleep data found for this period.\""
+},
+{
+"i": 29,
+"k": "text",
+"p": "Analytics",
+"s": "No workout or activity calories found for this period.",
+"in": [
+"AnalyticsChartView"
+],
+"code": "? \"No workout or activity calories found for this period.\""
+},
+{
+"i": 30,
+"k": "text",
+"p": "Analytics",
+"s": "No meal or activity data found for this period.",
+"in": [
+"AnalyticsChartView"
+],
+"code": "? \"No meal or activity data found for this period.\""
+},
+{
+"i": 31,
+"k": "text",
+"p": "Analytics",
+"s": "This metric will appear after it is changed in the profile editor.",
+"in": [
+"AnalyticsChartView"
+],
+"code": "? \"This metric will appear after it is changed in the profile editor.\""
+},
+{
+"i": 32,
+"k": "text",
+"p": "Analytics",
+"s": "No meal data found for this metric.",
+"in": [
+"AnalyticsChartView"
+],
+"code": ": \"No meal data found for this metric.\""
+},
+{
+"i": 33,
+"k": "text",
+"p": "Analytics",
+"s": "Deficit",
+"in": [
+"AnalyticsChartView"
+],
+"code": "Text(\"Deficit\")"
+},
+{
+"i": 34,
+"k": "text",
+"p": "Analytics",
+"s": "Surplus",
+"in": [
+"AnalyticsChartView"
+],
+"code": "Text(\"Surplus\")"
+},
+{
+"i": 35,
+"k": "text",
+"p": "Analytics",
+"s": "MAX: %@ %@",
+"in": [
+"AnalyticsChartView"
+],
+"code": "Text(\"MAX: \\(max.clean) \\(requirements.unit ?? \"\")\")"
+},
+{
+"i": 36,
+"k": "text",
+"p": "Analytics",
+"s": "Analytics",
+"in": [
+"AnalyticsToolbarView"
+],
+"code": "Text(\"Analytics\")"
+},
+{
+"i": 37,
+"k": "text",
+"p": "Analytics",
+"s": "Select Metrics",
+"in": [
+"AnalyticsView"
+],
+"code": "Text(\"Select Metrics\").font(.headline).foregroundColor(effectManager.currentGlobalAccentColor)"
+},
+{
+"i": 38,
+"k": "button",
+"p": "Analytics",
+"s": "Done",
+"in": [
+"AIDailyMealGeneratorView",
+"AIDailyTrainingGeneratorView",
+"AnalyticsView",
+"AyurvedaSearchFiltersView"
+],
+"code": "Button(\"Done\") { withAnimation { presentedSheet = nil } }"
+},
+{
+"i": 39,
+"k": "accessibility",
+"p": "Ayurveda",
+"s": "Selected",
+"in": [
+"AyurvedaChip",
+"EffectSegmentPicker",
+"FoodSearchView"
+],
+"code": ".accessibilityValue(isSelected ? \"Selected\" : \"Not selected\")"
+},
+{
+"i": 40,
+"k": "accessibility",
+"p": "Ayurveda",
+"s": "Not selected",
+"in": [
+"AyurvedaChip",
+"EffectSegmentPicker"
+],
+"code": ".accessibilityValue(isSelected ? \"Selected\" : \"Not selected\")"
+},
+{
+"i": 41,
+"k": "accessibility",
+"p": "Ayurveda",
+"s": "Double tap to deselect",
+"in": [
+"AyurvedaChip"
+],
+"code": ".accessibilityHint(isSelected ? \"Double tap to deselect\" : \"Double tap to select\")"
+},
+{
+"i": 42,
+"k": "accessibility",
+"p": "Ayurveda",
+"s": "Double tap to select",
+"in": [
+"AyurvedaChip",
+"EffectSegmentPicker"
+],
+"code": ".accessibilityHint(isSelected ? \"Double tap to deselect\" : \"Double tap to select\")"
+},
+{
+"i": 43,
+"k": "text",
+"p": "Ayurveda",
+"s": "Dosha Effects",
+"in": [
+"AyurvedaEditorSection",
+"YogaExerciseViews"
+],
+"code": "Text(\"Dosha Effects\")"
+},
+{
+"i": 44,
+"k": "accessibility",
+"p": "Ayurveda",
+"s": "Virya energy",
+"in": [
+"AyurvedaEditorSection"
+],
+"code": ".accessibilityLabel(\"Virya energy\")"
+},
+{
+"i": 45,
+"k": "accessibility",
+"p": "Ayurveda",
+"s": "Vipaka post-digestive effect",
+"in": [
+"AyurvedaEditorSection"
+],
+"code": ".accessibilityLabel(\"Vipaka post-digestive effect\")"
+},
+{
+"i": 46,
+"k": "label",
+"p": "Ayurveda",
+"s": "Set manually",
+"in": [
+"AyurvedaEditorSection",
+"YogaExerciseViews"
+],
+"code": "Toggle(\"Set manually\", isOn: $isManualOverride)"
+},
+{
+"i": 47,
+"k": "text",
+"p": "Ayurveda",
+"s": "Add ingredients to see a live Ayurveda preview.",
+"in": [
+"AyurvedaEditorSection"
+],
+"code": "Text(\"Add ingredients to see a live Ayurveda preview.\")"
+},
+{
+"i": 48,
+"k": "text",
+"p": "Ayurveda",
+"s": "Computed from your ingredients — updates automatically",
+"in": [
+"AyurvedaEditorSection"
+],
+"code": "Text(\"Computed from your ingredients — updates automatically\")"
+},
+{
+"i": 49,
+"k": "text",
+"p": "Ayurveda",
+"s": "Not enough recognizable ingredients yet.",
+"in": [
+"AyurvedaEditorSection"
+],
+"code": "Text(\"Not enough recognizable ingredients yet.\")"
+},
+{
+"i": 50,
+"k": "label",
+"p": "Ayurveda",
+"s": "Virya (energy)",
+"in": [
+"AyurvedaEditorSection"
+],
+"code": "Label(\"Virya (energy)\", systemImage: \"bolt.fill\")"
+},
+{
+"i": 51,
+"k": "text",
+"p": "Ayurveda",
+"s": "Ayurveda debug: %@",
+"in": [
+"AyurvedaSectionView"
+],
+"code": "Text(\"Ayurveda debug: \\(debugFailure)\")"
+},
+{
+"i": 52,
+"k": "text",
+"p": "Ayurveda",
+"s": "Ayurveda",
+"in": [
+"AyurvedaSectionView",
+"ExerciseItemEditorView",
+"YogaExerciseViews"
+],
+"code": "Text(\"Ayurveda\")"
+},
+{
+"i": 53,
+"k": "text",
+"p": "Ayurveda",
+"s": "Doshas",
+"in": [
+"DoshaBarsView",
+"FoodItemRowView"
+],
+"code": "Text(\"Doshas\")"
+},
+{
+"i": 54,
+"k": "accessibility",
+"p": "Ayurveda",
+"s": "Dosha display",
+"in": [
+"DoshaBarsView"
+],
+"code": ".accessibilityLabel(\"Dosha display\")"
+},
+{
+"i": 55,
+"k": "accessibility",
+"p": "Ayurveda",
+"s": "Dosha effect legend",
+"in": [
+"DoshaBarsView"
+],
+"code": ".accessibilityLabel(\"Dosha effect legend\")"
+},
+{
+"i": 56,
+"k": "text",
+"p": "Ayurveda",
+"s": "%@ %lld%%",
+"in": [
+"DoshaBarsView"
+],
+"code": "Text(\"\\(item.label) \\(item.value)%\")"
+},
+{
+"i": 57,
+"k": "accessibility",
+"p": "Ayurveda",
+"s": "%@ effect",
+"in": [
+"DoshaScaleSelector"
+],
+"code": ".accessibilityLabel(\"\\(name) effect\")"
+},
+{
+"i": 58,
+"k": "accessibility",
+"p": "Ayurveda",
+"s": "Adjusts dosha effect",
+"in": [
+"DoshaScaleSelector"
+],
+"code": ".accessibilityHint(\"Adjusts dosha effect\")"
+},
+{
+"i": 59,
+"k": "accessibility",
+"p": "Ayurveda",
+"s": "Double tap to clear",
+"in": [
+"EffectSegmentPicker"
+],
+"code": ".accessibilityHint(isSelected ? \"Double tap to clear\" : \"Double tap to select\")"
+},
+{
+"i": 60,
+"k": "text",
+"p": "Ayurveda",
+"s": "Recipe Nutrition",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "Text(\"Recipe Nutrition\")"
+},
+{
+"i": 61,
+"k": "label",
+"p": "Ayurveda",
+"s": "Nutrition basis",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "Picker(\"Nutrition basis\", selection: $basis) {"
+},
+{
+"i": 62,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Scanned Barcode",
+"in": [
+"BarcodeRowView"
+],
+"code": "Text(\"Scanned Barcode\")"
+},
+{
+"i": 63,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Searching in your local database…",
+"in": [
+"BarcodeRowView"
+],
+"code": "Text(\"Searching in your local database…\")"
+},
+{
+"i": 64,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Looking up product…",
+"in": [
+"BarcodeRowView"
+],
+"code": "Text(\"Looking up product…\")"
+},
+{
+"i": 65,
+"k": "label",
+"p": "BarcodeScanner",
+"s": "Reliable local match",
+"in": [
+"BarcodeRowView"
+],
+"code": "Label(\"Reliable local match\", systemImage: \"checkmark.shield.fill\")"
+},
+{
+"i": 66,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "No reliable match in your database",
+"in": [
+"BarcodeRowView"
+],
+"code": "Text(\"No reliable match in your database\")"
+},
+{
+"i": 67,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Product with this code not found",
+"in": [
+"BarcodeRowView"
+],
+"code": "Text(\"Product with this code not found\")"
+},
+{
+"i": 68,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Invalid Code",
+"in": [
+"BarcodeRowView"
+],
+"code": "Text(\"Invalid Code\")"
+},
+{
+"i": 69,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "The scanned code is not a valid product barcode.",
+"in": [
+"BarcodeRowView"
+],
+"code": "Text(\"The scanned code is not a valid product barcode.\")"
+},
+{
+"i": 70,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Requesting Camera Access…",
+"in": [
+"BarcodeScannerView"
+],
+"code": "Text(\"Requesting Camera Access…\")"
+},
+{
+"i": 71,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Live preview is OFF",
+"in": [
+"BarcodeScannerView"
+],
+"code": "Text(\"Live preview is OFF\")"
+},
+{
+"i": 72,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Tap “Live Off” to enable camera",
+"in": [
+"BarcodeScannerView"
+],
+"code": "Text(\"Tap “Live Off” to enable camera\")"
+},
+{
+"i": 73,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Scanned",
+"in": [
+"BarcodeScannerView"
+],
+"code": "Text(\"Scanned\")"
+},
+{
+"i": 74,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "No scanned barcodes",
+"in": [
+"BarcodeScannerView"
+],
+"code": "Text(\"No scanned barcodes\")"
+},
+{
+"i": 75,
+"k": "alert",
+"p": "BarcodeScanner",
+"s": "Camera access needed",
+"in": [
+"BarcodeScannerView"
+],
+"code": ".alert(\"Camera access needed\", isPresented: $showPermissionAlert) {"
+},
+{
+"i": 76,
+"k": "button",
+"p": "BarcodeScanner",
+"s": "OK",
+"in": [
+"AIDailyMealGeneratorView",
+"AIDailyTrainingGeneratorView",
+"BarcodeScannerView",
+"DailyMealPlanView"
+],
+"code": "Button(\"OK\", role: .cancel) { }"
+},
+{
+"i": 77,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "To use the live preview, allow camera access in Settings.",
+"in": [
+"BarcodeScannerView"
+],
+"code": "Text(\"To use the live preview, allow camera access in Settings.\")"
+},
+{
+"i": 78,
+"k": "alert",
+"p": "BarcodeScanner",
+"s": "Error",
+"in": [
+"BarcodeScannerView",
+"DailyMealPlanView",
+"DailyTrainingPlanView",
+"ExerciseItemEditorView"
+],
+"code": ".alert(\"Error\", isPresented: $showAlert) {"
+},
+{
+"i": 79,
+"k": "alert",
+"p": "BarcodeScanner",
+"s": "Delete Item",
+"in": [
+"BarcodeScannerView",
+"FoodItemListView",
+"ShoppingListDetailView",
+"StorageListView"
+],
+"code": ".alert(\"Delete Item\", isPresented: $isShowingDeleteScannedItemAlert) {"
+},
+{
+"i": 80,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Are you sure you want to delete this scanned barcode?",
+"in": [
+"BarcodeScannerView"
+],
+"code": "Text(\"Are you sure you want to delete this scanned barcode?\")"
+},
+{
+"i": 81,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Add Item?",
+"in": [
+"BarcodeScannerView"
+],
+"code": "\"Add Item?\","
+},
+{
+"i": 82,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Add \"%@\"",
+"in": [
+"BarcodeScannerView"
+]
+},
+{
+"i": 83,
+"k": "button",
+"p": "BarcodeScanner",
+"s": "Create New Food: \"%@\"",
+"in": [
+"BarcodeScannerView"
+],
+"code": "Button(\"Create New Food: \\\"\\(productName)\\\"\") {"
+},
+{
+"i": 84,
+"k": "button",
+"p": "BarcodeScanner",
+"s": "Create New Food with AI: \"%@\"",
+"in": [
+"BarcodeScannerView"
+],
+"code": "Button(\"Create New Food with AI: \\\"\\(productName)\\\"\") {"
+},
+{
+"i": 85,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Found \"%@\" in your database. You can add it, or create a new entry for \"%@\".",
+"in": [
+"BarcodeScannerView"
+]
+},
+{
+"i": 86,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "\"%@\" was not found in your database. You can create a new entry for it.",
+"in": [
+"BarcodeScannerView"
+],
+"code": "Text(\"\\\"\\(productName)\\\" was not found in your database. You can create a new entry for it.\")"
+},
+{
+"i": 87,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Add this item to %@?",
+"in": [
+"BarcodeScannerView"
+],
+"code": "Text(\"Add this item to \\(destination)?\")"
+},
+{
+"i": 88,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Generation Scheduled",
+"in": [
+"AIDailyMealGeneratorView",
+"AIDailyTrainingGeneratorView",
+"BarcodeScannerView",
+"FoodItemEditorView"
+],
+"code": "Text(\"Generation Scheduled\")"
+},
+{
+"i": 89,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "You'll be notified when your food is ready.",
+"in": [
+"BarcodeScannerView",
+"FoodItemEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "Text(\"You'll be notified when your food is ready.\")"
+},
+{
+"i": 90,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Unknown Camera Error",
+"in": [
+"CameraPicker"
+],
+"code": "ContentUnavailableView(\"Unknown Camera Error\", systemImage: \"camera.badge.ellipsis\")"
+},
+{
+"i": 91,
+"k": "text",
+"p": "Calendar",
+"s": "%lld min total",
+"in": [
+"EventView",
+"TrainingSummaryRowEventView"
+],
+"code": "Text(\"\\(durationMinutes) min total\")",
+"plural": true
+},
+{
+"i": 92,
+"k": "text",
+"p": "Calendar",
+"s": "%lld min",
+"in": [
+"ExerciseRowEventView",
+"FoodItemDetailView"
+],
+"code": "Text(\"\\(Int(duration)) min\")",
+"plural": true
+},
+{
+"i": 93,
+"k": "text",
+"p": "Calendar",
+"s": "%.0f kcal burned",
+"in": [
+"ExerciseRowEventView",
+"NetBalanceDetailRingView",
+"TrainingSummaryRowEventView"
+],
+"code": "Text(\"\\(caloriesBurned, specifier: \"%.0f\") kcal burned\")"
+},
+{
+"i": 94,
+"k": "text",
+"p": "Calendar",
+"s": "Meal",
+"in": [
+"MealSummaryRowEventView"
+],
+"code": "Text(\"Meal\")"
+},
+{
+"i": 95,
+"k": "text",
+"p": "Calendar",
+"s": "%lld item%@ bought",
+"in": [
+"ShoppingListRowsView"
+],
+"code": "Text(\"\\(itemsPendingCount) item\\(itemsPendingCount > 1 ? \"s\" : \"\") bought\")",
+"note": "the %@ after the noun is the English plural ending ('s' or nothing): leave it out and word the translation so that it reads with any number"
+},
+{
+"i": 96,
+"k": "text",
+"p": "Calendar",
+"s": "%llds",
+"in": [
+"ShoppingListRowsView"
+],
+"code": "Text(\"\\(Int(ceil(timeRemaining)))s\")",
+"plural": true
+},
+{
+"i": 97,
+"k": "text",
+"p": "Calendar",
+"s": "Undo",
+"in": [
+"ShoppingListRowsView"
+],
+"code": "Text(\"Undo\")"
+},
+{
+"i": 98,
+"k": "text",
+"p": "Calendar",
+"s": "All items bought!",
+"in": [
+"ShoppingListRowsView"
+],
+"code": "Text(\"All items bought!\")"
+},
+{
+"i": 99,
+"k": "text",
+"p": "Calendar",
+"s": "Workout Summary",
+"in": [
+"TrainingSummaryRowEventView"
+],
+"code": "Text(\"Workout Summary\")"
+},
+{
+"i": 100,
+"k": "label",
+"p": "Calendar",
+"s": "Notes",
+"in": [
+"MealActionMenuView",
+"NodesListView",
+"NutritionsDetailView",
+"TrainingActionMenuView"
+],
+"code": "Label(\"Notes\", systemImage: \"list.clipboard\")"
+},
+{
+"i": 101,
+"k": "text",
+"p": "CustomViews",
+"s": "Search...",
+"in": [
+"ColorMultiSelectGridView",
+"DropdownMenu",
+"IconMultiSelectGridView",
+"LiquidTabBar"
+],
+"code": "Text(\"Search...\")"
+},
+{
+"i": 102,
+"k": "placeholder",
+"p": "CustomViews",
+"s": "Search…",
+"in": [
+"DropdownMenu"
+],
+"code": "TextField(\"Search…\", text: $searchText, prompt: Text(\"Search...\")"
+},
+{
+"i": 103,
+"k": "button",
+"p": "CustomViews",
+"s": "Deselect all",
+"in": [
+"DropdownMenu"
+],
+"code": "Button(allSelected ? \"Deselect all\" : \"Select all\") {"
+},
+{
+"i": 104,
+"k": "button",
+"p": "CustomViews",
+"s": "Select all",
+"in": [
+"DropdownMenu"
+],
+"code": "Button(allSelected ? \"Deselect all\" : \"Select all\") {"
+},
+{
+"i": 105,
+"k": "text",
+"p": "CustomViews",
+"s": "+ %lld more",
+"in": [
+"MultiSelectDropdown"
+],
+"code": "Text(\"+ \\(remaining) more\")",
+"plural": true
+},
+{
+"i": 106,
+"k": "text",
+"p": "CustomViews",
+"s": "Live Effect Controls",
+"in": [
+"EffectControlPanelView"
+],
+"code": "Text(\"Live Effect Controls\").font(.headline)"
+},
+{
+"i": 107,
+"k": "text",
+"p": "CustomViews",
+"s": "Saturation",
+"in": [
+"EffectControlPanelView"
+],
+"code": "Text(\"Saturation\").frame(width: 100, alignment: .leading)"
+},
+{
+"i": 108,
+"k": "text",
+"p": "CustomViews",
+"s": "Brightness",
+"in": [
+"EffectControlPanelView"
+],
+"code": "Text(\"Brightness\").frame(width: 100, alignment: .leading)"
+},
+{
+"i": 109,
+"k": "text",
+"p": "CustomViews",
+"s": "Opacity",
+"in": [
+"EffectControlPanelView"
+],
+"code": "Text(\"Opacity\").frame(width: 100, alignment: .leading)"
+},
+{
+"i": 110,
+"k": "label",
+"p": "CustomViews",
+"s": "Use Apple Material",
+"in": [
+"EffectControlPanelView"
+],
+"code": "Toggle(\"Use Apple Material\", isOn: $effectManager.config.useAppleMaterial.animation())"
+},
+{
+"i": 111,
+"k": "label",
+"p": "CustomViews",
+"s": "Contrast Scrim",
+"in": [
+"EffectControlPanelView"
+],
+"code": "Toggle(\"Contrast Scrim\", isOn: $effectManager.config.useScrim)"
+},
+{
+"i": 112,
+"k": "button",
+"p": "CustomViews",
+"s": "Save",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "Button(themeToEdit == nil ? \"Save\" : \"Update\", action: saveTheme)"
+},
+{
+"i": 113,
+"k": "button",
+"p": "CustomViews",
+"s": "Update",
+"in": [
+"PromptEditorView",
+"ThemeEditorView"
+],
+"code": "Button(themeToEdit == nil ? \"Save\" : \"Update\", action: saveTheme)"
+},
+{
+"i": 114,
+"k": "text",
+"p": "CustomViews",
+"s": "Live Preview",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Live Preview\")"
+},
+{
+"i": 115,
+"k": "text",
+"p": "CustomViews",
+"s": "Theme Name",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Theme Name\")"
+},
+{
+"i": 116,
+"k": "placeholder",
+"p": "CustomViews",
+"s": "e.g., Sunset Bliss",
+"in": [
+"ThemeEditorView"
+],
+"code": "TextField(\"My Awesome Theme\", text: $themeName, prompt: Text(\"e.g., Sunset Bliss\").foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.6)))"
+},
+{
+"i": 117,
+"k": "placeholder",
+"p": "CustomViews",
+"s": "My Awesome Theme",
+"in": [
+"ThemeEditorView"
+],
+"code": "TextField(\"My Awesome Theme\", text: $themeName, prompt: Text(\"e.g., Sunset Bliss\").foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.6)))"
+},
+{
+"i": 118,
+"k": "text",
+"p": "CustomViews",
+"s": "Colors",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Colors\")"
+},
+{
+"i": 119,
+"k": "text",
+"p": "CustomViews",
+"s": "Color %lld",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Color \\(index + 1)\")",
+"plural": true
+},
+{
+"i": 120,
+"k": "label",
+"p": "CustomViews",
+"s": "Add New Color",
+"in": [
+"ThemeEditorView"
+],
+"code": "Label(\"Add New Color\", systemImage: \"plus\")"
+},
+{
+"i": 121,
+"k": "text",
+"p": "CustomViews",
+"s": "Gradient Direction",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Gradient Direction\")"
+},
+{
+"i": 122,
+"k": "label",
+"p": "CustomViews",
+"s": "Start Point",
+"in": [
+"ThemeEditorView"
+],
+"code": "Picker(\"Start Point\", selection: $startPoint) {"
+},
+{
+"i": 123,
+"k": "text",
+"p": "CustomViews",
+"s": "Top Leading",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Top Leading\").tag(UnitPoint.topLeading)"
+},
+{
+"i": 124,
+"k": "text",
+"p": "CustomViews",
+"s": "Top",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Top\").tag(UnitPoint.top)"
+},
+{
+"i": 125,
+"k": "text",
+"p": "CustomViews",
+"s": "Top Trailing",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Top Trailing\").tag(UnitPoint.topTrailing)"
+},
+{
+"i": 126,
+"k": "text",
+"p": "CustomViews",
+"s": "Leading",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Leading\").tag(UnitPoint.leading)"
+},
+{
+"i": 127,
+"k": "text",
+"p": "CustomViews",
+"s": "Center",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Center\").tag(UnitPoint.center)"
+},
+{
+"i": 128,
+"k": "label",
+"p": "CustomViews",
+"s": "End Point",
+"in": [
+"ThemeEditorView"
+],
+"code": "Picker(\"End Point\", selection: $endPoint) {"
+},
+{
+"i": 129,
+"k": "text",
+"p": "CustomViews",
+"s": "Bottom Trailing",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Bottom Trailing\").tag(UnitPoint.bottomTrailing)"
+},
+{
+"i": 130,
+"k": "text",
+"p": "CustomViews",
+"s": "Bottom",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Bottom\").tag(UnitPoint.bottom)"
+},
+{
+"i": 131,
+"k": "text",
+"p": "CustomViews",
+"s": "Bottom Leading",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Bottom Leading\").tag(UnitPoint.bottomLeading)"
+},
+{
+"i": 132,
+"k": "text",
+"p": "CustomViews",
+"s": "Trailing",
+"in": [
+"ThemeEditorView"
+],
+"code": "Text(\"Trailing\").tag(UnitPoint.trailing)"
+},
+{
+"i": 133,
+"k": "text",
+"p": "Exercise",
+"s": "Exercise Details",
+"in": [
+"ExerciseItemDetailView"
+],
+"code": "Text(\"Exercise Details\").font(.headline)"
+},
+{
+"i": 134,
+"k": "text",
+"p": "Exercise",
+"s": "Intensity",
+"in": [
+"ExerciseItemDetailView"
+],
+"code": "Label { Text(\"Intensity\") } icon: {"
+},
+{
+"i": 135,
+"k": "text",
+"p": "Exercise",
+"s": "%@ METs",
+"in": [
+"ExerciseItemDetailView"
+],
+"code": "Text(\"\\(met.clean) METs\").font(.title.weight(.bold))"
+},
+{
+"i": 136,
+"k": "text",
+"p": "Exercise",
+"s": "Burn (30 min)",
+"in": [
+"ExerciseItemDetailView"
+],
+"code": "Label { Text(\"Burn (30 min)\") } icon: {"
+},
+{
+"i": 137,
+"k": "text",
+"p": "Exercise",
+"s": "%.0f kcal",
+"in": [
+"CaloriesDetailRingView",
+"ExerciseCalorieRowView",
+"ExerciseItemDetailView",
+"HealthActivityCalorieRowView"
+],
+"code": "Text(\"\\(calories, specifier: \"%.0f\") kcal\")"
+},
+{
+"i": 138,
+"k": "text",
+"p": "Exercise",
+"s": "Min. Age",
+"in": [
+"ExerciseItemDetailView",
+"FoodItemDetailView"
+],
+"code": "Label { Text(\"Min. Age\") } icon: {"
+},
+{
+"i": 139,
+"k": "text",
+"p": "Exercise",
+"s": "%lld mo",
+"in": [
+"ExerciseItemDetailView",
+"FoodItemDetailView"
+],
+"code": "Text(\"\\(item.minimalAgeMonths) mo\")",
+"plural": true
+},
+{
+"i": 140,
+"k": "text",
+"p": "Exercise",
+"s": "%@ sec",
+"in": [
+"ExerciseItemDetailView",
+"WorkoutEditorView"
+],
+"code": "Text(\"\\(link.durationSeconds.clean) sec\")"
+},
+{
+"i": 141,
+"k": "label",
+"p": "Exercise",
+"s": "Exercise details",
+"in": [
+"ExerciseItemDetailView"
+],
+"code": "Label(\"Exercise details\", systemImage: \"figure.yoga\")"
+},
+{
+"i": 142,
+"k": "text",
+"p": "Exercise",
+"s": "Back",
+"in": [
+"AyurvedaConstitutionViews",
+"ExerciseItemDetailView",
+"FoodItemDetailView",
+"MealEditorView"
+],
+"code": "Text(\"Back\")"
+},
+{
+"i": 143,
+"k": "text",
+"p": "Exercise",
+"s": "Linked Notes",
+"in": [
+"ExerciseItemDetailView",
+"FoodItemDetailView"
+],
+"code": "Text(\"Linked Notes\")"
+},
+{
+"i": 144,
+"k": "text",
+"p": "Exercise",
+"s": "No Linked Notes",
+"in": [
+"ExerciseItemDetailView",
+"FoodItemDetailView"
+],
+"code": "\"No Linked Notes\","
+},
+{
+"i": 145,
+"k": "text",
+"p": "Exercise",
+"s": "You haven't linked this exercise to any notes yet.",
+"in": [
+"ExerciseItemDetailView"
+],
+"code": "description: Text(\"You haven't linked this exercise to any notes yet.\")"
+},
+{
+"i": 146,
+"k": "text",
+"p": "Exercise",
+"s": "Saving…",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "Text(\"Saving…\")"
+},
+{
+"i": 147,
+"k": "accessibility",
+"p": "Exercise",
+"s": "Saving",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": ".accessibilityLabel(\"Saving\")"
+},
+{
+"i": 148,
+"k": "text",
+"p": "Exercise",
+"s": "Select photo source",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "\"Select photo source\","
+},
+{
+"i": 149,
+"k": "button",
+"p": "Exercise",
+"s": "Take Photo",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "Button(\"Take Photo\") {"
+},
+{
+"i": 150,
+"k": "button",
+"p": "Exercise",
+"s": "Choose from Library",
+"in": [
+"ExerciseItemEditorView",
+"WorkoutEditorView"
+],
+"code": "Button(\"Choose from Library\") {"
+},
+{
+"i": 151,
+"k": "text",
+"p": "Exercise",
+"s": "Description",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemEditorView"
+],
+"code": "Text(\"Description\")"
+},
+{
+"i": 152,
+"k": "text",
+"p": "Exercise",
+"s": "Gallery",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"WorkoutEditorView"
+],
+"code": "Text(\"Gallery\")"
+},
+{
+"i": 153,
+"k": "button",
+"p": "Exercise",
+"s": "Set as main",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"WorkoutEditorView"
+],
+"code": "Button(\"Set as main\") {"
+},
+{
+"i": 154,
+"k": "button",
+"p": "Exercise",
+"s": "Change",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"WorkoutEditorView"
+],
+"code": "Button(\"Change\") {"
+},
+{
+"i": 155,
+"k": "text",
+"p": "Exercise",
+"s": "Remove",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"MealPlanEditorView"
+],
+"code": "Text(\"Remove\")"
+},
+{
+"i": 156,
+"k": "text",
+"p": "Exercise",
+"s": "Primary Muscles",
+"in": [
+"ExerciseItemEditorView",
+"WorkoutEditorView"
+],
+"code": "Text(\"Primary Muscles\")"
+},
+{
+"i": 157,
+"k": "text",
+"p": "Exercise",
+"s": "Select %@",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemEditorView",
+"ProfileEditorView"
+],
+"code": "Text(\"Select \\(openMenu.title)\")"
+},
+{
+"i": 158,
+"k": "text",
+"p": "Exercise",
+"s": "Generating Details...",
+"in": [
+"ExerciseItemEditorView"
+],
+"code": "Text(\"Generating Details...\").fontWeight(.bold)"
+},
+{
+"i": 159,
+"k": "text",
+"p": "Exercise",
+"s": "AI is fetching data for your exercise.",
+"in": [
+"ExerciseItemEditorView"
+],
+"code": "Text(\"AI is fetching data for your exercise.\").font(.caption)"
+},
+{
+"i": 160,
+"k": "alert",
+"p": "Exercise",
+"s": "Delete Exercise",
+"in": [
+"ExerciseListView",
+"TrainingView"
+],
+"code": ".alert(\"Delete Exercise\", isPresented: $isShowingDeleteItemConfirmation) {"
+},
+{
+"i": 161,
+"k": "text",
+"p": "Exercise",
+"s": "This exercise is used in %lld workouts or training plans.\nIf you delete it, it will be removed from those workouts and plans.\n\nAre you sure you want to continue?",
+"in": [
+"ExerciseListView"
+],
+"code": "This exercise is used in \\(itemUsageCount) workouts or training plans.",
+"plural": true
+},
+{
+"i": 162,
+"k": "text",
+"p": "Exercise",
+"s": "Are you sure you want to delete '%@'? This action cannot be undone.",
+"in": [
+"ExerciseListView",
+"FoodItemListView",
+"ProfileListView"
+],
+"code": "Text(\"Are you sure you want to delete '\\(item.name)'? This action cannot be undone.\")"
+},
+{
+"i": 163,
+"k": "text",
+"p": "Exercise",
+"s": "Delete Training Plan",
+"in": [
+"ExerciseListView"
+],
+"code": "planToDeleteName.isEmpty ? \"Delete Training Plan\" : \"Delete \\\"\\(planToDeleteName)\\\"\","
+},
+{
+"i": 164,
+"k": "text",
+"p": "Exercise",
+"s": "Delete \"%@\"",
+"in": [
+"ExerciseListView"
+]
+},
+{
+"i": 165,
+"k": "button",
+"p": "Exercise",
+"s": "Delete Plan Only",
+"in": [
+"ExerciseListView",
+"FoodItemListView"
+],
+"code": "Button(\"Delete Plan Only\", role: .destructive) {"
+},
+{
+"i": 166,
+"k": "button",
+"p": "Exercise",
+"s": "Delete Plan & Workouts",
+"in": [
+"ExerciseListView"
+],
+"code": "Button(\"Delete Plan & Workouts\", role: .destructive) {"
+},
+{
+"i": 167,
+"k": "text",
+"p": "Exercise",
+"s": "This training plan has %lld linked workout(s).\n\n• \"Delete Plan Only\" will remove the plan but keep the workouts in your exercise library.\n• \"Delete Plan & Workouts\" will delete the plan and those linked workouts as well.\n\nWhat would you like to do?",
+"in": [
+"ExerciseListView"
+],
+"code": "This training plan has \\(planToDeleteLinkedWorkoutCount) linked workout(s).",
+"plural": true
+},
+{
+"i": 168,
+"k": "text",
+"p": "Exercise",
+"s": "Are you sure you want to delete this training plan? This action cannot be undone.",
+"in": [
+"ExerciseListView"
+],
+"code": "Text(\"Are you sure you want to delete this training plan? This action cannot be undone.\")"
+},
+{
+"i": 169,
+"k": "text",
+"p": "Exercise",
+"s": "Default Exercises",
+"in": [
+"ExerciseListView"
+],
+"code": "if vm.filter == .default { Text(\"Default Exercises\").font(.title.bold()) }"
+},
+{
+"i": 170,
+"k": "text",
+"p": "Exercise",
+"s": "Favorite Exercises",
+"in": [
+"ExerciseListView"
+],
+"code": "else if vm.filter == .favorites { Text(\"Favorite Exercises\").font(.title.bold()) }"
+},
+{
+"i": 171,
+"k": "text",
+"p": "Exercise",
+"s": "Exercises",
+"in": [
+"ExerciseListView",
+"TrainingView",
+"WorkoutEditorView"
+],
+"code": "else if vm.filter == .all { Text(\"Exercises\").font(.title.bold()) }"
+},
+{
+"i": 172,
+"k": "text",
+"p": "Exercise",
+"s": "My Workouts",
+"in": [
+"ExerciseListView"
+],
+"code": "else if vm.filter == .workouts { Text(\"My Workouts\").font(.title.bold()) }"
+},
+{
+"i": 173,
+"k": "text",
+"p": "Exercise",
+"s": "Training Plans",
+"in": [
+"ExerciseListView"
+],
+"code": "else if vm.filter == .plans { Text(\"Training Plans\").font(.title.bold()) }"
+},
+{
+"i": 174,
+"k": "text",
+"p": "Exercise",
+"s": "No Training Plans",
+"in": [
+"ExerciseListView",
+"TrainingPlanPickerView"
+],
+"code": "\"No Training Plans\","
+},
+{
+"i": 175,
+"k": "text",
+"p": "Exercise",
+"s": "Create your first training plan.",
+"in": [
+"ExerciseListView"
+],
+"code": "description: Text(\"Create your first training plan.\")"
+},
+{
+"i": 176,
+"k": "text",
+"p": "Exercise",
+"s": "No Results for \"%@\"",
+"in": [
+"ExerciseListView"
+],
+"code": "\"No Results for \\\"\\(globalSearchText)\\\"\","
+},
+{
+"i": 177,
+"k": "text",
+"p": "Exercise",
+"s": "Check the spelling or try a new search.",
+"in": [
+"ExerciseListView"
+],
+"code": "Text(\"Check the spelling or try a new search.\")"
+},
+{
+"i": 178,
+"k": "text",
+"p": "Exercise",
+"s": "%lldy+",
+"in": [
+"ExerciseListView"
+],
+"code": "Text(\"\\(Int(planWrapper.minAgeMonths / 12))y+\")",
+"plural": true
+},
+{
+"i": 179,
+"k": "accessibility",
+"p": "Exercise",
+"s": "Delete %@",
+"in": [
+"ExerciseListView",
+"FoodItemListView",
+"NodesListView",
+"ProfileListView"
+],
+"code": ".accessibilityLabel(\"Delete \\(planWrapper.name)\")"
+},
+{
+"i": 180,
+"k": "accessibility",
+"p": "Exercise",
+"s": "Edit %@",
+"in": [
+"ExerciseListView",
+"FoodItemListView",
+"ProfileListView"
+],
+"code": ".accessibilityLabel(\"Edit \\(planWrapper.name)\")"
+},
+{
+"i": 181,
+"k": "accessibility",
+"p": "Exercise",
+"s": "Add %@",
+"in": [
+"ExerciseListView",
+"FoodItemListView"
+],
+"code": ".accessibilityLabel(\"Add \\(vm.filter.rawValue)\")"
+},
+{
+"i": 182,
+"k": "text",
+"p": "Exercise",
+"s": "Delete Prompt?",
+"in": [
+"AIDailyMealGeneratorView",
+"AIDailyTrainingGeneratorView",
+"FoodItemMenuEditorView",
+"MealPlanEditorView"
+],
+"code": "\"Delete Prompt?\", isPresented: $isShowingDeletePromptConfirmation, presenting: promptToDelete"
+},
+{
+"i": 183,
+"k": "message",
+"p": "Exercise",
+"s": "Are you sure you want to delete this prompt? This action cannot be undone.",
+"in": [
+"AIDailyMealGeneratorView",
+"AIDailyTrainingGeneratorView",
+"FoodItemMenuEditorView",
+"MealPlanEditorView"
+],
+"code": "} message: { _ in Text(\"Are you sure you want to delete this prompt? This action cannot be undone.\") }"
+},
+{
+"i": 184,
+"k": "text",
+"p": "Exercise",
+"s": "Prompts",
+"in": [
+"AIDailyMealGeneratorView",
+"AIDailyTrainingGeneratorView",
+"FoodItemMenuEditorView",
+"MealPlanEditorView"
+],
+"code": "Text(\"Prompts\")"
+},
+{
+"i": 185,
+"k": "label",
+"p": "Exercise",
+"s": "New Prompt",
+"in": [
+"AIDailyMealGeneratorView",
+"AIDailyTrainingGeneratorView",
+"FoodItemMenuEditorView",
+"MealPlanEditorView"
+],
+"code": "Label(\"New Prompt\", systemImage: \"plus.bubble\")"
+},
+{
+"i": 186,
+"k": "text",
+"p": "Exercise",
+"s": "N/A",
+"in": [
+"WorkoutEditorView"
+],
+"code": "Text(\"N/A\")",
+"note": "not available"
+},
+{
+"i": 187,
+"k": "text",
+"p": "Exercise",
+"s": "No Exercises",
+"in": [
+"WorkoutDetailRingView",
+"WorkoutEditorView"
+],
+"code": "\"No Exercises\","
+},
+{
+"i": 188,
+"k": "text",
+"p": "Exercise",
+"s": "Use the search above to add exercises to this workout.",
+"in": [
+"WorkoutEditorView"
+],
+"code": "description: Text(\"Use the search above to add exercises to this workout.\")"
+},
+{
+"i": 189,
+"k": "text",
+"p": "Exercise",
+"s": "No results found.",
+"in": [
+"FoodSearchPanelView",
+"TrainingPlanEditorView",
+"TrainingView",
+"WorkoutEditorView"
+],
+"code": "Text(\"No results found.\")"
+},
+{
+"i": 190,
+"k": "accessibility",
+"p": "Exercise",
+"s": "Favorites",
+"in": [
+"FoodItemListView",
+"FoodSearchPanelView",
+"FoodSearchView",
+"TrainingPlanEditorView"
+],
+"code": ".accessibilityLabel(\"Favorites\")"
+},
+{
+"i": 191,
+"k": "text",
+"p": "Exercise",
+"s": "Workout notes, instructions, etc.",
+"in": [
+"WorkoutEditorView"
+],
+"code": "Text(\"Workout notes, instructions, etc.\")"
+},
+{
+"i": 192,
+"k": "text",
+"p": "Exercise",
+"s": "Select Prompts",
+"in": [
+"AIDailyMealGeneratorView",
+"AIDailyTrainingGeneratorView",
+"FoodItemMenuEditorView",
+"MealPlanEditorView"
+],
+"code": "Text(\"Select Prompts\").font(.headline).foregroundColor(effectManager.currentGlobalAccentColor)"
+},
+{
+"i": 193,
+"k": "text",
+"p": "Exercise",
+"s": "Generating Workout...",
+"in": [
+"TrainingView",
+"WorkoutEditorView"
+],
+"code": "Text(\"Generating Workout...\").fontWeight(.bold)"
+},
+{
+"i": 194,
+"k": "text",
+"p": "Exercise",
+"s": "AI is creating your workout. You'll be notified.",
+"in": [
+"WorkoutEditorView"
+],
+"code": "Text(\"AI is creating your workout. You'll be notified.\").font(.caption)"
+},
+{
+"i": 195,
+"k": "text",
+"p": "Exercise",
+"s": "sec",
+"in": [
+"ExerciseCalorieRowView",
+"SelectedExerciseRowView",
+"TrainingPlanExerciseDetailRow",
+"TrainingPlanExerciseRowView"
+],
+"code": "Text(\"sec\")"
+},
+{
+"i": 196,
+"k": "text",
+"p": "Fitness",
+"s": "Generate Daily Workouts",
+"in": [
+"AIDailyTrainingGeneratorView"
+],
+"code": "Text(\"Generate Daily Workouts\").font(.headline)"
+},
+{
+"i": 197,
+"k": "text",
+"p": "Fitness",
+"s": "You'll be notified when your plan is ready.",
+"in": [
+"AIDailyMealGeneratorView",
+"AIDailyTrainingGeneratorView",
+"MealPlanEditorView",
+"NutritionsDetailView"
+],
+"code": "Text(\"You'll be notified when your plan is ready.\")"
+},
+{
+"i": 198,
+"k": "text",
+"p": "Fitness",
+"s": "kcal",
+"in": [
+"CalorieBurnRingView",
+"NetBalanceRingView",
+"NutrientProportionData",
+"SearchResultRow"
+],
+"code": "Text(\"kcal\")"
+},
+{
+"i": 199,
+"k": "text",
+"p": "Fitness",
+"s": "%lld sets",
+"in": [
+"ExerciseLogEntryView",
+"TrainingPlanExerciseDetailRow"
+],
+"code": "Text(\"\\(exerciseLog.sets.count) sets\")",
+"plural": true
+},
+{
+"i": 200,
+"k": "text",
+"p": "Fitness",
+"s": "Add Set",
+"in": [
+"ExerciseLogEntryView",
+"TrainingPlanExerciseRowView"
+],
+"code": "Text(\"Add Set\")"
+},
+{
+"i": 201,
+"k": "text",
+"p": "Fitness",
+"s": "Set %lld",
+"in": [
+"ExerciseLogEntryView",
+"TrainingPlanExerciseDetailRow",
+"TrainingPlanExerciseRowView"
+],
+"code": "Text(\"Set \\(setIndex + 1)\")",
+"plural": true
+},
+{
+"i": 202,
+"k": "text",
+"p": "Fitness",
+"s": "To Failure",
+"in": [
+"ExerciseLogEntryView",
+"TrainingPlanExerciseDetailRow",
+"TrainingPlanExerciseRowView"
+],
+"code": "Text(\"To Failure\")"
+},
+{
+"i": 203,
+"k": "text",
+"p": "Fitness",
+"s": "Weight",
+"in": [
+"ExerciseLogEntryView",
+"TrainingPlanExerciseRowView"
+],
+"code": "Text(\"Weight\")"
+},
+{
+"i": 204,
+"k": "label",
+"p": "Fitness",
+"s": "Weight Whole",
+"in": [
+"ExerciseLogEntryView",
+"TrainingPlanExerciseRowView"
+],
+"code": "Picker(\"Weight Whole\", selection: weightWholeBinding(for: setBinding)) {"
+},
+{
+"i": 205,
+"k": "label",
+"p": "Fitness",
+"s": "Weight Decimal",
+"in": [
+"ExerciseLogEntryView",
+"TrainingPlanExerciseRowView"
+],
+"code": "Picker(\"Weight Decimal\", selection: weightDecimalBinding(for: setBinding)) {"
+},
+{
+"i": 206,
+"k": "text",
+"p": "Fitness",
+"s": "Time Based",
+"in": [
+"ExerciseLogEntryView",
+"TrainingPlanExerciseRowView"
+],
+"code": "Text(\"Time Based\")"
+},
+{
+"i": 207,
+"k": "text",
+"p": "Fitness",
+"s": "Sec",
+"in": [
+"ExerciseLogEntryView",
+"TrainingPlanExerciseRowView"
+],
+"code": "Text(\"Sec\").tag(TimeUnit.seconds)"
+},
+{
+"i": 208,
+"k": "text",
+"p": "Fitness",
+"s": "Min",
+"in": [
+"ExerciseLogEntryView",
+"TrainingPlanExerciseRowView"
+],
+"code": "Text(\"Min\").tag(TimeUnit.minutes)"
+},
+{
+"i": 209,
+"k": "text",
+"p": "Fitness",
+"s": "Daily Activity Total",
+"in": [
+"HealthActivityCalorieRowView"
+],
+"code": "Text(\"Daily Activity Total\")"
+},
+{
+"i": 210,
+"k": "text",
+"p": "Fitness",
+"s": "%@ steps",
+"in": [
+"HealthActivityCalorieRowView"
+],
+"code": "Text(\"\\(activity.stepCount.formatted()) steps\")"
+},
+{
+"i": 211,
+"k": "text",
+"p": "Fitness",
+"s": "HealthKit active energy",
+"in": [
+"HealthActivityCalorieRowView"
+],
+"code": "Text(\"HealthKit active energy\")"
+},
+{
+"i": 212,
+"k": "button",
+"p": "Fitness",
+"s": "Close",
+"in": [
+"CaloriesDetailRingView",
+"DailyAyurvedaSummaryView",
+"GoalsDetailRingView",
+"MacrosDetailRingView"
+],
+"code": "Button(\"Close\", action: onDismiss)"
+},
+{
+"i": 213,
+"k": "text",
+"p": "Fitness",
+"s": "Net Calorie Balance",
+"in": [
+"NetBalanceDetailRingView"
+],
+"code": "Text(\"Net Calorie Balance\").font(.headline)"
+},
+{
+"i": 214,
+"k": "text",
+"p": "Fitness",
+"s": "Health Activity",
+"in": [
+"NetBalanceDetailRingView",
+"TotalBurnedDetailRingView"
+],
+"code": "Text(\"Health Activity\")"
+},
+{
+"i": 215,
+"k": "text",
+"p": "Fitness",
+"s": "No Exercises Logged",
+"in": [
+"NetBalanceDetailRingView",
+"TotalBurnedDetailRingView"
+],
+"code": "ContentUnavailableView(\"No Exercises Logged\", systemImage: \"dumbbell\")"
+},
+{
+"i": 216,
+"k": "text",
+"p": "Fitness",
+"s": "Calories Consumed:",
+"in": [
+"NetBalanceDetailRingView"
+],
+"code": "HStack { Text(\"Calories Consumed:\"); Spacer(); Text(\"\\(totalConsumed, specifier: \"%.0f\") kcal\") }"
+},
+{
+"i": 217,
+"k": "text",
+"p": "Fitness",
+"s": "Calories Burned:",
+"in": [
+"NetBalanceDetailRingView"
+],
+"code": "HStack { Text(\"Calories Burned:\"); Spacer(); Text(\"-\\(totalBurned, specifier: \"%.0f\") kcal\") }"
+},
+{
+"i": 218,
+"k": "text",
+"p": "Fitness",
+"s": "-%.0f kcal",
+"in": [
+"NetBalanceDetailRingView"
+],
+"code": "HStack { Text(\"Calories Burned:\"); Spacer(); Text(\"-\\(totalBurned, specifier: \"%.0f\") kcal\") }"
+},
+{
+"i": 219,
+"k": "text",
+"p": "Fitness",
+"s": "Net Balance:",
+"in": [
+"NetBalanceDetailRingView"
+],
+"code": "Text(\"Net Balance:\").fontWeight(.bold)"
+},
+{
+"i": 220,
+"k": "text",
+"p": "Fitness",
+"s": "%+.0f kcal",
+"in": [
+"NetBalanceDetailRingView"
+],
+"code": "Text(\"\\(netBalance, specifier: \"%+.0f\") kcal\").fontWeight(.bold)"
+},
+{
+"i": 221,
+"k": "text",
+"p": "Fitness",
+"s": "Exercises Today",
+"in": [
+"NetBalanceDetailRingView"
+],
+"code": "Text(\"Exercises Today\")"
+},
+{
+"i": 222,
+"k": "text",
+"p": "Fitness",
+"s": "Nodes: %lld",
+"in": [
+"SelectedExerciseRowView",
+"SelectedFoodRowView"
+],
+"code": "Text(\"Nodes: \\(nodes.count)\")",
+"plural": true
+},
+{
+"i": 223,
+"k": "text",
+"p": "Fitness",
+"s": "Total Burned Today",
+"in": [
+"TotalBurnedDetailRingView"
+],
+"code": "Text(\"Total Burned Today\").font(.headline)"
+},
+{
+"i": 224,
+"k": "text",
+"p": "Fitness",
+"s": "No Results",
+"in": [
+"TotalBurnedDetailRingView"
+],
+"code": "ContentUnavailableView(selectedMuscleGroup == nil ? \"No Exercises Logged\" : \"No Results\", systemImage: \"dumbbell\", description: Text(message))"
+},
+{
+"i": 225,
+"k": "text",
+"p": "Fitness",
+"s": "Total Burned Today:",
+"in": [
+"TotalBurnedDetailRingView"
+],
+"code": "Text(\"Total Burned Today:\")"
+},
+{
+"i": 226,
+"k": "text",
+"p": "Fitness",
+"s": "All Exercises Today",
+"in": [
+"TotalBurnedDetailRingView"
+],
+"code": "Text(selectedMuscleGroup == nil ? \"All Exercises Today\" : \"Filtered Exercises\")"
+},
+{
+"i": 227,
+"k": "text",
+"p": "Fitness",
+"s": "Filtered Exercises",
+"in": [
+"TotalBurnedDetailRingView"
+],
+"code": "Text(selectedMuscleGroup == nil ? \"All Exercises Today\" : \"Filtered Exercises\")"
+},
+{
+"i": 228,
+"k": "text",
+"p": "Fitness",
+"s": "Workout Actions",
+"in": [
+"TrainingActionMenuView"
+],
+"code": "Text(\"Workout Actions\").font(.headline)"
+},
+{
+"i": 229,
+"k": "label",
+"p": "Fitness",
+"s": "Generate with AI",
+"in": [
+"MealActionMenuView",
+"TrainingActionMenuView"
+],
+"code": "Label(\"Generate with AI\", systemImage: \"sparkles\")"
+},
+{
+"i": 230,
+"k": "label",
+"p": "Fitness",
+"s": "Copy to New Training Plan",
+"in": [
+"TrainingActionMenuView"
+],
+"code": "Label(\"Copy to New Training Plan\", systemImage: \"doc.on.doc\")"
+},
+{
+"i": 231,
+"k": "label",
+"p": "Fitness",
+"s": "Add to Existing Training Plan",
+"in": [
+"TrainingActionMenuView"
+],
+"code": "Label(\"Add to Existing Training Plan\", systemImage: \"plus.rectangle.on.rectangle\")"
+},
+{
+"i": 232,
+"k": "text",
+"p": "Fitness",
+"s": "Workout Name",
+"in": [
+"TrainingEditorView"
+],
+"code": "Text(\"Workout Name\")"
+},
+{
+"i": 233,
+"k": "placeholder",
+"p": "Fitness",
+"s": "e.g., Morning Run",
+"in": [
+"TrainingEditorView"
+],
+"code": "TextField(\"\", text: $draft.name, prompt: Text(\"e.g., Morning Run\").foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.6)))"
+},
+{
+"i": 234,
+"k": "text",
+"p": "Fitness",
+"s": "Start Time",
+"in": [
+"TrainingEditorView"
+],
+"code": "Text(\"Start Time\")"
+},
+{
+"i": 235,
+"k": "text",
+"p": "Fitness",
+"s": "End Time",
+"in": [
+"TrainingEditorView"
+],
+"code": "Text(\"End Time\")"
+},
+{
+"i": 236,
+"k": "text",
+"p": "Fitness",
+"s": "Reminder",
+"in": [
+"MealEditorView",
+"ShoppingListDetailView",
+"TrainingEditorView"
+],
+"code": "Text(\"Reminder\")"
+},
+{
+"i": 237,
+"k": "text",
+"p": "Fitness",
+"s": "Notifications are disabled. Please enable them in Settings if you want to use reminders for your workouts.",
+"in": [
+"TrainingEditorView"
+],
+"code": "Text(\"Notifications are disabled. Please enable them in Settings if you want to use reminders for your workouts.\")"
+},
+{
+"i": 238,
+"k": "text",
+"p": "Fitness",
+"s": "Add Workout",
+"in": [
+"ProfileEditorView",
+"ProfileWizardView",
+"TrainingEditorView"
+],
+"code": "Text(isNew ? \"Add Workout\" : \"Edit Workout\").font(.headline)"
+},
+{
+"i": 239,
+"k": "text",
+"p": "Fitness",
+"s": "Edit Workout",
+"in": [
+"TrainingEditorView"
+],
+"code": "Text(isNew ? \"Add Workout\" : \"Edit Workout\").font(.headline)"
+},
+{
+"i": 240,
+"k": "label",
+"p": "Fitness",
+"s": "Add as New Day",
+"in": [
+"MealPlanAddDestinationView",
+"TrainingPlanAddDestinationView"
+],
+"code": "Label(\"Add as New Day\", systemImage: \"plus.square.on.square\")"
+},
+{
+"i": 241,
+"k": "label",
+"p": "Fitness",
+"s": "Replace an Existing Day",
+"in": [
+"MealPlanAddDestinationView",
+"TrainingPlanAddDestinationView"
+],
+"code": "Label(\"Replace an Existing Day\", systemImage: \"arrow.triangle.2.circlepath\")"
+},
+{
+"i": 242,
+"k": "text",
+"p": "Fitness",
+"s": "Choose Destination",
+"in": [
+"MealPlanAddDestinationView",
+"TrainingPlanAddDestinationView"
+],
+"code": "Text(\"Choose Destination\").font(.headline)"
+},
+{
+"i": 243,
+"k": "text",
+"p": "Fitness",
+"s": "Day %lld",
+"in": [
+"MealPlanAddDestinationView",
+"MealPlanDetailView",
+"MealPlanEditorView",
+"MealPlanPreviewView"
+],
+"code": "Text(day.isRestDay ? \"Day \\(dayIndex): Rest Day\" : \"Day \\(dayIndex)\")",
+"plural": true
+},
+{
+"i": 244,
+"k": "text",
+"p": "Fitness",
+"s": "Day %lld: Rest Day",
+"in": [
+"TrainingPlanAddDestinationView",
+"TrainingPlanDetailView",
+"TrainingPlanEditorView",
+"TrainingPlanPreviewView"
+],
+"code": "Text(day.isRestDay ? \"Day \\(dayIndex): Rest Day\" : \"Day \\(dayIndex)\")",
+"plural": true
+},
+{
+"i": 245,
+"k": "button",
+"p": "Fitness",
+"s": "Replace This Day",
+"in": [
+"MealPlanAddDestinationView",
+"TrainingPlanAddDestinationView"
+],
+"code": "Button(\"Replace This Day\") { replace(day: day) }"
+},
+{
+"i": 246,
+"k": "text",
+"p": "Fitness",
+"s": "No exercises planned for this workout.",
+"in": [
+"DailyTrainingPlanView",
+"TrainingPlanAddDestinationView",
+"TrainingPlanDetailView",
+"TrainingPlanPreviewView"
+],
+"code": "Text(\"No exercises planned for this workout.\")"
+},
+{
+"i": 247,
+"k": "text",
+"p": "Fitness",
+"s": "No Workouts to Add",
+"in": [
+"TrainingPlanAddWorkoutsView"
+],
+"code": "ContentUnavailableView(\"No Workouts to Add\", systemImage: \"dumbbell.fill\")"
+},
+{
+"i": 248,
+"k": "text",
+"p": "Fitness",
+"s": "Select Workouts to Add",
+"in": [
+"TrainingPlanAddWorkoutsView"
+],
+"code": "Text(\"Select Workouts to Add\").font(.headline)"
+},
+{
+"i": 249,
+"k": "button",
+"p": "Fitness",
+"s": "Next",
+"in": [
+"AyurvedaConstitutionViews",
+"MealPlanAddMealsView",
+"TrainingPlanAddWorkoutsView"
+],
+"code": "Button(\"Next\") {"
+},
+{
+"i": 250,
+"k": "text",
+"p": "Fitness",
+"s": "%lld exercises",
+"in": [
+"TrainingPlanAddWorkoutsView",
+"TrainingSelectionForPlanView"
+],
+"code": "Text(\"\\(training.exercises(using: modelContext).count) exercises\")",
+"plural": true
+},
+{
+"i": 251,
+"k": "text",
+"p": "Fitness",
+"s": "%lld day%@",
+"in": [
+"FoodItemListView",
+"MealPlanPickerView",
+"NutritionsDetailView",
+"TrainingPlanPickerView"
+],
+"code": "Text(\"\\(plan.days.count) day\\(plan.days.count == 1 ? \"\" : \"s\")\")",
+"note": "the %@ after the noun is the English plural ending ('s' or nothing): leave it out and word the translation so that it reads with any number"
+},
+{
+"i": 252,
+"k": "button",
+"p": "Fitness",
+"s": "Add to Training",
+"in": [
+"TrainingPlanPreviewView"
+],
+"code": "Button(\"Add to Training\") { onAdd(selectedDays) } // Използваме избраните дни"
+},
+{
+"i": 253,
+"k": "text",
+"p": "Fitness",
+"s": "No workout selected.",
+"in": [
+"TrainingPlanDetailView",
+"TrainingPlanPreviewView"
+],
+"code": "Text(\"No workout selected.\").font(.caption).italic().opacity(0.7)"
+},
+{
+"i": 254,
+"k": "text",
+"p": "Fitness",
+"s": "No Workouts to Copy",
+"in": [
+"TrainingSelectionForPlanView"
+],
+"code": "ContentUnavailableView(\"No Workouts to Copy\", systemImage: \"dumbbell.fill\")"
+},
+{
+"i": 255,
+"k": "text",
+"p": "Fitness",
+"s": "Select Workouts",
+"in": [
+"TrainingSelectionForPlanView"
+],
+"code": "Text(\"Select Workouts\").font(.headline)"
+},
+{
+"i": 256,
+"k": "button",
+"p": "Fitness",
+"s": "Create",
+"in": [
+"MealSelectionForPlanView",
+"TrainingSelectionForPlanView"
+],
+"code": "Button(\"Create\") { handleCreateAction() }"
+},
+{
+"i": 257,
+"k": "text",
+"p": "Fitness",
+"s": "Workout",
+"in": [
+"TrainingSummaryView"
+],
+"code": "Text(\"Workout\")"
+},
+{
+"i": 258,
+"k": "text",
+"p": "Fitness",
+"s": "Total Burned",
+"in": [
+"TrainingSummaryView"
+],
+"code": "Text(\"Total Burned\")"
+},
+{
+"i": 259,
+"k": "text",
+"p": "Fitness",
+"s": "Net Balance",
+"in": [
+"TrainingSummaryView"
+],
+"code": "Text(\"Net Balance\")"
+},
+{
+"i": 260,
+"k": "text",
+"p": "Fitness",
+"s": "Are you sure you want to delete '%@' from your workout? This action cannot be undone.",
+"in": [
+"TrainingView"
+],
+"code": "Text(\"Are you sure you want to delete '\\(exerciseToDelete?.name ?? \"this exercise\")' from your workout? This action cannot be undone.\")"
+},
+{
+"i": 261,
+"k": "alert",
+"p": "Fitness",
+"s": "Add Trainings from Plan",
+"in": [
+"TrainingView"
+],
+"code": ".confirmationDialog(\"Add Trainings from Plan\", isPresented: .constant(trainingPlanDaysToAdd != nil), titleVisibility: .visible, actions: {"
+},
+{
+"i": 262,
+"k": "button",
+"p": "Fitness",
+"s": "Add to Existing Workouts",
+"in": [
+"DailyTrainingPlanView",
+"TrainingView"
+],
+"code": "Button(\"Add to Existing Workouts\") { processTrainingPlanAddition(mode: .append) }"
+},
+{
+"i": 263,
+"k": "button",
+"p": "Fitness",
+"s": "Overwrite Existing Workouts",
+"in": [
+"DailyTrainingPlanView",
+"TrainingView"
+],
+"code": "Button(\"Overwrite Existing Workouts\", role: .destructive) { processTrainingPlanAddition(mode: .overwrite) }"
+},
+{
+"i": 264,
+"k": "message",
+"p": "Fitness",
+"s": "This will add workouts for %lld day(s), starting from %@. How should workouts for a specific time slot be added?",
+"in": [
+"TrainingView"
+],
+"code": "}, message: { Text(\"This will add workouts for \\(trainingPlanDaysToAdd?.count ?? 0) day(s), starting from \\(chosenDate.formatted(date: .abbreviated, time: .omit"
+},
+{
+"i": 265,
+"k": "alert",
+"p": "Fitness",
+"s": "AI Error",
+"in": [
+"TrainingView"
+],
+"code": ".alert(\"AI Error\", isPresented: $showAlert) {"
+},
+{
+"i": 266,
+"k": "alert",
+"p": "Fitness",
+"s": "Delete Note",
+"in": [
+"NutritionsDetailView",
+"TrainingView"
+],
+"code": ".alert(\"Delete Note\", isPresented: $isShowingDeleteNodeConfirmation) {"
+},
+{
+"i": 267,
+"k": "text",
+"p": "Fitness",
+"s": "Are you sure you want to delete this note? This action cannot be undone.",
+"in": [
+"NutritionsDetailView",
+"TrainingView"
+],
+"code": "Text(\"Are you sure you want to delete this note? This action cannot be undone.\")"
+},
+{
+"i": 268,
+"k": "button",
+"p": "Fitness",
+"s": "Exercises List",
+"in": [
+"TrainingView"
+],
+"code": "Button(\"Exercises List\") {"
+},
+{
+"i": 269,
+"k": "button",
+"p": "Fitness",
+"s": "Load Plan",
+"in": [
+"NutritionsDetailView",
+"TrainingView"
+],
+"code": "Button(\"Load Plan\") {"
+},
+{
+"i": 270,
+"k": "button",
+"p": "Fitness",
+"s": "Actions",
+"in": [
+"NutritionsDetailView",
+"TrainingView"
+],
+"code": "Button(\"Actions\") {"
+},
+{
+"i": 271,
+"k": "label",
+"p": "Fitness",
+"s": "View Details",
+"in": [
+"MealPlanDetailView",
+"MealPlanEditorView",
+"NutritionsDetailView",
+"TrainingPlanDetailView"
+],
+"code": "Label(\"View Details\", systemImage: \"info.circle\")"
+},
+{
+"i": 272,
+"k": "label",
+"p": "Fitness",
+"s": "Remove from Workout",
+"in": [
+"TrainingView"
+],
+"code": "Label(\"Remove from Workout\", systemImage: \"trash\")"
+},
+{
+"i": 273,
+"k": "accessibility",
+"p": "Fitness",
+"s": "Delete training exercise %@",
+"in": [
+"TrainingView"
+],
+"code": ".accessibilityLabel(\"Delete training exercise \\(exercise.name)\")"
+},
+{
+"i": 274,
+"k": "text",
+"p": "Fitness",
+"s": "Please select a workout from the timeline.",
+"in": [
+"TrainingView"
+],
+"code": "Text(\"Please select a workout from the timeline.\")"
+},
+{
+"i": 275,
+"k": "text",
+"p": "Fitness",
+"s": "Muscle Groups",
+"in": [
+"TrainingView"
+],
+"code": "Text(\"Muscle Groups\")"
+},
+{
+"i": 276,
+"k": "text",
+"p": "Fitness",
+"s": "Selected: %@",
+"in": [
+"FoodSearchPanelView",
+"TrainingPlanEditorView",
+"TrainingView"
+],
+"code": "Text(\"Selected: \\(group.rawValue)\")"
+},
+{
+"i": 277,
+"k": "accessibility",
+"p": "Fitness",
+"s": "Workouts",
+"in": [
+"ProfileEditorView",
+"TrainingPlanEditorView",
+"TrainingView"
+],
+"code": ".accessibilityLabel(\"Workouts\")"
+},
+{
+"i": 278,
+"k": "text",
+"p": "Fitness",
+"s": "AI is creating your exercises. You'll be notified.",
+"in": [
+"TrainingView"
+],
+"code": "Text(\"AI is creating your exercises. You'll be notified.\").font(.caption)"
+},
+{
+"i": 279,
+"k": "text",
+"p": "Fitness",
+"s": "Add Note",
+"in": [
+"NodesListView",
+"NutritionsDetailView",
+"TrainingView"
+],
+"code": "Text(\"Add Note\")"
+},
+{
+"i": 280,
+"k": "text",
+"p": "Fitness",
+"s": "No Nodes for this Day",
+"in": [
+"NutritionsDetailView",
+"TrainingView"
+],
+"code": "ContentUnavailableView(\"No Nodes for this Day\", systemImage: \"note.text\")"
+},
+{
+"i": 281,
+"k": "text",
+"p": "Fitness",
+"s": "Workout Log",
+"in": [
+"WorkoutDetailRingView"
+],
+"code": "Text(\"Workout Log\").font(.headline)"
+},
+{
+"i": 282,
+"k": "text",
+"p": "Fitness",
+"s": "Total Burned:",
+"in": [
+"WorkoutDetailRingView"
+],
+"code": "Text(\"Total Burned:\")"
+},
+{
+"i": 283,
+"k": "text",
+"p": "Fitness",
+"s": "Logged Exercises",
+"in": [
+"WorkoutDetailRingView"
+],
+"code": "Text(\"Logged Exercises\")"
+}
+]

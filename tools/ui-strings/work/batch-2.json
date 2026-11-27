@@ -1,0 +1,1161 @@
+[
+{
+"i": 505,
+"k": "text",
+"p": "Profile",
+"s": "Add Profile",
+"in": [
+"ProfileEditorView"
+],
+"code": "Text(profile == nil ? \"Add Profile\" : \"Edit Profile\")"
+},
+{
+"i": 506,
+"k": "text",
+"p": "Profile",
+"s": "Edit Profile",
+"in": [
+"ProfileEditorView"
+],
+"code": "Text(profile == nil ? \"Add Profile\" : \"Edit Profile\")"
+},
+{
+"i": 507,
+"k": "text",
+"p": "Profile",
+"s": "Personal Information",
+"in": [
+"ProfileEditorView"
+],
+"code": "Text(\"Personal Information\")"
+},
+{
+"i": 508,
+"k": "placeholder",
+"p": "Profile",
+"s": "John Appleseed",
+"in": [
+"ProfileEditorView"
+],
+"code": "TextField(\"\", text: $name, prompt: Text(\"John Appleseed\").foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.6)))"
+},
+{
+"i": 509,
+"k": "label",
+"p": "Profile",
+"s": "Select Gender",
+"in": [
+"ProfileEditorView"
+],
+"code": "Picker(\"Select Gender\", selection: $gender) {"
+},
+{
+"i": 510,
+"k": "text",
+"p": "Profile",
+"s": "Ayurvedic Profile",
+"in": [
+"ProfileEditorView"
+],
+"code": "Text(\"Ayurvedic Profile\")"
+},
+{
+"i": 511,
+"k": "text",
+"p": "Profile",
+"s": "Data Management",
+"in": [
+"ProfileEditorView"
+],
+"code": "Text(\"Data Management\")"
+},
+{
+"i": 512,
+"k": "text",
+"p": "Profile",
+"s": "Separate Storage & Lists",
+"in": [
+"ProfileEditorView",
+"ProfileWizardView"
+],
+"code": "Text(\"Separate Storage & Lists\")"
+},
+{
+"i": 513,
+"k": "text",
+"p": "Profile",
+"s": "When on, this profile will have its own private storage and shopping lists. Otherwise, it will use the shared global data.",
+"in": [
+"ProfileEditorView"
+],
+"code": "Text(\"When on, this profile will have its own private storage and shopping lists. Otherwise, it will use the shared global data.\")"
+},
+{
+"i": 514,
+"k": "text",
+"p": "Profile",
+"s": "Priority Vitamins",
+"in": [
+"ProfileEditorView"
+],
+"code": "Text(\"Priority Vitamins\")"
+},
+{
+"i": 515,
+"k": "text",
+"p": "Profile",
+"s": "Priority Minerals",
+"in": [
+"ProfileEditorView"
+],
+"code": "Text(\"Priority Minerals\")"
+},
+{
+"i": 516,
+"k": "text",
+"p": "Profile",
+"s": "Allergens",
+"in": [
+"ProfileEditorView"
+],
+"code": "Text(\"Allergens\")"
+},
+{
+"i": 517,
+"k": "text",
+"p": "Profile",
+"s": "Meals",
+"in": [
+"ProfileEditorView"
+],
+"code": "Text(\"Meals\")"
+},
+{
+"i": 518,
+"k": "text",
+"p": "Profile",
+"s": "Select date",
+"in": [
+"ProfileEditorView"
+],
+"code": "Label { Text(\"Select date\") } icon: { Image(systemName: \"calendar\").foregroundColor(effectManager.currentGlobalAccentColor) }.lineLimit(1)"
+},
+{
+"i": 519,
+"k": "alert",
+"p": "Profile",
+"s": "Delete Profile",
+"in": [
+"ProfileListView"
+],
+"code": ".alert(\"Delete Profile\", isPresented: $showingDeleteConfirmation) {"
+},
+{
+"i": 520,
+"k": "alert",
+"p": "Profile",
+"s": "Live Activity",
+"in": [
+"ProfileListView"
+],
+"code": ".alert(\"Live Activity\", isPresented: $showingLiveActivityError) {"
+},
+{
+"i": 521,
+"k": "text",
+"p": "Profile",
+"s": "Stop",
+"in": [
+"ProfileListView"
+],
+"code": "Text(liveActivityManager.isRunning ? \"Stop\" : \"Live\")"
+},
+{
+"i": 522,
+"k": "text",
+"p": "Profile",
+"s": "Live",
+"in": [
+"ProfileListView"
+],
+"code": "Text(liveActivityManager.isRunning ? \"Stop\" : \"Live\")"
+},
+{
+"i": 523,
+"k": "text",
+"p": "Profile",
+"s": "Stop next activity Live Activity",
+"in": [
+"ProfileListView"
+],
+"code": "? \"Stop next activity Live Activity\""
+},
+{
+"i": 524,
+"k": "text",
+"p": "Profile",
+"s": "Start next activity Live Activity",
+"in": [
+"ProfileListView"
+],
+"code": ": \"Start next activity Live Activity\""
+},
+{
+"i": 525,
+"k": "accessibility",
+"p": "Profile",
+"s": "Add profile",
+"in": [
+"ProfileListView"
+],
+"code": ".accessibilityLabel(\"Add profile\")"
+},
+{
+"i": 526,
+"k": "text",
+"p": "Profile",
+"s": "Weight: %@ %@",
+"in": [
+"ProfileListView"
+],
+"code": "Text(\"Weight: \\(formattedWeight) \\(weightUnit)\")"
+},
+{
+"i": 527,
+"k": "text",
+"p": "Profile",
+"s": "Height: %@ %@",
+"in": [
+"ProfileListView"
+],
+"code": "Text(\"Height: \\(formattedHeight) \\(heightUnit)\")"
+},
+{
+"i": 528,
+"k": "text",
+"p": "Profile",
+"s": "Upgrade to the %@ plan to unlock and use this profile.",
+"in": [
+"ProfileListView"
+],
+"code": "Text(\"Upgrade to the \\(plan) plan to unlock and use this profile.\")"
+},
+{
+"i": 529,
+"k": "text",
+"p": "Profile",
+"s": "HealthKit profile",
+"in": [
+"ProfileListView"
+],
+"code": "isHealthKitProfile ? \"HealthKit profile\" : \"Use HealthKit\","
+},
+{
+"i": 530,
+"k": "text",
+"p": "Profile",
+"s": "Use HealthKit",
+"in": [
+"ProfileListView"
+],
+"code": "isHealthKitProfile ? \"HealthKit profile\" : \"Use HealthKit\","
+},
+{
+"i": 531,
+"k": "text",
+"p": "Profile",
+"s": "Current HealthKit profile",
+"in": [
+"ProfileListView"
+],
+"code": "? \"Current HealthKit profile\""
+},
+{
+"i": 532,
+"k": "text",
+"p": "Profile",
+"s": "Use HealthKit for %@",
+"in": [
+"ProfileListView"
+],
+"code": ": \"Use HealthKit for \\(profile.name)\""
+},
+{
+"i": 533,
+"k": "text",
+"p": "Prompt",
+"s": "Edit Prompt",
+"in": [
+"PromptEditorView"
+],
+"code": "Text(isEditing ? \"Edit Prompt\" : \"New Prompt\").font(.headline)"
+},
+{
+"i": 534,
+"k": "text",
+"p": "Prompt",
+"s": "Generate a vegan weekly menu",
+"in": [
+"PromptEditorView"
+],
+"code": "Text(\"Generate a vegan weekly menu\")"
+},
+{
+"i": 535,
+"k": "text",
+"p": "Settings",
+"s": "Add Theme",
+"in": [
+"AddThemeButton"
+],
+"code": "Text(\"Add Theme\")"
+},
+{
+"i": 536,
+"k": "text",
+"p": "Settings",
+"s": "Add New",
+"in": [
+"ImagePickerButton"
+],
+"code": "Text(\"Add New\")"
+},
+{
+"i": 537,
+"k": "text",
+"p": "Settings",
+"s": "Recent",
+"in": [
+"RecentImageButton"
+],
+"code": "Text(\"Recent\")"
+},
+{
+"i": 538,
+"k": "label",
+"p": "Settings",
+"s": "Ad privacy choices",
+"in": [
+"SettingsView"
+],
+"code": "Label(\"Ad privacy choices\", systemImage: \"hand.raised\")"
+},
+{
+"i": 539,
+"k": "text",
+"p": "Settings",
+"s": "Appearance",
+"in": [
+"SettingsView"
+],
+"code": "Text(\"Appearance\")"
+},
+{
+"i": 540,
+"k": "text",
+"p": "Settings",
+"s": "Choose a theme or a background image to change the application's appearance.",
+"in": [
+"SettingsView"
+],
+"code": "Text(\"Choose a theme or a background image to change the application's appearance.\")"
+},
+{
+"i": 541,
+"k": "label",
+"p": "Settings",
+"s": "Replace",
+"in": [
+"SettingsView"
+],
+"code": "} label: { Label(\"Replace\", systemImage: \"arrow.triangle.2.circlepath\") }"
+},
+{
+"i": 542,
+"k": "label",
+"p": "Settings",
+"s": "Edit",
+"in": [
+"SettingsView"
+],
+"code": "Label(\"Edit\", systemImage: \"pencil\")"
+},
+{
+"i": 543,
+"k": "text",
+"p": "Settings",
+"s": "Notifications",
+"in": [
+"SettingsView"
+],
+"code": "Text(\"Notifications\")"
+},
+{
+"i": 544,
+"k": "text",
+"p": "Settings",
+"s": "Checking notification permission…",
+"in": [
+"SettingsView"
+],
+"code": "Text(\"Checking notification permission…\")"
+},
+{
+"i": 545,
+"k": "text",
+"p": "Settings",
+"s": "Allow notifications in Ayura",
+"in": [
+"SettingsView"
+],
+"code": "Text(\"Allow notifications in Ayura\")"
+},
+{
+"i": 546,
+"k": "text",
+"p": "Settings",
+"s": "Controls reminders and updates for the entire app.",
+"in": [
+"SettingsView"
+],
+"code": "Text(\"Controls reminders and updates for the entire app.\")"
+},
+{
+"i": 547,
+"k": "label",
+"p": "Settings",
+"s": "Notifications are disabled in iOS",
+"in": [
+"SettingsView"
+],
+"code": "Label(\"Notifications are disabled in iOS\", systemImage: \"bell.slash.fill\")"
+},
+{
+"i": 548,
+"k": "text",
+"p": "Settings",
+"s": "Open Settings → Apps → Ayura → Notifications and turn on Allow Notifications.",
+"in": [
+"SettingsView"
+],
+"code": "Text(\"Open Settings → Apps → Ayura → Notifications and turn on Allow Notifications.\")"
+},
+{
+"i": 549,
+"k": "label",
+"p": "Settings",
+"s": "Open iOS Settings",
+"in": [
+"SettingsView"
+],
+"code": "Label(\"Open iOS Settings\", systemImage: \"gear\")"
+},
+{
+"i": 550,
+"k": "text",
+"p": "ShoppingList",
+"s": "All Lists",
+"in": [
+"ShoppingListAnalyticsView",
+"ShoppingListDetailView"
+],
+"code": "HStack { Image(systemName: \"chevron.backward\"); Text(\"All Lists\") }"
+},
+{
+"i": 551,
+"k": "text",
+"p": "ShoppingList",
+"s": "List Analytics",
+"in": [
+"ShoppingListAnalyticsView"
+],
+"code": "Text(\"List Analytics\").font(.headline)"
+},
+{
+"i": 552,
+"k": "label",
+"p": "ShoppingList",
+"s": "No Spending Data",
+"in": [
+"ShoppingListAnalyticsView"
+],
+"code": "Label(\"No Spending Data\", systemImage: \"chart.bar.xaxis.ascending\")"
+},
+{
+"i": 553,
+"k": "text",
+"p": "ShoppingList",
+"s": "No completed lists with prices found for this period.",
+"in": [
+"ShoppingListAnalyticsView"
+],
+"code": "Text(\"No completed lists with prices found for this period.\")"
+},
+{
+"i": 554,
+"k": "text",
+"p": "ShoppingList",
+"s": "Weekly Spending",
+"in": [
+"ShoppingListAnalyticsView"
+],
+"code": "Text(selectedMode == .weekly ? \"Weekly Spending\" : \"Monthly Spending\")"
+},
+{
+"i": 555,
+"k": "text",
+"p": "ShoppingList",
+"s": "Monthly Spending",
+"in": [
+"ShoppingListAnalyticsView"
+],
+"code": "Text(selectedMode == .weekly ? \"Weekly Spending\" : \"Monthly Spending\")"
+},
+{
+"i": 556,
+"k": "text",
+"p": "ShoppingList",
+"s": "Spent: %@",
+"in": [
+"ShoppingListAnalyticsView"
+],
+"code": "Text(\"Spent: \\(p.totalSpent, format: .currency(code: GlobalState.currencyCode))\")"
+},
+{
+"i": 557,
+"k": "text",
+"p": "ShoppingList",
+"s": "Are you sure you want to delete '%@' from the list? This action cannot be undone.",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "Text(\"Are you sure you want to delete '\\(itemToDelete?.name ?? \"this item\")' from the list? This action cannot be undone.\")"
+},
+{
+"i": 558,
+"k": "text",
+"p": "ShoppingList",
+"s": "Purchased:",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "Text(\"Purchased:\").font(.caption).foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))"
+},
+{
+"i": 559,
+"k": "text",
+"p": "ShoppingList",
+"s": "Total:",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "Text(\"Total:\").font(.caption).foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))"
+},
+{
+"i": 560,
+"k": "placeholder",
+"p": "ShoppingList",
+"s": "Friday market",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "TextField(\"\", text: $editableName, prompt: Text(\"Friday market\").foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.6)))"
+},
+{
+"i": 561,
+"k": "text",
+"p": "ShoppingList",
+"s": "Date & Time",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "Text(\"Date & Time\")"
+},
+{
+"i": 562,
+"k": "text",
+"p": "ShoppingList",
+"s": "Notifications are disabled. Please enable them in Settings.",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "Text(\"Notifications are disabled. Please enable them in Settings.\")"
+},
+{
+"i": 563,
+"k": "text",
+"p": "ShoppingList",
+"s": "Items",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "Text(\"Items\")"
+},
+{
+"i": 564,
+"k": "button",
+"p": "ShoppingList",
+"s": "Deselect Newly Bought",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "Button(areAllItemsBought ? \"Deselect Newly Bought\" : \"Mark All As Bought\", action: toggleAllItemsBought)"
+},
+{
+"i": 565,
+"k": "button",
+"p": "ShoppingList",
+"s": "Mark All As Bought",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "Button(areAllItemsBought ? \"Deselect Newly Bought\" : \"Mark All As Bought\", action: toggleAllItemsBought)"
+},
+{
+"i": 566,
+"k": "text",
+"p": "ShoppingList",
+"s": "The list is empty. Add items from suggestions or use search.",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "Text(\"The list is empty. Add items from suggestions or use search.\")"
+},
+{
+"i": 567,
+"k": "text",
+"p": "ShoppingList",
+"s": "Suggestions",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "Text(\"Suggestions\")"
+},
+{
+"i": 568,
+"k": "text",
+"p": "ShoppingList",
+"s": "Low stock: %lld g",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "Text(\"Low stock: \\(Int(storageItem.totalQuantity)) g\").font(.caption).foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))",
+"plural": true
+},
+{
+"i": 569,
+"k": "text",
+"p": "ShoppingList",
+"s": "Recently used",
+"in": [
+"ShoppingListDetailView"
+],
+"code": "Text(\"Recently used\").font(.caption).foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))"
+},
+{
+"i": 570,
+"k": "text",
+"p": "ShoppingList",
+"s": "Shopping Lists",
+"in": [
+"ShoppingListView"
+],
+"code": "Text(\"Shopping Lists\").font(.title.bold()).foregroundColor(effectManager.currentGlobalAccentColor)"
+},
+{
+"i": 571,
+"k": "text",
+"p": "ShoppingList",
+"s": "Create your first list by tapping the “+” button below.",
+"in": [
+"ShoppingListView"
+],
+"code": "ContentUnavailableView(\"No Shopping Lists\", systemImage: \"cart.badge.plus\", description: Text(\"Create your first list by tapping the “+” button below.\")).foregr"
+},
+{
+"i": 572,
+"k": "text",
+"p": "ShoppingList",
+"s": "No Shopping Lists",
+"in": [
+"ShoppingListView"
+],
+"code": "ContentUnavailableView(\"No Shopping Lists\", systemImage: \"cart.badge.plus\", description: Text(\"Create your first list by tapping the “+” button below.\")).foregr"
+},
+{
+"i": 573,
+"k": "alert",
+"p": "ShoppingList",
+"s": "Delete List",
+"in": [
+"ShoppingListView"
+],
+"code": ".alert(\"Delete List\", isPresented: $isShowingDeleteListConfirmation) {"
+},
+{
+"i": 574,
+"k": "text",
+"p": "ShoppingList",
+"s": "Are you sure you want to delete the list '%@'? This action cannot be undone.",
+"in": [
+"ShoppingListView"
+],
+"code": "Text(\"Are you sure you want to delete the list '\\(listToDelete?.name ?? \"this list\")'? This action cannot be undone.\")"
+},
+{
+"i": 575,
+"k": "text",
+"p": "ShoppingList",
+"s": "Items: %lld | Total: %@",
+"in": [
+"ShoppingListView"
+],
+"code": "Text(\"Items: \\(list.items.count) | Total: \\(list.totalPrice, format: .currency(code: GlobalState.currencyCode))\")"
+},
+{
+"i": 576,
+"k": "accessibility",
+"p": "ShoppingList",
+"s": "Add Shopping List",
+"in": [
+"ShoppingListView"
+],
+"code": ".accessibilityLabel(\"Add Shopping List\")"
+},
+{
+"i": 577,
+"k": "text",
+"p": "Storage",
+"s": "Quantity",
+"in": [
+"BatchCardView",
+"BatchEditRow"
+],
+"code": "Text(\"Quantity\")"
+},
+{
+"i": 578,
+"k": "text",
+"p": "Storage",
+"s": "Has Expiration Date",
+"in": [
+"BatchCardView",
+"BatchEditRow"
+],
+"code": "Text(\"Has Expiration Date\")"
+},
+{
+"i": 579,
+"k": "text",
+"p": "Storage",
+"s": "Expires on",
+"in": [
+"BatchCardView",
+"BatchEditRow"
+],
+"code": "Text(\"Expires on\")"
+},
+{
+"i": 580,
+"k": "label",
+"p": "Storage",
+"s": "Delete Batch",
+"in": [
+"BatchCardView",
+"BatchEditRow",
+"StorageBatchEditorContent"
+],
+"code": "Label(\"Delete Batch\", systemImage: \"minus.circle\")"
+},
+{
+"i": 581,
+"k": "text",
+"p": "Storage",
+"s": "Available: %@ %@",
+"in": [
+"ConsumeStockViewContent"
+],
+"code": "Text(\"Available: \\(availableDisplay.value) \\(availableDisplay.unit)\")"
+},
+{
+"i": 582,
+"k": "text",
+"p": "Storage",
+"s": "Consume",
+"in": [
+"ConsumeStockViewContent"
+],
+"code": "Text(\"Consume\")"
+},
+{
+"i": 583,
+"k": "text",
+"p": "Storage",
+"s": "In storage: %@ %@",
+"in": [
+"FoodItemRowStorageView"
+],
+"code": "Text(\"In storage: \\(displayWeight.value) \\(displayWeight.unit)\")"
+},
+{
+"i": 584,
+"k": "label",
+"p": "Storage",
+"s": "Add Batch",
+"in": [
+"ProductCard"
+],
+"code": "Label(\"Add Batch\", systemImage: \"plus\")"
+},
+{
+"i": 585,
+"k": "text",
+"p": "Storage",
+"s": "No batches found. Add a new one to get started.",
+"in": [
+"StorageBatchEditorContent"
+],
+"code": "Text(\"No batches found. Add a new one to get started.\")"
+},
+{
+"i": 586,
+"k": "label",
+"p": "Storage",
+"s": "Add Another Batch",
+"in": [
+"StorageBatchEditorContent"
+],
+"code": "Label(\"Add Another Batch\", systemImage: \"plus\")"
+},
+{
+"i": 587,
+"k": "text",
+"p": "Storage",
+"s": "Are you sure you want to delete this batch (%@ %@, expires: %@)? This action cannot be undone.",
+"in": [
+"StorageBatchEditorContent"
+],
+"code": "Text(\"Are you sure you want to delete this batch (\\(quantityDisplay.value) \\(quantityDisplay.unit), expires: \\(expirationString))? This action cannot be undone."
+},
+{
+"i": 588,
+"k": "text",
+"p": "Storage",
+"s": "Add to Storage",
+"in": [
+"StorageEditorViev",
+"StorageListView"
+],
+"code": "Text(\"Add to Storage\")"
+},
+{
+"i": 589,
+"k": "text",
+"p": "Storage",
+"s": "Are you sure you want to delete '%@' from your storage? This action cannot be undone.",
+"in": [
+"StorageListView"
+],
+"code": "Text(\"Are you sure you want to delete '\\(itemToDelete?.food?.name ?? \"this item\")' from your storage? This action cannot be undone.\")"
+},
+{
+"i": 590,
+"k": "text",
+"p": "Storage",
+"s": "Storage",
+"in": [
+"StorageListView"
+],
+"code": "Text(\"Storage\")"
+},
+{
+"i": 591,
+"k": "label",
+"p": "Storage",
+"s": "No Items in Storage",
+"in": [
+"StorageListView"
+],
+"code": "Label(\"No Items in Storage\", systemImage: \"archivebox\")"
+},
+{
+"i": 592,
+"k": "text",
+"p": "Storage",
+"s": "Tap the '+' button to add your first item.",
+"in": [
+"StorageListView"
+],
+"code": "Text(\"Tap the '+' button to add your first item.\")"
+},
+{
+"i": 593,
+"k": "text",
+"p": "Storage",
+"s": "Current Status",
+"in": [
+"TransactionHistoryContent"
+],
+"code": "Text(\"Current Status\")"
+},
+{
+"i": 594,
+"k": "text",
+"p": "Storage",
+"s": "Available Quantity",
+"in": [
+"TransactionHistoryContent"
+],
+"code": "Text(\"Available Quantity\")"
+},
+{
+"i": 595,
+"k": "label",
+"p": "Storage",
+"s": "No History",
+"in": [
+"TransactionHistoryContent"
+],
+"code": "Label(\"No History\", systemImage: \"clock.arrow.circlepath\")"
+},
+{
+"i": 596,
+"k": "text",
+"p": "Storage",
+"s": "No transactions have been recorded for this item yet.",
+"in": [
+"TransactionHistoryContent"
+],
+"code": "Text(\"No transactions have been recorded for this item yet.\")"
+},
+{
+"i": 597,
+"k": "alert",
+"p": "TrainingPlan",
+"s": "Add Workouts to Calendar",
+"in": [
+"DailyTrainingPlanView"
+],
+"code": ".confirmationDialog(\"Add Workouts to Calendar\", isPresented: $isShowingConfirmation, titleVisibility: .visible) {"
+},
+{
+"i": 598,
+"k": "text",
+"p": "TrainingPlan",
+"s": "This will add workouts for %@. How should workouts for a specific time slot be handled?",
+"in": [
+"DailyTrainingPlanView"
+],
+"code": "Text(\"This will add workouts for \\(targetDate.formatted(date: .abbreviated, time: .omitted)). How should workouts for a specific time slot be handled?\")"
+},
+{
+"i": 599,
+"k": "text",
+"p": "TrainingPlan",
+"s": "AI Daily Workout Plan",
+"in": [
+"DailyTrainingPlanView"
+],
+"code": "Text(\"AI Daily Workout Plan\").font(.headline)"
+},
+{
+"i": 600,
+"k": "text",
+"p": "TrainingPlan",
+"s": "Suggested Workouts",
+"in": [
+"DailyTrainingPlanView"
+],
+"code": "Text(\"Suggested Workouts\")"
+},
+{
+"i": 601,
+"k": "text",
+"p": "TrainingPlan",
+"s": "New Training Plan",
+"in": [
+"TrainingPlanEditorView"
+],
+"code": "Text(planToEdit == nil ? \"New Training Plan\" : \"Edit Training Plan\").font(.headline)"
+},
+{
+"i": 602,
+"k": "text",
+"p": "TrainingPlan",
+"s": "Edit Training Plan",
+"in": [
+"TrainingPlanEditorView"
+],
+"code": "Text(planToEdit == nil ? \"New Training Plan\" : \"Edit Training Plan\").font(.headline)"
+},
+{
+"i": 603,
+"k": "placeholder",
+"p": "TrainingPlan",
+"s": "e.g., Strength Phase 1",
+"in": [
+"TrainingPlanEditorView"
+],
+"code": "TextField(\"\", text: $name, prompt: Text(\"e.g., Strength Phase 1\").foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.6)))"
+},
+{
+"i": 604,
+"k": "text",
+"p": "TrainingPlan",
+"s": "Select a workout to add exercises.",
+"in": [
+"TrainingPlanEditorView"
+],
+"code": "Text(\"Select a workout to add exercises.\")"
+},
+{
+"i": 605,
+"k": "text",
+"p": "TrainingPlan",
+"s": "Tap search to add exercises.",
+"in": [
+"TrainingPlanEditorView"
+],
+"code": "Text(\"Tap search to add exercises.\")"
+},
+{
+"i": 606,
+"k": "text",
+"p": "TrainingPlan",
+"s": "Generating Plan...",
+"in": [
+"TrainingPlanEditorView"
+],
+"code": "Text(\"Generating Plan...\").fontWeight(.bold)"
+},
+{
+"i": 607,
+"k": "label",
+"p": "TrainingPlan",
+"s": "Skip Day",
+"in": [
+"TrainingPlanEditorView"
+],
+"code": "Label(\"Skip Day\", systemImage: \"powersleep\")"
+},
+{
+"i": 608,
+"k": "text",
+"p": "TrainingPlan",
+"s": "No sets detailed.",
+"in": [
+"TrainingPlanExerciseDetailRow"
+],
+"code": "Text(\"No sets detailed.\")"
+},
+{
+"i": 609,
+"k": "text",
+"p": "TrainingPlan",
+"s": "%lld %@",
+"in": [
+"TrainingPlanExerciseDetailRow"
+],
+"code": "Text(\"\\(val) \\(unitText)\")"
+},
+{
+"i": 610,
+"k": "text",
+"p": "TrainingPlan",
+"s": "%lld sets planned",
+"in": [
+"TrainingPlanExerciseRowView"
+],
+"code": "Text(\"\\(link.sets.count) sets planned\")",
+"plural": true
+},
+{
+"i": 611,
+"k": "text",
+"p": "Yoga",
+"s": "Calculated from the exercises — updates automatically",
+"in": [
+"YogaExerciseViews"
+],
+"code": "Text(\"Calculated from the exercises — updates automatically\")"
+},
+{
+"i": 612,
+"k": "text",
+"p": "Yoga",
+"s": "Add exercises with Ayurveda data to see a live preview.",
+"in": [
+"YogaExerciseViews"
+],
+"code": "Text(\"Add exercises with Ayurveda data to see a live preview.\")"
+},
+{
+"i": 613,
+"k": "text",
+"p": "Yoga",
+"s": "Calculated from %lld exercise%@ in this workout.",
+"in": [
+"YogaExerciseViews"
+],
+"code": "? \"Calculated from \\(yogaEntries.count) exercise\\(yogaEntries.count == 1 ? \"\" : \"s\") in this workout.\"",
+"note": "the %@ after the noun is the English plural ending ('s' or nothing): leave it out and word the translation so that it reads with any number"
+},
+{
+"i": 614,
+"k": "text",
+"p": "Yoga",
+"s": "Ayurveda effects set manually.",
+"in": [
+"YogaExerciseViews"
+],
+"code": ": \"Ayurveda effects set manually.\""
+},
+{
+"i": 615,
+"k": "permission",
+"p": "permissions",
+"s": "Ayurveda & Asana Yoga reads and updates your calendar to save your meals, shopping lists, and workouts.",
+"key": "NSCalendarsFullAccessUsageDescription",
+"note": "shown by iOS when it asks for this permission; the app name stays in English"
+},
+{
+"i": 616,
+"k": "permission",
+"p": "permissions",
+"s": "Ayurveda & Asana Yoga uses your calendar to save your meals, shopping lists, and workouts.",
+"key": "NSCalendarsUsageDescription",
+"note": "shown by iOS when it asks for this permission; the app name stays in English"
+},
+{
+"i": 617,
+"k": "permission",
+"p": "permissions",
+"s": "Camera is used to scan barcodes and food items so you can quickly add them to the app.",
+"key": "NSCameraUsageDescription",
+"note": "shown by iOS when it asks for this permission; the app name stays in English"
+},
+{
+"i": 618,
+"k": "permission",
+"p": "permissions",
+"s": "Ayurveda & Asana Yoga reads your sleep, steps, active energy, and workouts to highlight sleep and include daily activity in calorie totals.",
+"key": "NSHealthShareUsageDescription",
+"note": "shown by iOS when it asks for this permission; the app name stays in English"
+},
+{
+"i": 619,
+"k": "permission",
+"p": "permissions",
+"s": "Ayurveda & Asana Yoga writes workout and activity data to Health when you choose to save or test these features.",
+"key": "NSHealthUpdateUsageDescription",
+"note": "shown by iOS when it asks for this permission; the app name stays in English"
+},
+{
+"i": 620,
+"k": "permission",
+"p": "permissions",
+"s": "Ayurveda & Asana Yoga needs to connect to your local server to sync your health data across devices.",
+"key": "NSLocalNetworkUsageDescription",
+"note": "shown by iOS when it asks for this permission; the app name stays in English"
+}
+]
