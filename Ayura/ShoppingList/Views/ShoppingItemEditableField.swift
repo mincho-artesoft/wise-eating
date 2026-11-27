@@ -59,7 +59,7 @@ struct ShoppingItemEditableField: View {
     var body: some View {
         HStack(spacing: 4) {
             ConfigurableTextField(
-                title: isInteger ? "Qty" : "0.00",
+                title: isInteger ? String(localized: "Qty") : "0.00",
                 value: $text,
                 type: isInteger ? .integer : .decimal,
                 placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),

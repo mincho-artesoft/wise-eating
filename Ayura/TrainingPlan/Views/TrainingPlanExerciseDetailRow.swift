@@ -41,7 +41,7 @@ struct TrainingPlanExerciseDetailRow: View {
                     }
                     
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(exercise?.name ?? "Unknown")
+                        Text(exercise?.name ?? String(localized: "Unknown"))
                             .font(.system(size: 16, weight: .semibold))
                             .lineLimit(2)
                             .foregroundStyle(effectManager.currentGlobalAccentColor)
@@ -124,9 +124,9 @@ struct TrainingPlanExerciseDetailRow: View {
                                           // ✅ ПРОМЯНА: Проверка за isTimeBased и timeUnit
                                           let unitText: String = {
                                               if set.isTimeBased {
-                                                  return set.timeUnit == .minutes ? "min" : "sec"
+                                                  return set.timeUnit == .minutes ? String(localized: "min") : String(localized: "sec")
                                               }
-                                              return "reps"
+                                              return String(localized: "reps")
                                           }()
                                           
                                           Text("\(val) \(unitText)")

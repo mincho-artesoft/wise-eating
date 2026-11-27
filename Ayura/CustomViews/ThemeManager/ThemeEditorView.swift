@@ -24,7 +24,7 @@ struct ThemeEditorView: View {
     
     // MARK: - Computed Properties
     private var navigationTitle: String {
-        themeToEdit == nil ? "New Theme" : "Edit Theme"
+        themeToEdit == nil ? String(localized: "New Theme") : String(localized: "Edit Theme")
     }
 
     private var isSaveDisabled: Bool {
@@ -126,7 +126,7 @@ struct ThemeEditorView: View {
             Spacer()
             
             HStack {
-                Button(themeToEdit == nil ? "Save" : "Update", action: saveTheme)
+                Button(themeToEdit == nil ? String(localized: "Save") : String(localized: "Update"), action: saveTheme)
                     .disabled(isSaveDisabled)
             }
             .padding(.horizontal, 10)
@@ -290,16 +290,16 @@ struct ThemeEditorView: View {
     // MARK: - Helper Methods
     private func name(for point: UnitPoint) -> String {
         switch point {
-        case .topLeading: return "Top Leading"
-        case .top: return "Top"
-        case .topTrailing: return "Top Trailing"
-        case .leading: return "Leading"
-        case .center: return "Center"
-        case .bottomLeading: return "Bottom Leading"
-        case .bottom: return "Bottom"
-        case .bottomTrailing: return "Bottom Trailing"
-        case .trailing: return "Trailing"
-        default: return "Custom"
+        case .topLeading: return String(localized: "Top Leading")
+        case .top: return String(localized: "Top")
+        case .topTrailing: return String(localized: "Top Trailing")
+        case .leading: return String(localized: "Leading")
+        case .center: return String(localized: "Center")
+        case .bottomLeading: return String(localized: "Bottom Leading")
+        case .bottom: return String(localized: "Bottom")
+        case .bottomTrailing: return String(localized: "Bottom Trailing")
+        case .trailing: return String(localized: "Trailing")
+        default: return String(localized: "Custom")
         }
     }
     

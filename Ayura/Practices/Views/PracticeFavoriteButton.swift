@@ -24,7 +24,7 @@ struct PracticeFavoriteButton: View {
         .buttonStyle(.plain)
         .contentShape(Rectangle())
         .accessibilityLabel(
-            isFavorite ? "Remove from Favorites" : "Add to Favorites"
+            isFavorite ? String(localized: "Remove from Favorites") : String(localized: "Add to Favorites")
         )
         .animation(.spring(), value: catalogPreferences.revision)
     }

@@ -15,16 +15,16 @@ enum PermissionType {
         switch self {
         case .calendar:
             // ✅ ОБНОВЕНО: включваме и тренировките
-            return "Calendar Access Required for Meals & Workouts"
+            return String(localized: "Calendar Access Required for Meals & Workouts")
         case .notifications:
             // ✅ ОБНОВЕНО: включваме и тренировките, shopping lists и AI
-            return "Notifications Required for Meals, Workouts & Shopping Lists"
+            return String(localized: "Notifications Required for Meals, Workouts & Shopping Lists")
         case .allTrainingFeatures:
-            return "Health Access Required"
+            return String(localized: "Health Access Required")
         case .camera:
-            return "Camera Access Required"
+            return String(localized: "Camera Access Required")
         case .network:
-            return "Internet Connection Required"
+            return String(localized: "Internet Connection Required")
         }
     }
 
@@ -32,28 +32,28 @@ enum PermissionType {
         switch self {
         case .calendar:
             // ✅ ОБНОВЕНО: споменаваме и тренировки
-            return """
+            return String(localized: """
             Ayurveda & Asana Yoga uses your calendar to save your meals, shopping lists, and workouts. \
             Please grant permission in Settings to use these features.
-            """
+            """)
         case .notifications:
             // ✅ ОБНОВЕНО: включваме shopping lists, AI и други
-            return """
+            return String(localized: """
             Ayurveda & Asana Yoga uses notifications to remind you about your meals, workouts, shopping lists, \
             AI suggestions, and other important features. Please enable notifications in Settings \
             to stay on track and get the most out of Ayurveda & Asana Yoga.
-            """
+            """)
         case .allTrainingFeatures:
-            return """
+            return String(localized: """
             To track your workouts, Ayurveda & Asana Yoga needs access to your Health data.
 
             The button below will open the Health app. From there, please navigate to:
             **Sharing > Apps > Ayurveda & Asana Yoga**
-            """
+            """)
         case .camera:
-            return "Ayurveda & Asana Yoga needs camera access to scan barcodes and take photos for your foods and exercises. Please grant permission in Settings to use these features."
+            return String(localized: "Ayurveda & Asana Yoga needs camera access to scan barcodes and take photos for your foods and exercises. Please grant permission in Settings to use these features.")
         case .network:
-            return "An active internet connection is required to look up products and create new items. Turn on Wi-Fi or Cellular data."
+            return String(localized: "An active internet connection is required to look up products and create new items. Turn on Wi-Fi or Cellular data.")
         }
     }
 
@@ -70,8 +70,8 @@ enum PermissionType {
     /// Текст за бутона според типа
     var primaryButtonTitle: String {
         switch self {
-        case .allTrainingFeatures: return "Open Health App"
-        case .network, .camera, .calendar, .notifications: return "Open Settings"
+        case .allTrainingFeatures: return String(localized: "Open Health App")
+        case .network, .camera, .calendar, .notifications: return String(localized: "Open Settings")
         }
     }
 }

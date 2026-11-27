@@ -110,7 +110,7 @@ struct ProfileListView: View {
                 profileToDelete = nil
             }
         } message: {
-            Text("Are you sure you want to delete '\(profileToDelete?.name ?? "this profile")'? This action cannot be undone.")
+            Text("Are you sure you want to delete '\(profileToDelete?.name ?? String(localized: "this profile"))'? This action cannot be undone.")
         }
         .alert("Live Activity", isPresented: $showingLiveActivityError) {
             Button("OK", role: .cancel) {}
@@ -162,7 +162,7 @@ struct ProfileListView: View {
                 HStack(spacing: 6) {
                     Image(systemName: liveActivityManager.isRunning ? "livephoto.slash" : "livephoto")
                         .font(.title2)
-                    Text(liveActivityManager.isRunning ? "Stop" : "Live")
+                    Text(liveActivityManager.isRunning ? String(localized: "Stop") : String(localized: "Live"))
                         .font(.headline)
                 }
                 .padding(.horizontal, 10)
@@ -174,8 +174,8 @@ struct ProfileListView: View {
             .opacity(selectedProfile == nil ? 0.4 : 1.0)
             .accessibilityLabel(
                 liveActivityManager.isRunning
-                    ? "Stop next activity Live Activity"
-                        : "Start next activity Live Activity"
+                    ? String(localized: "Stop next activity Live Activity")
+                        : String(localized: "Start next activity Live Activity")
             )
 
             Spacer()
@@ -260,14 +260,14 @@ struct ProfileListView: View {
         let years = ageComponents.year ?? 0
         let months = ageComponents.month ?? 0
 
-        if years >= 2 { return "\(years) y/o" }
+        if years >= 2 { return String(localized: "\(years) y/o") }
         if years == 1 {
             return months == 0
-                ? "1 year"
-                : (months == 1 ? "1 year & 1 month" : "1 year & \(months) months")
+                ? String(localized: "1 year")
+                : (months == 1 ? String(localized: "1 year & 1 month") : String(localized: "1 year & \(months) months"))
         }
-        if months == 0 { return "Under a month" }
-        return months == 1 ? "1 month" : "\(months) months"
+        if months == 0 { return String(localized: "Under a month") }
+        return months == 1 ? String(localized: "1 month") : String(localized: "\(months) months")
     }
 
     @ViewBuilder
@@ -289,9 +289,9 @@ struct ProfileListView: View {
             guard isLocked else { return nil }
             switch subscriptionManager.nextTierForProfileLimit {
             case .advance:
-                return "Advanced"
+                return String(localized: "Advanced")
             case .premium:
-                return "Premium"
+                return String(localized: "Premium")
             default:
                 return nil
             }
@@ -343,7 +343,7 @@ struct ProfileListView: View {
                         setHealthKitProfile(profile)
                     } label: {
                         Label(
-                            isHealthKitProfile ? "HealthKit profile" : "Use HealthKit",
+                            isHealthKitProfile ? String(localized: "HealthKit profile") : String(localized: "Use HealthKit"),
                             systemImage: isHealthKitProfile
                                 ? "heart.text.square.fill"
                                 : "heart.text.square"
@@ -374,8 +374,8 @@ struct ProfileListView: View {
                     .disabled(isLocked)
                     .accessibilityLabel(
                         isHealthKitProfile
-                            ? "Current HealthKit profile"
-                            : "Use HealthKit for \(profile.name)"
+                            ? String(localized: "Current HealthKit profile")
+                            : String(localized: "Use HealthKit for \(profile.name)")
                     )
                 }
             }

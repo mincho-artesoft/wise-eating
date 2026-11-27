@@ -13,7 +13,7 @@ struct TrainingPlanPickerView: View {
 
     init(
         title: String,
-        dismissButtonLabel: String = "Close",
+        dismissButtonLabel: String = String(localized: "Close"),
         plans: [TrainingPlan],
         onDismiss: @escaping () -> Void,
         onSelectPlan: @escaping (TrainingPlan) -> Void

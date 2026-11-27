@@ -13,6 +13,14 @@ public enum CalendarFilterType: String, CaseIterable, Identifiable {
     case training = "Training"
     case practice = "Practices"
     public var id: String { self.rawValue }
+    public var displayName: String {
+        switch self {
+        case .all: String(localized: "All")
+        case .meal: String(localized: "Meal")
+        case .training: String(localized: "Training")
+        case .practice: String(localized: "Practices")
+        }
+    }
 }
 
 fileprivate struct CalendarToolbarItemsView: View {
@@ -61,7 +69,7 @@ fileprivate struct CalendarToolbarItemsView: View {
                 currentFilter = filter
             }
         } label: {
-            Text(filter.rawValue)
+            Text(filter.displayName)
                 .font(.caption.weight(.semibold))
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 6)

@@ -306,7 +306,7 @@ struct NutritionsDetailView: View {
                     }
                     Button("Cancel", role: .cancel) { itemToDelete = nil }
                 }, message: {
-                    Text("Are you sure you want to delete '\(itemToDelete?.name ?? "this food")' from the meal? This will not affect your stored items.")
+                    Text("Are you sure you want to delete '\(itemToDelete?.name ?? String(localized: "this food"))' from the meal? This will not affect your stored items.")
                 })
         )
     }
@@ -357,7 +357,7 @@ struct NutritionsDetailView: View {
                             }
                         }
                     } else if completedJob.status == .failed {
-                        alertMsg = "AI generation failed: \(completedJob.failureReason ?? "Unknown error")"
+                        alertMsg = String(localized: "AI generation failed: \(completedJob.failureReason ?? String(localized: "Unknown error"))")
                         showAlert = true
                         runningGenerationJobID = nil
                         Task { await aiManager.deleteJob(completedJob) }
@@ -587,8 +587,8 @@ struct NutritionsDetailView: View {
                         )
                     case .pickExistingPlan:
                         MealPlanPickerView(
-                            title: "Add to Existing Plan",
-                            dismissButtonLabel: "Back",
+                            title: String(localized: "Add to Existing Plan"),
+                            dismissButtonLabel: String(localized: "Back"),
                             plans: filteredMealPlans,
                             onDismiss: {
                                 withAnimation { mealActionContent = .actions }
@@ -1310,7 +1310,7 @@ struct NutritionsDetailView: View {
                         )
                     } else {
                         MealPlanPickerView(
-                            title: "Add from Meal Plan",
+                            title: String(localized: "Add from Meal Plan"),
                             plans: filteredMealPlans,
                             onDismiss: dismissMealPlanPicker,
                             onSelectPlan: { plan in
@@ -2662,8 +2662,8 @@ struct NutritionsDetailView: View {
             if reminderDate.timeIntervalSinceNow > 0 {
                 do {
                     let newID = try await NotificationManager.shared.scheduleNotification(
-                        title: "🍽️ Meal Reminder",
-                        body: "It's time for your \(meal.name). Enjoy!",
+                        title: String(localized: "🍽️ Meal Reminder"),
+                        body: String(localized: "It's time for your \(meal.name). Enjoy!"),
                         timeInterval: reminderDate.timeIntervalSinceNow,
                         userInfo: [
                             "mealID": meal.id.uuidString,
@@ -2871,15 +2871,15 @@ struct NutritionsDetailView: View {
             return true
         case .deviceNotEligible:
             // Няма да се вижда бутон, но пазим безопасността и тук
-            alertMsg = "This device doesn’t support Apple Intelligence."
+            alertMsg = String(localized: "This device doesn’t support Apple Intelligence.")
         case .appleIntelligenceNotEnabled:
-            alertMsg = "Apple Intelligence is turned off. Enable it in Settings to use AI meal generation."
+            alertMsg = String(localized: "Apple Intelligence is turned off. Enable it in Settings to use AI meal generation.")
         case .modelNotReady:
-            alertMsg = "The model is downloading or preparing. Please try again in a bit."
+            alertMsg = String(localized: "The model is downloading or preparing. Please try again in a bit.")
         case .unavailableUnsupportedOS:
-            alertMsg = "Apple Intelligence requires iOS 26 or newer. Update your OS to use this feature."
+            alertMsg = String(localized: "Apple Intelligence requires iOS 26 or newer. Update your OS to use this feature.")
         case .unavailableOther:
-            alertMsg = "Apple Intelligence is currently unavailable for an unknown reason."
+            alertMsg = String(localized: "Apple Intelligence is currently unavailable for an unknown reason.")
         }
         showAlert = true
         return false
@@ -2904,7 +2904,7 @@ struct NutritionsDetailView: View {
         ) {
             self.runningGenerationJobID = newJob.id
         } else {
-            alertMsg = "Could not start AI generation job."
+            alertMsg = String(localized: "Could not start AI generation job.")
             showAlert = true
             toastTimer?.invalidate()
             toastTimer = nil
@@ -2940,7 +2940,7 @@ struct NutritionsDetailView: View {
         }
         
         guard !emptyMeals.isEmpty else {
-            alertMsg = "All meals for this day already have items. Clear some meals if you want to generate new ones."
+            alertMsg = String(localized: "All meals for this day already have items. Clear some meals if you want to generate new ones.")
             showAlert = true
             return
         }

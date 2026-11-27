@@ -55,7 +55,7 @@ struct AyurvedaDoshaQuickFilterChip: View {
         .glassCardStyle(cornerRadius: 20)
         .buttonStyle(.plain)
         .accessibilityLabel(dosha.displayName)
-        .accessibilityValue(preference?.displayName ?? "Not selected")
+        .accessibilityValue(preference?.displayName ?? String(localized: "Not selected"))
         .accessibilityHint(
             "Double tap to cycle through pacifies, neutral, aggravates, and off"
         )
@@ -173,7 +173,7 @@ struct AyurvedaDoshaResultChips: View {
             }
             .accessibilityLabel(
                 presentation?.accessibilityLabel(dosha: name)
-                    ?? "\(name): no Ayurvedic profile"
+                    ?? String(localized: "\(name): no Ayurvedic profile")
             )
             .accessibilityIdentifier(
                 "ayurveda-dosha-chip-\(name.lowercased())"
@@ -248,22 +248,22 @@ struct AyurvedaSearchedFieldChips: View {
     ) -> String? {
         switch field {
         case .rasa:
-            return listText(label: "Rasa", values: metadata.rasa)
+            return listText(label: String(localized: "Rasa"), values: metadata.rasa)
         case .virya:
-            return optionalText(label: "Virya", value: metadata.virya)
+            return optionalText(label: String(localized: "Virya"), value: metadata.virya)
         case .vipaka:
-            return optionalText(label: "Vipaka", value: metadata.vipaka)
+            return optionalText(label: String(localized: "Vipaka"), value: metadata.vipaka)
         case .guna:
-            return listText(label: "Guna", values: metadata.gunas)
+            return listText(label: String(localized: "Guna"), values: metadata.gunas)
         case .agni:
             guard let value = metadata.agniEffect else { return nil }
             let effect = value > 0
-                ? "Kindles"
-                : (value < 0 ? "Dampens" : "Neutral")
-            return "Agni: \(effect)"
+                ? String(localized: "Kindles")
+                : (value < 0 ? String(localized: "Dampens") : String(localized: "Neutral"))
+            return String(localized: "Agni: \(effect)")
         case .digestibility:
             guard let value = metadata.digestibility else { return nil }
-            return "Digestibility: \(digestibilityLabel(value))"
+            return String(localized: "Digestibility: \(digestibilityLabel(value))")
         case .digestion:
             var values: [String] = []
             if let digestibility = metadata.digestibility {
@@ -271,15 +271,15 @@ struct AyurvedaSearchedFieldChips: View {
             }
             if let agni = metadata.agniEffect {
                 if agni > 0 {
-                    values.append("Kindles agni")
+                    values.append(String(localized: "Kindles agni"))
                 } else if agni < 0 {
-                    values.append("Dampens agni")
+                    values.append(String(localized: "Dampens agni"))
                 }
             }
             guard !values.isEmpty else { return nil }
-            return "Digestion: \(values.joined(separator: " · "))"
+            return String(localized: "Digestion: \(values.joined(separator: " · "))")
         case .season:
-            return listText(label: "Season", values: metadata.seasons)
+            return listText(label: String(localized: "Season"), values: metadata.seasons)
         }
     }
 
@@ -300,9 +300,9 @@ struct AyurvedaSearchedFieldChips: View {
     }
 
     private func digestibilityLabel(_ value: Int) -> String {
-        if value >= 4 { return "Easy (\(value)/5)" }
-        if value <= 2 { return "Heavy (\(value)/5)" }
-        return "Moderate (\(value)/5)"
+        if value >= 4 { return String(localized: "Easy (\(value)/5)") }
+        if value <= 2 { return String(localized: "Heavy (\(value)/5)") }
+        return String(localized: "Moderate (\(value)/5)")
     }
 
     private func displayName(_ value: String) -> String {

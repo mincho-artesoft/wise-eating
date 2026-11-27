@@ -64,18 +64,18 @@ struct DoshaBarsView: View {
   private var legend: some View {
     ChipGrid {
       DoshaLegendItem(
-        title: "Pacifies",
-        detail: "(calms, reduces)",
+        title: String(localized: "Pacifies"),
+        detail: String(localized: "(calms, reduces)"),
         color: Color("AyurvedaPacify")
       )
       DoshaLegendItem(
-        title: "Neutral",
-        detail: "(no effect)",
+        title: String(localized: "Neutral"),
+        detail: String(localized: "(no effect)"),
         color: Color("AyurvedaNeutral")
       )
       DoshaLegendItem(
-        title: "Aggravates",
-        detail: "(increases)",
+        title: String(localized: "Aggravates"),
+        detail: String(localized: "(increases)"),
         color: Color("AyurvedaAggravate")
       )
     }

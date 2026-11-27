@@ -359,47 +359,47 @@ final class SleepHealthStore: ObservableObject {
     ) -> (name: String, symbolName: String) {
         switch activityType {
         case .walking:
-            return ("Walking", "figure.walk.circle.fill")
+            return (String(localized: "Walking"), "figure.walk.circle.fill")
         case .running:
-            return ("Running", "figure.run.circle.fill")
+            return (String(localized: "Running"), "figure.run.circle.fill")
         case .cycling:
-            return ("Cycling", "figure.outdoor.cycle.circle.fill")
+            return (String(localized: "Cycling"), "figure.outdoor.cycle.circle.fill")
         case .hiking:
-            return ("Hiking", "figure.hiking.circle.fill")
+            return (String(localized: "Hiking"), "figure.hiking.circle.fill")
         case .swimming:
-            return ("Swimming", "figure.pool.swim.circle.fill")
+            return (String(localized: "Swimming"), "figure.pool.swim.circle.fill")
         case .traditionalStrengthTraining:
-            return ("Strength Training", "dumbbell.fill")
+            return (String(localized: "Strength Training"), "dumbbell.fill")
         case .functionalStrengthTraining:
-            return ("Functional Strength", "figure.strengthtraining.functional")
+            return (String(localized: "Functional Strength"), "figure.strengthtraining.functional")
         case .highIntensityIntervalTraining:
-            return ("High Intensity Interval Training", "figure.highintensity.intervaltraining")
+            return (String(localized: "High Intensity Interval Training"), "figure.highintensity.intervaltraining")
         case .yoga:
-            return ("Yoga", "figure.yoga")
+            return (String(localized: "Yoga"), "figure.yoga")
         case .pilates:
-            return ("Pilates", "figure.pilates")
+            return (String(localized: "Pilates"), "figure.pilates")
         case .coreTraining:
-            return ("Core Training", "figure.core.training")
+            return (String(localized: "Core Training"), "figure.core.training")
         case .dance, .cardioDance, .socialDance:
-            return ("Dance", "figure.dance")
+            return (String(localized: "Dance"), "figure.dance")
         case .elliptical:
-            return ("Elliptical", "figure.elliptical")
+            return (String(localized: "Elliptical"), "figure.elliptical")
         case .rowing:
-            return ("Rowing", "figure.rower")
+            return (String(localized: "Rowing"), "figure.rower")
         case .stairClimbing, .stairs, .stepTraining:
-            return ("Stair Training", "figure.stair.stepper")
+            return (String(localized: "Stair Training"), "figure.stair.stepper")
         case .mixedCardio:
-            return ("Mixed Cardio", "figure.mixed.cardio")
+            return (String(localized: "Mixed Cardio"), "figure.mixed.cardio")
         case .crossTraining:
-            return ("Cross Training", "figure.cross.training")
+            return (String(localized: "Cross Training"), "figure.cross.training")
         case .soccer:
-            return ("Soccer", "figure.soccer")
+            return (String(localized: "Soccer"), "figure.soccer")
         case .basketball:
-            return ("Basketball", "figure.basketball")
+            return (String(localized: "Basketball"), "figure.basketball")
         case .tennis:
-            return ("Tennis", "figure.tennis")
+            return (String(localized: "Tennis"), "figure.tennis")
         default:
-            return ("Workout", "figure.run.circle.fill")
+            return (String(localized: "Workout"), "figure.run.circle.fill")
         }
     }
 

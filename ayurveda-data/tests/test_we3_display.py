@@ -353,9 +353,9 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
             ".foregroundStyle(effectManager.currentGlobalAccentColor)",
             section,
         )
-        self.assertIn('title: "Constitution"', section)
+        self.assertIn('title: String(localized: "Constitution")', section)
         self.assertIn("completesSetupDirectly: true", section)
-        self.assertIn('title: String = "Ayurvedic profile"', constitution)
+        self.assertIn('title: String = String(localized: "Ayurvedic profile")', constitution)
         self.assertIn("Text(title)", constitution)
 
     def test_profile_editor_ayurveda_setup_finishes_from_header(self):
@@ -366,7 +366,7 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         ]
 
         self.assertIn(
-            'trailingTitle: completesDirectly ? "Done" : nil',
+            'trailingTitle: completesDirectly ? String(localized: "Done") : nil',
             setup,
         )
         self.assertIn("trailingDisabled: directCompletionDisabled", setup)
@@ -534,7 +534,7 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         self.assertNotIn('Label("Daily Ayurveda"', row)
         self.assertIn('Text("Dosha Balance")', row)
         self.assertIn("GlassChipView(", row)
-        self.assertIn('label: "Fit: \\(fitLabel)"', row)
+        self.assertIn('label: String(localized: "Fit: \\(fitLabel)")', row)
         self.assertIn("systemImage: fitIcon", row)
         self.assertIn("textColor: fitColor", row)
         self.assertIn("font: .subheadline", row)

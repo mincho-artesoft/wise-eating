@@ -182,9 +182,9 @@ struct MealEditorView: View {
 
     private func formatReminder(_ minutes: Int) -> String {
         if minutes == 0 {
-            return "None"
+            return String(localized: "None")
         }
-        return "\(minutes) min before"
+        return String(localized: "\(minutes) min before")
     }
     
     private func checkNotificationStatus() {

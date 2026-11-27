@@ -1,8 +1,10 @@
 # Translating the interface
 
-`work/batch-0.json` … `batch-3.json` hold 678 strings (about 2,700 words):
+`work/batch-0.json` … `batch-8.json` hold 1,394 strings (about 5,100 words):
 the buttons, titles, labels, messages and placeholders of the app, and the six
-texts iOS shows when it asks for a permission. Each item has
+texts iOS shows when it asks for a permission. Batches 0–3 are the first round,
+4–8 the second (text the app used to hold in plain values: option names, the
+constitution questionnaire, error and status messages, notification texts). Each item has
 
 - `i` — its number;
 - `k` — what it is: `button`, `title`, `heading`, `label`, `text`, `alert`,
@@ -14,6 +16,8 @@ texts iOS shows when it asks for a permission. Each item has
 - `code` — the line of Swift it comes from. Read it: it says whether "Set" is
   a verb on a button or a set of an exercise, and what each `%@` is filled
   with;
+- `above` — on short items whose own line says little: the declaration or the
+  text above it. For an answer of the questionnaire it is the question;
 - `plural` and `note` on some items, explained below.
 
 Write `work/<language>/out-N.json`: a JSON array, the same length and order
@@ -112,5 +116,23 @@ that it reads with any number ("days: %lld" rather than "%lld day").
 - Western digits. One translation per item; no notes, no alternatives.
 - A string that is only a name, a unit or a symbol in that language may stay
   as the English; do not leave a real word untranslated.
-- Batch 3 (`onboarding-paywall`) is translated last and only when Mincho says
-  so: those screens are about to be rewritten.
+- Batches 3 and 8 (`onboarding-paywall`) are translated last and only when
+  Mincho says so: those screens are about to be rewritten.
+
+## The second round (batches 4–8)
+
+- **The constitution questionnaire** (batch 4, `Ayurveda`): twelve questions,
+  each with three answers, and five check-in questions. The three answers of a
+  question describe the three doshas in everyday words; keep them parallel in
+  form and about the same length, and do not name the dosha. A question ends
+  with a question mark; an answer has no full stop.
+- **Fragments.** A few strings are pieces a sentence is put together from
+  (`" and "`, `", but "`, `"Contains: "`, `"Created: "`). Their leading and
+  trailing spaces are kept for you; translate the word, and look at `code` to
+  see what they join.
+- **Names of nutrients, muscles, allergens, pose families and months** are
+  labels: the ordinary word of the language, capitalised as a label.
+- **Notification texts** (`NotificationManager`, reminders) are whole
+  sentences shown on the lock screen: short, no exclamation marks.
+- A string that also exists in batches 0–3 is not repeated; a word that now
+  appears as a label must read the same as it did there.

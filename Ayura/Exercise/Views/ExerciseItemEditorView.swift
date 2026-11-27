@@ -125,7 +125,7 @@ struct ExerciseItemEditorView: View {
                 title: copy.name,
                 sanskrit: copy.sanskrit
             )
-            _name = State(initialValue: isAIInit ? composedName : "Copy of \(composedName)")
+            _name = State(initialValue: isAIInit ? composedName : String(localized: "Copy of \(composedName)"))
             _description = State(initialValue: copy.exerciseDescription ?? "")
             _videoURL = State(initialValue: copy.videoURL ?? "")
             _metValueString = State(initialValue: copy.metValue.map { String(format: "%.1f", $0) } ?? "")
@@ -205,7 +205,7 @@ struct ExerciseItemEditorView: View {
     }
     
     private var navigationTitle: String {
-        exerciseToEdit == nil && dubExercise == nil ? "Add Exercise" : "Edit Exercise"
+        exerciseToEdit == nil && dubExercise == nil ? String(localized: "Add Exercise") : String(localized: "Edit Exercise")
     }
     
     // MARK: - Body
@@ -388,9 +388,9 @@ struct ExerciseItemEditorView: View {
                 .padding(.bottom, -4)
             
             VStack(spacing: 16) {
-                StyledLabeledPicker(label: "Exercise Name", isRequired: true) {
+                StyledLabeledPicker(label: String(localized: "Exercise Name"), isRequired: true) {
                     ConfigurableTextField(
-                        title: "e.g., Barbell Squat",
+                        title: String(localized: "e.g., Barbell Squat"),
                         value: $name,
                         type: .standard,
                         placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
@@ -406,9 +406,9 @@ struct ExerciseItemEditorView: View {
                     photoPicker
                     
                     VStack(alignment: .leading, spacing: 12) {
-                        StyledLabeledPicker(label: "Default Duration (sec)") {
+                        StyledLabeledPicker(label: String(localized: "Default Duration (sec)")) {
                             ConfigurableTextField(
-                                title: "e.g., 30",
+                                title: String(localized: "e.g., 30"),
                                 value: $durationSecondsString,
                                 type: .integer,
                                 placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
@@ -420,7 +420,7 @@ struct ExerciseItemEditorView: View {
                         }
                         .id(FocusableField.duration)
                         
-                        StyledLabeledPicker(label: "Description", height: 120) {
+                        StyledLabeledPicker(label: String(localized: "Description"), height: 120) {
                             descriptionEditor
                                 .focused($focusedField, equals: .description)
                         }
@@ -428,9 +428,9 @@ struct ExerciseItemEditorView: View {
                     }
                 }
                 
-                StyledLabeledPicker(label: "Minimum Age (months)") {
+                StyledLabeledPicker(label: String(localized: "Minimum Age (months)")) {
                     ConfigurableTextField(
-                        title: "e.g. 6",
+                        title: String(localized: "e.g. 6"),
                         value: $minAgeMonthsTxt,
                         type: .integer,
                         placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
@@ -568,9 +568,9 @@ struct ExerciseItemEditorView: View {
     
     private var detailsSection: some View {
         VStack(spacing: 16) {
-            StyledLabeledPicker(label: "Video URL (optional)") {
+            StyledLabeledPicker(label: String(localized: "Video URL (optional)")) {
                 ConfigurableTextField(
-                    title: "e.g., https://youtube.com/...",
+                    title: String(localized: "e.g., https://youtube.com/..."),
                     value: $videoURL,
                     type: .standard,
                     placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
@@ -581,9 +581,9 @@ struct ExerciseItemEditorView: View {
             }
             .id(FocusableField.videoURL)
             
-            StyledLabeledPicker(label: "MET Value (optional)") {
+            StyledLabeledPicker(label: String(localized: "MET Value (optional)")) {
                 ConfigurableTextField(
-                    title: "e.g., 8.0",
+                    title: String(localized: "e.g., 8.0"),
                     value: $metValueString,
                     type: .decimal,
                     placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
@@ -622,8 +622,8 @@ struct ExerciseItemEditorView: View {
             MultiSelectButton(
                 selection: $selectedMuscleGroups,
                 items: MuscleGroup.allCases,
-                label: { $0.rawValue },
-                prompt: "Select muscle groups...",
+                label: { $0.displayName },
+                prompt: String(localized: "Select muscle groups..."),
                 isExpanded: openMenu == .muscle
             )
             .contentShape(Rectangle())
@@ -703,7 +703,7 @@ struct ExerciseItemEditorView: View {
                     IconMultiSelectGridView(
                         items: MuscleGroup.allCases,
                         selection: $selectedMuscleGroups,
-                        searchPrompt: "Search muscles...",
+                        searchPrompt: String(localized: "Search muscles..."),
                         iconSize: CGSize(width: 48, height: 80),
                         useIconColor: true,
                         assetNameProvider: { group in
@@ -714,8 +714,8 @@ struct ExerciseItemEditorView: View {
                     SearchableSingleSelectList(
                         items: AsanaFamily.allCases,
                         selection: selectedFamily,
-                        label: { $0.rawValue },
-                        searchPrompt: "Search families...",
+                        label: { $0.displayName },
+                        searchPrompt: String(localized: "Search families..."),
                         onSelect: { selection in
                             selectedFamily = selection
                             closePracticePicker()
@@ -725,8 +725,8 @@ struct ExerciseItemEditorView: View {
                     SearchableSingleSelectList(
                         items: YogaBreath.allCases,
                         selection: breath,
-                        label: { $0.rawValue },
-                        searchPrompt: "Search breathing options...",
+                        label: { yogaLabel($0.rawValue) },
+                        searchPrompt: String(localized: "Search breathing options..."),
                         onSelect: { selection in
                             breath = selection
                             closePracticePicker()
@@ -736,8 +736,8 @@ struct ExerciseItemEditorView: View {
                     SearchableSingleSelectList(
                         items: YogaDrishti.allCases,
                         selection: drishti,
-                        label: { $0.rawValue },
-                        searchPrompt: "Search gaze options...",
+                        label: { yogaLabel($0.rawValue) },
+                        searchPrompt: String(localized: "Search gaze options..."),
                         onSelect: { selection in
                             drishti = selection
                             closePracticePicker()
@@ -771,7 +771,7 @@ struct ExerciseItemEditorView: View {
     private func save() {
         let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmedName.isEmpty else {
-            alertMessage = "Exercise name cannot be empty."
+            alertMessage = String(localized: "Exercise name cannot be empty.")
             showAlert = true
             return
         }
@@ -786,7 +786,7 @@ struct ExerciseItemEditorView: View {
                     from: ctx.container
                 )
             } catch {
-                alertMessage = "Failed to open the user database: \(error.localizedDescription)"
+                alertMessage = String(localized: "Failed to open the user database: \(error.localizedDescription)")
                 showAlert = true
                 isSaving = false
                 return
@@ -874,7 +874,7 @@ struct ExerciseItemEditorView: View {
                 
                 onDismiss(itemToSave)
             } catch {
-                alertMessage = "Failed to save exercise: \(error.localizedDescription)"
+                alertMessage = String(localized: "Failed to save exercise: \(error.localizedDescription)")
                 showAlert = true
                 isSaving = false
             }
@@ -920,7 +920,7 @@ struct ExerciseItemEditorView: View {
     /// Извиква се само когато потребителят е "платил" (с пари или с гледане на реклама).
     private func startAIGeneration() {
         guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            alertMsg = "Please enter a name for the exercise first."
+            alertMsg = String(localized: "Please enter a name for the exercise first.")
             showAlert = true
             return
         }
@@ -938,14 +938,14 @@ struct ExerciseItemEditorView: View {
             ) {
                 self.runningGenerationJobID = newJob.id
             } else {
-                alertMsg = "Could not start AI generation job."
+                alertMsg = String(localized: "Could not start AI generation job.")
                 showAlert = true
                 toastTimer?.invalidate()
                 toastTimer = nil
                 withAnimation { showAIGenerationToast = false }
             }
         } else {
-            alertMsg = "AI data generation requires iOS 26 or newer."
+            alertMsg = String(localized: "AI data generation requires iOS 26 or newer.")
             showAlert = true
         }
     }
@@ -971,7 +971,7 @@ struct ExerciseItemEditorView: View {
         
         // 2. Валидация на името (преди рекламите)
         guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            alertMsg = "Please enter a name for the exercise first."
+            alertMsg = String(localized: "Please enter a name for the exercise first.")
             showAlert = true
             return
         }
@@ -1023,7 +1023,7 @@ struct ExerciseItemEditorView: View {
     private func populateFromCompletedJob(jobID: UUID) async {
         guard let job = (aiManager.jobs.first { $0.id == jobID }),
               let resultData = job.resultData else {
-            alertMsg = "Could not find completed job data."
+            alertMsg = String(localized: "Could not find completed job data.")
             showAlert = true
             runningGenerationJobID = nil
             return
@@ -1067,7 +1067,7 @@ struct ExerciseItemEditorView: View {
             pendingAIJobIDToDeleteOnSave = jobID
             
         } catch {
-            alertMessage = "Failed to process AI data: \(error.localizedDescription)"
+            alertMessage = String(localized: "Failed to process AI data: \(error.localizedDescription)")
             showAlert = true
             runningGenerationJobID = nil
             
@@ -1266,15 +1266,15 @@ struct ExerciseItemEditorView: View {
         case .available:
             return true
         case .deviceNotEligible:
-            alertMessage = "This device doesn’t support Apple Intelligence."
+            alertMessage = String(localized: "This device doesn’t support Apple Intelligence.")
         case .appleIntelligenceNotEnabled:
-            alertMessage = "Apple Intelligence is turned off. Enable it in Settings to use AI exercise generation."
+            alertMessage = String(localized: "Apple Intelligence is turned off. Enable it in Settings to use AI exercise generation.")
         case .modelNotReady:
-            alertMessage = "The model is downloading or preparing. Please try again in a bit."
+            alertMessage = String(localized: "The model is downloading or preparing. Please try again in a bit.")
         case .unavailableUnsupportedOS:
-            alertMessage = "Apple Intelligence requires iOS 26 or newer. Update your OS to use this feature."
+            alertMessage = String(localized: "Apple Intelligence requires iOS 26 or newer. Update your OS to use this feature.")
         case .unavailableOther:
-            alertMessage = "Apple Intelligence is currently unavailable for an unknown reason."
+            alertMessage = String(localized: "Apple Intelligence is currently unavailable for an unknown reason.")
         }
         showAlert = true
         return false
@@ -1325,10 +1325,10 @@ struct ExerciseItemEditorView: View {
 fileprivate extension ExerciseItemEditorView.OpenMenu {
     var title: String {
         switch self {
-        case .muscle: "Muscle Groups"
-        case .family: "Family"
-        case .breath: "Breath"
-        case .drishti: "Drishti"
+        case .muscle: String(localized: "Muscle Groups")
+        case .family: String(localized: "Family")
+        case .breath: String(localized: "Breath")
+        case .drishti: String(localized: "Drishti")
         case .none:   ""
         }
     }

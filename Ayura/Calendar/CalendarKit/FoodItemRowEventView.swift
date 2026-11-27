@@ -78,7 +78,7 @@ struct FoodItemRowEventView: View {
                 return item.itemDescription?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty()
             }
             let first = links.prefix(3).map { link -> String in
-                let n = link.food?.name ?? "Ingredient"; let g = link.grams
+                let n = link.food?.name ?? String(localized: "Ingredient"); let g = link.grams
                 let s = g.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0fg", g) : String(format: "%.1fg", g)
                 return "\(n) \(s)"
             }

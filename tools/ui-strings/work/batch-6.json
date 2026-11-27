@@ -1,0 +1,2269 @@
+[
+{
+"i": 1150,
+"k": "text",
+"p": "FoodSearch",
+"s": "%@: no Ayurvedic profile",
+"in": [
+"AyurvedaSearchChips"
+],
+"code": "?? String(localized: \"\\(name): no Ayurvedic profile\")"
+},
+{
+"i": 1151,
+"k": "text",
+"p": "FoodSearch",
+"s": "Rasa",
+"in": [
+"AyurvedaSearchChips"
+],
+"code": "return listText(label: String(localized: \"Rasa\"), values: metadata.rasa)"
+},
+{
+"i": 1152,
+"k": "text",
+"p": "FoodSearch",
+"s": "Virya",
+"in": [
+"AyurvedaSearchChips"
+],
+"code": "return optionalText(label: String(localized: \"Virya\"), value: metadata.virya)"
+},
+{
+"i": 1153,
+"k": "text",
+"p": "FoodSearch",
+"s": "Vipaka",
+"in": [
+"AyurvedaSearchChips"
+],
+"code": "return optionalText(label: String(localized: \"Vipaka\"), value: metadata.vipaka)"
+},
+{
+"i": 1154,
+"k": "text",
+"p": "FoodSearch",
+"s": "Guna",
+"in": [
+"AyurvedaSearchChips"
+],
+"code": "return listText(label: String(localized: \"Guna\"), values: metadata.gunas)"
+},
+{
+"i": 1155,
+"k": "text",
+"p": "FoodSearch",
+"s": "Kindles",
+"in": [
+"AyurvedaSearchChips"
+],
+"code": "? String(localized: \"Kindles\")",
+"above": "let effect = value > 0"
+},
+{
+"i": 1156,
+"k": "text",
+"p": "FoodSearch",
+"s": "Dampens",
+"in": [
+"AyurvedaSearchChips"
+],
+"code": ": (value < 0 ? String(localized: \"Dampens\") : String(localized: \"Neutral\"))"
+},
+{
+"i": 1157,
+"k": "text",
+"p": "FoodSearch",
+"s": "Agni: %@",
+"in": [
+"AyurvedaSearchChips"
+],
+"code": "return String(localized: \"Agni: \\(effect)\")",
+"above": "let effect = value > 0"
+},
+{
+"i": 1158,
+"k": "label",
+"p": "FoodSearch",
+"s": "Digestibility: %@",
+"in": [
+"AyurvedaSearchChips"
+],
+"code": "return String(localized: \"Digestibility: \\(digestibilityLabel(value))\")"
+},
+{
+"i": 1159,
+"k": "text",
+"p": "FoodSearch",
+"s": "Kindles agni",
+"in": [
+"AyurvedaSearchChips"
+],
+"code": "values.append(String(localized: \"Kindles agni\"))",
+"above": "if let agni = metadata.agniEffect {"
+},
+{
+"i": 1160,
+"k": "text",
+"p": "FoodSearch",
+"s": "Dampens agni",
+"in": [
+"AyurvedaSearchChips"
+],
+"code": "values.append(String(localized: \"Dampens agni\"))",
+"above": "if let agni = metadata.agniEffect {"
+},
+{
+"i": 1161,
+"k": "text",
+"p": "FoodSearch",
+"s": "Digestion: %@",
+"in": [
+"AyurvedaSearchChips"
+],
+"code": "return String(localized: \"Digestion: \\(values.joined(separator: \" · \"))\")"
+},
+{
+"i": 1162,
+"k": "text",
+"p": "FoodSearch",
+"s": "Season",
+"in": [
+"AyurvedaSearchChips"
+],
+"code": "return listText(label: String(localized: \"Season\"), values: metadata.seasons)"
+},
+{
+"i": 1163,
+"k": "text",
+"p": "FoodSearch",
+"s": "Easy (%lld/5)",
+"in": [
+"AyurvedaSearchChips"
+],
+"code": "if value >= 4 { return String(localized: \"Easy (\\(value)/5)\") }",
+"plural": true
+},
+{
+"i": 1164,
+"k": "text",
+"p": "FoodSearch",
+"s": "Heavy (%lld/5)",
+"in": [
+"AyurvedaSearchChips"
+],
+"code": "if value <= 2 { return String(localized: \"Heavy (\\(value)/5)\") }",
+"plural": true
+},
+{
+"i": 1165,
+"k": "text",
+"p": "FoodSearch",
+"s": "Moderate (%lld/5)",
+"in": [
+"AyurvedaSearchChips"
+],
+"code": "return String(localized: \"Moderate (\\(value)/5)\")",
+"above": "private func digestibilityLabel(_ value: Int) -> String {",
+"plural": true
+},
+{
+"i": 1166,
+"k": "text",
+"p": "FoodSearch",
+"s": "Age %lldy+",
+"in": [
+"FoodSearchView"
+],
+"code": "return (months >= 12) ? String(localized: \"Age \\(Int(months / 12.0))y+\") : String(localized: \"Age \\(Int(months))m+\")",
+"plural": true
+},
+{
+"i": 1167,
+"k": "text",
+"p": "FoodSearch",
+"s": "Age %lldm+",
+"in": [
+"FoodSearchView"
+],
+"code": "return (months >= 12) ? String(localized: \"Age \\(Int(months / 12.0))y+\") : String(localized: \"Age \\(Int(months))m+\")",
+"plural": true
+},
+{
+"i": 1168,
+"k": "text",
+"p": "FoodSearch",
+"s": "Age",
+"in": [
+"FoodSearchView"
+],
+"code": "return String(localized: \"Age\")",
+"above": "if let months = quickAgeFilterMonths {"
+},
+{
+"i": 1169,
+"k": "text",
+"p": "FoodSearch",
+"s": "Inferred from %@ · near match",
+"in": [
+"AyurvedaFacet"
+],
+"code": "return String(localized: \"Inferred from \\(sourceProfileName) · near match\")"
+},
+{
+"i": 1170,
+"k": "text",
+"p": "FoodSearch",
+"s": "Inferred from %@",
+"in": [
+"AyurvedaFacet"
+],
+"code": "return String(localized: \"Inferred from \\(sourceProfileName)\")"
+},
+{
+"i": 1171,
+"k": "text",
+"p": "FoodSearch",
+"s": "Linked to %@",
+"in": [
+"AyurvedaFacet"
+],
+"code": "return String(localized: \"Linked to \\(sourceProfileName)\")"
+},
+{
+"i": 1172,
+"k": "text",
+"p": "FoodSearch",
+"s": "Ayurveda profile · %@",
+"in": [
+"AyurvedaFacet"
+],
+"code": "return String(localized: \"Ayurveda profile · \\(sourceProfileName)\")"
+},
+{
+"i": 1173,
+"k": "text",
+"p": "FoodSearch",
+"s": "Vata",
+"in": [
+"AyurvedaSearchFilters"
+],
+"code": "case .vata: String(localized: \"Vata\")",
+"above": "var displayName: String {"
+},
+{
+"i": 1174,
+"k": "text",
+"p": "FoodSearch",
+"s": "Pitta",
+"in": [
+"AyurvedaSearchFilters"
+],
+"code": "case .pitta: String(localized: \"Pitta\")",
+"above": "case .vata: String(localized: \"Vata\")"
+},
+{
+"i": 1175,
+"k": "text",
+"p": "FoodSearch",
+"s": "Kapha",
+"in": [
+"AyurvedaSearchFilters"
+],
+"code": "case .kapha: String(localized: \"Kapha\")",
+"above": "case .pitta: String(localized: \"Pitta\")"
+},
+{
+"i": 1176,
+"k": "text",
+"p": "FoodSearch",
+"s": "%lld foods without pH data excluded",
+"in": [
+"SearchContext"
+],
+"code": "return String(localized: \"\\(foodsWithoutPhExcluded) foods without pH data excluded\")",
+"plural": true
+},
+{
+"i": 1177,
+"k": "text",
+"p": "FoodSearch",
+"s": "Sugar",
+"in": [
+"SmartFoodSearchEngine"
+],
+"code": "case .totalSugar: return String(localized: \"Sugar\")"
+},
+{
+"i": 1178,
+"k": "text",
+"p": "FoodSearch",
+"s": "Еnergy",
+"in": [
+"SmartFoodSearchEngine"
+],
+"code": "case .energy: return String(localized: \"Еnergy\")"
+},
+{
+"i": 1179,
+"k": "text",
+"p": "FoodSearch",
+"s": "Vit B1",
+"in": [
+"SmartFoodSearchEngine"
+],
+"code": "case .thiamin: return String(localized: \"Vit B1\")"
+},
+{
+"i": 1180,
+"k": "text",
+"p": "FoodSearch",
+"s": "Vit B2",
+"in": [
+"SmartFoodSearchEngine"
+],
+"code": "case .riboflavin: return String(localized: \"Vit B2\")"
+},
+{
+"i": 1181,
+"k": "text",
+"p": "FoodSearch",
+"s": "Vit B3",
+"in": [
+"SmartFoodSearchEngine"
+],
+"code": "case .niacin: return String(localized: \"Vit B3\")"
+},
+{
+"i": 1182,
+"k": "text",
+"p": "FoodSearch",
+"s": "Vit B5",
+"in": [
+"SmartFoodSearchEngine"
+],
+"code": "case .pantothenicAcid: return String(localized: \"Vit B5\")"
+},
+{
+"i": 1183,
+"k": "text",
+"p": "FoodSearch",
+"s": "Vit B6",
+"in": [
+"SmartFoodSearchEngine"
+],
+"code": "case .vitaminB6: return String(localized: \"Vit B6\")"
+},
+{
+"i": 1184,
+"k": "text",
+"p": "FoodSearch",
+"s": "Vit B12",
+"in": [
+"SmartFoodSearchEngine"
+],
+"code": "case .vitaminB12: return String(localized: \"Vit B12\")"
+},
+{
+"i": 1185,
+"k": "text",
+"p": "FoodSearch",
+"s": "Folate",
+"in": [
+"SmartFoodSearchEngine"
+],
+"code": "case .folateTotal: return String(localized: \"Folate\")"
+},
+{
+"i": 1186,
+"k": "text",
+"p": "FoodSearch",
+"s": "Folic Acid",
+"in": [
+"SmartFoodSearchEngine"
+],
+"code": "case .folicAcid: return String(localized: \"Folic Acid\")"
+},
+{
+"i": 1187,
+"k": "text",
+"p": "FoodSearch",
+"s": "Food Folate",
+"in": [
+"SmartFoodSearchEngine"
+],
+"code": "case .folateFood: return String(localized: \"Food Folate\")"
+},
+{
+"i": 1188,
+"k": "text",
+"p": "Health",
+"s": "Walking",
+"in": [
+"SleepHealthStore"
+],
+"code": "return (String(localized: \"Walking\"), \"figure.walk.circle.fill\")"
+},
+{
+"i": 1189,
+"k": "text",
+"p": "Health",
+"s": "Running",
+"in": [
+"SleepHealthStore"
+],
+"code": "return (String(localized: \"Running\"), \"figure.run.circle.fill\")"
+},
+{
+"i": 1190,
+"k": "text",
+"p": "Health",
+"s": "Cycling",
+"in": [
+"SleepHealthStore"
+],
+"code": "return (String(localized: \"Cycling\"), \"figure.outdoor.cycle.circle.fill\")"
+},
+{
+"i": 1191,
+"k": "text",
+"p": "Health",
+"s": "Hiking",
+"in": [
+"SleepHealthStore"
+],
+"code": "return (String(localized: \"Hiking\"), \"figure.hiking.circle.fill\")"
+},
+{
+"i": 1192,
+"k": "text",
+"p": "Health",
+"s": "Swimming",
+"in": [
+"SleepHealthStore"
+],
+"code": "return (String(localized: \"Swimming\"), \"figure.pool.swim.circle.fill\")"
+},
+{
+"i": 1193,
+"k": "text",
+"p": "Health",
+"s": "Strength Training",
+"in": [
+"SleepHealthStore"
+],
+"code": "return (String(localized: \"Strength Training\"), \"dumbbell.fill\")"
+},
+{
+"i": 1194,
+"k": "text",
+"p": "Health",
+"s": "Functional Strength",
+"in": [
+"SleepHealthStore"
+],
+"code": "return (String(localized: \"Functional Strength\"), \"figure.strengthtraining.functional\")"
+},
+{
+"i": 1195,
+"k": "text",
+"p": "Health",
+"s": "High Intensity Interval Training",
+"in": [
+"SleepHealthStore"
+],
+"code": "return (String(localized: \"High Intensity Interval Training\"), \"figure.highintensity.intervaltraining\")"
+},
+{
+"i": 1196,
+"k": "text",
+"p": "Health",
+"s": "Yoga",
+"in": [
+"SleepHealthStore"
+],
+"code": "return (String(localized: \"Yoga\"), \"figure.yoga\")"
+},
+{
+"i": 1197,
+"k": "text",
+"p": "Health",
+"s": "Pilates",
+"in": [
+"SleepHealthStore"
+],
+"code": "return (String(localized: \"Pilates\"), \"figure.pilates\")"
+},
+{
+"i": 1198,
+"k": "text",
+"p": "Health",
+"s": "Core Training",
+"in": [
+"SleepHealthStore"
+],
+"code": "return (String(localized: \"Core Training\"), \"figure.core.training\")"
+},
+{
+"i": 1199,
+"k": "text",
+"p": "Health",
+"s": "Dance",
+"in": [
+"SleepHealthStore"
+],
+"code": "return (String(localized: \"Dance\"), \"figure.dance\")"
+},
+{
+"i": 1200,
+"k": "text",
+"p": "Health",
+"s": "Elliptical",
+"in": [
+"SleepHealthStore"
+],
+"code": "return (String(localized: \"Elliptical\"), \"figure.elliptical\")"
+},
+{
+"i": 1201,
+"k": "text",
+"p": "Health",
+"s": "Rowing",
+"in": [
+"SleepHealthStore"
+],
+"code": "return (String(localized: \"Rowing\"), \"figure.rower\")"
+},
+{
+"i": 1202,
+"k": "text",
+"p": "Health",
+"s": "Stair Training",
+"in": [
+"SleepHealthStore"
+],
+"code": "return (String(localized: \"Stair Training\"), \"figure.stair.stepper\")"
+},
+{
+"i": 1203,
+"k": "text",
+"p": "Health",
+"s": "Mixed Cardio",
+"in": [
+"SleepHealthStore"
+],
+"code": "return (String(localized: \"Mixed Cardio\"), \"figure.mixed.cardio\")"
+},
+{
+"i": 1204,
+"k": "text",
+"p": "Health",
+"s": "Cross Training",
+"in": [
+"SleepHealthStore"
+],
+"code": "return (String(localized: \"Cross Training\"), \"figure.cross.training\")"
+},
+{
+"i": 1205,
+"k": "text",
+"p": "Health",
+"s": "Soccer",
+"in": [
+"SleepHealthStore"
+],
+"code": "return (String(localized: \"Soccer\"), \"figure.soccer\")"
+},
+{
+"i": 1206,
+"k": "text",
+"p": "Health",
+"s": "Basketball",
+"in": [
+"SleepHealthStore"
+],
+"code": "return (String(localized: \"Basketball\"), \"figure.basketball\")"
+},
+{
+"i": 1207,
+"k": "text",
+"p": "Health",
+"s": "Tennis",
+"in": [
+"SleepHealthStore"
+],
+"code": "return (String(localized: \"Tennis\"), \"figure.tennis\")"
+},
+{
+"i": 1208,
+"k": "text",
+"p": "LiveActivity",
+"s": "Scheduled activity",
+"in": [
+"NextEventLiveActivityManager"
+],
+"code": "let title = event.title ?? String(localized: \"Scheduled activity\")"
+},
+{
+"i": 1209,
+"k": "text",
+"p": "LiveActivity",
+"s": "Live Activities are disabled. Enable them in Settings > Apps > Ayurveda & Asana Yoga > Live Activities.",
+"in": [
+"NextEventLiveActivityManager"
+],
+"code": "return String(localized: \"Live Activities are disabled. Enable them in Settings > Apps > Ayurveda & Asana Yoga > Live Activities.\")",
+"above": "case .disabledBySystem:"
+},
+{
+"i": 1210,
+"k": "text",
+"p": "Main",
+"s": "Nutrition",
+"in": [
+"AppTab"
+],
+"code": "case .nutrition: String(localized: \"Nutrition\")",
+"above": "var title: String {"
+},
+{
+"i": 1211,
+"k": "text",
+"p": "Main",
+"s": "Calendar",
+"in": [
+"AppTab"
+],
+"code": "case .calendar: String(localized: \"Calendar\")",
+"above": "case .foods: String(localized: \"Foods\")"
+},
+{
+"i": 1212,
+"k": "text",
+"p": "Main",
+"s": "Shopping List",
+"in": [
+"AppTab"
+],
+"code": "case .shoppingList: String(localized: \"Shopping List\")"
+},
+{
+"i": 1213,
+"k": "text",
+"p": "Main",
+"s": "Search",
+"in": [
+"AppTab"
+],
+"code": "case .search: String(localized: \"Search\")",
+"above": "case .analytics: String(localized: \"Analytics\")"
+},
+{
+"i": 1214,
+"k": "text",
+"p": "Main",
+"s": "Generate",
+"in": [
+"AppTab"
+],
+"code": "case .aiGenerate: String(localized: \"Generate\")",
+"above": "case .exercises: String(localized: \"Exercises\")"
+},
+{
+"i": 1215,
+"k": "text",
+"p": "Main",
+"s": "Your existing data has not been deleted. Please close and reopen the app.",
+"in": [
+"AyurvedaAsanaYogaApp"
+],
+"code": "\"Your existing data has not been deleted. Please close and reopen the app.\""
+},
+{
+"i": 1216,
+"k": "text",
+"p": "Main",
+"s": "Notifications are disabled in Ayura settings.",
+"in": [
+"NotificationManager"
+],
+"code": "String(localized: \"Notifications are disabled in Ayura settings.\")",
+"above": "var errorDescription: String? {"
+},
+{
+"i": 1217,
+"k": "text",
+"p": "Main",
+"s": "Your usual practice time is approaching. Open Ayura when you're ready.",
+"in": [
+"NotificationManager"
+],
+"code": "content.body = String(localized: \"Your usual practice time is approaching. Open Ayura when you're ready.\")",
+"above": "content.title = String(localized: \"🧘 Workout Reminder\")"
+},
+{
+"i": 1218,
+"k": "text",
+"p": "Main",
+"s": "Calendar Access Required for Meals & Workouts",
+"in": [
+"PermissionManager"
+],
+"code": "return String(localized: \"Calendar Access Required for Meals & Workouts\")",
+"above": "case .calendar:"
+},
+{
+"i": 1219,
+"k": "text",
+"p": "Main",
+"s": "Notifications Required for Meals, Workouts & Shopping Lists",
+"in": [
+"PermissionManager"
+],
+"code": "return String(localized: \"Notifications Required for Meals, Workouts & Shopping Lists\")",
+"above": "case .notifications:"
+},
+{
+"i": 1220,
+"k": "text",
+"p": "Main",
+"s": "Health Access Required",
+"in": [
+"PermissionManager"
+],
+"code": "return String(localized: \"Health Access Required\")",
+"above": "case .allTrainingFeatures:"
+},
+{
+"i": 1221,
+"k": "text",
+"p": "Main",
+"s": "Camera Access Required",
+"in": [
+"PermissionManager"
+],
+"code": "return String(localized: \"Camera Access Required\")",
+"above": "case .camera:"
+},
+{
+"i": 1222,
+"k": "text",
+"p": "Main",
+"s": "Internet Connection Required",
+"in": [
+"PermissionManager"
+],
+"code": "return String(localized: \"Internet Connection Required\")",
+"above": "case .network:"
+},
+{
+"i": 1223,
+"k": "text",
+"p": "Main",
+"s": "Ayurveda & Asana Yoga uses your calendar to save your meals, shopping lists, and workouts. Please grant permission in Settings to use these features.",
+"in": [
+"PermissionManager"
+],
+"code": "Ayurveda & Asana Yoga uses your calendar to save your meals, shopping lists, and workouts. \\",
+"above": "case .calendar:"
+},
+{
+"i": 1224,
+"k": "text",
+"p": "Main",
+"s": "Ayurveda & Asana Yoga uses notifications to remind you about your meals, workouts, shopping lists, AI suggestions, and other important features. Please enable notifications in Settings to stay on track and get the most out of Ayurveda & Asana Yoga.",
+"in": [
+"PermissionManager"
+],
+"code": "Ayurveda & Asana Yoga uses notifications to remind you about your meals, workouts, shopping lists, \\",
+"above": "case .notifications:"
+},
+{
+"i": 1225,
+"k": "text",
+"p": "Main",
+"s": "To track your workouts, Ayurveda & Asana Yoga needs access to your Health data.\n\nThe button below will open the Health app. From there, please navigate to:\n**Sharing > Apps > Ayurveda & Asana Yoga**",
+"in": [
+"PermissionManager"
+],
+"code": "To track your workouts, Ayurveda & Asana Yoga needs access to your Health data.",
+"above": "case .allTrainingFeatures:"
+},
+{
+"i": 1226,
+"k": "text",
+"p": "Main",
+"s": "Ayurveda & Asana Yoga needs camera access to scan barcodes and take photos for your foods and exercises. Please grant permission in Settings to use these features.",
+"in": [
+"PermissionManager"
+],
+"code": "return String(localized: \"Ayurveda & Asana Yoga needs camera access to scan barcodes and take photos for your foods and exercises. Please grant permission in Se",
+"above": "case .camera:"
+},
+{
+"i": 1227,
+"k": "text",
+"p": "Main",
+"s": "An active internet connection is required to look up products and create new items. Turn on Wi-Fi or Cellular data.",
+"in": [
+"PermissionManager"
+],
+"code": "return String(localized: \"An active internet connection is required to look up products and create new items. Turn on Wi-Fi or Cellular data.\")",
+"above": "case .network:"
+},
+{
+"i": 1228,
+"k": "text",
+"p": "Main",
+"s": "Open Health App",
+"in": [
+"PermissionManager"
+],
+"code": "case .allTrainingFeatures: return String(localized: \"Open Health App\")"
+},
+{
+"i": 1229,
+"k": "text",
+"p": "Main",
+"s": "Open Settings",
+"in": [
+"PermissionManager"
+],
+"code": "case .network, .camera, .calendar, .notifications: return String(localized: \"Open Settings\")"
+},
+{
+"i": 1230,
+"k": "text",
+"p": "Meal",
+"s": "AI generation failed: %@",
+"in": [
+"MealPlanEditorView",
+"NutritionsDetailView"
+],
+"code": "alertMessage = String(localized: \"AI generation failed: \\(completedJob.failureReason ?? String(localized: \"Unknown error\"))\")"
+},
+{
+"i": 1231,
+"k": "text",
+"p": "Meal",
+"s": "Unknown error",
+"in": [
+"MealPlanEditorView",
+"NutritionsDetailView"
+],
+"code": "alertMessage = String(localized: \"AI generation failed: \\(completedJob.failureReason ?? String(localized: \"Unknown error\"))\")"
+},
+{
+"i": 1232,
+"k": "label",
+"p": "Meal",
+"s": "Plan Name",
+"in": [
+"MealPlanEditorView",
+"TrainingPlanEditorView"
+],
+"code": "StyledLabeledPicker(label: String(localized: \"Plan Name\"), isRequired: true) {"
+},
+{
+"i": 1233,
+"k": "text",
+"p": "Meal",
+"s": "Failed to save the plan. Error: %@",
+"in": [
+"MealPlanEditorView"
+],
+"code": "alertMessage = String(localized: \"Failed to save the plan. Error: \\(error.localizedDescription)\")"
+},
+{
+"i": 1234,
+"k": "text",
+"p": "Meal",
+"s": "All meals for all days already have items. Clear some meals if you want to generate new ones.",
+"in": [
+"MealPlanEditorView"
+],
+"code": "alertMessage = String(localized: \"All meals for all days already have items. Clear some meals if you want to generate new ones.\")",
+"above": "let emptyMealNames = day.meals"
+},
+{
+"i": 1235,
+"k": "text",
+"p": "Meal",
+"s": "Unknown Item",
+"in": [
+"MealPlanEntryDetailRowView",
+"MealPlanEntryRowView"
+],
+"code": "Text(item?.displayName ?? String(localized: \"Unknown Item\"))"
+},
+{
+"i": 1236,
+"k": "text",
+"p": "Nodes",
+"s": "The note could not be saved.",
+"in": [
+"NodeEditorView"
+],
+"code": "Text(saveErrorMessage ?? String(localized: \"The note could not be saved.\"))"
+},
+{
+"i": 1237,
+"k": "label",
+"p": "Nodes",
+"s": "Note",
+"in": [
+"NodeEditorView"
+],
+"code": "StyledLabeledPicker(label: String(localized: \"Note\"), isFixedHeight: false) {"
+},
+{
+"i": 1238,
+"k": "text",
+"p": "Nodes",
+"s": "The note could not be found in the user database.",
+"in": [
+"NodeEditorView"
+],
+"code": "String(localized: \"The note could not be found in the user database.\")",
+"above": "var errorDescription: String? {"
+},
+{
+"i": 1239,
+"k": "text",
+"p": "Nodes",
+"s": "No Nodes in Selected Range",
+"in": [
+"NodesListView"
+],
+"code": "return String(localized: \"No Nodes in Selected Range\")",
+"above": "private var emptyStateTitle: String {"
+},
+{
+"i": 1240,
+"k": "text",
+"p": "Nodes",
+"s": "No Nodes Available",
+"in": [
+"NodesListView"
+],
+"code": "case .all: return String(localized: \"No Nodes Available\")",
+"above": "private var emptyStateTitle: String {"
+},
+{
+"i": 1241,
+"k": "text",
+"p": "Nodes",
+"s": "No Meal Nodes",
+"in": [
+"NodesListView"
+],
+"code": "case .meal: return String(localized: \"No Meal Nodes\")"
+},
+{
+"i": 1242,
+"k": "text",
+"p": "Nodes",
+"s": "No Workout Nodes",
+"in": [
+"NodesListView"
+],
+"code": "case .workouts: return String(localized: \"No Workout Nodes\")"
+},
+{
+"i": 1243,
+"k": "text",
+"p": "Nodes",
+"s": "Try adjusting the date range or clearing the filter to see all your nodes.",
+"in": [
+"NodesListView"
+],
+"code": "text = String(localized: \"Try adjusting the date range or clearing the filter to see all your nodes.\")",
+"above": "let text: String"
+},
+{
+"i": 1244,
+"k": "text",
+"p": "Nodes",
+"s": "Tap the '+' button to add your first node.",
+"in": [
+"NodesListView"
+],
+"code": "case .all: text = String(localized: \"Tap the '+' button to add your first node.\")",
+"above": "let text: String"
+},
+{
+"i": 1245,
+"k": "text",
+"p": "Nodes",
+"s": "Tap the '+' button to add your first meal node.",
+"in": [
+"NodesListView"
+],
+"code": "case .meal: text = String(localized: \"Tap the '+' button to add your first meal node.\")"
+},
+{
+"i": 1246,
+"k": "text",
+"p": "Nodes",
+"s": "Tap the '+' button to add your first workout node.",
+"in": [
+"NodesListView"
+],
+"code": "case .workouts: text = String(localized: \"Tap the '+' button to add your first workout node.\")"
+},
+{
+"i": 1247,
+"k": "text",
+"p": "Nodes",
+"s": "Untitled",
+"in": [
+"NodesListView"
+],
+"code": "Text(\"Are you sure you want to delete the node titled \\\"\\(node.textContent ?? String(localized: \"Untitled\"))\\\"? This action cannot be undone.\")"
+},
+{
+"i": 1248,
+"k": "text",
+"p": "Nutrient",
+"s": "Daily Ayurveda",
+"in": [
+"DailyAyurvedaSummaryView"
+],
+"code": "case .food: String(localized: \"Daily Ayurveda\")",
+"above": "var headerTitle: String {"
+},
+{
+"i": 1249,
+"k": "text",
+"p": "Nutrient",
+"s": "Exercise Ayurveda",
+"in": [
+"DailyAyurvedaSummaryView"
+],
+"code": "case .exercise: String(localized: \"Exercise Ayurveda\")",
+"above": "case .food: String(localized: \"Daily Ayurveda\")"
+},
+{
+"i": 1250,
+"k": "text",
+"p": "Nutrient",
+"s": "No Exercises to Display",
+"in": [
+"DailyAyurvedaSummaryView"
+],
+"code": "case .exercise: String(localized: \"No Exercises to Display\")",
+"above": "case .food: String(localized: \"No Foods to Display\")"
+},
+{
+"i": 1251,
+"k": "text",
+"p": "Nutrient",
+"s": "Not Enough Ayurveda Data",
+"in": [
+"DailyAyurvedaSummaryView"
+],
+"code": "case .food: String(localized: \"Not Enough Ayurveda Data\")",
+"above": "var insufficientDataTitle: String {"
+},
+{
+"i": 1252,
+"k": "text",
+"p": "Nutrient",
+"s": "Not Enough Exercise Ayurveda Data",
+"in": [
+"DailyAyurvedaSummaryView"
+],
+"code": "case .exercise: String(localized: \"Not Enough Exercise Ayurveda Data\")",
+"above": "case .food: String(localized: \"Not Enough Ayurveda Data\")"
+},
+{
+"i": 1253,
+"k": "text",
+"p": "Nutrient",
+"s": "At least half of the food weight needs Ayurveda data.",
+"in": [
+"DailyAyurvedaSummaryView"
+],
+"code": "String(localized: \"At least half of the food weight needs Ayurveda data.\")",
+"above": "case .food:"
+},
+{
+"i": 1254,
+"k": "text",
+"p": "Nutrient",
+"s": "At least half of the exercise duration needs Ayurveda data.",
+"in": [
+"DailyAyurvedaSummaryView"
+],
+"code": "String(localized: \"At least half of the exercise duration needs Ayurveda data.\")",
+"above": "case .exercise:"
+},
+{
+"i": 1255,
+"k": "text",
+"p": "Nutrient",
+"s": "Dosha Balance",
+"in": [
+"DailyAyurvedaSummaryView"
+],
+"code": "summaryTitle: String = String(localized: \"Dosha Balance\"),"
+},
+{
+"i": 1256,
+"k": "text",
+"p": "Nutrient",
+"s": "Good",
+"in": [
+"DailyAyurvedaSummaryView"
+],
+"code": "case .supportive: return String(localized: \"Good\")"
+},
+{
+"i": 1257,
+"k": "text",
+"p": "Nutrient",
+"s": "Mixed",
+"in": [
+"DailyAyurvedaSummaryView"
+],
+"code": "case .mixed: return String(localized: \"Mixed\")"
+},
+{
+"i": 1258,
+"k": "text",
+"p": "Nutrient",
+"s": "Poor",
+"in": [
+"DailyAyurvedaSummaryView"
+],
+"code": "case .lessSupportive: return String(localized: \"Poor\")"
+},
+{
+"i": 1259,
+"k": "text",
+"p": "Nutrient",
+"s": "Whole Day",
+"in": [
+"DailyAyurvedaSummaryView"
+],
+"code": "return String(localized: \"Whole Day\")",
+"above": "let meal = meals.first(where: { $0.id == selectedMealID }) else {"
+},
+{
+"i": 1260,
+"k": "text",
+"p": "Nutrient",
+"s": "Apple Intelligence is turned off. Enable it in Settings to use AI meal generation.",
+"in": [
+"MealActionMenuView",
+"NutritionsDetailView"
+],
+"code": "return String(localized: \"Apple Intelligence is turned off. Enable it in Settings to use AI meal generation.\")",
+"above": "case .appleIntelligenceNotEnabled:"
+},
+{
+"i": 1261,
+"k": "text",
+"p": "Nutrient",
+"s": "this food",
+"in": [
+"NutritionsDetailView"
+],
+"code": "Text(\"Are you sure you want to delete '\\(itemToDelete?.name ?? String(localized: \"this food\"))' from the meal? This will not affect your stored items.\")"
+},
+{
+"i": 1262,
+"k": "text",
+"p": "Nutrient",
+"s": "🍽️ Meal Reminder",
+"in": [
+"NutritionsDetailView",
+"SettingsView"
+],
+"code": "title: String(localized: \"🍽️ Meal Reminder\"),",
+"above": "let newID = try await NotificationManager.shared.scheduleNotification("
+},
+{
+"i": 1263,
+"k": "text",
+"p": "Nutrient",
+"s": "It's time for your %@. Enjoy!",
+"in": [
+"NutritionsDetailView",
+"SettingsView"
+],
+"code": "body: String(localized: \"It's time for your \\(meal.name). Enjoy!\"),",
+"above": "title: String(localized: \"🍽️ Meal Reminder\"),"
+},
+{
+"i": 1264,
+"k": "text",
+"p": "Nutrient",
+"s": "All meals for this day already have items. Clear some meals if you want to generate new ones.",
+"in": [
+"NutritionsDetailView"
+],
+"code": "alertMsg = String(localized: \"All meals for this day already have items. Clear some meals if you want to generate new ones.\")",
+"above": "let emptyMeals = dailyMeals.filter { meal in"
+},
+{
+"i": 1265,
+"k": "text",
+"p": "Practices",
+"s": "Ayura Practices",
+"in": [
+"PracticeAudioPlayer"
+],
+"code": "MPMediaItemPropertyAlbumTitle: String(localized: \"Ayura Practices\"),"
+},
+{
+"i": 1266,
+"k": "label",
+"p": "Practices",
+"s": "Eyes %@",
+"in": [
+"PracticeEntryView"
+],
+"code": "text: practiceLabel(practice.eyes) ?? String(localized: \"Eyes \\(practice.eyes)\")"
+},
+{
+"i": 1267,
+"k": "text",
+"p": "Practices",
+"s": "Length",
+"in": [
+"PracticeEntryView"
+],
+"code": "PracticeSectionHeading(title: String(localized: \"Length\"), detail: String(localized: \"Choose your pace\"))"
+},
+{
+"i": 1268,
+"k": "text",
+"p": "Practices",
+"s": "Choose your pace",
+"in": [
+"PracticeEntryView"
+],
+"code": "PracticeSectionHeading(title: String(localized: \"Length\"), detail: String(localized: \"Choose your pace\"))"
+},
+{
+"i": 1269,
+"k": "text",
+"p": "Practices",
+"s": "Guide",
+"in": [
+"PracticeEntryView"
+],
+"code": "PracticeSectionHeading(title: String(localized: \"Guide\"), detail: String(localized: \"Voice guidance\"))"
+},
+{
+"i": 1270,
+"k": "text",
+"p": "Practices",
+"s": "Voice guidance",
+"in": [
+"PracticeEntryView"
+],
+"code": "PracticeSectionHeading(title: String(localized: \"Guide\"), detail: String(localized: \"Voice guidance\"))"
+},
+{
+"i": 1271,
+"k": "text",
+"p": "Practices",
+"s": "No voice",
+"in": [
+"PracticeEntryView"
+],
+"code": "case .off: String(localized: \"No voice\")",
+"above": "private func voiceModeTitle(_ mode: PracticeVoiceMode) -> String {"
+},
+{
+"i": 1272,
+"k": "text",
+"p": "Practices",
+"s": "Guided voice",
+"in": [
+"PracticeEntryView"
+],
+"code": "case .recorded: String(localized: \"Guided voice\")",
+"above": "case .off: String(localized: \"No voice\")"
+},
+{
+"i": 1273,
+"k": "text",
+"p": "Practices",
+"s": "Sound",
+"in": [
+"PracticeEntryView"
+],
+"code": "title: String(localized: \"Sound\"),",
+"above": "private var soundPicker: some View {"
+},
+{
+"i": 1274,
+"k": "text",
+"p": "Practices",
+"s": "%lld bundled tracks",
+"in": [
+"PracticeEntryView"
+],
+"code": "detail: String(localized: \"\\(ambienceTracks.count) bundled tracks\")",
+"plural": true
+},
+{
+"i": 1275,
+"k": "text",
+"p": "Practices",
+"s": "%lld min %lld sec",
+"in": [
+"PracticeHistoryView"
+],
+"code": "return String(localized: \"\\(minutes) min \\(seconds) sec\")"
+},
+{
+"i": 1276,
+"k": "text",
+"p": "Practices",
+"s": "Practice: %@",
+"in": [
+"PracticePlayerView"
+],
+"code": "title: String(localized: \"Practice: \\(localizedPracticeTitle(session.practiceTitle))\"),"
+},
+{
+"i": 1277,
+"k": "text",
+"p": "Practices",
+"s": "Meditation",
+"in": [
+"AsanaFamily",
+"PracticesView"
+],
+"code": "case .meditation: String(localized: \"Meditation\")",
+"above": "case .favorites: String(localized: \"Favorites\")"
+},
+{
+"i": 1278,
+"k": "text",
+"p": "Practices",
+"s": "Visualisation",
+"in": [
+"PracticesView"
+],
+"code": "case .visualisation: String(localized: \"Visualisation\")"
+},
+{
+"i": 1279,
+"k": "text",
+"p": "Practices",
+"s": "Pranayama",
+"in": [
+"AsanaFamily",
+"PracticesView"
+],
+"code": "case .pranayama: String(localized: \"Pranayama\")",
+"above": "case .visualisation: String(localized: \"Visualisation\")"
+},
+{
+"i": 1280,
+"k": "text",
+"p": "Practices",
+"s": "Relaxation",
+"in": [
+"PracticesView"
+],
+"code": "case .relaxation: String(localized: \"Relaxation\")",
+"above": "case .pranayama: String(localized: \"Pranayama\")"
+},
+{
+"i": 1281,
+"k": "text",
+"p": "Practices",
+"s": "Kriya",
+"in": [
+"AsanaFamily",
+"PracticesView"
+],
+"code": "case .kriya: String(localized: \"Kriya\")",
+"above": "case .relaxation: String(localized: \"Relaxation\")"
+},
+{
+"i": 1282,
+"k": "text",
+"p": "Practices",
+"s": "Dawn",
+"in": [
+"PracticesView"
+],
+"code": "case .dawn: String(localized: \"Dawn\")",
+"above": "var displayName: String {"
+},
+{
+"i": 1283,
+"k": "text",
+"p": "Practices",
+"s": "Morning",
+"in": [
+"PracticesView"
+],
+"code": "case .morning: String(localized: \"Morning\")",
+"above": "case .dawn: String(localized: \"Dawn\")"
+},
+{
+"i": 1284,
+"k": "text",
+"p": "Practices",
+"s": "Midday",
+"in": [
+"PracticesView"
+],
+"code": "case .midday: String(localized: \"Midday\")",
+"above": "case .morning: String(localized: \"Morning\")"
+},
+{
+"i": 1285,
+"k": "text",
+"p": "Practices",
+"s": "Afternoon",
+"in": [
+"PracticesView"
+],
+"code": "case .afternoon: String(localized: \"Afternoon\")",
+"above": "case .midday: String(localized: \"Midday\")"
+},
+{
+"i": 1286,
+"k": "text",
+"p": "Practices",
+"s": "Evening",
+"in": [
+"PracticesView"
+],
+"code": "case .evening: String(localized: \"Evening\")",
+"above": "case .afternoon: String(localized: \"Afternoon\")"
+},
+{
+"i": 1287,
+"k": "text",
+"p": "Practices",
+"s": "Night",
+"in": [
+"PracticesView"
+],
+"code": "case .night: String(localized: \"Night\")",
+"above": "case .evening: String(localized: \"Evening\")"
+},
+{
+"i": 1288,
+"k": "text",
+"p": "Practices",
+"s": "Quiet clarity before the day begins",
+"in": [
+"PracticesView"
+],
+"code": "case .dawn: String(localized: \"Quiet clarity before the day begins\")",
+"above": "var guidance: String {"
+},
+{
+"i": 1289,
+"k": "text",
+"p": "Practices",
+"s": "Awaken attention and steady energy",
+"in": [
+"PracticesView"
+],
+"code": "case .morning: String(localized: \"Awaken attention and steady energy\")",
+"above": "case .dawn: String(localized: \"Quiet clarity before the day begins\")"
+},
+{
+"i": 1290,
+"k": "text",
+"p": "Practices",
+"s": "Cool intensity and return to centre",
+"in": [
+"PracticesView"
+],
+"code": "case .midday: String(localized: \"Cool intensity and return to centre\")",
+"above": "case .morning: String(localized: \"Awaken attention and steady energy\")"
+},
+{
+"i": 1291,
+"k": "text",
+"p": "Practices",
+"s": "Settle movement and restore focus",
+"in": [
+"PracticesView"
+],
+"code": "case .afternoon: String(localized: \"Settle movement and restore focus\")",
+"above": "case .midday: String(localized: \"Cool intensity and return to centre\")"
+},
+{
+"i": 1292,
+"k": "text",
+"p": "Practices",
+"s": "Release the day and turn inward",
+"in": [
+"PracticesView"
+],
+"code": "case .evening: String(localized: \"Release the day and turn inward\")",
+"above": "case .afternoon: String(localized: \"Settle movement and restore focus\")"
+},
+{
+"i": 1293,
+"k": "text",
+"p": "Practices",
+"s": "Soften effort and prepare for rest",
+"in": [
+"PracticesView"
+],
+"code": "case .night: String(localized: \"Soften effort and prepare for rest\")",
+"above": "case .evening: String(localized: \"Release the day and turn inward\")"
+},
+{
+"i": 1294,
+"k": "text",
+"p": "Practices",
+"s": "%lld:%@ min",
+"in": [
+"PracticesView"
+],
+"code": ": String(localized: \"\\(minutes):\\(String(format: \"%02d\", remainder)) min\")"
+},
+{
+"i": 1295,
+"k": "label",
+"p": "Profile",
+"s": "Height (%@)",
+"in": [
+"ProfileEditorView"
+],
+"code": "StyledLabeledPicker(label: String(localized: \"Height (\\(GlobalState.measurementSystem == \"Imperial\" ? \"in\" : \"cm\"))\"), isRequired: true) {"
+},
+{
+"i": 1296,
+"k": "label",
+"p": "Profile",
+"s": "Weight (%@)",
+"in": [
+"ProfileEditorView"
+],
+"code": "StyledLabeledPicker(label: String(localized: \"Weight (\\(GlobalState.measurementSystem == \"Imperial\" ? \"lbs\" : \"kg\"))\"), isRequired: true) {"
+},
+{
+"i": 1297,
+"k": "label",
+"p": "Profile",
+"s": "Sex",
+"in": [
+"ProfileEditorView"
+],
+"code": "StyledLabeledPicker(label: String(localized: \"Sex\"), isRequired: true) {"
+},
+{
+"i": 1298,
+"k": "text",
+"p": "Profile",
+"s": "Female",
+"in": [
+"ProfileEditorView"
+],
+"code": "ForEach(genders, id: \\.self) { Text($0 == \"Female\" ? String(localized: \"Female\") : String(localized: \"Male\")) }"
+},
+{
+"i": 1299,
+"k": "text",
+"p": "Profile",
+"s": "Male",
+"in": [
+"ProfileEditorView"
+],
+"code": "ForEach(genders, id: \\.self) { Text($0 == \"Female\" ? String(localized: \"Female\") : String(localized: \"Male\")) }"
+},
+{
+"i": 1300,
+"k": "text",
+"p": "Profile",
+"s": "Constitution",
+"in": [
+"ProfileEditorView"
+],
+"code": "title: String(localized: \"Constitution\"),",
+"above": "private var constitutionSection: some View {"
+},
+{
+"i": 1301,
+"k": "label",
+"p": "Profile",
+"s": "Birthday",
+"in": [
+"ProfileEditorView"
+],
+"code": "StyledLabeledPicker(label: String(localized: \"Birthday\"), isRequired: true) {"
+},
+{
+"i": 1302,
+"k": "text",
+"p": "Profile",
+"s": "Please enter valid numbers for weight and height.",
+"in": [
+"ProfileEditorView"
+],
+"code": "showError(String(localized: \"Please enter valid numbers for weight and height.\"))",
+"above": "let h_display = UnitConversion.parseDecimal(height) else {"
+},
+{
+"i": 1303,
+"k": "text",
+"p": "Profile",
+"s": "Please add at least one meal.",
+"in": [
+"ProfileEditorView"
+],
+"code": "showError(String(localized: \"Please add at least one meal.\"))",
+"above": "let heightInCm = GlobalState.measurementSystem == \"Imperial\" ? UnitConversion.inchesToCm(h_display) : h_display"
+},
+{
+"i": 1304,
+"k": "text",
+"p": "Profile",
+"s": "Every meal must have an end time after its start time.",
+"in": [
+"ProfileEditorView"
+],
+"code": "showError(String(localized: \"Every meal must have an end time after its start time.\"))",
+"above": "let heightInCm = GlobalState.measurementSystem == \"Imperial\" ? UnitConversion.inchesToCm(h_display) : h_display"
+},
+{
+"i": 1305,
+"k": "text",
+"p": "Profile",
+"s": "Please select a birthday.",
+"in": [
+"ProfileEditorView"
+],
+"code": "showError(String(localized: \"Please select a birthday.\"))",
+"above": "guard let validBirthday = birthday else {"
+},
+{
+"i": 1306,
+"k": "text",
+"p": "Profile",
+"s": "Calendar access is required to manage profile data and settings.",
+"in": [
+"ProfileEditorView"
+],
+"code": "showError(String(localized: \"Calendar access is required to manage profile data and settings.\"))",
+"above": "let chosenAllergens = selectedAllergens.compactMap { Allergen(rawValue: $0) }"
+},
+{
+"i": 1307,
+"k": "text",
+"p": "Profile",
+"s": "Failed to save profile: %@",
+"in": [
+"ProfileEditorView"
+],
+"code": "showError(String(localized: \"Failed to save profile: \\(error.localizedDescription)\"))"
+},
+{
+"i": 1308,
+"k": "text",
+"p": "Profile",
+"s": "this profile",
+"in": [
+"ProfileListView"
+],
+"code": "Text(\"Are you sure you want to delete '\\(profileToDelete?.name ?? String(localized: \"this profile\"))'? This action cannot be undone.\")"
+},
+{
+"i": 1309,
+"k": "text",
+"p": "Profile",
+"s": "%lld y/o",
+"in": [
+"ProfileListView"
+],
+"code": "if years >= 2 { return String(localized: \"\\(years) y/o\") }",
+"plural": true
+},
+{
+"i": 1310,
+"k": "text",
+"p": "Profile",
+"s": "1 year",
+"in": [
+"ProfileListView"
+],
+"code": "? String(localized: \"1 year\")",
+"above": "let months = ageComponents.month ?? 0"
+},
+{
+"i": 1311,
+"k": "text",
+"p": "Profile",
+"s": "1 year & 1 month",
+"in": [
+"ProfileListView"
+],
+"code": ": (months == 1 ? String(localized: \"1 year & 1 month\") : String(localized: \"1 year & \\(months) months\"))"
+},
+{
+"i": 1312,
+"k": "text",
+"p": "Profile",
+"s": "1 year & %lld months",
+"in": [
+"ProfileListView"
+],
+"code": ": (months == 1 ? String(localized: \"1 year & 1 month\") : String(localized: \"1 year & \\(months) months\"))",
+"plural": true
+},
+{
+"i": 1313,
+"k": "text",
+"p": "Profile",
+"s": "Under a month",
+"in": [
+"ProfileListView"
+],
+"code": "if months == 0 { return String(localized: \"Under a month\") }"
+},
+{
+"i": 1314,
+"k": "text",
+"p": "Profile",
+"s": "1 month",
+"in": [
+"ProfileListView"
+],
+"code": "return months == 1 ? String(localized: \"1 month\") : String(localized: \"\\(months) months\")"
+},
+{
+"i": 1315,
+"k": "text",
+"p": "Profile",
+"s": "Advanced",
+"in": [
+"ProfileListView"
+],
+"code": "return String(localized: \"Advanced\")",
+"above": "case .advance:"
+},
+{
+"i": 1316,
+"k": "text",
+"p": "Profile",
+"s": "Premium",
+"in": [
+"ProfileListView"
+],
+"code": "return String(localized: \"Premium\")",
+"above": "case .premium:"
+},
+{
+"i": 1317,
+"k": "text",
+"p": "Settings",
+"s": "Night Breath",
+"in": [
+"SettingsView"
+],
+"code": "Text(background.name == \"Night Breath\" ? String(localized: \"Night Breath\") : (background.name == \"Morning Breath\" ? String(localized: \"Morning Breath\") : backgr"
+},
+{
+"i": 1318,
+"k": "text",
+"p": "Settings",
+"s": "Morning Breath",
+"in": [
+"SettingsView"
+],
+"code": "Text(background.name == \"Night Breath\" ? String(localized: \"Night Breath\") : (background.name == \"Morning Breath\" ? String(localized: \"Morning Breath\") : backgr"
+},
+{
+"i": 1319,
+"k": "text",
+"p": "Settings",
+"s": "🛒 Shopping Reminder",
+"in": [
+"SettingsView",
+"ShoppingListDetailView"
+],
+"code": "title: String(localized: \"🛒 Shopping Reminder\"),",
+"above": "let reminderDate = list.eventStartDate.addingTimeInterval(-TimeInterval(minutes * 60))"
+},
+{
+"i": 1320,
+"k": "text",
+"p": "Settings",
+"s": "Time to buy groceries for your list: %@",
+"in": [
+"SettingsView",
+"ShoppingListDetailView"
+],
+"code": "body: String(localized: \"Time to buy groceries for your list: \\(list.name)\"),",
+"above": "title: String(localized: \"🛒 Shopping Reminder\"),"
+},
+{
+"i": 1321,
+"k": "text",
+"p": "ShoppingList",
+"s": "Qty",
+"in": [
+"ShoppingItemEditableField"
+],
+"code": "title: isInteger ? String(localized: \"Qty\") : \"0.00\","
+},
+{
+"i": 1322,
+"k": "text",
+"p": "ShoppingList",
+"s": "this item",
+"in": [
+"ShoppingListDetailView",
+"StorageListView"
+],
+"code": "Text(\"Are you sure you want to delete '\\(itemToDelete?.name ?? String(localized: \"this item\"))' from the list? This action cannot be undone.\")"
+},
+{
+"i": 1323,
+"k": "text",
+"p": "ShoppingList",
+"s": "this list",
+"in": [
+"ShoppingListView"
+],
+"code": "Text(\"Are you sure you want to delete the list '\\(listToDelete?.name ?? String(localized: \"this list\"))'? This action cannot be undone.\")"
+},
+{
+"i": 1324,
+"k": "text",
+"p": "Storage",
+"s": "Addition",
+"in": [
+"TransactionType"
+],
+"code": "case .addition: String(localized: \"Addition\")",
+"above": "var displayName: String {"
+},
+{
+"i": 1325,
+"k": "text",
+"p": "Storage",
+"s": "Consumption",
+"in": [
+"TransactionType"
+],
+"code": "case .consumption: String(localized: \"Consumption\")"
+},
+{
+"i": 1326,
+"k": "text",
+"p": "Storage",
+"s": "Meal Consumption",
+"in": [
+"TransactionType"
+],
+"code": "case .mealConsumption: String(localized: \"Meal Consumption\")"
+},
+{
+"i": 1327,
+"k": "text",
+"p": "Storage",
+"s": "Manual Correction",
+"in": [
+"TransactionType"
+],
+"code": "case .manualCorrection: String(localized: \"Manual Correction\")"
+},
+{
+"i": 1328,
+"k": "text",
+"p": "Storage",
+"s": "Manual Removal",
+"in": [
+"TransactionType"
+],
+"code": "case .manualRemoval: String(localized: \"Manual Removal\")"
+},
+{
+"i": 1329,
+"k": "text",
+"p": "Storage",
+"s": "Deleted from Storage",
+"in": [
+"TransactionType"
+],
+"code": "case .fullDeletion: String(localized: \"Deleted from Storage\")"
+},
+{
+"i": 1330,
+"k": "text",
+"p": "Storage",
+"s": "Shopping Addition",
+"in": [
+"TransactionType"
+],
+"code": "case .shoppingAddition: String(localized: \"Shopping Addition\")"
+},
+{
+"i": 1331,
+"k": "text",
+"p": "Storage",
+"s": "Quantity to consume",
+"in": [
+"ConsumeStockViewContent"
+],
+"code": "title: String(localized: \"Quantity to consume\"),"
+},
+{
+"i": 1332,
+"k": "text",
+"p": "Storage",
+"s": "Top Nutrients (per 100g)",
+"in": [
+"FoodItemRowStorageView"
+],
+"code": "ChipScrollView(title: String(localized: \"Top Nutrients (per 100g)\"), items: nutrients, textColor: effectManager.currentGlobalAccentColor)"
+},
+{
+"i": 1333,
+"k": "text",
+"p": "Storage",
+"s": "no expiration",
+"in": [
+"StorageBatchEditorContent"
+],
+"code": "let expirationString = batchToDelete?.expirationDate?.formatted(date: .abbreviated, time: .omitted) ?? String(localized: \"no expiration\")"
+},
+{
+"i": 1334,
+"k": "text",
+"p": "Storage",
+"s": "Item Details",
+"in": [
+"StorageItemDetailView"
+],
+"code": "Text(item.food?.name ?? String(localized: \"Item Details\"))"
+},
+{
+"i": 1335,
+"k": "text",
+"p": "TrainingPlan",
+"s": "Failed to save plan. Error: %@",
+"in": [
+"TrainingPlanEditorView"
+],
+"code": "alertMessage = String(localized: \"Failed to save plan. Error: \\(error.localizedDescription)\")"
+},
+{
+"i": 1336,
+"k": "text",
+"p": "TrainingPlan",
+"s": "Please select a day and a workout first.",
+"in": [
+"TrainingPlanEditorView"
+],
+"code": "alertMessage = String(localized: \"Please select a day and a workout first.\")",
+"above": "let workoutIndex = days[dayIndex].workouts.firstIndex(where: { $0.id == selectedWorkoutID })"
+},
+{
+"i": 1337,
+"k": "text",
+"p": "TrainingPlan",
+"s": "Could not start AI training plan generation job.",
+"in": [
+"TrainingPlanEditorView"
+],
+"code": "alertMessage = String(localized: \"Could not start AI training plan generation job.\")",
+"above": "if let newJob = aiManager.startTrainingPlanGeneration("
+},
+{
+"i": 1338,
+"k": "text",
+"p": "TrainingPlan",
+"s": "All workouts for all days already have exercises. Clear some workouts if you want to generate new ones.",
+"in": [
+"TrainingPlanEditorView"
+],
+"code": "alertMessage = String(localized: \"All workouts for all days already have exercises. Clear some workouts if you want to generate new ones.\")",
+"above": "let emptyWorkoutNames = day.workouts"
+},
+{
+"i": 1339,
+"k": "text",
+"p": "TrainingPlan",
+"s": "Could not find the completed AI job (id: %@).",
+"in": [
+"TrainingPlanEditorView"
+],
+"code": "alertMessage = String(localized: \"Could not find the completed AI job (id: \\(jobID.uuidString)).\")"
+},
+{
+"i": 1340,
+"k": "text",
+"p": "TrainingPlan",
+"s": "Could not decode the generated training plan data.",
+"in": [
+"TrainingPlanEditorView"
+],
+"code": "alertMessage = String(localized: \"Could not decode the generated training plan data.\")",
+"above": "guard let draft = try? JSONDecoder().decode(TrainingPlanDraft.self, from: resultData) else {"
+},
+{
+"i": 1341,
+"k": "text",
+"p": "TrainingPlan",
+"s": "min",
+"in": [
+"TrainingPlanExerciseDetailRow"
+],
+"code": "return set.timeUnit == .minutes ? String(localized: \"min\") : String(localized: \"sec\")"
+},
+{
+"i": 1342,
+"k": "text",
+"p": "TrainingPlan",
+"s": "reps",
+"in": [
+"TrainingPlanExerciseDetailRow"
+],
+"code": "return String(localized: \"reps\")",
+"above": "let unitText: String = {"
+},
+{
+"i": 1343,
+"k": "text",
+"p": "Yoga",
+"s": "Arm Balance",
+"in": [
+"AsanaFamily"
+],
+"code": "case .armBalance: String(localized: \"Arm Balance\")",
+"above": "public var displayName: String {"
+},
+{
+"i": 1344,
+"k": "text",
+"p": "Yoga",
+"s": "Backbend",
+"in": [
+"AsanaFamily"
+],
+"code": "case .backbend: String(localized: \"Backbend\")",
+"above": "case .armBalance: String(localized: \"Arm Balance\")"
+},
+{
+"i": 1345,
+"k": "text",
+"p": "Yoga",
+"s": "Bandha & Mudra",
+"in": [
+"AsanaFamily"
+],
+"code": "case .bandhaAndMudra: String(localized: \"Bandha & Mudra\")"
+},
+{
+"i": 1346,
+"k": "text",
+"p": "Yoga",
+"s": "Core",
+"in": [
+"AsanaFamily"
+],
+"code": "case .core: String(localized: \"Core\")",
+"above": "case .bandhaAndMudra: String(localized: \"Bandha & Mudra\")"
+},
+{
+"i": 1347,
+"k": "text",
+"p": "Yoga",
+"s": "Forward Bend",
+"in": [
+"AsanaFamily"
+],
+"code": "case .forwardBend: String(localized: \"Forward Bend\")"
+},
+{
+"i": 1348,
+"k": "text",
+"p": "Yoga",
+"s": "Hip Opener",
+"in": [
+"AsanaFamily"
+],
+"code": "case .hipOpener: String(localized: \"Hip Opener\")",
+"above": "case .forwardBend: String(localized: \"Forward Bend\")"
+},
+{
+"i": 1349,
+"k": "text",
+"p": "Yoga",
+"s": "Inversion",
+"in": [
+"AsanaFamily"
+],
+"code": "case .inversion: String(localized: \"Inversion\")",
+"above": "case .hipOpener: String(localized: \"Hip Opener\")"
+},
+{
+"i": 1350,
+"k": "text",
+"p": "Yoga",
+"s": "Prone",
+"in": [
+"AsanaFamily"
+],
+"code": "case .prone: String(localized: \"Prone\")",
+"above": "case .pranayama: String(localized: \"Pranayama\")"
+},
+{
+"i": 1351,
+"k": "text",
+"p": "Yoga",
+"s": "Restorative",
+"in": [
+"AsanaFamily"
+],
+"code": "case .restorative: String(localized: \"Restorative\")"
+},
+{
+"i": 1352,
+"k": "text",
+"p": "Yoga",
+"s": "Seated",
+"in": [
+"AsanaFamily"
+],
+"code": "case .seated: String(localized: \"Seated\")",
+"above": "case .restorative: String(localized: \"Restorative\")"
+},
+{
+"i": 1353,
+"k": "text",
+"p": "Yoga",
+"s": "Standing",
+"in": [
+"AsanaFamily"
+],
+"code": "case .standing: String(localized: \"Standing\")",
+"above": "case .seated: String(localized: \"Seated\")"
+},
+{
+"i": 1354,
+"k": "text",
+"p": "Yoga",
+"s": "Standing Balance",
+"in": [
+"AsanaFamily"
+],
+"code": "case .standingBalance: String(localized: \"Standing Balance\")"
+},
+{
+"i": 1355,
+"k": "text",
+"p": "Yoga",
+"s": "Supine",
+"in": [
+"AsanaFamily"
+],
+"code": "case .supine: String(localized: \"Supine\")",
+"above": "case .standingBalance: String(localized: \"Standing Balance\")"
+},
+{
+"i": 1356,
+"k": "text",
+"p": "Yoga",
+"s": "Surya Namaskar",
+"in": [
+"AsanaFamily"
+],
+"code": "case .suryaNamaskar: String(localized: \"Surya Namaskar\")"
+},
+{
+"i": 1357,
+"k": "text",
+"p": "Yoga",
+"s": "Twist",
+"in": [
+"AsanaFamily"
+],
+"code": "case .twist: String(localized: \"Twist\")",
+"above": "case .suryaNamaskar: String(localized: \"Surya Namaskar\")"
+},
+{
+"i": 1358,
+"k": "label",
+"p": "Yoga",
+"s": "Level",
+"in": [
+"YogaExerciseViews"
+],
+"code": "StyledLabeledPicker(label: String(localized: \"Level\")) {"
+},
+{
+"i": 1359,
+"k": "placeholder",
+"p": "Yoga",
+"s": "Select a family",
+"in": [
+"YogaExerciseViews"
+],
+"code": "prompt: String(localized: \"Select a family\"),",
+"above": "private var familyField: some View {"
+},
+{
+"i": 1360,
+"k": "placeholder",
+"p": "Yoga",
+"s": "Select a breathing option",
+"in": [
+"YogaExerciseViews"
+],
+"code": "prompt: String(localized: \"Select a breathing option\"),",
+"above": "private var breathField: some View {"
+},
+{
+"i": 1361,
+"k": "text",
+"p": "Yoga",
+"s": "Drishti (gaze)",
+"in": [
+"YogaExerciseViews"
+],
+"code": "label: String(localized: \"Drishti (gaze)\"),",
+"above": "private var drishtiField: some View {"
+},
+{
+"i": 1362,
+"k": "placeholder",
+"p": "Yoga",
+"s": "Select a gaze option",
+"in": [
+"YogaExerciseViews"
+],
+"code": "prompt: String(localized: \"Select a gaze option\"),",
+"above": "private var drishtiField: some View {"
+},
+{
+"i": 1363,
+"k": "text",
+"p": "Yoga",
+"s": "Not set",
+"in": [
+"YogaExerciseViews"
+],
+"code": "title: String(localized: \"Not set\"),"
+},
+{
+"i": 1364,
+"k": "text",
+"p": "Yoga",
+"s": "Duration",
+"in": [
+"YogaExerciseViews"
+],
+"code": "title: String(localized: \"Duration\"),",
+"above": "if let duration = formattedDuration {"
+}
+]

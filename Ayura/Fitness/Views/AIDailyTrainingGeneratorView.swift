@@ -194,7 +194,7 @@ struct AIDailyTrainingGeneratorView: View {
                 selection: $selectedPromptIDs,
                 items: planPrompts,
                 label: { $0.text },
-                prompt: "Select a prompt...",
+                prompt: String(localized: "Select a prompt..."),
                 isExpanded: openMenu == .promptSelector
             )
             .contentShape(Rectangle())

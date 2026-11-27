@@ -230,7 +230,7 @@ struct StorageListView: View {
                 itemToDelete = nil
             }
         } message: {
-            Text("Are you sure you want to delete '\(itemToDelete?.food?.name ?? "this item")' from your storage? This action cannot be undone.")
+            Text("Are you sure you want to delete '\(itemToDelete?.food?.name ?? String(localized: "this item"))' from your storage? This action cannot be undone.")
         }
     }
     

@@ -57,7 +57,7 @@ public final class Training: Codable, Identifiable, Equatable, @unchecked Sendab
         }
 
         self.init(
-            name: ev.title ?? "Training",
+            name: ev.title ?? String(localized: "Training"),
             startTime: ev.startDate,
             endTime: ev.endDate,
             notes: decodedNotes,

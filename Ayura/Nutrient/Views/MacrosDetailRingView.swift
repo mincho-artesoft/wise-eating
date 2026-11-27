@@ -162,11 +162,11 @@ struct MacrosDetailRingView: View {
                 .frame(height: 12) // Constrain the height of the GeometryReader
                 
                 HStack {
-                    legendItem(label: "Protein", value: protein, color: MacroNutrientPalette.protein, macroType: .protein)
+                    legendItem(label: String(localized: "Protein"), value: protein, color: MacroNutrientPalette.protein, macroType: .protein)
                     Spacer()
-                    legendItem(label: "Carbs", value: carbs, color: MacroNutrientPalette.carbohydrates, macroType: .carbs)
+                    legendItem(label: String(localized: "Carbs"), value: carbs, color: MacroNutrientPalette.carbohydrates, macroType: .carbs)
                     Spacer()
-                    legendItem(label: "Fat", value: fat, color: MacroNutrientPalette.fat, macroType: .fat)
+                    legendItem(label: String(localized: "Fat"), value: fat, color: MacroNutrientPalette.fat, macroType: .fat)
                 }
                 .font(.caption)
             }

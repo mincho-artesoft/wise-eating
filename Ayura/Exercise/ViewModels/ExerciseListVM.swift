@@ -12,6 +12,15 @@ final class ExerciseListVM: ObservableObject {
     enum Filter: String, CaseIterable, Identifiable {
         case all = "Exercises", workouts = "Workouts", plans = "Training Plans", favorites = "Favorites", `default` = "Default"
         var id: String { rawValue }
+        var displayName: String {
+            switch self {
+            case .all: String(localized: "Exercises")
+            case .workouts: String(localized: "Workouts")
+            case .plans: String(localized: "Training Plans")
+            case .favorites: String(localized: "Favorites")
+            case .default: String(localized: "Default")
+            }
+        }
     }
     // --- КРАЙ НА ПРОМЯНАТА ---
     

@@ -28,11 +28,11 @@ struct ChipScrollView<T: Identifiable & Hashable>: View {
                             }
                         } else if T.self == Allergen.self {
                             ForEach(items as! [Allergen]) { allergen in
-                                GlassChipView(label: allergen.rawValue, isAlert: true, textColor: isAlertSection ? .orange : textColor)
+                                GlassChipView(label: allergen.displayName, isAlert: true, textColor: isAlertSection ? .orange : textColor)
                             }
                         } else if T.self == MuscleGroup.self {
                             ForEach(items as! [MuscleGroup]) { group in
-                                GlassChipView(label: group.rawValue, color: .purple, textColor: textColor)
+                                GlassChipView(label: group.displayName, color: .purple, textColor: textColor)
                             }
                         }
                     }

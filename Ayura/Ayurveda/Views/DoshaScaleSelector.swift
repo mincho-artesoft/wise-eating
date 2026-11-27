@@ -341,11 +341,11 @@ struct DoshaScaleSelector: View {
   private var accessibilityValue: String {
     let spokenNumber: String
     switch value {
-    case -2: spokenNumber = "minus two"
-    case -1: spokenNumber = "minus one"
-    case 1: spokenNumber = "plus one"
-    case 2: spokenNumber = "plus two"
-    default: spokenNumber = "zero"
+    case -2: spokenNumber = String(localized: "minus two")
+    case -1: spokenNumber = String(localized: "minus one")
+    case 1: spokenNumber = String(localized: "plus one")
+    case 2: spokenNumber = String(localized: "plus two")
+    default: spokenNumber = String(localized: "zero")
     }
     return "\(spokenNumber), \(AyurvedaDisplayMath.effectLabel(value))"
   }

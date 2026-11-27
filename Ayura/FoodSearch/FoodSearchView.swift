@@ -113,7 +113,7 @@ private struct FoodSearchViewContent: View {
                         }
                         triggerSearch() // Update results immediately
                     }) {
-                        Text(mode.rawValue)
+                        Text(mode.displayName)
                             .font(.subheadline)
                             .fontWeight(isSelected ? .semibold : .regular)
                             .padding(.horizontal, 16)
@@ -454,9 +454,9 @@ private struct FoodSearchViewContent: View {
         case .ph: return "pH"
         case .age:
             if let months = quickAgeFilterMonths {
-                return (months >= 12) ? "Age \(Int(months / 12.0))y+" : "Age \(Int(months))m+"
+                return (months >= 12) ? String(localized: "Age \(Int(months / 12.0))y+") : String(localized: "Age \(Int(months))m+")
             } else {
-                return "Age"
+                return String(localized: "Age")
             }
         }
     }

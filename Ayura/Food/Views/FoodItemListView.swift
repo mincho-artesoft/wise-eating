@@ -23,6 +23,16 @@ struct FoodItemListView: View {
         case favorites = "Favorites"
         case `default` = "Default"
         var id: String { rawValue }
+        var displayName: String {
+            switch self {
+            case .foods: String(localized: "Foods")
+            case .recipes: String(localized: "Recipes")
+            case .menus: String(localized: "Menus")
+            case .plans: String(localized: "Meal Plans")
+            case .favorites: String(localized: "Favorites")
+            case .default: String(localized: "Default")
+            }
+        }
     }
     
     // MARK: - Navigation State
@@ -521,28 +531,28 @@ struct FoodItemListView: View {
     }
     
     private var emptyStateTitle: String {
-        if !vm.searchText.isEmpty { return "No Results for \"\(vm.searchText)\"" }
+        if !vm.searchText.isEmpty { return String(localized: "No Results for \"\(vm.searchText)\"") }
         switch vm.filter {
-        case .foods: return "No Foods"
-        case .recipes: return "No Recipes"
-        case .menus: return "No Menus"
-        case .plans: return "No Meal Plans"
-        case .favorites: return "No Favorites"
-        case .default: return "No Items Available"
+        case .foods: return String(localized: "No Foods")
+        case .recipes: return String(localized: "No Recipes")
+        case .menus: return String(localized: "No Menus")
+        case .plans: return String(localized: "No Meal Plans")
+        case .favorites: return String(localized: "No Favorites")
+        case .default: return String(localized: "No Items Available")
         }
     }
     
     private var emptyStateDescription: Text {
         let text: String
-        if !vm.searchText.isEmpty { text = "Try a different search term or change the filter." }
+        if !vm.searchText.isEmpty { text = String(localized: "Try a different search term or change the filter.") }
         else {
             switch vm.filter {
-            case .foods: text = "Tap the '+' button to add your first food."
-            case .recipes: text = "Tap the '+' button to add your first recipe."
-            case .menus: text = "Tap the '+' button to add your first menu."
-            case .plans: text = "Tap the '+' button to create your first meal plan."
-            case .favorites: text = "You can add items to your favorites by swiping left on them."
-            case .default: text = "Select a filter like 'Foods' or 'Recipes' to get started."
+            case .foods: text = String(localized: "Tap the '+' button to add your first food.")
+            case .recipes: text = String(localized: "Tap the '+' button to add your first recipe.")
+            case .menus: text = String(localized: "Tap the '+' button to add your first menu.")
+            case .plans: text = String(localized: "Tap the '+' button to create your first meal plan.")
+            case .favorites: text = String(localized: "You can add items to your favorites by swiping left on them.")
+            case .default: text = String(localized: "Select a filter like 'Foods' or 'Recipes' to get started.")
             }
         }
         return Text(text)
@@ -907,7 +917,7 @@ struct FoodItemListView: View {
            .disabled(!isAddButtonVisible)
 	           .simultaneousGesture(dragGesture(geometry: geometry))
            .accessibilityIdentifier("food-add-button")
-           .accessibilityLabel("Add \(vm.filter.rawValue)")
+           .accessibilityLabel("Add \(vm.filter.displayName)")
            .transition(.scale.combined(with: .opacity))
        }
     

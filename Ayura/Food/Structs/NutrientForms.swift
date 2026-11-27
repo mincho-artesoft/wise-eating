@@ -368,57 +368,57 @@ func nutBinding<Root: Sendable>(
 //────────────────────────────────────────────────────────────────────────────
 
 let vitaminLabelById: [String: String] = [
-    "vitA": "Vit A",
-    "retinol": "Retinol",
-    "caroteneAlpha": "α-Carotene",
-    "caroteneBeta": "β-Carotene",
-    "cryptoxanthinBeta": "β-Cryptoxanthin",
-    "luteinZeaxanthin": "Lutein + Zeax.",
-    "lycopene": "Lycopene",
+    "vitA": String(localized: "Vit A"),
+    "retinol": String(localized: "Retinol"),
+    "caroteneAlpha": String(localized: "α-Carotene"),
+    "caroteneBeta": String(localized: "β-Carotene"),
+    "cryptoxanthinBeta": String(localized: "β-Cryptoxanthin"),
+    "luteinZeaxanthin": String(localized: "Lutein + Zeax."),
+    "lycopene": String(localized: "Lycopene"),
 
-    "vitB1": "B1 Thiamin",
-    "vitB2": "B2 Riboflavin",
-    "vitB3": "B3 Niacin",
-    "vitB5": "B5 Pant. acid",
+    "vitB1": String(localized: "B1 Thiamin"),
+    "vitB2": String(localized: "B2 Riboflavin"),
+    "vitB3": String(localized: "B3 Niacin"),
+    "vitB5": String(localized: "B5 Pant. acid"),
     "vitB6": "B6",
 
-    "folateDFE": "Folate DFE",
-    "folateFood": "Folate food",
-    "folateTotal": "Folate total",
-    "folicAcid": "Folic acid",
+    "folateDFE": String(localized: "Folate DFE"),
+    "folateFood": String(localized: "Folate food"),
+    "folateTotal": String(localized: "Folate total"),
+    "folicAcid": String(localized: "Folic acid"),
 
     "vitB12": "B12",
 
-    "vitC": "Vit C",
-    "vitD": "Vit D",
-    "vitE": "Vit E",
-    "vitK": "Vit K",
-    "choline": "Choline"
+    "vitC": String(localized: "Vit C"),
+    "vitD": String(localized: "Vit D"),
+    "vitE": String(localized: "Vit E"),
+    "vitK": String(localized: "Vit K"),
+    "choline": String(localized: "Choline")
 ]
 
 let mineralLabelById: [String: String] = [
-    "calcium": "Calcium",
-    "phosphorus": "Phosphorus",
-    "magnesium": "Magnesium",
-    "potassium": "Potassium",
-    "sodium": "Sodium",
+    "calcium": String(localized: "Calcium"),
+    "phosphorus": String(localized: "Phosphorus"),
+    "magnesium": String(localized: "Magnesium"),
+    "potassium": String(localized: "Potassium"),
+    "sodium": String(localized: "Sodium"),
 
-    "iron": "Iron",
-    "zinc": "Zinc",
-    "copper": "Copper",
-    "manganese": "Manganese",
-    "selenium": "Selenium",
-    "fluoride": "Fluoride"
+    "iron": String(localized: "Iron"),
+    "zinc": String(localized: "Zinc"),
+    "copper": String(localized: "Copper"),
+    "manganese": String(localized: "Manganese"),
+    "selenium": String(localized: "Selenium"),
+    "fluoride": String(localized: "Fluoride")
 ]
 
 let lipidLabelById: [String: String] = [
     // Totals
-    "totalSaturated":        "Sat. fat",
-    "totalMonounsaturated":  "Mono-unsat.",
-    "totalPolyunsaturated":  "Poly-unsat.",
-    "totalTrans":            "Trans fat",
-    "totalTransMonoenoic":   "Trans monoenoic",
-    "totalTransPolyenoic":   "Trans polyenoic",
+    "totalSaturated":        String(localized: "Sat. fat"),
+    "totalMonounsaturated":  String(localized: "Mono-unsat."),
+    "totalPolyunsaturated":  String(localized: "Poly-unsat."),
+    "totalTrans":            String(localized: "Trans fat"),
+    "totalTransMonoenoic":   String(localized: "Trans monoenoic"),
+    "totalTransPolyenoic":   String(localized: "Trans polyenoic"),
 
     // SFA
     "sfa4_0":  "C4:0",
@@ -469,14 +469,14 @@ let lipidLabelById: [String: String] = [
 
 
 let otherLabelById: [String: String] = [
-    "alcoholEthyl": "Alcohol",
-    "caffeine": "Caffeine",
-    "theobromine": "Theobromine",
-    "cholesterol": "Cholesterol",
-    "water": "Water",
-    "energyKcal": "Energy",
-    "ash": "Ash",
-    "betaine": "Betaine",
+    "alcoholEthyl": String(localized: "Alcohol"),
+    "caffeine": String(localized: "Caffeine"),
+    "theobromine": String(localized: "Theobromine"),
+    "cholesterol": String(localized: "Cholesterol"),
+    "water": String(localized: "Water"),
+    "energyKcal": String(localized: "Energy"),
+    "ash": String(localized: "Ash"),
+    "betaine": String(localized: "Betaine"),
     "alkalinityPH": "pH"
 ]
 
@@ -603,21 +603,21 @@ nonisolated(unsafe) let mineralAccess: [String : (MineralsData) -> Nutrient?] = 
 // ────────────────────────────────────────────────────────────────────────────
 
 let aminoLabelById: [String: String] = [
-    "alanine":"Alanine","arginine":"Arginine","asparticAcid":"Aspartic Acid","cystine":"Cystine",
-    "glutamicAcid":"Glutamic Acid","glycine":"Glycine","histidine":"Histidine","isoleucine":"Isoleucine",
-    "leucine":"Leucine","lysine":"Lysine","methionine":"Methionine","phenylalanine":"Phenylalanine",
-    "proline":"Proline","threonine":"Threonine","tryptophan":"Tryptophan","tyrosine":"Tyrosine",
-    "valine":"Valine","serine":"Serine","hydroxyproline":"Hydroxyproline"
+    "alanine":String(localized: "Alanine"),"arginine":String(localized: "Arginine"),"asparticAcid":String(localized: "Aspartic Acid"),"cystine":String(localized: "Cystine"),
+    "glutamicAcid":String(localized: "Glutamic Acid"),"glycine":String(localized: "Glycine"),"histidine":String(localized: "Histidine"),"isoleucine":String(localized: "Isoleucine"),
+    "leucine":String(localized: "Leucine"),"lysine":String(localized: "Lysine"),"methionine":String(localized: "Methionine"),"phenylalanine":String(localized: "Phenylalanine"),
+    "proline":String(localized: "Proline"),"threonine":String(localized: "Threonine"),"tryptophan":String(localized: "Tryptophan"),"tyrosine":String(localized: "Tyrosine"),
+    "valine":String(localized: "Valine"),"serine":String(localized: "Serine"),"hydroxyproline":String(localized: "Hydroxyproline")
 ]
 
 let carbDetailsLabelById: [String: String] = [
-    "starch":"Starch","sucrose":"Sucrose","glucose":"Glucose","fructose":"Fructose",
-    "lactose":"Lactose","maltose":"Maltose","galactose":"Galactose"
+    "starch":String(localized: "Starch"),"sucrose":String(localized: "Sucrose"),"glucose":String(localized: "Glucose"),"fructose":String(localized: "Fructose"),
+    "lactose":String(localized: "Lactose"),"maltose":String(localized: "Maltose"),"galactose":String(localized: "Galactose")
 ]
 
 let sterolsLabelById: [String: String] = [
-    "phytosterols":"Phytosterols","betaSitosterol":"Beta-Sitosterol",
-    "campesterol":"Campesterol","stigmasterol":"Stigmasterol"
+    "phytosterols":String(localized: "Phytosterols"),"betaSitosterol":String(localized: "Beta-Sitosterol"),
+    "campesterol":String(localized: "Campesterol"),"stigmasterol":String(localized: "Stigmasterol")
 ]
 
 // ────────────────────────────────────────────────────────────────────────────

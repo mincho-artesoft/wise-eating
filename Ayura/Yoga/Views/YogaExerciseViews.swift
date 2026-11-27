@@ -56,7 +56,7 @@ struct ExercisePracticeEditorFields<FocusField: Hashable>: View {
         VStack(alignment: .leading, spacing: 16) {
             familyField
 
-            StyledLabeledPicker(label: "Level") {
+            StyledLabeledPicker(label: String(localized: "Level")) {
                 ConfigurableTextField(
                     title: "1–3",
                     value: $level,
@@ -112,33 +112,33 @@ struct ExercisePracticeEditorFields<FocusField: Hashable>: View {
 
     private var familyField: some View {
         searchablePickerField(
-            label: "Family",
+            label: String(localized: "Family"),
             selection: familySelection,
             items: AsanaFamily.allCases,
-            itemLabel: { $0.rawValue },
-            prompt: "Select a family",
+            itemLabel: { $0.displayName },
+            prompt: String(localized: "Select a family"),
             picker: .family
         )
     }
 
     private var breathField: some View {
         searchablePickerField(
-            label: "Breath",
+            label: String(localized: "Breath"),
             selection: breathSelection,
             items: YogaBreath.allCases,
-            itemLabel: { $0.rawValue },
-            prompt: "Select a breathing option",
+            itemLabel: { yogaLabel($0.rawValue) },
+            prompt: String(localized: "Select a breathing option"),
             picker: .breath
         )
     }
 
     private var drishtiField: some View {
         searchablePickerField(
-            label: "Drishti (gaze)",
+            label: String(localized: "Drishti (gaze)"),
             selection: drishtiSelection,
             items: YogaDrishti.allCases,
-            itemLabel: { $0.rawValue },
-            prompt: "Select a gaze option",
+            itemLabel: { yogaLabel($0.rawValue) },
+            prompt: String(localized: "Select a gaze option"),
             picker: .drishti
         )
     }
@@ -217,7 +217,7 @@ struct SearchableSingleSelectList<Item: Identifiable & Hashable>: View {
             ScrollView(showsIndicators: false) {
                 LazyVStack(spacing: 10) {
                     selectionRow(
-                        title: "Not set",
+                        title: String(localized: "Not set"),
                         isSelected: selection == nil
                     ) {
                         onSelect(nil)
@@ -291,19 +291,19 @@ struct ExerciseAyurvedaEditorSection: View {
             DoshaScaleSelector(
                 value: $vata,
                 dosha: .vata,
-                subtitle: "Movement & Air"
+                subtitle: String(localized: "Movement & Air")
             )
             Divider()
             DoshaScaleSelector(
                 value: $pitta,
                 dosha: .pitta,
-                subtitle: "Fire & Transformation"
+                subtitle: String(localized: "Fire & Transformation")
             )
             Divider()
             DoshaScaleSelector(
                 value: $kapha,
                 dosha: .kapha,
-                subtitle: "Structure & Water"
+                subtitle: String(localized: "Structure & Water")
             )
         }
         .foregroundStyle(effectManager.currentGlobalAccentColor)
@@ -355,10 +355,10 @@ struct ExercisePracticeDetailSection: View {
     private var metrics: [ExercisePracticeMetric] {
         var values: [ExercisePracticeMetric] = []
 
-        if let family = item.family?.rawValue {
+        if let family = item.family?.displayName {
             values.append(
                 ExercisePracticeMetric(
-                    title: "Family",
+                    title: String(localized: "Family"),
                     value: family,
                     systemImage: "figure.yoga"
                 )
@@ -367,7 +367,7 @@ struct ExercisePracticeDetailSection: View {
         if let level = formattedLevel {
             values.append(
                 ExercisePracticeMetric(
-                    title: "Level",
+                    title: String(localized: "Level"),
                     value: level,
                     systemImage: "chart.bar.fill"
                 )
@@ -376,7 +376,7 @@ struct ExercisePracticeDetailSection: View {
         if let duration = formattedDuration {
             values.append(
                 ExercisePracticeMetric(
-                    title: "Duration",
+                    title: String(localized: "Duration"),
                     value: duration,
                     systemImage: "timer"
                 )
@@ -385,7 +385,7 @@ struct ExercisePracticeDetailSection: View {
         if let breath = item.breath?.rawValue {
             values.append(
                 ExercisePracticeMetric(
-                    title: "Breath",
+                    title: String(localized: "Breath"),
                     value: yogaLabel(breath),
                     systemImage: "wind"
                 )
@@ -394,7 +394,7 @@ struct ExercisePracticeDetailSection: View {
         if let drishti = item.drishti?.rawValue {
             values.append(
                 ExercisePracticeMetric(
-                    title: "Drishti",
+                    title: String(localized: "Drishti"),
                     value: yogaLabel(drishti),
                     systemImage: "eye.fill"
                 )
@@ -410,12 +410,12 @@ struct ExercisePracticeDetailSection: View {
     }
 
     private var formattedLevel: String? {
-        item.level.map { "Level \($0)" }
+        item.level.map { String(localized: "Level \($0)") }
     }
 
     private var formattedDuration: String? {
         guard let seconds = item.durationSeconds, seconds > 0 else { return nil }
-        return "\(seconds) sec"
+        return String(localized: "\(seconds) sec")
     }
 
     private func metricView(_ metric: ExercisePracticeMetric) -> some View {
@@ -537,19 +537,19 @@ struct YogaWorkoutAyurvedaEditorSection: View {
             DoshaScaleSelector(
                 value: $vata,
                 dosha: .vata,
-                subtitle: "Movement & Air"
+                subtitle: String(localized: "Movement & Air")
             )
             Divider()
             DoshaScaleSelector(
                 value: $pitta,
                 dosha: .pitta,
-                subtitle: "Fire & Transformation"
+                subtitle: String(localized: "Fire & Transformation")
             )
             Divider()
             DoshaScaleSelector(
                 value: $kapha,
                 dosha: .kapha,
-                subtitle: "Structure & Water"
+                subtitle: String(localized: "Structure & Water")
             )
         }
     }
@@ -606,8 +606,8 @@ struct YogaWorkoutAyurvedaSection: View {
                 VStack(alignment: .leading, spacing: 16) {
                     Text(
                         manualDosha == nil
-                            ? "Calculated from \(yogaEntries.count) exercise\(yogaEntries.count == 1 ? "" : "s") in this workout."
-                            : "Ayurveda effects set manually."
+                            ? String(localized: "Calculated from \(yogaEntries.count) exercise\(yogaEntries.count == 1 ? "" : "s") in this workout.")
+                            : String(localized: "Ayurveda effects set manually.")
                     )
                     .font(.caption)
                     .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.72))

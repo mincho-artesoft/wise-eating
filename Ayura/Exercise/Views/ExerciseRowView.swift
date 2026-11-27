@@ -97,7 +97,7 @@ struct ExerciseRowView: View {
                 
                 if !muscleGroups.isEmpty {
                     VStack(alignment: .leading, spacing: 8) {
-                        ChipScrollView(title: "Primary Muscles", items: muscleGroups, textColor: effectManager.currentGlobalAccentColor)
+                        ChipScrollView(title: String(localized: "Primary Muscles"), items: muscleGroups, textColor: effectManager.currentGlobalAccentColor)
                     }
                 }
             }

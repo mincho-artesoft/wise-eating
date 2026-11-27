@@ -95,7 +95,7 @@ struct SettingsView: View {
                                 .frame(width: 68, height: 68)
                                 .scaleEffect(isSelected ? 1.1 : 1.0)
 
-                                Text(background.name)
+                                Text(background.name == "Night Breath" ? String(localized: "Night Breath") : (background.name == "Morning Breath" ? String(localized: "Morning Breath") : background.name))
                                     .font(.caption)
                                     .fontWeight(isSelected ? .bold : .medium)
                             }
@@ -326,8 +326,8 @@ struct SettingsView: View {
                 guard reminderDate > Date() else { continue }
 
                 meal.notificationID = try? await NotificationManager.shared.scheduleNotification(
-                    title: "🍽️ Meal Reminder",
-                    body: "It's time for your \(meal.name). Enjoy!",
+                    title: String(localized: "🍽️ Meal Reminder"),
+                    body: String(localized: "It's time for your \(meal.name). Enjoy!"),
                     timeInterval: reminderDate.timeIntervalSinceNow,
                     userInfo: [
                         "mealID": meal.id.uuidString,
@@ -348,8 +348,8 @@ struct SettingsView: View {
                 guard reminderDate > Date() else { continue }
 
                 training.notificationID = try? await NotificationManager.shared.scheduleNotification(
-                    title: "🧘 Workout Reminder",
-                    body: "Time for your workout: \(training.name)!",
+                    title: String(localized: "🧘 Workout Reminder"),
+                    body: String(localized: "Time for your workout: \(training.name)!"),
                     timeInterval: reminderDate.timeIntervalSinceNow,
                     userInfo: [
                         "trainingID": training.id.uuidString,
@@ -372,8 +372,8 @@ struct SettingsView: View {
             guard reminderDate > Date() else { continue }
 
             list.notificationID = try? await NotificationManager.shared.scheduleNotification(
-                title: "🛒 Shopping Reminder",
-                body: "Time to buy groceries for your list: \(list.name)",
+                title: String(localized: "🛒 Shopping Reminder"),
+                body: String(localized: "Time to buy groceries for your list: \(list.name)"),
                 timeInterval: reminderDate.timeIntervalSinceNow,
                 userInfo: ["shoppingListID": list.id.uuidString],
                 profileID: list.profile?.id

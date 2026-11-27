@@ -37,7 +37,7 @@ struct DropdownMenu<Item: Identifiable & Hashable>: View {
                         .autocapitalization(.none)
 
                     if selectAllBtn{
-                        Button(allSelected ? "Deselect all" : "Select all") {
+                        Button(allSelected ? String(localized: "Deselect all") : String(localized: "Select all")) {
                             toggleAll()
                         }
                         .font(.system(size: 14, weight: .semibold))

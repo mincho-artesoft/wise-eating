@@ -88,8 +88,8 @@ struct TotalBurnedDetailRingView: View {
                 VStack(spacing: 16) {
                     if allExercisesOfTheDay.isEmpty {
                         // --- START OF MODIFICATION: Improved empty state ---
-                        let message = selectedMuscleGroup == nil ? "No exercises have been logged for today." : "No exercises found for the selected muscle group."
-                        ContentUnavailableView(selectedMuscleGroup == nil ? "No Exercises Logged" : "No Results", systemImage: "dumbbell", description: Text(message))
+                        let message = selectedMuscleGroup == nil ? String(localized: "No exercises have been logged for today.") : String(localized: "No exercises found for the selected muscle group.")
+                        ContentUnavailableView(selectedMuscleGroup == nil ? String(localized: "No Exercises Logged") : String(localized: "No Results"), systemImage: "dumbbell", description: Text(message))
                             .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
                             .padding(.vertical, 40)
                             .glassCardStyle(cornerRadius: 15)
@@ -139,7 +139,7 @@ struct TotalBurnedDetailRingView: View {
     }
     
     private var listHeader: some View {
-        Text(selectedMuscleGroup == nil ? "All Exercises Today" : "Filtered Exercises")
+        Text(selectedMuscleGroup == nil ? String(localized: "All Exercises Today") : String(localized: "Filtered Exercises"))
             .font(.headline)
             .foregroundStyle(effectManager.currentGlobalAccentColor)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -180,13 +180,13 @@ struct TotalBurnedDetailRingView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(maxHeight: ringCellHeight * 0.85)
 
-                    Text(group.rawValue)
+                    Text(group.displayName)
                         .font(.system(size: 10, weight: .medium))
                         .multilineTextAlignment(.center)
                         .foregroundStyle(effectManager.currentGlobalAccentColor)
                         .lineLimit(1)
                 } else {
-                    Text(group.rawValue)
+                    Text(group.displayName)
                         .font(.caption.weight(.semibold))
                         .multilineTextAlignment(.center)
                         .foregroundStyle(effectManager.currentGlobalAccentColor)

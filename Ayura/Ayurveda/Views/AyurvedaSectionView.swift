@@ -69,10 +69,10 @@ struct AyurvedaDisplayCard: View {
     VStack(alignment: .leading, spacing: 16) {
       if display.engineExcluded {
         AyurvedaDisplayWarningRow(
-          title: "Health warning",
+          title: String(localized: "Health warning"),
           text: display.edible
-            ? "Traditional sources and modern evidence advise against consuming this. Shown for reference only — never recommended."
-            : "Not available as food. Shown for reference only — no serving or recommendation is provided."
+            ? String(localized: "Traditional sources and modern evidence advise against consuming this. Shown for reference only — never recommended.")
+            : String(localized: "Not available as food. Shown for reference only — no serving or recommendation is provided.")
         )
       }
       if display.edible {
@@ -113,7 +113,7 @@ struct AyurvedaDisplayCard: View {
   private var propertyGroups: [AyurvedaPropertyGroup] {
     if display.tierLabel == "Computed" {
       return group(
-        title: "Virya (energy)",
+        title: String(localized: "Virya (energy)"),
         systemImage: "bolt.fill",
         kind: .virya,
         values: optionalValue(display.virya)
@@ -122,31 +122,31 @@ struct AyurvedaDisplayCard: View {
 
     var groups: [AyurvedaPropertyGroup] = []
     groups += group(
-      title: "Rasa (taste)",
+      title: String(localized: "Rasa (taste)"),
       systemImage: "leaf.fill",
       kind: .rasa,
       values: display.rasa
     )
     groups += group(
-      title: "Virya (energy)",
+      title: String(localized: "Virya (energy)"),
       systemImage: "bolt.fill",
       kind: .virya,
       values: optionalValue(display.virya)
     )
     groups += group(
-      title: "Vipaka (post-digestive)",
+      title: String(localized: "Vipaka (post-digestive)"),
       systemImage: "arrow.triangle.2.circlepath",
       kind: .vipaka,
       values: optionalValue(display.vipaka)
     )
     groups += group(
-      title: "Gunas (qualities)",
+      title: String(localized: "Gunas (qualities)"),
       systemImage: "circle.grid.2x2.fill",
       kind: .guna,
       values: display.gunas
     )
     groups += group(
-      title: "Preparation modifiers",
+      title: String(localized: "Preparation modifiers"),
       systemImage: "slider.horizontal.3",
       kind: .modifier,
       values: display.modifierLabels
@@ -212,7 +212,7 @@ private struct AyurvedaPropertyGroupView: View {
       ChipGrid {
         ForEach(Array(group.values.enumerated()), id: \.offset) { _, value in
           GlassChipView(
-            label: value.capitalized,
+            label: AyurvedaPropertyText.localized(value),
             color: tint(for: value),
             systemImage: icon(for: value),
             textColor: effectManager.currentGlobalAccentColor,

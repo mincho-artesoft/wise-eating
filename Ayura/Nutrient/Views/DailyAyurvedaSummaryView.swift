@@ -12,8 +12,8 @@ enum DailyAyurvedaDetailContent {
 
     var headerTitle: String {
         switch self {
-        case .food: "Daily Ayurveda"
-        case .exercise: "Exercise Ayurveda"
+        case .food: String(localized: "Daily Ayurveda")
+        case .exercise: String(localized: "Exercise Ayurveda")
         }
     }
 
@@ -26,24 +26,24 @@ enum DailyAyurvedaDetailContent {
 
     var emptyTitle: String {
         switch self {
-        case .food: "No Foods to Display"
-        case .exercise: "No Exercises to Display"
+        case .food: String(localized: "No Foods to Display")
+        case .exercise: String(localized: "No Exercises to Display")
         }
     }
 
     var insufficientDataTitle: String {
         switch self {
-        case .food: "Not Enough Ayurveda Data"
-        case .exercise: "Not Enough Exercise Ayurveda Data"
+        case .food: String(localized: "Not Enough Ayurveda Data")
+        case .exercise: String(localized: "Not Enough Exercise Ayurveda Data")
         }
     }
 
     var coverageMessage: String {
         switch self {
         case .food:
-            "At least half of the food weight needs Ayurveda data."
+            String(localized: "At least half of the food weight needs Ayurveda data.")
         case .exercise:
-            "At least half of the exercise duration needs Ayurveda data."
+            String(localized: "At least half of the exercise duration needs Ayurveda data.")
         }
     }
 }
@@ -67,9 +67,9 @@ struct DailyAyurvedaSummaryRow: View {
         profileDistribution: AyurvedaDoshaDistribution?,
         target: AyurvedaDoshaDistribution?,
         horizontalPadding: CGFloat = 20,
-        summaryTitle: String = "Dosha Balance",
+        summaryTitle: String = String(localized: "Dosha Balance"),
         summarySubtitle: String? = nil,
-        accessibilityContext: String = "Daily Ayurveda",
+        accessibilityContext: String = String(localized: "Daily Ayurveda"),
         usesPersonalizedEffectColors: Bool = true,
         onTap: (() -> Void)? = nil
     ) {
@@ -110,7 +110,7 @@ struct DailyAyurvedaSummaryRow: View {
                 Spacer(minLength: 8)
 
                 GlassChipView(
-                    label: "Fit: \(fitLabel)",
+                    label: String(localized: "Fit: \(fitLabel)"),
                     systemImage: fitIcon,
                     textColor: fitColor,
                     font: .subheadline,
@@ -368,9 +368,9 @@ struct DailyAyurvedaSummaryRow: View {
         guard computation.computed != nil else { return "—" }
         guard let fit else { return "?" }
         switch fit.direction {
-        case .supportive: return "Good"
-        case .mixed: return "Mixed"
-        case .lessSupportive: return "Poor"
+        case .supportive: return String(localized: "Good")
+        case .mixed: return String(localized: "Mixed")
+        case .lessSupportive: return String(localized: "Poor")
         }
     }
 
@@ -816,7 +816,7 @@ struct DailyAyurvedaDetailView: View {
     private var selectedTitle: String {
         guard let selectedMealID,
               let meal = meals.first(where: { $0.id == selectedMealID }) else {
-            return "Whole Day"
+            return String(localized: "Whole Day")
         }
         return meal.name
     }
@@ -835,9 +835,9 @@ struct DailyAyurvedaDetailView: View {
         _ direction: AyurvedaFoodFitPresentation.Direction
     ) -> String {
         switch direction {
-        case .supportive: "Good"
-        case .mixed: "Mixed"
-        case .lessSupportive: "Poor"
+        case .supportive: String(localized: "Good")
+        case .mixed: String(localized: "Mixed")
+        case .lessSupportive: String(localized: "Poor")
         }
     }
 

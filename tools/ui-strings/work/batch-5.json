@@ -1,0 +1,2922 @@
+[
+{
+"i": 893,
+"k": "text",
+"p": "Calendar",
+"s": "Practice",
+"in": [
+"EventView"
+],
+"code": "kind: session?.practiceKind ?? String(localized: \"Practice\"),"
+},
+{
+"i": 894,
+"k": "text",
+"p": "Calendar",
+"s": "New Meal/Training",
+"in": [
+"EventView"
+],
+"code": "textView.text = String(localized: \"New Meal/Training\")",
+"above": "if let first = viewModel.firstLocalCalendarColor {"
+},
+{
+"i": 895,
+"k": "text",
+"p": "Calendar",
+"s": "New Shopping List",
+"in": [
+"EventView"
+],
+"code": "textView.text = String(localized: \"New Shopping List\")",
+"above": "if let first = viewModel.firstLocalCalendarColor {"
+},
+{
+"i": 896,
+"k": "text",
+"p": "Calendar",
+"s": "Ingredient",
+"in": [
+"FoodItemDetailView",
+"FoodItemRowEventView",
+"FoodItemRowStorageView",
+"FoodItemRowView"
+],
+"code": "let n = link.food?.name ?? String(localized: \"Ingredient\"); let g = link.grams"
+},
+{
+"i": 897,
+"k": "text",
+"p": "Calendar",
+"s": "All",
+"in": [
+"PracticesView",
+"TwoWayPinnedSingleDayMultiCalendarContainerView",
+"WrappingSegmentedControl"
+],
+"code": "case .all: String(localized: \"All\")",
+"above": "public var displayName: String {"
+},
+{
+"i": 898,
+"k": "text",
+"p": "Calendar",
+"s": "Training",
+"in": [
+"AppTab",
+"Training",
+"TwoWayPinnedSingleDayMultiCalendarContainerView"
+],
+"code": "case .training: String(localized: \"Training\")",
+"above": "case .meal: String(localized: \"Meal\")"
+},
+{
+"i": 899,
+"k": "text",
+"p": "CustomViews",
+"s": "January",
+"in": [
+"MonthYearPickerView"
+],
+"code": "String(localized: \"January\"), String(localized: \"February\"), String(localized: \"March\"), String(localized: \"April\"), String(localized: \"May\"), String(localized:"
+},
+{
+"i": 900,
+"k": "text",
+"p": "CustomViews",
+"s": "February",
+"in": [
+"MonthYearPickerView"
+],
+"code": "String(localized: \"January\"), String(localized: \"February\"), String(localized: \"March\"), String(localized: \"April\"), String(localized: \"May\"), String(localized:"
+},
+{
+"i": 901,
+"k": "text",
+"p": "CustomViews",
+"s": "March",
+"in": [
+"MonthYearPickerView"
+],
+"code": "String(localized: \"January\"), String(localized: \"February\"), String(localized: \"March\"), String(localized: \"April\"), String(localized: \"May\"), String(localized:"
+},
+{
+"i": 902,
+"k": "text",
+"p": "CustomViews",
+"s": "April",
+"in": [
+"MonthYearPickerView"
+],
+"code": "String(localized: \"January\"), String(localized: \"February\"), String(localized: \"March\"), String(localized: \"April\"), String(localized: \"May\"), String(localized:"
+},
+{
+"i": 903,
+"k": "text",
+"p": "CustomViews",
+"s": "May",
+"in": [
+"MonthYearPickerView"
+],
+"code": "String(localized: \"January\"), String(localized: \"February\"), String(localized: \"March\"), String(localized: \"April\"), String(localized: \"May\"), String(localized:"
+},
+{
+"i": 904,
+"k": "text",
+"p": "CustomViews",
+"s": "June",
+"in": [
+"MonthYearPickerView"
+],
+"code": "String(localized: \"January\"), String(localized: \"February\"), String(localized: \"March\"), String(localized: \"April\"), String(localized: \"May\"), String(localized:"
+},
+{
+"i": 905,
+"k": "text",
+"p": "CustomViews",
+"s": "July",
+"in": [
+"MonthYearPickerView"
+],
+"code": "String(localized: \"July\"), String(localized: \"August\"), String(localized: \"September\"), String(localized: \"October\"), String(localized: \"November\"), String(loca"
+},
+{
+"i": 906,
+"k": "text",
+"p": "CustomViews",
+"s": "August",
+"in": [
+"MonthYearPickerView"
+],
+"code": "String(localized: \"July\"), String(localized: \"August\"), String(localized: \"September\"), String(localized: \"October\"), String(localized: \"November\"), String(loca"
+},
+{
+"i": 907,
+"k": "text",
+"p": "CustomViews",
+"s": "September",
+"in": [
+"MonthYearPickerView"
+],
+"code": "String(localized: \"July\"), String(localized: \"August\"), String(localized: \"September\"), String(localized: \"October\"), String(localized: \"November\"), String(loca"
+},
+{
+"i": 908,
+"k": "text",
+"p": "CustomViews",
+"s": "October",
+"in": [
+"MonthYearPickerView"
+],
+"code": "String(localized: \"July\"), String(localized: \"August\"), String(localized: \"September\"), String(localized: \"October\"), String(localized: \"November\"), String(loca"
+},
+{
+"i": 909,
+"k": "text",
+"p": "CustomViews",
+"s": "November",
+"in": [
+"MonthYearPickerView"
+],
+"code": "String(localized: \"July\"), String(localized: \"August\"), String(localized: \"September\"), String(localized: \"October\"), String(localized: \"November\"), String(loca"
+},
+{
+"i": 910,
+"k": "text",
+"p": "CustomViews",
+"s": "December",
+"in": [
+"MonthYearPickerView"
+],
+"code": "String(localized: \"July\"), String(localized: \"August\"), String(localized: \"September\"), String(localized: \"October\"), String(localized: \"November\"), String(loca"
+},
+{
+"i": 911,
+"k": "text",
+"p": "CustomViews",
+"s": "Settings",
+"in": [
+"WrappingSegmentedControl"
+],
+"code": "String(localized: \"Settings\"), String(localized: \"Nutrients\"), String(localized: \"Plans\"),"
+},
+{
+"i": 912,
+"k": "text",
+"p": "CustomViews",
+"s": "Plans",
+"in": [
+"WrappingSegmentedControl"
+],
+"code": "String(localized: \"Settings\"), String(localized: \"Nutrients\"), String(localized: \"Plans\"),"
+},
+{
+"i": 913,
+"k": "text",
+"p": "CustomViews",
+"s": "Weekly",
+"in": [
+"Product+Extension",
+"WrappingSegmentedControl"
+],
+"code": "String(localized: \"Weekly\"), String(localized: \"Monthly\"),"
+},
+{
+"i": 914,
+"k": "text",
+"p": "CustomViews",
+"s": "Monthly",
+"in": [
+"Product+Extension",
+"WrappingSegmentedControl"
+],
+"code": "String(localized: \"Weekly\"), String(localized: \"Monthly\"),"
+},
+{
+"i": 915,
+"k": "text",
+"p": "CustomViews",
+"s": "Edit Batches",
+"in": [
+"WrappingSegmentedControl"
+],
+"code": "String(localized: \"Consume\"), String(localized: \"Edit Batches\"), String(localized: \"History\"),"
+},
+{
+"i": 916,
+"k": "text",
+"p": "CustomViews",
+"s": "AI Settings",
+"in": [
+"WrappingSegmentedControl"
+],
+"code": "String(localized: \"AI Settings\"),",
+"above": "private func segmentTitlesForExtraction() -> [String] {"
+},
+{
+"i": 917,
+"k": "text",
+"p": "CustomViews",
+"s": "New Theme",
+"in": [
+"ThemeEditorView"
+],
+"code": "themeToEdit == nil ? String(localized: \"New Theme\") : String(localized: \"Edit Theme\")"
+},
+{
+"i": 918,
+"k": "text",
+"p": "CustomViews",
+"s": "Edit Theme",
+"in": [
+"ThemeEditorView"
+],
+"code": "themeToEdit == nil ? String(localized: \"New Theme\") : String(localized: \"Edit Theme\")"
+},
+{
+"i": 919,
+"k": "text",
+"p": "Exercise",
+"s": "Chest",
+"in": [
+"MuscleGroup"
+],
+"code": "case .chest: String(localized: \"Chest\")",
+"above": "public var displayName: String {"
+},
+{
+"i": 920,
+"k": "text",
+"p": "Exercise",
+"s": "Lats",
+"in": [
+"MuscleGroup"
+],
+"code": "case .lats: String(localized: \"Lats\")",
+"above": "case .back: String(localized: \"Back\")"
+},
+{
+"i": 921,
+"k": "text",
+"p": "Exercise",
+"s": "Traps",
+"in": [
+"MuscleGroup"
+],
+"code": "case .traps: String(localized: \"Traps\")",
+"above": "case .lats: String(localized: \"Lats\")"
+},
+{
+"i": 922,
+"k": "text",
+"p": "Exercise",
+"s": "Lower Back",
+"in": [
+"MuscleGroup"
+],
+"code": "case .lowerBack: String(localized: \"Lower Back\")",
+"above": "case .traps: String(localized: \"Traps\")"
+},
+{
+"i": 923,
+"k": "text",
+"p": "Exercise",
+"s": "Quads",
+"in": [
+"MuscleGroup"
+],
+"code": "case .quads: String(localized: \"Quads\")",
+"above": "case .lowerBack: String(localized: \"Lower Back\")"
+},
+{
+"i": 924,
+"k": "text",
+"p": "Exercise",
+"s": "Hamstrings",
+"in": [
+"MuscleGroup"
+],
+"code": "case .hamstrings: String(localized: \"Hamstrings\")",
+"above": "case .quads: String(localized: \"Quads\")"
+},
+{
+"i": 925,
+"k": "text",
+"p": "Exercise",
+"s": "Glutes",
+"in": [
+"MuscleGroup"
+],
+"code": "case .glutes: String(localized: \"Glutes\")",
+"above": "case .hamstrings: String(localized: \"Hamstrings\")"
+},
+{
+"i": 926,
+"k": "text",
+"p": "Exercise",
+"s": "Calves",
+"in": [
+"MuscleGroup"
+],
+"code": "case .calves: String(localized: \"Calves\")",
+"above": "case .glutes: String(localized: \"Glutes\")"
+},
+{
+"i": 927,
+"k": "text",
+"p": "Exercise",
+"s": "Hip Flexors",
+"in": [
+"MuscleGroup"
+],
+"code": "case .hipFlexors: String(localized: \"Hip Flexors\")",
+"above": "case .calves: String(localized: \"Calves\")"
+},
+{
+"i": 928,
+"k": "text",
+"p": "Exercise",
+"s": "Inner Thighs",
+"in": [
+"MuscleGroup"
+],
+"code": "case .innerThighs: String(localized: \"Inner Thighs\")"
+},
+{
+"i": 929,
+"k": "text",
+"p": "Exercise",
+"s": "Shoulders",
+"in": [
+"MuscleGroup"
+],
+"code": "case .shoulders: String(localized: \"Shoulders\")",
+"above": "case .innerThighs: String(localized: \"Inner Thighs\")"
+},
+{
+"i": 930,
+"k": "text",
+"p": "Exercise",
+"s": "Deltoids",
+"in": [
+"MuscleGroup"
+],
+"code": "case .deltoids: String(localized: \"Deltoids\")",
+"above": "case .shoulders: String(localized: \"Shoulders\")"
+},
+{
+"i": 931,
+"k": "text",
+"p": "Exercise",
+"s": "Biceps",
+"in": [
+"MuscleGroup"
+],
+"code": "case .biceps: String(localized: \"Biceps\")",
+"above": "case .deltoids: String(localized: \"Deltoids\")"
+},
+{
+"i": 932,
+"k": "text",
+"p": "Exercise",
+"s": "Triceps",
+"in": [
+"MuscleGroup"
+],
+"code": "case .triceps: String(localized: \"Triceps\")",
+"above": "case .biceps: String(localized: \"Biceps\")"
+},
+{
+"i": 933,
+"k": "text",
+"p": "Exercise",
+"s": "Forearms",
+"in": [
+"MuscleGroup"
+],
+"code": "case .forearms: String(localized: \"Forearms\")",
+"above": "case .triceps: String(localized: \"Triceps\")"
+},
+{
+"i": 934,
+"k": "text",
+"p": "Exercise",
+"s": "Abs",
+"in": [
+"MuscleGroup"
+],
+"code": "case .abs: String(localized: \"Abs\")",
+"above": "case .forearms: String(localized: \"Forearms\")"
+},
+{
+"i": 935,
+"k": "text",
+"p": "Exercise",
+"s": "Obliques",
+"in": [
+"MuscleGroup"
+],
+"code": "case .obliques: String(localized: \"Obliques\")",
+"above": "case .abs: String(localized: \"Abs\")"
+},
+{
+"i": 936,
+"k": "text",
+"p": "Exercise",
+"s": "Full Body",
+"in": [
+"MuscleGroup"
+],
+"code": "case .fullBody: String(localized: \"Full Body\")",
+"above": "case .obliques: String(localized: \"Obliques\")"
+},
+{
+"i": 937,
+"k": "text",
+"p": "Exercise",
+"s": "Legs",
+"in": [
+"MuscleGroup"
+],
+"code": "case .legs: String(localized: \"Legs\")",
+"above": "case .fullBody: String(localized: \"Full Body\")"
+},
+{
+"i": 938,
+"k": "text",
+"p": "Exercise",
+"s": "Arms",
+"in": [
+"MuscleGroup"
+],
+"code": "case .arms: String(localized: \"Arms\")",
+"above": "case .legs: String(localized: \"Legs\")"
+},
+{
+"i": 939,
+"k": "text",
+"p": "Exercise",
+"s": "Default",
+"in": [
+"ExerciseListVM",
+"FoodItemListView"
+],
+"code": "case .default: String(localized: \"Default\")",
+"above": "case .favorites: String(localized: \"Favorites\")"
+},
+{
+"i": 940,
+"k": "text",
+"p": "Exercise",
+"s": "Exercises in this Workout",
+"in": [
+"ExerciseItemDetailView"
+],
+"code": "SectionView(title: String(localized: \"Exercises in this Workout\")) {"
+},
+{
+"i": 941,
+"k": "text",
+"p": "Exercise",
+"s": "Video Tutorial",
+"in": [
+"ExerciseItemDetailView"
+],
+"code": "SectionView(title: String(localized: \"Video Tutorial\")) {"
+},
+{
+"i": 942,
+"k": "text",
+"p": "Exercise",
+"s": "Copy of %@",
+"in": [
+"ExerciseItemEditorView"
+],
+"code": "_name = State(initialValue: isAIInit ? composedName : String(localized: \"Copy of \\(composedName)\"))"
+},
+{
+"i": 943,
+"k": "text",
+"p": "Exercise",
+"s": "Add Exercise",
+"in": [
+"ExerciseItemEditorView"
+],
+"code": "exerciseToEdit == nil && dubExercise == nil ? String(localized: \"Add Exercise\") : String(localized: \"Edit Exercise\")"
+},
+{
+"i": 944,
+"k": "text",
+"p": "Exercise",
+"s": "Edit Exercise",
+"in": [
+"ExerciseItemEditorView"
+],
+"code": "exerciseToEdit == nil && dubExercise == nil ? String(localized: \"Add Exercise\") : String(localized: \"Edit Exercise\")"
+},
+{
+"i": 945,
+"k": "label",
+"p": "Exercise",
+"s": "Exercise Name",
+"in": [
+"ExerciseItemEditorView"
+],
+"code": "StyledLabeledPicker(label: String(localized: \"Exercise Name\"), isRequired: true) {"
+},
+{
+"i": 946,
+"k": "text",
+"p": "Exercise",
+"s": "e.g., Barbell Squat",
+"in": [
+"ExerciseItemEditorView"
+],
+"code": "title: String(localized: \"e.g., Barbell Squat\"),",
+"above": "private var generalSection: some View {"
+},
+{
+"i": 947,
+"k": "label",
+"p": "Exercise",
+"s": "Default Duration (sec)",
+"in": [
+"ExerciseItemEditorView"
+],
+"code": "StyledLabeledPicker(label: String(localized: \"Default Duration (sec)\")) {"
+},
+{
+"i": 948,
+"k": "label",
+"p": "Exercise",
+"s": "Minimum Age (months)",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "StyledLabeledPicker(label: String(localized: \"Minimum Age (months)\")) {"
+},
+{
+"i": 949,
+"k": "label",
+"p": "Exercise",
+"s": "Video URL (optional)",
+"in": [
+"ExerciseItemEditorView",
+"WorkoutEditorView"
+],
+"code": "StyledLabeledPicker(label: String(localized: \"Video URL (optional)\")) {"
+},
+{
+"i": 950,
+"k": "text",
+"p": "Exercise",
+"s": "e.g., https://youtube.com/...",
+"in": [
+"ExerciseItemEditorView",
+"WorkoutEditorView"
+],
+"code": "title: String(localized: \"e.g., https://youtube.com/...\"),",
+"above": "private var detailsSection: some View {"
+},
+{
+"i": 951,
+"k": "label",
+"p": "Exercise",
+"s": "MET Value (optional)",
+"in": [
+"ExerciseItemEditorView"
+],
+"code": "StyledLabeledPicker(label: String(localized: \"MET Value (optional)\")) {"
+},
+{
+"i": 952,
+"k": "placeholder",
+"p": "Exercise",
+"s": "Select muscle groups...",
+"in": [
+"ExerciseItemEditorView"
+],
+"code": "prompt: String(localized: \"Select muscle groups...\"),",
+"above": "private var muscleGroupSection: some View {"
+},
+{
+"i": 953,
+"k": "text",
+"p": "Exercise",
+"s": "Search muscles...",
+"in": [
+"ExerciseItemEditorView"
+],
+"code": "searchPrompt: String(localized: \"Search muscles...\"),",
+"above": "case .muscle:"
+},
+{
+"i": 954,
+"k": "text",
+"p": "Exercise",
+"s": "Search families...",
+"in": [
+"ExerciseItemEditorView"
+],
+"code": "searchPrompt: String(localized: \"Search families...\"),",
+"above": "case .family:"
+},
+{
+"i": 955,
+"k": "text",
+"p": "Exercise",
+"s": "Search breathing options...",
+"in": [
+"ExerciseItemEditorView"
+],
+"code": "searchPrompt: String(localized: \"Search breathing options...\"),",
+"above": "case .breath:"
+},
+{
+"i": 956,
+"k": "text",
+"p": "Exercise",
+"s": "Search gaze options...",
+"in": [
+"ExerciseItemEditorView"
+],
+"code": "searchPrompt: String(localized: \"Search gaze options...\"),",
+"above": "case .drishti:"
+},
+{
+"i": 957,
+"k": "text",
+"p": "Exercise",
+"s": "Exercise name cannot be empty.",
+"in": [
+"ExerciseItemEditorView"
+],
+"code": "alertMessage = String(localized: \"Exercise name cannot be empty.\")",
+"above": "let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)"
+},
+{
+"i": 958,
+"k": "text",
+"p": "Exercise",
+"s": "Failed to open the user database: %@",
+"in": [
+"ExerciseItemEditorView",
+"WorkoutEditorView"
+],
+"code": "alertMessage = String(localized: \"Failed to open the user database: \\(error.localizedDescription)\")"
+},
+{
+"i": 959,
+"k": "text",
+"p": "Exercise",
+"s": "Failed to save exercise: %@",
+"in": [
+"ExerciseItemEditorView"
+],
+"code": "alertMessage = String(localized: \"Failed to save exercise: \\(error.localizedDescription)\")"
+},
+{
+"i": 960,
+"k": "text",
+"p": "Exercise",
+"s": "Please enter a name for the exercise first.",
+"in": [
+"ExerciseItemEditorView"
+],
+"code": "alertMsg = String(localized: \"Please enter a name for the exercise first.\")",
+"above": "private func startAIGeneration() {"
+},
+{
+"i": 961,
+"k": "text",
+"p": "Exercise",
+"s": "Could not start AI generation job.",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemEditorView",
+"MealPlanEditorView",
+"NutritionsDetailView"
+],
+"code": "alertMsg = String(localized: \"Could not start AI generation job.\")",
+"above": "if let newJob = aiManager.startExerciseDetailGeneration("
+},
+{
+"i": 962,
+"k": "text",
+"p": "Exercise",
+"s": "AI data generation requires iOS 26 or newer.",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemEditorView"
+],
+"code": "alertMsg = String(localized: \"AI data generation requires iOS 26 or newer.\")"
+},
+{
+"i": 963,
+"k": "text",
+"p": "Exercise",
+"s": "Could not find completed job data.",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "alertMsg = String(localized: \"Could not find completed job data.\")",
+"above": "let resultData = job.resultData else {"
+},
+{
+"i": 964,
+"k": "text",
+"p": "Exercise",
+"s": "Failed to process AI data: %@",
+"in": [
+"ExerciseItemEditorView",
+"FoodItemEditorView"
+],
+"code": "alertMessage = String(localized: \"Failed to process AI data: \\(error.localizedDescription)\")"
+},
+{
+"i": 965,
+"k": "text",
+"p": "Exercise",
+"s": "Family",
+"in": [
+"ExerciseItemEditorView",
+"YogaExerciseViews"
+],
+"code": "case .family: String(localized: \"Family\")",
+"above": "case .muscle: String(localized: \"Muscle Groups\")"
+},
+{
+"i": 966,
+"k": "text",
+"p": "Exercise",
+"s": "Breath",
+"in": [
+"ExerciseItemEditorView",
+"YogaExerciseViews"
+],
+"code": "case .breath: String(localized: \"Breath\")",
+"above": "case .family: String(localized: \"Family\")"
+},
+{
+"i": 967,
+"k": "text",
+"p": "Exercise",
+"s": "Drishti",
+"in": [
+"ExerciseItemEditorView",
+"YogaExerciseViews"
+],
+"code": "case .drishti: String(localized: \"Drishti\")",
+"above": "case .breath: String(localized: \"Breath\")"
+},
+{
+"i": 968,
+"k": "text",
+"p": "Exercise",
+"s": "Created: ",
+"in": [
+"ExerciseListView"
+],
+"code": "String(localized: \"Created: \")"
+},
+{
+"i": 969,
+"k": "text",
+"p": "Exercise",
+"s": "No Custom Exercises",
+"in": [
+"ExerciseListView"
+],
+"code": "case .all: return String(localized: \"No Custom Exercises\")",
+"above": "private var emptyStateTitle: String {"
+},
+{
+"i": 970,
+"k": "text",
+"p": "Exercise",
+"s": "No Favorites",
+"in": [
+"ExerciseListView",
+"FoodItemListView"
+],
+"code": "case .favorites: return String(localized: \"No Favorites\")"
+},
+{
+"i": 971,
+"k": "text",
+"p": "Exercise",
+"s": "No Workouts",
+"in": [
+"ExerciseListView"
+],
+"code": "case .workouts: return String(localized: \"No Workouts\")"
+},
+{
+"i": 972,
+"k": "text",
+"p": "Exercise",
+"s": "No Items Available",
+"in": [
+"ExerciseListView",
+"FoodItemListView"
+],
+"code": "case .default: return String(localized: \"No Items Available\")"
+},
+{
+"i": 973,
+"k": "text",
+"p": "Exercise",
+"s": "Try a different search term or change the filter.",
+"in": [
+"ExerciseListView",
+"FoodItemListView"
+],
+"code": "if !vm.searchText.isEmpty { text = String(localized: \"Try a different search term or change the filter.\") }"
+},
+{
+"i": 974,
+"k": "text",
+"p": "Exercise",
+"s": "Tap the '+' button to add your first exercise.",
+"in": [
+"ExerciseListView"
+],
+"code": "case .all: text = String(localized: \"Tap the '+' button to add your first exercise.\")",
+"above": "let text: String"
+},
+{
+"i": 975,
+"k": "text",
+"p": "Exercise",
+"s": "You can add exercises to your favorites by swiping left on them.",
+"in": [
+"ExerciseListView"
+],
+"code": "case .favorites: text = String(localized: \"You can add exercises to your favorites by swiping left on them.\")"
+},
+{
+"i": 976,
+"k": "text",
+"p": "Exercise",
+"s": "Tap the '+' button to create your first workout.",
+"in": [
+"ExerciseListView"
+],
+"code": "case .workouts: text = String(localized: \"Tap the '+' button to create your first workout.\")"
+},
+{
+"i": 977,
+"k": "text",
+"p": "Exercise",
+"s": "This is the list of built-in exercises.",
+"in": [
+"ExerciseListView"
+],
+"code": "case .default: text = String(localized: \"This is the list of built-in exercises.\")"
+},
+{
+"i": 978,
+"k": "text",
+"p": "Exercise",
+"s": "Tap the '+' button to create your first training plan.",
+"in": [
+"ExerciseListView"
+],
+"code": "case .plans: text = String(localized: \"Tap the '+' button to create your first training plan.\")"
+},
+{
+"i": 979,
+"k": "text",
+"p": "Exercise",
+"s": "New Workout",
+"in": [
+"WorkoutEditorView"
+],
+"code": "workoutToEdit == nil ? String(localized: \"New Workout\") : String(localized: \"Edit Workout\")"
+},
+{
+"i": 980,
+"k": "placeholder",
+"p": "Exercise",
+"s": "Select a prompt...",
+"in": [
+"AIDailyMealGeneratorView",
+"AIDailyTrainingGeneratorView",
+"FoodItemMenuEditorView",
+"MealPlanEditorView"
+],
+"code": "prompt: String(localized: \"Select a prompt...\"),",
+"above": "let workoutPrompts = allPrompts.filter { $0.type == .workout }"
+},
+{
+"i": 981,
+"k": "text",
+"p": "Exercise",
+"s": "e.g., Full Body Strength",
+"in": [
+"WorkoutEditorView"
+],
+"code": "title: String(localized: \"e.g., Full Body Strength\"),",
+"above": "private var generalSection: some View {"
+},
+{
+"i": 982,
+"k": "label",
+"p": "Exercise",
+"s": "Total Duration",
+"in": [
+"WorkoutEditorView"
+],
+"code": "StyledLabeledPicker(label: String(localized: \"Total Duration\")) {"
+},
+{
+"i": 983,
+"k": "label",
+"p": "Exercise",
+"s": "Average MET Value",
+"in": [
+"WorkoutEditorView"
+],
+"code": "StyledLabeledPicker(label: String(localized: \"Average MET Value\")) {"
+},
+{
+"i": 984,
+"k": "placeholder",
+"p": "Exercise",
+"s": "Add exercises to see muscle groups",
+"in": [
+"WorkoutEditorView"
+],
+"code": "prompt: String(localized: \"Add exercises to see muscle groups\"),",
+"above": "let aggregatedIDs = Set(aggregatedMuscleGroups.map(\\.id))"
+},
+{
+"i": 985,
+"k": "text",
+"p": "Exercise",
+"s": "Level %lld",
+"in": [
+"PracticeEntryView",
+"WorkoutEditorView",
+"YogaExerciseViews"
+],
+"code": "item.level.map { String(localized: \"Level \\($0)\") },",
+"plural": true
+},
+{
+"i": 986,
+"k": "text",
+"p": "Exercise",
+"s": "%lld sec",
+"in": [
+"PracticeHistoryView",
+"WorkoutEditorView",
+"YogaExerciseViews"
+],
+"code": "item.durationSeconds.map { String(localized: \"\\($0) sec\") }",
+"plural": true
+},
+{
+"i": 987,
+"k": "text",
+"p": "Exercise",
+"s": "Workout name cannot be empty.",
+"in": [
+"WorkoutEditorView"
+],
+"code": "alertMessage = String(localized: \"Workout name cannot be empty.\")",
+"above": "let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)"
+},
+{
+"i": 988,
+"k": "text",
+"p": "Exercise",
+"s": "Failed to save workout: %@",
+"in": [
+"WorkoutEditorView"
+],
+"code": "alertMessage = String(localized: \"Failed to save workout: \\(error.localizedDescription)\")"
+},
+{
+"i": 989,
+"k": "text",
+"p": "Exercise",
+"s": "Please enter a name for the workout first.",
+"in": [
+"WorkoutEditorView"
+],
+"code": "alertMessage = String(localized: \"Please enter a name for the workout first.\")",
+"above": "let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)"
+},
+{
+"i": 990,
+"k": "text",
+"p": "Exercise",
+"s": "Could not start AI workout generation job.",
+"in": [
+"WorkoutEditorView"
+],
+"code": "alertMessage = String(localized: \"Could not start AI workout generation job.\")",
+"above": "if let newJob = aiManager.startWorkoutGeneration("
+},
+{
+"i": 991,
+"k": "text",
+"p": "Exercise",
+"s": "Could not find the completed AI job data.",
+"in": [
+"WorkoutEditorView"
+],
+"code": "alertMessage = String(localized: \"Could not find the completed AI job data.\")",
+"above": "let resultData = job.resultData else {"
+},
+{
+"i": 992,
+"k": "text",
+"p": "Exercise",
+"s": "Could not decode the generated workout data.",
+"in": [
+"WorkoutEditorView"
+],
+"code": "alertMessage = String(localized: \"Could not decode the generated workout data.\")",
+"above": "guard let payload = try? JSONDecoder().decode(ResolvedWorkoutResponseDTO.self, from: resultData) else {"
+},
+{
+"i": 993,
+"k": "text",
+"p": "Fitness",
+"s": "Reps",
+"in": [
+"ExerciseLogEntryView",
+"TrainingPlanExerciseRowView"
+],
+"code": "return String(localized: \"Reps\")",
+"above": "let unitLabel: String = {"
+},
+{
+"i": 994,
+"k": "text",
+"p": "Fitness",
+"s": "%lld hr %lld min",
+"in": [
+"HealthActivityCalorieRowView"
+],
+"code": "return String(localized: \"\\(hours) hr \\(minutes) min\")",
+"above": "let minutes = totalMinutes % 60"
+},
+{
+"i": 995,
+"k": "text",
+"p": "Fitness",
+"s": "%lld hr",
+"in": [
+"HealthActivityCalorieRowView"
+],
+"code": "return String(localized: \"\\(hours) hr\")",
+"above": "let minutes = totalMinutes % 60",
+"plural": true
+},
+{
+"i": 996,
+"k": "text",
+"p": "Fitness",
+"s": "No exercises have been logged for today.",
+"in": [
+"TotalBurnedDetailRingView"
+],
+"code": "let message = selectedMuscleGroup == nil ? String(localized: \"No exercises have been logged for today.\") : String(localized: \"No exercises found for the selecte"
+},
+{
+"i": 997,
+"k": "text",
+"p": "Fitness",
+"s": "No exercises found for the selected muscle group.",
+"in": [
+"TotalBurnedDetailRingView"
+],
+"code": "let message = selectedMuscleGroup == nil ? String(localized: \"No exercises have been logged for today.\") : String(localized: \"No exercises found for the selecte"
+},
+{
+"i": 998,
+"k": "text",
+"p": "Fitness",
+"s": "Apple Intelligence is turned off. Enable it in Settings to use AI workout generation.",
+"in": [
+"TrainingActionMenuView"
+],
+"code": "return String(localized: \"Apple Intelligence is turned off. Enable it in Settings to use AI workout generation.\")",
+"above": "case .appleIntelligenceNotEnabled:"
+},
+{
+"i": 999,
+"k": "text",
+"p": "Fitness",
+"s": "None",
+"in": [
+"FoodItemReceptEditorView",
+"MealEditorView",
+"ShoppingListDetailView",
+"TrainingEditorView"
+],
+"code": "return String(localized: \"None\")",
+"above": "private func formatReminder(_ minutes: Int) -> String {"
+},
+{
+"i": 1000,
+"k": "text",
+"p": "Fitness",
+"s": "%lld min before",
+"in": [
+"MealEditorView",
+"ShoppingListDetailView",
+"TrainingEditorView"
+],
+"code": "return String(localized: \"\\(minutes) min before\")",
+"above": "private func formatReminder(_ minutes: Int) -> String {",
+"plural": true
+},
+{
+"i": 1001,
+"k": "text",
+"p": "Fitness",
+"s": "Training Plan %@",
+"in": [
+"TrainingSelectionForPlanView"
+],
+"code": "let defaultPlanName = String(localized: \"Training Plan \\(dateString)\")"
+},
+{
+"i": 1002,
+"k": "text",
+"p": "Fitness",
+"s": "AM",
+"in": [
+"TrainingTimelineView"
+],
+"code": "ampm = String(localized: \"AM\")",
+"above": "let ampm: String"
+},
+{
+"i": 1003,
+"k": "text",
+"p": "Fitness",
+"s": "PM",
+"in": [
+"TrainingTimelineView"
+],
+"code": "ampm = effectiveHour < 12 ? String(localized: \"AM\") : String(localized: \"PM\")"
+},
+{
+"i": 1004,
+"k": "text",
+"p": "Fitness",
+"s": "this exercise",
+"in": [
+"TrainingView"
+],
+"code": "Text(\"Are you sure you want to delete '\\(exerciseToDelete?.name ?? String(localized: \"this exercise\"))' from your workout? This action cannot be undone.\")"
+},
+{
+"i": 1005,
+"k": "accessibility",
+"p": "Fitness",
+"s": "Daily exercise Ayurveda",
+"in": [
+"TrainingView"
+],
+"code": "accessibilityContext: String(localized: \"Daily exercise Ayurveda\"),"
+},
+{
+"i": 1006,
+"k": "text",
+"p": "Fitness",
+"s": "Add to Existing Plan",
+"in": [
+"NutritionsDetailView",
+"TrainingView"
+],
+"code": "title: String(localized: \"Add to Existing Plan\"),",
+"above": "case .pickExistingPlan:"
+},
+{
+"i": 1007,
+"k": "text",
+"p": "Fitness",
+"s": "Add from Training Plan",
+"in": [
+"TrainingView"
+],
+"code": "title: String(localized: \"Add from Training Plan\"),"
+},
+{
+"i": 1008,
+"k": "text",
+"p": "Fitness",
+"s": "Could not start AI training generation job.",
+"in": [
+"TrainingView"
+],
+"code": "alertMsg = String(localized: \"Could not start AI training generation job.\")",
+"above": "if let newJob = aiManager.startTrainingPlanGeneration("
+},
+{
+"i": 1009,
+"k": "text",
+"p": "Fitness",
+"s": "All workouts for this day already have exercises. Clear some if you want the AI to generate new ones.",
+"in": [
+"TrainingView"
+],
+"code": "alertMsg = String(localized: \"All workouts for this day already have exercises. Clear some if you want the AI to generate new ones.\")",
+"above": "let dayIndex = 1 // ако имаш реален индекс за деня – сложи него"
+},
+{
+"i": 1010,
+"k": "text",
+"p": "Fitness",
+"s": "🧘 Workout Reminder",
+"in": [
+"NotificationManager",
+"SettingsView",
+"TrainingView"
+],
+"code": "title: String(localized: \"🧘 Workout Reminder\"),",
+"above": "let newID = try await NotificationManager.shared.scheduleNotification("
+},
+{
+"i": 1011,
+"k": "text",
+"p": "Fitness",
+"s": "Time for your workout: %@!",
+"in": [
+"SettingsView",
+"TrainingView"
+],
+"code": "body: String(localized: \"Time for your workout: \\(training.name)!\"),"
+},
+{
+"i": 1012,
+"k": "text",
+"p": "Fitness",
+"s": "Apple Intelligence is turned off. Enable it in Settings to use AI.",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"MealPlanEditorView"
+],
+"code": "alertMsg = String(localized: \"Apple Intelligence is turned off. Enable it in Settings to use AI.\")",
+"above": "case .appleIntelligenceNotEnabled:"
+},
+{
+"i": 1013,
+"k": "text",
+"p": "Fitness",
+"s": "The model is downloading or preparing. Please try again shortly.",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"MealPlanEditorView"
+],
+"code": "alertMsg = String(localized: \"The model is downloading or preparing. Please try again shortly.\")",
+"above": "case .modelNotReady:"
+},
+{
+"i": 1014,
+"k": "text",
+"p": "Fitness",
+"s": "Apple Intelligence requires iOS 26 or newer.",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"MealPlanEditorView"
+],
+"code": "alertMsg = String(localized: \"Apple Intelligence requires iOS 26 or newer.\")",
+"above": "case .unavailableUnsupportedOS:"
+},
+{
+"i": 1015,
+"k": "text",
+"p": "Food",
+"s": "Celery",
+"in": [
+"Allergen"
+],
+"code": "case .celery: String(localized: \"Celery\")",
+"above": "public var displayName: String {"
+},
+{
+"i": 1016,
+"k": "text",
+"p": "Food",
+"s": "Cereals containing gluten",
+"in": [
+"Allergen"
+],
+"code": "case .cerealsContainingGluten: String(localized: \"Cereals containing gluten\")"
+},
+{
+"i": 1017,
+"k": "text",
+"p": "Food",
+"s": "Cereals containing gluten (barley)",
+"in": [
+"Allergen"
+],
+"code": "case .cerealsContainingGlutenBarley: String(localized: \"Cereals containing gluten (barley)\")"
+},
+{
+"i": 1018,
+"k": "text",
+"p": "Food",
+"s": "Cereals containing gluten (oats)",
+"in": [
+"Allergen"
+],
+"code": "case .cerealsContainingGlutenOats: String(localized: \"Cereals containing gluten (oats)\")"
+},
+{
+"i": 1019,
+"k": "text",
+"p": "Food",
+"s": "Cereals containing gluten (rye)",
+"in": [
+"Allergen"
+],
+"code": "case .cerealsContainingGlutenRye: String(localized: \"Cereals containing gluten (rye)\")"
+},
+{
+"i": 1020,
+"k": "text",
+"p": "Food",
+"s": "Crustaceans",
+"in": [
+"Allergen"
+],
+"code": "case .crustaceans: String(localized: \"Crustaceans\")"
+},
+{
+"i": 1021,
+"k": "text",
+"p": "Food",
+"s": "Eggs",
+"in": [
+"Allergen"
+],
+"code": "case .eggs: String(localized: \"Eggs\")",
+"above": "case .crustaceans: String(localized: \"Crustaceans\")"
+},
+{
+"i": 1022,
+"k": "text",
+"p": "Food",
+"s": "Fish",
+"in": [
+"Allergen"
+],
+"code": "case .fish: String(localized: \"Fish\")",
+"above": "case .eggs: String(localized: \"Eggs\")"
+},
+{
+"i": 1023,
+"k": "text",
+"p": "Food",
+"s": "Low Sodium",
+"in": [
+"Allergen"
+],
+"code": "case .lowSodium: String(localized: \"Low Sodium\")",
+"above": "case .fish: String(localized: \"Fish\")"
+},
+{
+"i": 1024,
+"k": "text",
+"p": "Food",
+"s": "Milk",
+"in": [
+"Allergen"
+],
+"code": "case .milk: String(localized: \"Milk\")",
+"above": "case .lowSodium: String(localized: \"Low Sodium\")"
+},
+{
+"i": 1025,
+"k": "text",
+"p": "Food",
+"s": "Molluscs",
+"in": [
+"Allergen"
+],
+"code": "case .molluscs: String(localized: \"Molluscs\")",
+"above": "case .milk: String(localized: \"Milk\")"
+},
+{
+"i": 1026,
+"k": "text",
+"p": "Food",
+"s": "Mustard",
+"in": [
+"Allergen"
+],
+"code": "case .mustard: String(localized: \"Mustard\")",
+"above": "case .molluscs: String(localized: \"Molluscs\")"
+},
+{
+"i": 1027,
+"k": "text",
+"p": "Food",
+"s": "Nuts",
+"in": [
+"Allergen"
+],
+"code": "case .nuts: String(localized: \"Nuts\")",
+"above": "case .mustard: String(localized: \"Mustard\")"
+},
+{
+"i": 1028,
+"k": "text",
+"p": "Food",
+"s": "Nuts (Brazil nuts)",
+"in": [
+"Allergen"
+],
+"code": "case .nutsBrazilNuts: String(localized: \"Nuts (Brazil nuts)\")"
+},
+{
+"i": 1029,
+"k": "text",
+"p": "Food",
+"s": "Nuts (almonds)",
+"in": [
+"Allergen"
+],
+"code": "case .nutsAlmonds: String(localized: \"Nuts (almonds)\")"
+},
+{
+"i": 1030,
+"k": "text",
+"p": "Food",
+"s": "Nuts (cashews)",
+"in": [
+"Allergen"
+],
+"code": "case .nutsCashews: String(localized: \"Nuts (cashews)\")"
+},
+{
+"i": 1031,
+"k": "text",
+"p": "Food",
+"s": "Nuts (chestnuts)",
+"in": [
+"Allergen"
+],
+"code": "case .nutsChestnuts: String(localized: \"Nuts (chestnuts)\")"
+},
+{
+"i": 1032,
+"k": "text",
+"p": "Food",
+"s": "Nuts (coconut)",
+"in": [
+"Allergen"
+],
+"code": "case .nutsCoconut: String(localized: \"Nuts (coconut)\")"
+},
+{
+"i": 1033,
+"k": "text",
+"p": "Food",
+"s": "Nuts (hazelnuts)",
+"in": [
+"Allergen"
+],
+"code": "case .nutsHazelnuts: String(localized: \"Nuts (hazelnuts)\")"
+},
+{
+"i": 1034,
+"k": "text",
+"p": "Food",
+"s": "Nuts (macadamia nuts)",
+"in": [
+"Allergen"
+],
+"code": "case .nutsMacadamiaNuts: String(localized: \"Nuts (macadamia nuts)\")"
+},
+{
+"i": 1035,
+"k": "text",
+"p": "Food",
+"s": "Nuts (pecans)",
+"in": [
+"Allergen"
+],
+"code": "case .nutsPecans: String(localized: \"Nuts (pecans)\")",
+"above": "case .nutsMacadamiaNuts: String(localized: \"Nuts (macadamia nuts)\")"
+},
+{
+"i": 1036,
+"k": "text",
+"p": "Food",
+"s": "Nuts (pine nuts)",
+"in": [
+"Allergen"
+],
+"code": "case .nutsPineNuts: String(localized: \"Nuts (pine nuts)\")"
+},
+{
+"i": 1037,
+"k": "text",
+"p": "Food",
+"s": "Nuts (pistachio nuts)",
+"in": [
+"Allergen"
+],
+"code": "case .nutsPistachioNuts: String(localized: \"Nuts (pistachio nuts)\")"
+},
+{
+"i": 1038,
+"k": "text",
+"p": "Food",
+"s": "Nuts (walnuts)",
+"in": [
+"Allergen"
+],
+"code": "case .nutsWalnuts: String(localized: \"Nuts (walnuts)\")"
+},
+{
+"i": 1039,
+"k": "text",
+"p": "Food",
+"s": "Peanuts",
+"in": [
+"Allergen"
+],
+"code": "case .peanuts: String(localized: \"Peanuts\")",
+"above": "case .nutsWalnuts: String(localized: \"Nuts (walnuts)\")"
+},
+{
+"i": 1040,
+"k": "text",
+"p": "Food",
+"s": "Sesame seeds",
+"in": [
+"Allergen"
+],
+"code": "case .sesameSeeds: String(localized: \"Sesame seeds\")"
+},
+{
+"i": 1041,
+"k": "text",
+"p": "Food",
+"s": "Soybeans",
+"in": [
+"Allergen"
+],
+"code": "case .soybeans: String(localized: \"Soybeans\")",
+"above": "case .sesameSeeds: String(localized: \"Sesame seeds\")"
+},
+{
+"i": 1042,
+"k": "text",
+"p": "Food",
+"s": "Sulphur dioxide/sulphites",
+"in": [
+"Allergen"
+],
+"code": "case .sulphurDioxideSulphites: String(localized: \"Sulphur dioxide/sulphites\")"
+},
+{
+"i": 1043,
+"k": "text",
+"p": "Food",
+"s": "Vit A",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"vitA\": String(localized: \"Vit A\"),",
+"above": "let vitaminLabelById: [String: String] = ["
+},
+{
+"i": 1044,
+"k": "text",
+"p": "Food",
+"s": "α-Carotene",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"caroteneAlpha\": String(localized: \"α-Carotene\"),",
+"above": "let vitaminLabelById: [String: String] = ["
+},
+{
+"i": 1045,
+"k": "text",
+"p": "Food",
+"s": "β-Carotene",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"caroteneBeta\": String(localized: \"β-Carotene\"),",
+"above": "let vitaminLabelById: [String: String] = ["
+},
+{
+"i": 1046,
+"k": "text",
+"p": "Food",
+"s": "β-Cryptoxanthin",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"cryptoxanthinBeta\": String(localized: \"β-Cryptoxanthin\"),"
+},
+{
+"i": 1047,
+"k": "text",
+"p": "Food",
+"s": "Lutein + Zeax.",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"luteinZeaxanthin\": String(localized: \"Lutein + Zeax.\"),"
+},
+{
+"i": 1048,
+"k": "text",
+"p": "Food",
+"s": "B1 Thiamin",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"vitB1\": String(localized: \"B1 Thiamin\"),",
+"above": "let vitaminLabelById: [String: String] = ["
+},
+{
+"i": 1049,
+"k": "text",
+"p": "Food",
+"s": "B2 Riboflavin",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"vitB2\": String(localized: \"B2 Riboflavin\"),",
+"above": "let vitaminLabelById: [String: String] = ["
+},
+{
+"i": 1050,
+"k": "text",
+"p": "Food",
+"s": "B3 Niacin",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"vitB3\": String(localized: \"B3 Niacin\"),",
+"above": "let vitaminLabelById: [String: String] = ["
+},
+{
+"i": 1051,
+"k": "text",
+"p": "Food",
+"s": "B5 Pant. acid",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"vitB5\": String(localized: \"B5 Pant. acid\"),"
+},
+{
+"i": 1052,
+"k": "text",
+"p": "Food",
+"s": "Folate food",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"folateFood\": String(localized: \"Folate food\"),"
+},
+{
+"i": 1053,
+"k": "text",
+"p": "Food",
+"s": "Folate total",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"folateTotal\": String(localized: \"Folate total\"),"
+},
+{
+"i": 1054,
+"k": "text",
+"p": "Food",
+"s": "Vit C",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"vitC\": String(localized: \"Vit C\"),"
+},
+{
+"i": 1055,
+"k": "text",
+"p": "Food",
+"s": "Vit D",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"vitD\": String(localized: \"Vit D\"),"
+},
+{
+"i": 1056,
+"k": "text",
+"p": "Food",
+"s": "Vit E",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"vitE\": String(localized: \"Vit E\"),"
+},
+{
+"i": 1057,
+"k": "text",
+"p": "Food",
+"s": "Vit K",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"vitK\": String(localized: \"Vit K\"),"
+},
+{
+"i": 1058,
+"k": "text",
+"p": "Food",
+"s": "Sat. fat",
+"in": [
+"FoodItemEditorView",
+"NutrientForms"
+],
+"code": "\"totalSaturated\": String(localized: \"Sat. fat\"),"
+},
+{
+"i": 1059,
+"k": "text",
+"p": "Food",
+"s": "Mono-unsat.",
+"in": [
+"FoodItemEditorView",
+"NutrientForms"
+],
+"code": "\"totalMonounsaturated\": String(localized: \"Mono-unsat.\"),"
+},
+{
+"i": 1060,
+"k": "text",
+"p": "Food",
+"s": "Poly-unsat.",
+"in": [
+"FoodItemEditorView",
+"NutrientForms"
+],
+"code": "\"totalPolyunsaturated\": String(localized: \"Poly-unsat.\"),"
+},
+{
+"i": 1061,
+"k": "text",
+"p": "Food",
+"s": "Trans fat",
+"in": [
+"FoodItemEditorView",
+"NutrientForms"
+],
+"code": "\"totalTrans\": String(localized: \"Trans fat\"),",
+"above": "let lipidLabelById: [String: String] = ["
+},
+{
+"i": 1062,
+"k": "text",
+"p": "Food",
+"s": "Trans monoenoic",
+"in": [
+"FoodItemEditorView",
+"NutrientForms"
+],
+"code": "\"totalTransMonoenoic\": String(localized: \"Trans monoenoic\"),"
+},
+{
+"i": 1063,
+"k": "text",
+"p": "Food",
+"s": "Trans polyenoic",
+"in": [
+"FoodItemEditorView",
+"NutrientForms"
+],
+"code": "\"totalTransPolyenoic\": String(localized: \"Trans polyenoic\"),"
+},
+{
+"i": 1064,
+"k": "text",
+"p": "Food",
+"s": "Alcohol",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"alcoholEthyl\": String(localized: \"Alcohol\"),",
+"above": "let otherLabelById: [String: String] = ["
+},
+{
+"i": 1065,
+"k": "text",
+"p": "Food",
+"s": "Caffeine",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"caffeine\": String(localized: \"Caffeine\"),",
+"above": "let otherLabelById: [String: String] = ["
+},
+{
+"i": 1066,
+"k": "text",
+"p": "Food",
+"s": "Theobromine",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"theobromine\": String(localized: \"Theobromine\"),",
+"above": "let otherLabelById: [String: String] = ["
+},
+{
+"i": 1067,
+"k": "text",
+"p": "Food",
+"s": "Cholesterol",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"cholesterol\": String(localized: \"Cholesterol\"),",
+"above": "let otherLabelById: [String: String] = ["
+},
+{
+"i": 1068,
+"k": "text",
+"p": "Food",
+"s": "Ash",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"ash\": String(localized: \"Ash\"),",
+"above": "let otherLabelById: [String: String] = ["
+},
+{
+"i": 1069,
+"k": "text",
+"p": "Food",
+"s": "Betaine",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"betaine\": String(localized: \"Betaine\"),",
+"above": "let otherLabelById: [String: String] = ["
+},
+{
+"i": 1070,
+"k": "text",
+"p": "Food",
+"s": "Alanine",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"alanine\":String(localized: \"Alanine\"),\"arginine\":String(localized: \"Arginine\"),\"asparticAcid\":String(localized: \"Aspartic Acid\"),\"cystine\":String(localized: \"C"
+},
+{
+"i": 1071,
+"k": "text",
+"p": "Food",
+"s": "Arginine",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"alanine\":String(localized: \"Alanine\"),\"arginine\":String(localized: \"Arginine\"),\"asparticAcid\":String(localized: \"Aspartic Acid\"),\"cystine\":String(localized: \"C"
+},
+{
+"i": 1072,
+"k": "text",
+"p": "Food",
+"s": "Aspartic Acid",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"alanine\":String(localized: \"Alanine\"),\"arginine\":String(localized: \"Arginine\"),\"asparticAcid\":String(localized: \"Aspartic Acid\"),\"cystine\":String(localized: \"C"
+},
+{
+"i": 1073,
+"k": "text",
+"p": "Food",
+"s": "Cystine",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"alanine\":String(localized: \"Alanine\"),\"arginine\":String(localized: \"Arginine\"),\"asparticAcid\":String(localized: \"Aspartic Acid\"),\"cystine\":String(localized: \"C"
+},
+{
+"i": 1074,
+"k": "text",
+"p": "Food",
+"s": "Glutamic Acid",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"glutamicAcid\":String(localized: \"Glutamic Acid\"),\"glycine\":String(localized: \"Glycine\"),\"histidine\":String(localized: \"Histidine\"),\"isoleucine\":String(localize"
+},
+{
+"i": 1075,
+"k": "text",
+"p": "Food",
+"s": "Glycine",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"glutamicAcid\":String(localized: \"Glutamic Acid\"),\"glycine\":String(localized: \"Glycine\"),\"histidine\":String(localized: \"Histidine\"),\"isoleucine\":String(localize"
+},
+{
+"i": 1076,
+"k": "text",
+"p": "Food",
+"s": "Histidine",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"glutamicAcid\":String(localized: \"Glutamic Acid\"),\"glycine\":String(localized: \"Glycine\"),\"histidine\":String(localized: \"Histidine\"),\"isoleucine\":String(localize"
+},
+{
+"i": 1077,
+"k": "text",
+"p": "Food",
+"s": "Isoleucine",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"glutamicAcid\":String(localized: \"Glutamic Acid\"),\"glycine\":String(localized: \"Glycine\"),\"histidine\":String(localized: \"Histidine\"),\"isoleucine\":String(localize"
+},
+{
+"i": 1078,
+"k": "text",
+"p": "Food",
+"s": "Leucine",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"leucine\":String(localized: \"Leucine\"),\"lysine\":String(localized: \"Lysine\"),\"methionine\":String(localized: \"Methionine\"),\"phenylalanine\":String(localized: \"Phen"
+},
+{
+"i": 1079,
+"k": "text",
+"p": "Food",
+"s": "Lysine",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"leucine\":String(localized: \"Leucine\"),\"lysine\":String(localized: \"Lysine\"),\"methionine\":String(localized: \"Methionine\"),\"phenylalanine\":String(localized: \"Phen"
+},
+{
+"i": 1080,
+"k": "text",
+"p": "Food",
+"s": "Methionine",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"leucine\":String(localized: \"Leucine\"),\"lysine\":String(localized: \"Lysine\"),\"methionine\":String(localized: \"Methionine\"),\"phenylalanine\":String(localized: \"Phen"
+},
+{
+"i": 1081,
+"k": "text",
+"p": "Food",
+"s": "Phenylalanine",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"leucine\":String(localized: \"Leucine\"),\"lysine\":String(localized: \"Lysine\"),\"methionine\":String(localized: \"Methionine\"),\"phenylalanine\":String(localized: \"Phen"
+},
+{
+"i": 1082,
+"k": "text",
+"p": "Food",
+"s": "Proline",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"proline\":String(localized: \"Proline\"),\"threonine\":String(localized: \"Threonine\"),\"tryptophan\":String(localized: \"Tryptophan\"),\"tyrosine\":String(localized: \"Tyr"
+},
+{
+"i": 1083,
+"k": "text",
+"p": "Food",
+"s": "Threonine",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"proline\":String(localized: \"Proline\"),\"threonine\":String(localized: \"Threonine\"),\"tryptophan\":String(localized: \"Tryptophan\"),\"tyrosine\":String(localized: \"Tyr"
+},
+{
+"i": 1084,
+"k": "text",
+"p": "Food",
+"s": "Tryptophan",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"proline\":String(localized: \"Proline\"),\"threonine\":String(localized: \"Threonine\"),\"tryptophan\":String(localized: \"Tryptophan\"),\"tyrosine\":String(localized: \"Tyr"
+},
+{
+"i": 1085,
+"k": "text",
+"p": "Food",
+"s": "Tyrosine",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"proline\":String(localized: \"Proline\"),\"threonine\":String(localized: \"Threonine\"),\"tryptophan\":String(localized: \"Tryptophan\"),\"tyrosine\":String(localized: \"Tyr"
+},
+{
+"i": 1086,
+"k": "text",
+"p": "Food",
+"s": "Valine",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"valine\":String(localized: \"Valine\"),\"serine\":String(localized: \"Serine\"),\"hydroxyproline\":String(localized: \"Hydroxyproline\")"
+},
+{
+"i": 1087,
+"k": "text",
+"p": "Food",
+"s": "Serine",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"valine\":String(localized: \"Valine\"),\"serine\":String(localized: \"Serine\"),\"hydroxyproline\":String(localized: \"Hydroxyproline\")"
+},
+{
+"i": 1088,
+"k": "text",
+"p": "Food",
+"s": "Hydroxyproline",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"valine\":String(localized: \"Valine\"),\"serine\":String(localized: \"Serine\"),\"hydroxyproline\":String(localized: \"Hydroxyproline\")"
+},
+{
+"i": 1089,
+"k": "text",
+"p": "Food",
+"s": "Starch",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"starch\":String(localized: \"Starch\"),\"sucrose\":String(localized: \"Sucrose\"),\"glucose\":String(localized: \"Glucose\"),\"fructose\":String(localized: \"Fructose\"),"
+},
+{
+"i": 1090,
+"k": "text",
+"p": "Food",
+"s": "Sucrose",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"starch\":String(localized: \"Starch\"),\"sucrose\":String(localized: \"Sucrose\"),\"glucose\":String(localized: \"Glucose\"),\"fructose\":String(localized: \"Fructose\"),"
+},
+{
+"i": 1091,
+"k": "text",
+"p": "Food",
+"s": "Glucose",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"starch\":String(localized: \"Starch\"),\"sucrose\":String(localized: \"Sucrose\"),\"glucose\":String(localized: \"Glucose\"),\"fructose\":String(localized: \"Fructose\"),"
+},
+{
+"i": 1092,
+"k": "text",
+"p": "Food",
+"s": "Fructose",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"starch\":String(localized: \"Starch\"),\"sucrose\":String(localized: \"Sucrose\"),\"glucose\":String(localized: \"Glucose\"),\"fructose\":String(localized: \"Fructose\"),"
+},
+{
+"i": 1093,
+"k": "text",
+"p": "Food",
+"s": "Lactose",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"lactose\":String(localized: \"Lactose\"),\"maltose\":String(localized: \"Maltose\"),\"galactose\":String(localized: \"Galactose\")"
+},
+{
+"i": 1094,
+"k": "text",
+"p": "Food",
+"s": "Maltose",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"lactose\":String(localized: \"Lactose\"),\"maltose\":String(localized: \"Maltose\"),\"galactose\":String(localized: \"Galactose\")"
+},
+{
+"i": 1095,
+"k": "text",
+"p": "Food",
+"s": "Galactose",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"lactose\":String(localized: \"Lactose\"),\"maltose\":String(localized: \"Maltose\"),\"galactose\":String(localized: \"Galactose\")"
+},
+{
+"i": 1096,
+"k": "text",
+"p": "Food",
+"s": "Phytosterols",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"phytosterols\":String(localized: \"Phytosterols\"),\"betaSitosterol\":String(localized: \"Beta-Sitosterol\"),"
+},
+{
+"i": 1097,
+"k": "text",
+"p": "Food",
+"s": "Beta-Sitosterol",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"phytosterols\":String(localized: \"Phytosterols\"),\"betaSitosterol\":String(localized: \"Beta-Sitosterol\"),"
+},
+{
+"i": 1098,
+"k": "text",
+"p": "Food",
+"s": "Campesterol",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"campesterol\":String(localized: \"Campesterol\"),\"stigmasterol\":String(localized: \"Stigmasterol\")"
+},
+{
+"i": 1099,
+"k": "text",
+"p": "Food",
+"s": "Stigmasterol",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "\"campesterol\":String(localized: \"Campesterol\"),\"stigmasterol\":String(localized: \"Stigmasterol\")"
+},
+{
+"i": 1100,
+"k": "text",
+"p": "Food",
+"s": "%@ — non-portioned",
+"in": [
+"FoodItemDetailView"
+],
+"code": "? String(localized: \"\\(name) — non-portioned\")",
+"above": "let notes = ingredient.inedibleContraindications"
+},
+{
+"i": 1101,
+"k": "text",
+"p": "Food",
+"s": "%@ — non-portioned (%@)",
+"in": [
+"FoodItemDetailView"
+],
+"code": ": String(localized: \"\\(name) — non-portioned (\\(notes))\")",
+"above": "let notes = ingredient.inedibleContraindications"
+},
+{
+"i": 1102,
+"k": "text",
+"p": "Food",
+"s": "Contains: ",
+"in": [
+"FoodItemDetailView"
+],
+"code": "var text = String(localized: \"Contains: \") + ingredientsStrings.joined(separator: \", \")"
+},
+{
+"i": 1103,
+"k": "text",
+"p": "Food",
+"s": "Macronutrients",
+"in": [
+"FoodItemDetailView",
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "SectionView(title: String(localized: \"Macronutrients\")) {"
+},
+{
+"i": 1104,
+"k": "text",
+"p": "Food",
+"s": "Ingredients",
+"in": [
+"FoodItemDetailView",
+"FoodItemReceptEditorView"
+],
+"code": "SectionView(title: String(localized: \"Ingredients\")) {"
+},
+{
+"i": 1105,
+"k": "text",
+"p": "Food",
+"s": "Lipids",
+"in": [
+"FoodItemDetailView",
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "return nutrientChipSectionView(title: String(localized: \"Lipids\"), nutrients: items)"
+},
+{
+"i": 1106,
+"k": "text",
+"p": "Food",
+"s": "Amino Acids",
+"in": [
+"FoodItemDetailView",
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "return nutrientChipSectionView(title: String(localized: \"Amino Acids\"), nutrients: items)"
+},
+{
+"i": 1107,
+"k": "text",
+"p": "Food",
+"s": "Carbohydrate Details",
+"in": [
+"FoodItemDetailView",
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "return nutrientChipSectionView(title: String(localized: \"Carbohydrate Details\"), nutrients: items)"
+},
+{
+"i": 1108,
+"k": "text",
+"p": "Food",
+"s": "Sterols",
+"in": [
+"FoodItemDetailView",
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "return nutrientChipSectionView(title: String(localized: \"Sterols\"), nutrients: items)"
+},
+{
+"i": 1109,
+"k": "text",
+"p": "Food",
+"s": "Other Compounds",
+"in": [
+"FoodItemDetailView"
+],
+"code": "return nutrientChipSectionView(title: String(localized: \"Other Compounds\"), nutrients: items)"
+},
+{
+"i": 1110,
+"k": "text",
+"p": "Food",
+"s": "Carbs",
+"in": [
+"FoodItemDetailView",
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "legendItem(label: String(localized: \"Carbs\"), value: carbs, color: MacroNutrientPalette.carbohydrates)"
+},
+{
+"i": 1111,
+"k": "label",
+"p": "Food",
+"s": "Name",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"ProfileEditorView"
+],
+"code": "StyledLabeledPicker(label: String(localized: \"Name\"), isRequired: true) {"
+},
+{
+"i": 1112,
+"k": "text",
+"p": "Food",
+"s": "Other",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "collapsibleHeader(String(localized: \"Other\"), isExpanded: $showOther)"
+},
+{
+"i": 1113,
+"k": "text",
+"p": "Food",
+"s": "Please enter the Weight / serving (%@).",
+"in": [
+"FoodItemEditorView"
+],
+"code": "alertMsg = String(localized: \"Please enter the Weight / serving (\\(servingUnit)).\")"
+},
+{
+"i": 1114,
+"k": "text",
+"p": "Food",
+"s": "The sum of carbohydrates, protein, and fat (%.1f g) cannot exceed the total serving weight (%.1f g).",
+"in": [
+"FoodItemEditorView"
+],
+"code": "format: String(localized: \"The sum of carbohydrates, protein, and fat (%.1f g) cannot exceed the total serving weight (%.1f g).\"),",
+"above": "let macroSum = carbs + protein + fat"
+},
+{
+"i": 1115,
+"k": "text",
+"p": "Food",
+"s": "Your local database appears to be corrupted (SQLite code 11).",
+"in": [
+"FoodItemEditorView"
+],
+"code": "alertMsg = String(localized: \"Your local database appears to be corrupted (SQLite code 11).\")",
+"above": "let nsErr = error as NSError"
+},
+{
+"i": 1116,
+"k": "text",
+"p": "Food",
+"s": "Please enter a name for the food first.",
+"in": [
+"FoodItemEditorView"
+],
+"code": "alertMsg = String(localized: \"Please enter a name for the food first.\")"
+},
+{
+"i": 1117,
+"k": "text",
+"p": "Food",
+"s": "No Foods",
+"in": [
+"FoodItemListView"
+],
+"code": "case .foods: return String(localized: \"No Foods\")"
+},
+{
+"i": 1118,
+"k": "text",
+"p": "Food",
+"s": "No Recipes",
+"in": [
+"FoodItemListView"
+],
+"code": "case .recipes: return String(localized: \"No Recipes\")"
+},
+{
+"i": 1119,
+"k": "text",
+"p": "Food",
+"s": "No Menus",
+"in": [
+"FoodItemListView"
+],
+"code": "case .menus: return String(localized: \"No Menus\")"
+},
+{
+"i": 1120,
+"k": "text",
+"p": "Food",
+"s": "Tap the '+' button to add your first food.",
+"in": [
+"FoodItemListView"
+],
+"code": "case .foods: text = String(localized: \"Tap the '+' button to add your first food.\")"
+},
+{
+"i": 1121,
+"k": "text",
+"p": "Food",
+"s": "Tap the '+' button to add your first recipe.",
+"in": [
+"FoodItemListView"
+],
+"code": "case .recipes: text = String(localized: \"Tap the '+' button to add your first recipe.\")"
+},
+{
+"i": 1122,
+"k": "text",
+"p": "Food",
+"s": "Tap the '+' button to add your first menu.",
+"in": [
+"FoodItemListView"
+],
+"code": "case .menus: text = String(localized: \"Tap the '+' button to add your first menu.\")"
+},
+{
+"i": 1123,
+"k": "text",
+"p": "Food",
+"s": "Tap the '+' button to create your first meal plan.",
+"in": [
+"FoodItemListView"
+],
+"code": "case .plans: text = String(localized: \"Tap the '+' button to create your first meal plan.\")"
+},
+{
+"i": 1124,
+"k": "text",
+"p": "Food",
+"s": "You can add items to your favorites by swiping left on them.",
+"in": [
+"FoodItemListView"
+],
+"code": "case .favorites: text = String(localized: \"You can add items to your favorites by swiping left on them.\")"
+},
+{
+"i": 1125,
+"k": "text",
+"p": "Food",
+"s": "Select a filter like 'Foods' or 'Recipes' to get started.",
+"in": [
+"FoodItemListView"
+],
+"code": "case .default: text = String(localized: \"Select a filter like 'Foods' or 'Recipes' to get started.\")"
+},
+{
+"i": 1126,
+"k": "text",
+"p": "Food",
+"s": "Add Menu",
+"in": [
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "let title = (food == nil) ? String(localized: \"Add Menu\") : String(localized: \"Edit Menu\")"
+},
+{
+"i": 1127,
+"k": "text",
+"p": "Food",
+"s": "Edit Menu",
+"in": [
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "let title = (food == nil) ? String(localized: \"Add Menu\") : String(localized: \"Edit Menu\")"
+},
+{
+"i": 1128,
+"k": "text",
+"p": "Food",
+"s": "Menu Name",
+"in": [
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "let prompt = String(localized: \"Menu Name\")",
+"above": "private var basicSection: some View {"
+},
+{
+"i": 1129,
+"k": "label",
+"p": "Food",
+"s": "Prep time (min)",
+"in": [
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "StyledLabeledPicker(label: String(localized: \"Prep time (min)\")) {"
+},
+{
+"i": 1130,
+"k": "text",
+"p": "Food",
+"s": "Minimum age is determined by: %@ (%lld months).",
+"in": [
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "return String(localized: \"Minimum age is determined by: \\(names[0]) (\\(calculatedMinAge) months).\")"
+},
+{
+"i": 1131,
+"k": "text",
+"p": "Food",
+"s": "Minimum age is determined by: %@ and %@ (%lld months).",
+"in": [
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "return String(localized: \"Minimum age is determined by: \\(names[0]) and \\(names[1]) (\\(calculatedMinAge) months).\")"
+},
+{
+"i": 1132,
+"k": "text",
+"p": "Food",
+"s": "Minimum age is determined by: %@ and %lld more (%lld months).",
+"in": [
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "return String(localized: \"Minimum age is determined by: \\(firstTwo) and \\(names.count - 2) more (\\(calculatedMinAge) months).\")"
+},
+{
+"i": 1133,
+"k": "text",
+"p": "Food",
+"s": "Foods in Menu",
+"in": [
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "let title = String(localized: \"Foods in Menu\")",
+"above": "private var ingredientsSection: some View {"
+},
+{
+"i": 1134,
+"k": "text",
+"p": "Food",
+"s": "Could not start AI menu generation job.",
+"in": [
+"FoodItemMenuEditorView"
+],
+"code": "alertMsg = String(localized: \"Could not start AI menu generation job.\")",
+"above": "if let newJob = aiManager.startMenuGeneration("
+},
+{
+"i": 1135,
+"k": "text",
+"p": "Food",
+"s": "AI menu generation requires iOS 26 or newer.",
+"in": [
+"FoodItemMenuEditorView"
+],
+"code": "alertMsg = String(localized: \"AI menu generation requires iOS 26 or newer.\")"
+},
+{
+"i": 1136,
+"k": "text",
+"p": "Food",
+"s": "A profile is required for AI generation.",
+"in": [
+"FoodItemMenuEditorView"
+],
+"code": "alertMsg = String(localized: \"A profile is required for AI generation.\")",
+"above": "guard let profile = self.profile else {"
+},
+{
+"i": 1137,
+"k": "text",
+"p": "Food",
+"s": "Could not find completed job data for the menu.",
+"in": [
+"FoodItemMenuEditorView"
+],
+"code": "alertMsg = String(localized: \"Could not find completed job data for the menu.\")",
+"above": "let resultData = job.resultData else {"
+},
+{
+"i": 1138,
+"k": "text",
+"p": "Food",
+"s": "Could not decode the generated menu data.",
+"in": [
+"FoodItemMenuEditorView"
+],
+"code": "alertMsg = String(localized: \"Could not decode the generated menu data.\")",
+"above": "guard let payload = try? decoder.decode(ResolvedRecipeResponseDTO.self, from: resultData) else {"
+},
+{
+"i": 1139,
+"k": "text",
+"p": "Food",
+"s": "Add Recipe",
+"in": [
+"FoodItemReceptEditorView"
+],
+"code": "let title = food?.isMenu == true ? (food == nil ? String(localized: \"Add Menu\") : String(localized: \"Edit Menu\")) : (food == nil ? String(localized: \"Add Recipe"
+},
+{
+"i": 1140,
+"k": "text",
+"p": "Food",
+"s": "Edit Recipe",
+"in": [
+"FoodItemReceptEditorView"
+],
+"code": "let title = food?.isMenu == true ? (food == nil ? String(localized: \"Add Menu\") : String(localized: \"Edit Menu\")) : (food == nil ? String(localized: \"Add Recipe"
+},
+{
+"i": 1141,
+"k": "text",
+"p": "Food",
+"s": "Recipe Name",
+"in": [
+"FoodItemReceptEditorView"
+],
+"code": "let prompt = food?.isMenu == true ? String(localized: \"Menu Name\") : String(localized: \"Recipe Name\")"
+},
+{
+"i": 1142,
+"k": "text",
+"p": "Food",
+"s": "Could not start AI recipe generation job.",
+"in": [
+"FoodItemReceptEditorView"
+],
+"code": "alertMsg = String(localized: \"Could not start AI recipe generation job.\")",
+"above": "if let newJob = aiManager.startRecipeGeneration("
+},
+{
+"i": 1143,
+"k": "text",
+"p": "Food",
+"s": "AI recipe generation requires iOS 26 or newer.",
+"in": [
+"FoodItemReceptEditorView"
+],
+"code": "alertMsg = String(localized: \"AI recipe generation requires iOS 26 or newer.\")"
+},
+{
+"i": 1144,
+"k": "text",
+"p": "Food",
+"s": "Please enter a name for the recipe first.",
+"in": [
+"FoodItemReceptEditorView"
+],
+"code": "alertMsg = String(localized: \"Please enter a name for the recipe first.\")"
+},
+{
+"i": 1145,
+"k": "text",
+"p": "Food",
+"s": "A profile is required for AI recipe generation.",
+"in": [
+"FoodItemReceptEditorView"
+],
+"code": "alertMsg = String(localized: \"A profile is required for AI recipe generation.\")",
+"above": "guard let profile = self.profile else {"
+},
+{
+"i": 1146,
+"k": "text",
+"p": "Food",
+"s": "Could not decode the generated recipe data.",
+"in": [
+"FoodItemReceptEditorView"
+],
+"code": "alertMsg = String(localized: \"Could not decode the generated recipe data.\")",
+"above": "guard let payload = try? decoder.decode(ResolvedRecipeResponseDTO.self, from: resultData) else {"
+},
+{
+"i": 1147,
+"k": "text",
+"p": "Food",
+"s": "Top Nutrients",
+"in": [
+"FoodItemRowView"
+],
+"code": "ChipScrollView(title: String(localized: \"Top Nutrients\"), items: nutrients, textColor: effectManager.currentGlobalAccentColor)"
+},
+{
+"i": 1148,
+"k": "text",
+"p": "Food",
+"s": "Prot",
+"in": [
+"SearchResultRow"
+],
+"code": "macroText(for: .protein, label: String(localized: \"Prot\"))"
+},
+{
+"i": 1149,
+"k": "text",
+"p": "Food",
+"s": "Carb",
+"in": [
+"SearchResultRow"
+],
+"code": "macroText(for: .carbs, label: String(localized: \"Carb\"))"
+}
+]

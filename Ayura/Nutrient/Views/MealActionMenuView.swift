@@ -31,15 +31,15 @@ struct MealActionMenuView: View {
         case .available:
             return ""
         case .deviceNotEligible:
-            return "This device doesn’t support Apple Intelligence."
+            return String(localized: "This device doesn’t support Apple Intelligence.")
         case .appleIntelligenceNotEnabled:
-            return "Apple Intelligence is turned off. Enable it in Settings to use AI meal generation."
+            return String(localized: "Apple Intelligence is turned off. Enable it in Settings to use AI meal generation.")
         case .modelNotReady:
-            return "The model is downloading or preparing. Please try again in a bit."
+            return String(localized: "The model is downloading or preparing. Please try again in a bit.")
         case .unavailableUnsupportedOS:
-            return "Apple Intelligence requires iOS 26 or newer. Update your OS to use this feature."
+            return String(localized: "Apple Intelligence requires iOS 26 or newer. Update your OS to use this feature.")
         case .unavailableOther:
-            return "Apple Intelligence is currently unavailable for an unknown reason."
+            return String(localized: "Apple Intelligence is currently unavailable for an unknown reason.")
         }
     }
 

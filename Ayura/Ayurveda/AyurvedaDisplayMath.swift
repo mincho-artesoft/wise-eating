@@ -64,15 +64,15 @@ public enum AyurvedaDisplayMath {
   public static func effectLabel(_ value: Int) -> String {
     switch value {
     case ...(-2):
-      return "strongly pacifies"
+      return String(localized: "strongly pacifies")
     case -1:
-      return "pacifies"
+      return String(localized: "pacifies")
     case 0:
-      return "neutral"
+      return String(localized: "neutral")
     case 1:
-      return "aggravates"
+      return String(localized: "aggravates")
     default:
-      return "strongly aggravates"
+      return String(localized: "strongly aggravates")
     }
   }
 

@@ -30,19 +30,19 @@ struct RecipeNutritionPanelView: View {
 
           if display.status != "none" {
             nutrientSection(
-              "Energy & Macronutrients",
+              String(localized: "Energy & Macronutrients"),
               definitions: RecipeNutrientDefinition.macronutrients,
               display: display,
               tint: Color(hex: "4A86E8")
             )
             nutrientSection(
-              "Vitamins",
+              String(localized: "Vitamins"),
               definitions: RecipeNutrientDefinition.vitamins,
               display: display,
               tint: Color(hex: "FCC934")
             )
             nutrientSection(
-              "Minerals",
+              String(localized: "Minerals"),
               definitions: RecipeNutrientDefinition.minerals,
               display: display,
               tint: Color(hex: "34A853")
@@ -87,7 +87,7 @@ struct RecipeNutritionPanelView: View {
         )
 
       if !display.missingIngredients.isEmpty {
-        Text("Missing nutrition: " + display.missingIngredients.joined(separator: ", "))
+        Text(String(localized: "Missing nutrition: ") + display.missingIngredients.joined(separator: ", "))
           .font(.caption)
           .foregroundStyle(.orange)
           .fixedSize(horizontal: false, vertical: true)
@@ -180,9 +180,9 @@ private enum RecipeNutritionBasis: String, CaseIterable, Identifiable {
   var title: String {
     switch self {
     case .perServing:
-      return "Per serving"
+      return String(localized: "Per serving")
     case .per100g:
-      return "Per 100 g"
+      return String(localized: "Per 100 g")
     }
   }
 }
@@ -199,11 +199,11 @@ private struct RecipeNutritionDisplay {
   var statusLabel: String {
     switch status {
     case "full":
-      return "Full ingredient coverage"
+      return String(localized: "Full ingredient coverage")
     case "estimated":
-      return "Estimated"
+      return String(localized: "Estimated")
     default:
-      return "Unavailable"
+      return String(localized: "Unavailable")
     }
   }
 
@@ -219,14 +219,14 @@ private struct RecipeNutritionDisplay {
   }
 
   var servingSummary: String {
-    "\(servings) servings · \(totalWeightG.clean) g total"
+    String(localized: "\(servings) servings · \(totalWeightG.clean) g total")
   }
 
   var explanation: String {
     if status == "none" {
-      return "No ingredient nutrition could be resolved."
+      return String(localized: "No ingredient nutrition could be resolved.")
     }
-    return "Calculated from USDA-bound ingredients. Unavailable USDA nutrient observations are shown as —."
+    return String(localized: "Calculated from USDA-bound ingredients. Unavailable USDA nutrient observations are shown as —.")
   }
 
   func values(for basis: RecipeNutritionBasis) -> [String: Double] {
@@ -247,51 +247,51 @@ private struct RecipeNutrientDefinition: Identifiable {
   var id: String { key }
 
   static let macronutrients = [
-    RecipeNutrientDefinition(key: "energyKcal", label: "Energy", defaultUnit: "kcal"),
-    RecipeNutrientDefinition(key: "carbohydrates", label: "Carbohydrates", defaultUnit: "g"),
-    RecipeNutrientDefinition(key: "protein", label: "Protein", defaultUnit: "g"),
-    RecipeNutrientDefinition(key: "fat", label: "Fat", defaultUnit: "g"),
-    RecipeNutrientDefinition(key: "fiber", label: "Fiber", defaultUnit: "g"),
-    RecipeNutrientDefinition(key: "totalSugars", label: "Total sugars", defaultUnit: "g"),
+    RecipeNutrientDefinition(key: "energyKcal", label: String(localized: "Energy"), defaultUnit: "kcal"),
+    RecipeNutrientDefinition(key: "carbohydrates", label: String(localized: "Carbohydrates"), defaultUnit: "g"),
+    RecipeNutrientDefinition(key: "protein", label: String(localized: "Protein"), defaultUnit: "g"),
+    RecipeNutrientDefinition(key: "fat", label: String(localized: "Fat"), defaultUnit: "g"),
+    RecipeNutrientDefinition(key: "fiber", label: String(localized: "Fiber"), defaultUnit: "g"),
+    RecipeNutrientDefinition(key: "totalSugars", label: String(localized: "Total sugars"), defaultUnit: "g"),
   ]
 
   static let vitamins = [
-    RecipeNutrientDefinition(key: "vitaminA_RAE", label: "Vitamin A RAE", defaultUnit: "µg"),
-    RecipeNutrientDefinition(key: "retinol", label: "Retinol", defaultUnit: "µg"),
-    RecipeNutrientDefinition(key: "caroteneAlpha", label: "Alpha-carotene", defaultUnit: "µg"),
-    RecipeNutrientDefinition(key: "caroteneBeta", label: "Beta-carotene", defaultUnit: "µg"),
-    RecipeNutrientDefinition(key: "cryptoxanthinBeta", label: "Beta-cryptoxanthin", defaultUnit: "µg"),
-    RecipeNutrientDefinition(key: "luteinZeaxanthin", label: "Lutein + zeaxanthin", defaultUnit: "µg"),
-    RecipeNutrientDefinition(key: "lycopene", label: "Lycopene", defaultUnit: "µg"),
-    RecipeNutrientDefinition(key: "vitaminB1_Thiamin", label: "Vitamin B1", defaultUnit: "mg"),
-    RecipeNutrientDefinition(key: "vitaminB2_Riboflavin", label: "Vitamin B2", defaultUnit: "mg"),
-    RecipeNutrientDefinition(key: "vitaminB3_Niacin", label: "Vitamin B3", defaultUnit: "mg"),
-    RecipeNutrientDefinition(key: "vitaminB5_PantothenicAcid", label: "Vitamin B5", defaultUnit: "mg"),
-    RecipeNutrientDefinition(key: "vitaminB6", label: "Vitamin B6", defaultUnit: "mg"),
-    RecipeNutrientDefinition(key: "folateDFE", label: "Folate DFE", defaultUnit: "µg"),
-    RecipeNutrientDefinition(key: "folateFood", label: "Food folate", defaultUnit: "µg"),
-    RecipeNutrientDefinition(key: "folateTotal", label: "Total folate", defaultUnit: "µg"),
-    RecipeNutrientDefinition(key: "folicAcid", label: "Folic acid", defaultUnit: "µg"),
-    RecipeNutrientDefinition(key: "vitaminB12", label: "Vitamin B12", defaultUnit: "µg"),
-    RecipeNutrientDefinition(key: "vitaminC", label: "Vitamin C", defaultUnit: "mg"),
-    RecipeNutrientDefinition(key: "vitaminD", label: "Vitamin D", defaultUnit: "µg"),
-    RecipeNutrientDefinition(key: "vitaminE", label: "Vitamin E", defaultUnit: "mg"),
-    RecipeNutrientDefinition(key: "vitaminK", label: "Vitamin K", defaultUnit: "µg"),
-    RecipeNutrientDefinition(key: "choline", label: "Choline", defaultUnit: "mg"),
+    RecipeNutrientDefinition(key: "vitaminA_RAE", label: String(localized: "Vitamin A RAE"), defaultUnit: "µg"),
+    RecipeNutrientDefinition(key: "retinol", label: String(localized: "Retinol"), defaultUnit: "µg"),
+    RecipeNutrientDefinition(key: "caroteneAlpha", label: String(localized: "Alpha-carotene"), defaultUnit: "µg"),
+    RecipeNutrientDefinition(key: "caroteneBeta", label: String(localized: "Beta-carotene"), defaultUnit: "µg"),
+    RecipeNutrientDefinition(key: "cryptoxanthinBeta", label: String(localized: "Beta-cryptoxanthin"), defaultUnit: "µg"),
+    RecipeNutrientDefinition(key: "luteinZeaxanthin", label: String(localized: "Lutein + zeaxanthin"), defaultUnit: "µg"),
+    RecipeNutrientDefinition(key: "lycopene", label: String(localized: "Lycopene"), defaultUnit: "µg"),
+    RecipeNutrientDefinition(key: "vitaminB1_Thiamin", label: String(localized: "Vitamin B1"), defaultUnit: "mg"),
+    RecipeNutrientDefinition(key: "vitaminB2_Riboflavin", label: String(localized: "Vitamin B2"), defaultUnit: "mg"),
+    RecipeNutrientDefinition(key: "vitaminB3_Niacin", label: String(localized: "Vitamin B3"), defaultUnit: "mg"),
+    RecipeNutrientDefinition(key: "vitaminB5_PantothenicAcid", label: String(localized: "Vitamin B5"), defaultUnit: "mg"),
+    RecipeNutrientDefinition(key: "vitaminB6", label: String(localized: "Vitamin B6"), defaultUnit: "mg"),
+    RecipeNutrientDefinition(key: "folateDFE", label: String(localized: "Folate DFE"), defaultUnit: "µg"),
+    RecipeNutrientDefinition(key: "folateFood", label: String(localized: "Food folate"), defaultUnit: "µg"),
+    RecipeNutrientDefinition(key: "folateTotal", label: String(localized: "Total folate"), defaultUnit: "µg"),
+    RecipeNutrientDefinition(key: "folicAcid", label: String(localized: "Folic acid"), defaultUnit: "µg"),
+    RecipeNutrientDefinition(key: "vitaminB12", label: String(localized: "Vitamin B12"), defaultUnit: "µg"),
+    RecipeNutrientDefinition(key: "vitaminC", label: String(localized: "Vitamin C"), defaultUnit: "mg"),
+    RecipeNutrientDefinition(key: "vitaminD", label: String(localized: "Vitamin D"), defaultUnit: "µg"),
+    RecipeNutrientDefinition(key: "vitaminE", label: String(localized: "Vitamin E"), defaultUnit: "mg"),
+    RecipeNutrientDefinition(key: "vitaminK", label: String(localized: "Vitamin K"), defaultUnit: "µg"),
+    RecipeNutrientDefinition(key: "choline", label: String(localized: "Choline"), defaultUnit: "mg"),
   ]
 
   static let minerals = [
-    RecipeNutrientDefinition(key: "calcium", label: "Calcium", defaultUnit: "mg"),
-    RecipeNutrientDefinition(key: "iron", label: "Iron", defaultUnit: "mg"),
-    RecipeNutrientDefinition(key: "magnesium", label: "Magnesium", defaultUnit: "mg"),
-    RecipeNutrientDefinition(key: "phosphorus", label: "Phosphorus", defaultUnit: "mg"),
-    RecipeNutrientDefinition(key: "potassium", label: "Potassium", defaultUnit: "mg"),
-    RecipeNutrientDefinition(key: "sodium", label: "Sodium", defaultUnit: "mg"),
-    RecipeNutrientDefinition(key: "selenium", label: "Selenium", defaultUnit: "µg"),
-    RecipeNutrientDefinition(key: "zinc", label: "Zinc", defaultUnit: "mg"),
-    RecipeNutrientDefinition(key: "copper", label: "Copper", defaultUnit: "mg"),
-    RecipeNutrientDefinition(key: "manganese", label: "Manganese", defaultUnit: "mg"),
-    RecipeNutrientDefinition(key: "fluoride", label: "Fluoride", defaultUnit: "µg"),
+    RecipeNutrientDefinition(key: "calcium", label: String(localized: "Calcium"), defaultUnit: "mg"),
+    RecipeNutrientDefinition(key: "iron", label: String(localized: "Iron"), defaultUnit: "mg"),
+    RecipeNutrientDefinition(key: "magnesium", label: String(localized: "Magnesium"), defaultUnit: "mg"),
+    RecipeNutrientDefinition(key: "phosphorus", label: String(localized: "Phosphorus"), defaultUnit: "mg"),
+    RecipeNutrientDefinition(key: "potassium", label: String(localized: "Potassium"), defaultUnit: "mg"),
+    RecipeNutrientDefinition(key: "sodium", label: String(localized: "Sodium"), defaultUnit: "mg"),
+    RecipeNutrientDefinition(key: "selenium", label: String(localized: "Selenium"), defaultUnit: "µg"),
+    RecipeNutrientDefinition(key: "zinc", label: String(localized: "Zinc"), defaultUnit: "mg"),
+    RecipeNutrientDefinition(key: "copper", label: String(localized: "Copper"), defaultUnit: "mg"),
+    RecipeNutrientDefinition(key: "manganese", label: String(localized: "Manganese"), defaultUnit: "mg"),
+    RecipeNutrientDefinition(key: "fluoride", label: String(localized: "Fluoride"), defaultUnit: "µg"),
   ]
 }
 

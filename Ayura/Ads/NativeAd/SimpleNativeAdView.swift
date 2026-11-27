@@ -59,7 +59,7 @@ final class SimpleNativeAdView: NativeAdView {
     
     private let adBadgeLabel: UILabel = {
         let label = UILabel()
-        label.text = "Ad"
+        label.text = String(localized: "Ad")
         label.font = UIFont.systemFont(ofSize: 9, weight: .bold)
         label.textColor = .white
         label.backgroundColor = .orange

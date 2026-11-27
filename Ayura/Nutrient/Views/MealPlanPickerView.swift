@@ -18,7 +18,7 @@ struct MealPlanPickerView: View {
     // --- UPDATED INIT ---
     init(
         title: String,
-        dismissButtonLabel: String = "Close",
+        dismissButtonLabel: String = String(localized: "Close"),
         plans: [MealPlan],
         onDismiss: @escaping () -> Void,
         onSelectPlan: @escaping (MealPlan) -> Void

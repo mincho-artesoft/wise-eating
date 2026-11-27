@@ -22,15 +22,15 @@ struct AyurvedaDoshaEffectPresentation: Sendable {
   var effectWord: String {
     switch boundedValue {
     case -2:
-      return "Strongly pacifies"
+      return String(localized: "Strongly pacifies")
     case -1:
-      return "Pacifies"
+      return String(localized: "Pacifies")
     case 1:
-      return "Aggravates"
+      return String(localized: "Aggravates")
     case 2:
-      return "Strongly aggravates"
+      return String(localized: "Strongly aggravates")
     default:
-      return "Neutral"
+      return String(localized: "Neutral")
     }
   }
 
@@ -56,16 +56,16 @@ struct AyurvedaDoshaEffectPresentation: Sendable {
   }
 
   func accessibilityLabel(dosha name: String) -> String {
-    "\(name): \(effectWord.lowercased()), \(spokenValue) of two"
+    String(localized: "\(name): \(effectWord.lowercased()), \(spokenValue) of two")
   }
 
   private var spokenValue: String {
     switch boundedValue {
-    case -2: return "minus two"
-    case -1: return "minus one"
-    case 1: return "plus one"
-    case 2: return "plus two"
-    default: return "zero"
+    case -2: return String(localized: "minus two")
+    case -1: return String(localized: "minus one")
+    case 1: return String(localized: "plus one")
+    case 2: return String(localized: "plus two")
+    default: return String(localized: "zero")
     }
   }
 }
@@ -209,5 +209,34 @@ struct AyurvedaDisplay: Sendable {
       confidence: confidence,
       sanskrit: profile.sanskrit
     )
+  }
+}
+
+enum AyurvedaPropertyText {
+  static func localized(_ value: String) -> String {
+    switch value.lowercased() {
+    case "sweet": String(localized: "Sweet")
+    case "sour": String(localized: "Sour")
+    case "salty": String(localized: "Salty")
+    case "pungent": String(localized: "Pungent")
+    case "bitter": String(localized: "Bitter")
+    case "astringent": String(localized: "Astringent")
+    case "heating": String(localized: "Heating")
+    case "cooling": String(localized: "Cooling")
+    case "neutral": String(localized: "Neutral")
+    case "dense": String(localized: "Dense")
+    case "dry": String(localized: "Dry")
+    case "heavy": String(localized: "Heavy")
+    case "light": String(localized: "Light")
+    case "liquid": String(localized: "Liquid")
+    case "oily": String(localized: "Oily")
+    case "penetrating": String(localized: "Penetrating")
+    case "rough": String(localized: "Rough")
+    case "sharp": String(localized: "Sharp")
+    case "slimy": String(localized: "Slimy")
+    case "smooth": String(localized: "Smooth")
+    case "soft": String(localized: "Soft")
+    default: value.capitalized
+    }
   }
 }

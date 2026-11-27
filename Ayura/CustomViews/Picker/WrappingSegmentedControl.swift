@@ -119,6 +119,7 @@ struct WrappingSegmentedControl<T: Hashable & Identifiable & CaseIterable & RawR
     private func segmentButton(for item: T) -> some View {
         let isSelected = selection == item
         let itemTint = selectionTint?(item)
+        let itemTitle = String(localized: String.LocalizationValue(item.rawValue))
 
         Button(action: {
             // Анимация за местене на фона
@@ -141,7 +142,7 @@ struct WrappingSegmentedControl<T: Hashable & Identifiable & CaseIterable & RawR
                     Image(systemName: systemImage)
                         .accessibilityHidden(true)
                 }
-                Text(item.rawValue)
+                Text(itemTitle)
             }
                 .font(.caption)
                 .fontWeight(.semibold)
@@ -165,9 +166,26 @@ struct WrappingSegmentedControl<T: Hashable & Identifiable & CaseIterable & RawR
         }
         .buttonStyle(.plain)
         .accessibilityIdentifier("segment-\(item.rawValue)")
-        .accessibilityLabel(item.rawValue)
+        .accessibilityLabel(itemTitle)
         // --- НАЧАЛО НА ПРОМЯНАТА (3/3): Прилагаме ефекта за мащабиране ---
         .scaleEffect(isSelected && isAnimatingSelection ? 1.2 : 1.0)
         // --- КРАЙ НА ПРОМЯНАТА (3/3) ---
     }
+}
+
+/// The control shows an enum's raw value, looked up in the string catalogue
+/// at run time. The compiler extracts only literals it sees, so the raw
+/// values of the enums that have no display property of their own are
+/// listed here; this function is never called.
+private func segmentTitlesForExtraction() -> [String] {
+    [
+        String(localized: "Settings"), String(localized: "Nutrients"), String(localized: "Plans"),
+        String(localized: "Vitamins"), String(localized: "Minerals"),
+        String(localized: "Cooling"), String(localized: "Neutral"), String(localized: "Heating"),
+        String(localized: "Sweet"), String(localized: "Sour"), String(localized: "Pungent"),
+        String(localized: "All"), String(localized: "Meals"), String(localized: "Workouts"),
+        String(localized: "Weekly"), String(localized: "Monthly"),
+        String(localized: "Consume"), String(localized: "Edit Batches"), String(localized: "History"),
+        String(localized: "AI Settings"),
+    ]
 }

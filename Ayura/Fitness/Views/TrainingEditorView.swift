@@ -157,7 +157,7 @@ struct TrainingEditorView: View {
             .glassCardStyle(cornerRadius: 20)
             
             Spacer()
-            Text(isNew ? "Add Workout" : "Edit Workout").font(.headline)
+            Text(isNew ? String(localized: "Add Workout") : String(localized: "Edit Workout")).font(.headline)
             Spacer()
             
             let isDataValid = !draft.name.trimmingCharacters(in: .whitespaces).isEmpty && draft.endTime > draft.startTime
@@ -184,9 +184,9 @@ struct TrainingEditorView: View {
 
     private func formatReminder(_ minutes: Int) -> String {
         if minutes == 0 {
-            return "None"
+            return String(localized: "None")
         }
-        return "\(minutes) min before"
+        return String(localized: "\(minutes) min before")
     }
     
     private func checkNotificationStatus() {

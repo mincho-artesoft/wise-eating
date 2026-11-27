@@ -162,7 +162,7 @@ enum AyurvedaConstitutionSource: String, Codable, Sendable {
   var displayName: String? {
     switch self {
     case .selfDeclared: nil
-    case .questionnaire: "From the 12-question profile"
+    case .questionnaire: String(localized: "From the 12-question profile")
     }
   }
 }
@@ -184,91 +184,91 @@ struct AyurvedaDeclaredTypeOption: Identifiable, Equatable, Sendable {
     .init(
       id: "vata",
       displayName: "Vata",
-      detail: "Vata leads",
+      detail: String(localized: "Vata leads"),
       group: .single,
       distribution: .init(vata: 1, pitta: 0, kapha: 0)
     ),
     .init(
       id: "pitta",
       displayName: "Pitta",
-      detail: "Pitta leads",
+      detail: String(localized: "Pitta leads"),
       group: .single,
       distribution: .init(vata: 0, pitta: 1, kapha: 0)
     ),
     .init(
       id: "kapha",
       displayName: "Kapha",
-      detail: "Kapha leads",
+      detail: String(localized: "Kapha leads"),
       group: .single,
       distribution: .init(vata: 0, pitta: 0, kapha: 1)
     ),
     .init(
       id: "vata-pitta-even",
       displayName: "Vata–Pitta",
-      detail: "Even pair",
+      detail: String(localized: "Even pair"),
       group: .dual,
       distribution: .init(vata: 1, pitta: 1, kapha: 0)
     ),
     .init(
       id: "vata-pitta",
       displayName: "Vata–Pitta",
-      detail: "Vata leads",
+      detail: String(localized: "Vata leads"),
       group: .dual,
       distribution: .init(vata: 0.6, pitta: 0.4, kapha: 0)
     ),
     .init(
       id: "pitta-vata",
       displayName: "Pitta–Vata",
-      detail: "Pitta leads",
+      detail: String(localized: "Pitta leads"),
       group: .dual,
       distribution: .init(vata: 0.4, pitta: 0.6, kapha: 0)
     ),
     .init(
       id: "pitta-kapha-even",
       displayName: "Pitta–Kapha",
-      detail: "Even pair",
+      detail: String(localized: "Even pair"),
       group: .dual,
       distribution: .init(vata: 0, pitta: 1, kapha: 1)
     ),
     .init(
       id: "pitta-kapha",
       displayName: "Pitta–Kapha",
-      detail: "Pitta leads",
+      detail: String(localized: "Pitta leads"),
       group: .dual,
       distribution: .init(vata: 0, pitta: 0.6, kapha: 0.4)
     ),
     .init(
       id: "kapha-pitta",
       displayName: "Kapha–Pitta",
-      detail: "Kapha leads",
+      detail: String(localized: "Kapha leads"),
       group: .dual,
       distribution: .init(vata: 0, pitta: 0.4, kapha: 0.6)
     ),
     .init(
       id: "vata-kapha-even",
       displayName: "Vata–Kapha",
-      detail: "Even pair",
+      detail: String(localized: "Even pair"),
       group: .dual,
       distribution: .init(vata: 1, pitta: 0, kapha: 1)
     ),
     .init(
       id: "vata-kapha",
       displayName: "Vata–Kapha",
-      detail: "Vata leads",
+      detail: String(localized: "Vata leads"),
       group: .dual,
       distribution: .init(vata: 0.6, pitta: 0, kapha: 0.4)
     ),
     .init(
       id: "kapha-vata",
       displayName: "Kapha–Vata",
-      detail: "Kapha leads",
+      detail: String(localized: "Kapha leads"),
       group: .dual,
       distribution: .init(vata: 0.4, pitta: 0, kapha: 0.6)
     ),
     .init(
       id: "sama",
       displayName: "Sama / Tridoshic",
-      detail: "Balanced traditional profile",
+      detail: String(localized: "Balanced traditional profile"),
       group: .balanced,
       distribution: .balanced
     ),
@@ -314,76 +314,76 @@ struct AyurvedaConstitutionQuestion: Identifiable, Sendable {
   static let all: [AyurvedaConstitutionQuestion] = {
     let rows: [(String, String, String, String)] = [
       (
-        "Which has best described your build for most of your adult life?",
-        "Light or thin; hard to put on weight",
-        "Medium or defined; changes with effort",
-        "Solid or broad; gains easily"
+        String(localized: "Which has best described your build for most of your adult life?"),
+        String(localized: "Light or thin; hard to put on weight"),
+        String(localized: "Medium or defined; changes with effort"),
+        String(localized: "Solid or broad; gains easily")
       ),
       (
-        "Over the years, your weight has usually tended to?",
-        "Fluctuate, or stay low",
-        "Hold steady with effort",
-        "Climb, and come off slowly"
+        String(localized: "Over the years, your weight has usually tended to?"),
+        String(localized: "Fluctuate, or stay low"),
+        String(localized: "Hold steady with effort"),
+        String(localized: "Climb, and come off slowly")
       ),
       (
-        "Your skin has generally felt?",
-        "Dry or rough and cool to touch",
-        "Warm and quick to flush",
-        "Soft, moist and cool"
+        String(localized: "Your skin has generally felt?"),
+        String(localized: "Dry or rough and cool to touch"),
+        String(localized: "Warm and quick to flush"),
+        String(localized: "Soft, moist and cool")
       ),
       (
-        "Your hair has generally been?",
-        "Fine, dry and prone to frizz",
-        "Fine and prone to early greying or thinning",
-        "Thick, wavy and prone to oiliness"
+        String(localized: "Your hair has generally been?"),
+        String(localized: "Fine, dry and prone to frizz"),
+        String(localized: "Fine and prone to early greying or thinning"),
+        String(localized: "Thick, wavy and prone to oiliness")
       ),
       (
-        "Your appetite is usually?",
-        "Irregular — big some days, absent on others",
-        "Strong; a late meal feels uncomfortable",
-        "Steady; skipping a meal is usually easy"
+        String(localized: "Your appetite is usually?"),
+        String(localized: "Irregular — big some days, absent on others"),
+        String(localized: "Strong; a late meal feels uncomfortable"),
+        String(localized: "Steady; skipping a meal is usually easy")
       ),
       (
-        "After a heavy meal, you usually feel?",
-        "Gassy or bloated",
-        "Warm, sometimes acidic",
-        "Heavy and sleepy"
+        String(localized: "After a heavy meal, you usually feel?"),
+        String(localized: "Gassy or bloated"),
+        String(localized: "Warm, sometimes acidic"),
+        String(localized: "Heavy and sleepy")
       ),
       (
-        "The weather you have usually felt best in is?",
-        "Warm and humid",
-        "Cool and breezy",
-        "Warm and dry"
+        String(localized: "The weather you have usually felt best in is?"),
+        String(localized: "Warm and humid"),
+        String(localized: "Cool and breezy"),
+        String(localized: "Warm and dry")
       ),
       (
-        "Your energy through a typical day usually?",
-        "Comes in bursts, then dips",
-        "Feels steady and driven",
-        "Starts slowly, then lasts"
+        String(localized: "Your energy through a typical day usually?"),
+        String(localized: "Comes in bursts, then dips"),
+        String(localized: "Feels steady and driven"),
+        String(localized: "Starts slowly, then lasts")
       ),
       (
-        "Your sleep on most nights is?",
-        "Light; you wake easily",
-        "Moderate; you wake, then resettle",
-        "Deep and long; waking is hard"
+        String(localized: "Your sleep on most nights is?"),
+        String(localized: "Light; you wake easily"),
+        String(localized: "Moderate; you wake, then resettle"),
+        String(localized: "Deep and long; waking is hard")
       ),
       (
-        "Your natural pace has usually been?",
-        "Quick; sitting still is difficult",
-        "Purposeful and focused",
-        "Unhurried and steady"
+        String(localized: "Your natural pace has usually been?"),
+        String(localized: "Quick; sitting still is difficult"),
+        String(localized: "Purposeful and focused"),
+        String(localized: "Unhurried and steady")
       ),
       (
-        "In conversation, you usually tend to be?",
-        "Fast and likely to jump between subjects",
-        "Precise and eager to convince",
-        "Measured and happy to listen"
+        String(localized: "In conversation, you usually tend to be?"),
+        String(localized: "Fast and likely to jump between subjects"),
+        String(localized: "Precise and eager to convince"),
+        String(localized: "Measured and happy to listen")
       ),
       (
-        "Under pressure, you usually notice yourself becoming?",
-        "Scattered",
-        "Sharp",
-        "Quiet"
+        String(localized: "Under pressure, you usually notice yourself becoming?"),
+        String(localized: "Scattered"),
+        String(localized: "Sharp"),
+        String(localized: "Quiet")
       ),
     ]
     let rotations: [[AyurvedaDosha]] = [
@@ -428,39 +428,39 @@ struct AyurvedaCheckInQuestion: Identifiable, Sendable {
   static let all: [AyurvedaCheckInQuestion] = {
     let rows: [(String, String, String, String, String)] = [
       (
-        "Sleep",
-        "Over the past week or two, your sleep has felt?",
-        "Light or interrupted",
-        "Moderate, with some restlessness",
-        "Deep, long or hard to wake from"
+        String(localized: "Sleep"),
+        String(localized: "Over the past week or two, your sleep has felt?"),
+        String(localized: "Light or interrupted"),
+        String(localized: "Moderate, with some restlessness"),
+        String(localized: "Deep, long or hard to wake from")
       ),
       (
-        "Digestion",
-        "Over the past week or two, after meals you have most often felt?",
-        "Variable, gassy or bloated",
-        "Warm or acidic",
-        "Heavy or slow"
+        String(localized: "Digestion"),
+        String(localized: "Over the past week or two, after meals you have most often felt?"),
+        String(localized: "Variable, gassy or bloated"),
+        String(localized: "Warm or acidic"),
+        String(localized: "Heavy or slow")
       ),
       (
-        "Appetite",
-        "Over the past week or two, your appetite has been?",
-        "Irregular",
-        "Strong and urgent",
-        "Steady but easy to postpone"
+        String(localized: "Appetite"),
+        String(localized: "Over the past week or two, your appetite has been?"),
+        String(localized: "Irregular"),
+        String(localized: "Strong and urgent"),
+        String(localized: "Steady but easy to postpone")
       ),
       (
-        "Energy",
-        "Over the past week or two, your energy has been?",
-        "Changeable, with bursts and dips",
-        "Driven and intense",
-        "Slow to start but long-lasting"
+        String(localized: "Energy"),
+        String(localized: "Over the past week or two, your energy has been?"),
+        String(localized: "Changeable, with bursts and dips"),
+        String(localized: "Driven and intense"),
+        String(localized: "Slow to start but long-lasting")
       ),
       (
-        "Skin",
-        "Over the past week or two, your skin has most often felt?",
-        "Dry or rough",
-        "Warm or sensitive",
-        "Soft or oily"
+        String(localized: "Skin"),
+        String(localized: "Over the past week or two, your skin has most often felt?"),
+        String(localized: "Dry or rough"),
+        String(localized: "Warm or sensitive"),
+        String(localized: "Soft or oily")
       ),
     ]
     let rotations: [[AyurvedaDosha]] = [
@@ -518,7 +518,7 @@ struct AyurvedaConstitutionResult: Equatable, Sendable {
       return Self(
         distribution: distribution,
         label: "Sama / Tridoshic",
-        uncertaintyNote: "Your answers are distributed evenly across the three traditional profiles."
+        uncertaintyNote: String(localized: "Your answers are distributed evenly across the three traditional profiles.")
       )
     }
 
@@ -529,7 +529,7 @@ struct AyurvedaConstitutionResult: Equatable, Sendable {
         distribution: distribution,
         label: "\(top.dosha.displayName)–\(second.dosha.displayName)",
         uncertaintyNote: nearTie
-          ? "The leading profiles are within one answer, so the questionnaire does not separate them."
+          ? String(localized: "The leading profiles are within one answer, so the questionnaire does not separate them.")
           : nil
       )
     }
@@ -918,13 +918,13 @@ struct AyurvedaFoodFitPresentation: Equatable, Sendable {
     let title: String
     if score >= 0.45 {
       direction = .supportive
-      title = "Supportive for your current profile"
+      title = String(localized: "Supportive for your current profile")
     } else if score <= -0.45 {
       direction = .lessSupportive
-      title = "Less supportive for your current profile"
+      title = String(localized: "Less supportive for your current profile")
     } else {
       direction = .mixed
-      title = "Mixed fit for your current profile"
+      title = String(localized: "Mixed fit for your current profile")
     }
 
     let supported = AyurvedaDosha.allCases
@@ -936,35 +936,35 @@ struct AyurvedaFoodFitPresentation: Equatable, Sendable {
 
     var qualityWords: [String] = []
     if let virya, !virya.isEmpty {
-      qualityWords.append(virya.capitalized)
+      qualityWords.append(AyurvedaPropertyText.localized(virya))
     }
-    qualityWords.append(contentsOf: rasa.prefix(1).map { $0.capitalized })
-    qualityWords.append(contentsOf: gunas.prefix(1).map { $0.capitalized })
+    qualityWords.append(contentsOf: rasa.prefix(1).map { AyurvedaPropertyText.localized($0) })
+    qualityWords.append(contentsOf: gunas.prefix(1).map { AyurvedaPropertyText.localized($0) })
     var seenQualities = Set<String>()
     qualityWords = qualityWords.filter {
       seenQualities.insert($0.lowercased()).inserted
     }
-    let qualityPrefix = qualityWords.prefix(2).joined(separator: " and ")
+    let qualityPrefix = qualityWords.prefix(2).joined(separator: String(localized: " and "))
 
     var actionParts: [String] = []
     if !supported.isEmpty {
       actionParts.append(
-        "supports \(supported.map(\.displayName).joinedEnglish)"
+        String(localized: "supports \(supported.map(\.displayName).joinedEnglish)")
       )
     }
     if !increased.isEmpty {
       actionParts.append(
-        "may increase \(increased.map(\.displayName).joinedEnglish)"
+        String(localized: "may increase \(increased.map(\.displayName).joinedEnglish)")
       )
     }
     if actionParts.isEmpty {
-      actionParts.append("is neutral across the three doshas")
+      actionParts.append(String(localized: "is neutral across the three doshas"))
     }
 
-    let action = actionParts.joined(separator: ", but ")
+    let action = actionParts.joined(separator: String(localized: ", but "))
     let explanation = qualityPrefix.isEmpty
       ? action.capitalized + "."
-      : "\(qualityPrefix) — \(action)."
+      : String(localized: "\(qualityPrefix) — \(action).")
     return Self(
       score: score,
       direction: direction,
@@ -979,7 +979,7 @@ private extension Array where Element == String {
     switch count {
     case 0: ""
     case 1: self[0]
-    case 2: "\(self[0]) and \(self[1])"
+    case 2: String(localized: "\(self[0]) and \(self[1])")
     default:
       dropLast().joined(separator: ", ") + ", and " + (last ?? "")
     }

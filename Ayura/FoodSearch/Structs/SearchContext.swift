@@ -19,7 +19,7 @@ struct SearchContext {
 
     var phDataExclusionMessage: String? {
         guard foodsWithoutPhExcluded > 0 else { return nil }
-        return "\(foodsWithoutPhExcluded) foods without pH data excluded"
+        return String(localized: "\(foodsWithoutPhExcluded) foods without pH data excluded")
     }
 }
 

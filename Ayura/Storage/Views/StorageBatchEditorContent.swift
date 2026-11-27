@@ -98,7 +98,7 @@ struct StorageBatchEditorContent: View {
             }
         } message: {
             let quantityDisplay = UnitConversion.formatGramsToGramsOrOunces(batchToDelete?.quantity ?? 0)
-            let expirationString = batchToDelete?.expirationDate?.formatted(date: .abbreviated, time: .omitted) ?? "no expiration"
+            let expirationString = batchToDelete?.expirationDate?.formatted(date: .abbreviated, time: .omitted) ?? String(localized: "no expiration")
             Text("Are you sure you want to delete this batch (\(quantityDisplay.value) \(quantityDisplay.unit), expires: \(expirationString))? This action cannot be undone.")
         }
     }

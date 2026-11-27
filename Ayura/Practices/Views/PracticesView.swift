@@ -416,7 +416,7 @@ struct PracticesView: View {
                         .foregroundStyle(.yellow)
                 }
 
-                Text(filter.rawValue)
+                Text(filter.displayName)
                     .font(.caption.weight(.semibold))
 
                 Text(String(practiceCount(for: filter)))
@@ -665,6 +665,18 @@ private enum PracticeListFilter: String, CaseIterable, Identifiable {
 
     var id: String { rawValue }
 
+    var displayName: String {
+        switch self {
+        case .all: String(localized: "All")
+        case .favorites: String(localized: "Favorites")
+        case .meditation: String(localized: "Meditation")
+        case .visualisation: String(localized: "Visualisation")
+        case .pranayama: String(localized: "Pranayama")
+        case .relaxation: String(localized: "Relaxation")
+        case .kriya: String(localized: "Kriya")
+        }
+    }
+
     init?(kind: String) {
         guard let filter = Self.allCases.first(where: { $0.kind == kind }) else {
             return nil
@@ -700,23 +712,23 @@ private enum PracticeDaySlot: String {
 
     var displayName: String {
         switch self {
-        case .dawn: "Dawn"
-        case .morning: "Morning"
-        case .midday: "Midday"
-        case .afternoon: "Afternoon"
-        case .evening: "Evening"
-        case .night: "Night"
+        case .dawn: String(localized: "Dawn")
+        case .morning: String(localized: "Morning")
+        case .midday: String(localized: "Midday")
+        case .afternoon: String(localized: "Afternoon")
+        case .evening: String(localized: "Evening")
+        case .night: String(localized: "Night")
         }
     }
 
     var guidance: String {
         switch self {
-        case .dawn: "Quiet clarity before the day begins"
-        case .morning: "Awaken attention and steady energy"
-        case .midday: "Cool intensity and return to centre"
-        case .afternoon: "Settle movement and restore focus"
-        case .evening: "Release the day and turn inward"
-        case .night: "Soften effort and prepare for rest"
+        case .dawn: String(localized: "Quiet clarity before the day begins")
+        case .morning: String(localized: "Awaken attention and steady energy")
+        case .midday: String(localized: "Cool intensity and return to centre")
+        case .afternoon: String(localized: "Settle movement and restore focus")
+        case .evening: String(localized: "Release the day and turn inward")
+        case .night: String(localized: "Soften effort and prepare for rest")
         }
     }
 
@@ -766,6 +778,6 @@ func practiceDuration(_ seconds: Int) -> String {
     let minutes = seconds / 60
     let remainder = seconds % 60
     return remainder == 0
-        ? "\(minutes) min"
-        : "\(minutes):\(String(format: "%02d", remainder)) min"
+        ? String(localized: "\(minutes) min")
+        : String(localized: "\(minutes):\(String(format: "%02d", remainder)) min")
 }

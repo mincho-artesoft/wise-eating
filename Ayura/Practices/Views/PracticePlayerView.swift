@@ -235,7 +235,7 @@ struct PracticePlayerView: View {
                     forProfile: profile,
                     startDate: session.startedAt,
                     endDate: session.endedAt,
-                    title: "Practice: \(session.practiceTitle)",
+                    title: String(localized: "Practice: \(localizedPracticeTitle(session.practiceTitle))"),
                     invisiblePayload: PracticeCalendarEvent.invisiblePayload(for: session)
                 )
 

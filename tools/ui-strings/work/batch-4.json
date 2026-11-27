@@ -1,0 +1,2390 @@
+[
+{
+"i": 678,
+"k": "text",
+"p": "Ads",
+"s": "Ad",
+"in": [
+"SimpleNativeAdView"
+],
+"code": "label.text = String(localized: \"Ad\")",
+"above": "let label = UILabel()"
+},
+{
+"i": 679,
+"k": "text",
+"p": "Analytics",
+"s": "Target",
+"in": [
+"AnalyticsChartView"
+],
+"code": "Text(\"\\(isCalories || isWaterChart || isProteinChart || isCarbsChart || isFatChart || isSleepChart ? String(localized: \"Target\") : String(localized: \"MIN\")): \\("
+},
+{
+"i": 680,
+"k": "text",
+"p": "Analytics",
+"s": "MIN",
+"in": [
+"AnalyticsChartView"
+],
+"code": "Text(\"\\(isCalories || isWaterChart || isProteinChart || isCarbsChart || isFatChart || isSleepChart ? String(localized: \"Target\") : String(localized: \"MIN\")): \\("
+},
+{
+"i": 681,
+"k": "text",
+"p": "Analytics",
+"s": "Burned Calories",
+"in": [
+"AnalyticsChartView",
+"AnalyticsView"
+],
+"code": "if id == \"calories_burned\" { return String(localized: \"Burned Calories\") }"
+},
+{
+"i": 682,
+"k": "text",
+"p": "Analytics",
+"s": "Water Intake",
+"in": [
+"AnalyticsChartView",
+"AnalyticsView"
+],
+"code": "if id == \"water\" { return String(localized: \"Water Intake\") }"
+},
+{
+"i": 683,
+"k": "text",
+"p": "Analytics",
+"s": "Protein",
+"in": [
+"AnalyticsChartView",
+"AnalyticsView",
+"FoodItemDetailView",
+"FoodItemEditorView"
+],
+"code": "if id == \"protein\" { return String(localized: \"Protein\") }"
+},
+{
+"i": 684,
+"k": "text",
+"p": "Analytics",
+"s": "Carbohydrates",
+"in": [
+"AnalyticsChartView",
+"AnalyticsView",
+"FoodSearchPanelView",
+"RecipeNutritionPanelView"
+],
+"code": "if id == \"carbohydrates\" { return String(localized: \"Carbohydrates\") }"
+},
+{
+"i": 685,
+"k": "text",
+"p": "Analytics",
+"s": "Fat",
+"in": [
+"AnalyticsChartView",
+"AnalyticsView",
+"FoodItemDetailView",
+"FoodItemEditorView"
+],
+"code": "if id == \"fat\" { return String(localized: \"Fat\") }"
+},
+{
+"i": 686,
+"k": "text",
+"p": "Analytics",
+"s": "Height",
+"in": [
+"AnalyticsChartView",
+"AnalyticsView"
+],
+"code": "if id == \"profile_height\" { return String(localized: \"Height\") }"
+},
+{
+"i": 687,
+"k": "text",
+"p": "Analytics",
+"s": "Sleep",
+"in": [
+"AnalyticsChartView",
+"AnalyticsView",
+"AyurvedaConstitution"
+],
+"code": "if id == \"sleep\" { return String(localized: \"Sleep\") }"
+},
+{
+"i": 688,
+"k": "text",
+"p": "Analytics",
+"s": "Unknown Vitamin",
+"in": [
+"AnalyticsChartView"
+],
+"code": "return allVitamins.first { $0.key == key }?.name ?? String(localized: \"Unknown Vitamin\")"
+},
+{
+"i": 689,
+"k": "text",
+"p": "Analytics",
+"s": "Unknown Mineral",
+"in": [
+"AnalyticsChartView"
+],
+"code": "return allMinerals.first { $0.key == key }?.name ?? String(localized: \"Unknown Mineral\")"
+},
+{
+"i": 690,
+"k": "text",
+"p": "Analytics",
+"s": "Unknown",
+"in": [
+"AnalyticsChartView",
+"AnalyticsView",
+"TrainingPlanExerciseDetailRow",
+"TrainingPlanExerciseRowView"
+],
+"code": "return String(localized: \"Unknown\")",
+"above": "let key = String(id.dropFirst(4))"
+},
+{
+"i": 691,
+"k": "text",
+"p": "Analytics",
+"s": "Select Range",
+"in": [
+"AnalyticsToolbarView"
+],
+"code": "return String(localized: \"Select Range\")",
+"above": "guard let start = customStartDate, let end = customEndDate else {"
+},
+{
+"i": 692,
+"k": "text",
+"p": "Analytics",
+"s": "Week",
+"in": [
+"AnalyticsView"
+],
+"code": "case .week: String(localized: \"Week\")",
+"above": "var displayName: String {"
+},
+{
+"i": 693,
+"k": "text",
+"p": "Analytics",
+"s": "Month",
+"in": [
+"AnalyticsView"
+],
+"code": "case .month: String(localized: \"Month\")",
+"above": "case .week: String(localized: \"Week\")"
+},
+{
+"i": 694,
+"k": "text",
+"p": "Analytics",
+"s": "Year",
+"in": [
+"AnalyticsView"
+],
+"code": "case .year: String(localized: \"Year\")",
+"above": "case .month: String(localized: \"Month\")"
+},
+{
+"i": 695,
+"k": "text",
+"p": "Analytics",
+"s": "All Time",
+"in": [
+"AnalyticsView"
+],
+"code": "case .all: String(localized: \"All Time\")",
+"above": "case .year: String(localized: \"Year\")"
+},
+{
+"i": 696,
+"k": "text",
+"p": "Analytics",
+"s": "Custom",
+"in": [
+"AnalyticsView",
+"ThemeEditorView"
+],
+"code": "case .custom: String(localized: \"Custom\")",
+"above": "case .all: String(localized: \"All Time\")"
+},
+{
+"i": 697,
+"k": "placeholder",
+"p": "Analytics",
+"s": "Choose nutrients to display...",
+"in": [
+"AnalyticsView"
+],
+"code": "prompt: String(localized: \"Choose nutrients to display...\"),",
+"above": "private var metricSelectorSection: some View {"
+},
+{
+"i": 698,
+"k": "text",
+"p": "Ayurveda",
+"s": "From the 12-question profile",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "case .questionnaire: String(localized: \"From the 12-question profile\")"
+},
+{
+"i": 699,
+"k": "text",
+"p": "Ayurveda",
+"s": "Vata leads",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "detail: String(localized: \"Vata leads\"),",
+"above": "static let all: [AyurvedaDeclaredTypeOption] = ["
+},
+{
+"i": 700,
+"k": "text",
+"p": "Ayurveda",
+"s": "Pitta leads",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "detail: String(localized: \"Pitta leads\"),",
+"above": "static let all: [AyurvedaDeclaredTypeOption] = ["
+},
+{
+"i": 701,
+"k": "text",
+"p": "Ayurveda",
+"s": "Kapha leads",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "detail: String(localized: \"Kapha leads\"),"
+},
+{
+"i": 702,
+"k": "text",
+"p": "Ayurveda",
+"s": "Even pair",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "detail: String(localized: \"Even pair\"),"
+},
+{
+"i": 703,
+"k": "text",
+"p": "Ayurveda",
+"s": "Balanced traditional profile",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "detail: String(localized: \"Balanced traditional profile\"),"
+},
+{
+"i": 704,
+"k": "text",
+"p": "Ayurveda",
+"s": "Which has best described your build for most of your adult life?",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Which has best described your build for most of your adult life?\"),",
+"above": "let rows: [(String, String, String, String)] = ["
+},
+{
+"i": 705,
+"k": "text",
+"p": "Ayurveda",
+"s": "Light or thin; hard to put on weight",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Light or thin; hard to put on weight\"),",
+"above": "let rows: [(String, String, String, String)] = ["
+},
+{
+"i": 706,
+"k": "text",
+"p": "Ayurveda",
+"s": "Medium or defined; changes with effort",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Medium or defined; changes with effort\"),",
+"above": "let rows: [(String, String, String, String)] = ["
+},
+{
+"i": 707,
+"k": "text",
+"p": "Ayurveda",
+"s": "Solid or broad; gains easily",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Solid or broad; gains easily\")",
+"above": "let rows: [(String, String, String, String)] = ["
+},
+{
+"i": 708,
+"k": "text",
+"p": "Ayurveda",
+"s": "Over the years, your weight has usually tended to?",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Over the years, your weight has usually tended to?\"),",
+"above": "let rows: [(String, String, String, String)] = ["
+},
+{
+"i": 709,
+"k": "text",
+"p": "Ayurveda",
+"s": "Fluctuate, or stay low",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Fluctuate, or stay low\"),",
+"above": "let rows: [(String, String, String, String)] = ["
+},
+{
+"i": 710,
+"k": "text",
+"p": "Ayurveda",
+"s": "Hold steady with effort",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Hold steady with effort\"),",
+"above": "let rows: [(String, String, String, String)] = ["
+},
+{
+"i": 711,
+"k": "text",
+"p": "Ayurveda",
+"s": "Climb, and come off slowly",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Climb, and come off slowly\")",
+"above": "let rows: [(String, String, String, String)] = ["
+},
+{
+"i": 712,
+"k": "text",
+"p": "Ayurveda",
+"s": "Your skin has generally felt?",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Your skin has generally felt?\"),"
+},
+{
+"i": 713,
+"k": "text",
+"p": "Ayurveda",
+"s": "Dry or rough and cool to touch",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Dry or rough and cool to touch\"),",
+"above": "String(localized: \"Your skin has generally felt?\"),"
+},
+{
+"i": 714,
+"k": "text",
+"p": "Ayurveda",
+"s": "Warm and quick to flush",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Warm and quick to flush\"),",
+"above": "String(localized: \"Your skin has generally felt?\"),"
+},
+{
+"i": 715,
+"k": "text",
+"p": "Ayurveda",
+"s": "Soft, moist and cool",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Soft, moist and cool\")",
+"above": "String(localized: \"Your skin has generally felt?\"),"
+},
+{
+"i": 716,
+"k": "text",
+"p": "Ayurveda",
+"s": "Your hair has generally been?",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Your hair has generally been?\"),"
+},
+{
+"i": 717,
+"k": "text",
+"p": "Ayurveda",
+"s": "Fine, dry and prone to frizz",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Fine, dry and prone to frizz\"),",
+"above": "String(localized: \"Your hair has generally been?\"),"
+},
+{
+"i": 718,
+"k": "text",
+"p": "Ayurveda",
+"s": "Fine and prone to early greying or thinning",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Fine and prone to early greying or thinning\"),",
+"above": "String(localized: \"Your hair has generally been?\"),"
+},
+{
+"i": 719,
+"k": "text",
+"p": "Ayurveda",
+"s": "Thick, wavy and prone to oiliness",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Thick, wavy and prone to oiliness\")",
+"above": "String(localized: \"Your hair has generally been?\"),"
+},
+{
+"i": 720,
+"k": "text",
+"p": "Ayurveda",
+"s": "Your appetite is usually?",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Your appetite is usually?\"),"
+},
+{
+"i": 721,
+"k": "text",
+"p": "Ayurveda",
+"s": "Irregular — big some days, absent on others",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Irregular — big some days, absent on others\"),",
+"above": "String(localized: \"Your appetite is usually?\"),"
+},
+{
+"i": 722,
+"k": "text",
+"p": "Ayurveda",
+"s": "Strong; a late meal feels uncomfortable",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Strong; a late meal feels uncomfortable\"),",
+"above": "String(localized: \"Your appetite is usually?\"),"
+},
+{
+"i": 723,
+"k": "text",
+"p": "Ayurveda",
+"s": "Steady; skipping a meal is usually easy",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Steady; skipping a meal is usually easy\")",
+"above": "String(localized: \"Your appetite is usually?\"),"
+},
+{
+"i": 724,
+"k": "text",
+"p": "Ayurveda",
+"s": "After a heavy meal, you usually feel?",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"After a heavy meal, you usually feel?\"),"
+},
+{
+"i": 725,
+"k": "text",
+"p": "Ayurveda",
+"s": "Gassy or bloated",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Gassy or bloated\"),",
+"above": "String(localized: \"After a heavy meal, you usually feel?\"),"
+},
+{
+"i": 726,
+"k": "text",
+"p": "Ayurveda",
+"s": "Warm, sometimes acidic",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Warm, sometimes acidic\"),",
+"above": "String(localized: \"After a heavy meal, you usually feel?\"),"
+},
+{
+"i": 727,
+"k": "text",
+"p": "Ayurveda",
+"s": "Heavy and sleepy",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Heavy and sleepy\")",
+"above": "String(localized: \"After a heavy meal, you usually feel?\"),"
+},
+{
+"i": 728,
+"k": "text",
+"p": "Ayurveda",
+"s": "The weather you have usually felt best in is?",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"The weather you have usually felt best in is?\"),"
+},
+{
+"i": 729,
+"k": "text",
+"p": "Ayurveda",
+"s": "Warm and humid",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Warm and humid\"),",
+"above": "String(localized: \"The weather you have usually felt best in is?\"),"
+},
+{
+"i": 730,
+"k": "text",
+"p": "Ayurveda",
+"s": "Cool and breezy",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Cool and breezy\"),",
+"above": "String(localized: \"The weather you have usually felt best in is?\"),"
+},
+{
+"i": 731,
+"k": "text",
+"p": "Ayurveda",
+"s": "Warm and dry",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Warm and dry\")",
+"above": "String(localized: \"The weather you have usually felt best in is?\"),"
+},
+{
+"i": 732,
+"k": "text",
+"p": "Ayurveda",
+"s": "Your energy through a typical day usually?",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Your energy through a typical day usually?\"),"
+},
+{
+"i": 733,
+"k": "text",
+"p": "Ayurveda",
+"s": "Comes in bursts, then dips",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Comes in bursts, then dips\"),",
+"above": "String(localized: \"Your energy through a typical day usually?\"),"
+},
+{
+"i": 734,
+"k": "text",
+"p": "Ayurveda",
+"s": "Feels steady and driven",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Feels steady and driven\"),",
+"above": "String(localized: \"Your energy through a typical day usually?\"),"
+},
+{
+"i": 735,
+"k": "text",
+"p": "Ayurveda",
+"s": "Starts slowly, then lasts",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Starts slowly, then lasts\")",
+"above": "String(localized: \"Your energy through a typical day usually?\"),"
+},
+{
+"i": 736,
+"k": "text",
+"p": "Ayurveda",
+"s": "Your sleep on most nights is?",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Your sleep on most nights is?\"),"
+},
+{
+"i": 737,
+"k": "text",
+"p": "Ayurveda",
+"s": "Light; you wake easily",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Light; you wake easily\"),",
+"above": "String(localized: \"Your sleep on most nights is?\"),"
+},
+{
+"i": 738,
+"k": "text",
+"p": "Ayurveda",
+"s": "Moderate; you wake, then resettle",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Moderate; you wake, then resettle\"),",
+"above": "String(localized: \"Your sleep on most nights is?\"),"
+},
+{
+"i": 739,
+"k": "text",
+"p": "Ayurveda",
+"s": "Deep and long; waking is hard",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Deep and long; waking is hard\")",
+"above": "String(localized: \"Your sleep on most nights is?\"),"
+},
+{
+"i": 740,
+"k": "text",
+"p": "Ayurveda",
+"s": "Your natural pace has usually been?",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Your natural pace has usually been?\"),"
+},
+{
+"i": 741,
+"k": "text",
+"p": "Ayurveda",
+"s": "Quick; sitting still is difficult",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Quick; sitting still is difficult\"),",
+"above": "String(localized: \"Your natural pace has usually been?\"),"
+},
+{
+"i": 742,
+"k": "text",
+"p": "Ayurveda",
+"s": "Purposeful and focused",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Purposeful and focused\"),",
+"above": "String(localized: \"Your natural pace has usually been?\"),"
+},
+{
+"i": 743,
+"k": "text",
+"p": "Ayurveda",
+"s": "Unhurried and steady",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Unhurried and steady\")",
+"above": "String(localized: \"Your natural pace has usually been?\"),"
+},
+{
+"i": 744,
+"k": "text",
+"p": "Ayurveda",
+"s": "In conversation, you usually tend to be?",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"In conversation, you usually tend to be?\"),"
+},
+{
+"i": 745,
+"k": "text",
+"p": "Ayurveda",
+"s": "Fast and likely to jump between subjects",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Fast and likely to jump between subjects\"),",
+"above": "String(localized: \"In conversation, you usually tend to be?\"),"
+},
+{
+"i": 746,
+"k": "text",
+"p": "Ayurveda",
+"s": "Precise and eager to convince",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Precise and eager to convince\"),",
+"above": "String(localized: \"In conversation, you usually tend to be?\"),"
+},
+{
+"i": 747,
+"k": "text",
+"p": "Ayurveda",
+"s": "Measured and happy to listen",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Measured and happy to listen\")",
+"above": "String(localized: \"In conversation, you usually tend to be?\"),"
+},
+{
+"i": 748,
+"k": "text",
+"p": "Ayurveda",
+"s": "Under pressure, you usually notice yourself becoming?",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Under pressure, you usually notice yourself becoming?\"),"
+},
+{
+"i": 749,
+"k": "text",
+"p": "Ayurveda",
+"s": "Scattered",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Scattered\"),",
+"above": "String(localized: \"Under pressure, you usually notice yourself becoming?\"),"
+},
+{
+"i": 750,
+"k": "text",
+"p": "Ayurveda",
+"s": "Sharp",
+"in": [
+"AyurvedaConstitution",
+"AyurvedaDisplay"
+],
+"code": "String(localized: \"Sharp\"),",
+"above": "String(localized: \"Under pressure, you usually notice yourself becoming?\"),"
+},
+{
+"i": 751,
+"k": "text",
+"p": "Ayurveda",
+"s": "Quiet",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Quiet\")",
+"above": "String(localized: \"Under pressure, you usually notice yourself becoming?\"),"
+},
+{
+"i": 752,
+"k": "text",
+"p": "Ayurveda",
+"s": "Over the past week or two, your sleep has felt?",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Over the past week or two, your sleep has felt?\"),",
+"above": "let rows: [(String, String, String, String, String)] = ["
+},
+{
+"i": 753,
+"k": "text",
+"p": "Ayurveda",
+"s": "Light or interrupted",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Light or interrupted\"),",
+"above": "let rows: [(String, String, String, String, String)] = ["
+},
+{
+"i": 754,
+"k": "text",
+"p": "Ayurveda",
+"s": "Moderate, with some restlessness",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Moderate, with some restlessness\"),",
+"above": "let rows: [(String, String, String, String, String)] = ["
+},
+{
+"i": 755,
+"k": "text",
+"p": "Ayurveda",
+"s": "Deep, long or hard to wake from",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Deep, long or hard to wake from\")",
+"above": "let rows: [(String, String, String, String, String)] = ["
+},
+{
+"i": 756,
+"k": "text",
+"p": "Ayurveda",
+"s": "Over the past week or two, after meals you have most often felt?",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Over the past week or two, after meals you have most often felt?\"),",
+"above": "let rows: [(String, String, String, String, String)] = ["
+},
+{
+"i": 757,
+"k": "text",
+"p": "Ayurveda",
+"s": "Variable, gassy or bloated",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Variable, gassy or bloated\"),",
+"above": "let rows: [(String, String, String, String, String)] = ["
+},
+{
+"i": 758,
+"k": "text",
+"p": "Ayurveda",
+"s": "Warm or acidic",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Warm or acidic\"),",
+"above": "String(localized: \"Over the past week or two, after meals you have most often felt?\"),"
+},
+{
+"i": 759,
+"k": "text",
+"p": "Ayurveda",
+"s": "Heavy or slow",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Heavy or slow\")",
+"above": "String(localized: \"Over the past week or two, after meals you have most often felt?\"),"
+},
+{
+"i": 760,
+"k": "text",
+"p": "Ayurveda",
+"s": "Appetite",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Appetite\"),"
+},
+{
+"i": 761,
+"k": "text",
+"p": "Ayurveda",
+"s": "Over the past week or two, your appetite has been?",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Over the past week or two, your appetite has been?\"),"
+},
+{
+"i": 762,
+"k": "text",
+"p": "Ayurveda",
+"s": "Irregular",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Irregular\"),",
+"above": "String(localized: \"Over the past week or two, your appetite has been?\"),"
+},
+{
+"i": 763,
+"k": "text",
+"p": "Ayurveda",
+"s": "Strong and urgent",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Strong and urgent\"),",
+"above": "String(localized: \"Over the past week or two, your appetite has been?\"),"
+},
+{
+"i": 764,
+"k": "text",
+"p": "Ayurveda",
+"s": "Steady but easy to postpone",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Steady but easy to postpone\")",
+"above": "String(localized: \"Over the past week or two, your appetite has been?\"),"
+},
+{
+"i": 765,
+"k": "text",
+"p": "Ayurveda",
+"s": "Over the past week or two, your energy has been?",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Over the past week or two, your energy has been?\"),"
+},
+{
+"i": 766,
+"k": "text",
+"p": "Ayurveda",
+"s": "Changeable, with bursts and dips",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Changeable, with bursts and dips\"),",
+"above": "String(localized: \"Over the past week or two, your energy has been?\"),"
+},
+{
+"i": 767,
+"k": "text",
+"p": "Ayurveda",
+"s": "Driven and intense",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Driven and intense\"),",
+"above": "String(localized: \"Over the past week or two, your energy has been?\"),"
+},
+{
+"i": 768,
+"k": "text",
+"p": "Ayurveda",
+"s": "Slow to start but long-lasting",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Slow to start but long-lasting\")",
+"above": "String(localized: \"Over the past week or two, your energy has been?\"),"
+},
+{
+"i": 769,
+"k": "text",
+"p": "Ayurveda",
+"s": "Skin",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Skin\"),"
+},
+{
+"i": 770,
+"k": "text",
+"p": "Ayurveda",
+"s": "Over the past week or two, your skin has most often felt?",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Over the past week or two, your skin has most often felt?\"),"
+},
+{
+"i": 771,
+"k": "text",
+"p": "Ayurveda",
+"s": "Dry or rough",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Dry or rough\"),",
+"above": "String(localized: \"Over the past week or two, your skin has most often felt?\"),"
+},
+{
+"i": 772,
+"k": "text",
+"p": "Ayurveda",
+"s": "Warm or sensitive",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Warm or sensitive\"),",
+"above": "String(localized: \"Over the past week or two, your skin has most often felt?\"),"
+},
+{
+"i": 773,
+"k": "text",
+"p": "Ayurveda",
+"s": "Soft or oily",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"Soft or oily\")",
+"above": "String(localized: \"Over the past week or two, your skin has most often felt?\"),"
+},
+{
+"i": 774,
+"k": "text",
+"p": "Ayurveda",
+"s": "Your answers are distributed evenly across the three traditional profiles.",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "uncertaintyNote: String(localized: \"Your answers are distributed evenly across the three traditional profiles.\")",
+"above": "let isBalanced = top.value - bottom.value <= oneAnswer + 0.000_1"
+},
+{
+"i": 775,
+"k": "text",
+"p": "Ayurveda",
+"s": "The leading profiles are within one answer, so the questionnaire does not separate them.",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "? String(localized: \"The leading profiles are within one answer, so the questionnaire does not separate them.\")",
+"above": "let hasSecondary = second.value >= 0.25"
+},
+{
+"i": 776,
+"k": "text",
+"p": "Ayurveda",
+"s": "Supportive for your current profile",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "title = String(localized: \"Supportive for your current profile\")",
+"above": "let title: String"
+},
+{
+"i": 777,
+"k": "text",
+"p": "Ayurveda",
+"s": "Less supportive for your current profile",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "title = String(localized: \"Less supportive for your current profile\")",
+"above": "title = String(localized: \"Supportive for your current profile\")"
+},
+{
+"i": 778,
+"k": "text",
+"p": "Ayurveda",
+"s": "Mixed fit for your current profile",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "title = String(localized: \"Mixed fit for your current profile\")",
+"above": "title = String(localized: \"Less supportive for your current profile\")"
+},
+{
+"i": 779,
+"k": "text",
+"p": "Ayurveda",
+"s": " and ",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "let qualityPrefix = qualityWords.prefix(2).joined(separator: String(localized: \" and \"))"
+},
+{
+"i": 780,
+"k": "text",
+"p": "Ayurveda",
+"s": "supports %@",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"supports \\(supported.map(\\.displayName).joinedEnglish)\")"
+},
+{
+"i": 781,
+"k": "text",
+"p": "Ayurveda",
+"s": "may increase %@",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "String(localized: \"may increase \\(increased.map(\\.displayName).joinedEnglish)\")"
+},
+{
+"i": 782,
+"k": "text",
+"p": "Ayurveda",
+"s": "is neutral across the three doshas",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "actionParts.append(String(localized: \"is neutral across the three doshas\"))"
+},
+{
+"i": 783,
+"k": "text",
+"p": "Ayurveda",
+"s": ", but ",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "let action = actionParts.joined(separator: String(localized: \", but \"))"
+},
+{
+"i": 784,
+"k": "text",
+"p": "Ayurveda",
+"s": "%@ and %@",
+"in": [
+"AyurvedaConstitution"
+],
+"code": "case 2: String(localized: \"\\(self[0]) and \\(self[1])\")"
+},
+{
+"i": 785,
+"k": "text",
+"p": "Ayurveda",
+"s": "strongly pacifies",
+"in": [
+"AyurvedaDisplayMath"
+],
+"code": "return String(localized: \"strongly pacifies\")",
+"above": "case ...(-2):"
+},
+{
+"i": 786,
+"k": "text",
+"p": "Ayurveda",
+"s": "pacifies",
+"in": [
+"AyurvedaDisplayMath"
+],
+"code": "return String(localized: \"pacifies\")",
+"above": "case -1:"
+},
+{
+"i": 787,
+"k": "text",
+"p": "Ayurveda",
+"s": "neutral",
+"in": [
+"AyurvedaDisplayMath"
+],
+"code": "return String(localized: \"neutral\")",
+"above": "case 0:"
+},
+{
+"i": 788,
+"k": "text",
+"p": "Ayurveda",
+"s": "aggravates",
+"in": [
+"AyurvedaDisplayMath"
+],
+"code": "return String(localized: \"aggravates\")",
+"above": "case 1:"
+},
+{
+"i": 789,
+"k": "text",
+"p": "Ayurveda",
+"s": "strongly aggravates",
+"in": [
+"AyurvedaDisplayMath"
+],
+"code": "return String(localized: \"strongly aggravates\")",
+"above": "case 1:"
+},
+{
+"i": 790,
+"k": "text",
+"p": "Ayurveda",
+"s": "Viruddha — incompatible combinations",
+"in": [
+"AyurvedaChipsView"
+],
+"code": "title: String(localized: \"Viruddha — incompatible combinations\"),",
+"above": "var body: some View {"
+},
+{
+"i": 791,
+"k": "text",
+"p": "Ayurveda",
+"s": "Contraindications",
+"in": [
+"AyurvedaChipsView"
+],
+"code": "title: String(localized: \"Contraindications\"),",
+"above": "title: String(localized: \"Viruddha — incompatible combinations\"),"
+},
+{
+"i": 792,
+"k": "text",
+"p": "Ayurveda",
+"s": "Strongly pacifies",
+"in": [
+"AyurvedaDisplay"
+],
+"code": "return String(localized: \"Strongly pacifies\")",
+"above": "case -2:"
+},
+{
+"i": 793,
+"k": "text",
+"p": "Ayurveda",
+"s": "Pacifies",
+"in": [
+"AyurvedaDisplay",
+"AyurvedaSearchFilters",
+"DoshaBarsView"
+],
+"code": "return String(localized: \"Pacifies\")",
+"above": "case -1:"
+},
+{
+"i": 794,
+"k": "text",
+"p": "Ayurveda",
+"s": "Aggravates",
+"in": [
+"AyurvedaDisplay",
+"AyurvedaSearchFilters",
+"DoshaBarsView"
+],
+"code": "return String(localized: \"Aggravates\")",
+"above": "case 1:"
+},
+{
+"i": 795,
+"k": "text",
+"p": "Ayurveda",
+"s": "Strongly aggravates",
+"in": [
+"AyurvedaDisplay"
+],
+"code": "return String(localized: \"Strongly aggravates\")",
+"above": "case 2:"
+},
+{
+"i": 796,
+"k": "text",
+"p": "Ayurveda",
+"s": "%@: %@, %@ of two",
+"in": [
+"AyurvedaDisplay"
+],
+"code": "String(localized: \"\\(name): \\(effectWord.lowercased()), \\(spokenValue) of two\")"
+},
+{
+"i": 797,
+"k": "text",
+"p": "Ayurveda",
+"s": "minus two",
+"in": [
+"AyurvedaDisplay",
+"DoshaScaleSelector"
+],
+"code": "case -2: return String(localized: \"minus two\")",
+"above": "private var spokenValue: String {"
+},
+{
+"i": 798,
+"k": "text",
+"p": "Ayurveda",
+"s": "minus one",
+"in": [
+"AyurvedaDisplay",
+"DoshaScaleSelector"
+],
+"code": "case -1: return String(localized: \"minus one\")",
+"above": "case -2: return String(localized: \"minus two\")"
+},
+{
+"i": 799,
+"k": "text",
+"p": "Ayurveda",
+"s": "plus one",
+"in": [
+"AyurvedaDisplay",
+"DoshaScaleSelector"
+],
+"code": "case 1: return String(localized: \"plus one\")",
+"above": "case -1: return String(localized: \"minus one\")"
+},
+{
+"i": 800,
+"k": "text",
+"p": "Ayurveda",
+"s": "plus two",
+"in": [
+"AyurvedaDisplay",
+"DoshaScaleSelector"
+],
+"code": "case 2: return String(localized: \"plus two\")",
+"above": "case 1: return String(localized: \"plus one\")"
+},
+{
+"i": 801,
+"k": "text",
+"p": "Ayurveda",
+"s": "zero",
+"in": [
+"AyurvedaDisplay",
+"DoshaScaleSelector"
+],
+"code": "default: return String(localized: \"zero\")",
+"above": "case 2: return String(localized: \"plus two\")"
+},
+{
+"i": 802,
+"k": "text",
+"p": "Ayurveda",
+"s": "Sweet",
+"in": [
+"AyurvedaDisplay",
+"WrappingSegmentedControl"
+],
+"code": "case \"sweet\": String(localized: \"Sweet\")",
+"above": "static func localized(_ value: String) -> String {"
+},
+{
+"i": 803,
+"k": "text",
+"p": "Ayurveda",
+"s": "Sour",
+"in": [
+"AyurvedaDisplay",
+"WrappingSegmentedControl"
+],
+"code": "case \"sour\": String(localized: \"Sour\")",
+"above": "case \"sweet\": String(localized: \"Sweet\")"
+},
+{
+"i": 804,
+"k": "text",
+"p": "Ayurveda",
+"s": "Salty",
+"in": [
+"AyurvedaDisplay"
+],
+"code": "case \"salty\": String(localized: \"Salty\")",
+"above": "case \"sour\": String(localized: \"Sour\")"
+},
+{
+"i": 805,
+"k": "text",
+"p": "Ayurveda",
+"s": "Pungent",
+"in": [
+"AyurvedaDisplay",
+"WrappingSegmentedControl"
+],
+"code": "case \"pungent\": String(localized: \"Pungent\")",
+"above": "case \"salty\": String(localized: \"Salty\")"
+},
+{
+"i": 806,
+"k": "text",
+"p": "Ayurveda",
+"s": "Bitter",
+"in": [
+"AyurvedaDisplay"
+],
+"code": "case \"bitter\": String(localized: \"Bitter\")",
+"above": "case \"pungent\": String(localized: \"Pungent\")"
+},
+{
+"i": 807,
+"k": "text",
+"p": "Ayurveda",
+"s": "Astringent",
+"in": [
+"AyurvedaDisplay"
+],
+"code": "case \"astringent\": String(localized: \"Astringent\")"
+},
+{
+"i": 808,
+"k": "text",
+"p": "Ayurveda",
+"s": "Heating",
+"in": [
+"AyurvedaDisplay",
+"WrappingSegmentedControl"
+],
+"code": "case \"heating\": String(localized: \"Heating\")",
+"above": "case \"astringent\": String(localized: \"Astringent\")"
+},
+{
+"i": 809,
+"k": "text",
+"p": "Ayurveda",
+"s": "Cooling",
+"in": [
+"AyurvedaDisplay",
+"WrappingSegmentedControl"
+],
+"code": "case \"cooling\": String(localized: \"Cooling\")",
+"above": "case \"heating\": String(localized: \"Heating\")"
+},
+{
+"i": 810,
+"k": "text",
+"p": "Ayurveda",
+"s": "Dense",
+"in": [
+"AyurvedaDisplay"
+],
+"code": "case \"dense\": String(localized: \"Dense\")",
+"above": "case \"neutral\": String(localized: \"Neutral\")"
+},
+{
+"i": 811,
+"k": "text",
+"p": "Ayurveda",
+"s": "Dry",
+"in": [
+"AyurvedaDisplay"
+],
+"code": "case \"dry\": String(localized: \"Dry\")",
+"above": "case \"dense\": String(localized: \"Dense\")"
+},
+{
+"i": 812,
+"k": "text",
+"p": "Ayurveda",
+"s": "Heavy",
+"in": [
+"AyurvedaDisplay"
+],
+"code": "case \"heavy\": String(localized: \"Heavy\")",
+"above": "case \"dry\": String(localized: \"Dry\")"
+},
+{
+"i": 813,
+"k": "text",
+"p": "Ayurveda",
+"s": "Light",
+"in": [
+"AyurvedaDisplay"
+],
+"code": "case \"light\": String(localized: \"Light\")",
+"above": "case \"heavy\": String(localized: \"Heavy\")"
+},
+{
+"i": 814,
+"k": "text",
+"p": "Ayurveda",
+"s": "Liquid",
+"in": [
+"AyurvedaDisplay"
+],
+"code": "case \"liquid\": String(localized: \"Liquid\")",
+"above": "case \"light\": String(localized: \"Light\")"
+},
+{
+"i": 815,
+"k": "text",
+"p": "Ayurveda",
+"s": "Oily",
+"in": [
+"AyurvedaDisplay"
+],
+"code": "case \"oily\": String(localized: \"Oily\")",
+"above": "case \"liquid\": String(localized: \"Liquid\")"
+},
+{
+"i": 816,
+"k": "text",
+"p": "Ayurveda",
+"s": "Penetrating",
+"in": [
+"AyurvedaDisplay"
+],
+"code": "case \"penetrating\": String(localized: \"Penetrating\")"
+},
+{
+"i": 817,
+"k": "text",
+"p": "Ayurveda",
+"s": "Rough",
+"in": [
+"AyurvedaDisplay"
+],
+"code": "case \"rough\": String(localized: \"Rough\")",
+"above": "case \"penetrating\": String(localized: \"Penetrating\")"
+},
+{
+"i": 818,
+"k": "text",
+"p": "Ayurveda",
+"s": "Slimy",
+"in": [
+"AyurvedaDisplay"
+],
+"code": "case \"slimy\": String(localized: \"Slimy\")",
+"above": "case \"sharp\": String(localized: \"Sharp\")"
+},
+{
+"i": 819,
+"k": "text",
+"p": "Ayurveda",
+"s": "Smooth",
+"in": [
+"AyurvedaDisplay"
+],
+"code": "case \"smooth\": String(localized: \"Smooth\")",
+"above": "case \"slimy\": String(localized: \"Slimy\")"
+},
+{
+"i": 820,
+"k": "text",
+"p": "Ayurveda",
+"s": "Soft",
+"in": [
+"AyurvedaDisplay"
+],
+"code": "case \"soft\": String(localized: \"Soft\")",
+"above": "case \"smooth\": String(localized: \"Smooth\")"
+},
+{
+"i": 821,
+"k": "text",
+"p": "Ayurveda",
+"s": "Movement & Air",
+"in": [
+"AyurvedaEditorSection",
+"YogaExerciseViews"
+],
+"code": "subtitle: String(localized: \"Movement & Air\")",
+"above": "private var doshaGroup: some View {"
+},
+{
+"i": 822,
+"k": "text",
+"p": "Ayurveda",
+"s": "Fire & Transformation",
+"in": [
+"AyurvedaEditorSection",
+"YogaExerciseViews"
+],
+"code": "subtitle: String(localized: \"Fire & Transformation\")"
+},
+{
+"i": 823,
+"k": "text",
+"p": "Ayurveda",
+"s": "Structure & Water",
+"in": [
+"AyurvedaEditorSection",
+"YogaExerciseViews"
+],
+"code": "subtitle: String(localized: \"Structure & Water\")"
+},
+{
+"i": 824,
+"k": "text",
+"p": "Ayurveda",
+"s": "Rasa (taste)",
+"in": [
+"AyurvedaEditorSection",
+"AyurvedaSectionView"
+],
+"code": "editorGroup(title: String(localized: \"Rasa (taste)\")) {"
+},
+{
+"i": 825,
+"k": "text",
+"p": "Ayurveda",
+"s": "Vipaka (post-digestive)",
+"in": [
+"AyurvedaEditorSection",
+"AyurvedaSectionView"
+],
+"code": "editorGroup(title: String(localized: \"Vipaka (post-digestive)\")) {"
+},
+{
+"i": 826,
+"k": "text",
+"p": "Ayurveda",
+"s": "Gunas (qualities)",
+"in": [
+"AyurvedaEditorSection",
+"AyurvedaSectionView"
+],
+"code": "editorGroup(title: String(localized: \"Gunas (qualities)\")) {"
+},
+{
+"i": 827,
+"k": "text",
+"p": "Ayurveda",
+"s": "Health warning",
+"in": [
+"AyurvedaSectionView"
+],
+"code": "title: String(localized: \"Health warning\"),",
+"above": "var body: some View {"
+},
+{
+"i": 828,
+"k": "text",
+"p": "Ayurveda",
+"s": "Traditional sources and modern evidence advise against consuming this. Shown for reference only — never recommended.",
+"in": [
+"AyurvedaSectionView"
+],
+"code": "? String(localized: \"Traditional sources and modern evidence advise against consuming this. Shown for reference only — never recommended.\")",
+"above": "title: String(localized: \"Health warning\"),"
+},
+{
+"i": 829,
+"k": "text",
+"p": "Ayurveda",
+"s": "Not available as food. Shown for reference only — no serving or recommendation is provided.",
+"in": [
+"AyurvedaSectionView"
+],
+"code": ": String(localized: \"Not available as food. Shown for reference only — no serving or recommendation is provided.\")",
+"above": "title: String(localized: \"Health warning\"),"
+},
+{
+"i": 830,
+"k": "text",
+"p": "Ayurveda",
+"s": "Preparation modifiers",
+"in": [
+"AyurvedaSectionView"
+],
+"code": "title: String(localized: \"Preparation modifiers\"),",
+"above": "title: String(localized: \"Gunas (qualities)\"),"
+},
+{
+"i": 831,
+"k": "text",
+"p": "Ayurveda",
+"s": "(calms, reduces)",
+"in": [
+"DoshaBarsView"
+],
+"code": "detail: String(localized: \"(calms, reduces)\"),",
+"above": "title: String(localized: \"Pacifies\"),"
+},
+{
+"i": 832,
+"k": "text",
+"p": "Ayurveda",
+"s": "(no effect)",
+"in": [
+"DoshaBarsView"
+],
+"code": "detail: String(localized: \"(no effect)\"),",
+"above": "title: String(localized: \"Neutral\"),"
+},
+{
+"i": 833,
+"k": "text",
+"p": "Ayurveda",
+"s": "(increases)",
+"in": [
+"DoshaBarsView"
+],
+"code": "detail: String(localized: \"(increases)\"),",
+"above": "title: String(localized: \"Aggravates\"),"
+},
+{
+"i": 834,
+"k": "text",
+"p": "Ayurveda",
+"s": "Energy & Macronutrients",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "String(localized: \"Energy & Macronutrients\"),",
+"above": "Text(basis.title).tag(basis)"
+},
+{
+"i": 835,
+"k": "text",
+"p": "Ayurveda",
+"s": "Vitamins",
+"in": [
+"FoodItemDetailView",
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "String(localized: \"Vitamins\"),"
+},
+{
+"i": 836,
+"k": "text",
+"p": "Ayurveda",
+"s": "Minerals",
+"in": [
+"FoodItemDetailView",
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView"
+],
+"code": "String(localized: \"Minerals\"),"
+},
+{
+"i": 837,
+"k": "text",
+"p": "Ayurveda",
+"s": "Missing nutrition: ",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "Text(String(localized: \"Missing nutrition: \") + display.missingIngredients.joined(separator: \", \"))"
+},
+{
+"i": 838,
+"k": "text",
+"p": "Ayurveda",
+"s": "Per serving",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "return String(localized: \"Per serving\")",
+"above": "case .perServing:"
+},
+{
+"i": 839,
+"k": "text",
+"p": "Ayurveda",
+"s": "Per 100 g",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "return String(localized: \"Per 100 g\")",
+"above": "case .per100g:"
+},
+{
+"i": 840,
+"k": "text",
+"p": "Ayurveda",
+"s": "Full ingredient coverage",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "return String(localized: \"Full ingredient coverage\")",
+"above": "case \"full\":"
+},
+{
+"i": 841,
+"k": "text",
+"p": "Ayurveda",
+"s": "Estimated",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "return String(localized: \"Estimated\")",
+"above": "case \"estimated\":"
+},
+{
+"i": 842,
+"k": "text",
+"p": "Ayurveda",
+"s": "Unavailable",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "return String(localized: \"Unavailable\")",
+"above": "case \"estimated\":"
+},
+{
+"i": 843,
+"k": "text",
+"p": "Ayurveda",
+"s": "%lld servings · %@ g total",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "String(localized: \"\\(servings) servings · \\(totalWeightG.clean) g total\")"
+},
+{
+"i": 844,
+"k": "text",
+"p": "Ayurveda",
+"s": "No ingredient nutrition could be resolved.",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "return String(localized: \"No ingredient nutrition could be resolved.\")",
+"above": "var explanation: String {"
+},
+{
+"i": 845,
+"k": "text",
+"p": "Ayurveda",
+"s": "Calculated from USDA-bound ingredients. Unavailable USDA nutrient observations are shown as —.",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "return String(localized: \"Calculated from USDA-bound ingredients. Unavailable USDA nutrient observations are shown as —.\")",
+"above": "var explanation: String {"
+},
+{
+"i": 846,
+"k": "text",
+"p": "Ayurveda",
+"s": "Fiber",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"RecipeNutritionPanelView"
+],
+"code": "RecipeNutrientDefinition(key: \"fiber\", label: String(localized: \"Fiber\"), defaultUnit: \"g\"),"
+},
+{
+"i": 847,
+"k": "text",
+"p": "Ayurveda",
+"s": "Total sugars",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"RecipeNutritionPanelView"
+],
+"code": "RecipeNutrientDefinition(key: \"totalSugars\", label: String(localized: \"Total sugars\"), defaultUnit: \"g\"),"
+},
+{
+"i": 848,
+"k": "text",
+"p": "Ayurveda",
+"s": "Vitamin A RAE",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "RecipeNutrientDefinition(key: \"vitaminA_RAE\", label: String(localized: \"Vitamin A RAE\"), defaultUnit: \"µg\"),"
+},
+{
+"i": 849,
+"k": "text",
+"p": "Ayurveda",
+"s": "Retinol",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "RecipeNutrientDefinition(key: \"retinol\", label: String(localized: \"Retinol\"), defaultUnit: \"µg\"),"
+},
+{
+"i": 850,
+"k": "text",
+"p": "Ayurveda",
+"s": "Alpha-carotene",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "RecipeNutrientDefinition(key: \"caroteneAlpha\", label: String(localized: \"Alpha-carotene\"), defaultUnit: \"µg\"),"
+},
+{
+"i": 851,
+"k": "text",
+"p": "Ayurveda",
+"s": "Beta-carotene",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "RecipeNutrientDefinition(key: \"caroteneBeta\", label: String(localized: \"Beta-carotene\"), defaultUnit: \"µg\"),"
+},
+{
+"i": 852,
+"k": "text",
+"p": "Ayurveda",
+"s": "Beta-cryptoxanthin",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "RecipeNutrientDefinition(key: \"cryptoxanthinBeta\", label: String(localized: \"Beta-cryptoxanthin\"), defaultUnit: \"µg\"),"
+},
+{
+"i": 853,
+"k": "text",
+"p": "Ayurveda",
+"s": "Lutein + zeaxanthin",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "RecipeNutrientDefinition(key: \"luteinZeaxanthin\", label: String(localized: \"Lutein + zeaxanthin\"), defaultUnit: \"µg\"),"
+},
+{
+"i": 854,
+"k": "text",
+"p": "Ayurveda",
+"s": "Lycopene",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "RecipeNutrientDefinition(key: \"lycopene\", label: String(localized: \"Lycopene\"), defaultUnit: \"µg\"),"
+},
+{
+"i": 855,
+"k": "text",
+"p": "Ayurveda",
+"s": "Vitamin B1",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "RecipeNutrientDefinition(key: \"vitaminB1_Thiamin\", label: String(localized: \"Vitamin B1\"), defaultUnit: \"mg\"),"
+},
+{
+"i": 856,
+"k": "text",
+"p": "Ayurveda",
+"s": "Vitamin B2",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "RecipeNutrientDefinition(key: \"vitaminB2_Riboflavin\", label: String(localized: \"Vitamin B2\"), defaultUnit: \"mg\"),"
+},
+{
+"i": 857,
+"k": "text",
+"p": "Ayurveda",
+"s": "Vitamin B3",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "RecipeNutrientDefinition(key: \"vitaminB3_Niacin\", label: String(localized: \"Vitamin B3\"), defaultUnit: \"mg\"),"
+},
+{
+"i": 858,
+"k": "text",
+"p": "Ayurveda",
+"s": "Vitamin B5",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "RecipeNutrientDefinition(key: \"vitaminB5_PantothenicAcid\", label: String(localized: \"Vitamin B5\"), defaultUnit: \"mg\"),"
+},
+{
+"i": 859,
+"k": "text",
+"p": "Ayurveda",
+"s": "Vitamin B6",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "RecipeNutrientDefinition(key: \"vitaminB6\", label: String(localized: \"Vitamin B6\"), defaultUnit: \"mg\"),"
+},
+{
+"i": 860,
+"k": "text",
+"p": "Ayurveda",
+"s": "Folate DFE",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "RecipeNutrientDefinition(key: \"folateDFE\", label: String(localized: \"Folate DFE\"), defaultUnit: \"µg\"),"
+},
+{
+"i": 861,
+"k": "text",
+"p": "Ayurveda",
+"s": "Food folate",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "RecipeNutrientDefinition(key: \"folateFood\", label: String(localized: \"Food folate\"), defaultUnit: \"µg\"),"
+},
+{
+"i": 862,
+"k": "text",
+"p": "Ayurveda",
+"s": "Total folate",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "RecipeNutrientDefinition(key: \"folateTotal\", label: String(localized: \"Total folate\"), defaultUnit: \"µg\"),"
+},
+{
+"i": 863,
+"k": "text",
+"p": "Ayurveda",
+"s": "Folic acid",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "RecipeNutrientDefinition(key: \"folicAcid\", label: String(localized: \"Folic acid\"), defaultUnit: \"µg\"),"
+},
+{
+"i": 864,
+"k": "text",
+"p": "Ayurveda",
+"s": "Vitamin B12",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "RecipeNutrientDefinition(key: \"vitaminB12\", label: String(localized: \"Vitamin B12\"), defaultUnit: \"µg\"),"
+},
+{
+"i": 865,
+"k": "text",
+"p": "Ayurveda",
+"s": "Vitamin C",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "RecipeNutrientDefinition(key: \"vitaminC\", label: String(localized: \"Vitamin C\"), defaultUnit: \"mg\"),"
+},
+{
+"i": 866,
+"k": "text",
+"p": "Ayurveda",
+"s": "Vitamin D",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "RecipeNutrientDefinition(key: \"vitaminD\", label: String(localized: \"Vitamin D\"), defaultUnit: \"µg\"),"
+},
+{
+"i": 867,
+"k": "text",
+"p": "Ayurveda",
+"s": "Vitamin E",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "RecipeNutrientDefinition(key: \"vitaminE\", label: String(localized: \"Vitamin E\"), defaultUnit: \"mg\"),"
+},
+{
+"i": 868,
+"k": "text",
+"p": "Ayurveda",
+"s": "Vitamin K",
+"in": [
+"RecipeNutritionPanelView"
+],
+"code": "RecipeNutrientDefinition(key: \"vitaminK\", label: String(localized: \"Vitamin K\"), defaultUnit: \"µg\"),"
+},
+{
+"i": 869,
+"k": "text",
+"p": "Ayurveda",
+"s": "Choline",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "RecipeNutrientDefinition(key: \"choline\", label: String(localized: \"Choline\"), defaultUnit: \"mg\"),"
+},
+{
+"i": 870,
+"k": "text",
+"p": "Ayurveda",
+"s": "Calcium",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "RecipeNutrientDefinition(key: \"calcium\", label: String(localized: \"Calcium\"), defaultUnit: \"mg\"),"
+},
+{
+"i": 871,
+"k": "text",
+"p": "Ayurveda",
+"s": "Iron",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "RecipeNutrientDefinition(key: \"iron\", label: String(localized: \"Iron\"), defaultUnit: \"mg\"),"
+},
+{
+"i": 872,
+"k": "text",
+"p": "Ayurveda",
+"s": "Magnesium",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "RecipeNutrientDefinition(key: \"magnesium\", label: String(localized: \"Magnesium\"), defaultUnit: \"mg\"),"
+},
+{
+"i": 873,
+"k": "text",
+"p": "Ayurveda",
+"s": "Phosphorus",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "RecipeNutrientDefinition(key: \"phosphorus\", label: String(localized: \"Phosphorus\"), defaultUnit: \"mg\"),"
+},
+{
+"i": 874,
+"k": "text",
+"p": "Ayurveda",
+"s": "Potassium",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "RecipeNutrientDefinition(key: \"potassium\", label: String(localized: \"Potassium\"), defaultUnit: \"mg\"),"
+},
+{
+"i": 875,
+"k": "text",
+"p": "Ayurveda",
+"s": "Sodium",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "RecipeNutrientDefinition(key: \"sodium\", label: String(localized: \"Sodium\"), defaultUnit: \"mg\"),"
+},
+{
+"i": 876,
+"k": "text",
+"p": "Ayurveda",
+"s": "Selenium",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "RecipeNutrientDefinition(key: \"selenium\", label: String(localized: \"Selenium\"), defaultUnit: \"µg\"),"
+},
+{
+"i": 877,
+"k": "text",
+"p": "Ayurveda",
+"s": "Zinc",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "RecipeNutrientDefinition(key: \"zinc\", label: String(localized: \"Zinc\"), defaultUnit: \"mg\"),"
+},
+{
+"i": 878,
+"k": "text",
+"p": "Ayurveda",
+"s": "Copper",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "RecipeNutrientDefinition(key: \"copper\", label: String(localized: \"Copper\"), defaultUnit: \"mg\"),"
+},
+{
+"i": 879,
+"k": "text",
+"p": "Ayurveda",
+"s": "Manganese",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "RecipeNutrientDefinition(key: \"manganese\", label: String(localized: \"Manganese\"), defaultUnit: \"mg\"),"
+},
+{
+"i": 880,
+"k": "text",
+"p": "Ayurveda",
+"s": "Fluoride",
+"in": [
+"FoodItemEditorView",
+"FoodItemMenuEditorView",
+"FoodItemReceptEditorView",
+"NutrientForms"
+],
+"code": "RecipeNutrientDefinition(key: \"fluoride\", label: String(localized: \"Fluoride\"), defaultUnit: \"µg\"),"
+},
+{
+"i": 881,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Live On",
+"in": [
+"BarcodeScannerView"
+],
+"code": "text: isLivePreviewOn ? String(localized: \"Live On\") : String(localized: \"Live Off\")"
+},
+{
+"i": 882,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Live Off",
+"in": [
+"BarcodeScannerView"
+],
+"code": "text: isLivePreviewOn ? String(localized: \"Live On\") : String(localized: \"Live Off\")"
+},
+{
+"i": 883,
+"k": "button",
+"p": "BarcodeScanner",
+"s": "Camera",
+"in": [
+"BarcodeScannerView"
+],
+"code": "scanOptionButton(icon: \"camera.fill\", text: String(localized: \"Camera\")) {"
+},
+{
+"i": 884,
+"k": "button",
+"p": "BarcodeScanner",
+"s": "Upload",
+"in": [
+"BarcodeScannerView"
+],
+"code": "scanOptionButton(icon: \"photo.on.rectangle.angled\", text: String(localized: \"Upload\")) {"
+},
+{
+"i": 885,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "your shopping list",
+"in": [
+"BarcodeScannerView"
+],
+"code": "let destination = (mode == .shoppingList) ? String(localized: \"your shopping list\") : String(localized: \"your meal\")"
+},
+{
+"i": 886,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "your meal",
+"in": [
+"BarcodeScannerView"
+],
+"code": "let destination = (mode == .shoppingList) ? String(localized: \"your shopping list\") : String(localized: \"your meal\")"
+},
+{
+"i": 887,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "this product",
+"in": [
+"BarcodeScannerView"
+],
+"code": "Text(\"Found \\\"\\(foodItem.name)\\\" in your database. You can add it, or create a new entry for \\\"\\(item.productName ?? String(localized: \"this product\"))\\\".\")"
+},
+{
+"i": 888,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "This device doesn’t support Apple Intelligence.",
+"in": [
+"BarcodeScannerView",
+"ExerciseItemEditorView",
+"FoodItemEditorView",
+"FoodItemMenuEditorView"
+],
+"code": "alertMessage = String(localized: \"This device doesn’t support Apple Intelligence.\")",
+"above": "case .deviceNotEligible:"
+},
+{
+"i": 889,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Apple Intelligence is turned off. Enable it in Settings to use AI exercise generation.",
+"in": [
+"BarcodeScannerView",
+"ExerciseItemEditorView",
+"WorkoutEditorView"
+],
+"code": "alertMessage = String(localized: \"Apple Intelligence is turned off. Enable it in Settings to use AI exercise generation.\")",
+"above": "case .appleIntelligenceNotEnabled:"
+},
+{
+"i": 890,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "The model is downloading or preparing. Please try again in a bit.",
+"in": [
+"BarcodeScannerView",
+"ExerciseItemEditorView",
+"MealActionMenuView",
+"NutritionsDetailView"
+],
+"code": "alertMessage = String(localized: \"The model is downloading or preparing. Please try again in a bit.\")",
+"above": "case .modelNotReady:"
+},
+{
+"i": 891,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Apple Intelligence requires iOS 26 or newer. Update your OS to use this feature.",
+"in": [
+"BarcodeScannerView",
+"ExerciseItemEditorView",
+"MealActionMenuView",
+"NutritionsDetailView"
+],
+"code": "alertMessage = String(localized: \"Apple Intelligence requires iOS 26 or newer. Update your OS to use this feature.\")",
+"above": "case .unavailableUnsupportedOS:"
+},
+{
+"i": 892,
+"k": "text",
+"p": "BarcodeScanner",
+"s": "Apple Intelligence is currently unavailable for an unknown reason.",
+"in": [
+"BarcodeScannerView",
+"ExerciseItemEditorView",
+"FoodItemEditorView",
+"FoodItemMenuEditorView"
+],
+"code": "alertMessage = String(localized: \"Apple Intelligence is currently unavailable for an unknown reason.\")",
+"above": "case .unavailableOther:"
+}
+]

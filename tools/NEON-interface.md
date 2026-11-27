@@ -11,7 +11,8 @@ zh-Hant
 
 ## The package
 
-`tools/ui-strings`: 678 strings, about 2,700 words, in four batches.
+`tools/ui-strings`: 1,394 strings, about 5,100 words. The first round is
+batches 0–3 (678 strings), the second batches 4–8 (716 strings, below).
 
 | Batch | Strings | What |
 |---|---|---|
@@ -62,15 +63,27 @@ agrees to ship before the onboarding and paywall strings.
 4. After `apply.py`: `tools/search-golden/remote.sh run` must still pass, and
    the app must build.
 
-## What this package does not cover
+## Second round: batches 4–8
 
-These 678 are the strings the Swift compiler already treats as translatable:
-once they are in the catalogue they appear in the app with no code change.
-A second group is not in the package: text held in ordinary `String` values —
-option names, questionnaire questions and answers, error messages built in
-code. Those need a change in the app before they can be translated at all,
-and will come as a later round (`extract.py --new` writes batches with only
-the new strings; translations already made are kept).
+The app has since been changed so that the text it held in ordinary values is
+translatable too. `extract.py --append` added it after the first round's
+batches; item numbers go on from 678 and batches 0–3 are untouched.
+
+| Batch | Strings | What |
+|---|---|---|
+| 4 | 215 | ads, analytics, Ayurveda (with the constitution questionnaire), barcode scanner |
+| 5 | 257 | calendar, shared views, exercise, fitness, food |
+| 6 | 215 | food search, health, live activity, main (tabs, permissions, notifications), meals, nodes, nutrients, practices, profile, settings, shopping list, storage, training plan, yoga |
+| 7 | 17 | Live Activity widget, subscription period words |
+| 8 | 12 | onboarding — **last, with batch 3, only when Mincho says so** |
+
+Same procedure as batches 0–2, and the section "The second round" of the
+guide. `assemble.py` reads every batch that has an out file and keeps what a
+language already has.
+
+Still English after this: the paywall and the profile wizard (about to be
+rewritten), the names of vitamins and minerals from the seed data, default
+names the app saves (meals, trainings), and the built-in theme names.
 
 Do not change Swift code, and do not edit the catalogues by hand.
 
@@ -78,4 +91,4 @@ Do not change Swift code, and do not edit the catalogues by hand.
 
 `tools/search-golden/remote.sh test` (a build), `tools/ui-strings/fetch.sh`
 (copies what the compiler extracted), `python3 tools/ui-strings/extract.py
---new`.
+--append`.

@@ -405,7 +405,7 @@ struct TrainingView: View {
                     exerciseToDelete = nil
                 }
             } message: {
-                Text("Are you sure you want to delete '\(exerciseToDelete?.name ?? "this exercise")' from your workout? This action cannot be undone.")
+                Text("Are you sure you want to delete '\(exerciseToDelete?.name ?? String(localized: "this exercise"))' from your workout? This action cannot be undone.")
             }
             .confirmationDialog("Add Trainings from Plan", isPresented: .constant(trainingPlanDaysToAdd != nil), titleVisibility: .visible, actions: {
                 Button("Add to Existing Workouts") { processTrainingPlanAddition(mode: .append) }
@@ -761,7 +761,7 @@ struct TrainingView: View {
                 .distribution,
             target: exerciseAyurvedaTarget,
             horizontalPadding: 10,
-            accessibilityContext: "Daily exercise Ayurveda",
+            accessibilityContext: String(localized: "Daily exercise Ayurveda"),
             onTap: { presentRingDetail(.ayurveda) }
         )
     }
@@ -988,8 +988,8 @@ struct TrainingView: View {
                         )
                     case .pickExistingPlan:
                         TrainingPlanPickerView(
-                            title: "Add to Existing Plan",
-                            dismissButtonLabel: "Back",
+                            title: String(localized: "Add to Existing Plan"),
+                            dismissButtonLabel: String(localized: "Back"),
                             plans: filteredTrainingPlans,
                             onDismiss: { withAnimation { trainingActionContent = .actions } },
                             onSelectPlan: { plan in
@@ -1061,7 +1061,7 @@ struct TrainingView: View {
                         )
                     } else {
                         TrainingPlanPickerView(
-                            title: "Add from Training Plan",
+                            title: String(localized: "Add from Training Plan"),
                             plans: filteredTrainingPlans,
                             onDismiss: dismissTrainingPlanPicker,
                             onSelectPlan: { plan in
@@ -1323,7 +1323,7 @@ struct TrainingView: View {
         ) {
             self.runningGenerationJobID = newJob.id
         } else {
-            alertMsg = "Could not start AI training generation job."
+            alertMsg = String(localized: "Could not start AI training generation job.")
             showAlert = true
             toastTimer?.invalidate()
             toastTimer = nil
@@ -1358,7 +1358,7 @@ struct TrainingView: View {
         }
         
         guard !workoutsToGenerate.isEmpty else {
-            alertMsg = "All workouts for this day already have exercises. Clear some if you want the AI to generate new ones."
+            alertMsg = String(localized: "All workouts for this day already have exercises. Clear some if you want the AI to generate new ones.")
             showAlert = true
             return
         }
@@ -1632,8 +1632,8 @@ struct TrainingView: View {
                 if reminderDate.timeIntervalSinceNow > 0 {
                     do {
                         let newID = try await NotificationManager.shared.scheduleNotification(
-                            title: "🧘 Workout Reminder",
-                            body: "Time for your workout: \(training.name)!",
+                            title: String(localized: "🧘 Workout Reminder"),
+                            body: String(localized: "Time for your workout: \(training.name)!"),
                             timeInterval: reminderDate.timeIntervalSinceNow,
                             userInfo: [
                                 "trainingID": training.id.uuidString,
@@ -1883,7 +1883,7 @@ struct TrainingView: View {
                 
                 HStack {
                     if let group = selectedMuscleGroup {
-                        Text("Selected: \(group.rawValue)")
+                        Text("Selected: \(group.displayName)")
                             .font(.body)
                             .foregroundStyle(effectManager.currentGlobalAccentColor)
                             .lineLimit(1)
@@ -1993,13 +1993,13 @@ struct TrainingView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(maxHeight: ringCellHeight * 0.85)
                     
-                    Text(group.rawValue)
+                    Text(group.displayName)
                         .font(.system(size: 10, weight: .medium))
                         .multilineTextAlignment(.center)
                         .foregroundStyle(effectManager.currentGlobalAccentColor)
                         .lineLimit(1)
                 } else {
-                    Text(group.rawValue)
+                    Text(group.displayName)
                         .font(.caption.weight(.semibold))
                         .multilineTextAlignment(.center)
                         .foregroundStyle(effectManager.currentGlobalAccentColor)
@@ -2122,7 +2122,7 @@ struct TrainingView: View {
             }
         }) {
             HStack(spacing: 6) {
-                Text(group.rawValue)
+                Text(group.displayName)
                     .font(.caption)
                     .fontWeight(.medium)
                 
@@ -2208,15 +2208,15 @@ struct TrainingView: View {
         case .available:
             return true
         case .deviceNotEligible:
-            alertMsg = "This device doesn’t support Apple Intelligence."
+            alertMsg = String(localized: "This device doesn’t support Apple Intelligence.")
         case .appleIntelligenceNotEnabled:
-            alertMsg = "Apple Intelligence is turned off. Enable it in Settings to use AI."
+            alertMsg = String(localized: "Apple Intelligence is turned off. Enable it in Settings to use AI.")
         case .modelNotReady:
-            alertMsg = "The model is downloading or preparing. Please try again shortly."
+            alertMsg = String(localized: "The model is downloading or preparing. Please try again shortly.")
         case .unavailableUnsupportedOS:
-            alertMsg = "Apple Intelligence requires iOS 26 or newer."
+            alertMsg = String(localized: "Apple Intelligence requires iOS 26 or newer.")
         case .unavailableOther:
-            alertMsg = "Apple Intelligence is currently unavailable for an unknown reason."
+            alertMsg = String(localized: "Apple Intelligence is currently unavailable for an unknown reason.")
         }
         showAlert = true
         return false

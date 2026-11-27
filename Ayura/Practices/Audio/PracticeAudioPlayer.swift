@@ -273,7 +273,7 @@ final class PracticeAudioPlayer: NSObject, ObservableObject {
         guard let plan else { return }
         var info: [String: Any] = [
             MPMediaItemPropertyTitle: plan.title,
-            MPMediaItemPropertyAlbumTitle: "Ayura Practices",
+            MPMediaItemPropertyAlbumTitle: String(localized: "Ayura Practices"),
             MPMediaItemPropertyPlaybackDuration: plan.totalDuration,
             MPNowPlayingInfoPropertyElapsedPlaybackTime: elapsed,
             MPNowPlayingInfoPropertyPlaybackRate: state == .playing ? 1 : 0,

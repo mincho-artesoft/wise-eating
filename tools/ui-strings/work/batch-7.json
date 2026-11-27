@@ -1,0 +1,181 @@
+[
+{
+"i": 1365,
+"k": "text",
+"p": "Еxtensions",
+"s": "days",
+"in": [
+"Product+Extension"
+],
+"code": "case .day: return plural ? String(localized: \"days\") : String(localized: \"day\")"
+},
+{
+"i": 1366,
+"k": "text",
+"p": "Еxtensions",
+"s": "day",
+"in": [
+"Product+Extension"
+],
+"code": "case .day: return plural ? String(localized: \"days\") : String(localized: \"day\")"
+},
+{
+"i": 1367,
+"k": "text",
+"p": "Еxtensions",
+"s": "weeks",
+"in": [
+"Product+Extension"
+],
+"code": "case .week: return plural ? String(localized: \"weeks\") : String(localized: \"week\")"
+},
+{
+"i": 1368,
+"k": "text",
+"p": "Еxtensions",
+"s": "week",
+"in": [
+"Product+Extension"
+],
+"code": "case .week: return plural ? String(localized: \"weeks\") : String(localized: \"week\")"
+},
+{
+"i": 1369,
+"k": "text",
+"p": "Еxtensions",
+"s": "months",
+"in": [
+"Product+Extension"
+],
+"code": "case .month: return plural ? String(localized: \"months\") : String(localized: \"month\")"
+},
+{
+"i": 1370,
+"k": "text",
+"p": "Еxtensions",
+"s": "month",
+"in": [
+"Product+Extension"
+],
+"code": "case .month: return plural ? String(localized: \"months\") : String(localized: \"month\")"
+},
+{
+"i": 1371,
+"k": "text",
+"p": "Еxtensions",
+"s": "years",
+"in": [
+"Product+Extension"
+],
+"code": "case .year: return plural ? String(localized: \"years\") : String(localized: \"year\")"
+},
+{
+"i": 1372,
+"k": "text",
+"p": "Еxtensions",
+"s": "year",
+"in": [
+"Product+Extension"
+],
+"code": "case .year: return plural ? String(localized: \"years\") : String(localized: \"year\")"
+},
+{
+"i": 1373,
+"k": "text",
+"p": "Еxtensions",
+"s": "periods",
+"in": [
+"Product+Extension"
+],
+"code": "@unknown default: return plural ? String(localized: \"periods\") : String(localized: \"period\")"
+},
+{
+"i": 1374,
+"k": "text",
+"p": "Еxtensions",
+"s": "period",
+"in": [
+"Product+Extension"
+],
+"code": "@unknown default: return plural ? String(localized: \"periods\") : String(localized: \"period\")"
+},
+{
+"i": 1375,
+"k": "text",
+"p": "Еxtensions",
+"s": "Daily",
+"in": [
+"Product+Extension"
+],
+"code": "case .day: return String(localized: \"Daily\")",
+"above": "guard let unit = subscription?.subscriptionPeriod.unit else { return \"\" }"
+},
+{
+"i": 1376,
+"k": "text",
+"p": "Еxtensions",
+"s": "Recurring",
+"in": [
+"Product+Extension"
+],
+"code": "@unknown default: return String(localized: \"Recurring\")"
+},
+{
+"i": 1377,
+"k": "text",
+"p": "AyuraLiveActivityWidget",
+"s": "Live schedule",
+"in": [
+"AyuraLiveActivityWidget"
+],
+"code": "Text(event?.kind.label ?? String(localized: \"Live schedule\"))",
+"widget": true
+},
+{
+"i": 1378,
+"k": "text",
+"p": "AyuraLiveActivityWidget",
+"s": "Waiting for next activity",
+"in": [
+"AyuraLiveActivityWidget"
+],
+"code": "Text(event?.title ?? String(localized: \"Waiting for next activity\"))",
+"widget": true
+},
+{
+"i": 1379,
+"k": "text",
+"p": "AyuraLiveActivityWidget",
+"s": "Next meal",
+"in": [
+"AyuraLiveActivityWidget"
+],
+"code": "case .meal: String(localized: \"Next meal\")",
+"above": "var label: String {",
+"widget": true
+},
+{
+"i": 1380,
+"k": "text",
+"p": "AyuraLiveActivityWidget",
+"s": "Next workout",
+"in": [
+"AyuraLiveActivityWidget"
+],
+"code": "case .workout: String(localized: \"Next workout\")",
+"above": "case .meal: String(localized: \"Next meal\")",
+"widget": true
+},
+{
+"i": 1381,
+"k": "text",
+"p": "AyuraLiveActivityWidget",
+"s": "Next practice",
+"in": [
+"AyuraLiveActivityWidget"
+],
+"code": "case .practice: String(localized: \"Next practice\")",
+"above": "case .workout: String(localized: \"Next workout\")",
+"widget": true
+}
+]

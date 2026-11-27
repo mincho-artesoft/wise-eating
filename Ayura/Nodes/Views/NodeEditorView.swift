@@ -131,7 +131,7 @@ struct NodeEditorView: View {
         ) {
             Button("OK") { saveErrorMessage = nil }
         } message: {
-            Text(saveErrorMessage ?? "The note could not be saved.")
+            Text(saveErrorMessage ?? String(localized: "The note could not be saved."))
         }
     }
 
@@ -183,7 +183,7 @@ struct NodeEditorView: View {
                 }
                 .foregroundColor(effectManager.currentGlobalAccentColor)
                 
-                StyledLabeledPicker(label: "Note", isFixedHeight: false) {
+                StyledLabeledPicker(label: String(localized: "Note"), isFixedHeight: false) {
                     nodeTextEditor
                 }
             }
@@ -418,6 +418,6 @@ private enum NodeSaveError: LocalizedError {
     case missingNode
 
     var errorDescription: String? {
-        "The note could not be found in the user database."
+        String(localized: "The note could not be found in the user database.")
     }
 }

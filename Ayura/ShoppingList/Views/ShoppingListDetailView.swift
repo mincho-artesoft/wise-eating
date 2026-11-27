@@ -297,7 +297,7 @@ struct ShoppingListDetailView: View {
             }
             Button("Cancel", role: .cancel) { itemToDelete = nil }
         } message: {
-            Text("Are you sure you want to delete '\(itemToDelete?.name ?? "this item")' from the list? This action cannot be undone.")
+            Text("Are you sure you want to delete '\(itemToDelete?.name ?? String(localized: "this item"))' from the list? This action cannot be undone.")
         }
         .alert("Unable to Save", isPresented: $showSaveError) {
             Button("OK", role: .cancel) {}
@@ -739,8 +739,8 @@ struct ShoppingListDetailView: View {
                 if reminderDate.timeIntervalSinceNow > 0 {
                     do {
                         let newID = try await NotificationManager.shared.scheduleNotification(
-                            title: "🛒 Shopping Reminder",
-                            body: "Time to buy groceries for your list: \(list.name)",
+                            title: String(localized: "🛒 Shopping Reminder"),
+                            body: String(localized: "Time to buy groceries for your list: \(list.name)"),
                             timeInterval: reminderDate.timeIntervalSinceNow,
                             userInfo: ["shoppingListID": list.id.uuidString],
                             profileID: viewModel.profile.id
@@ -812,7 +812,7 @@ struct ShoppingListDetailView: View {
         viewModel.fetchAllData()
     }
 
-    private func formatReminder(_ minutes: Int) -> String { if minutes == 0 { return "None" }; return "\(minutes) min before" }
+    private func formatReminder(_ minutes: Int) -> String { if minutes == 0 { return String(localized: "None") }; return String(localized: "\(minutes) min before") }
     
     private var combinedSuggestions: [FoodItem] {
         let lowStockFoods = viewModel.suggestedItems.compactMap { $0.food }

@@ -46,7 +46,7 @@ struct StorageItemDetailView: View {
                   
                     Spacer()
                     
-                    Text(item.food?.name ?? "Item Details")
+                    Text(item.food?.name ?? String(localized: "Item Details"))
                         .font(.headline)
                         .foregroundColor(effectManager.currentGlobalAccentColor)
 

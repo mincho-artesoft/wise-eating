@@ -127,24 +127,24 @@ struct NodesListView: View {
     
     private var emptyStateTitle: String {
         if filterStartDate != nil {
-            return "No Nodes in Selected Range"
+            return String(localized: "No Nodes in Selected Range")
         }
         switch currentFilter {
-        case .all: return "No Nodes Available"
-        case .meal: return "No Meal Nodes"
-        case .workouts: return "No Workout Nodes"
+        case .all: return String(localized: "No Nodes Available")
+        case .meal: return String(localized: "No Meal Nodes")
+        case .workouts: return String(localized: "No Workout Nodes")
         }
     }
 
     private var emptyStateDescription: Text {
         let text: String
         if filterStartDate != nil {
-            text = "Try adjusting the date range or clearing the filter to see all your nodes."
+            text = String(localized: "Try adjusting the date range or clearing the filter to see all your nodes.")
         } else {
             switch currentFilter {
-            case .all: text = "Tap the '+' button to add your first node."
-            case .meal: text = "Tap the '+' button to add your first meal node."
-            case .workouts: text = "Tap the '+' button to add your first workout node."
+            case .all: text = String(localized: "Tap the '+' button to add your first node.")
+            case .meal: text = String(localized: "Tap the '+' button to add your first meal node.")
+            case .workouts: text = String(localized: "Tap the '+' button to add your first workout node.")
             }
         }
         return Text(text)
@@ -271,7 +271,7 @@ struct NodesListView: View {
                     nodeToDelete = nil
                 }
             } message: { node in
-                Text("Are you sure you want to delete the node titled \"\(node.textContent ?? "Untitled")\"? This action cannot be undone.")
+                Text("Are you sure you want to delete the node titled \"\(node.textContent ?? String(localized: "Untitled"))\"? This action cannot be undone.")
             }
             // --- НАЧАЛО НА ПРОМЯНАТА (5/8): Добавяме .overlay за панела ---
             .overlay {

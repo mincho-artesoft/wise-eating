@@ -11,7 +11,7 @@ struct AnalyticsToolbarView: View {
     // --- НАЧАЛО НА ПРОМЯНАТА ---
     private var formattedDateRange: String {
         guard let start = customStartDate, let end = customEndDate else {
-            return "Select Range"
+            return String(localized: "Select Range")
         }
         let formatter = DateFormatter()
         // Проверяваме дали има зададен глобален формат и го използваме

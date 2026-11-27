@@ -140,7 +140,7 @@ struct SelectedExerciseRowView: View {
 
             HStack(spacing: 4) {
                 ConfigurableTextField(
-                    title: "sec",
+                    title: String(localized: "sec"),
                     value: $textValue,
                     type: .integer,
                     placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),

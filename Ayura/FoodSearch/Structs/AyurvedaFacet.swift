@@ -383,15 +383,15 @@ struct AyurvedaCanonicalSearchMetadata: Codable, Hashable, Sendable {
     var sourceCaption: String? {
         switch sourceTier {
         case "near":
-            return "Inferred from \(sourceProfileName) · near match"
+            return String(localized: "Inferred from \(sourceProfileName) · near match")
         case "derived":
-            return "Inferred from \(sourceProfileName)"
+            return String(localized: "Inferred from \(sourceProfileName)")
         case "exact":
-            return "Linked to \(sourceProfileName)"
+            return String(localized: "Linked to \(sourceProfileName)")
         case "estimated":
-            return "Ayurveda profile · \(sourceProfileName)"
+            return String(localized: "Ayurveda profile · \(sourceProfileName)")
         case "catalog":
-            return "Ayurveda profile · \(sourceProfileName)"
+            return String(localized: "Ayurveda profile · \(sourceProfileName)")
         default:
             return nil
         }

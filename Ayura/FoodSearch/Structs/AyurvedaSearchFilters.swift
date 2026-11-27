@@ -8,7 +8,11 @@ enum AyurvedaSearchDosha: String, CaseIterable, Identifiable, Sendable {
     var id: String { rawValue }
 
     var displayName: String {
-        rawValue.capitalized
+        switch self {
+        case .vata: String(localized: "Vata")
+        case .pitta: String(localized: "Pitta")
+        case .kapha: String(localized: "Kapha")
+        }
     }
 }
 
@@ -21,9 +25,9 @@ enum AyurvedaDoshaPreference: String, CaseIterable, Identifiable, Sendable {
 
     var displayName: String {
         switch self {
-        case .pacifies: return "Pacifies"
-        case .neutral: return "Neutral"
-        case .aggravates: return "Aggravates"
+        case .pacifies: return String(localized: "Pacifies")
+        case .neutral: return String(localized: "Neutral")
+        case .aggravates: return String(localized: "Aggravates")
         }
     }
 }

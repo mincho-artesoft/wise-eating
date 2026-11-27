@@ -43,13 +43,13 @@ struct FoodItemDetailView: View {
         if (food.isRecipe || food.isMenu), let ingredients = food.ingredients, !ingredients.isEmpty {
             let topIngredients = ingredients.prefix(3)
             let ingredientsStrings = topIngredients.map { link -> String in
-                let name = link.food?.displayName ?? "Ingredient"
+                let name = link.food?.displayName ?? String(localized: "Ingredient")
                 if let ingredient = link.food, !ingredient.isEdible {
                     let notes = ingredient.inedibleContraindications
                         .joined(separator: "; ")
                     return notes.isEmpty
-                        ? "\(name) — non-portioned"
-                        : "\(name) — non-portioned (\(notes))"
+                        ? String(localized: "\(name) — non-portioned")
+                        : String(localized: "\(name) — non-portioned (\(notes))")
                 }
                 let grams = link.grams
                 let formattedGrams = grams.truncatingRemainder(dividingBy: 1) == 0
@@ -57,7 +57,7 @@ struct FoodItemDetailView: View {
                     : String(format: "%.1fg", grams)
                 return "\(name) \(formattedGrams)"
             }
-            var text = "Contains: " + ingredientsStrings.joined(separator: ", ")
+            var text = String(localized: "Contains: ") + ingredientsStrings.joined(separator: ", ")
             if ingredients.count > 3 { text += "..." }
             return text
         }
@@ -467,8 +467,8 @@ struct FoodItemDetailView: View {
     }
 
     private var allergensSection: some View {
-        let items = (food.allergens ?? []).map { StaticTag(label: $0.rawValue, color: .orange) }
-        return tagSectionView(title: "Allergens", tags: items)
+        let items = (food.allergens ?? []).map { StaticTag(label: $0.displayName, color: .orange) }
+        return tagSectionView(title: String(localized: "Allergens"), tags: items)
     }
 
     private var macrosSection: some View {
@@ -478,7 +478,7 @@ struct FoodItemDetailView: View {
         let totalWeight = self.displayWeightG ?? (p + c + f)
         return Group {
             if totalWeight > 0 {
-                SectionView(title: "Macronutrients") {
+                SectionView(title: String(localized: "Macronutrients")) {
                     MacroProportionBarView(protein: p, carbs: c, fat: f, totalWeight: totalWeight)
                 }
                 .padding()
@@ -490,7 +490,7 @@ struct FoodItemDetailView: View {
     @ViewBuilder
     private var ingredientsSection: some View {
         if let ingredients = food.ingredients, !ingredients.isEmpty {
-            SectionView(title: "Ingredients") {
+            SectionView(title: String(localized: "Ingredients")) {
                 VStack(alignment: .leading, spacing: 10) {
                     ForEach(ingredients) { link in
                         if let ingredient = link.food {
@@ -528,37 +528,37 @@ struct FoodItemDetailView: View {
 
     private var vitaminsSection: some View {
         let items = food.topVitamins(count: Int.max)
-        return nutrientChipSectionView(title: "Vitamins", nutrients: items)
+        return nutrientChipSectionView(title: String(localized: "Vitamins"), nutrients: items)
     }
     
     private var mineralsSection: some View {
         let items = food.topMinerals(count: Int.max)
-        return nutrientChipSectionView(title: "Minerals", nutrients: items)
+        return nutrientChipSectionView(title: String(localized: "Minerals"), nutrients: items)
     }
     
     private var lipidsSection: some View {
         let items = food.allLipids()
-        return nutrientChipSectionView(title: "Lipids", nutrients: items)
+        return nutrientChipSectionView(title: String(localized: "Lipids"), nutrients: items)
     }
     
     private var aminoAcidsSection: some View {
         let items = food.allAminoAcids()
-        return nutrientChipSectionView(title: "Amino Acids", nutrients: items)
+        return nutrientChipSectionView(title: String(localized: "Amino Acids"), nutrients: items)
     }
 
     private var carbDetailsSection: some View {
         let items = food.allCarbDetails()
-        return nutrientChipSectionView(title: "Carbohydrate Details", nutrients: items)
+        return nutrientChipSectionView(title: String(localized: "Carbohydrate Details"), nutrients: items)
     }
     
     private var sterolsSection: some View {
         let items = food.allSterols()
-        return nutrientChipSectionView(title: "Sterols", nutrients: items)
+        return nutrientChipSectionView(title: String(localized: "Sterols"), nutrients: items)
     }
     
     private var otherCompoundsSection: some View {
         let items = food.allOtherCompounds()
-        return nutrientChipSectionView(title: "Other Compounds", nutrients: items)
+        return nutrientChipSectionView(title: String(localized: "Other Compounds"), nutrients: items)
     }
     
     @ViewBuilder
@@ -581,11 +581,11 @@ struct FoodItemDetailView: View {
         if !nutrients.isEmpty {
             SectionView(title: title) {
                 CustomFlowLayout(horizontalSpacing: 8, verticalSpacing: 8) {
-                    if title == "Lipids"{
+                    if title == String(localized: "Lipids"){
                         ForEach(nutrients) { nutrient in
                             NutrientChipView(name: nutrient.name, value: nutrient.value, unit: nutrient.unit, color: .yellow)
                         }
-                    } else if title == "Other Compounds"{
+                    } else if title == String(localized: "Other Compounds"){
                         ForEach(nutrients) { nutrient in
                             NutrientChipView(name: nutrient.name, value: nutrient.value, unit: nutrient.unit, color: .brown)
                         }
@@ -833,11 +833,11 @@ fileprivate struct MacroProportionBarView: View {
                 .frame(height: 12)
             }
             HStack {
-                legendItem(label: "Protein", value: protein, color: MacroNutrientPalette.protein)
+                legendItem(label: String(localized: "Protein"), value: protein, color: MacroNutrientPalette.protein)
                 Spacer()
-                legendItem(label: "Carbs", value: carbs, color: MacroNutrientPalette.carbohydrates)
+                legendItem(label: String(localized: "Carbs"), value: carbs, color: MacroNutrientPalette.carbohydrates)
                 Spacer()
-                legendItem(label: "Fat", value: fat, color: MacroNutrientPalette.fat)
+                legendItem(label: String(localized: "Fat"), value: fat, color: MacroNutrientPalette.fat)
             }.font(.caption)
         }
     }

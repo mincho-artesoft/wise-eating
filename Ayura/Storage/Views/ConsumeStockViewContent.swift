@@ -58,7 +58,7 @@ struct ConsumeStockViewContent: View {
 
                  HStack {
                      ConfigurableTextField(
-                         title: "Quantity to consume",
+                         title: String(localized: "Quantity to consume"),
                          value: $quantityToConsumeString,
                          type: .decimal,
                          focused: $focusedField,

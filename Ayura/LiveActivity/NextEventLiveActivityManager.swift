@@ -110,7 +110,7 @@ final class NextEventLiveActivityManager: ObservableObject {
             let trainingTemplateNames = Set(profile.trainings.map(\.name))
 
             for event in scheduledEvents where event.startDate > now {
-                let title = event.title ?? "Scheduled activity"
+                let title = event.title ?? String(localized: "Scheduled activity")
                 let decodedPayload = event.notes.flatMap(OptimizedInvisibleCoder.decode(from:))
 
                 if let decodedPayload,
@@ -216,7 +216,7 @@ final class NextEventLiveActivityManager: ObservableObject {
 
     private static func compactTitle(_ title: String) -> String {
         let trimmed = title.trimmingCharacters(in: .whitespacesAndNewlines)
-        let fallback = trimmed.isEmpty ? "Scheduled activity" : trimmed
+        let fallback = trimmed.isEmpty ? String(localized: "Scheduled activity") : trimmed
         return String(fallback.prefix(48))
     }
 }
@@ -227,7 +227,7 @@ private enum NextEventLiveActivityError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .disabledBySystem:
-            return "Live Activities are disabled. Enable them in Settings > Apps > Ayurveda & Asana Yoga > Live Activities."
+            return String(localized: "Live Activities are disabled. Enable them in Settings > Apps > Ayurveda & Asana Yoga > Live Activities.")
         }
     }
 }

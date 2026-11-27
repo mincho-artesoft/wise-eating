@@ -351,7 +351,7 @@ struct FoodItemEditorView: View {
     private func populateFromCompletedJob(jobID: UUID) async {
         guard let job = (aiManager.jobs.first { $0.id == jobID }),
               let resultData = job.resultData else {
-            alertMsg = "Could not find completed job data."
+            alertMsg = String(localized: "Could not find completed job data.")
             showAlert = true
             runningGenerationJobID = nil
             return
@@ -397,7 +397,7 @@ struct FoodItemEditorView: View {
                 pendingAIJobIDToDeleteOnSave = jobID
 
             } catch {
-                alertMsg = "Failed to process AI data: \(error.localizedDescription)"
+                alertMsg = String(localized: "Failed to process AI data: \(error.localizedDescription)")
                 showAlert = true
                 runningGenerationJobID = nil
                 // При грешка все още чистим
@@ -499,7 +499,7 @@ struct FoodItemEditorView: View {
                 .padding(.bottom, -4)
 
             VStack(spacing: 12) {
-                StyledLabeledPicker(label: "Name", isRequired: true) {
+                StyledLabeledPicker(label: String(localized: "Name"), isRequired: true) {
                     TextField(
                         "",
                         text: $name,
@@ -516,7 +516,7 @@ struct FoodItemEditorView: View {
                 HStack(spacing: 16) {
                     photoPicker
 
-                    StyledLabeledPicker(label: "Description", height: 120) {
+                    StyledLabeledPicker(label: String(localized: "Description"), height: 120) {
                         descriptionEditor
                             .focused($focusedField, equals: .description)
                     }
@@ -524,7 +524,7 @@ struct FoodItemEditorView: View {
                 }
 
                 // Minimum age
-                StyledLabeledPicker(label: "Minimum Age (months)") {
+                StyledLabeledPicker(label: String(localized: "Minimum Age (months)")) {
                     ConfigurableTextField(
                         title: "e.g. 6",
                         value: $minAgeMonthsTxt,
@@ -541,10 +541,10 @@ struct FoodItemEditorView: View {
                 // --- ALLERGENS + WARNING ---
                 VStack(alignment: .leading, spacing: 4) {
                     tagPicker(
-                        label: "Allergens",
+                        label: String(localized: "Allergens"),
                         selection: $selectedAllergens,
                         items: Allergen.allCases,
-                        itemLabel: { $0.rawValue },
+                        itemLabel: { $0.displayName },
                         menu: .allergen
                     )
 
@@ -591,7 +591,7 @@ struct FoodItemEditorView: View {
     private var foodAllergenNames: String {
         let names = Allergen.allCases
             .filter { selectedAllergens.contains($0.id) }
-            .map(\.rawValue)
+            .map(\.displayName)
             .sorted()
         return names.joined(separator: ", ")
     }
@@ -599,7 +599,7 @@ struct FoodItemEditorView: View {
     private var userAllergenNames: String {
         guard let profile else { return "" }
         let names = profile.allergens
-            .map(\.rawValue)
+            .map(\.displayName)
             .sorted()
         return names.joined(separator: ", ")
     }
@@ -697,7 +697,7 @@ struct FoodItemEditorView: View {
         
         private var macroSection: some View {
             VStack(alignment: .leading, spacing: 8) {
-                collapsibleHeader("Macronutrients", isExpanded: $showMacros)
+                collapsibleHeader(String(localized: "Macronutrients"), isExpanded: $showMacros)
                 if showMacros {
                     VStack(spacing: 12) {
                         macroGrid
@@ -721,7 +721,7 @@ struct FoodItemEditorView: View {
             let other = allRowsWithFocus.filter { !prioLabels.contains($0.row.label) }
 
             return VStack(alignment: .leading, spacing: 8) {
-                collapsibleHeader("Vitamins", isExpanded: $showMoreVitamins, hasOtherItems: !other.isEmpty)
+                collapsibleHeader(String(localized: "Vitamins"), isExpanded: $showMoreVitamins, hasOtherItems: !other.isEmpty)
                 
                 if !prio.isEmpty || (showMoreVitamins && !other.isEmpty) {
                    VStack(spacing: 12) {
@@ -755,7 +755,7 @@ struct FoodItemEditorView: View {
             let other = allRowsWithFocus.filter { !prioLabels.contains($0.row.label) }
             
             return VStack(alignment: .leading, spacing: 8) {
-                collapsibleHeader("Minerals", isExpanded: $showMoreMinerals, hasOtherItems: !other.isEmpty)
+                collapsibleHeader(String(localized: "Minerals"), isExpanded: $showMoreMinerals, hasOtherItems: !other.isEmpty)
                 
                 if !prio.isEmpty || (showMoreMinerals && !other.isEmpty) {
                    VStack(spacing: 12) {
@@ -780,7 +780,7 @@ struct FoodItemEditorView: View {
         }
         private var lipidSection: some View {
             VStack(alignment: .leading, spacing: 8) {
-                collapsibleHeader("Lipids", isExpanded: $showLipids)
+                collapsibleHeader(String(localized: "Lipids"), isExpanded: $showLipids)
                 
                 if showLipids {
                     VStack(spacing: 12) {
@@ -808,7 +808,7 @@ struct FoodItemEditorView: View {
         }
         private var aminoAcidsSection: some View {
             VStack(alignment: .leading, spacing: 8) {
-                collapsibleHeader("Amino Acids", isExpanded: $showAminoAcids)
+                collapsibleHeader(String(localized: "Amino Acids"), isExpanded: $showAminoAcids)
                 if showAminoAcids {
                     VStack(spacing: 12) {
                         ForEach(aminoAcidRows(), id: \.row.label) { item in
@@ -822,7 +822,7 @@ struct FoodItemEditorView: View {
         }
         private var carbDetailsSection: some View {
             VStack(alignment: .leading, spacing: 8) {
-                collapsibleHeader("Carbohydrate Details", isExpanded: $showCarbDetails)
+                collapsibleHeader(String(localized: "Carbohydrate Details"), isExpanded: $showCarbDetails)
                 if showCarbDetails {
                     VStack(spacing: 12) {
                         ForEach(carbDetailRows(), id: \.row.label) { item in
@@ -836,7 +836,7 @@ struct FoodItemEditorView: View {
         }
         private var sterolsSection: some View {
             VStack(alignment: .leading, spacing: 8) {
-                collapsibleHeader("Sterols", isExpanded: $showSterols)
+                collapsibleHeader(String(localized: "Sterols"), isExpanded: $showSterols)
                 if showSterols {
                     VStack(spacing: 12) {
                         ForEach(sterolRows(), id: \.row.label) { item in
@@ -850,7 +850,7 @@ struct FoodItemEditorView: View {
         }
         private var otherSection: some View {
            VStack(alignment: .leading, spacing: 8) {
-               collapsibleHeader("Other", isExpanded: $showOther)
+               collapsibleHeader(String(localized: "Other"), isExpanded: $showOther)
                if showOther {
                    VStack(spacing: 12) { otherGrid }
                        .padding()
@@ -863,7 +863,7 @@ struct FoodItemEditorView: View {
 
        private var ayurvedaSection: some View {
            VStack(alignment: .leading, spacing: 8) {
-               collapsibleHeader("Ayurveda", isExpanded: $showAyurveda)
+               collapsibleHeader(String(localized: "Ayurveda"), isExpanded: $showAyurveda)
                if showAyurveda {
                    AyurvedaEditorSection(form: $ayurForm)
                        .padding()
@@ -905,7 +905,7 @@ struct FoodItemEditorView: View {
     private func save() {
         let totalWeight: Double = others.weightG?.value ?? 0
         guard totalWeight > 0 else {
-            alertMsg = "Please enter the Weight / serving (\(servingUnit))."
+            alertMsg = String(localized: "Please enter the Weight / serving (\(servingUnit)).")
             showAlert = true
             return
         }
@@ -917,7 +917,7 @@ struct FoodItemEditorView: View {
         
         if macroSum > totalWeight {
             alertMsg = String(
-                format: "The sum of carbohydrates, protein, and fat (%.1f g) cannot exceed the total serving weight (%.1f g).",
+                format: String(localized: "The sum of carbohydrates, protein, and fat (%.1f g) cannot exceed the total serving weight (%.1f g)."),
                 macroSum, totalWeight
             )
             showAlert = true
@@ -1089,7 +1089,7 @@ struct FoodItemEditorView: View {
             } catch {
                 let nsErr = error as NSError
                 if nsErr.domain == "NSSQLiteErrorDomain", nsErr.code == 11 {
-                    alertMsg = "Your local database appears to be corrupted (SQLite code 11)."
+                    alertMsg = String(localized: "Your local database appears to be corrupted (SQLite code 11).")
                 } else {
                     alertMsg = nsErr.localizedDescription
                 }
@@ -1153,7 +1153,7 @@ struct FoodItemEditorView: View {
     private var macroGrid: some View {
            VStack(spacing: 12) {
                FocusableNutrientRow(
-                   row: .init(label: "Energy", unit: "kcal", field: nutBinding(\.energyKcal, state: $others, unit: "kcal")),
+                   row: .init(label: String(localized: "Energy"), unit: "kcal", field: nutBinding(\.energyKcal, state: $others, unit: "kcal")),
                    focusState: $focusedField,
                    focusID: .energyKcal
                )
@@ -1186,9 +1186,9 @@ struct FoodItemEditorView: View {
                }
                .id(FocusableField.servingWeight) // ID на контейнера
                
-               FocusableNutrientRow(row: .init(label: "Carbs", unit: "g", field: nutBinding(\.carbohydrates, state: $macros, unit: "g")), focusState: $focusedField, focusID: .carbohydrates)
-               FocusableNutrientRow(row: .init(label: "Protein", unit: "g", field: nutBinding(\.protein, state: $macros, unit: "g")), focusState: $focusedField, focusID: .protein)
-               FocusableNutrientRow(row: .init(label: "Fat", unit: "g", field: nutBinding(\.fat, state: $macros, unit: "g")), focusState: $focusedField, focusID: .fat)
+               FocusableNutrientRow(row: .init(label: String(localized: "Carbs"), unit: "g", field: nutBinding(\.carbohydrates, state: $macros, unit: "g")), focusState: $focusedField, focusID: .carbohydrates)
+               FocusableNutrientRow(row: .init(label: String(localized: "Protein"), unit: "g", field: nutBinding(\.protein, state: $macros, unit: "g")), focusState: $focusedField, focusID: .protein)
+               FocusableNutrientRow(row: .init(label: String(localized: "Fat"), unit: "g", field: nutBinding(\.fat, state: $macros, unit: "g")), focusState: $focusedField, focusID: .fat)
            }
        }
     
@@ -1202,32 +1202,32 @@ struct FoodItemEditorView: View {
             // Заменяме nutrientGrid с VStack от FocusableNutrientRow
             VStack(spacing: 12) { // Добавяме VStack за консистентно разстояние
                 FocusableNutrientRow(
-                    row: .init(label: "Sat. fat", unit: "g", field: nutBinding(\.totalSaturated, state: $lipids)),
+                    row: .init(label: String(localized: "Sat. fat"), unit: "g", field: nutBinding(\.totalSaturated, state: $lipids)),
                     focusState: $focusedField,
                     focusID: .totalSaturated
                 )
                 FocusableNutrientRow(
-                    row: .init(label: "Mono-unsat.", unit: "g", field: nutBinding(\.totalMonounsaturated, state: $lipids)),
+                    row: .init(label: String(localized: "Mono-unsat."), unit: "g", field: nutBinding(\.totalMonounsaturated, state: $lipids)),
                     focusState: $focusedField,
                     focusID: .totalMonounsaturated
                 )
                 FocusableNutrientRow(
-                    row: .init(label: "Poly-unsat.", unit: "g", field: nutBinding(\.totalPolyunsaturated, state: $lipids)),
+                    row: .init(label: String(localized: "Poly-unsat."), unit: "g", field: nutBinding(\.totalPolyunsaturated, state: $lipids)),
                     focusState: $focusedField,
                     focusID: .totalPolyunsaturated
                 )
                 FocusableNutrientRow(
-                    row: .init(label: "Trans fat", unit: "g", field: nutBinding(\.totalTrans, state: $lipids)),
+                    row: .init(label: String(localized: "Trans fat"), unit: "g", field: nutBinding(\.totalTrans, state: $lipids)),
                     focusState: $focusedField,
                     focusID: .totalTrans
                 )
                 FocusableNutrientRow(
-                    row: .init(label: "Trans monoenoic", unit: "g", field: nutBinding(\.totalTransMonoenoic, state: $lipids)),
+                    row: .init(label: String(localized: "Trans monoenoic"), unit: "g", field: nutBinding(\.totalTransMonoenoic, state: $lipids)),
                     focusState: $focusedField,
                     focusID: .totalTransMonoenoic
                 )
                 FocusableNutrientRow(
-                    row: .init(label: "Trans polyenoic", unit: "g", field: nutBinding(\.totalTransPolyenoic, state: $lipids)),
+                    row: .init(label: String(localized: "Trans polyenoic"), unit: "g", field: nutBinding(\.totalTransPolyenoic, state: $lipids)),
                     focusState: $focusedField,
                     focusID: .totalTransPolyenoic
                 )
@@ -1328,15 +1328,15 @@ struct FoodItemEditorView: View {
 
     private var otherGrid: some View {
           VStack(spacing: 12) {
-              FocusableNutrientRow(row: .init(label: "Alcohol", unit: "g", field: nutBinding(\.alcoholEthyl, state: $others, unit: "g")), focusState: $focusedField, focusID: .alcoholEthyl)
-              FocusableNutrientRow(row: .init(label: "Caffeine", unit: "mg", field: nutBinding(\.caffeine, state: $others, unit: "mg")), focusState: $focusedField, focusID: .caffeine)
-              FocusableNutrientRow(row: .init(label: "Theobromine", unit: "mg", field: nutBinding(\.theobromine, state: $others, unit: "mg")), focusState: $focusedField, focusID: .theobromine)
-              FocusableNutrientRow(row: .init(label: "Cholesterol", unit: "mg", field: nutBinding(\.cholesterol, state: $others, unit: "mg")), focusState: $focusedField, focusID: .cholesterol)
-              FocusableNutrientRow(row: .init(label: "Water", unit: "g", field: nutBinding(\.water, state: $others, unit: "g")), focusState: $focusedField, focusID: .water)
-              FocusableNutrientRow(row: .init(label: "Ash", unit: "g", field: nutBinding(\.ash, state: $others, unit: "g")), focusState: $focusedField, focusID: .ash)
-              FocusableNutrientRow(row: .init(label: "Betaine", unit: "mg", field: nutBinding(\.betaine, state: $others, unit: "mg")), focusState: $focusedField, focusID: .betaine)
-              FocusableNutrientRow(row: .init(label: "Fiber", unit: "g", field: nutBinding(\.fiber, state: $macros, unit: "g")), focusState: $focusedField, focusID: .fiber)
-              FocusableNutrientRow(row: .init(label: "Total sugars", unit: "g", field: nutBinding(\.totalSugars, state: $macros, unit: "g")), focusState: $focusedField, focusID: .totalSugars)
+              FocusableNutrientRow(row: .init(label: String(localized: "Alcohol"), unit: "g", field: nutBinding(\.alcoholEthyl, state: $others, unit: "g")), focusState: $focusedField, focusID: .alcoholEthyl)
+              FocusableNutrientRow(row: .init(label: String(localized: "Caffeine"), unit: "mg", field: nutBinding(\.caffeine, state: $others, unit: "mg")), focusState: $focusedField, focusID: .caffeine)
+              FocusableNutrientRow(row: .init(label: String(localized: "Theobromine"), unit: "mg", field: nutBinding(\.theobromine, state: $others, unit: "mg")), focusState: $focusedField, focusID: .theobromine)
+              FocusableNutrientRow(row: .init(label: String(localized: "Cholesterol"), unit: "mg", field: nutBinding(\.cholesterol, state: $others, unit: "mg")), focusState: $focusedField, focusID: .cholesterol)
+              FocusableNutrientRow(row: .init(label: String(localized: "Water"), unit: "g", field: nutBinding(\.water, state: $others, unit: "g")), focusState: $focusedField, focusID: .water)
+              FocusableNutrientRow(row: .init(label: String(localized: "Ash"), unit: "g", field: nutBinding(\.ash, state: $others, unit: "g")), focusState: $focusedField, focusID: .ash)
+              FocusableNutrientRow(row: .init(label: String(localized: "Betaine"), unit: "mg", field: nutBinding(\.betaine, state: $others, unit: "mg")), focusState: $focusedField, focusID: .betaine)
+              FocusableNutrientRow(row: .init(label: String(localized: "Fiber"), unit: "g", field: nutBinding(\.fiber, state: $macros, unit: "g")), focusState: $focusedField, focusID: .fiber)
+              FocusableNutrientRow(row: .init(label: String(localized: "Total sugars"), unit: "g", field: nutBinding(\.totalSugars, state: $macros, unit: "g")), focusState: $focusedField, focusID: .totalSugars)
               FocusableNutrientRow(row: .init(label: "pH", unit: "", field: nutBinding(\.alkalinityPH, state: $others, unit: "pH")), focusState: $focusedField, focusID: .alkalinityPH)
           }
       }
@@ -1352,89 +1352,89 @@ struct FoodItemEditorView: View {
     
     private func vitaminRows() -> [(row: NutrientRow, focusID: FocusableField)] {
         return [
-            (row: .init(label: "Vit A", unit: "µg RAE", field: nutBinding(\.vitaminA_RAE, state: $vitamins, unit: "µg")), focusID: .vitaminA_RAE),
-            (row: .init(label: "Retinol", unit: "µg", field: nutBinding(\.retinol, state: $vitamins, unit: "µg")), focusID: .retinol),
-            (row: .init(label: "α-Carotene", unit: "µg", field: nutBinding(\.caroteneAlpha, state: $vitamins, unit: "µg")), focusID: .caroteneAlpha),
-            (row: .init(label: "β-Carotene", unit: "µg", field: nutBinding(\.caroteneBeta, state: $vitamins, unit: "µg")), focusID: .caroteneBeta),
-            (row: .init(label: "β-Cryptoxanthin", unit: "µg", field: nutBinding(\.cryptoxanthinBeta, state: $vitamins, unit: "µg")), focusID: .cryptoxanthinBeta),
-            (row: .init(label: "Lutein + Zeax.", unit: "µg", field: nutBinding(\.luteinZeaxanthin, state: $vitamins, unit: "µg")), focusID: .luteinZeaxanthin),
-            (row: .init(label: "Lycopene", unit: "µg", field: nutBinding(\.lycopene, state: $vitamins, unit: "µg")), focusID: .lycopene),
-            (row: .init(label: "B1 Thiamin", unit: "mg", field: nutBinding(\.vitaminB1_Thiamin, state: $vitamins, unit: "mg")), focusID: .vitaminB1_Thiamin),
-            (row: .init(label: "B2 Riboflavin", unit: "mg", field: nutBinding(\.vitaminB2_Riboflavin, state: $vitamins, unit: "mg")), focusID: .vitaminB2_Riboflavin),
-            (row: .init(label: "B3 Niacin", unit: "mg", field: nutBinding(\.vitaminB3_Niacin, state: $vitamins, unit: "mg")), focusID: .vitaminB3_Niacin),
-            (row: .init(label: "B5 Pant. acid", unit: "mg", field: nutBinding(\.vitaminB5_PantothenicAcid, state: $vitamins, unit: "mg")), focusID: .vitaminB5_PantothenicAcid),
+            (row: .init(label: String(localized: "Vit A"), unit: "µg RAE", field: nutBinding(\.vitaminA_RAE, state: $vitamins, unit: "µg")), focusID: .vitaminA_RAE),
+            (row: .init(label: String(localized: "Retinol"), unit: "µg", field: nutBinding(\.retinol, state: $vitamins, unit: "µg")), focusID: .retinol),
+            (row: .init(label: String(localized: "α-Carotene"), unit: "µg", field: nutBinding(\.caroteneAlpha, state: $vitamins, unit: "µg")), focusID: .caroteneAlpha),
+            (row: .init(label: String(localized: "β-Carotene"), unit: "µg", field: nutBinding(\.caroteneBeta, state: $vitamins, unit: "µg")), focusID: .caroteneBeta),
+            (row: .init(label: String(localized: "β-Cryptoxanthin"), unit: "µg", field: nutBinding(\.cryptoxanthinBeta, state: $vitamins, unit: "µg")), focusID: .cryptoxanthinBeta),
+            (row: .init(label: String(localized: "Lutein + Zeax."), unit: "µg", field: nutBinding(\.luteinZeaxanthin, state: $vitamins, unit: "µg")), focusID: .luteinZeaxanthin),
+            (row: .init(label: String(localized: "Lycopene"), unit: "µg", field: nutBinding(\.lycopene, state: $vitamins, unit: "µg")), focusID: .lycopene),
+            (row: .init(label: String(localized: "B1 Thiamin"), unit: "mg", field: nutBinding(\.vitaminB1_Thiamin, state: $vitamins, unit: "mg")), focusID: .vitaminB1_Thiamin),
+            (row: .init(label: String(localized: "B2 Riboflavin"), unit: "mg", field: nutBinding(\.vitaminB2_Riboflavin, state: $vitamins, unit: "mg")), focusID: .vitaminB2_Riboflavin),
+            (row: .init(label: String(localized: "B3 Niacin"), unit: "mg", field: nutBinding(\.vitaminB3_Niacin, state: $vitamins, unit: "mg")), focusID: .vitaminB3_Niacin),
+            (row: .init(label: String(localized: "B5 Pant. acid"), unit: "mg", field: nutBinding(\.vitaminB5_PantothenicAcid, state: $vitamins, unit: "mg")), focusID: .vitaminB5_PantothenicAcid),
             (row: .init(label: "B6", unit: "mg", field: nutBinding(\.vitaminB6, state: $vitamins, unit: "mg")), focusID: .vitaminB6),
-            (row: .init(label: "Folate DFE", unit: "µg", field: nutBinding(\.folateDFE, state: $vitamins, unit: "µg")), focusID: .folateDFE),
-            (row: .init(label: "Folate food", unit: "µg", field: nutBinding(\.folateFood, state: $vitamins, unit: "µg")), focusID: .folateFood),
-            (row: .init(label: "Folate total", unit: "µg", field: nutBinding(\.folateTotal, state: $vitamins, unit: "µg")), focusID: .folateTotal),
-            (row: .init(label: "Folic acid", unit: "µg", field: nutBinding(\.folicAcid, state: $vitamins, unit: "µg")), focusID: .folicAcid),
+            (row: .init(label: String(localized: "Folate DFE"), unit: "µg", field: nutBinding(\.folateDFE, state: $vitamins, unit: "µg")), focusID: .folateDFE),
+            (row: .init(label: String(localized: "Folate food"), unit: "µg", field: nutBinding(\.folateFood, state: $vitamins, unit: "µg")), focusID: .folateFood),
+            (row: .init(label: String(localized: "Folate total"), unit: "µg", field: nutBinding(\.folateTotal, state: $vitamins, unit: "µg")), focusID: .folateTotal),
+            (row: .init(label: String(localized: "Folic acid"), unit: "µg", field: nutBinding(\.folicAcid, state: $vitamins, unit: "µg")), focusID: .folicAcid),
             (row: .init(label: "B12", unit: "µg", field: nutBinding(\.vitaminB12, state: $vitamins, unit: "µg")), focusID: .vitaminB12),
-            (row: .init(label: "Vit C", unit: "mg", field: nutBinding(\.vitaminC, state: $vitamins, unit: "mg")), focusID: .vitaminC),
-            (row: .init(label: "Vit D", unit: "µg", field: nutBinding(\.vitaminD, state: $vitamins, unit: "µg")), focusID: .vitaminD),
-            (row: .init(label: "Vit E", unit: "mg", field: nutBinding(\.vitaminE, state: $vitamins, unit: "mg")), focusID: .vitaminE),
-            (row: .init(label: "Vit K", unit: "µg", field: nutBinding(\.vitaminK, state: $vitamins, unit: "µg")), focusID: .vitaminK),
-            (row: .init(label: "Choline", unit: "mg", field: nutBinding(\.choline, state: $vitamins, unit: "mg")), focusID: .choline)
+            (row: .init(label: String(localized: "Vit C"), unit: "mg", field: nutBinding(\.vitaminC, state: $vitamins, unit: "mg")), focusID: .vitaminC),
+            (row: .init(label: String(localized: "Vit D"), unit: "µg", field: nutBinding(\.vitaminD, state: $vitamins, unit: "µg")), focusID: .vitaminD),
+            (row: .init(label: String(localized: "Vit E"), unit: "mg", field: nutBinding(\.vitaminE, state: $vitamins, unit: "mg")), focusID: .vitaminE),
+            (row: .init(label: String(localized: "Vit K"), unit: "µg", field: nutBinding(\.vitaminK, state: $vitamins, unit: "µg")), focusID: .vitaminK),
+            (row: .init(label: String(localized: "Choline"), unit: "mg", field: nutBinding(\.choline, state: $vitamins, unit: "mg")), focusID: .choline)
         ]
     }
 
     private func mineralRows() -> [(row: NutrientRow, focusID: FocusableField)] {
         return [
-            (row: .init(label: "Calcium", unit: "mg", field: nutBinding(\.calcium, state: $minerals, unit: "mg")), focusID: .calcium),
-            (row: .init(label: "Phosphorus", unit: "mg", field: nutBinding(\.phosphorus, state: $minerals, unit: "mg")), focusID: .phosphorus),
-            (row: .init(label: "Magnesium", unit: "mg", field: nutBinding(\.magnesium, state: $minerals, unit: "mg")), focusID: .magnesium),
-            (row: .init(label: "Potassium", unit: "mg", field: nutBinding(\.potassium, state: $minerals, unit: "mg")), focusID: .potassium),
-            (row: .init(label: "Sodium", unit: "mg", field: nutBinding(\.sodium, state: $minerals, unit: "mg")), focusID: .sodium),
-            (row: .init(label: "Iron", unit: "mg", field: nutBinding(\.iron, state: $minerals, unit: "mg")), focusID: .iron),
-            (row: .init(label: "Zinc", unit: "mg", field: nutBinding(\.zinc, state: $minerals, unit: "mg")), focusID: .zinc),
-            (row: .init(label: "Copper", unit: "mg", field: nutBinding(\.copper, state: $minerals, unit: "mg")), focusID: .copper),
-            (row: .init(label: "Manganese", unit: "mg", field: nutBinding(\.manganese, state: $minerals, unit: "mg")), focusID: .manganese),
-            (row: .init(label: "Selenium", unit: "µg", field: nutBinding(\.selenium, state: $minerals, unit: "µg")), focusID: .selenium),
-            (row: .init(label: "Fluoride", unit: "µg", field: nutBinding(\.fluoride, state: $minerals, unit: "µg")), focusID: .fluoride)
+            (row: .init(label: String(localized: "Calcium"), unit: "mg", field: nutBinding(\.calcium, state: $minerals, unit: "mg")), focusID: .calcium),
+            (row: .init(label: String(localized: "Phosphorus"), unit: "mg", field: nutBinding(\.phosphorus, state: $minerals, unit: "mg")), focusID: .phosphorus),
+            (row: .init(label: String(localized: "Magnesium"), unit: "mg", field: nutBinding(\.magnesium, state: $minerals, unit: "mg")), focusID: .magnesium),
+            (row: .init(label: String(localized: "Potassium"), unit: "mg", field: nutBinding(\.potassium, state: $minerals, unit: "mg")), focusID: .potassium),
+            (row: .init(label: String(localized: "Sodium"), unit: "mg", field: nutBinding(\.sodium, state: $minerals, unit: "mg")), focusID: .sodium),
+            (row: .init(label: String(localized: "Iron"), unit: "mg", field: nutBinding(\.iron, state: $minerals, unit: "mg")), focusID: .iron),
+            (row: .init(label: String(localized: "Zinc"), unit: "mg", field: nutBinding(\.zinc, state: $minerals, unit: "mg")), focusID: .zinc),
+            (row: .init(label: String(localized: "Copper"), unit: "mg", field: nutBinding(\.copper, state: $minerals, unit: "mg")), focusID: .copper),
+            (row: .init(label: String(localized: "Manganese"), unit: "mg", field: nutBinding(\.manganese, state: $minerals, unit: "mg")), focusID: .manganese),
+            (row: .init(label: String(localized: "Selenium"), unit: "µg", field: nutBinding(\.selenium, state: $minerals, unit: "µg")), focusID: .selenium),
+            (row: .init(label: String(localized: "Fluoride"), unit: "µg", field: nutBinding(\.fluoride, state: $minerals, unit: "µg")), focusID: .fluoride)
         ]
     }
     
     private func aminoAcidRows() -> [(row: NutrientRow, focusID: FocusableField)] {
         return [
-            (row: .init(label: "Alanine", unit: "g", field: nutBinding(\.alanine, state: $aminoAcids)), focusID: .alanine),
-            (row: .init(label: "Arginine", unit: "g", field: nutBinding(\.arginine, state: $aminoAcids)), focusID: .arginine),
-            (row: .init(label: "Aspartic Acid", unit: "g", field: nutBinding(\.asparticAcid, state: $aminoAcids)), focusID: .asparticAcid),
-            (row: .init(label: "Cystine", unit: "g", field: nutBinding(\.cystine, state: $aminoAcids)), focusID: .cystine),
-            (row: .init(label: "Glutamic Acid", unit: "g", field: nutBinding(\.glutamicAcid, state: $aminoAcids)), focusID: .glutamicAcid),
-            (row: .init(label: "Glycine", unit: "g", field: nutBinding(\.glycine, state: $aminoAcids)), focusID: .glycine),
-            (row: .init(label: "Histidine", unit: "g", field: nutBinding(\.histidine, state: $aminoAcids)), focusID: .histidine),
-            (row: .init(label: "Isoleucine", unit: "g", field: nutBinding(\.isoleucine, state: $aminoAcids)), focusID: .isoleucine),
-            (row: .init(label: "Leucine", unit: "g", field: nutBinding(\.leucine, state: $aminoAcids)), focusID: .leucine),
-            (row: .init(label: "Lysine", unit: "g", field: nutBinding(\.lysine, state: $aminoAcids)), focusID: .lysine),
-            (row: .init(label: "Methionine", unit: "g", field: nutBinding(\.methionine, state: $aminoAcids)), focusID: .methionine),
-            (row: .init(label: "Phenylalanine", unit: "g", field: nutBinding(\.phenylalanine, state: $aminoAcids)), focusID: .phenylalanine),
-            (row: .init(label: "Proline", unit: "g", field: nutBinding(\.proline, state: $aminoAcids)), focusID: .proline),
-            (row: .init(label: "Threonine", unit: "g", field: nutBinding(\.threonine, state: $aminoAcids)), focusID: .threonine),
-            (row: .init(label: "Tryptophan", unit: "g", field: nutBinding(\.tryptophan, state: $aminoAcids)), focusID: .tryptophan),
-            (row: .init(label: "Tyrosine", unit: "g", field: nutBinding(\.tyrosine, state: $aminoAcids)), focusID: .tyrosine),
-            (row: .init(label: "Valine", unit: "g", field: nutBinding(\.valine, state: $aminoAcids)), focusID: .valine),
-            (row: .init(label: "Serine", unit: "g", field: nutBinding(\.serine, state: $aminoAcids)), focusID: .serine),
-            (row: .init(label: "Hydroxyproline", unit: "g", field: nutBinding(\.hydroxyproline, state: $aminoAcids)), focusID: .hydroxyproline)
+            (row: .init(label: String(localized: "Alanine"), unit: "g", field: nutBinding(\.alanine, state: $aminoAcids)), focusID: .alanine),
+            (row: .init(label: String(localized: "Arginine"), unit: "g", field: nutBinding(\.arginine, state: $aminoAcids)), focusID: .arginine),
+            (row: .init(label: String(localized: "Aspartic Acid"), unit: "g", field: nutBinding(\.asparticAcid, state: $aminoAcids)), focusID: .asparticAcid),
+            (row: .init(label: String(localized: "Cystine"), unit: "g", field: nutBinding(\.cystine, state: $aminoAcids)), focusID: .cystine),
+            (row: .init(label: String(localized: "Glutamic Acid"), unit: "g", field: nutBinding(\.glutamicAcid, state: $aminoAcids)), focusID: .glutamicAcid),
+            (row: .init(label: String(localized: "Glycine"), unit: "g", field: nutBinding(\.glycine, state: $aminoAcids)), focusID: .glycine),
+            (row: .init(label: String(localized: "Histidine"), unit: "g", field: nutBinding(\.histidine, state: $aminoAcids)), focusID: .histidine),
+            (row: .init(label: String(localized: "Isoleucine"), unit: "g", field: nutBinding(\.isoleucine, state: $aminoAcids)), focusID: .isoleucine),
+            (row: .init(label: String(localized: "Leucine"), unit: "g", field: nutBinding(\.leucine, state: $aminoAcids)), focusID: .leucine),
+            (row: .init(label: String(localized: "Lysine"), unit: "g", field: nutBinding(\.lysine, state: $aminoAcids)), focusID: .lysine),
+            (row: .init(label: String(localized: "Methionine"), unit: "g", field: nutBinding(\.methionine, state: $aminoAcids)), focusID: .methionine),
+            (row: .init(label: String(localized: "Phenylalanine"), unit: "g", field: nutBinding(\.phenylalanine, state: $aminoAcids)), focusID: .phenylalanine),
+            (row: .init(label: String(localized: "Proline"), unit: "g", field: nutBinding(\.proline, state: $aminoAcids)), focusID: .proline),
+            (row: .init(label: String(localized: "Threonine"), unit: "g", field: nutBinding(\.threonine, state: $aminoAcids)), focusID: .threonine),
+            (row: .init(label: String(localized: "Tryptophan"), unit: "g", field: nutBinding(\.tryptophan, state: $aminoAcids)), focusID: .tryptophan),
+            (row: .init(label: String(localized: "Tyrosine"), unit: "g", field: nutBinding(\.tyrosine, state: $aminoAcids)), focusID: .tyrosine),
+            (row: .init(label: String(localized: "Valine"), unit: "g", field: nutBinding(\.valine, state: $aminoAcids)), focusID: .valine),
+            (row: .init(label: String(localized: "Serine"), unit: "g", field: nutBinding(\.serine, state: $aminoAcids)), focusID: .serine),
+            (row: .init(label: String(localized: "Hydroxyproline"), unit: "g", field: nutBinding(\.hydroxyproline, state: $aminoAcids)), focusID: .hydroxyproline)
         ]
     }
     
     private func carbDetailRows() -> [(row: NutrientRow, focusID: FocusableField)] {
         return [
-            (row: .init(label: "Starch", unit: "g", field: nutBinding(\.starch, state: $carbDetails)), focusID: .starch),
-            (row: .init(label: "Sucrose", unit: "g", field: nutBinding(\.sucrose, state: $carbDetails)), focusID: .sucrose),
-            (row: .init(label: "Glucose", unit: "g", field: nutBinding(\.glucose, state: $carbDetails)), focusID: .glucose),
-            (row: .init(label: "Fructose", unit: "g", field: nutBinding(\.fructose, state: $carbDetails)), focusID: .fructose),
-            (row: .init(label: "Lactose", unit: "g", field: nutBinding(\.lactose, state: $carbDetails)), focusID: .lactose),
-            (row: .init(label: "Maltose", unit: "g", field: nutBinding(\.maltose, state: $carbDetails)), focusID: .maltose),
-            (row: .init(label: "Galactose", unit: "g", field: nutBinding(\.galactose, state: $carbDetails)), focusID: .galactose)
+            (row: .init(label: String(localized: "Starch"), unit: "g", field: nutBinding(\.starch, state: $carbDetails)), focusID: .starch),
+            (row: .init(label: String(localized: "Sucrose"), unit: "g", field: nutBinding(\.sucrose, state: $carbDetails)), focusID: .sucrose),
+            (row: .init(label: String(localized: "Glucose"), unit: "g", field: nutBinding(\.glucose, state: $carbDetails)), focusID: .glucose),
+            (row: .init(label: String(localized: "Fructose"), unit: "g", field: nutBinding(\.fructose, state: $carbDetails)), focusID: .fructose),
+            (row: .init(label: String(localized: "Lactose"), unit: "g", field: nutBinding(\.lactose, state: $carbDetails)), focusID: .lactose),
+            (row: .init(label: String(localized: "Maltose"), unit: "g", field: nutBinding(\.maltose, state: $carbDetails)), focusID: .maltose),
+            (row: .init(label: String(localized: "Galactose"), unit: "g", field: nutBinding(\.galactose, state: $carbDetails)), focusID: .galactose)
         ]
     }
     
     private func sterolRows() -> [(row: NutrientRow, focusID: FocusableField)] {
         return [
-            (row: .init(label: "Phytosterols", unit: "mg", field: nutBinding(\.phytosterols, state: $sterols, unit: "mg")), focusID: .phytosterols),
-            (row: .init(label: "Beta-Sitosterol", unit: "mg", field: nutBinding(\.betaSitosterol, state: $sterols, unit: "mg")), focusID: .betaSitosterol),
-            (row: .init(label: "Campesterol", unit: "mg", field: nutBinding(\.campesterol, state: $sterols, unit: "mg")), focusID: .campesterol),
-            (row: .init(label: "Stigmasterol", unit: "mg", field: nutBinding(\.stigmasterol, state: $sterols, unit: "mg")), focusID: .stigmasterol)
+            (row: .init(label: String(localized: "Phytosterols"), unit: "mg", field: nutBinding(\.phytosterols, state: $sterols, unit: "mg")), focusID: .phytosterols),
+            (row: .init(label: String(localized: "Beta-Sitosterol"), unit: "mg", field: nutBinding(\.betaSitosterol, state: $sterols, unit: "mg")), focusID: .betaSitosterol),
+            (row: .init(label: String(localized: "Campesterol"), unit: "mg", field: nutBinding(\.campesterol, state: $sterols, unit: "mg")), focusID: .campesterol),
+            (row: .init(label: String(localized: "Stigmasterol"), unit: "mg", field: nutBinding(\.stigmasterol, state: $sterols, unit: "mg")), focusID: .stigmasterol)
         ]
     }
 
@@ -1511,7 +1511,7 @@ struct FoodItemEditorView: View {
         Group {
             switch openMenu {
             case .allergen:
-                dropdownMenu(selection: $selectedAllergens, items: Allergen.allCases, label: { $0.rawValue })
+                dropdownMenu(selection: $selectedAllergens, items: Allergen.allCases, label: { $0.displayName })
             case .none:
                 EmptyView()
             }
@@ -1543,7 +1543,7 @@ struct FoodItemEditorView: View {
                 selection: selection,
                 items: items,
                 label: itemLabel,
-                prompt: "Select \(label)",
+                prompt: String(localized: "Select \(label)"),
                 isExpanded: openMenu == menu
             )
             .contentShape(Rectangle())
@@ -1563,15 +1563,15 @@ struct FoodItemEditorView: View {
         case .available:
             return true
         case .deviceNotEligible:
-            alertMsg = "This device doesn’t support Apple Intelligence."
+            alertMsg = String(localized: "This device doesn’t support Apple Intelligence.")
         case .appleIntelligenceNotEnabled:
-            alertMsg = "Apple Intelligence is turned off. Enable it in Settings to use AI."
+            alertMsg = String(localized: "Apple Intelligence is turned off. Enable it in Settings to use AI.")
         case .modelNotReady:
-            alertMsg = "The model is downloading or preparing. Please try again shortly."
+            alertMsg = String(localized: "The model is downloading or preparing. Please try again shortly.")
         case .unavailableUnsupportedOS:
-            alertMsg = "Apple Intelligence requires iOS 26 or newer."
+            alertMsg = String(localized: "Apple Intelligence requires iOS 26 or newer.")
         case .unavailableOther:
-            alertMsg = "Apple Intelligence is currently unavailable for an unknown reason."
+            alertMsg = String(localized: "Apple Intelligence is currently unavailable for an unknown reason.")
         }
         showAlert = true
         return false
@@ -1778,14 +1778,14 @@ extension FoodItemEditorView {
             ) {
                 self.runningGenerationJobID = newJob.id
             } else {
-                alertMsg = "Could not start AI generation job."
+                alertMsg = String(localized: "Could not start AI generation job.")
                 showAlert = true
                 toastTimer?.invalidate()
                 toastTimer = nil
                 withAnimation { showAIGenerationToast = false }
             }
         } else {
-            alertMsg = "AI data generation requires iOS 26 or newer."
+            alertMsg = String(localized: "AI data generation requires iOS 26 or newer.")
             showAlert = true
         }
     }
@@ -1811,7 +1811,7 @@ extension FoodItemEditorView {
         
         // 2. Валидация на името (преди да караме потребителя да гледа реклами)
         guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            alertMsg = "Please enter a name for the food first."
+            alertMsg = String(localized: "Please enter a name for the food first.")
             showAlert = true
             return
         }
@@ -1960,7 +1960,7 @@ extension FoodItemEditorView {
 extension FoodItemEditorView.OpenMenu {
     var title: String {
         switch self {
-        case .allergen: return "Allergens"
+        case .allergen: return String(localized: "Allergens")
         case .none: return ""
         }
     }

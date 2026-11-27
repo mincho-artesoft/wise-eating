@@ -118,7 +118,7 @@ struct AyurvedaSearchFiltersView: View {
                 HStack(spacing: 5) {
                     Text(
                         filters.preference(for: dosha)?.displayName
-                            ?? "Any effect"
+                            ?? String(localized: "Any effect")
                     )
                     Image(systemName: "chevron.up.chevron.down")
                         .font(.caption2)

@@ -500,7 +500,7 @@ struct ShoppingListView: View {
                 listToDelete = nil
             }
         } message: {
-            Text("Are you sure you want to delete the list '\(listToDelete?.name ?? "this list")'? This action cannot be undone.")
+            Text("Are you sure you want to delete the list '\(listToDelete?.name ?? String(localized: "this list"))'? This action cannot be undone.")
         }
     }
     

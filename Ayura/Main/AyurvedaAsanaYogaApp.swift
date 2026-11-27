@@ -139,7 +139,7 @@ final class DatabaseBootstrapController: ObservableObject {
         case ready(ModelContainer, isRecoveryMode: Bool)
         case failed(diagnostic: String)
     }
-    @Published private(set) var phase: Phase = .preparing(status: "Preparing offline Ayurveda & Yoga library...")
+    @Published private(set) var phase: Phase = .preparing(status: String(localized: "Preparing offline Ayurveda & Yoga library..."))
     var isPreparing: Bool { if case .preparing = phase { return true }; return false }
     var database: DatabaseLaunchState {
         switch phase {
@@ -202,8 +202,7 @@ private struct DatabaseUnavailableView: View {
                     .multilineTextAlignment(.center)
 
                 Text(
-                    "Your existing data has not been deleted. "
-                        + "Please close and reopen the app."
+                    "Your existing data has not been deleted. Please close and reopen the app."
                 )
                 .font(.body)
                 .multilineTextAlignment(.center)

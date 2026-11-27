@@ -239,7 +239,7 @@ struct ProfileEditorView: View {
          
          Spacer()
 
-         Text(profile == nil ? "Add Profile" : "Edit Profile")
+         Text(profile == nil ? String(localized: "Add Profile") : String(localized: "Edit Profile"))
              .font(.headline)
              .foregroundColor(effectManager.currentGlobalAccentColor)
 
@@ -274,7 +274,7 @@ struct ProfileEditorView: View {
                    photoPicker
                    VStack(alignment: .leading, spacing: 12) {
                        
-                       StyledLabeledPicker(label: "Name", isRequired: true) {
+                       StyledLabeledPicker(label: String(localized: "Name"), isRequired: true) {
                            TextField("", text: $name, prompt: Text("John Appleseed").foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.6)))
                                .font(.system(size: 16))
                                .focused($focusedField, equals: .name)
@@ -284,7 +284,7 @@ struct ProfileEditorView: View {
                        .id(Field.name)
                        
                        HStack(spacing: 12) {
-                           StyledLabeledPicker(label: "Height (\(GlobalState.measurementSystem == "Imperial" ? "in" : "cm"))", isRequired: true) {
+                           StyledLabeledPicker(label: String(localized: "Height (\(GlobalState.measurementSystem == "Imperial" ? "in" : "cm"))"), isRequired: true) {
                                ConfigurableTextField(
                                    title: GlobalState.measurementSystem == "Imperial" ? "70" : "175",
                                    value: $height,
@@ -310,7 +310,7 @@ struct ProfileEditorView: View {
                            }
                            .id(Field.height)
                            
-                           StyledLabeledPicker(label: "Weight (\(GlobalState.measurementSystem == "Imperial" ? "lbs" : "kg"))", isRequired: true) {
+                           StyledLabeledPicker(label: String(localized: "Weight (\(GlobalState.measurementSystem == "Imperial" ? "lbs" : "kg"))"), isRequired: true) {
                                ConfigurableTextField(
                                    title: GlobalState.measurementSystem == "Imperial" ? "155" : "70.5",
                                    value: $weight,
@@ -340,13 +340,13 @@ struct ProfileEditorView: View {
 
                VStack(spacing: 12) {
                    HStack {
-                       StyledLabeledPicker(label: "Sex", isRequired: true) {
+                       StyledLabeledPicker(label: String(localized: "Sex"), isRequired: true) {
                            Menu {
                                Picker("Select Gender", selection: $gender) {
-                                   ForEach(genders, id: \.self, content: Text.init)
+                                   ForEach(genders, id: \.self) { Text($0 == "Female" ? String(localized: "Female") : String(localized: "Male")) }
                                }
                            } label: {
-                               Text(gender)
+                               Text(gender == "Female" ? String(localized: "Female") : (gender == "Male" ? String(localized: "Male") : gender))
                                    .font(.system(size: 16))
                                    .frame(maxWidth: .infinity, alignment: .leading)
                                    .contentShape(Rectangle())
@@ -371,7 +371,7 @@ struct ProfileEditorView: View {
              .foregroundStyle(effectManager.currentGlobalAccentColor)
 
          AyurvedaConstitutionEditorButton(
-             title: "Constitution",
+             title: String(localized: "Constitution"),
              profileID: profile?.id,
              completesSetupDirectly: true,
              pendingDraft: $pendingAyurvedaDraft
@@ -409,7 +409,7 @@ struct ProfileEditorView: View {
              .font(.headline)
              .foregroundStyle(effectManager.currentGlobalAccentColor)
          
-         tagPicker(label: "Vitamins", selection: $selectedVitIDs, items: allVitamins, menu: .vitamin) { vitamin in
+         tagPicker(label: String(localized: "Vitamins"), selection: $selectedVitIDs, items: allVitamins, menu: .vitamin) { vitamin in
              "\(vitamin.name) (\(vitamin.abbreviation))"
          }
          .glassCardStyle(cornerRadius: 20)
@@ -422,7 +422,7 @@ struct ProfileEditorView: View {
              .font(.headline)
              .foregroundStyle(effectManager.currentGlobalAccentColor)
 
-         tagPicker(label: "Minerals", selection: $selectedMinIDs, items: allMinerals, menu: .mineral) { mineral in
+         tagPicker(label: String(localized: "Minerals"), selection: $selectedMinIDs, items: allMinerals, menu: .mineral) { mineral in
              "\(mineral.name) (\(mineral.symbol))"
          }
          .glassCardStyle(cornerRadius: 20)
@@ -435,8 +435,8 @@ struct ProfileEditorView: View {
              .font(.headline)
              .foregroundStyle(effectManager.currentGlobalAccentColor)
 
-         tagPicker(label: "Allergens", selection: $selectedAllergens, items: Allergen.allCases, menu: .allergen) { allergen in
-             allergen.rawValue
+         tagPicker(label: String(localized: "Allergens"), selection: $selectedAllergens, items: Allergen.allCases, menu: .allergen) { allergen in
+             allergen.displayName
          }
          .glassCardStyle(cornerRadius: 20)
      }
@@ -528,7 +528,7 @@ struct ProfileEditorView: View {
 
  
  private var birthdayPicker: some View {
-     StyledLabeledPicker(label: "Birthday", isRequired: true) {
+     StyledLabeledPicker(label: String(localized: "Birthday"), isRequired: true) {
          ZStack(alignment: .leading) {
              
              Group {
@@ -639,7 +639,7 @@ struct ProfileEditorView: View {
      
      guard let w_display = UnitConversion.parseDecimal(weight),
            let h_display = UnitConversion.parseDecimal(height) else {
-         showError("Please enter valid numbers for weight and height.")
+         showError(String(localized: "Please enter valid numbers for weight and height."))
          return
      }
      
@@ -647,15 +647,15 @@ struct ProfileEditorView: View {
      let heightInCm = GlobalState.measurementSystem == "Imperial" ? UnitConversion.inchesToCm(h_display) : h_display
      
      guard !meals.isEmpty else {
-         showError("Please add at least one meal.")
+         showError(String(localized: "Please add at least one meal."))
          return
      }
      guard meals.allSatisfy({ $0.endTime > $0.startTime }) else {
-         showError("Every meal must have an end time after its start time.")
+         showError(String(localized: "Every meal must have an end time after its start time."))
          return
      }
      guard let validBirthday = birthday else {
-         showError("Please select a birthday.")
+         showError(String(localized: "Please select a birthday."))
          return
      }
      
@@ -665,7 +665,7 @@ struct ProfileEditorView: View {
 
      Task { @MainActor in
          guard await calVM.requestCalendarAccessIfNeeded() else {
-             showError("Calendar access is required to manage profile data and settings.")
+             showError(String(localized: "Calendar access is required to manage profile data and settings."))
              return
          }
 
@@ -721,7 +721,7 @@ struct ProfileEditorView: View {
              }
              onDismiss(visibleProfile)
          } catch {
-             showError("Failed to save profile: \(error.localizedDescription)")
+             showError(String(localized: "Failed to save profile: \(error.localizedDescription)"))
          }
      }
  }
@@ -942,7 +942,7 @@ struct ProfileEditorView: View {
                  "\(mineral.name) (\(mineral.symbol))"
              }
          case .allergen:
-             dropdownMenu(selection: $selectedAllergens, items: Allergen.allCases, label: { $0.rawValue })
+             dropdownMenu(selection: $selectedAllergens, items: Allergen.allCases, label: { $0.displayName })
          case .none:
              EmptyView()
          }
@@ -972,7 +972,7 @@ struct ProfileEditorView: View {
          MultiSelectButton(selection: selection,
                            items: items,
                            label: itemLabel,
-                           prompt: "Select \(label)",
+                           prompt: String(localized: "Select \(label)"),
                            isExpanded: openMenu == menu)
              .contentShape(Rectangle())
              .onTapGesture {
@@ -999,9 +999,9 @@ struct ProfileEditorView: View {
 extension ProfileEditorView.OpenMenu {
  var title: String {
      switch self {
-     case .vitamin: return "Vitamins"
-     case .mineral: return "Minerals"
-     case .allergen: return "Allergens"
+     case .vitamin: return String(localized: "Vitamins")
+     case .mineral: return String(localized: "Minerals")
+     case .allergen: return String(localized: "Allergens")
      case .none: return ""
      }
  }

@@ -220,7 +220,7 @@ struct WorkoutEditorView: View {
     
     // MARK: - Computed
     private var navigationTitle: String {
-        workoutToEdit == nil ? "New Workout" : "Edit Workout"
+        workoutToEdit == nil ? String(localized: "New Workout") : String(localized: "Edit Workout")
     }
     
     private var isSaveDisabled: Bool {
@@ -504,7 +504,7 @@ struct WorkoutEditorView: View {
                 selection: $selectedPromptIDs,
                 items: workoutPrompts,
                 label: { $0.text },
-                prompt: "Select a prompt...",
+                prompt: String(localized: "Select a prompt..."),
                 isExpanded: openMenu == .promptSelector
             )
             .contentShape(Rectangle())
@@ -529,9 +529,9 @@ struct WorkoutEditorView: View {
                 .padding(.bottom, -4)
             
             VStack(spacing: 16) {
-                StyledLabeledPicker(label: "Workout Name", isRequired: true) {
+                StyledLabeledPicker(label: String(localized: "Workout Name"), isRequired: true) {
                     ConfigurableTextField(
-                        title: "e.g., Full Body Strength",
+                        title: String(localized: "e.g., Full Body Strength"),
                         value: $name,
                         type: .standard,
                         placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
@@ -548,7 +548,7 @@ struct WorkoutEditorView: View {
                     
                     VStack(alignment: .leading, spacing: 12) {
                         HStack(spacing: 16) {
-                            StyledLabeledPicker(label: "Total Duration") {
+                            StyledLabeledPicker(label: String(localized: "Total Duration")) {
                                 HStack {
                                     Text("\(totalDuration.clean) sec")
                                         .font(.system(size: 16))
@@ -557,16 +557,16 @@ struct WorkoutEditorView: View {
                             }
                         }
                         
-                        StyledLabeledPicker(label: "Description", height: 120) {
+                        StyledLabeledPicker(label: String(localized: "Description"), height: 120) {
                             descriptionEditor
                                 .focused($focusedField, equals: .description)
                         }
                         .id(FocusableField.description)
                     }
                 }
-                StyledLabeledPicker(label: "Minimum Age (months)") {
+                StyledLabeledPicker(label: String(localized: "Minimum Age (months)")) {
                     ConfigurableTextField(
-                        title: "e.g. 6",
+                        title: String(localized: "e.g. 6"),
                         value: $minimalAgeMonthsTxt,
                         type: .integer,
                         placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
@@ -601,9 +601,9 @@ struct WorkoutEditorView: View {
     
     private var detailsSection: some View {
         VStack(spacing: 16) {
-            StyledLabeledPicker(label: "Video URL (optional)") {
+            StyledLabeledPicker(label: String(localized: "Video URL (optional)")) {
                 ConfigurableTextField(
-                    title: "e.g., https://youtube.com/...",
+                    title: String(localized: "e.g., https://youtube.com/..."),
                     value: $videoURL,
                     type: .standard,
                     placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
@@ -614,7 +614,7 @@ struct WorkoutEditorView: View {
             }
             .id(FocusableField.videoURL)
             
-            StyledLabeledPicker(label: "Average MET Value") {
+            StyledLabeledPicker(label: String(localized: "Average MET Value")) {
                 HStack {
                     if let avgMET = averageMET {
                         Text(String(format: "%.1f", avgMET))
@@ -642,8 +642,8 @@ struct WorkoutEditorView: View {
             MultiSelectButton(
                 selection: .constant(aggregatedIDs),
                 items: aggregatedMuscleGroups,
-                label: { $0.rawValue },
-                prompt: "Add exercises to see muscle groups",
+                label: { $0.displayName },
+                prompt: String(localized: "Add exercises to see muscle groups"),
                 isExpanded: false,
                 disabled: true
             )
@@ -691,9 +691,9 @@ struct WorkoutEditorView: View {
     private func yogaSearchMetadata(for item: ExerciseItem) -> some View {
         if item.hasYogaPracticeMetadata {
             let values = [
-                item.family?.rawValue,
-                item.level.map { "Level \($0)" },
-                item.durationSeconds.map { "\($0) sec" }
+                item.family?.displayName,
+                item.level.map { String(localized: "Level \($0)") },
+                item.durationSeconds.map { String(localized: "\($0) sec") }
             ]
             .compactMap { $0 }
             .filter { !$0.isEmpty }
@@ -853,7 +853,7 @@ struct WorkoutEditorView: View {
             }
         }) {
             HStack(spacing: 6) {
-                Text(group.rawValue)
+                Text(group.displayName)
                     .font(.caption)
                     .fontWeight(.medium)
                 
@@ -1184,7 +1184,7 @@ struct WorkoutEditorView: View {
     private func saveWorkout() {
         let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmedName.isEmpty else {
-            alertMessage = "Workout name cannot be empty."
+            alertMessage = String(localized: "Workout name cannot be empty.")
             showAlert = true
             return
         }
@@ -1199,7 +1199,7 @@ struct WorkoutEditorView: View {
                     from: modelContext.container
                 )
             } catch {
-                alertMessage = "Failed to open the user database: \(error.localizedDescription)"
+                alertMessage = String(localized: "Failed to open the user database: \(error.localizedDescription)")
                 showAlert = true
                 isSaving = false
                 return
@@ -1282,7 +1282,7 @@ struct WorkoutEditorView: View {
                 }
                 onDismiss(itemToSave)
             } catch {
-                alertMessage = "Failed to save workout: \(error.localizedDescription)"
+                alertMessage = String(localized: "Failed to save workout: \(error.localizedDescription)")
                 showAlert = true
                 isSaving = false
             }
@@ -1398,7 +1398,7 @@ struct WorkoutEditorView: View {
         private func startAIGeneration() {
             let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
             guard !trimmedName.isEmpty else {
-                alertMessage = "Please enter a name for the workout first."
+                alertMessage = String(localized: "Please enter a name for the workout first.")
                 showAlert = true
                 return
             }
@@ -1417,7 +1417,7 @@ struct WorkoutEditorView: View {
             ) {
                 self.runningGenerationJobID = newJob.id
             } else {
-                alertMessage = "Could not start AI workout generation job."
+                alertMessage = String(localized: "Could not start AI workout generation job.")
                 showAlert = true
                 toastTimer?.invalidate()
                 toastTimer = nil
@@ -1447,7 +1447,7 @@ struct WorkoutEditorView: View {
             // 2. Валидация на името (преди рекламите)
             let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
             guard !trimmedName.isEmpty else {
-                alertMessage = "Please enter a name for the workout first."
+                alertMessage = String(localized: "Please enter a name for the workout first.")
                 showAlert = true
                 return
             }
@@ -1499,14 +1499,14 @@ struct WorkoutEditorView: View {
     private func populateFromCompletedJob(jobID: UUID) async {
         guard let job = aiManager.jobs.first(where: { $0.id == jobID }),
               let resultData = job.resultData else {
-            alertMessage = "Could not find the completed AI job data."
+            alertMessage = String(localized: "Could not find the completed AI job data.")
             showAlert = true
             runningGenerationJobID = nil
             return
         }
         
         guard let payload = try? JSONDecoder().decode(ResolvedWorkoutResponseDTO.self, from: resultData) else {
-            alertMessage = "Could not decode the generated workout data."
+            alertMessage = String(localized: "Could not decode the generated workout data.")
             showAlert = true
             runningGenerationJobID = nil
             await aiManager.deleteJob(byID: jobID)
@@ -1661,15 +1661,15 @@ struct WorkoutEditorView: View {
         case .available:
             return true
         case .deviceNotEligible:
-            alertMessage = "This device doesn’t support Apple Intelligence."
+            alertMessage = String(localized: "This device doesn’t support Apple Intelligence.")
         case .appleIntelligenceNotEnabled:
-            alertMessage = "Apple Intelligence is turned off. Enable it in Settings to use AI exercise generation."
+            alertMessage = String(localized: "Apple Intelligence is turned off. Enable it in Settings to use AI exercise generation.")
         case .modelNotReady:
-            alertMessage = "The model is downloading or preparing. Please try again in a bit."
+            alertMessage = String(localized: "The model is downloading or preparing. Please try again in a bit.")
         case .unavailableUnsupportedOS:
-            alertMessage = "Apple Intelligence requires iOS 26 or newer. Update your OS to use this feature."
+            alertMessage = String(localized: "Apple Intelligence requires iOS 26 or newer. Update your OS to use this feature.")
         case .unavailableOther:
-            alertMessage = "Apple Intelligence is currently unavailable for an unknown reason."
+            alertMessage = String(localized: "Apple Intelligence is currently unavailable for an unknown reason.")
         }
         showAlert = true
         return false
@@ -1692,7 +1692,7 @@ private extension WorkoutEditorView.OpenMenu {
     var title: String {
         switch self {
         case .none: return ""
-        case .promptSelector: return "Prompts"
+        case .promptSelector: return String(localized: "Prompts")
         }
     }
 }
@@ -1736,7 +1736,7 @@ fileprivate struct EditableExerciseRow: View {
 
                 HStack(spacing: 4) {
                     ConfigurableTextField(
-                        title: "sec",
+                        title: String(localized: "sec"),
                         value: $textValue,
                         type: .decimal,
                         placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),

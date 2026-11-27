@@ -7,9 +7,9 @@ import Foundation
 /// Identifiable: Useful for SwiftUI lists and ForEach loops.
 public enum MuscleGroup: String, Codable, CaseIterable, Identifiable, SelectableItem, Sendable {
     public var id: String { self.rawValue }
-    public var name: String { self.rawValue }
+    public var name: String { displayName }
     public var iconName: String? { assetName(forGender: "Male") }
-    public var iconText: String? { self.rawValue }
+    public var iconText: String? { displayName }
 
     public func assetName(forGender gender: String) -> String {
         let normalizedGender = gender
@@ -40,4 +40,30 @@ public enum MuscleGroup: String, Codable, CaseIterable, Identifiable, Selectable
     case fullBody = "Full Body"
     case legs = "Legs"
     case arms = "Arms"
+
+    public var displayName: String {
+        switch self {
+        case .chest: String(localized: "Chest")
+        case .back: String(localized: "Back")
+        case .lats: String(localized: "Lats")
+        case .traps: String(localized: "Traps")
+        case .lowerBack: String(localized: "Lower Back")
+        case .quads: String(localized: "Quads")
+        case .hamstrings: String(localized: "Hamstrings")
+        case .glutes: String(localized: "Glutes")
+        case .calves: String(localized: "Calves")
+        case .hipFlexors: String(localized: "Hip Flexors")
+        case .innerThighs: String(localized: "Inner Thighs")
+        case .shoulders: String(localized: "Shoulders")
+        case .deltoids: String(localized: "Deltoids")
+        case .biceps: String(localized: "Biceps")
+        case .triceps: String(localized: "Triceps")
+        case .forearms: String(localized: "Forearms")
+        case .abs: String(localized: "Abs")
+        case .obliques: String(localized: "Obliques")
+        case .fullBody: String(localized: "Full Body")
+        case .legs: String(localized: "Legs")
+        case .arms: String(localized: "Arms")
+        }
+    }
 }

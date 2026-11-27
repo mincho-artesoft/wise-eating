@@ -208,7 +208,7 @@ struct AIDailyMealGeneratorView: View {
                 selection: $selectedPromptIDs,
                 items: mealPlanPrompts,
                 label: { $0.text },
-                prompt: "Select a prompt...",
+                prompt: String(localized: "Select a prompt..."),
                 isExpanded: openMenu == .promptSelector
             )
             .contentShape(Rectangle())

@@ -252,8 +252,8 @@ struct AyurvedaConstitutionSetupView: View {
           VStack(spacing: 0) {
             AyurvedaCustomHeader(
               title: navigationTitle,
-              leadingTitle: "Cancel",
-              trailingTitle: completesDirectly ? "Done" : nil,
+              leadingTitle: String(localized: "Cancel"),
+              trailingTitle: completesDirectly ? String(localized: "Done") : nil,
               trailingDisabled: directCompletionDisabled,
               leadingAction: cancelSetup,
               trailingAction: completeDirectly
@@ -283,9 +283,9 @@ struct AyurvedaConstitutionSetupView: View {
 
   private var navigationTitle: String {
     switch phase {
-    case .picker: "Choose a profile"
-    case .questionnaire: "Traditional profile"
-    case .result: "Your result"
+    case .picker: String(localized: "Choose a profile")
+    case .questionnaire: String(localized: "Traditional profile")
+    case .result: String(localized: "Your result")
     }
   }
 
@@ -293,18 +293,18 @@ struct AyurvedaConstitutionSetupView: View {
     switch phase {
     case .picker:
       onHeaderChange(
-        "Your traditional constitution",
-        "Choose your constitution or answer 12 questions."
+        String(localized: "Your traditional constitution"),
+        String(localized: "Choose your constitution or answer 12 questions.")
       )
     case .questionnaire:
       onHeaderChange(
-        "Constitution questions",
-        "Answer based on how you have usually been."
+        String(localized: "Constitution questions"),
+        String(localized: "Answer based on how you have usually been.")
       )
     case .result:
       onHeaderChange(
-        "Your constitution result",
-        "Review your dosha distribution."
+        String(localized: "Your constitution result"),
+        String(localized: "Review your dosha distribution.")
       )
     }
   }
@@ -784,7 +784,7 @@ struct AyurvedaConstitutionEditorButton: View {
   @State private var isShowingManager = false
 
   init(
-    title: String = "Ayurvedic profile",
+    title: String = String(localized: "Ayurvedic profile"),
     profileID: UUID?,
     completesSetupDirectly: Bool = false,
     pendingDraft: Binding<AyurvedaConstitutionDraft?>
@@ -805,7 +805,7 @@ struct AyurvedaConstitutionEditorButton: View {
         Text(title)
           .font(.headline)
         Spacer()
-        Text(resultLabel ?? "Set up")
+        Text(resultLabel ?? String(localized: "Set up"))
           .font(.subheadline.weight(.semibold))
           .lineLimit(1)
         Image(systemName: "chevron.right")
@@ -874,8 +874,8 @@ private struct AyurvedaConstitutionDraftManagerView: View {
 
       VStack(spacing: 0) {
         AyurvedaCustomHeader(
-          title: "Ayurvedic profile",
-          trailingTitle: "Done",
+          title: String(localized: "Ayurvedic profile"),
+          trailingTitle: String(localized: "Done"),
           trailingAction: { dismiss() }
         )
 
@@ -1062,8 +1062,8 @@ struct AyurvedaConstitutionManagerView: View {
 
       VStack(spacing: 0) {
         AyurvedaCustomHeader(
-          title: "Ayurvedic profile",
-          trailingTitle: "Done",
+          title: String(localized: "Ayurvedic profile"),
+          trailingTitle: String(localized: "Done"),
           trailingAction: { dismiss() }
         )
 
@@ -1203,8 +1203,8 @@ private struct AyurvedaCheckInView: View {
 
       VStack(spacing: 0) {
         AyurvedaCustomHeader(
-          title: "Current check-in",
-          leadingTitle: "Cancel",
+          title: String(localized: "Current check-in"),
+          leadingTitle: String(localized: "Cancel"),
           leadingAction: { dismiss() }
         )
 

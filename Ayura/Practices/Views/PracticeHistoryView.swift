@@ -229,8 +229,8 @@ struct PracticeHistoryView: View {
         let totalSeconds = max(1, Int(duration.rounded()))
         let minutes = totalSeconds / 60
         let seconds = totalSeconds % 60
-        if minutes == 0 { return "\(seconds) sec" }
-        if seconds == 0 { return "\(minutes) min" }
-        return "\(minutes) min \(seconds) sec"
+        if minutes == 0 { return String(localized: "\(seconds) sec") }
+        if seconds == 0 { return String(localized: "\(minutes) min") }
+        return String(localized: "\(minutes) min \(seconds) sec")
     }
 }

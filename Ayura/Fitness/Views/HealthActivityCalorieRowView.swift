@@ -61,12 +61,12 @@ struct HealthWorkoutActivityRowView: View {
         let hours = totalMinutes / 60
         let minutes = totalMinutes % 60
         if hours > 0, minutes > 0 {
-            return "\(hours) hr \(minutes) min"
+            return String(localized: "\(hours) hr \(minutes) min")
         }
         if hours > 0 {
-            return "\(hours) hr"
+            return String(localized: "\(hours) hr")
         }
-        return "\(minutes) min"
+        return String(localized: "\(minutes) min")
     }
 
     private var timingText: String {

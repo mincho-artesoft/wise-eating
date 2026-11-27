@@ -55,7 +55,7 @@ struct FoodItemRowView: View {
             guard let links = item.ingredients, !links.isEmpty else {
                 return item.displayDescription
             }
-            let first = links.prefix(3).map { $0.food?.displayName ?? "Ingredient" }
+            let first = links.prefix(3).map { $0.food?.displayName ?? String(localized: "Ingredient") }
             var txt = first.joined(separator: ", ")
             if links.count > 3 { txt += "..." }
             return txt
@@ -152,8 +152,8 @@ struct FoodItemRowView: View {
                         || ayurvedaDisplay != nil
                     {
                         VStack(alignment: .leading, spacing: 8) {
-                            ChipScrollView(title: "Top Nutrients", items: nutrients, textColor: effectManager.currentGlobalAccentColor)
-                            ChipScrollView(title: "Allergens", items: allergens, textColor: effectManager.currentGlobalAccentColor, isAlertSection: true)
+                            ChipScrollView(title: String(localized: "Top Nutrients"), items: nutrients, textColor: effectManager.currentGlobalAccentColor)
+                            ChipScrollView(title: String(localized: "Allergens"), items: allergens, textColor: effectManager.currentGlobalAccentColor, isAlertSection: true)
 
                             if let ayurvedaDisplay {
                                 VStack(alignment: .leading, spacing: 6) {

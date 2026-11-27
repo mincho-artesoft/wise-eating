@@ -36,14 +36,14 @@ struct AyurvedaWarningsView: View {
     VStack(alignment: .leading, spacing: 8) {
       if !viruddha.isEmpty {
         warningGroup(
-          title: "Viruddha — incompatible combinations",
+          title: String(localized: "Viruddha — incompatible combinations"),
           values: viruddha,
           color: .orange
         )
       }
       if !contraindications.isEmpty {
         warningGroup(
-          title: "Contraindications",
+          title: String(localized: "Contraindications"),
           values: contraindications,
           color: .red
         )

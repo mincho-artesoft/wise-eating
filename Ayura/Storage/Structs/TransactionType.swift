@@ -12,6 +12,18 @@ public enum TransactionType: String, Codable, Sendable {
     // ✅ НОВ ТИП ТРАНЗАКЦИЯ
     case shoppingAddition = "Shopping Addition"
     
+    var displayName: String {
+        switch self {
+        case .addition: String(localized: "Addition")
+        case .consumption: String(localized: "Consumption")
+        case .mealConsumption: String(localized: "Meal Consumption")
+        case .manualCorrection: String(localized: "Manual Correction")
+        case .manualRemoval: String(localized: "Manual Removal")
+        case .fullDeletion: String(localized: "Deleted from Storage")
+        case .shoppingAddition: String(localized: "Shopping Addition")
+        }
+    }
+
     var iconName: String {
         switch self {
         case .addition: "plus.circle.fill"

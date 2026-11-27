@@ -56,7 +56,7 @@ struct FoodItemRowStorageView: View {
             guard let links = item.ingredients, !links.isEmpty else {
                 return item.displayDescription
             }
-            let first = links.prefix(3).map { $0.food?.displayName ?? "Ingredient" }
+            let first = links.prefix(3).map { $0.food?.displayName ?? String(localized: "Ingredient") }
             var txt = first.joined(separator: ", ")
             if links.count > 3 { txt += "..." }
             return txt
@@ -116,10 +116,10 @@ struct FoodItemRowStorageView: View {
             if !nutrients.isEmpty || !allergens.isEmpty {
                 VStack(alignment: .leading, spacing: 8) {
                     if !nutrients.isEmpty {
-                        ChipScrollView(title: "Top Nutrients (per 100g)", items: nutrients, textColor: effectManager.currentGlobalAccentColor)
+                        ChipScrollView(title: String(localized: "Top Nutrients (per 100g)"), items: nutrients, textColor: effectManager.currentGlobalAccentColor)
                     }
                     if !allergens.isEmpty {
-                        ChipScrollView(title: "Allergens", items: allergens, textColor: effectManager.currentGlobalAccentColor, isAlertSection: true)
+                        ChipScrollView(title: String(localized: "Allergens"), items: allergens, textColor: effectManager.currentGlobalAccentColor, isAlertSection: true)
                     }
                 }
             }

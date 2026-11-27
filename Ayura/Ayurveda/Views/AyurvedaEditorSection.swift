@@ -135,29 +135,29 @@ struct AyurvedaEditorSection: View {
       DoshaScaleSelector(
         value: $form.vata,
         dosha: .vata,
-        subtitle: "Movement & Air"
+        subtitle: String(localized: "Movement & Air")
       )
       Divider()
       DoshaScaleSelector(
         value: $form.pitta,
         dosha: .pitta,
-        subtitle: "Fire & Transformation"
+        subtitle: String(localized: "Fire & Transformation")
       )
       Divider()
       DoshaScaleSelector(
         value: $form.kapha,
         dosha: .kapha,
-        subtitle: "Structure & Water"
+        subtitle: String(localized: "Structure & Water")
       )
     }
   }
 
   private var rasaGroup: some View {
-    editorGroup(title: "Rasa (taste)") {
+    editorGroup(title: String(localized: "Rasa (taste)")) {
       ChipGrid {
         ForEach(Self.rasaValues, id: \.self) { value in
           GlassChipView(
-            label: value.capitalized,
+            label: AyurvedaPropertyText.localized(value),
             color: rasaTint(value),
             systemImage: rasaIcon(value),
             textColor: effectManager.currentGlobalAccentColor,
@@ -170,7 +170,7 @@ struct AyurvedaEditorSection: View {
   }
 
   private var viryaGroup: some View {
-    editorGroup(title: "Virya (energy)") {
+    editorGroup(title: String(localized: "Virya (energy)")) {
       WrappingSegmentedControl(
         selection: viryaSelection,
         layoutMode: .wrap,
@@ -200,7 +200,7 @@ struct AyurvedaEditorSection: View {
   }
 
   private var vipakaGroup: some View {
-    editorGroup(title: "Vipaka (post-digestive)") {
+    editorGroup(title: String(localized: "Vipaka (post-digestive)")) {
       WrappingSegmentedControl(
         selection: vipakaSelection,
         layoutMode: .wrap,
@@ -227,11 +227,11 @@ struct AyurvedaEditorSection: View {
   }
 
   private var gunaGroup: some View {
-    editorGroup(title: "Gunas (qualities)") {
+    editorGroup(title: String(localized: "Gunas (qualities)")) {
       ChipGrid {
         ForEach(Self.gunaValues, id: \.self) { value in
           GlassChipView(
-            label: value.capitalized,
+            label: AyurvedaPropertyText.localized(value),
             color: effectManager.currentGlobalAccentColor,
             systemImage: nil,
             textColor: effectManager.currentGlobalAccentColor,
@@ -387,7 +387,7 @@ private struct AyurvedaAutomaticPreview: View {
         )
 
       GlassChipView(
-        label: virya.capitalized,
+        label: AyurvedaPropertyText.localized(virya),
         color: viryaColor(virya),
         systemImage: viryaIcon(virya),
         textColor: effectManager.currentGlobalAccentColor,

@@ -96,7 +96,7 @@ struct TrainingPlanAddDestinationView: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 // --- ПРОМЯНА: Проверяваме isRestDay и променяме текста ---
-                Text(day.isRestDay ? "Day \(dayIndex): Rest Day" : "Day \(dayIndex)")
+                Text(day.isRestDay ? String(localized: "Day \(dayIndex): Rest Day") : String(localized: "Day \(dayIndex)"))
                     .font(.headline)
                 
                 Spacer()

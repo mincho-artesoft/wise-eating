@@ -1,0 +1,132 @@
+[
+{
+"i": 1382,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Choose a profile",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "case .picker: String(localized: \"Choose a profile\")",
+"above": "private var navigationTitle: String {"
+},
+{
+"i": 1383,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Traditional profile",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "case .questionnaire: String(localized: \"Traditional profile\")"
+},
+{
+"i": 1384,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Your result",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "case .result: String(localized: \"Your result\")",
+"above": "case .questionnaire: String(localized: \"Traditional profile\")"
+},
+{
+"i": 1385,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Your traditional constitution",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "String(localized: \"Your traditional constitution\"),",
+"above": "case .picker:"
+},
+{
+"i": 1386,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Choose your constitution or answer 12 questions.",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "String(localized: \"Choose your constitution or answer 12 questions.\")",
+"above": "case .picker:"
+},
+{
+"i": 1387,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Constitution questions",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "String(localized: \"Constitution questions\"),",
+"above": "case .questionnaire:"
+},
+{
+"i": 1388,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Answer based on how you have usually been.",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "String(localized: \"Answer based on how you have usually been.\")",
+"above": "case .questionnaire:"
+},
+{
+"i": 1389,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Your constitution result",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "String(localized: \"Your constitution result\"),",
+"above": "case .result:"
+},
+{
+"i": 1390,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Review your dosha distribution.",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "String(localized: \"Review your dosha distribution.\")",
+"above": "case .result:"
+},
+{
+"i": 1391,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Ayurvedic profile",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "title: String = String(localized: \"Ayurvedic profile\"),",
+"above": "@State private var isShowingManager = false"
+},
+{
+"i": 1392,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Set up",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "Text(resultLabel ?? String(localized: \"Set up\"))"
+},
+{
+"i": 1393,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Current check-in",
+"in": [
+"AyurvedaConstitutionViews"
+],
+"code": "title: String(localized: \"Current check-in\"),",
+"above": "var body: some View {"
+}
+]

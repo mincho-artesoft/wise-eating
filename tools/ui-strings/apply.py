@@ -6,7 +6,8 @@
   apply.py --partial   also languages that do not have every string yet
   apply.py --to DIR    write the catalogues into DIR instead of Ayura/ (to try it)
 
-Interface strings go to Ayura/Localizable.xcstrings under their English key;
+Interface strings go to Ayura/Localizable.xcstrings under their English key,
+the Live Activity widget's also to AyuraLiveActivityWidget/Localizable.xcstrings;
 permission texts go to Ayura/InfoPlist.xcstrings under their Info.plist key.
 Nothing already in a catalogue is removed; a language's entry for a key is
 replaced. A language that does not have every string is skipped unless
@@ -49,6 +50,8 @@ def localization(value):
 
 
 interface = load(repo / "Ayura" / "Localizable.xcstrings")
+# The Live Activity widget is its own bundle and reads its own catalogue.
+widget = load(repo / "AyuraLiveActivityWidget" / "Localizable.xcstrings")
 permissions = load(repo / "Ayura" / "InfoPlist.xcstrings")
 for item in keys:
     if item["k"] == "permission":
@@ -56,6 +59,8 @@ for item in keys:
         entry.setdefault("localizations", {})["en"] = {"stringUnit": {"state": "new", "value": item["s"]}}
     else:
         interface["strings"].setdefault(item["s"], {})
+        if item.get("widget"):
+            widget["strings"].setdefault(item["s"], {})
 
 written = []
 for language in languages:
@@ -69,10 +74,17 @@ for language in languages:
             continue
         catalogue, key = (permissions, item["key"]) if item["k"] == "permission" else (interface, item["s"])
         catalogue["strings"][key].setdefault("localizations", {})[language] = localization(table[item["s"]])
+        if item.get("widget"):
+            widget["strings"][key].setdefault("localizations", {})[language] = localization(table[item["s"]])
     written.append(language)
 
 target.mkdir(parents=True, exist_ok=True)
-for name, catalogue in (("Localizable.xcstrings", interface), ("InfoPlist.xcstrings", permissions)):
+widget_target = target if "--to" in sys.argv else repo
+(widget_target / "AyuraLiveActivityWidget").mkdir(parents=True, exist_ok=True)
+for name, catalogue in (("Localizable.xcstrings", interface), ("InfoPlist.xcstrings", permissions),
+                        ("../AyuraLiveActivityWidget/Localizable.xcstrings", widget)):
+    if "--to" in sys.argv:
+        name = name.replace("../", "")
     (target / name).write_text(json.dumps(catalogue, ensure_ascii=False, indent=2,
                                           separators=(",", ": ")) + "\n")
 print(f"{len(written)} languages written to {target}: {' '.join(written)}")

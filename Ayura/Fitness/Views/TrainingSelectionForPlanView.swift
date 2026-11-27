@@ -102,7 +102,7 @@ struct TrainingSelectionForPlanView: View {
     private func handleCreateAction() {
         guard !selectedTrainingIDs.isEmpty else { return }
         let dateString = Date().formatted(date: .abbreviated, time: .omitted)
-        let defaultPlanName = "Training Plan \(dateString)"
+        let defaultPlanName = String(localized: "Training Plan \(dateString)")
         let selected = trainings.filter { selectedTrainingIDs.contains($0.id) }
         onCreatePlan(selected, defaultPlanName)
     }

@@ -417,7 +417,7 @@ struct ExerciseItemDetailView: View {
     @ViewBuilder
     private var workoutExercisesSection: some View {
         if item.isWorkout, let exercises = item.exercises, !exercises.isEmpty {
-            SectionView(title: "Exercises in this Workout") {
+            SectionView(title: String(localized: "Exercises in this Workout")) {
                 VStack(alignment: .leading, spacing: 10) {
                     ForEach(exercises) { link in
                         if let exercise = link.exercise {
@@ -468,8 +468,8 @@ struct ExerciseItemDetailView: View {
     }
     
     private var muscleGroupSection: some View {
-        let items = item.muscleGroups.map { StaticTag(label: $0.rawValue, color: .purple) }
-        return tagSectionView(title: "Primary Muscles", tags: items)
+        let items = item.muscleGroups.map { StaticTag(label: $0.displayName, color: .purple) }
+        return tagSectionView(title: String(localized: "Primary Muscles"), tags: items)
     }
 
     @ViewBuilder
@@ -498,7 +498,7 @@ struct ExerciseItemDetailView: View {
     @ViewBuilder
     private var videoSection: some View {
         if let url = videoURL {
-            SectionView(title: "Video Tutorial") {
+            SectionView(title: String(localized: "Video Tutorial")) {
                 VideoPlayer(player: AVPlayer(url: url))
                     .frame(height: 200)
                     .clipShape(RoundedRectangle(cornerRadius: 15))

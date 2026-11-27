@@ -115,14 +115,14 @@ struct AnalyticsChartView: View {
         } description: {
             Text(
                 isSleepMetric
-                    ? "No HealthKit sleep data found for this period."
+                    ? String(localized: "No HealthKit sleep data found for this period.")
                     : isBurnedCaloriesMetric
-                        ? "No workout or activity calories found for this period."
+                        ? String(localized: "No workout or activity calories found for this period.")
                     : isNetBalanceMetric
-                        ? "No meal or activity data found for this period."
+                        ? String(localized: "No meal or activity data found for this period.")
                     : isProfileMetric
-                        ? "This metric will appear after it is changed in the profile editor."
-                        : "No meal data found for this metric."
+                        ? String(localized: "This metric will appear after it is changed in the profile editor.")
+                        : String(localized: "No meal data found for this metric.")
             )
                 .foregroundStyle(accent.opacity(0.8))
         }
@@ -280,7 +280,7 @@ struct AnalyticsChartView: View {
                           Circle()
                               .fill(color)
                               .frame(width: 8, height: 8)
-                          Text("\(isCalories || isWaterChart || isProteinChart || isCarbsChart || isFatChart || isSleepChart ? "Target" : "MIN"): \(min.clean) \(requirements.unit ?? "")")
+                          Text("\(isCalories || isWaterChart || isProteinChart || isCarbsChart || isFatChart || isSleepChart ? String(localized: "Target") : String(localized: "MIN")): \(min.clean) \(requirements.unit ?? "")")
                               .font(.caption.weight(.semibold))
                               .foregroundStyle(accent)
                       }
@@ -487,25 +487,25 @@ struct AnalyticsChartView: View {
     }
 
     private func nutrientName(for id: String) -> String {
-        if id == "calories" { return "Calories" }
-        if id == "calories_burned" { return "Burned Calories" }
-        if id == "net_calorie_balance" { return "Net Calorie Balance" }
-        if id == "water" { return "Water Intake" }
-        if id == "protein" { return "Protein" }
-        if id == "carbohydrates" { return "Carbohydrates" }
-        if id == "fat" { return "Fat" }
-        if id == "profile_weight" { return "Weight" }
-        if id == "profile_height" { return "Height" }
-        if id == "sleep" { return "Sleep" }
+        if id == "calories" { return String(localized: "Calories") }
+        if id == "calories_burned" { return String(localized: "Burned Calories") }
+        if id == "net_calorie_balance" { return String(localized: "Net Calorie Balance") }
+        if id == "water" { return String(localized: "Water Intake") }
+        if id == "protein" { return String(localized: "Protein") }
+        if id == "carbohydrates" { return String(localized: "Carbohydrates") }
+        if id == "fat" { return String(localized: "Fat") }
+        if id == "profile_weight" { return String(localized: "Weight") }
+        if id == "profile_height" { return String(localized: "Height") }
+        if id == "sleep" { return String(localized: "Sleep") }
         if id.starts(with: "vit_") {
             let key = String(id.dropFirst(4))
-            return allVitamins.first { $0.key == key }?.name ?? "Unknown Vitamin"
+            return allVitamins.first { $0.key == key }?.name ?? String(localized: "Unknown Vitamin")
         }
         if id.starts(with: "min_") {
             let key = String(id.dropFirst(4))
-            return allMinerals.first { $0.key == key }?.name ?? "Unknown Mineral"
+            return allMinerals.first { $0.key == key }?.name ?? String(localized: "Unknown Mineral")
         }
-        return "Unknown"
+        return String(localized: "Unknown")
     }
     
     private func calculateWaterGoal(for profile: Profile) -> Int {

@@ -47,7 +47,7 @@ struct PracticeEntryView: View {
     }
 
     private var selectedAmbienceTitle: String {
-        guard let selectedAmbienceName else { return "No ambience" }
+        guard let selectedAmbienceName else { return String(localized: "No ambience") }
         return ambienceTracks.first { $0.resourceName == selectedAmbienceName }?.displayName
             ?? selectedAmbienceName.replacingOccurrences(of: "_", with: " ")
     }
@@ -197,7 +197,7 @@ struct PracticeEntryView: View {
             }
             .accessibilityAddTraits(artworkImage == nil ? [] : .isButton)
             .accessibilityHint(
-                artworkImage == nil ? "" : "Opens the practice image full screen"
+                artworkImage == nil ? "" : String(localized: "Opens the practice image full screen")
             )
     }
 
@@ -234,11 +234,11 @@ struct PracticeEntryView: View {
                 )
                 PracticeMetadataPill(
                     icon: practice.eyes == "closed" ? "eye.slash" : "eye",
-                    text: practiceLabel(practice.eyes) ?? "Eyes \(practice.eyes)"
+                    text: practiceLabel(practice.eyes) ?? String(localized: "Eyes \(practice.eyes)")
                 )
                 PracticeMetadataPill(
                     icon: "chart.bar",
-                    text: "Level \(practice.level)"
+                    text: String(localized: "Level \(practice.level)")
                 )
                 PracticeMetadataPill(
                     icon: "clock",
@@ -274,7 +274,7 @@ struct PracticeEntryView: View {
 
     private var lengthPicker: some View {
         VStack(alignment: .leading, spacing: 12) {
-            PracticeSectionHeading(title: "Length", detail: "Choose your pace")
+            PracticeSectionHeading(title: String(localized: "Length"), detail: String(localized: "Choose your pace"))
             HStack(spacing: 9) {
                 ForEach(practice.availableDurationOptions, id: \.self) { duration in
                     Button {
@@ -321,7 +321,7 @@ struct PracticeEntryView: View {
 
     private var guidePicker: some View {
         VStack(alignment: .leading, spacing: 12) {
-            PracticeSectionHeading(title: "Guide", detail: "Voice guidance")
+            PracticeSectionHeading(title: String(localized: "Guide"), detail: String(localized: "Voice guidance"))
             HStack(spacing: 9) {
                 ForEach(availableVoiceModes) { mode in
                     Button {
@@ -370,16 +370,16 @@ struct PracticeEntryView: View {
 
     private func voiceModeTitle(_ mode: PracticeVoiceMode) -> String {
         switch mode {
-        case .off: "No voice"
-        case .recorded: "Guided voice"
+        case .off: String(localized: "No voice")
+        case .recorded: String(localized: "Guided voice")
         }
     }
 
     private var soundPicker: some View {
         VStack(alignment: .leading, spacing: 12) {
             PracticeSectionHeading(
-                title: "Sound",
-                detail: "\(ambienceTracks.count) bundled tracks"
+                title: String(localized: "Sound"),
+                detail: String(localized: "\(ambienceTracks.count) bundled tracks")
             )
             Menu {
                 Button("No ambience") { selectedAmbienceName = nil }

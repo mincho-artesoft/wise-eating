@@ -109,20 +109,20 @@ struct BarcodeScannerView: View {
                         Spacer()
                         scanOptionButton(
                             icon: "barcode.viewfinder",
-                            text: isLivePreviewOn ? "Live On" : "Live Off"
+                            text: isLivePreviewOn ? String(localized: "Live On") : String(localized: "Live Off")
                         ) {
                             toggleLivePreview()
                         }
 
                         Spacer()
 
-                        scanOptionButton(icon: "camera.fill", text: "Camera") {
+                        scanOptionButton(icon: "camera.fill", text: String(localized: "Camera")) {
                             isShowingCameraPicker = true
                         }
 
                         Spacer()
 
-                        scanOptionButton(icon: "photo.on.rectangle.angled", text: "Upload") {
+                        scanOptionButton(icon: "photo.on.rectangle.angled", text: String(localized: "Upload")) {
                             isShowingPhotoLibraryPicker = true
                         }
                         Spacer()
@@ -277,9 +277,9 @@ struct BarcodeScannerView: View {
                 itemForConfirmation = nil
             }
         } message: { item in
-            let destination = (mode == .shoppingList) ? "your shopping list" : "your meal"
+            let destination = (mode == .shoppingList) ? String(localized: "your shopping list") : String(localized: "your meal")
             if let foodItem = item.resolvedFoodItem {
-                Text("Found \"\(foodItem.name)\" in your database. You can add it, or create a new entry for \"\(item.productName ?? "this product")\".")
+                Text("Found \"\(foodItem.name)\" in your database. You can add it, or create a new entry for \"\(item.productName ?? String(localized: "this product"))\".")
             } else if let productName = item.productName {
                 Text("\"\(productName)\" was not found in your database. You can create a new entry for it.")
             } else {
@@ -512,15 +512,15 @@ struct BarcodeScannerView: View {
         case .available:
             return true
         case .deviceNotEligible:
-            alertMessage = "This device doesn’t support Apple Intelligence."
+            alertMessage = String(localized: "This device doesn’t support Apple Intelligence.")
         case .appleIntelligenceNotEnabled:
-            alertMessage = "Apple Intelligence is turned off. Enable it in Settings to use AI exercise generation."
+            alertMessage = String(localized: "Apple Intelligence is turned off. Enable it in Settings to use AI exercise generation.")
         case .modelNotReady:
-            alertMessage = "The model is downloading or preparing. Please try again in a bit."
+            alertMessage = String(localized: "The model is downloading or preparing. Please try again in a bit.")
         case .unavailableUnsupportedOS:
-            alertMessage = "Apple Intelligence requires iOS 26 or newer. Update your OS to use this feature."
+            alertMessage = String(localized: "Apple Intelligence requires iOS 26 or newer. Update your OS to use this feature.")
         case .unavailableOther:
-            alertMessage = "Apple Intelligence is currently unavailable for an unknown reason."
+            alertMessage = String(localized: "Apple Intelligence is currently unavailable for an unknown reason.")
         }
         showAlert = true
         return false

@@ -8,7 +8,7 @@ enum NotificationSchedulingError: LocalizedError {
     case disabledInApp
 
     var errorDescription: String? {
-        "Notifications are disabled in Ayura settings."
+        String(localized: "Notifications are disabled in Ayura settings.")
     }
 }
 
@@ -155,8 +155,8 @@ class NotificationManager {
         )
 
         let content = UNMutableNotificationContent()
-        content.title = "🧘 Workout Reminder"
-        content.body = "Your usual practice time is approaching. Open Ayura when you're ready."
+        content.title = String(localized: "🧘 Workout Reminder")
+        content.body = String(localized: "Your usual practice time is approaching. Open Ayura when you're ready.")
         content.sound = .default
         content.threadIdentifier = "practice-reminders"
         content.userInfo = [

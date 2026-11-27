@@ -53,7 +53,7 @@ struct TrainingPlanExerciseRowView: View {
                     }
 
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(item?.name ?? "Unknown")
+                        Text(item?.name ?? String(localized: "Unknown"))
                             .foregroundStyle(effectManager.currentGlobalAccentColor)
                             .font(.headline)
                             .lineLimit(2)
@@ -67,7 +67,7 @@ struct TrainingPlanExerciseRowView: View {
 
                     HStack(spacing: 4) {
                         ConfigurableTextField(
-                            title: "sec",
+                            title: String(localized: "sec"),
                             value: $textValue,
                             type: .integer,
                             placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
@@ -184,9 +184,9 @@ struct TrainingPlanExerciseRowView: View {
                             // ✅ ДИНАМИЧЕН ЕТИКЕТ: Sec / Min / Reps
                             let unitLabel: String = {
                                 if setBinding.wrappedValue.isTimeBased {
-                                    return setBinding.wrappedValue.timeUnit == .minutes ? "Min" : "Sec"
+                                    return setBinding.wrappedValue.timeUnit == .minutes ? String(localized: "Min") : String(localized: "Sec")
                                 }
-                                return "Reps"
+                                return String(localized: "Reps")
                             }()
                             
                             Text(unitLabel)

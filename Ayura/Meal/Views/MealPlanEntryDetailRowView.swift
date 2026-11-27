@@ -73,7 +73,7 @@ struct MealPlanEntryDetailRowView: View {
             }
 
             VStack(alignment: .leading, spacing: 2) {
-                Text(item?.displayName ?? "Unknown Item")
+                Text(item?.displayName ?? String(localized: "Unknown Item"))
                     .font(.system(size: 16, weight: .semibold))
                     .lineLimit(2)
                     .foregroundStyle(effectManager.currentGlobalAccentColor)

@@ -6,8 +6,8 @@ import UIKit
 public class MonthYearPickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate {
 
     private let months = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
+        String(localized: "January"), String(localized: "February"), String(localized: "March"), String(localized: "April"), String(localized: "May"), String(localized: "June"),
+        String(localized: "July"), String(localized: "August"), String(localized: "September"), String(localized: "October"), String(localized: "November"), String(localized: "December")
     ]
 
     public var years: [Int] = []

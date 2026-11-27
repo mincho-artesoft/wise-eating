@@ -42,11 +42,11 @@ struct NodeRowView: View {
             }
             
             if let foods = node.linkedFoods, !foods.isEmpty {
-                linkedItemsSection(title: "Foods", items: foods.map { $0.name }, icon: "fork.knife")
+                linkedItemsSection(title: String(localized: "Foods"), items: foods.map { $0.name }, icon: "fork.knife")
             }
             
             if let exercises = node.linkedExercises, !exercises.isEmpty {
-                linkedItemsSection(title: "Exercises", items: exercises.map { $0.name }, icon: "dumbbell.fill")
+                linkedItemsSection(title: String(localized: "Exercises"), items: exercises.map { $0.name }, icon: "dumbbell.fill")
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)

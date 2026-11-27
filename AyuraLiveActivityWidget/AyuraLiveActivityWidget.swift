@@ -36,10 +36,10 @@ struct NextEventLiveActivityWidget: Widget {
                     TimelineView(AdaptiveCountdownSchedule(events: context.state.events)) { timeline in
                         let event = nextEvent(in: context.state.events, at: timeline.date)
                         VStack(spacing: 2) {
-                            Text(event?.kind.label ?? "Live schedule")
+                            Text(event?.kind.label ?? String(localized: "Live schedule"))
                                 .font(.caption2)
                                 .foregroundStyle(.white.opacity(0.62))
-                            Text(event?.title ?? "Waiting for next activity")
+                            Text(event?.title ?? String(localized: "Waiting for next activity"))
                                 .font(.caption.weight(.semibold))
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.7)
@@ -165,11 +165,11 @@ private struct NextEventLockScreenView: View {
                 .background((event?.kind.color ?? .secondary).opacity(0.18), in: Circle())
 
             VStack(alignment: .leading, spacing: 5) {
-                Text(event?.kind.label ?? "Live schedule")
+                Text(event?.kind.label ?? String(localized: "Live schedule"))
                     .font(.caption)
                     .foregroundStyle(.white.opacity(0.62))
 
-                Text(event?.title ?? "Waiting for next activity")
+                Text(event?.title ?? String(localized: "Waiting for next activity"))
                     .font(.headline)
                     .lineLimit(1)
                     .minimumScaleFactor(0.72)
@@ -255,9 +255,9 @@ private struct EventSymbol: View {
 private extension NextEventItem.Kind {
     var label: String {
         switch self {
-        case .meal: "Next meal"
-        case .workout: "Next workout"
-        case .practice: "Next practice"
+        case .meal: String(localized: "Next meal")
+        case .workout: String(localized: "Next workout")
+        case .practice: String(localized: "Next practice")
         }
     }
 

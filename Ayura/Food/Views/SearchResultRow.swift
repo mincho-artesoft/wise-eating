@@ -256,9 +256,9 @@ struct SearchResultRow: View {
                                 .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
                         }
                     }
-                    macroText(for: .protein, label: "Prot")
-                    macroText(for: .totalFat, label: "Fat")
-                    macroText(for: .carbs, label: "Carb")
+                    macroText(for: .protein, label: String(localized: "Prot"))
+                    macroText(for: .totalFat, label: String(localized: "Fat"))
+                    macroText(for: .carbs, label: String(localized: "Carb"))
                 }
             }
         }

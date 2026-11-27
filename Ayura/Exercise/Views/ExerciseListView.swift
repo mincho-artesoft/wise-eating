@@ -243,7 +243,7 @@ Are you sure you want to continue?
 
             // ✅ FIX: Delete Training Plan alert (без достъп до plan.days след delete)
             .alert(
-                planToDeleteName.isEmpty ? "Delete Training Plan" : "Delete \"\(planToDeleteName)\"",
+                planToDeleteName.isEmpty ? String(localized: "Delete Training Plan") : String(localized: "Delete \"\(planToDeleteName)\""),
                 isPresented: $isShowingDeletePlanConfirmation
             ) {
                 Button("Delete Plan Only", role: .destructive) {
@@ -460,12 +460,11 @@ What would you like to do?
 
                                 HStack {
                                     Text(
-                                        "\(planWrapper.dayCount) day"
-                                            + (planWrapper.dayCount == 1 ? "" : "s")
+                                        String(localized: "\(planWrapper.dayCount) day\(planWrapper.dayCount == 1 ? "" : "s")")
                                     )
                                     Text("•")
                                     Text(
-                                        "Created: "
+                                        String(localized: "Created: ")
                                             + planWrapper.creationDate.formatted(
                                                 date: .abbreviated,
                                                 time: .omitted
@@ -820,26 +819,26 @@ What would you like to do?
     }
 
     private var emptyStateTitle: String {
-        if !vm.searchText.isEmpty { return "No Results for \"\(vm.searchText)\"" }
+        if !vm.searchText.isEmpty { return String(localized: "No Results for \"\(vm.searchText)\"") }
         switch vm.filter {
-        case .all: return "No Custom Exercises"
-        case .favorites: return "No Favorites"
-        case .workouts: return "No Workouts"
-        case .default: return "No Items Available"
-        case .plans: return "No Training Plans"
+        case .all: return String(localized: "No Custom Exercises")
+        case .favorites: return String(localized: "No Favorites")
+        case .workouts: return String(localized: "No Workouts")
+        case .default: return String(localized: "No Items Available")
+        case .plans: return String(localized: "No Training Plans")
         }
     }
 
     private var emptyStateDescription: Text {
         let text: String
-        if !vm.searchText.isEmpty { text = "Try a different search term or change the filter." }
+        if !vm.searchText.isEmpty { text = String(localized: "Try a different search term or change the filter.") }
         else {
             switch vm.filter {
-            case .all: text = "Tap the '+' button to add your first exercise."
-            case .favorites: text = "You can add exercises to your favorites by swiping left on them."
-            case .workouts: text = "Tap the '+' button to create your first workout."
-            case .default: text = "This is the list of built-in exercises."
-            case .plans: text = "Tap the '+' button to create your first training plan."
+            case .all: text = String(localized: "Tap the '+' button to add your first exercise.")
+            case .favorites: text = String(localized: "You can add exercises to your favorites by swiping left on them.")
+            case .workouts: text = String(localized: "Tap the '+' button to create your first workout.")
+            case .default: text = String(localized: "This is the list of built-in exercises.")
+            case .plans: text = String(localized: "Tap the '+' button to create your first training plan.")
             }
         }
         return Text(text)
@@ -952,7 +951,7 @@ What would you like to do?
         .disabled(!isAddButtonVisible)
         .simultaneousGesture(dragGesture(geometry: geometry))
         .accessibilityIdentifier("exercise-add-button")
-        .accessibilityLabel("Add \(vm.filter.rawValue)")
+        .accessibilityLabel("Add \(vm.filter.displayName)")
         .transition(.scale.combined(with: .opacity))
     }
 

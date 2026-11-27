@@ -95,12 +95,12 @@ struct FoodSearchPanelView: View {
     private var selectedFilterName: String? {
         guard let id = selectedNutrientID else { return nil }
         switch id {
-        case "protein": return "Protein"
-        case "fat": return "Fat"
-        case "carbohydrates": return "Carbohydrates"
-        case "ph_low": return "pH Low ↑"
-        case "ph_high": return "pH High ↓"
-        case "ph_neutral": return "pH Neutral ≈"
+        case "protein": return String(localized: "Protein")
+        case "fat": return String(localized: "Fat")
+        case "carbohydrates": return String(localized: "Carbohydrates")
+        case "ph_low": return String(localized: "pH Low ↑")
+        case "ph_high": return String(localized: "pH High ↓")
+        case "ph_neutral": return String(localized: "pH Neutral ≈")
         default: break
         }
         return allSelectableNutrients.first(where: { $0.id == id })?.label
@@ -289,9 +289,9 @@ struct FoodSearchPanelView: View {
                     }
                 }
                 
-                filterChipButton(for: SelectableNutrient(id: "protein", label: "Protein"))
-                filterChipButton(for: SelectableNutrient(id: "fat", label: "Fat"))
-                filterChipButton(for: SelectableNutrient(id: "carbohydrates", label: "Carbohydrates"))
+                filterChipButton(for: SelectableNutrient(id: "protein", label: String(localized: "Protein")))
+                filterChipButton(for: SelectableNutrient(id: "fat", label: String(localized: "Fat")))
+                filterChipButton(for: SelectableNutrient(id: "carbohydrates", label: String(localized: "Carbohydrates")))
                 
                 ForEach(filterChipItems) { item in filterChipButton(for: item) }
                 

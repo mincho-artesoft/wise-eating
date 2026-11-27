@@ -33,18 +33,18 @@ enum AppTab: Int, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .nutrition: "Nutrition"
-        case .training: "Training"
-        case .foods: "Foods"
-        case .calendar: "Calendar"
-        case .storage: "Storage"
-        case .shoppingList: "Shopping List"
-        case .analytics: "Analytics"
-        case .search: "Search"
-        case .exercises: "Exercises"
-        case .aiGenerate: "Generate"
-        case .nodes: "Notes"
-        case .practices: "Practices"
+        case .nutrition: String(localized: "Nutrition")
+        case .training: String(localized: "Training")
+        case .foods: String(localized: "Foods")
+        case .calendar: String(localized: "Calendar")
+        case .storage: String(localized: "Storage")
+        case .shoppingList: String(localized: "Shopping List")
+        case .analytics: String(localized: "Analytics")
+        case .search: String(localized: "Search")
+        case .exercises: String(localized: "Exercises")
+        case .aiGenerate: String(localized: "Generate")
+        case .nodes: String(localized: "Notes")
+        case .practices: String(localized: "Practices")
 //        case .test: "test"
         }
     }

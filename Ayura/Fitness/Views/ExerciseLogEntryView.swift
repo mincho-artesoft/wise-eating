@@ -128,9 +128,9 @@ struct ExerciseLogEntryView: View {
                             // ✅ Динамичен етикет: Sec / Min / Reps
                             let unitLabel: String = {
                                 if set.isTimeBased {
-                                    return set.timeUnit == .minutes ? "Min" : "Sec"
+                                    return set.timeUnit == .minutes ? String(localized: "Min") : String(localized: "Sec")
                                 }
-                                return "Reps"
+                                return String(localized: "Reps")
                             }()
                             
                             Text(unitLabel)

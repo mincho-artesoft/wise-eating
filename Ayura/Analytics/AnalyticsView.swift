@@ -44,6 +44,15 @@ struct AnalyticsView: View {
     enum TimeRange: String, CaseIterable, Identifiable {
         case week = "Week", month = "Month", year = "Year", all = "All Time", custom = "Custom"
         var id: String { self.rawValue }
+        var displayName: String {
+            switch self {
+            case .week: String(localized: "Week")
+            case .month: String(localized: "Month")
+            case .year: String(localized: "Year")
+            case .all: String(localized: "All Time")
+            case .custom: String(localized: "Custom")
+            }
+        }
     }
     
     private let legacySelectedMetricsKey = "selectedAnalyticMetricIDs"
@@ -74,19 +83,19 @@ struct AnalyticsView: View {
     // MARK: - Computed Properties
     private var allSelectableNutrients: [SelectableNutrient] {
            var items: [SelectableNutrient] = [
-               SelectableNutrient(id: "calories", label: "Calories"),
-               SelectableNutrient(id: "calories_burned", label: "Burned Calories"),
-               SelectableNutrient(id: "net_calorie_balance", label: "Net Calorie Balance"),
-               SelectableNutrient(id: "water", label: "Water Intake"),
-               SelectableNutrient(id: "protein", label: "Protein"),
-               SelectableNutrient(id: "carbohydrates", label: "Carbohydrates"),
-               SelectableNutrient(id: "fat", label: "Fat"),
-               SelectableNutrient(id: "profile_weight", label: "Weight"),
-               SelectableNutrient(id: "profile_height", label: "Height")
+               SelectableNutrient(id: "calories", label: String(localized: "Calories")),
+               SelectableNutrient(id: "calories_burned", label: String(localized: "Burned Calories")),
+               SelectableNutrient(id: "net_calorie_balance", label: String(localized: "Net Calorie Balance")),
+               SelectableNutrient(id: "water", label: String(localized: "Water Intake")),
+               SelectableNutrient(id: "protein", label: String(localized: "Protein")),
+               SelectableNutrient(id: "carbohydrates", label: String(localized: "Carbohydrates")),
+               SelectableNutrient(id: "fat", label: String(localized: "Fat")),
+               SelectableNutrient(id: "profile_weight", label: String(localized: "Weight")),
+               SelectableNutrient(id: "profile_height", label: String(localized: "Height"))
            ]
            if isHealthKitProfile {
                items.insert(
-                   SelectableNutrient(id: "sleep", label: "Sleep"),
+                   SelectableNutrient(id: "sleep", label: String(localized: "Sleep")),
                    at: 3
                )
            }
@@ -279,7 +288,7 @@ struct AnalyticsView: View {
             selection: $selectedNutrientIDs,
             items: allSelectableNutrients,
             label: { $0.label },
-            prompt: "Choose nutrients to display...",
+            prompt: String(localized: "Choose nutrients to display..."),
             displayLimit: 6,
             isExpanded: presentedSheet == .metrics
         )
@@ -435,7 +444,7 @@ struct AnalyticsView: View {
     }
     
     private func nutrientName(for id: String) -> String {
-        allSelectableNutrients.first { $0.id == id }?.label ?? "Unknown"
+        allSelectableNutrients.first { $0.id == id }?.label ?? String(localized: "Unknown")
     }
     
     private func saveSelection() {

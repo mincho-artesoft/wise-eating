@@ -69,9 +69,9 @@ struct TrainingTimelineView: View {
             let displayHour = hrMod12 == 0 ? 12 : hrMod12
             let ampm: String
             if hour == 24 {
-                ampm = "AM"
+                ampm = String(localized: "AM")
             } else {
-                ampm = effectiveHour < 12 ? "AM" : "PM"
+                ampm = effectiveHour < 12 ? String(localized: "AM") : String(localized: "PM")
             }
             return "\(displayHour) \(ampm)"
         } else {

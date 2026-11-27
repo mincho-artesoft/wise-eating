@@ -372,7 +372,7 @@ struct TrainingPlanEditorView: View {
                 .glassCardStyle(cornerRadius: 20)
             
             Spacer()
-            Text(planToEdit == nil ? "New Training Plan" : "Edit Training Plan").font(.headline)
+            Text(planToEdit == nil ? String(localized: "New Training Plan") : String(localized: "Edit Training Plan")).font(.headline)
             Spacer()
             
             Button("Save", action: savePlan)
@@ -469,7 +469,7 @@ struct TrainingPlanEditorView: View {
     private var nameCard: some View {
         // +++ НОВО: Обвиваме в VStack, за да добавим новото поле +++
         VStack(spacing: 12) {
-            StyledLabeledPicker(label: "Plan Name", isRequired: true) {
+            StyledLabeledPicker(label: String(localized: "Plan Name"), isRequired: true) {
                 TextField("", text: $name, prompt: Text("e.g., Strength Phase 1").foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.6)))
                     .accessibilityIdentifier("training-plan-name")
                     .focused($focusedField, equals: .name)
@@ -477,7 +477,7 @@ struct TrainingPlanEditorView: View {
             .id(FocusableField.name)
             
             // +++ НОВО: Добавяме полето за минимална възраст +++
-            StyledLabeledPicker(label: "Minimum Age (months)") {
+            StyledLabeledPicker(label: String(localized: "Minimum Age (months)")) {
                 ConfigurableTextField(
                     title: "0",
                     value: $minAgeMonthsTxt,
@@ -525,7 +525,7 @@ struct TrainingPlanEditorView: View {
                 selection: $selectedPromptIDs,
                 items: workoutPrompts,
                 label: { $0.text },
-                prompt: "Select a prompt...",
+                prompt: String(localized: "Select a prompt..."),
                 isExpanded: openMenu == .promptSelector
             )
             .contentShape(Rectangle())
@@ -620,7 +620,7 @@ struct TrainingPlanEditorView: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 // Показваме "Rest Day" в заглавието, ако е ден за почивка
-                Text(day.isRestDay ? "Day \(dayIndex): Rest Day" : "Day \(dayIndex)")
+                Text(day.isRestDay ? String(localized: "Day \(dayIndex): Rest Day") : String(localized: "Day \(dayIndex)"))
                     .font(.headline)
                     .foregroundColor(effectManager.currentGlobalAccentColor)
                 
@@ -722,7 +722,7 @@ struct TrainingPlanEditorView: View {
                 
                 HStack {
                     if let group = selectedMuscleGroup {
-                        Text("Selected: \(group.rawValue)")
+                        Text("Selected: \(group.displayName)")
                             .font(.body)
                             .foregroundStyle(effectManager.currentGlobalAccentColor)
                             .lineLimit(1)
@@ -904,7 +904,7 @@ struct TrainingPlanEditorView: View {
             }
         }) {
             HStack(spacing: 6) {
-                Text(group.rawValue).font(.caption).fontWeight(.medium)
+                Text(group.displayName).font(.caption).fontWeight(.medium)
                 if isSelected {
                     Image(systemName: "xmark").imageScale(.small).font(.system(size: 12, weight: .bold))
                 }
@@ -1105,7 +1105,7 @@ struct TrainingPlanEditorView: View {
                         )
                     }
                 }
-                alertMessage = "Failed to save plan. Error: \(error.localizedDescription)"
+                alertMessage = String(localized: "Failed to save plan. Error: \(error.localizedDescription)")
                 showAlert = true
             }
         }
@@ -1363,7 +1363,7 @@ struct TrainingPlanEditorView: View {
         guard let dayIndex = days.firstIndex(where: { $0.id == selectedDayID }),
               let workoutIndex = days[dayIndex].workouts.firstIndex(where: { $0.id == selectedWorkoutID })
         else {
-            alertMessage = "Please select a day and a workout first."
+            alertMessage = String(localized: "Please select a day and a workout first.")
             showAlert = true
             return
         }
@@ -1489,7 +1489,7 @@ struct TrainingPlanEditorView: View {
             self.runningGenerationJobID = newJob.id
             self.hasUserMadeEdits = false
         } else {
-            alertMessage = "Could not start AI training plan generation job."
+            alertMessage = String(localized: "Could not start AI training plan generation job.")
             showAlert = true
             toastTimer?.invalidate()
             toastTimer = nil
@@ -1530,7 +1530,7 @@ struct TrainingPlanEditorView: View {
         
         // Ако няма празни тренировки – няма какво да генерираме
         guard !workoutsToGenerate.isEmpty else {
-            alertMessage = "All workouts for all days already have exercises. Clear some workouts if you want to generate new ones."
+            alertMessage = String(localized: "All workouts for all days already have exercises. Clear some workouts if you want to generate new ones.")
             showAlert = true
             return
         }
@@ -1763,14 +1763,14 @@ struct TrainingPlanEditorView: View {
     private func populateFromCompletedJob(jobID: UUID) async {
         guard let job = aiManager.jobs.first(where: { $0.id == jobID }),
               let resultData = job.resultData else {
-            alertMessage = "Could not find the completed AI job (id: \(jobID))."
+            alertMessage = String(localized: "Could not find the completed AI job (id: \(jobID.uuidString)).")
             showAlert = true
             runningGenerationJobID = nil
             return
         }
         
         guard let draft = try? JSONDecoder().decode(TrainingPlanDraft.self, from: resultData) else {
-            alertMessage = "Could not decode the generated training plan data."
+            alertMessage = String(localized: "Could not decode the generated training plan data.")
             showAlert = true
             runningGenerationJobID = nil
             await aiManager.deleteJob(byID: jobID)
@@ -1896,15 +1896,15 @@ struct TrainingPlanEditorView: View {
         case .available:
             return true
         case .deviceNotEligible:
-            alertMessage = "This device doesn’t support Apple Intelligence."
+            alertMessage = String(localized: "This device doesn’t support Apple Intelligence.")
         case .appleIntelligenceNotEnabled:
-            alertMessage = "Apple Intelligence is turned off. Enable it in Settings to use AI."
+            alertMessage = String(localized: "Apple Intelligence is turned off. Enable it in Settings to use AI.")
         case .modelNotReady:
-            alertMessage = "The model is downloading or preparing. Please try again shortly."
+            alertMessage = String(localized: "The model is downloading or preparing. Please try again shortly.")
         case .unavailableUnsupportedOS:
-            alertMessage = "Apple Intelligence requires iOS 26 or newer."
+            alertMessage = String(localized: "Apple Intelligence requires iOS 26 or newer.")
         case .unavailableOther:
-            alertMessage = "Apple Intelligence is currently unavailable for an unknown reason."
+            alertMessage = String(localized: "Apple Intelligence is currently unavailable for an unknown reason.")
         }
         showAlert = true
         return false

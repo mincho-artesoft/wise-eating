@@ -31,6 +31,15 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
         case mealPlans = "Meal Plans"
         
         public var id: String { rawValue }
+
+        public var displayName: String {
+            switch self {
+            case .nutrients: String(localized: "Nutrients")
+            case .recipes: String(localized: "Recipes")
+            case .menus: String(localized: "Menus")
+            case .mealPlans: String(localized: "Meal Plans")
+            }
+        }
     }
     
     // MARK: - Outputs (for UI)
@@ -2288,33 +2297,33 @@ extension SmartFoodSearch3 {
     /// Centralised human-readable display name for each nutrient type.
     nonisolated static func displayName(for nutrient: NutrientType) -> String {
         switch nutrient {
-        case .totalFat:        return "Fat"
-        case .totalSugar:      return "Sugar"
-        case .energy:          return "Еnergy"
+        case .totalFat:        return String(localized: "Fat")
+        case .totalSugar:      return String(localized: "Sugar")
+        case .energy:          return String(localized: "Еnergy")
 
         // Vitamins
-        case .vitaminA:        return "Vit A"
-        case .vitaminC:        return "Vit C"
-        case .vitaminD:        return "Vit D"
-        case .vitaminE:        return "Vit E"
-        case .vitaminK:        return "Vit K"
-        case .thiamin:         return "Vit B1"
-        case .riboflavin:      return "Vit B2"
-        case .niacin:          return "Vit B3"
-        case .pantothenicAcid: return "Vit B5"
-        case .vitaminB6:       return "Vit B6"
-        case .vitaminB12:      return "Vit B12"
-        case .folateTotal:     return "Folate"
-        case .folateDFE:       return "Folate DFE"
-        case .folicAcid:       return "Folic Acid"
-        case .folateFood:      return "Food Folate"
-        case .luteinZeaxanthin: return "Lutein + Zeax."
-        case .lycopene:        return "Lycopene"
-        case .caffeine:        return "Caffeine"
-        case .cholesterol:     return "Cholesterol"
-        case .alphaCarotene:     return "α-Carotene"
-        case .betaCarotene:      return "β-Carotene"
-        case .betaCryptoxanthin: return "β-Cryptoxanthin"
+        case .vitaminA:        return String(localized: "Vit A")
+        case .vitaminC:        return String(localized: "Vit C")
+        case .vitaminD:        return String(localized: "Vit D")
+        case .vitaminE:        return String(localized: "Vit E")
+        case .vitaminK:        return String(localized: "Vit K")
+        case .thiamin:         return String(localized: "Vit B1")
+        case .riboflavin:      return String(localized: "Vit B2")
+        case .niacin:          return String(localized: "Vit B3")
+        case .pantothenicAcid: return String(localized: "Vit B5")
+        case .vitaminB6:       return String(localized: "Vit B6")
+        case .vitaminB12:      return String(localized: "Vit B12")
+        case .folateTotal:     return String(localized: "Folate")
+        case .folateDFE:       return String(localized: "Folate DFE")
+        case .folicAcid:       return String(localized: "Folic Acid")
+        case .folateFood:      return String(localized: "Food Folate")
+        case .luteinZeaxanthin: return String(localized: "Lutein + Zeax.")
+        case .lycopene:        return String(localized: "Lycopene")
+        case .caffeine:        return String(localized: "Caffeine")
+        case .cholesterol:     return String(localized: "Cholesterol")
+        case .alphaCarotene:     return String(localized: "α-Carotene")
+        case .betaCarotene:      return String(localized: "β-Carotene")
+        case .betaCryptoxanthin: return String(localized: "β-Cryptoxanthin")
         default:
             // Fallback: pretty-print the raw value
             return nutrient.rawValue

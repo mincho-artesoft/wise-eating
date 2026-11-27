@@ -139,7 +139,7 @@ struct TrainingPlanDetailView: View {
         VStack(alignment: .leading, spacing: 12) {
             
             HStack {
-                Text(day.isRestDay ? "Day \(dayIndex): Rest Day" : "Day \(dayIndex)")
+                Text(day.isRestDay ? String(localized: "Day \(dayIndex): Rest Day") : String(localized: "Day \(dayIndex)"))
                     .font(.headline)
                     .foregroundColor(effectManager.currentGlobalAccentColor)
                 

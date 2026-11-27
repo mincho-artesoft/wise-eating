@@ -13,7 +13,7 @@ struct TransactionRowView: View {
                 .frame(width: 30)
 
             VStack(alignment: .leading) {
-                Text(transaction.type.rawValue)
+                Text(transaction.type.displayName)
                     .fontWeight(.bold)
                     .foregroundColor(effectManager.currentGlobalAccentColor)
 

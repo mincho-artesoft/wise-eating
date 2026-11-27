@@ -504,7 +504,7 @@ open class EventView: UIView {
             let session = practiceSession(from: w.realEvent)
             let practice = practice(for: session)
             let row = PracticeCalendarRowView(
-                kind: session?.practiceKind ?? "Practice",
+                kind: session?.practiceKind ?? String(localized: "Practice"),
                 artworkAssetName: session?.artworkAssetName,
                 doshaVata: practice?.doshaVata ?? 0,
                 doshaPitta: practice?.doshaPitta ?? 0,
@@ -540,7 +540,7 @@ open class EventView: UIView {
         let text = NSMutableAttributedString(attachment: icon)
         text.append(
             NSAttributedString(
-                string: " \(w.realEvent.title ?? "Practice")",
+                string: " \(w.realEvent.title ?? String(localized: "Practice"))",
                 attributes: [
                     .font: UIFont.systemFont(ofSize: 12, weight: .semibold),
                     .foregroundColor: practiceTextColor,
@@ -884,7 +884,7 @@ extension EventView {
             backgroundColor = .systemBlue.withAlphaComponent(0.3)
         }
 
-        textView.text      = "New Meal/Training"
+        textView.text      = String(localized: "New Meal/Training")
         textView.font      = .systemFont(ofSize: 12, weight: .semibold)
         textView.textColor = color
         eventResizeHandles.forEach { $0.isHidden = true }
@@ -901,7 +901,7 @@ extension EventView {
             backgroundColor = .systemBlue.withAlphaComponent(0.3)
         }
 
-        textView.text      = "New Shopping List"
+        textView.text      = String(localized: "New Shopping List")
         textView.font      = .systemFont(ofSize: 12, weight: .semibold)
         textView.textColor = color
         eventResizeHandles.forEach { $0.isHidden = true }

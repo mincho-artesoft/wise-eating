@@ -46,11 +46,11 @@ struct PromptEditorView: View {
 
                         Spacer()
                         // Динамично заглавие
-                        Text(isEditing ? "Edit Prompt" : "New Prompt").font(.headline)
+                        Text(isEditing ? String(localized: "Edit Prompt") : String(localized: "New Prompt")).font(.headline)
                         Spacer()
 
                         // Динамичен текст на бутона
-                        Button(isEditing ? "Update" : "Save", action: savePrompt)
+                        Button(isEditing ? String(localized: "Update") : String(localized: "Save"), action: savePrompt)
                             .disabled(isSaveDisabled)
                             .padding(.horizontal, 10).padding(.vertical, 5)
                             .glassCardStyle(cornerRadius: 20)

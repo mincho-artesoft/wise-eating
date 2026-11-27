@@ -3,8 +3,10 @@
 the Swift compiler extracted (work/stringsdata, see fetch.sh) and the
 permission texts in the project file.
 
-  extract.py          every string
-  extract.py --new    only strings that some <language>.json does not have yet
+  extract.py            every string, in new batches numbered from 0
+  extract.py --append   keep the batches that exist and add batches with the
+                        strings that are in none of them; item numbers go on
+                        from the last one, so translations in progress stay valid
 
 A string is a key of Ayura/Localizable.xcstrings: the English text exactly as
 the compiler sees it, format specifiers included. The 18 keys that are already
@@ -47,15 +49,32 @@ for path in data:
 
 
 def code_line(source, line, key):
+    """The source line of the literal and, when that line is little more than
+    the literal itself, the nearest declaration or text above it."""
     path = repo / source
     if not path.exists():
-        return None
+        return None, None
     lines = path.read_text(errors="ignore").split("\n")
     probe = key[:12].split("%")[0].split("\n")[0]
     for offset in (0, -1, 1, -2, 2):
-        if 0 < line + offset <= len(lines) and probe in lines[line + offset - 1]:
-            return " ".join(lines[line + offset - 1].split())[:160]
-    return None
+        at = line + offset - 1
+        if 0 <= at < len(lines) and probe in lines[at]:
+            code = " ".join(lines[at].split())
+            above = None
+            if len(code) - len(key) < 40:
+                for earlier in range(at - 1, max(at - 12, -1), -1):
+                    text = " ".join(lines[earlier].split())
+                    if re.search(r"\b(case|func|var|let|static|enum|struct|title|question|prompt)\b", text):
+                        above = text[:140]
+                        break
+                if above is None:
+                    # An answer in a list: the question it belongs to.
+                    for earlier in range(at - 1, max(at - 6, -1), -1):
+                        if re.search(r'\?"\)?,?$', lines[earlier].strip()):
+                            above = " ".join(lines[earlier].split())[:140]
+                            break
+            return code[:160], above
+    return None, None
 
 
 items = []
@@ -67,11 +86,14 @@ for key, where in places.items():
     where = sorted(set(where), key=lambda place: (any(mark in place[0] for mark in LATE), place))
     source, line = where[0]
     late = any(mark in source for mark in LATE)
-    code = code_line(source, line, key)
+    code, above = code_line(source, line, key)
     kind = next((name for mark, name in KINDS if code and mark in code), "text")
     arguments = ui.specifiers(key)
     item = {"k": kind, "p": "onboarding-paywall" if late else source.split("/")[1 if source.startswith("Ayura/") else 0],
-            "s": key, "in": sorted({pathlib.Path(s).stem for s, _ in where})[:4], "code": code}
+            "s": key, "in": sorted({pathlib.Path(s).stem for s, _ in where})[:4], "code": code, "above": above}
+    if any(s.startswith("AyuraLiveActivityWidget/") for s, _ in where):
+        # A separate bundle: apply.py writes these into the widget's own catalogue too.
+        item["widget"] = True
     if list(arguments.values()) == ["int"]:
         item["plural"] = True
     if re.search(r"%lld [a-z]+%@", key):
@@ -100,11 +122,20 @@ for item in items:
 
 (here / "keys.en.json").write_text(json.dumps(
     [{k: v for k, v in item.items() if v not in (None, "")} for item in unique], ensure_ascii=False, indent=0))
-(here / "strings.en.json").write_text(json.dumps(sorted(seen, key=lambda s: (s.lower(), s)), ensure_ascii=False, indent=0))
 
-if "--new" in sys.argv:
-    tables = [json.loads(p.read_text()) for p in here.glob("*.json") if p.stem not in ("keys.en", "strings.en")]
-    unique = [item for item in unique if any(item["s"] not in table for table in tables)]
+work = here / "work"
+kept, number = [], 0
+if "--append" in sys.argv:
+    paths = sorted(work.glob("batch-*.json"), key=lambda p: int(p.stem.split("-")[1]))
+    kept = [json.loads(p.read_text()) for p in paths]
+    number = max(item["i"] for batch in kept for item in batch) + 1
+    known = {item["s"] for batch in kept for item in batch}
+    gone = sorted(known - seen)
+    unique = [item for item in unique if item["s"] not in known]
+    print(f"{len(kept)} batches kept; {len(gone)} of their strings are no longer in the app")
+else:
+    for old in work.glob("batch-*.json"):
+        old.unlink()
 
 batches, current = [], []
 for position, item in enumerate(unique):
@@ -114,11 +145,7 @@ for position, item in enumerate(unique):
         batches.append(current)
         current = []
 
-work = here / "work"
-for old in work.glob("batch-*.json"):
-    old.unlink()
-number = 0
-for index, batch in enumerate(batches):
+for index, batch in enumerate(batches, start=len(kept)):
     numbered = []
     for item in batch:
         numbered.append({"i": number, **{k: v for k, v in item.items() if v not in (None, "")}})
@@ -126,7 +153,10 @@ for index, batch in enumerate(batches):
     (work / f"batch-{index}.json").write_text(json.dumps(numbered, ensure_ascii=False, indent=0))
     words = sum(len(item["s"].split()) for item in batch)
     print(f"batch {index}: {len(batch)} strings, {words} words, {sorted({item['p'] for item in batch})}")
-print(f"{len(seen)} strings in all, {number} in the batches, "
-      f"{sum(1 for item in unique if item.get('plural'))} of them plural")
-if any((work / d.name).is_dir() and d.name != "stringsdata" for d in work.iterdir()):
-    print("work/<language>/ folders exist: their out files belong to the previous batches")
+
+# Everything any batch asks for, so that a translation of a string the app
+# has since dropped is still accepted by assemble.py.
+everything = seen | {item["s"] for batch in kept for item in batch}
+(here / "strings.en.json").write_text(json.dumps(sorted(everything, key=lambda s: (s.lower(), s)), ensure_ascii=False, indent=0))
+print(f"{len(seen)} strings in the app, {len(everything)} in the batches, "
+      f"{sum(1 for item in unique if item.get('plural'))} new plural items")

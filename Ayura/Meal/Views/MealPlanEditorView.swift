@@ -353,7 +353,7 @@ struct MealPlanEditorView: View {
                     }
                     
                 case .failed:
-                    alertMessage = "AI generation failed: \(completedJob.failureReason ?? "Unknown error")"
+                    alertMessage = String(localized: "AI generation failed: \(completedJob.failureReason ?? String(localized: "Unknown error"))")
                     showAlert = true
                     
                     // По желание: можем пак да го маркираме за чистене при Save
@@ -391,7 +391,7 @@ struct MealPlanEditorView: View {
                         }
                     }
                 } else if completedJob.status == .failed {
-                    alertMessage = "AI generation failed: \(completedJob.failureReason ?? "Unknown error")"
+                    alertMessage = String(localized: "AI generation failed: \(completedJob.failureReason ?? String(localized: "Unknown error"))")
                     showAlert = true
                     runningGenerationJobID = nil
                     Task { await aiManager.deleteJob(completedJob) }
@@ -596,14 +596,14 @@ struct MealPlanEditorView: View {
     
     private var nameCard: some View {
         VStack(spacing: 12) {
-            StyledLabeledPicker(label: "Plan Name", isRequired: true) {
+            StyledLabeledPicker(label: String(localized: "Plan Name"), isRequired: true) {
                 TextField("", text: $name, prompt: Text("e.g., High-Protein Week").foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.6)))
                     .accessibilityIdentifier("meal-plan-name")
                     .focused($focusedField, equals: .name)
             }
             .id(FocusableField.name)
             
-            StyledLabeledPicker(label: "Minimum Age (months)") {
+            StyledLabeledPicker(label: String(localized: "Minimum Age (months)")) {
                 ConfigurableTextField(
                     title: "0",
                     value: $minAgeMonthsTxt,
@@ -919,7 +919,7 @@ struct MealPlanEditorView: View {
                 
                 onDismiss()
             } catch {
-                alertMessage = "Failed to save the plan. Error: \(error.localizedDescription)"
+                alertMessage = String(localized: "Failed to save the plan. Error: \(error.localizedDescription)")
                 showAlert = true
             }
         }
@@ -1160,7 +1160,7 @@ struct MealPlanEditorView: View {
             self.runningGenerationJobID = newJob.id
             self.hasUserMadeEdits = false
         } else {
-            alertMessage = "Could not start AI generation job."
+            alertMessage = String(localized: "Could not start AI generation job.")
             showAlert = true
             toastTimer?.invalidate()
             toastTimer = nil
@@ -1199,7 +1199,7 @@ struct MealPlanEditorView: View {
         }
         
         guard !mealsToGenerate.isEmpty else {
-            alertMessage = "All meals for all days already have items. Clear some meals if you want to generate new ones."
+            alertMessage = String(localized: "All meals for all days already have items. Clear some meals if you want to generate new ones.")
             showAlert = true
             return
         }
@@ -1481,7 +1481,7 @@ struct MealPlanEditorView: View {
                 selection: $selectedPromptIDs,
                 items: mealPlanPrompts,
                 label: { $0.text },
-                prompt: "Select a prompt...",
+                prompt: String(localized: "Select a prompt..."),
                 isExpanded: openMenu == .promptSelector
             )
             .contentShape(Rectangle())
@@ -1593,15 +1593,15 @@ struct MealPlanEditorView: View {
         case .available:
             return true
         case .deviceNotEligible:
-            alertMessage = "This device doesn’t support Apple Intelligence."
+            alertMessage = String(localized: "This device doesn’t support Apple Intelligence.")
         case .appleIntelligenceNotEnabled:
-            alertMessage = "Apple Intelligence is turned off. Enable it in Settings to use AI."
+            alertMessage = String(localized: "Apple Intelligence is turned off. Enable it in Settings to use AI.")
         case .modelNotReady:
-            alertMessage = "The model is downloading or preparing. Please try again shortly."
+            alertMessage = String(localized: "The model is downloading or preparing. Please try again shortly.")
         case .unavailableUnsupportedOS:
-            alertMessage = "Apple Intelligence requires iOS 26 or newer."
+            alertMessage = String(localized: "Apple Intelligence requires iOS 26 or newer.")
         case .unavailableOther:
-            alertMessage = "Apple Intelligence is currently unavailable for an unknown reason."
+            alertMessage = String(localized: "Apple Intelligence is currently unavailable for an unknown reason.")
         }
         showAlert = true
         return false
