@@ -1,0 +1,1800 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "NSCalendarsFullAccessUsageDescription": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Ayurveda & Asana Yoga reads and updates your calendar to save your meals, shopping lists, and workouts."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يقرأ تطبيق Ayurveda & Asana Yoga تقويمك ويحدّثه لحفظ وجباتك وقوائم تسوقك وتمارينك."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga чете и актуализира календара ти, за да запазва твоите хранения, списъци за пазаруване и тренировки."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "আপনার খাবার, কেনাকাটার তালিকা এবং ওয়ার্কআউট সংরক্ষণ করতে Ayurveda & Asana Yoga আপনার ক্যালেন্ডার পড়ে এবং আপডেট করে।"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga llegeix i actualitza el teu calendari per desar-hi els àpats, les llistes de la compra i els entrenaments."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga čte a aktualizuje váš kalendář, aby mohla ukládat vaše jídla, nákupní seznamy a tréninky."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga læser og opdaterer din kalender for at gemme dine måltider, indkøbslister og træninger."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga liest und aktualisiert deinen Kalender, um deine Mahlzeiten, Einkaufslisten und Workouts zu speichern."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Το Ayurveda & Asana Yoga διαβάζει και ενημερώνει το ημερολόγιό σου για να αποθηκεύει τα γεύματα, τις λίστες αγορών και τις προπονήσεις σου."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga lee y actualiza tu calendario para guardar tus comidas, listas de la compra y entrenamientos."
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga lee y actualiza tu calendario para guardar tus comidas, listas de compras y entrenamientos."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga lukee ja päivittää kalenteriasi tallentaakseen ateriasi, ostoslistasi ja treenisi."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga lit et met à jour ton calendrier pour enregistrer tes repas, tes listes de courses et tes entraînements."
+          }
+        },
+        "fr-CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga lit et met à jour votre calendrier pour enregistrer vos repas, vos listes d'épicerie et vos entraînements."
+          }
+        },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga તમારા ભોજન, ખરીદીની યાદીઓ અને વર્કઆઉટ્સ સાચવવા માટે તમારું કૅલેન્ડર વાંચે છે અને અપડેટ કરે છે."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga קוראת ומעדכנת את היומן שלך כדי לשמור את הארוחות, רשימות הקניות והאימונים שלך."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga आपके भोजन, खरीदारी सूचियों और वर्कआउट को सहेजने के लिए आपका कैलेंडर पढ़ता और अपडेट करता है।"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga čita i ažurira tvoj kalendar za spremanje tvojih obroka, popisa za kupnju i treninga."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az Ayurveda & Asana Yoga olvassa és frissíti a naptáradat, hogy elmenthesse az étkezéseidet, bevásárlólistáidat és edzéseidet."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga membaca dan memperbarui kalender Anda untuk menyimpan waktu makan, daftar belanja, dan latihan Anda."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga legge e aggiorna il tuo calendario per salvare pasti, liste della spesa e allenamenti."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yogaは、食事、買い物リスト、ワークアウトを保存するためにカレンダーを読み取り・更新します。"
+          }
+        },
+        "kk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga тағамдарыңызды, сатып алу тізімдеріңізді және жаттығуларыңызды сақтау үшін күнтізбеңізді оқиды және жаңартады."
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ನಿಮ್ಮ ಊಟಗಳು, ಶಾಪಿಂಗ್ ಪಟ್ಟಿಗಳು ಮತ್ತು ವರ್ಕೌಟ್‌ಗಳನ್ನು ಉಳಿಸಲು Ayurveda & Asana Yoga ನಿಮ್ಮ ಕ್ಯಾಲೆಂಡರ್ ಅನ್ನು ಓದುತ್ತದೆ ಮತ್ತು ನವೀಕರಿಸುತ್ತದೆ."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga는 식단, 장보기 목록 및 워크아웃을 저장하기 위해 캘린더를 읽고 업데이트합니다."
+          }
+        },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "നിങ്ങളുടെ ഭക്ഷണവേളകൾ, ഷോപ്പിംഗ് ലിസ്റ്റുകൾ, വ്യായാമങ്ങൾ എന്നിവ സേവ് ചെയ്യുന്നതിനായി Ayurveda & Asana Yoga നിങ്ങളുടെ കലണ്ടർ വായിക്കുകയും അപ്ഡേറ്റ് ചെയ്യുകയും ചെയ്യുന്നു."
+          }
+        },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "तुमचे जेवण, खरेदीच्या याद्या आणि वर्कआउट्स जतन करण्यासाठी Ayurveda & Asana Yoga तुमचे कॅलेंडर वाचते आणि अपडेट करते."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga membaca dan mengemas kini kalendar anda untuk menyimpan hidangan, senarai beli-belah dan senaman anda."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga leser og oppdaterer kalenderen din for å lagre måltider, handlelister og treningsøkter."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga leest je agenda en werkt deze bij om je maaltijden, boodschappenlijsten en workouts op te slaan."
+          }
+        },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ଆପଣଙ୍କ ଭୋଜନ, କିଣାକିଣି ତାଲିକା ଏବଂ ୱାର୍କଆଉଟ୍ ସଞ୍ଚୟ କରିବାକୁ Ayurveda & Asana Yoga ଆପଣଙ୍କ କ୍ୟାଲେଣ୍ଡର ପଢ଼େ ଏବଂ ଅପଡେଟ୍ କରେ।"
+          }
+        },
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga ਤੁਹਾਡੇ ਭੋਜਨ, ਖ਼ਰੀਦਦਾਰੀ ਸੂਚੀਆਂ ਅਤੇ ਵਰਕਆਊਟਾਂ ਨੂੰ ਸੇਵ ਕਰਨ ਲਈ ਤੁਹਾਡਾ ਕੈਲੰਡਰ ਪੜ੍ਹਦੀ ਅਤੇ ਅੱਪਡੇਟ ਕਰਦੀ ਹੈ।"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplikacja Ayurveda & Asana Yoga odczytuje i aktualizuje Twój kalendarz, aby zapisywać posiłki, listy zakupów i treningi."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Ayurveda & Asana Yoga lê e atualiza seu calendário para salvar suas refeições, listas de compras e treinos."
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga lê e atualiza o teu calendário para guardar as tuas refeições, listas de compras e treinos."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga citește și actualizează calendarul tău pentru a salva mesele, listele de cumpărături și antrenamentele."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga читает и обновляет ваш календарь, чтобы сохранять приёмы пищи, списки покупок и тренировки."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga číta a aktualizuje váš kalendár, aby mohla ukladať vaše jedlá, nákupné zoznamy a tréningy."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga bere in posodablja vaš koledar za shranjevanje vaših obrokov, nakupovalnih seznamov in vadb."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga läser och uppdaterar din kalender för att spara dina måltider, inköpslistor och träningspass."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் உணவுகள், ஷாப்பிங் பட்டியல்கள் மற்றும் உடற்பயிற்சிகளைச் சேமிக்க Ayurveda & Asana Yoga உங்கள் நாட்காட்டியைப் படித்துப் புதுப்பிக்கிறது."
+          }
+        },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "మీ భోజనాలు, షాపింగ్ జాబితాలు మరియు వర్కవుట్‌లను సేవ్ చేయడానికి Ayurveda & Asana Yoga మీ క్యాలెండర్‌ను చదువుతుంది మరియు అప్‌డేట్ చేస్తుంది."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga จะอ่านและอัปเดตปฏิทินของคุณเพื่อบันทึกมื้ออาหาร รายการซื้อของ และการออกกำลังกาย"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga, öğünlerinizi, alışveriş listelerinizi ve antrenmanlarınızı kaydetmek için takviminizi okur ve günceller."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga читає та оновлює ваш календар, щоб зберігати ваші прийоми їжі, списки покупок і тренування."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga آپ کے کھانوں، خریداری کی فہرستوں اور ورزشوں کو محفوظ کرنے کے لیے آپ کا کیلنڈر پڑھتا اور اپڈیٹ کرتا ہے۔"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga đọc và cập nhật lịch của bạn để lưu bữa ăn, danh sách mua sắm và buổi tập."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga 会读取并更新你的日历，以保存你的餐食、购物清单和训练。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga 會讀取並更新你的行事曆，以儲存你的餐點、購物清單與鍛鍊。"
+          }
+        }
+      }
+    },
+    "NSCalendarsUsageDescription": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Ayurveda & Asana Yoga uses your calendar to save your meals, shopping lists, and workouts."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يستخدم تطبيق Ayurveda & Asana Yoga تقويمك لحفظ وجباتك وقوائم تسوقك وتمارينك."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga използва календара ти, за да запазва твоите хранения, списъци за пазаруване и тренировки."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "আপনার খাবার, কেনাকাটার তালিকা এবং ওয়ার্কআউট সংরক্ষণ করতে Ayurveda & Asana Yoga আপনার ক্যালেন্ডার ব্যবহার করে।"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga fa servir el teu calendari per desar-hi els àpats, les llistes de la compra i els entrenaments."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga používá váš kalendář k ukládání vašich jídel, nákupních seznamů a tréninků."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga bruger din kalender til at gemme dine måltider, indkøbslister og træninger."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga verwendet deinen Kalender, um deine Mahlzeiten, Einkaufslisten und Workouts zu speichern."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Το Ayurveda & Asana Yoga χρησιμοποιεί το ημερολόγιό σου για να αποθηκεύει τα γεύματα, τις λίστες αγορών και τις προπονήσεις σου."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga usa tu calendario para guardar tus comidas, listas de la compra y entrenamientos."
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga usa tu calendario para guardar tus comidas, listas de compras y entrenamientos."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga käyttää kalenteriasi tallentaakseen ateriasi, ostoslistasi ja treenisi."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga utilise ton calendrier pour enregistrer tes repas, tes listes de courses et tes entraînements."
+          }
+        },
+        "fr-CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga utilise votre calendrier pour enregistrer vos repas, vos listes d'épicerie et vos entraînements."
+          }
+        },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga તમારા ભોજન, ખરીદીની યાદીઓ અને વર્કઆઉટ્સ સાચવવા માટે તમારા કૅલેન્ડરનો ઉપયોગ કરે છે."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga משתמשת ביומן שלך כדי לשמור את הארוחות, רשימות הקניות והאימונים שלך."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga आपके भोजन, खरीदारी सूचियों और वर्कआउट को सहेजने के लिए आपके कैलेंडर का उपयोग करता है।"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga koristi tvoj kalendar za spremanje tvojih obroka, popisa za kupnju i treninga."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az Ayurveda & Asana Yoga a naptáradat használja az étkezéseid, bevásárlólistáid és edzéseid mentéséhez."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga menggunakan kalender Anda untuk menyimpan waktu makan, daftar belanja, dan latihan Anda."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga utilizza il tuo calendario per salvare pasti, liste della spesa e allenamenti."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yogaは、食事、買い物リスト、ワークアウトを保存するためにカレンダーを使用します。"
+          }
+        },
+        "kk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga тағамдарыңызды, сатып алу тізімдеріңізді және жаттығуларыңызды сақтау үшін күнтізбеңізді пайдаланады."
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ನಿಮ್ಮ ಊಟಗಳು, ಶಾಪಿಂಗ್ ಪಟ್ಟಿಗಳು ಮತ್ತು ವರ್ಕೌಟ್‌ಗಳನ್ನು ಉಳಿಸಲು Ayurveda & Asana Yoga ನಿಮ್ಮ ಕ್ಯಾಲೆಂಡರ್ ಅನ್ನು ಬಳಸುತ್ತದೆ."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga는 식단, 장보기 목록 및 워크아웃을 저장하기 위해 캘린더를 사용합니다."
+          }
+        },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "നിങ്ങളുടെ ഭക്ഷണവേളകൾ, ഷോപ്പിംഗ് ലിസ്റ്റുകൾ, വ്യായാമങ്ങൾ എന്നിവ സേവ് ചെയ്യുന്നതിനായി Ayurveda & Asana Yoga നിങ്ങളുടെ കലണ്ടർ ഉപയോഗിക്കുന്നു."
+          }
+        },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "तुमचे जेवण, खरेदीच्या याद्या आणि वर्कआउट्स जतन करण्यासाठी Ayurveda & Asana Yoga तुमचे कॅलेंडर वापरते."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga menggunakan kalendar anda untuk menyimpan hidangan, senarai beli-belah dan senaman anda."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga bruker kalenderen din til å lagre måltider, handlelister og treningsøkter."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga gebruikt je agenda om je maaltijden, boodschappenlijsten en workouts op te slaan."
+          }
+        },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ଆପଣଙ୍କ ଭୋଜନ, କିଣାକିଣି ତାଲିକା ଏବଂ ୱାର୍କଆଉଟ୍ ସଞ୍ଚୟ କରିବାକୁ Ayurveda & Asana Yoga ଆପଣଙ୍କ କ୍ୟାଲେଣ୍ଡର ବ୍ୟବହାର କରେ।"
+          }
+        },
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga ਤੁਹਾਡੇ ਭੋਜਨ, ਖ਼ਰੀਦਦਾਰੀ ਸੂਚੀਆਂ ਅਤੇ ਵਰਕਆਊਟਾਂ ਨੂੰ ਸੇਵ ਕਰਨ ਲਈ ਤੁਹਾਡਾ ਕੈਲੰਡਰ ਵਰਤਦੀ ਹੈ।"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplikacja Ayurveda & Asana Yoga korzysta z Twojego kalendarza, aby zapisywać posiłki, listy zakupów i treningi."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Ayurveda & Asana Yoga usa seu calendário para salvar suas refeições, listas de compras e treinos."
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga usa o teu calendário para guardar as tuas refeições, listas de compras e treinos."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga folosește calendarul tău pentru a salva mesele, listele de cumpărături și antrenamentele."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga использует ваш календарь для сохранения приёмов пищи, списков покупок и тренировок."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga používa váš kalendár na ukladanie vašich jedál, nákupných zoznamov a tréningov."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga uporablja vaš koledar za shranjevanje vaših obrokov, nakupovalnih seznamov in vadb."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga använder din kalender för att spara dina måltider, inköpslistor och träningspass."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் உணவுகள், ஷாப்பிங் பட்டியல்கள் மற்றும் உடற்பயிற்சிகளைச் சேமிக்க Ayurveda & Asana Yoga உங்கள் நாட்காட்டியைப் பயன்படுத்துகிறது."
+          }
+        },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "మీ భోజనాలు, షాపింగ్ జాబితాలు మరియు వర్కవుట్‌లను సేవ్ చేయడానికి Ayurveda & Asana Yoga మీ క్యాలెండర్‌ను ఉపయోగిస్తుంది."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga จะใช้ปฏิทินของคุณเพื่อบันทึกมื้ออาหาร รายการซื้อของ และการออกกำลังกาย"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga, öğünlerinizi, alışveriş listelerinizi ve antrenmanlarınızı kaydetmek için takviminizi kullanır."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga використовує ваш календар, щоб зберігати ваші прийоми їжі, списки покупок і тренування."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga آپ کے کھانوں، خریداری کی فہرستوں اور ورزشوں کو محفوظ کرنے کے لیے آپ کا کیلنڈر استعمال کرتا ہے۔"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga sử dụng lịch của bạn để lưu bữa ăn, danh sách mua sắm và buổi tập."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga 会使用你的日历，以保存你的餐食、购物清单和训练。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga 會使用你的行事曆來儲存你的餐點、購物清單與鍛鍊。"
+          }
+        }
+      }
+    },
+    "NSCameraUsageDescription": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Camera is used to scan barcodes and food items so you can quickly add them to the app."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُستخدم الكاميرا لمسح الرموز الشريطية والمواد الغذائية حتى تتمكن من إضافتها بسرعة إلى التطبيق."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Камерата се използва за сканиране на баркодове и хранителни продукти, за да можеш бързо да ги добавяш в приложението."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "বারকোড এবং খাদ্যসামগ্রী স্ক্যান করতে ক্যামেরা ব্যবহার করা হয়, যাতে আপনি দ্রুত সেগুলো অ্যাপে যোগ করতে পারেন।"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La càmera es fa servir per escanejar codis de barres i aliments per poder-los afegir ràpidament a l'aplicació."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotoaparát slouží ke skenování čárových kódů a potravin, abyste je mohli rychle přidat do aplikace."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kameraet bruges til at scanne stregkoder og fødevarer, så du hurtigt kan tilføje dem til appen."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Kamera wird verwendet, um Barcodes und Lebensmittel zu scannen, damit du sie schnell zur App hinzufügen kannst."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Η κάμερα χρησιμοποιείται για τη σάρωση γραμμωτών κωδίκων και τροφίμων, ώστε να μπορείς να τα προσθέτεις γρήγορα στην εφαρμογή."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La cámara se usa para escanear códigos de barras y alimentos para que puedas añadirlos rápidamente a la app."
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La cámara se usa para escanear códigos de barras y alimentos para que puedas agregarlos rápidamente a la app."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kameraa käytetään viivakoodien ja elintarvikkeiden skannaamiseen, jotta voit lisätä ne nopeasti sovellukseen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'appareil photo sert à scanner les codes-barres et les aliments afin que tu puisses les ajouter rapidement à l'application."
+          }
+        },
+        "fr-CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'appareil photo sert à scanner les codes-barres et les aliments afin que vous puissiez les ajouter rapidement à l'application."
+          }
+        },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "બારકોડ અને ખાદ્ય પદાર્થો સ્કૅન કરવા માટે કૅમેરાનો ઉપયોગ થાય છે જેથી તમે તેમને ઍપમાં ઝડપથી ઉમેરી શકો."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "המצלמה משמשת לסריקת ברקודים ופריטי מזון כדי שתוכל להוסיף אותם במהירות לאפליקציה."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बारकोड और खाद्य पदार्थों को स्कैन करने के लिए कैमरे का उपयोग किया जाता है ताकि आप उन्हें ऐप में जल्दी जोड़ सकें।"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kamera se koristi za skeniranje barkodova i namirnica radi brzog dodavanja u aplikaciju."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A kamera vonalkódok és élelmiszerek beolvasására szolgál, hogy gyorsan hozzáadhasd őket az alkalmazáshoz."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kamera digunakan untuk memindai kode batang dan bahan makanan agar Anda dapat menambahkannya ke aplikasi dengan cepat."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La fotocamera viene utilizzata per scansionare codici a barre e alimenti, così da aggiungerli rapidamente all'app."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バーコードや食品をスキャンしてアプリにすばやく追加するためにカメラを使用します。"
+          }
+        },
+        "kk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Камера штрих-кодтар мен азық-түлік өнімдерін сканерлеп, оларды қолданбаға жылдам қосу үшін пайдаланылады."
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ಬಾರ್‌ಕೋಡ್‌ಗಳು ಮತ್ತು ಆಹಾರ ಪದಾರ್ಥಗಳನ್ನು ಸ್ಕ್ಯಾನ್ ಮಾಡಲು ಕ್ಯಾಮೆರಾವನ್ನು ಬಳಸಲಾಗುತ್ತದೆ, ಇದರಿಂದ ನೀವು ಅವುಗಳನ್ನು ತ್ವರಿತವಾಗಿ ಆ್ಯಪ್‌ಗೆ ಸೇರಿಸಬಹುದು."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "바코드와 식품을 스캔하여 앱에 빠르게 추가할 수 있도록 카메라를 사용합니다."
+          }
+        },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ബാർകോഡുകളും ഭക്ഷണ സാധനങ്ങളും സ്കാൻ ചെയ്ത് വേഗത്തിൽ ആപ്പിലേക്ക് ചേർക്കുന്നതിന് ക്യാമറ ഉപയോഗിക്കുന്നു."
+          }
+        },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बारकोड आणि खाद्यपदार्थ स्कॅन करण्यासाठी कॅमेरा वापरला जातो, जेणेकरून तुम्ही ते ॲपमध्ये पटकन जोडू शकाल."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kamera digunakan untuk mengimbas kod bar dan item makanan supaya anda boleh menambahkannya ke dalam aplikasi dengan cepat."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kameraet brukes til å skanne strekkoder og matvarer slik at du raskt kan legge dem til i appen."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De camera wordt gebruikt om streepjescodes en voedingsmiddelen te scannen, zodat je ze snel aan de app kunt toevoegen."
+          }
+        },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ବାରକୋଡ୍ ଏବଂ ଖାଦ୍ୟ ସାମଗ୍ରୀ ସ୍କାନ୍ କରିବାକୁ କ୍ୟାମେରା ବ୍ୟବହୃତ ହୁଏ, ଯାହାଦ୍ୱାରା ଆପଣ ସେଗୁଡ଼ିକୁ ଶୀଘ୍ର ଆପ୍‌ରେ ଯୋଡ଼ିପାରିବେ।"
+          }
+        },
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ਕੈਮਰੇ ਦੀ ਵਰਤੋਂ ਬਾਰਕੋਡ ਅਤੇ ਭੋਜਨ ਦੀਆਂ ਚੀਜ਼ਾਂ ਨੂੰ ਸਕੈਨ ਕਰਨ ਲਈ ਕੀਤੀ ਜਾਂਦੀ ਹੈ ਤਾਂ ਜੋ ਤੁਸੀਂ ਉਹਨਾਂ ਨੂੰ ਐਪ ਵਿੱਚ ਜਲਦੀ ਸ਼ਾਮਲ ਕਰ ਸਕੋ।"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparat służy do skanowania kodów kreskowych i produktów spożywczych w celu szybkiego dodawania ich do aplikacji."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A câmera é usada para escanear códigos de barras e alimentos para que você possa adicioná-los rapidamente ao aplicativo."
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A câmara é usada para ler códigos de barras e alimentos para os poderes adicionar rapidamente à aplicação."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Camera este folosită pentru a scana coduri de bare și alimente, astfel încât să le poți adăuga rapid în aplicație."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Камера используется для сканирования штрихкодов и продуктов, чтобы вы могли быстро добавлять их в приложение."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotoaparát sa používa na skenovanie čiarových kódov a potravín, aby ste ich mohli rýchlo pridať do aplikácie."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kamera se uporablja za skeniranje črtnih kod in živil, da jih lahko hitro dodate v aplikacijo."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kameran används för att skanna streckkoder och livsmedel så att du snabbt kan lägga till dem i appen."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "பார்கோடுகளையும் உணவுப் பொருட்களையும் ஸ்கேன் செய்து செயலியில் விரைவாகச் சேர்க்க கேமரா பயன்படுத்தப்படுகிறது."
+          }
+        },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "బార్‌కోడ్‌లు మరియు ఆహార పదార్థాలను స్కాన్ చేసి, వాటిని యాప్‌లోకి త్వరగా జోడించడానికి కెమెరా ఉపయోగించబడుతుంది."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ใช้กล้องเพื่อสแกนบาร์โค้ดและรายการอาหาร เพื่อให้คุณเพิ่มลงในแอปได้อย่างรวดเร็ว"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kamera, barkodları ve yiyecekleri tarayarak uygulamaya hızlıca ekleyebilmeniz için kullanılır."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Камера використовується для сканування штрих-кодів і продуктів, щоб ви могли швидко додавати їх у програму."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بارکوڈز اور کھانے کی اشیاء کو اسکین کرنے کے لیے کیمرہ استعمال کیا جاتا ہے تاکہ آپ انہیں تیزی سے ایپ میں شامل کر سکیں۔"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Camera được dùng để quét mã vạch và thực phẩm giúp bạn thêm nhanh vào ứng dụng."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "使用相机扫描条形码和食物，以便你快速将其添加到应用中。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "相機用於掃描條碼與食物項目，讓你能快速將它們加入應用程式中。"
+          }
+        }
+      }
+    },
+    "NSHealthShareUsageDescription": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Ayurveda & Asana Yoga reads your sleep, steps, active energy, and workouts to highlight sleep and include daily activity in calorie totals."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يقرأ تطبيق Ayurveda & Asana Yoga بيانات النوم والخطوات والطاقة النشطة والتمارين لإبراز النوم وتضمين النشاط اليومي في إجمالي السعرات الحرارية."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga чете данните ти за сън, крачки, активна енергия и тренировки, за да показва съня и да включва дневната активност в общия брой калории."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ঘুম হাইলাইট করতে এবং মোট ক্যালোরিতে দৈনন্দিন কার্যকলাপ অন্তর্ভুক্ত করতে Ayurveda & Asana Yoga আপনার ঘুম, ধাপ, সক্রিয় শক্তি এবং ওয়ার্কআউট পড়ে।"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga llegeix les dades de son, passos, energia activa i entrenaments per destacar el son i incloure l'activitat diària en el recompte total de calories."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga čte údaje o vašem spánku, krocích, aktivní energii a trénincích, aby zvýraznila spánek a zahrnula denní aktivitu do celkového součtu kalorií."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga læser din søvn, dine skridt, din aktive energi og dine træninger for at fremhæve søvn og medregne daglig aktivitet i kalorietotaler."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga liest deinen Schlaf, deine Schritte, Aktivitätsenergie und Workouts, um den Schlaf hervorzuheben und tägliche Aktivitäten in die Kaloriensumme einzubeziehen."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Το Ayurveda & Asana Yoga διαβάζει τον ύπνο, τα βήματα, την ενεργή ενέργεια και τις προπονήσεις σου για να προβάλλει τον ύπνο και να περιλαμβάνει την ημερήσια δραστηριότητα στα σύνολα θερμίδων."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga lee tu sueño, pasos, energía activa y entrenamientos para destacar el sueño e incluir la actividad diaria en el total de calorías."
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga lee tus datos de sueño, pasos, energía activa y entrenamientos para destacar tu sueño e incluir la actividad diaria en el total de calorías."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga lukee tietoja unestasi, askeleistasi, aktiivienergiastasi ja treeneistäsi korostaakseen unta ja sisällyttääkseen päivittäisen aktiivisuuden kalorien kokonaismäärään."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga lit ton sommeil, tes pas, ton énergie active et tes entraînements pour mettre en avant ton sommeil et inclure ton activité quotidienne dans les totaux caloriques."
+          }
+        },
+        "fr-CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga lit votre sommeil, vos pas, votre énergie active et vos entraînements pour mettre en valeur votre sommeil et inclure votre activité quotidienne dans les totaux caloriques."
+          }
+        },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga ઊંઘને હાઇલાઇટ કરવા અને કુલ કૅલરીમાં દૈનિક પ્રવૃત્તિનો સમાવેશ કરવા માટે તમારી ઊંઘ, પગલાં, સક્રિય ઊર્જા અને વર્કઆઉટ્સ વાંચે છે."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga קוראת את נתוני השינה, הצעדים, האנרגיה הפעילה והאימונים שלך כדי להדגיש נתוני שינה ולכלול פעילות יומית בסך הקלוריות."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga नींद को प्रमुखता से दिखाने और कुल कैलोरी में दैनिक गतिविधि को शामिल करने के लिए आपकी नींद, कदम, सक्रिय ऊर्जा और वर्कआउट का डेटा पढ़ता है।"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga čita tvoj san, korake, aktivnu energiju i treninge kako bi istaknula san i uključila dnevnu aktivnost u ukupni zbroj kalorija."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az Ayurveda & Asana Yoga olvassa az alvási, lépésszám-, aktívenergia- és edzésadataidat, hogy kiemelje az alvást, és beleszámítsa a napi aktivitást a teljes kalóriamennyiségbe."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga membaca data tidur, langkah, energi aktif, dan latihan Anda untuk menyoroti tidur serta menyertakan aktivitas harian dalam total kalori."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga legge i dati su sonno, passi, energia attiva e allenamenti per evidenziare il sonno e includere l'attività giornaliera nel totale delle calorie."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yogaは、睡眠をハイライト表示し、毎日の活動量をカロリー合計に反映するため、睡眠、歩数、アクティブエネルギー、ワークアウトを読み取ります。"
+          }
+        },
+        "kk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga ұйқыны ерекшелеп көрсету және күнделікті белсенділікті жалпы калория мөлшеріне қосу үшін ұйқыңызды, қадамдарыңызды, белсенді қуатыңызды және жаттығуларыңызды оқиды."
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ನಿದ್ರೆಯನ್ನು ಹೈಲೈಟ್ ಮಾಡಲು ಮತ್ತು ದೈನಂದಿನ ಚಟುವಟಿಕೆಯನ್ನು ಒಟ್ಟು ಕ್ಯಾಲೋರಿಗಳಲ್ಲಿ ಸೇರಿಸಲು Ayurveda & Asana Yoga ನಿಮ್ಮ ನಿದ್ರೆ, ಹೆಜ್ಜೆಗಳು, ಸಕ್ರಿಯ ಶಕ್ತಿ ಮತ್ತು ವರ್ಕೌಟ್‌ಗಳನ್ನು ಓದುತ್ತದೆ."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga는 수면 정보를 강조 표시하고 일일 활동을 총 칼로리에 반영하기 위해 수면, 걸음 수, 활동 에너지 및 운동 데이터를 읽습니다."
+          }
+        },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ഉറക്കം എടുത്തുകാണിക്കുന്നതിനും പ്രതിദിന പ്രവർത്തനം ആകെ കലോറിയിൽ ഉൾപ്പെടുത്തുന്നതിനുമായി Ayurveda & Asana Yoga നിങ്ങളുടെ ഉറക്കം, ചുവടുകൾ, സജീവ ഊർജം, വ്യായാമങ്ങൾ എന്നിവ വായിക്കുന്നു."
+          }
+        },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "झोप हायलाइट करण्यासाठी आणि एकूण कॅलरीजमध्ये दैनंदिन हालचालींचा समावेश करण्यासाठी Ayurveda & Asana Yoga तुमची झोप, पावले, सक्रिय ऊर्जा आणि वर्कआउट्स वाचते."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga membaca data tidur, langkah, tenaga aktif dan senaman anda untuk menyerlahkan tidur dan menyertakan aktiviti harian dalam jumlah kalori."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga leser søvn, skritt, aktiv energi og treningsøkter for å fremheve søvn og inkludere daglig aktivitet i kalorisummen."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga leest je slaap, stappen, actieve energie en workouts om slaap uit te lichten en dagelijkse activiteit mee te nemen in de calorietotalen."
+          }
+        },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ନିଦକୁ ଦର୍ଶାଇବା ଏବଂ ମୋଟ କ୍ୟାଲୋରୀରେ ଦୈନିକ କାର୍ଯ୍ୟକଳାପ ଅନ୍ତର୍ଭୁକ୍ତ କରିବାକୁ Ayurveda & Asana Yoga ଆପଣଙ୍କ ନିଦ, ପାଦ ସଂଖ୍ୟା, ସକ୍ରିୟ ଶକ୍ତି ଏବଂ ୱାର୍କଆଉଟ୍ ପଢ଼େ।"
+          }
+        },
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga ਨੀਂਦ ਨੂੰ ਉਜਾਗਰ ਕਰਨ ਅਤੇ ਕੁੱਲ ਕੈਲੋਰੀ ਗਿਣਤੀ ਵਿੱਚ ਰੋਜ਼ਾਨਾ ਗਤੀਵਿਧੀ ਨੂੰ ਸ਼ਾਮਲ ਕਰਨ ਲਈ ਤੁਹਾਡੀ ਨੀਂਦ, ਕਦਮ, ਸਰਗਰਮ ਊਰਜਾ ਅਤੇ ਵਰਕਆਊਟ ਪੜ੍ਹਦੀ ਹੈ।"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplikacja Ayurveda & Asana Yoga odczytuje dane o śnie, krokach, aktywnej energii i treningach, aby wyróżniać sen i uwzględniać codzienną aktywność w bilansie kalorii."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Ayurveda & Asana Yoga lê seu sono, passos, energia ativa e treinos para destacar o sono e incluir a atividade diária nos totais de calorias."
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga lê os teus dados de sono, passos, energia ativa e treinos para destacar o sono e incluir a atividade diária nos totais de calorias."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga citește datele despre somn, pași, energie activă și antrenamente pentru a evidenția somnul și a include activitatea zilnică în totalul caloriilor."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga считывает данные о сне, шагах, активной энергии и тренировках, чтобы отображать сон и учитывать ежедневную активность в подсчёте калорий."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga číta údaje o vašom spánku, krokoch, aktívnej energii a tréningoch, aby zvýraznila spánok a zahrnula dennú aktivitu do celkových kalórií."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga bere podatke o vašem spanju, korakih, aktivni energiji in vadbah, da izpostavi spanje ter vključi dnevno aktivnost v skupni seštevek kalorij."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga läser din sömn, dina steg, aktiv energi och träningspass för att visa sömn och räkna med daglig aktivitet i totala kalorier."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "தூக்கத்தை முன்னிலைப்படுத்தவும், தினசரி செயல்பாட்டைக் கலோரி மொத்தத்தில் சேர்க்கவும் Ayurveda & Asana Yoga உங்கள் தூக்கம், படிகள், செயலில் உள்ள ஆற்றல் மற்றும் உடற்பயிற்சிகளைப் படிக்கிறது."
+          }
+        },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "నిద్రను హైలైట్ చేయడానికి మరియు రోజువారీ కార్యాచరణను మొత్తం కేలరీలలో చేర్చడానికి Ayurveda & Asana Yoga మీ నిద్ర, అడుగులు, చురుకైన శక్తి మరియు వర్కవుట్‌లను చదువుతుంది."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga จะอ่านข้อมูลการนอนหลับ จำนวนก้าว พลังงานที่เผาผลาญ และการออกกำลังกายของคุณ เพื่อเน้นข้อมูลการนอนหลับและนำกิจกรรมประจำวันมารวมในแคลอรีทั้งหมด"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga, uykuyu öne çıkarmak ve günlük aktiviteyi kalori toplamlarına dahil etmek için uyku, adım, aktif enerji ve antrenman verilerinizi okur."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga читає дані про ваш сон, кроки, активну енергію та тренування, щоб виділяти сон і враховувати щоденну активність у підсумку калорій."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga نیند کو نمایاں کرنے اور کل کیلوریز میں روزانہ کی سرگرمی شامل کرنے کے لیے آپ کی نیند، قدم، فعال توانائی اور ورزشیں پڑھتا ہے۔"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga đọc dữ liệu giấc ngủ, số bước, năng lượng hoạt động và bài tập của bạn để làm nổi bật giấc ngủ và tính hoạt động hằng ngày vào tổng calo."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga 会读取你的睡眠、步数、活动能量和训练数据，以突出显示睡眠情况并将日常活动计入总热量。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga 會讀取你的睡眠、步數、動態能量與鍛鍊資料，以標示睡眠狀況並將每日活動量計入總熱量中。"
+          }
+        }
+      }
+    },
+    "NSHealthUpdateUsageDescription": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Ayurveda & Asana Yoga writes workout and activity data to Health when you choose to save or test these features."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يكتب تطبيق Ayurveda & Asana Yoga بيانات التمارين والنشاط إلى «صحتي» عندما تختار حفظ هذه الميزات أو اختبارها."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga записва данни за тренировки и активност в приложението „Здраве“, когато избереш да запазиш или тестваш тези функции."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "আপনি যখন এই ফিচারগুলো সংরক্ষণ বা পরীক্ষা করতে চান, তখন Ayurveda & Asana Yoga ওয়ার্কআউট এবং কার্যকলাপের ডেটা স্বাস্থ্য অ্যাপে লেখে।"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga escriu dades d'entrenament i activitat a Salut quan decideixes desar o provar aquestes funcions."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga zapisuje údaje o trénincích a aktivitě do aplikace Zdraví, když se rozhodnete tyto funkce uložit nebo vyzkoušet."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga skriver trænings- og aktivitetsdata til Sundhed, når du vælger at gemme eller teste disse funktioner."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga schreibt Workout- und Aktivitätsdaten in Health, wenn du diese Funktionen speichern oder testen möchtest."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Το Ayurveda & Asana Yoga καταγράφει δεδομένα προπονήσεων και δραστηριότητας στην Υγεία όταν επιλέγεις να αποθηκεύσεις ή να δοκιμάσεις αυτές τις λειτουργίες."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga escribe datos de entrenamiento y actividad en Salud cuando decides guardar o probar estas funciones."
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga escribe datos de entrenamientos y actividad en Salud cuando decides guardar o probar estas funciones."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga kirjoittaa treeni- ja aktiivisuustietoja Terveys-appiin, kun päätät tallentaa tai testata näitä ominaisuuksia."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga écrit les données d'entraînement et d'activité dans Santé lorsque tu choisis d'enregistrer ou de tester ces fonctionnalités."
+          }
+        },
+        "fr-CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga écrit les données d'entraînement et d'activité dans Santé lorsque vous choisissez d'enregistrer ou de tester ces fonctionnalités."
+          }
+        },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "જ્યારે તમે આ સુવિધાઓને સાચવવાનું કે ચકાસવાનું પસંદ કરો છો, ત્યારે Ayurveda & Asana Yoga વર્કઆઉટ અને પ્રવૃત્તિનો ડેટા આરોગ્યમાં લખે છે."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga כותבת נתוני אימונים ופעילות לאפליקציית בריאות כשאתה בוחר לשמור או לבדוק תכונות אלה."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जब आप इन सुविधाओं को सहेजना या परखना चुनते हैं, तो Ayurveda & Asana Yoga वर्कआउट और गतिविधि डेटा को सेहत में लिखता है।"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga zapisuje podatke o treninzima i aktivnostima u Zdravlje kada odlučiš spremiti ili testirati ove značajke."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az Ayurveda & Asana Yoga edzés- és aktivitási adatokat ír az Egészség appba, amikor ezen funkciók mentését vagy tesztelését választod."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga menulis data latihan dan aktivitas ke Kesehatan saat Anda memilih untuk menyimpan atau menguji fitur ini."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga scrive i dati di allenamento e attività in Salute quando scegli di salvare o provare queste funzioni."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yogaは、保存または機能のテストを選択した際に、ワークアウトとアクティビティのデータを「ヘルスケア」に書き込みます。"
+          }
+        },
+        "kk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga осы мүмкіндіктерді сақтауды немесе тексеруді таңдаған кезде жаттығу және белсенділік деректерін «Денсаулық» қолданбасына жазады."
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ನೀವು ಈ ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ಉಳಿಸಲು ಅಥವಾ ಪರೀಕ್ಷಿಸಲು ಆಯ್ಕೆಮಾಡಿದಾಗ Ayurveda & Asana Yoga ವರ್ಕೌಟ್ ಮತ್ತು ಚಟುವಟಿಕೆ ಡೇಟಾವನ್ನು ಆರೋಗ್ಯ ಆ್ಯಪ್‌ಗೆ ಬರೆಯುತ್ತದೆ."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga는 해당 기능을 저장하거나 테스트하기로 선택할 때 운동 및 활동 데이터를 건강 앱에 기록합니다."
+          }
+        },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ഈ ഫീച്ചറുകൾ സേവ് ചെയ്യാനോ പരിശോധിക്കാനോ നിങ്ങൾ തിരഞ്ഞെടുക്കുമ്പോൾ, Ayurveda & Asana Yoga വ്യായാമവും പ്രവർത്തന വിവരങ്ങളും ആരോഗ്യം ആപ്പിലേക്ക് എഴുതുന്നു."
+          }
+        },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "तुम्ही ही वैशिष्ट्ये जतन करणे किंवा तपासणे निवडता तेव्हा Ayurveda & Asana Yoga वर्कआउट आणि हालचालींचा डेटा 'आरोग्य' मध्ये लिहिते."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga menulis data senaman dan aktiviti ke Kesihatan apabila anda memilih untuk menyimpan atau menguji ciri ini."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga skriver trenings- og aktivitetsdata til Helse når du velger å lagre eller teste disse funksjonene."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga schrijft workout- en activiteitsgegevens naar Gezondheid wanneer je ervoor kiest om deze functies op te slaan of te testen."
+          }
+        },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ଆପଣ ଯେତେବେଳେ ଏହି ସୁବିଧାଗୁଡ଼ିକୁ ସଞ୍ଚୟ କିମ୍ବା ପରୀକ୍ଷା କରିବାକୁ ବାଛନ୍ତି, ସେତେବେଳେ Ayurveda & Asana Yoga ୱାର୍କଆଉଟ୍ ଏବଂ କାର୍ଯ୍ୟକଳାପ ଡାଟା ସ୍ୱାସ୍ଥ୍ୟ ଆପ୍‌ରେ ଲେଖେ।"
+          }
+        },
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ਜਦੋਂ ਤੁਸੀਂ ਇਹਨਾਂ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਨੂੰ ਸੇਵ ਕਰਨ ਜਾਂ ਪਰਖਣ ਦੀ ਚੋਣ ਕਰਦੇ ਹੋ, ਤਾਂ Ayurveda & Asana Yoga “ਸਿਹਤ” ਐਪ ਵਿੱਚ ਵਰਕਆਊਟ ਅਤੇ ਗਤੀਵਿਧੀ ਡੇਟਾ ਲਿਖਦੀ ਹੈ।"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplikacja Ayurveda & Asana Yoga zapisuje dane o treningach i aktywności w aplikacji Zdrowie, gdy zdecydujesz się zapisać lub przetestować te funkcje."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Ayurveda & Asana Yoga grava dados de treinos e atividades no app Saúde quando você escolhe salvar ou testar esses recursos."
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga escreve dados de treino e atividade na aplicação Saúde quando escolhes guardar ou testar estas funcionalidades."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga scrie date despre antrenamente și activitate în Sănătate atunci când alegi să salvezi sau să testezi aceste funcții."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga записывает данные о тренировках и активности в приложение «Здоровье», когда вы выбираете сохранение или тестирование этих функций."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga zapisuje údaje o tréningoch a aktivite do apky Zdravie, keď sa rozhodnete tieto funkcie uložiť alebo otestovať."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga zapisuje podatke o vadbah in aktivnosti v aplikacijo Zdravje, kadar se odločite shraniti ali preizkusiti te funkcije."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga skriver tränings- och aktivitetsdata till Hälsa när du väljer att spara eller testa dessa funktioner."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இந்த அம்சங்களைச் சேமிக்க அல்லது சோதிக்க நீங்கள் தேர்வுசெய்யும்போது, Ayurveda & Asana Yoga உடற்பயிற்சி மற்றும் செயல்பாட்டுத் தரவை உடல்நலம் செயலியில் எழுதுகிறது."
+          }
+        },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "మీరు ఈ ఫీచర్‌లను సేవ్ చేయడానికి లేదా పరీక్షించడానికి ఎంచుకున్నప్పుడు Ayurveda & Asana Yoga వర్కవుట్ మరియు కార్యాచరణ డేటాను హెల్త్ యాప్‌లోకి రాస్తుంది."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga จะเขียนข้อมูลการออกกำลังกายและกิจกรรมไปยังแอปสุขภาพเมื่อคุณเลือกบันทึกหรือทดสอบฟีเจอร์เหล่านี้"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga, bu özellikleri kaydetmeyi veya test etmeyi seçtiğinizde antrenman ve aktivite verilerini Sağlık uygulamasına yazar."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga записує дані про тренування та активність у «Здоров’я», коли ви вирішуєте зберегти або протестувати ці функції."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جب آپ ان خصوصیات کو محفوظ کرنے یا جانچنے کا انتخاب کرتے ہیں تو Ayurveda & Asana Yoga ورزش اور سرگرمی کا ڈیٹا صحت ایپ میں درج کرتا ہے۔"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga ghi dữ liệu bài tập và hoạt động vào Sức khỏe khi bạn chọn lưu hoặc thử các tính năng này."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "当你选择保存或测试这些功能时，Ayurveda & Asana Yoga 会将训练和活动数据写入“健康”。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "當你選擇儲存或測試這些功能時，Ayurveda & Asana Yoga 會將鍛鍊與活動資料寫入「健康」。"
+          }
+        }
+      }
+    },
+    "NSLocalNetworkUsageDescription": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Ayurveda & Asana Yoga needs to connect to your local server to sync your health data across devices."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يحتاج تطبيق Ayurveda & Asana Yoga إلى الاتصال بخادمك المحلي لمزامنة بياناتك الصحية عبر الأجهزة."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga трябва да се свърже с локалния ти сървър, за да синхронизира здравните ти данни между устройствата."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "বিভিন্ন ডিভাইসে আপনার স্বাস্থ্য ডেটা সিঙ্ক করতে Ayurveda & Asana Yoga-এর আপনার লোকাল সার্ভারের সাথে সংযোগ স্থাপন করা প্রয়োজন।"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga s'ha de connectar al teu servidor local per sincronitzar les dades de salut entre dispositius."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga se potřebuje připojit k vašemu místnímu serveru, aby mohla synchronizovat vaše zdravotní údaje napříč zařízeními."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga skal oprette forbindelse til din lokale server for at synkronisere dine sundhedsdata på tværs af enheder."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga muss sich mit deinem lokalen Server verbinden, um deine Gesundheitsdaten geräteübergreifend zu synchronisieren."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Το Ayurveda & Asana Yoga πρέπει να συνδεθεί στον τοπικό σου διακομιστή για να συγχρονίσει τα δεδομένα υγείας σου μεταξύ των συσκευών σου."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga necesita conectarse a tu servidor local para sincronizar tus datos de salud entre dispositivos."
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga necesita conectarse a tu servidor local para sincronizar tus datos de salud entre dispositivos."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga tarvitsee yhteyden paikalliseen palvelimeesi synkronoidakseen terveystietosi laitteiden välillä."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga doit se connecter à ton serveur local pour synchroniser tes données de santé entre tes appareils."
+          }
+        },
+        "fr-CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga doit se connecter à votre serveur local pour synchroniser vos données de santé entre vos appareils."
+          }
+        },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "તમારા ઉપકરણો વચ્ચે તમારો આરોગ્ય ડેટા સિંક કરવા માટે Ayurveda & Asana Yoga ને તમારા સ્થાનિક સર્વર સાથે કનેક્ટ થવાની જરૂર છે."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga צריכה להתחבר לשרת המקומי שלך כדי לסנכרן את נתוני הבריאות שלך בין מכשירים."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "विभिन्न डिवाइसों पर आपका स्वास्थ्य डेटा सिंक करने के लिए Ayurveda & Asana Yoga को आपके स्थानीय सर्वर से कनेक्ट होना आवश्यक है।"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga treba se povezati s tvojim lokalnim poslužiteljem kako bi sinkronizirala tvoje zdravstvene podatke između uređaja."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az Ayurveda & Asana Yoga alkalmazásnak csatlakoznia kell a helyi szerveredhez az egészségügyi adataid eszközök közötti szinkronizálásához."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga perlu terhubung ke server lokal Anda untuk menyinkronkan data kesehatan Anda di berbagai perangkat."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga deve connettersi al tuo server locale per sincronizzare i dati sulla salute tra i dispositivi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yogaは、デバイス間で健康データを同期するためにローカルサーバーへ接続する必要があります。"
+          }
+        },
+        "kk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga денсаулық деректеріңізді құрылғылар арасында синхрондау үшін жергілікті серверіңізге қосылуы қажет."
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ಸಾಧನಗಳಾದ್ಯಂತ ನಿಮ್ಮ ಆರೋಗ್ಯ ಡೇಟಾವನ್ನು ಸಿಂಕ್ ಮಾಡಲು Ayurveda & Asana Yoga ನಿಮ್ಮ ಸ್ಥಳೀಯ ಸರ್ವರ್‌ಗೆ ಸಂಪರ್ಕಿಸಬೇಕಾಗುತ್ತದೆ."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga는 기기 간 건강 데이터를 동기화하기 위해 로컬 서버에 연결해야 합니다."
+          }
+        },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ഉപകരണങ്ങളിലുടനീളം നിങ്ങളുടെ ആരോഗ്യ ഡാറ്റ സമന്വയിപ്പിക്കുന്നതിന് Ayurveda & Asana Yoga-യ്ക്ക് നിങ്ങളുടെ ലോക്കൽ സെർവറുമായി കണക്റ്റ് ചെയ്യേണ്ടതുണ്ട്."
+          }
+        },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "तुमचा आरोग्य डेटा सर्व डिव्हाइसवर सिंक करण्यासाठी Ayurveda & Asana Yoga ला तुमच्या स्थानिक सर्व्हरशी कनेक्ट होण्याची आवश्यकता आहे."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga perlu bersambung ke pelayan setempat anda untuk menyegerakkan data kesihatan anda merentas peranti."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga må koble til den lokale serveren din for å synkronisere helsedataene dine på tvers av enheter."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga moet verbinding maken met je lokale server om je gezondheidsgegevens tussen apparaten te synchroniseren."
+          }
+        },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ବିଭିନ୍ନ ଡିଭାଇସ୍‌ରେ ଆପଣଙ୍କ ସ୍ୱାସ୍ଥ୍ୟ ଡାଟା ସିଙ୍କ୍ କରିବାକୁ Ayurveda & Asana Yoga କୁ ଆପଣଙ୍କ ଲୋକାଲ୍ ସର୍ଭର୍ ସହିତ ସଂଯୋଗ କରିବାକୁ ପଡ଼ିବ।"
+          }
+        },
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga ਨੂੰ ਡਿਵਾਈਸਾਂ ਵਿੱਚ ਤੁਹਾਡਾ ਸਿਹਤ ਡੇਟਾ ਸਿੰਕ ਕਰਨ ਲਈ ਤੁਹਾਡੇ ਲੋਕਲ ਸਰਵਰ ਨਾਲ ਜੁੜਨ ਦੀ ਲੋੜ ਹੈ।"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplikacja Ayurveda & Asana Yoga musi połączyć się z Twoim serwerem lokalnym, aby synchronizować dane zdrowotne między urządzeniami."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Ayurveda & Asana Yoga precisa se conectar ao seu servidor local para sincronizar seus dados de saúde entre dispositivos."
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga precisa de se ligar ao teu servidor local para sincronizar os teus dados de saúde entre dispositivos."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga trebuie să se conecteze la serverul tău local pentru a sincroniza datele tale de sănătate între dispozitive."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga требуется подключение к вашему локальному серверу для синхронизации данных о здоровье между устройствами."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga sa potrebuje pripojiť k vášmu lokálnemu serveru na synchronizáciu vašich zdravotných údajov medzi zariadeniami."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga se mora povezati z vašim lokalnim strežnikom za sinhronizacijo vaših zdravstvenih podatkov med napravami."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga behöver ansluta till din lokala server för att synkronisera dina hälsodata mellan enheter."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "சாதனங்களுக்கு இடையே உங்கள் உடல்நலத் தரவை ஒத்திசைக்க Ayurveda & Asana Yoga உங்கள் உள்ளூர் சேவையகத்துடன் இணைக்க வேண்டும்."
+          }
+        },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "పరికరాల మధ్య మీ ఆరోగ్య డేటాను సింక్ చేయడానికి Ayurveda & Asana Yoga మీ స్థానిక సర్వర్‌కు కనెక్ట్ అవ్వాలి."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga จำเป็นต้องเชื่อมต่อกับเซิร์ฟเวอร์ท้องถิ่นของคุณเพื่อซิงค์ข้อมูลสุขภาพข้ามอุปกรณ์"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga, sağlık verilerinizi cihazlar arasında eşzamanlamak için yerel sunucunuza bağlanmaya ihtiyaç duyar."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga потрібно підключитися до вашого локального сервера для синхронізації даних про здоров'я між пристроями."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "آلات کے درمیان آپ کی صحت کے ڈیٹا کو ہم آہنگ کرنے کے لیے Ayurveda & Asana Yoga کو آپ کے مقامی سرور سے منسلک ہونے کی ضرورت ہے۔"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga cần kết nối với máy chủ cục bộ của bạn để đồng bộ dữ liệu sức khỏe giữa các thiết bị."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga 需要连接到你的本地服务器，以便在设备间同步你的健康数据。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayurveda & Asana Yoga 需要連線至你的區域伺服器，以跨裝置同步你的健康資料。"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

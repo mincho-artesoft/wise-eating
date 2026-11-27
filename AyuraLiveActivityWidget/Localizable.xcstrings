@@ -1,0 +1,11 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "Live schedule": {},
+    "Waiting for next activity": {},
+    "Next meal": {},
+    "Next workout": {},
+    "Next practice": {}
+  },
+  "version": "1.0"
+}
