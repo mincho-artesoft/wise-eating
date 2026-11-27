@@ -1,0 +1,3915 @@
+{
+ "bitrateKbps": 24,
+ "channels": 1,
+ "codec": "aac-he",
+ "format": "wise-eating-production-narration/v2",
+ "practices": {
+  "abhyanga-awareness": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/abhyanga-awareness/cue-00.m4a",
+     "durationSec": 8.015125,
+     "holdSec": 25,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/abhyanga-awareness/cue-01.m4a",
+     "durationSec": 4.323083,
+     "holdSec": 25,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/abhyanga-awareness/cue-02.m4a",
+     "durationSec": 7.55975,
+     "holdSec": 30,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/abhyanga-awareness/cue-03.m4a",
+     "durationSec": 6.234208,
+     "holdSec": 40,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/abhyanga-awareness/cue-04.m4a",
+     "durationSec": 7.605625,
+     "holdSec": 45,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/abhyanga-awareness/cue-05.m4a",
+     "durationSec": 8.533875,
+     "holdSec": 45,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/abhyanga-awareness/cue-06.m4a",
+     "durationSec": 6.722625,
+     "holdSec": 45,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/abhyanga-awareness/cue-07.m4a",
+     "durationSec": 8.801125,
+     "holdSec": 50,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/abhyanga-awareness/cue-08.m4a",
+     "durationSec": 6.530958,
+     "holdSec": 60,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/abhyanga-awareness/cue-09.m4a",
+     "durationSec": 7.530583,
+     "holdSec": 40,
+     "index": 9
+    }
+   ],
+   "voice": "ash"
+  },
+  "alternate-nostril-breath": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/alternate-nostril-breath/cue-00.m4a",
+     "durationSec": 4.443,
+     "holdSec": 15,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/alternate-nostril-breath/cue-01.m4a",
+     "durationSec": 7.909833,
+     "holdSec": 22,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/alternate-nostril-breath/cue-02.m4a",
+     "durationSec": 5.409792,
+     "holdSec": 15,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/alternate-nostril-breath/cue-03.m4a",
+     "durationSec": 1.774708,
+     "holdSec": 12,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/alternate-nostril-breath/cue-04.m4a",
+     "durationSec": 5.85325,
+     "holdSec": 18,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/alternate-nostril-breath/cue-05.m4a",
+     "durationSec": 8.377958,
+     "holdSec": 25,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/alternate-nostril-breath/cue-06.m4a",
+     "durationSec": 13.415208,
+     "holdSec": 90,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/alternate-nostril-breath/cue-07.m4a",
+     "durationSec": 8.083958,
+     "holdSec": 60,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/alternate-nostril-breath/cue-08.m4a",
+     "durationSec": 2.85475,
+     "holdSec": 120,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/alternate-nostril-breath/cue-09.m4a",
+     "durationSec": 6.894125,
+     "holdSec": 40,
+     "index": 9
+    }
+   ],
+   "voice": "ash"
+  },
+  "before-the-sound": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/before-the-sound/cue-00.m4a",
+     "durationSec": 3.178042,
+     "holdSec": 15,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/before-the-sound/cue-01.m4a",
+     "durationSec": 8.119667,
+     "holdSec": 30,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/before-the-sound/cue-02.m4a",
+     "durationSec": 6.343667,
+     "holdSec": 40,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/before-the-sound/cue-03.m4a",
+     "durationSec": 8.801833,
+     "holdSec": 45,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/before-the-sound/cue-04.m4a",
+     "durationSec": 4.334958,
+     "holdSec": 45,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/before-the-sound/cue-05.m4a",
+     "durationSec": 3.773917,
+     "holdSec": 60,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/before-the-sound/cue-06.m4a",
+     "durationSec": 0.887,
+     "holdSec": 90,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/before-the-sound/cue-07.m4a",
+     "durationSec": 4.363208,
+     "holdSec": 40,
+     "index": 7
+    }
+   ],
+   "voice": "vera"
+  },
+  "bellows-breath": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/bellows-breath/cue-00.m4a",
+     "durationSec": 6.212667,
+     "holdSec": 20,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/bellows-breath/cue-01.m4a",
+     "durationSec": 4.782333,
+     "holdSec": 15,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/bellows-breath/cue-02.m4a",
+     "durationSec": 2.609333,
+     "holdSec": 15,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/bellows-breath/cue-03.m4a",
+     "durationSec": 9.167333,
+     "holdSec": 25,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/bellows-breath/cue-04.m4a",
+     "durationSec": 5.474583,
+     "holdSec": 20,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/bellows-breath/cue-05.m4a",
+     "durationSec": 4.218833,
+     "holdSec": 45,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/bellows-breath/cue-06.m4a",
+     "durationSec": 11.810667,
+     "holdSec": 40,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/bellows-breath/cue-07.m4a",
+     "durationSec": 3.605125,
+     "holdSec": 45,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/bellows-breath/cue-08.m4a",
+     "durationSec": 7.810208,
+     "holdSec": 60,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/bellows-breath/cue-09.m4a",
+     "durationSec": 8.384458,
+     "holdSec": 45,
+     "index": 9
+    }
+   ],
+   "voice": "juniper"
+  },
+  "breath-of-fire": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/breath-of-fire/cue-00.m4a",
+     "durationSec": 4.715708,
+     "holdSec": 18,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/breath-of-fire/cue-01.m4a",
+     "durationSec": 12.102292,
+     "holdSec": 25,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/breath-of-fire/cue-02.m4a",
+     "durationSec": 11.559125,
+     "holdSec": 25,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/breath-of-fire/cue-03.m4a",
+     "durationSec": 7.371208,
+     "holdSec": 30,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/breath-of-fire/cue-04.m4a",
+     "durationSec": 6.649958,
+     "holdSec": 45,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/breath-of-fire/cue-05.m4a",
+     "durationSec": 5.279958,
+     "holdSec": 45,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/breath-of-fire/cue-06.m4a",
+     "durationSec": 2.045542,
+     "holdSec": 50,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/breath-of-fire/cue-07.m4a",
+     "durationSec": 6.82075,
+     "holdSec": 60,
+     "index": 7
+    }
+   ],
+   "voice": "juniper"
+  },
+  "compassion": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/compassion/cue-00.m4a",
+     "durationSec": 3.843125,
+     "holdSec": 15,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/compassion/cue-01.m4a",
+     "durationSec": 5.842042,
+     "holdSec": 25,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/compassion/cue-02.m4a",
+     "durationSec": 5.810375,
+     "holdSec": 30,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/compassion/cue-03.m4a",
+     "durationSec": 6.961958,
+     "holdSec": 35,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/compassion/cue-04.m4a",
+     "durationSec": 4.068917,
+     "holdSec": 25,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/compassion/cue-05.m4a",
+     "durationSec": 4.607583,
+     "holdSec": 40,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/compassion/cue-06.m4a",
+     "durationSec": 10.993958,
+     "holdSec": 45,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/compassion/cue-07.m4a",
+     "durationSec": 5.809958,
+     "holdSec": 45,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/compassion/cue-08.m4a",
+     "durationSec": 3.556292,
+     "holdSec": 75,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/compassion/cue-09.m4a",
+     "durationSec": 5.075458,
+     "holdSec": 40,
+     "index": 9
+    }
+   ],
+   "voice": "vera"
+  },
+  "complete-rest": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/complete-rest/cue-00.m4a",
+     "durationSec": 6.920458,
+     "holdSec": 15,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/complete-rest/cue-01.m4a",
+     "durationSec": 5.065958,
+     "holdSec": 15,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/complete-rest/cue-02.m4a",
+     "durationSec": 7.002625,
+     "holdSec": 25,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/complete-rest/cue-03.m4a",
+     "durationSec": 4.725,
+     "holdSec": 25,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/complete-rest/cue-04.m4a",
+     "durationSec": 8.077708,
+     "holdSec": 20,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/complete-rest/cue-05.m4a",
+     "durationSec": 6.511375,
+     "holdSec": 25,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/complete-rest/cue-06.m4a",
+     "durationSec": 4.657958,
+     "holdSec": 20,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/complete-rest/cue-07.m4a",
+     "durationSec": 6.964625,
+     "holdSec": 20,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/complete-rest/cue-08.m4a",
+     "durationSec": 5.386917,
+     "holdSec": 20,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/complete-rest/cue-09.m4a",
+     "durationSec": 5.494792,
+     "holdSec": 20,
+     "index": 9
+    },
+    {
+     "audioAssetName": "narration/fr/audio/complete-rest/cue-10.m4a",
+     "durationSec": 4.842375,
+     "holdSec": 60,
+     "index": 10
+    },
+    {
+     "audioAssetName": "narration/fr/audio/complete-rest/cue-11.m4a",
+     "durationSec": 7.125875,
+     "holdSec": 90,
+     "index": 11
+    },
+    {
+     "audioAssetName": "narration/fr/audio/complete-rest/cue-12.m4a",
+     "durationSec": 2.9135,
+     "holdSec": 120,
+     "index": 12
+    },
+    {
+     "audioAssetName": "narration/fr/audio/complete-rest/cue-13.m4a",
+     "durationSec": 9.583667,
+     "holdSec": 30,
+     "index": 13
+    }
+   ],
+   "voice": "solene"
+  },
+  "cooling-attention": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/cooling-attention/cue-00.m4a",
+     "durationSec": 5.798792,
+     "holdSec": 12,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/cooling-attention/cue-01.m4a",
+     "durationSec": 8.597667,
+     "holdSec": 18,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/cooling-attention/cue-02.m4a",
+     "durationSec": 6.803083,
+     "holdSec": 20,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/cooling-attention/cue-03.m4a",
+     "durationSec": 7.561958,
+     "holdSec": 45,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/cooling-attention/cue-04.m4a",
+     "durationSec": 11.449958,
+     "holdSec": 25,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/cooling-attention/cue-05.m4a",
+     "durationSec": 6.750208,
+     "holdSec": 40,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/cooling-attention/cue-06.m4a",
+     "durationSec": 13.252833,
+     "holdSec": 35,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/cooling-attention/cue-07.m4a",
+     "durationSec": 6.2395,
+     "holdSec": 75,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/cooling-attention/cue-08.m4a",
+     "durationSec": 6.571458,
+     "holdSec": 30,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/cooling-attention/cue-09.m4a",
+     "durationSec": 6.409958,
+     "holdSec": 20,
+     "index": 9
+    }
+   ],
+   "voice": "maren"
+  },
+  "cooling-breath": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/cooling-breath/cue-00.m4a",
+     "durationSec": 3.369625,
+     "holdSec": 12,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/cooling-breath/cue-01.m4a",
+     "durationSec": 9.595417,
+     "holdSec": 22,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/cooling-breath/cue-02.m4a",
+     "durationSec": 5.545958,
+     "holdSec": 20,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/cooling-breath/cue-03.m4a",
+     "durationSec": 4.432583,
+     "holdSec": 18,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/cooling-breath/cue-04.m4a",
+     "durationSec": 5.796667,
+     "holdSec": 30,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/cooling-breath/cue-05.m4a",
+     "durationSec": 6.127792,
+     "holdSec": 40,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/cooling-breath/cue-06.m4a",
+     "durationSec": 6.538583,
+     "holdSec": 120,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/cooling-breath/cue-07.m4a",
+     "durationSec": 6.218458,
+     "holdSec": 45,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/cooling-breath/cue-08.m4a",
+     "durationSec": 6.181708,
+     "holdSec": 30,
+     "index": 8
+    }
+   ],
+   "voice": "ash"
+  },
+  "counting-the-exhale": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/counting-the-exhale/cue-00.m4a",
+     "durationSec": 6.858667,
+     "holdSec": 10,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/counting-the-exhale/cue-01.m4a",
+     "durationSec": 6.358958,
+     "holdSec": 12,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/counting-the-exhale/cue-02.m4a",
+     "durationSec": 5.809958,
+     "holdSec": 14,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/counting-the-exhale/cue-03.m4a",
+     "durationSec": 5.080875,
+     "holdSec": 16,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/counting-the-exhale/cue-04.m4a",
+     "durationSec": 3.01275,
+     "holdSec": 45,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/counting-the-exhale/cue-05.m4a",
+     "durationSec": 7.934833,
+     "holdSec": 40,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/counting-the-exhale/cue-06.m4a",
+     "durationSec": 7.114542,
+     "holdSec": 60,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/counting-the-exhale/cue-07.m4a",
+     "durationSec": 5.31725,
+     "holdSec": 90,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/counting-the-exhale/cue-08.m4a",
+     "durationSec": 4.762792,
+     "holdSec": 40,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/counting-the-exhale/cue-09.m4a",
+     "durationSec": 6.354167,
+     "holdSec": 20,
+     "index": 9
+    }
+   ],
+   "voice": "ash"
+  },
+  "descent-into-sleep": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/descent-into-sleep/cue-00.m4a",
+     "durationSec": 5.089958,
+     "holdSec": 25,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/descent-into-sleep/cue-01.m4a",
+     "durationSec": 5.551333,
+     "holdSec": 30,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/descent-into-sleep/cue-02.m4a",
+     "durationSec": 9.034458,
+     "holdSec": 45,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/descent-into-sleep/cue-03.m4a",
+     "durationSec": 6.308042,
+     "holdSec": 45,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/descent-into-sleep/cue-04.m4a",
+     "durationSec": 2.997375,
+     "holdSec": 45,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/descent-into-sleep/cue-05.m4a",
+     "durationSec": 3.132083,
+     "holdSec": 50,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/descent-into-sleep/cue-06.m4a",
+     "durationSec": 2.121,
+     "holdSec": 50,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/descent-into-sleep/cue-07.m4a",
+     "durationSec": 4.122708,
+     "holdSec": 60,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/descent-into-sleep/cue-08.m4a",
+     "durationSec": 3.128542,
+     "holdSec": 60,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/descent-into-sleep/cue-09.m4a",
+     "durationSec": 3.969833,
+     "holdSec": 90,
+     "index": 9
+    },
+    {
+     "audioAssetName": "narration/fr/audio/descent-into-sleep/cue-10.m4a",
+     "durationSec": 2.231625,
+     "holdSec": 120,
+     "index": 10
+    },
+    {
+     "audioAssetName": "narration/fr/audio/descent-into-sleep/cue-11.m4a",
+     "durationSec": 4.594167,
+     "holdSec": 150,
+     "index": 11
+    },
+    {
+     "audioAssetName": "narration/fr/audio/descent-into-sleep/cue-12.m4a",
+     "durationSec": 3.463458,
+     "holdSec": 180,
+     "index": 12
+    }
+   ],
+   "voice": "solene"
+  },
+  "eating-with-attention": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/eating-with-attention/cue-00.m4a",
+     "durationSec": 5.137958,
+     "holdSec": 20,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/eating-with-attention/cue-01.m4a",
+     "durationSec": 7.849958,
+     "holdSec": 25,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/eating-with-attention/cue-02.m4a",
+     "durationSec": 8.259792,
+     "holdSec": 30,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/eating-with-attention/cue-03.m4a",
+     "durationSec": 3.748875,
+     "holdSec": 20,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/eating-with-attention/cue-04.m4a",
+     "durationSec": 7.504667,
+     "holdSec": 35,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/eating-with-attention/cue-05.m4a",
+     "durationSec": 13.4035,
+     "holdSec": 40,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/eating-with-attention/cue-06.m4a",
+     "durationSec": 6.267,
+     "holdSec": 35,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/eating-with-attention/cue-07.m4a",
+     "durationSec": 8.451667,
+     "holdSec": 40,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/eating-with-attention/cue-08.m4a",
+     "durationSec": 6.622792,
+     "holdSec": 40,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/eating-with-attention/cue-09.m4a",
+     "durationSec": 5.14375,
+     "holdSec": 30,
+     "index": 9
+    }
+   ],
+   "voice": "ash"
+  },
+  "equal-breath": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/equal-breath/cue-00.m4a",
+     "durationSec": 7.198542,
+     "holdSec": 15,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/equal-breath/cue-01.m4a",
+     "durationSec": 7.784417,
+     "holdSec": 15,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/equal-breath/cue-02.m4a",
+     "durationSec": 7.627458,
+     "holdSec": 15,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/equal-breath/cue-03.m4a",
+     "durationSec": 10.058875,
+     "holdSec": 25,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/equal-breath/cue-04.m4a",
+     "durationSec": 6.837083,
+     "holdSec": 30,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/equal-breath/cue-05.m4a",
+     "durationSec": 4.810583,
+     "holdSec": 90,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/equal-breath/cue-06.m4a",
+     "durationSec": 8.980708,
+     "holdSec": 45,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/equal-breath/cue-07.m4a",
+     "durationSec": 1.0235,
+     "holdSec": 90,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/equal-breath/cue-08.m4a",
+     "durationSec": 5.309,
+     "holdSec": 40,
+     "index": 8
+    }
+   ],
+   "voice": "ash"
+  },
+  "equanimity": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/equanimity/cue-00.m4a",
+     "durationSec": 3.268583,
+     "holdSec": 15,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/equanimity/cue-01.m4a",
+     "durationSec": 2.684458,
+     "holdSec": 25,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/equanimity/cue-02.m4a",
+     "durationSec": 8.255917,
+     "holdSec": 35,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/equanimity/cue-03.m4a",
+     "durationSec": 6.233375,
+     "holdSec": 40,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/equanimity/cue-04.m4a",
+     "durationSec": 7.505792,
+     "holdSec": 40,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/equanimity/cue-05.m4a",
+     "durationSec": 6.079958,
+     "holdSec": 45,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/equanimity/cue-06.m4a",
+     "durationSec": 6.255542,
+     "holdSec": 40,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/equanimity/cue-07.m4a",
+     "durationSec": 6.774583,
+     "holdSec": 50,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/equanimity/cue-08.m4a",
+     "durationSec": 4.245792,
+     "holdSec": 75,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/equanimity/cue-09.m4a",
+     "durationSec": 2.62025,
+     "holdSec": 30,
+     "index": 9
+    }
+   ],
+   "voice": "vera"
+  },
+  "evening-review": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/evening-review/cue-00.m4a",
+     "durationSec": 4.9395,
+     "holdSec": 18,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/evening-review/cue-01.m4a",
+     "durationSec": 5.781375,
+     "holdSec": 30,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/evening-review/cue-02.m4a",
+     "durationSec": 5.949083,
+     "holdSec": 35,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/evening-review/cue-03.m4a",
+     "durationSec": 5.810792,
+     "holdSec": 40,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/evening-review/cue-04.m4a",
+     "durationSec": 6.555958,
+     "holdSec": 40,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/evening-review/cue-05.m4a",
+     "durationSec": 5.167417,
+     "holdSec": 45,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/evening-review/cue-06.m4a",
+     "durationSec": 1.166625,
+     "holdSec": 40,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/evening-review/cue-07.m4a",
+     "durationSec": 6.481958,
+     "holdSec": 40,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/evening-review/cue-08.m4a",
+     "durationSec": 5.108167,
+     "holdSec": 60,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/evening-review/cue-09.m4a",
+     "durationSec": 4.132542,
+     "holdSec": 60,
+     "index": 9
+    }
+   ],
+   "voice": "solene"
+  },
+  "extended-exhale": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/extended-exhale/cue-00.m4a",
+     "durationSec": 6.939542,
+     "holdSec": 15,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/extended-exhale/cue-01.m4a",
+     "durationSec": 1.779292,
+     "holdSec": 12,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/extended-exhale/cue-02.m4a",
+     "durationSec": 6.98875,
+     "holdSec": 20,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/extended-exhale/cue-03.m4a",
+     "durationSec": 5.985542,
+     "holdSec": 25,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/extended-exhale/cue-04.m4a",
+     "durationSec": 7.874292,
+     "holdSec": 35,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/extended-exhale/cue-05.m4a",
+     "durationSec": 6.83975,
+     "holdSec": 40,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/extended-exhale/cue-06.m4a",
+     "durationSec": 8.24025,
+     "holdSec": 120,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/extended-exhale/cue-07.m4a",
+     "durationSec": 6.196333,
+     "holdSec": 150,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/extended-exhale/cue-08.m4a",
+     "durationSec": 4.925208,
+     "holdSec": 40,
+     "index": 8
+    }
+   ],
+   "voice": "solene"
+  },
+  "eye-cleansing-gaze": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/eye-cleansing-gaze/cue-00.m4a",
+     "durationSec": 6.094125,
+     "holdSec": 20,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/eye-cleansing-gaze/cue-01.m4a",
+     "durationSec": 5.078542,
+     "holdSec": 18,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/eye-cleansing-gaze/cue-02.m4a",
+     "durationSec": 5.896083,
+     "holdSec": 25,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/eye-cleansing-gaze/cue-03.m4a",
+     "durationSec": 8.131417,
+     "holdSec": 35,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/eye-cleansing-gaze/cue-04.m4a",
+     "durationSec": 5.818125,
+     "holdSec": 60,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/eye-cleansing-gaze/cue-05.m4a",
+     "durationSec": 5.0385,
+     "holdSec": 20,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/eye-cleansing-gaze/cue-06.m4a",
+     "durationSec": 6.933,
+     "holdSec": 45,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/eye-cleansing-gaze/cue-07.m4a",
+     "durationSec": 4.081958,
+     "holdSec": 40,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/eye-cleansing-gaze/cue-08.m4a",
+     "durationSec": 6.498792,
+     "holdSec": 90,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/eye-cleansing-gaze/cue-09.m4a",
+     "durationSec": 3.929208,
+     "holdSec": 45,
+     "index": 9
+    }
+   ],
+   "voice": "ash"
+  },
+  "fire-at-the-navel": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/fire-at-the-navel/cue-00.m4a",
+     "durationSec": 5.0025,
+     "holdSec": 15,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/fire-at-the-navel/cue-01.m4a",
+     "durationSec": 6.186792,
+     "holdSec": 20,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/fire-at-the-navel/cue-02.m4a",
+     "durationSec": 6.12975,
+     "holdSec": 25,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/fire-at-the-navel/cue-03.m4a",
+     "durationSec": 6.78425,
+     "holdSec": 30,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/fire-at-the-navel/cue-04.m4a",
+     "durationSec": 10.446,
+     "holdSec": 25,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/fire-at-the-navel/cue-05.m4a",
+     "durationSec": 9.979833,
+     "holdSec": 45,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/fire-at-the-navel/cue-06.m4a",
+     "durationSec": 6.481958,
+     "holdSec": 40,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/fire-at-the-navel/cue-07.m4a",
+     "durationSec": 6.218708,
+     "holdSec": 75,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/fire-at-the-navel/cue-08.m4a",
+     "durationSec": 4.676667,
+     "holdSec": 40,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/fire-at-the-navel/cue-09.m4a",
+     "durationSec": 6.445583,
+     "holdSec": 25,
+     "index": 9
+    }
+   ],
+   "voice": "juniper"
+  },
+  "first-light-on-snow": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/first-light-on-snow/cue-00.m4a",
+     "durationSec": 4.640292,
+     "holdSec": 15,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/first-light-on-snow/cue-01.m4a",
+     "durationSec": 7.639,
+     "holdSec": 25,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/first-light-on-snow/cue-02.m4a",
+     "durationSec": 5.283625,
+     "holdSec": 30,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/first-light-on-snow/cue-03.m4a",
+     "durationSec": 5.099583,
+     "holdSec": 35,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/first-light-on-snow/cue-04.m4a",
+     "durationSec": 8.401958,
+     "holdSec": 40,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/first-light-on-snow/cue-05.m4a",
+     "durationSec": 8.261667,
+     "holdSec": 45,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/first-light-on-snow/cue-06.m4a",
+     "durationSec": 2.403792,
+     "holdSec": 60,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/first-light-on-snow/cue-07.m4a",
+     "durationSec": 6.793958,
+     "holdSec": 60,
+     "index": 7
+    }
+   ],
+   "voice": "juniper"
+  },
+  "high-cloud": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/high-cloud/cue-00.m4a",
+     "durationSec": 5.85325,
+     "holdSec": 15,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/high-cloud/cue-01.m4a",
+     "durationSec": 9.764875,
+     "holdSec": 28,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/high-cloud/cue-02.m4a",
+     "durationSec": 4.197708,
+     "holdSec": 30,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/high-cloud/cue-03.m4a",
+     "durationSec": 4.826042,
+     "holdSec": 35,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/high-cloud/cue-04.m4a",
+     "durationSec": 4.297958,
+     "holdSec": 45,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/high-cloud/cue-05.m4a",
+     "durationSec": 3.916,
+     "holdSec": 40,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/high-cloud/cue-06.m4a",
+     "durationSec": 8.84625,
+     "holdSec": 75,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/high-cloud/cue-07.m4a",
+     "durationSec": 4.676208,
+     "holdSec": 60,
+     "index": 7
+    }
+   ],
+   "voice": "juniper"
+  },
+  "hissing-breath": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/hissing-breath/cue-00.m4a",
+     "durationSec": 4.588458,
+     "holdSec": 12,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/hissing-breath/cue-01.m4a",
+     "durationSec": 6.577958,
+     "holdSec": 20,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/hissing-breath/cue-02.m4a",
+     "durationSec": 5.451208,
+     "holdSec": 22,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/hissing-breath/cue-03.m4a",
+     "durationSec": 3.323958,
+     "holdSec": 18,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/hissing-breath/cue-04.m4a",
+     "durationSec": 5.216458,
+     "holdSec": 30,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/hissing-breath/cue-05.m4a",
+     "durationSec": 6.963833,
+     "holdSec": 100,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/hissing-breath/cue-06.m4a",
+     "durationSec": 4.493875,
+     "holdSec": 45,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/hissing-breath/cue-07.m4a",
+     "durationSec": 3.177458,
+     "holdSec": 30,
+     "index": 7
+    }
+   ],
+   "voice": "ash"
+  },
+  "humming-bee-breath": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/humming-bee-breath/cue-00.m4a",
+     "durationSec": 6.274417,
+     "holdSec": 15,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/humming-bee-breath/cue-01.m4a",
+     "durationSec": 2.70225,
+     "holdSec": 12,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/humming-bee-breath/cue-02.m4a",
+     "durationSec": 9.702458,
+     "holdSec": 25,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/humming-bee-breath/cue-03.m4a",
+     "durationSec": 8.600208,
+     "holdSec": 30,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/humming-bee-breath/cue-04.m4a",
+     "durationSec": 6.214542,
+     "holdSec": 20,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/humming-bee-breath/cue-05.m4a",
+     "durationSec": 7.226042,
+     "holdSec": 30,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/humming-bee-breath/cue-06.m4a",
+     "durationSec": 8.325083,
+     "holdSec": 45,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/humming-bee-breath/cue-07.m4a",
+     "durationSec": 4.380667,
+     "holdSec": 120,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/humming-bee-breath/cue-08.m4a",
+     "durationSec": 5.075208,
+     "holdSec": 60,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/humming-bee-breath/cue-09.m4a",
+     "durationSec": 3.711292,
+     "holdSec": 30,
+     "index": 9
+    }
+   ],
+   "voice": "ash"
+  },
+  "listening-to-the-room": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/listening-to-the-room/cue-00.m4a",
+     "durationSec": 4.764875,
+     "holdSec": 15,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/listening-to-the-room/cue-01.m4a",
+     "durationSec": 4.69175,
+     "holdSec": 20,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/listening-to-the-room/cue-02.m4a",
+     "durationSec": 4.809917,
+     "holdSec": 25,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/listening-to-the-room/cue-03.m4a",
+     "durationSec": 3.649958,
+     "holdSec": 30,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/listening-to-the-room/cue-04.m4a",
+     "durationSec": 7.945958,
+     "holdSec": 35,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/listening-to-the-room/cue-05.m4a",
+     "durationSec": 2.31375,
+     "holdSec": 40,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/listening-to-the-room/cue-06.m4a",
+     "durationSec": 9.057583,
+     "holdSec": 50,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/listening-to-the-room/cue-07.m4a",
+     "durationSec": 7.1675,
+     "holdSec": 60,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/listening-to-the-room/cue-08.m4a",
+     "durationSec": 7.984,
+     "holdSec": 45,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/listening-to-the-room/cue-09.m4a",
+     "durationSec": 3.355583,
+     "holdSec": 90,
+     "index": 9
+    }
+   ],
+   "voice": "maren"
+  },
+  "loving-kindness": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/loving-kindness/cue-00.m4a",
+     "durationSec": 3.4225,
+     "holdSec": 12,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/loving-kindness/cue-01.m4a",
+     "durationSec": 8.813625,
+     "holdSec": 25,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/loving-kindness/cue-02.m4a",
+     "durationSec": 8.550083,
+     "holdSec": 35,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/loving-kindness/cue-03.m4a",
+     "durationSec": 9.396708,
+     "holdSec": 30,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/loving-kindness/cue-04.m4a",
+     "durationSec": 6.570708,
+     "holdSec": 20,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/loving-kindness/cue-05.m4a",
+     "durationSec": 6.299417,
+     "holdSec": 40,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/loving-kindness/cue-06.m4a",
+     "durationSec": 8.331,
+     "holdSec": 25,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/loving-kindness/cue-07.m4a",
+     "durationSec": 10.020458,
+     "holdSec": 40,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/loving-kindness/cue-08.m4a",
+     "durationSec": 10.88125,
+     "holdSec": 30,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/loving-kindness/cue-09.m4a",
+     "durationSec": 8.964417,
+     "holdSec": 45,
+     "index": 9
+    },
+    {
+     "audioAssetName": "narration/fr/audio/loving-kindness/cue-10.m4a",
+     "durationSec": 11.385917,
+     "holdSec": 45,
+     "index": 10
+    },
+    {
+     "audioAssetName": "narration/fr/audio/loving-kindness/cue-11.m4a",
+     "durationSec": 6.390333,
+     "holdSec": 30,
+     "index": 11
+    }
+   ],
+   "voice": "maren"
+  },
+  "mantra-repetition": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/mantra-repetition/cue-00.m4a",
+     "durationSec": 5.14825,
+     "holdSec": 20,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/mantra-repetition/cue-01.m4a",
+     "durationSec": 7.314708,
+     "holdSec": 25,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/mantra-repetition/cue-02.m4a",
+     "durationSec": 7.254458,
+     "holdSec": 25,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/mantra-repetition/cue-03.m4a",
+     "durationSec": 5.759,
+     "holdSec": 25,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/mantra-repetition/cue-04.m4a",
+     "durationSec": 7.3105,
+     "holdSec": 30,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/mantra-repetition/cue-05.m4a",
+     "durationSec": 4.999833,
+     "holdSec": 45,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/mantra-repetition/cue-06.m4a",
+     "durationSec": 5.8835,
+     "holdSec": 120,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/mantra-repetition/cue-07.m4a",
+     "durationSec": 8.29575,
+     "holdSec": 45,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/mantra-repetition/cue-08.m4a",
+     "durationSec": 4.115542,
+     "holdSec": 120,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/mantra-repetition/cue-09.m4a",
+     "durationSec": 5.37375,
+     "holdSec": 45,
+     "index": 9
+    }
+   ],
+   "voice": "rowan"
+  },
+  "morning-intention": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/morning-intention/cue-00.m4a",
+     "durationSec": 6.726917,
+     "holdSec": 22,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/morning-intention/cue-01.m4a",
+     "durationSec": 5.672833,
+     "holdSec": 25,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/morning-intention/cue-02.m4a",
+     "durationSec": 7.381375,
+     "holdSec": 35,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/morning-intention/cue-03.m4a",
+     "durationSec": 12.825083,
+     "holdSec": 40,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/morning-intention/cue-04.m4a",
+     "durationSec": 8.288917,
+     "holdSec": 40,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/morning-intention/cue-05.m4a",
+     "durationSec": 7.069625,
+     "holdSec": 40,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/morning-intention/cue-06.m4a",
+     "durationSec": 2.04875,
+     "holdSec": 35,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/morning-intention/cue-07.m4a",
+     "durationSec": 4.580375,
+     "holdSec": 30,
+     "index": 7
+    }
+   ],
+   "voice": "juniper"
+  },
+  "neti-neti": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/neti-neti/cue-00.m4a",
+     "durationSec": 5.045417,
+     "holdSec": 18,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/neti-neti/cue-01.m4a",
+     "durationSec": 6.819458,
+     "holdSec": 28,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/neti-neti/cue-02.m4a",
+     "durationSec": 7.411542,
+     "holdSec": 32,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/neti-neti/cue-03.m4a",
+     "durationSec": 8.341958,
+     "holdSec": 32,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/neti-neti/cue-04.m4a",
+     "durationSec": 6.894542,
+     "holdSec": 30,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/neti-neti/cue-05.m4a",
+     "durationSec": 5.676042,
+     "holdSec": 35,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/neti-neti/cue-06.m4a",
+     "durationSec": 5.426167,
+     "holdSec": 35,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/neti-neti/cue-07.m4a",
+     "durationSec": 8.401958,
+     "holdSec": 50,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/neti-neti/cue-08.m4a",
+     "durationSec": 7.37875,
+     "holdSec": 90,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/neti-neti/cue-09.m4a",
+     "durationSec": 3.361958,
+     "holdSec": 30,
+     "index": 9
+    }
+   ],
+   "voice": "vera"
+  },
+  "om-resonance": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/om-resonance/cue-00.m4a",
+     "durationSec": 5.407,
+     "holdSec": 12,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/om-resonance/cue-01.m4a",
+     "durationSec": 10.554167,
+     "holdSec": 16,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/om-resonance/cue-02.m4a",
+     "durationSec": 6.803083,
+     "holdSec": 20,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/om-resonance/cue-03.m4a",
+     "durationSec": 7.827708,
+     "holdSec": 18,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/om-resonance/cue-04.m4a",
+     "durationSec": 6.950458,
+     "holdSec": 18,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/om-resonance/cue-05.m4a",
+     "durationSec": 8.890917,
+     "holdSec": 25,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/om-resonance/cue-06.m4a",
+     "durationSec": 7.628167,
+     "holdSec": 30,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/om-resonance/cue-07.m4a",
+     "durationSec": 7.409667,
+     "holdSec": 60,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/om-resonance/cue-08.m4a",
+     "durationSec": 6.5825,
+     "holdSec": 60,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/om-resonance/cue-09.m4a",
+     "durationSec": 6.09525,
+     "holdSec": 45,
+     "index": 9
+    },
+    {
+     "audioAssetName": "narration/fr/audio/om-resonance/cue-10.m4a",
+     "durationSec": 2.596917,
+     "holdSec": 20,
+     "index": 10
+    }
+   ],
+   "voice": "juniper"
+  },
+  "rain-on-the-roof": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/rain-on-the-roof/cue-00.m4a",
+     "durationSec": 4.684208,
+     "holdSec": 15,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/rain-on-the-roof/cue-01.m4a",
+     "durationSec": 5.249875,
+     "holdSec": 20,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/rain-on-the-roof/cue-02.m4a",
+     "durationSec": 9.006667,
+     "holdSec": 30,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/rain-on-the-roof/cue-03.m4a",
+     "durationSec": 4.765917,
+     "holdSec": 30,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/rain-on-the-roof/cue-04.m4a",
+     "durationSec": 4.930542,
+     "holdSec": 35,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/rain-on-the-roof/cue-05.m4a",
+     "durationSec": 3.131917,
+     "holdSec": 45,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/rain-on-the-roof/cue-06.m4a",
+     "durationSec": 5.922458,
+     "holdSec": 90,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/rain-on-the-roof/cue-07.m4a",
+     "durationSec": 5.572458,
+     "holdSec": 60,
+     "index": 7
+    }
+   ],
+   "voice": "solene"
+  },
+  "rotation-of-awareness": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/rotation-of-awareness/cue-00.m4a",
+     "durationSec": 5.593958,
+     "holdSec": 12,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/rotation-of-awareness/cue-01.m4a",
+     "durationSec": 8.038417,
+     "holdSec": 12,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/rotation-of-awareness/cue-02.m4a",
+     "durationSec": 15.30925,
+     "holdSec": 8,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/rotation-of-awareness/cue-03.m4a",
+     "durationSec": 14.224667,
+     "holdSec": 8,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/rotation-of-awareness/cue-04.m4a",
+     "durationSec": 14.152417,
+     "holdSec": 10,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/rotation-of-awareness/cue-05.m4a",
+     "durationSec": 17.518125,
+     "holdSec": 8,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/rotation-of-awareness/cue-06.m4a",
+     "durationSec": 12.0945,
+     "holdSec": 8,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/rotation-of-awareness/cue-07.m4a",
+     "durationSec": 14.695542,
+     "holdSec": 10,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/rotation-of-awareness/cue-08.m4a",
+     "durationSec": 12.409958,
+     "holdSec": 12,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/rotation-of-awareness/cue-09.m4a",
+     "durationSec": 12.342167,
+     "holdSec": 12,
+     "index": 9
+    },
+    {
+     "audioAssetName": "narration/fr/audio/rotation-of-awareness/cue-10.m4a",
+     "durationSec": 16.996917,
+     "holdSec": 12,
+     "index": 10
+    },
+    {
+     "audioAssetName": "narration/fr/audio/rotation-of-awareness/cue-11.m4a",
+     "durationSec": 7.733292,
+     "holdSec": 20,
+     "index": 11
+    },
+    {
+     "audioAssetName": "narration/fr/audio/rotation-of-awareness/cue-12.m4a",
+     "durationSec": 7.0965,
+     "holdSec": 60,
+     "index": 12
+    },
+    {
+     "audioAssetName": "narration/fr/audio/rotation-of-awareness/cue-13.m4a",
+     "durationSec": 2.947,
+     "holdSec": 90,
+     "index": 13
+    },
+    {
+     "audioAssetName": "narration/fr/audio/rotation-of-awareness/cue-14.m4a",
+     "durationSec": 7.554042,
+     "holdSec": 25,
+     "index": 14
+    }
+   ],
+   "voice": "rowan"
+  },
+  "sense-withdrawal": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/sense-withdrawal/cue-00.m4a",
+     "durationSec": 4.738792,
+     "holdSec": 15,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/sense-withdrawal/cue-01.m4a",
+     "durationSec": 9.99375,
+     "holdSec": 35,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/sense-withdrawal/cue-02.m4a",
+     "durationSec": 6.79475,
+     "holdSec": 40,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/sense-withdrawal/cue-03.m4a",
+     "durationSec": 6.865958,
+     "holdSec": 40,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/sense-withdrawal/cue-04.m4a",
+     "durationSec": 7.349958,
+     "holdSec": 35,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/sense-withdrawal/cue-05.m4a",
+     "durationSec": 6.457958,
+     "holdSec": 35,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/sense-withdrawal/cue-06.m4a",
+     "durationSec": 10.050583,
+     "holdSec": 40,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/sense-withdrawal/cue-07.m4a",
+     "durationSec": 7.7895,
+     "holdSec": 45,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/sense-withdrawal/cue-08.m4a",
+     "durationSec": 7.915417,
+     "holdSec": 60,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/sense-withdrawal/cue-09.m4a",
+     "durationSec": 9.684083,
+     "holdSec": 45,
+     "index": 9
+    }
+   ],
+   "voice": "maren"
+  },
+  "silent-mantra": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/silent-mantra/cue-00.m4a",
+     "durationSec": 3.913958,
+     "holdSec": 12,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/silent-mantra/cue-01.m4a",
+     "durationSec": 9.301458,
+     "holdSec": 20,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/silent-mantra/cue-02.m4a",
+     "durationSec": 4.465958,
+     "holdSec": 15,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/silent-mantra/cue-03.m4a",
+     "durationSec": 8.877208,
+     "holdSec": 40,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/silent-mantra/cue-04.m4a",
+     "durationSec": 5.38525,
+     "holdSec": 20,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/silent-mantra/cue-05.m4a",
+     "durationSec": 10.690458,
+     "holdSec": 60,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/silent-mantra/cue-06.m4a",
+     "durationSec": 10.543042,
+     "holdSec": 45,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/silent-mantra/cue-07.m4a",
+     "durationSec": 3.154583,
+     "holdSec": 90,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/silent-mantra/cue-08.m4a",
+     "durationSec": 5.325917,
+     "holdSec": 60,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/silent-mantra/cue-09.m4a",
+     "durationSec": 1.914,
+     "holdSec": 45,
+     "index": 9
+    }
+   ],
+   "voice": "rowan"
+  },
+  "skull-shining-breath": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/skull-shining-breath/cue-00.m4a",
+     "durationSec": 4.563,
+     "holdSec": 18,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/skull-shining-breath/cue-01.m4a",
+     "durationSec": 5.633,
+     "holdSec": 18,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/skull-shining-breath/cue-02.m4a",
+     "durationSec": 7.13275,
+     "holdSec": 22,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/skull-shining-breath/cue-03.m4a",
+     "durationSec": 5.542,
+     "holdSec": 22,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/skull-shining-breath/cue-04.m4a",
+     "durationSec": 6.634917,
+     "holdSec": 20,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/skull-shining-breath/cue-05.m4a",
+     "durationSec": 6.987208,
+     "holdSec": 45,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/skull-shining-breath/cue-06.m4a",
+     "durationSec": 4.319375,
+     "holdSec": 40,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/skull-shining-breath/cue-07.m4a",
+     "durationSec": 6.79625,
+     "holdSec": 50,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/skull-shining-breath/cue-08.m4a",
+     "durationSec": 7.262,
+     "holdSec": 60,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/skull-shining-breath/cue-09.m4a",
+     "durationSec": 5.801375,
+     "holdSec": 45,
+     "index": 9
+    }
+   ],
+   "voice": "juniper"
+  },
+  "so-hum-breath": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/so-hum-breath/cue-00.m4a",
+     "durationSec": 7.840083,
+     "holdSec": 8,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/so-hum-breath/cue-01.m4a",
+     "durationSec": 6.579917,
+     "holdSec": 15,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/so-hum-breath/cue-02.m4a",
+     "durationSec": 7.398958,
+     "holdSec": 12,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/so-hum-breath/cue-03.m4a",
+     "durationSec": 5.452292,
+     "holdSec": 12,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/so-hum-breath/cue-04.m4a",
+     "durationSec": 9.956667,
+     "holdSec": 20,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/so-hum-breath/cue-05.m4a",
+     "durationSec": 7.822375,
+     "holdSec": 18,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/so-hum-breath/cue-06.m4a",
+     "durationSec": 5.380625,
+     "holdSec": 40,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/so-hum-breath/cue-07.m4a",
+     "durationSec": 10.969958,
+     "holdSec": 30,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/so-hum-breath/cue-08.m4a",
+     "durationSec": 4.92725,
+     "holdSec": 60,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/so-hum-breath/cue-09.m4a",
+     "durationSec": 5.1225,
+     "holdSec": 45,
+     "index": 9
+    },
+    {
+     "audioAssetName": "narration/fr/audio/so-hum-breath/cue-10.m4a",
+     "durationSec": 5.849667,
+     "holdSec": 15,
+     "index": 10
+    }
+   ],
+   "voice": "maren"
+  },
+  "standing-deep-breathing": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/standing-deep-breathing/cue-00.m4a",
+     "durationSec": 4.846542,
+     "holdSec": 15,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/standing-deep-breathing/cue-01.m4a",
+     "durationSec": 4.840333,
+     "holdSec": 15,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/standing-deep-breathing/cue-02.m4a",
+     "durationSec": 6.253708,
+     "holdSec": 20,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/standing-deep-breathing/cue-03.m4a",
+     "durationSec": 3.430917,
+     "holdSec": 18,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/standing-deep-breathing/cue-04.m4a",
+     "durationSec": 6.951875,
+     "holdSec": 25,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/standing-deep-breathing/cue-05.m4a",
+     "durationSec": 2.309583,
+     "holdSec": 90,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/standing-deep-breathing/cue-06.m4a",
+     "durationSec": 5.017958,
+     "holdSec": 45,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/standing-deep-breathing/cue-07.m4a",
+     "durationSec": 5.763208,
+     "holdSec": 45,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/standing-deep-breathing/cue-08.m4a",
+     "durationSec": 4.046042,
+     "holdSec": 30,
+     "index": 8
+    }
+   ],
+   "voice": "juniper"
+  },
+  "sympathetic-joy": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/sympathetic-joy/cue-00.m4a",
+     "durationSec": 1.657958,
+     "holdSec": 12,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/sympathetic-joy/cue-01.m4a",
+     "durationSec": 5.942208,
+     "holdSec": 28,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/sympathetic-joy/cue-02.m4a",
+     "durationSec": 7.732792,
+     "holdSec": 35,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/sympathetic-joy/cue-03.m4a",
+     "durationSec": 2.986042,
+     "holdSec": 30,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/sympathetic-joy/cue-04.m4a",
+     "durationSec": 7.604083,
+     "holdSec": 30,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/sympathetic-joy/cue-05.m4a",
+     "durationSec": 3.725125,
+     "holdSec": 40,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/sympathetic-joy/cue-06.m4a",
+     "durationSec": 8.5055,
+     "holdSec": 40,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/sympathetic-joy/cue-07.m4a",
+     "durationSec": 7.807417,
+     "holdSec": 50,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/sympathetic-joy/cue-08.m4a",
+     "durationSec": 8.033958,
+     "holdSec": 60,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/sympathetic-joy/cue-09.m4a",
+     "durationSec": 4.882917,
+     "holdSec": 40,
+     "index": 9
+    }
+   ],
+   "voice": "maren"
+  },
+  "the-borrowed-body": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/the-borrowed-body/cue-00.m4a",
+     "durationSec": 4.781458,
+     "holdSec": 18,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-borrowed-body/cue-01.m4a",
+     "durationSec": 5.913292,
+     "holdSec": 25,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-borrowed-body/cue-02.m4a",
+     "durationSec": 6.703667,
+     "holdSec": 35,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-borrowed-body/cue-03.m4a",
+     "durationSec": 6.041167,
+     "holdSec": 35,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-borrowed-body/cue-04.m4a",
+     "durationSec": 6.902333,
+     "holdSec": 40,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-borrowed-body/cue-05.m4a",
+     "durationSec": 9.20125,
+     "holdSec": 45,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-borrowed-body/cue-06.m4a",
+     "durationSec": 3.8055,
+     "holdSec": 40,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-borrowed-body/cue-07.m4a",
+     "durationSec": 4.097708,
+     "holdSec": 45,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-borrowed-body/cue-08.m4a",
+     "durationSec": 7.199833,
+     "holdSec": 60,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-borrowed-body/cue-09.m4a",
+     "durationSec": 6.58075,
+     "holdSec": 40,
+     "index": 9
+    }
+   ],
+   "voice": "vera"
+  },
+  "the-candle": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/the-candle/cue-00.m4a",
+     "durationSec": 3.172625,
+     "holdSec": 12,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-candle/cue-01.m4a",
+     "durationSec": 4.789125,
+     "holdSec": 22,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-candle/cue-02.m4a",
+     "durationSec": 7.544,
+     "holdSec": 28,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-candle/cue-03.m4a",
+     "durationSec": 3.503542,
+     "holdSec": 25,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-candle/cue-04.m4a",
+     "durationSec": 7.739625,
+     "holdSec": 35,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-candle/cue-05.m4a",
+     "durationSec": 8.371458,
+     "holdSec": 40,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-candle/cue-06.m4a",
+     "durationSec": 4.740125,
+     "holdSec": 90,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-candle/cue-07.m4a",
+     "durationSec": 6.140958,
+     "holdSec": 45,
+     "index": 7
+    }
+   ],
+   "voice": "rowan"
+  },
+  "the-empty-room": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/the-empty-room/cue-00.m4a",
+     "durationSec": 2.93675,
+     "holdSec": 12,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-empty-room/cue-01.m4a",
+     "durationSec": 7.0745,
+     "holdSec": 25,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-empty-room/cue-02.m4a",
+     "durationSec": 5.393208,
+     "holdSec": 28,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-empty-room/cue-03.m4a",
+     "durationSec": 6.453833,
+     "holdSec": 30,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-empty-room/cue-04.m4a",
+     "durationSec": 5.555708,
+     "holdSec": 40,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-empty-room/cue-05.m4a",
+     "durationSec": 3.405333,
+     "holdSec": 45,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-empty-room/cue-06.m4a",
+     "durationSec": 4.162,
+     "holdSec": 45,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-empty-room/cue-07.m4a",
+     "durationSec": 4.064,
+     "holdSec": 75,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-empty-room/cue-08.m4a",
+     "durationSec": 1.760625,
+     "holdSec": 40,
+     "index": 8
+    }
+   ],
+   "voice": "vera"
+  },
+  "the-fading-bell": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/the-fading-bell/cue-00.m4a",
+     "durationSec": 10.466708,
+     "holdSec": 15,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-fading-bell/cue-01.m4a",
+     "durationSec": 2.657667,
+     "holdSec": 6,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-fading-bell/cue-02.m4a",
+     "durationSec": 4.712708,
+     "holdSec": 20,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-fading-bell/cue-03.m4a",
+     "durationSec": 4.297958,
+     "holdSec": 25,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-fading-bell/cue-04.m4a",
+     "durationSec": 9.282458,
+     "holdSec": 30,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-fading-bell/cue-05.m4a",
+     "durationSec": 6.21425,
+     "holdSec": 40,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-fading-bell/cue-06.m4a",
+     "durationSec": 3.658917,
+     "holdSec": 60,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-fading-bell/cue-07.m4a",
+     "durationSec": 5.205292,
+     "holdSec": 60,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-fading-bell/cue-08.m4a",
+     "durationSec": 10.396833,
+     "holdSec": 60,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-fading-bell/cue-09.m4a",
+     "durationSec": 1.357792,
+     "holdSec": 30,
+     "index": 9
+    }
+   ],
+   "voice": "maren"
+  },
+  "the-forest-floor": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/the-forest-floor/cue-00.m4a",
+     "durationSec": 3.044333,
+     "holdSec": 12,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-forest-floor/cue-01.m4a",
+     "durationSec": 7.1955,
+     "holdSec": 20,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-forest-floor/cue-02.m4a",
+     "durationSec": 5.943125,
+     "holdSec": 25,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-forest-floor/cue-03.m4a",
+     "durationSec": 9.566542,
+     "holdSec": 30,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-forest-floor/cue-04.m4a",
+     "durationSec": 8.093583,
+     "holdSec": 35,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-forest-floor/cue-05.m4a",
+     "durationSec": 7.562625,
+     "holdSec": 30,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-forest-floor/cue-06.m4a",
+     "durationSec": 7.211792,
+     "holdSec": 45,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-forest-floor/cue-07.m4a",
+     "durationSec": 7.499542,
+     "holdSec": 60,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-forest-floor/cue-08.m4a",
+     "durationSec": 6.068958,
+     "holdSec": 90,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-forest-floor/cue-09.m4a",
+     "durationSec": 5.613708,
+     "holdSec": 25,
+     "index": 9
+    }
+   ],
+   "voice": "rowan"
+  },
+  "the-heart-space": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/the-heart-space/cue-00.m4a",
+     "durationSec": 5.299125,
+     "holdSec": 18,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-heart-space/cue-01.m4a",
+     "durationSec": 6.23575,
+     "holdSec": 25,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-heart-space/cue-02.m4a",
+     "durationSec": 7.125958,
+     "holdSec": 30,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-heart-space/cue-03.m4a",
+     "durationSec": 5.761958,
+     "holdSec": 35,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-heart-space/cue-04.m4a",
+     "durationSec": 5.338583,
+     "holdSec": 30,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-heart-space/cue-05.m4a",
+     "durationSec": 10.059667,
+     "holdSec": 45,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-heart-space/cue-06.m4a",
+     "durationSec": 8.145042,
+     "holdSec": 45,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-heart-space/cue-07.m4a",
+     "durationSec": 5.684292,
+     "holdSec": 60,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-heart-space/cue-08.m4a",
+     "durationSec": 1.931833,
+     "holdSec": 75,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-heart-space/cue-09.m4a",
+     "durationSec": 3.561417,
+     "holdSec": 40,
+     "index": 9
+    }
+   ],
+   "voice": "maren"
+  },
+  "the-hearth": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/the-hearth/cue-00.m4a",
+     "durationSec": 3.081,
+     "holdSec": 12,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-hearth/cue-01.m4a",
+     "durationSec": 6.970167,
+     "holdSec": 22,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-hearth/cue-02.m4a",
+     "durationSec": 7.295917,
+     "holdSec": 28,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-hearth/cue-03.m4a",
+     "durationSec": 7.537958,
+     "holdSec": 35,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-hearth/cue-04.m4a",
+     "durationSec": 5.212208,
+     "holdSec": 30,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-hearth/cue-05.m4a",
+     "durationSec": 8.11175,
+     "holdSec": 40,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-hearth/cue-06.m4a",
+     "durationSec": 4.755042,
+     "holdSec": 60,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-hearth/cue-07.m4a",
+     "durationSec": 7.863667,
+     "holdSec": 60,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-hearth/cue-08.m4a",
+     "durationSec": 7.304917,
+     "holdSec": 45,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-hearth/cue-09.m4a",
+     "durationSec": 3.889958,
+     "holdSec": 25,
+     "index": 9
+    }
+   ],
+   "voice": "juniper"
+  },
+  "the-night-sky": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/the-night-sky/cue-00.m4a",
+     "durationSec": 5.158,
+     "holdSec": 15,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-night-sky/cue-01.m4a",
+     "durationSec": 5.744125,
+     "holdSec": 22,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-night-sky/cue-02.m4a",
+     "durationSec": 9.522958,
+     "holdSec": 28,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-night-sky/cue-03.m4a",
+     "durationSec": 6.835792,
+     "holdSec": 35,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-night-sky/cue-04.m4a",
+     "durationSec": 7.113042,
+     "holdSec": 35,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-night-sky/cue-05.m4a",
+     "durationSec": 7.643833,
+     "holdSec": 45,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-night-sky/cue-06.m4a",
+     "durationSec": 5.704458,
+     "holdSec": 45,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-night-sky/cue-07.m4a",
+     "durationSec": 5.670583,
+     "holdSec": 90,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-night-sky/cue-08.m4a",
+     "durationSec": 5.317042,
+     "holdSec": 40,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-night-sky/cue-09.m4a",
+     "durationSec": 1.61275,
+     "holdSec": 25,
+     "index": 9
+    }
+   ],
+   "voice": "solene"
+  },
+  "the-open-window": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/the-open-window/cue-00.m4a",
+     "durationSec": 3.857208,
+     "holdSec": 15,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-open-window/cue-01.m4a",
+     "durationSec": 4.731667,
+     "holdSec": 25,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-open-window/cue-02.m4a",
+     "durationSec": 5.977958,
+     "holdSec": 28,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-open-window/cue-03.m4a",
+     "durationSec": 6.59075,
+     "holdSec": 35,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-open-window/cue-04.m4a",
+     "durationSec": 4.504958,
+     "holdSec": 30,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-open-window/cue-05.m4a",
+     "durationSec": 5.481542,
+     "holdSec": 45,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-open-window/cue-06.m4a",
+     "durationSec": 7.404,
+     "holdSec": 60,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-open-window/cue-07.m4a",
+     "durationSec": 1.156167,
+     "holdSec": 45,
+     "index": 7
+    }
+   ],
+   "voice": "juniper"
+  },
+  "the-pause-between-breaths": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/the-pause-between-breaths/cue-00.m4a",
+     "durationSec": 3.229875,
+     "holdSec": 10,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-pause-between-breaths/cue-01.m4a",
+     "durationSec": 6.090583,
+     "holdSec": 20,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-pause-between-breaths/cue-02.m4a",
+     "durationSec": 9.474542,
+     "holdSec": 18,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-pause-between-breaths/cue-03.m4a",
+     "durationSec": 7.675458,
+     "holdSec": 20,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-pause-between-breaths/cue-04.m4a",
+     "durationSec": 5.201333,
+     "holdSec": 45,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-pause-between-breaths/cue-05.m4a",
+     "durationSec": 7.849958,
+     "holdSec": 30,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-pause-between-breaths/cue-06.m4a",
+     "durationSec": 8.633833,
+     "holdSec": 60,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-pause-between-breaths/cue-07.m4a",
+     "durationSec": 10.36725,
+     "holdSec": 40,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-pause-between-breaths/cue-08.m4a",
+     "durationSec": 2.165833,
+     "holdSec": 90,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-pause-between-breaths/cue-09.m4a",
+     "durationSec": 5.50025,
+     "holdSec": 25,
+     "index": 9
+    }
+   ],
+   "voice": "maren"
+  },
+  "the-root-system": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/the-root-system/cue-00.m4a",
+     "durationSec": 1.476292,
+     "holdSec": 10,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-root-system/cue-01.m4a",
+     "durationSec": 6.636875,
+     "holdSec": 22,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-root-system/cue-02.m4a",
+     "durationSec": 5.347625,
+     "holdSec": 22,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-root-system/cue-03.m4a",
+     "durationSec": 5.370917,
+     "holdSec": 28,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-root-system/cue-04.m4a",
+     "durationSec": 4.336417,
+     "holdSec": 30,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-root-system/cue-05.m4a",
+     "durationSec": 8.657542,
+     "holdSec": 40,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-root-system/cue-06.m4a",
+     "durationSec": 4.764792,
+     "holdSec": 60,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-root-system/cue-07.m4a",
+     "durationSec": 5.733583,
+     "holdSec": 45,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-root-system/cue-08.m4a",
+     "durationSec": 4.882042,
+     "holdSec": 30,
+     "index": 8
+    }
+   ],
+   "voice": "rowan"
+  },
+  "the-six-tastes": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/the-six-tastes/cue-00.m4a",
+     "durationSec": 2.521958,
+     "holdSec": 18,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-six-tastes/cue-01.m4a",
+     "durationSec": 12.225167,
+     "holdSec": 30,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-six-tastes/cue-02.m4a",
+     "durationSec": 6.119875,
+     "holdSec": 35,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-six-tastes/cue-03.m4a",
+     "durationSec": 9.573375,
+     "holdSec": 35,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-six-tastes/cue-04.m4a",
+     "durationSec": 8.5005,
+     "holdSec": 35,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-six-tastes/cue-05.m4a",
+     "durationSec": 16.239125,
+     "holdSec": 40,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-six-tastes/cue-06.m4a",
+     "durationSec": 8.855208,
+     "holdSec": 40,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-six-tastes/cue-07.m4a",
+     "durationSec": 4.502583,
+     "holdSec": 35,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-six-tastes/cue-08.m4a",
+     "durationSec": 7.705958,
+     "holdSec": 30,
+     "index": 8
+    }
+   ],
+   "voice": "ash"
+  },
+  "the-slow-river": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/the-slow-river/cue-00.m4a",
+     "durationSec": 4.716417,
+     "holdSec": 12,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-slow-river/cue-01.m4a",
+     "durationSec": 9.019833,
+     "holdSec": 25,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-slow-river/cue-02.m4a",
+     "durationSec": 7.843792,
+     "holdSec": 30,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-slow-river/cue-03.m4a",
+     "durationSec": 12.986583,
+     "holdSec": 40,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-slow-river/cue-04.m4a",
+     "durationSec": 5.276458,
+     "holdSec": 35,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-slow-river/cue-05.m4a",
+     "durationSec": 5.876583,
+     "holdSec": 40,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-slow-river/cue-06.m4a",
+     "durationSec": 7.394708,
+     "holdSec": 60,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-slow-river/cue-07.m4a",
+     "durationSec": 3.897208,
+     "holdSec": 60,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-slow-river/cue-08.m4a",
+     "durationSec": 1.972667,
+     "holdSec": 30,
+     "index": 8
+    }
+   ],
+   "voice": "rowan"
+  },
+  "the-standing-stone": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/the-standing-stone/cue-00.m4a",
+     "durationSec": 3.267792,
+     "holdSec": 12,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-standing-stone/cue-01.m4a",
+     "durationSec": 6.626917,
+     "holdSec": 22,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-standing-stone/cue-02.m4a",
+     "durationSec": 4.593875,
+     "holdSec": 22,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-standing-stone/cue-03.m4a",
+     "durationSec": 7.405667,
+     "holdSec": 30,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-standing-stone/cue-04.m4a",
+     "durationSec": 7.342083,
+     "holdSec": 30,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-standing-stone/cue-05.m4a",
+     "durationSec": 5.225167,
+     "holdSec": 35,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-standing-stone/cue-06.m4a",
+     "durationSec": 6.897333,
+     "holdSec": 40,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-standing-stone/cue-07.m4a",
+     "durationSec": 4.733917,
+     "holdSec": 75,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-standing-stone/cue-08.m4a",
+     "durationSec": 3.409958,
+     "holdSec": 40,
+     "index": 8
+    }
+   ],
+   "voice": "rowan"
+  },
+  "the-still-lake": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/the-still-lake/cue-00.m4a",
+     "durationSec": 3.409958,
+     "holdSec": 12,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-still-lake/cue-01.m4a",
+     "durationSec": 9.139375,
+     "holdSec": 25,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-still-lake/cue-02.m4a",
+     "durationSec": 6.658167,
+     "holdSec": 30,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-still-lake/cue-03.m4a",
+     "durationSec": 6.364708,
+     "holdSec": 35,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-still-lake/cue-04.m4a",
+     "durationSec": 7.452,
+     "holdSec": 25,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-still-lake/cue-05.m4a",
+     "durationSec": 7.585958,
+     "holdSec": 40,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-still-lake/cue-06.m4a",
+     "durationSec": 8.109667,
+     "holdSec": 40,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-still-lake/cue-07.m4a",
+     "durationSec": 9.854625,
+     "holdSec": 75,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-still-lake/cue-08.m4a",
+     "durationSec": 5.499042,
+     "holdSec": 60,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-still-lake/cue-09.m4a",
+     "durationSec": 4.06575,
+     "holdSec": 25,
+     "index": 9
+    }
+   ],
+   "voice": "maren"
+  },
+  "the-turn-of-the-season": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/the-turn-of-the-season/cue-00.m4a",
+     "durationSec": 5.083,
+     "holdSec": 20,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-turn-of-the-season/cue-01.m4a",
+     "durationSec": 5.837875,
+     "holdSec": 30,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-turn-of-the-season/cue-02.m4a",
+     "durationSec": 7.428875,
+     "holdSec": 35,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-turn-of-the-season/cue-03.m4a",
+     "durationSec": 6.979875,
+     "holdSec": 40,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-turn-of-the-season/cue-04.m4a",
+     "durationSec": 10.401958,
+     "holdSec": 40,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-turn-of-the-season/cue-05.m4a",
+     "durationSec": 10.149042,
+     "holdSec": 45,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-turn-of-the-season/cue-06.m4a",
+     "durationSec": 9.844042,
+     "holdSec": 45,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/the-turn-of-the-season/cue-07.m4a",
+     "durationSec": 6.322042,
+     "holdSec": 60,
+     "index": 7
+    }
+   ],
+   "voice": "vera"
+  },
+  "three-part-breath": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/three-part-breath/cue-00.m4a",
+     "durationSec": 3.471958,
+     "holdSec": 12,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/three-part-breath/cue-01.m4a",
+     "durationSec": 3.124792,
+     "holdSec": 12,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/three-part-breath/cue-02.m4a",
+     "durationSec": 7.733625,
+     "holdSec": 25,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/three-part-breath/cue-03.m4a",
+     "durationSec": 4.414458,
+     "holdSec": 35,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/three-part-breath/cue-04.m4a",
+     "durationSec": 8.662375,
+     "holdSec": 30,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/three-part-breath/cue-05.m4a",
+     "durationSec": 5.366958,
+     "holdSec": 40,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/three-part-breath/cue-06.m4a",
+     "durationSec": 9.555667,
+     "holdSec": 30,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/three-part-breath/cue-07.m4a",
+     "durationSec": 6.904708,
+     "holdSec": 35,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/three-part-breath/cue-08.m4a",
+     "durationSec": 5.862458,
+     "holdSec": 90,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/three-part-breath/cue-09.m4a",
+     "durationSec": 6.302125,
+     "holdSec": 30,
+     "index": 9
+    }
+   ],
+   "voice": "rowan"
+  },
+  "victorious-breath": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/victorious-breath/cue-00.m4a",
+     "durationSec": 6.785792,
+     "holdSec": 15,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/victorious-breath/cue-01.m4a",
+     "durationSec": 9.006875,
+     "holdSec": 25,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/victorious-breath/cue-02.m4a",
+     "durationSec": 3.983875,
+     "holdSec": 25,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/victorious-breath/cue-03.m4a",
+     "durationSec": 5.875583,
+     "holdSec": 30,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/victorious-breath/cue-04.m4a",
+     "durationSec": 7.459417,
+     "holdSec": 30,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/victorious-breath/cue-05.m4a",
+     "durationSec": 6.262667,
+     "holdSec": 40,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/victorious-breath/cue-06.m4a",
+     "durationSec": 6.222833,
+     "holdSec": 45,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/victorious-breath/cue-07.m4a",
+     "durationSec": 5.555875,
+     "holdSec": 120,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/victorious-breath/cue-08.m4a",
+     "durationSec": 8.011458,
+     "holdSec": 40,
+     "index": 8
+    }
+   ],
+   "voice": "ash"
+  },
+  "walking-meditation": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/walking-meditation/cue-00.m4a",
+     "durationSec": 5.61925,
+     "holdSec": 18,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/walking-meditation/cue-01.m4a",
+     "durationSec": 6.660458,
+     "holdSec": 18,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/walking-meditation/cue-02.m4a",
+     "durationSec": 4.204458,
+     "holdSec": 20,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/walking-meditation/cue-03.m4a",
+     "durationSec": 4.1885,
+     "holdSec": 20,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/walking-meditation/cue-04.m4a",
+     "durationSec": 8.691917,
+     "holdSec": 35,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/walking-meditation/cue-05.m4a",
+     "durationSec": 7.175542,
+     "holdSec": 30,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/walking-meditation/cue-06.m4a",
+     "durationSec": 7.429208,
+     "holdSec": 35,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/walking-meditation/cue-07.m4a",
+     "durationSec": 6.036917,
+     "holdSec": 120,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/walking-meditation/cue-08.m4a",
+     "durationSec": 8.14475,
+     "holdSec": 60,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/walking-meditation/cue-09.m4a",
+     "durationSec": 5.363583,
+     "holdSec": 40,
+     "index": 9
+    }
+   ],
+   "voice": "ash"
+  },
+  "weight-and-contact": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/weight-and-contact/cue-00.m4a",
+     "durationSec": 5.236,
+     "holdSec": 10,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/weight-and-contact/cue-01.m4a",
+     "durationSec": 7.198333,
+     "holdSec": 18,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/weight-and-contact/cue-02.m4a",
+     "durationSec": 11.682458,
+     "holdSec": 22,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/weight-and-contact/cue-03.m4a",
+     "durationSec": 7.66825,
+     "holdSec": 25,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/weight-and-contact/cue-04.m4a",
+     "durationSec": 4.4775,
+     "holdSec": 40,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/weight-and-contact/cue-05.m4a",
+     "durationSec": 8.313292,
+     "holdSec": 30,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/weight-and-contact/cue-06.m4a",
+     "durationSec": 5.872833,
+     "holdSec": 60,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/weight-and-contact/cue-07.m4a",
+     "durationSec": 13.546833,
+     "holdSec": 45,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/weight-and-contact/cue-08.m4a",
+     "durationSec": 3.596125,
+     "holdSec": 90,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/weight-and-contact/cue-09.m4a",
+     "durationSec": 6.851333,
+     "holdSec": 20,
+     "index": 9
+    }
+   ],
+   "voice": "rowan"
+  },
+  "wind-through-grass": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/wind-through-grass/cue-00.m4a",
+     "durationSec": 5.353958,
+     "holdSec": 15,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/wind-through-grass/cue-01.m4a",
+     "durationSec": 6.8635,
+     "holdSec": 22,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/wind-through-grass/cue-02.m4a",
+     "durationSec": 4.710125,
+     "holdSec": 25,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/wind-through-grass/cue-03.m4a",
+     "durationSec": 9.317042,
+     "holdSec": 35,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/wind-through-grass/cue-04.m4a",
+     "durationSec": 5.541667,
+     "holdSec": 30,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/wind-through-grass/cue-05.m4a",
+     "durationSec": 6.869125,
+     "holdSec": 35,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/wind-through-grass/cue-06.m4a",
+     "durationSec": 4.282167,
+     "holdSec": 45,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/wind-through-grass/cue-07.m4a",
+     "durationSec": 6.348417,
+     "holdSec": 60,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/wind-through-grass/cue-08.m4a",
+     "durationSec": 7.351875,
+     "holdSec": 60,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/wind-through-grass/cue-09.m4a",
+     "durationSec": 2.271208,
+     "holdSec": 25,
+     "index": 9
+    }
+   ],
+   "voice": "juniper"
+  },
+  "witness-of-thought": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/witness-of-thought/cue-00.m4a",
+     "durationSec": 5.186125,
+     "holdSec": 12,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/witness-of-thought/cue-01.m4a",
+     "durationSec": 4.647125,
+     "holdSec": 25,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/witness-of-thought/cue-02.m4a",
+     "durationSec": 6.836583,
+     "holdSec": 30,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/witness-of-thought/cue-03.m4a",
+     "durationSec": 5.910167,
+     "holdSec": 25,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/witness-of-thought/cue-04.m4a",
+     "durationSec": 7.611958,
+     "holdSec": 45,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/witness-of-thought/cue-05.m4a",
+     "durationSec": 7.07925,
+     "holdSec": 35,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/witness-of-thought/cue-06.m4a",
+     "durationSec": 6.209458,
+     "holdSec": 75,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/witness-of-thought/cue-07.m4a",
+     "durationSec": 11.108333,
+     "holdSec": 40,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/witness-of-thought/cue-08.m4a",
+     "durationSec": 5.913667,
+     "holdSec": 90,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/witness-of-thought/cue-09.m4a",
+     "durationSec": 3.665625,
+     "holdSec": 45,
+     "index": 9
+    }
+   ],
+   "voice": "vera"
+  },
+  "yoga-nidra-short": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/yoga-nidra-short/cue-00.m4a",
+     "durationSec": 5.406458,
+     "holdSec": 20,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yoga-nidra-short/cue-01.m4a",
+     "durationSec": 9.522417,
+     "holdSec": 20,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yoga-nidra-short/cue-02.m4a",
+     "durationSec": 10.616125,
+     "holdSec": 40,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yoga-nidra-short/cue-03.m4a",
+     "durationSec": 5.393708,
+     "holdSec": 25,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yoga-nidra-short/cue-04.m4a",
+     "durationSec": 11.764458,
+     "holdSec": 14,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yoga-nidra-short/cue-05.m4a",
+     "durationSec": 5.004917,
+     "holdSec": 14,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yoga-nidra-short/cue-06.m4a",
+     "durationSec": 10.668292,
+     "holdSec": 14,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yoga-nidra-short/cue-07.m4a",
+     "durationSec": 5.329958,
+     "holdSec": 14,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yoga-nidra-short/cue-08.m4a",
+     "durationSec": 5.550583,
+     "holdSec": 20,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yoga-nidra-short/cue-09.m4a",
+     "durationSec": 1.516833,
+     "holdSec": 45,
+     "index": 9
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yoga-nidra-short/cue-10.m4a",
+     "durationSec": 7.221083,
+     "holdSec": 30,
+     "index": 10
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yoga-nidra-short/cue-11.m4a",
+     "durationSec": 5.229625,
+     "holdSec": 120,
+     "index": 11
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yoga-nidra-short/cue-12.m4a",
+     "durationSec": 4.489958,
+     "holdSec": 120,
+     "index": 12
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yoga-nidra-short/cue-13.m4a",
+     "durationSec": 3.993583,
+     "holdSec": 30,
+     "index": 13
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yoga-nidra-short/cue-14.m4a",
+     "durationSec": 8.42125,
+     "holdSec": 30,
+     "index": 14
+    }
+   ],
+   "voice": "solene"
+  },
+  "yogic-sleep": {
+   "cues": [
+    {
+     "audioAssetName": "narration/fr/audio/yogic-sleep/cue-00.m4a",
+     "durationSec": 9.278583,
+     "holdSec": 25,
+     "index": 0
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yogic-sleep/cue-01.m4a",
+     "durationSec": 5.923542,
+     "holdSec": 25,
+     "index": 1
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yogic-sleep/cue-02.m4a",
+     "durationSec": 10.982958,
+     "holdSec": 45,
+     "index": 2
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yogic-sleep/cue-03.m4a",
+     "durationSec": 2.790083,
+     "holdSec": 30,
+     "index": 3
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yogic-sleep/cue-04.m4a",
+     "durationSec": 17.851042,
+     "holdSec": 16,
+     "index": 4
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yogic-sleep/cue-05.m4a",
+     "durationSec": 14.844458,
+     "holdSec": 16,
+     "index": 5
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yogic-sleep/cue-06.m4a",
+     "durationSec": 16.187792,
+     "holdSec": 16,
+     "index": 6
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yogic-sleep/cue-07.m4a",
+     "durationSec": 15.117958,
+     "holdSec": 16,
+     "index": 7
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yogic-sleep/cue-08.m4a",
+     "durationSec": 12.009167,
+     "holdSec": 18,
+     "index": 8
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yogic-sleep/cue-09.m4a",
+     "durationSec": 17.361625,
+     "holdSec": 20,
+     "index": 9
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yogic-sleep/cue-10.m4a",
+     "durationSec": 4.424583,
+     "holdSec": 60,
+     "index": 10
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yogic-sleep/cue-11.m4a",
+     "durationSec": 7.880708,
+     "holdSec": 40,
+     "index": 11
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yogic-sleep/cue-12.m4a",
+     "durationSec": 3.238833,
+     "holdSec": 150,
+     "index": 12
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yogic-sleep/cue-13.m4a",
+     "durationSec": 8.339583,
+     "holdSec": 60,
+     "index": 13
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yogic-sleep/cue-14.m4a",
+     "durationSec": 7.820375,
+     "holdSec": 60,
+     "index": 14
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yogic-sleep/cue-15.m4a",
+     "durationSec": 5.387167,
+     "holdSec": 60,
+     "index": 15
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yogic-sleep/cue-16.m4a",
+     "durationSec": 8.805,
+     "holdSec": 75,
+     "index": 16
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yogic-sleep/cue-17.m4a",
+     "durationSec": 6.547292,
+     "holdSec": 45,
+     "index": 17
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yogic-sleep/cue-18.m4a",
+     "durationSec": 9.265958,
+     "holdSec": 45,
+     "index": 18
+    },
+    {
+     "audioAssetName": "narration/fr/audio/yogic-sleep/cue-19.m4a",
+     "durationSec": 6.927833,
+     "holdSec": 40,
+     "index": 19
+    }
+   ],
+   "voice": "solene"
+  }
+ },
+ "sampleRate": 24000
+}

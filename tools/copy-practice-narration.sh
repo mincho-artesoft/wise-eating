@@ -34,13 +34,14 @@ while IFS= read -r declared_path || [[ -n "$declared_path" ]]; do
     fi
     /bin/mkdir -p "$(dirname "$destination_path")"
     /bin/cp -f "$source_path" "$destination_path"
-    if [[ "$relative_path" == *.mp3 ]]; then
+    if [[ "$relative_path" == *.m4a ]]; then
         AUDIO_FILE_COUNT=$((AUDIO_FILE_COUNT + 1))
     fi
 done < "$INPUT_FILE_LIST_PATH"
 
-if [[ "$AUDIO_FILE_COUNT" != "601" ]]; then
-    echo "ERROR: expected 601 MP3 inputs; found $AUDIO_FILE_COUNT" >&2
+# 601 cues for English and for every language that has its own voice.
+if (( AUDIO_FILE_COUNT < 601 || AUDIO_FILE_COUNT % 601 != 0 )); then
+    echo "ERROR: expected a multiple of 601 narration cues; found $AUDIO_FILE_COUNT" >&2
     exit 1
 fi
 

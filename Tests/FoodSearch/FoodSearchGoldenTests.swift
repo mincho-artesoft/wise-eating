@@ -293,6 +293,21 @@ nonisolated final class FoodSearchGoldenTests: XCTestCase {
         XCTAssertNil(CatalogTextLocalizer.bundled("practice_content", for: "en"))
     }
 
+    /// The narration is bundled in English, French and Latin American
+    /// Spanish, every cue of every practice, and a language is matched to
+    /// its voice.
+    @MainActor func testPracticeNarrationLanguages() throws {
+        XCTAssertEqual(PracticeAudioAssetResolver.recordedNarrationCueCount, 601)
+        for language in ["fr", "es-MX"] {
+            XCTAssertEqual(PracticeAudioAssetResolver.recordedNarrationCueCount(language: language), 601, language)
+        }
+        XCTAssertTrue(PracticeAudioAssetResolver.narrationLanguages(for: "fr-CA").contains("fr"))
+        XCTAssertEqual(PracticeAudioAssetResolver.narrationLanguages(for: "es-ES").last, "es-MX")
+        XCTAssertTrue(PracticeAudioAssetResolver.narrationLanguages(for: "es-MX").contains("es-MX"))
+        XCTAssertFalse(PracticeAudioAssetResolver.narrationLanguages(for: "de-DE").contains("es-MX"))
+        XCTAssertEqual(PracticeAudioAssetResolver.narrationLanguages(for: "en-US"), [])
+    }
+
     /// The yoga tab's index over the real catalogue: every pose is reachable
     /// by its English and Sanskrit names in any word order, in part, with a
     /// typing error, and by family, level and muscle group. Results and

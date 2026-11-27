@@ -87,11 +87,41 @@ enum PracticeAudioAssetResolver {
 
     private static let expectedNarrationFormat = "wise-eating-production-narration/v2"
 
-    private static let recordedNarrationManifest: RecordedNarrationManifest? = {
+    /// The English narration: narration/manifest.json and narration/audio.
+    private static let recordedNarrationManifest = narrationManifest(at: "narration/manifest.json")
+
+    /// The narration in the user's language, when the bundle has it:
+    /// narration/<language>/manifest.json. A language without its own voice
+    /// hears the English one with the translated cues on screen.
+    private static let localizedNarrationManifest: RecordedNarrationManifest? = {
+        for language in narrationLanguages(for: Locale.preferredLanguages.first ?? "en") {
+            if let manifest = narrationManifest(at: "narration/\(language)/manifest.json") {
+                return manifest
+            }
+        }
+        return nil
+    }()
+
+    /// The narration folders to look for, most specific first. Spanish of any
+    /// region falls back to the Latin American voice, the only Spanish one.
+    static func narrationLanguages(for languageIdentifier: String) -> [String] {
+        var languages = FoodNameLocalizer.candidates(for: languageIdentifier)
+        if languages.contains("en") { return [] }
+        if languages.contains("es"), !languages.contains("es-MX") { languages.append("es-MX") }
+        return languages
+    }
+
+    /// How many cues the bundle holds in a language's own voice (0 without one).
+    static func recordedNarrationCueCount(language: String) -> Int {
+        guard let manifest = narrationManifest(at: "narration/\(language)/manifest.json") else { return 0 }
+        return manifest.practices.values.reduce(0) { total, practice in
+            total + practice.cues.filter { bundledNarrationURL(for: $0.audioAssetName) != nil }.count
+        }
+    }
+
+    private static func narrationManifest(at relativePath: String) -> RecordedNarrationManifest? {
         guard let resourceRoot = Bundle.main.resourceURL else { return nil }
-        let url = resourceRoot
-            .appendingPathComponent("narration", isDirectory: true)
-            .appendingPathComponent("manifest.json", isDirectory: false)
+        let url = resourceRoot.appendingPathComponent(relativePath, isDirectory: false)
         guard FileManager.default.fileExists(atPath: url.path) else { return nil }
 
         do {
@@ -108,7 +138,7 @@ enum PracticeAudioAssetResolver {
             print("⚠️ Practice narration manifest could not be loaded: \(error)")
             return nil
         }
-    }()
+    }
 
     /// Every supplied ambience file belongs to one logical catalogue mood.
     /// The practice's position inside that mood rotates through the resources,
@@ -225,13 +255,24 @@ enum PracticeAudioAssetResolver {
         practiceSlug: String,
         index: Int
     ) -> (url: URL, durationSeconds: Double)? {
-        guard let cue = recordedNarrationManifest?
-            .practices[practiceSlug]?
-            .cues.first(where: { $0.index == index }),
+        guard let cue = narrationCues(practiceSlug: practiceSlug)?
+            .first(where: { $0.index == index }),
               let url = bundledNarrationURL(for: cue.audioAssetName) else {
             return nil
         }
         return (url, cue.durationSec)
+    }
+
+    /// One practice is never read by two voices: the user's language is used
+    /// only when it has every cue of the practice, otherwise the English.
+    private static func narrationCues(practiceSlug: String) -> [RecordedNarrationCue]? {
+        let english = recordedNarrationManifest?.practices[practiceSlug]?.cues
+        guard let local = localizedNarrationManifest?.practices[practiceSlug]?.cues,
+              local.count == (english?.count ?? local.count),
+              local.allSatisfy({ bundledNarrationURL(for: $0.audioAssetName) != nil }) else {
+            return english
+        }
+        return local
     }
 
     static func ambienceURL(trackID: String) -> URL? {

@@ -18,7 +18,7 @@ Mincho's ElevenLabs subscription from the translated cues.
   reviewed for a language before its audio is generated. Look a cue up by its
   English `text`.
 - The English recordings, for reference by ear only:
-  `Resources/PracticeNarration/audio/<slug>/cue-NN.mp3`.
+  `Resources/PracticeNarration/audio/<slug>/cue-NN.m4a`.
 
 English is about 42,000 characters for the whole library; a translation is
 that, give or take a fifth. ElevenLabs bills by the character, and every retake
