@@ -386,7 +386,7 @@ struct ExercisePracticeDetailSection: View {
             values.append(
                 ExercisePracticeMetric(
                     title: "Breath",
-                    value: breath,
+                    value: yogaLabel(breath),
                     systemImage: "wind"
                 )
             )
@@ -395,7 +395,7 @@ struct ExercisePracticeDetailSection: View {
             values.append(
                 ExercisePracticeMetric(
                     title: "Drishti",
-                    value: drishti,
+                    value: yogaLabel(drishti),
                     systemImage: "eye.fill"
                 )
             )

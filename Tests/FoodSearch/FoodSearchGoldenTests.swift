@@ -272,6 +272,27 @@ nonisolated final class FoodSearchGoldenTests: XCTestCase {
         print("RECIPE_CONTENT|languages=\(files.count)|\(files.joined(separator: ","))")
     }
 
+    /// The practice and yoga text tables load for every bundled language and
+    /// translate a string of each catalogue.
+    @MainActor func testCatalogTextFilesLoad() throws {
+        for (prefix, sample) in [("practice_content", "Rain on the Roof"), ("yoga_content", "high blood pressure")] {
+            let files = (Bundle.main.urls(forResourcesWithExtension: "z", subdirectory: nil) ?? [])
+                .map { $0.deletingPathExtension().lastPathComponent }
+                .filter { $0.hasPrefix("\(prefix).") && $0 != "\(prefix).en" }
+                .map { String($0.dropFirst(prefix.count + 1)) }
+                .sorted()
+            XCTAssertEqual(files.count, 48, prefix)
+            for language in files {
+                let localizer = try XCTUnwrap(CatalogTextLocalizer.bundled(prefix, for: language), language)
+                XCTAssertEqual(localizer.language, language)
+                XCTAssertNotNil(localizer.translation(of: sample), "\(prefix) \(language)")
+                XCTAssertEqual(localizer.text("not a catalogue string"), "not a catalogue string")
+            }
+            print("CATALOG_TEXT|\(prefix)|languages=\(files.count)")
+        }
+        XCTAssertNil(CatalogTextLocalizer.bundled("practice_content", for: "en"))
+    }
+
     /// The yoga tab's index over the real catalogue: every pose is reachable
     /// by its English and Sanskrit names in any word order, in part, with a
     /// typing error, and by family, level and muscle group. Results and

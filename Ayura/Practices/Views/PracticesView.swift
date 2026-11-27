@@ -360,7 +360,7 @@ struct PracticesView: View {
                             Text("Suggested")
                                 .font(.caption.weight(.semibold))
                                 .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.62))
-                            Text(suggested.title)
+                            Text(suggested.displayTitle)
                                 .font(.headline)
                                 .lineLimit(1)
                         }
@@ -488,6 +488,7 @@ struct PracticesView: View {
         searchableValues.append(contentsOf: practice.season)
         searchableValues.append(contentsOf: practice.contraindications)
         searchableValues.append(contentsOf: practice.script.map(\.text))
+        searchableValues.append(contentsOf: practice.localizedSearchValues)
 
         return searchableValues.contains {
             $0.localizedStandardContains(searchQuery)
@@ -504,11 +505,11 @@ private struct PracticeLibraryRow: View {
             PracticeThumbnailView(practice: practice)
 
             VStack(alignment: .leading, spacing: 4) {
-                Text(practice.title)
+                Text(practice.displayTitle)
                     .font(.headline.weight(.bold))
                     .lineLimit(2)
 
-                if let sanskrit = practice.sanskrit, !sanskrit.isEmpty {
+                if let sanskrit = practice.displaySanskrit {
                     Text(sanskrit)
                         .font(.caption)
                         .italic()
@@ -750,7 +751,8 @@ private struct PracticeCardModifier: ViewModifier {
 }
 
 func kindDisplayName(_ kind: String) -> String {
-    switch kind {
+    if let local = practiceLabel(kind) { return local }
+    return switch kind {
     case "meditation": "Meditation"
     case "visualisation": "Visualisation"
     case "pranayama": "Breath"

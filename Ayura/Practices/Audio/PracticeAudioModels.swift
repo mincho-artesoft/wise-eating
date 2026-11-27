@@ -3,7 +3,10 @@ import Foundation
 struct PracticeAudioCue: Identifiable, Hashable {
     let id: String
     let atSeconds: Double
+    /// English: what the synthesised voice speaks and what the timing counts.
     let text: String
+    /// The cue in the user's language, for the screen and the lock screen.
+    let displayText: String
     let holdSeconds: Double
     let recordedAudioURL: URL?
     let recordedDurationSeconds: Double?
@@ -352,7 +355,7 @@ extension Practice {
         )
         return PracticeAudioPlan(
             practiceID: id,
-            title: title,
+            title: displayTitle,
             totalDuration: Double(duration),
             cues: orderedScript.enumerated().map { index, cue in
                 let recordedCue = voiceMode == .recorded
@@ -365,6 +368,7 @@ extension Practice {
                     id: cue.id,
                     atSeconds: cue.atSeconds,
                     text: cue.text,
+                    displayText: cue.displayText,
                     holdSeconds: cue.holdSeconds,
                     recordedAudioURL: recordedCue?.url,
                     recordedDurationSeconds: recordedCue?.durationSeconds

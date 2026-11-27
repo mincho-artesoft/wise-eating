@@ -279,7 +279,7 @@ final class PracticeAudioPlayer: NSObject, ObservableObject {
             MPNowPlayingInfoPropertyPlaybackRate: state == .playing ? 1 : 0,
         ]
         if let cue = currentCue {
-            info[MPMediaItemPropertyArtist] = cue.text
+            info[MPMediaItemPropertyArtist] = cue.displayText
         }
         MPNowPlayingInfoCenter.default().nowPlayingInfo = info
     }

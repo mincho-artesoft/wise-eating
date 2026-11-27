@@ -134,7 +134,7 @@ struct PracticePlayerView: View {
             .transition(.opacity)
             .allowsHitTesting(false)
         } else if !player.isHolding, let cue = player.currentCue {
-            Text(cue.text)
+            Text(cue.displayText)
                 .font(.system(size: 26, weight: .regular, design: .serif))
                 .multilineTextAlignment(.center)
                 .lineSpacing(7)

@@ -154,11 +154,11 @@ struct PracticeHistoryView: View {
             sessionArtwork(session)
 
             VStack(alignment: .leading, spacing: 5) {
-                Text(session.practiceTitle)
+                Text(localizedPracticeTitle(session.practiceTitle))
                     .font(.headline)
                     .lineLimit(2)
 
-                Text(session.practiceKind.uppercased())
+                Text((practiceLabel(session.practiceKind) ?? session.practiceKind).uppercased())
                     .font(.caption2.weight(.bold))
                     .tracking(1.1)
                     .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.62))

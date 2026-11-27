@@ -212,10 +212,10 @@ struct PracticeEntryView: View {
                 .font(.caption2.weight(.bold))
                 .tracking(1.6)
                 .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.62))
-            Text(practice.title)
+            Text(practice.displayTitle)
                 .font(.system(size: 34, weight: .bold, design: .rounded))
                 .fixedSize(horizontal: false, vertical: true)
-            if let sanskrit = practice.sanskrit, !sanskrit.isEmpty {
+            if let sanskrit = practice.displaySanskrit {
                 Text(sanskrit)
                     .font(.title3)
                     .italic()
@@ -230,11 +230,11 @@ struct PracticeEntryView: View {
             HStack(spacing: 8) {
                 PracticeMetadataPill(
                     icon: "figure.mind.and.body",
-                    text: practice.posture.capitalized
+                    text: practiceLabel(practice.posture) ?? practice.posture.capitalized
                 )
                 PracticeMetadataPill(
                     icon: practice.eyes == "closed" ? "eye.slash" : "eye",
-                    text: "Eyes \(practice.eyes)"
+                    text: practiceLabel(practice.eyes) ?? "Eyes \(practice.eyes)"
                 )
                 PracticeMetadataPill(
                     icon: "chart.bar",
@@ -254,7 +254,7 @@ struct PracticeEntryView: View {
 
     private var descriptionBlock: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text(practice.practiceDescription)
+            Text(practice.displayDescription)
                 .font(.body)
                 .lineSpacing(4)
             Divider().overlay(effectManager.currentGlobalAccentColor.opacity(0.16))
@@ -263,7 +263,7 @@ struct PracticeEntryView: View {
                     .font(.caption2.weight(.bold))
                     .tracking(1.3)
                     .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.58))
-                Text(practice.sourceTradition)
+                Text(practice.displaySourceTradition)
                     .font(.subheadline)
                     .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.78))
             }

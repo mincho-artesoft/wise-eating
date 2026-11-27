@@ -18,7 +18,7 @@ struct ExerciseRowView: View {
         
         if item.isWorkout {
             guard let links = item.exercises, !links.isEmpty else {
-                return item.exerciseDescription?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty()
+                return item.displayDescription
             }
             let first = links.prefix(3).compactMap { $0.exercise?.name }
             var text = first.joined(separator: ", ")
@@ -28,7 +28,7 @@ struct ExerciseRowView: View {
             }
             return text.nilIfEmpty()
         } else {
-            return item.exerciseDescription?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty()
+            return item.displayDescription
         }
     }
 

@@ -349,7 +349,7 @@ struct ExerciseItemDetailView: View {
                 .padding(.top, mainUIImage != nil ? 0 : 16)
                 .foregroundStyle(effectManager.currentGlobalAccentColor)
 
-            if let desc = item.exerciseDescription?.trimmingCharacters(in: .whitespacesAndNewlines), !desc.isEmpty {
+            if let desc = item.displayDescription {
                 Text(desc)
                     .font(.callout)
                     .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))

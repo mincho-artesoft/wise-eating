@@ -43,7 +43,7 @@ struct PracticeArtworkView: View {
             }
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Artwork for \(practice.title)")
+        .accessibilityLabel("Artwork for \(practice.displayTitle)")
     }
 
     private var fallbackSymbol: String {
