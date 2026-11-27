@@ -5,6 +5,11 @@ import NaturalLanguage
 
 struct RootView: View {
     @AppStorage("hasShownInitialSubscription") private var hasShownInitialSubscription: Bool = false
+    // FeatureFlags.newPaywall: the plan screen is offered once, after a few
+    // tab changes, and the earlier plan list stays behind "See all plans".
+    @AppStorage("paywallTabChanges") private var paywallTabChanges: Int = 0
+    @State private var showNewPaywall = false
+    @State private var showClassicPlans = false
     @State private var adLoopTask: Task<Void, Never>? = nil
     @State private var adRotationIndex: Int = 0
     @State private var nextAdRunDate: Date = Date().addingTimeInterval(70) // Първоначално след 70 сек
@@ -172,10 +177,32 @@ struct RootView: View {
             }
         }
         .onAppear(perform: restoreStoredTabsIfNeeded)
+        #if DEBUG
+        // For screenshots: `-showPaywall YES` opens the new plan screen at once.
+        .onAppear {
+            if UserDefaults.standard.bool(forKey: "showPaywall") { showNewPaywall = true }
+        }
+        #endif
+        .sheet(isPresented: $showNewPaywall) {
+            PaywallView(
+                isSheet: true,
+                onSeeAllPlans: {
+                    showNewPaywall = false
+                    openClassicPlans()
+                },
+                onClose: { showNewPaywall = false }
+            )
+        }
         .task(id: profiles.isEmpty) {
             // Onboarding and local records stay usable regardless of pending
             // or denied system permissions. Ask for optional integrations only
             // after a profile exists, without replacing the app with a spinner.
+            if !profiles.isEmpty, !FeatureFlags.firstRunFinished {
+                FeatureFlags.firstRunFinished = true
+                if FeatureFlags.newOnboarding {
+                    Task { await AdsConsentManager.shared.prepareAds() }
+                }
+            }
             guard !profiles.isEmpty, !didPrepareOptionalServices,
                   !ProcessInfo.processInfo.arguments.contains("-skipPermissionPrompts") else { return }
             didPrepareOptionalServices = true
@@ -195,6 +222,8 @@ struct RootView: View {
             }
         }
         .onChange(of: selectedTab) { _, newTab in
+            offerNewPaywallIfDue()
+            if newTab == .calendar { requestCalendarForCurrentProfileIfNeeded() }
             if newTab != .search {
                 storedSelectedTab = newTab
             }
@@ -988,10 +1017,14 @@ struct RootView: View {
             SettingsView(editorState: $editorState)
             
         case .subscriptions:
-            SubscriptionView(
-                selectedCategory: $selectedSubscriptionCategory,
-                pendingUpgradeCategory: $pendingUpgradeCategory
-            )
+            if FeatureFlags.newPaywall, !showClassicPlans, pendingUpgradeCategory == nil {
+                PaywallView(isSheet: false, onSeeAllPlans: { showClassicPlans = true })
+            } else {
+                SubscriptionView(
+                    selectedCategory: $selectedSubscriptionCategory,
+                    pendingUpgradeCategory: $pendingUpgradeCategory
+                )
+            }
         }
     }
     
@@ -1238,10 +1271,41 @@ struct RootView: View {
     }
     
     private func showInitialSubscriptionIfNeeded() {
+        // The new plan screen is not shown at the door: see offerNewPaywallIfDue().
+        guard !FeatureFlags.newPaywall else { return }
         // Показваме само веднъж – при първо стартиране на приложението
         guard !hasShownInitialSubscription else { return }
         hasShownInitialSubscription = true
-        
+        openClassicPlans()
+    }
+
+    /// Once, after the person has moved around the app a little.
+    private func offerNewPaywallIfDue() {
+        guard FeatureFlags.newPaywall, !hasShownInitialSubscription, !profiles.isEmpty,
+              !ProcessInfo.processInfo.arguments.contains("-skipPermissionPrompts") else { return }
+        paywallTabChanges += 1
+        guard paywallTabChanges >= 4, !SubscriptionManager.shared.hasActiveSubscription else { return }
+        hasShownInitialSubscription = true
+        showNewPaywall = true
+    }
+
+    /// With the short onboarding the calendar is asked for when it is first opened.
+    private func requestCalendarForCurrentProfileIfNeeded() {
+        guard FeatureFlags.newOnboarding,
+              EKEventStore.authorizationStatus(for: .event) == .notDetermined,
+              !ProcessInfo.processInfo.arguments.contains("-skipPermissionPrompts") else { return }
+        Task { @MainActor in
+            guard await CalendarViewModel.shared.requestCalendarAccessIfNeeded() else { return }
+            await CalendarViewModel.shared.ensureSharedShoppingListCalendarExists()
+            if let profile = selectedProfile {
+                _ = CalendarViewModel.shared.createOrUpdateCalendar(for: profile)
+                try? modelContext.save()
+            }
+        }
+    }
+
+    private func openClassicPlans() {
+        showClassicPlans = true
         // Отваряме долното меню на таб "Subscriptions"
         selectedDraggableMenuTab = .subscriptions
         

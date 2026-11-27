@@ -63,6 +63,8 @@ struct AyurvedaAsanaYogaApp: App {
                         guard !Self.isIsolatedSmokeTest else { return }
                         // StoreKit refreshes independently. Its cached plan already
                         // suppresses ads for subscribers, and changes reset ads below.
+                        // With the short onboarding the consent form waits for a profile.
+                        guard FeatureFlags.adsMayPrepare else { return }
                         await AdsConsentManager.shared.prepareAds()
                     }
                     .onChange(of: subscriptionManager.subscriptionStatus) { _, _ in
@@ -77,6 +79,7 @@ struct AyurvedaAsanaYogaApp: App {
                         ReviewManager.appLaunched()
                         Task { await subscriptionManager.updatePurchasedStatus() }
                         Task { @MainActor in
+                            guard FeatureFlags.adsMayPrepare else { return }
                             await AdsConsentManager.shared.prepareAds()
                             if isFirstAppLaunch {
                                 isFirstAppLaunch = false

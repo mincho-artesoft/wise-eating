@@ -1,3 +1,4 @@
+import EventKit
 import SwiftUI
 import SwiftData
 
@@ -84,7 +85,14 @@ struct RootLauncher: View {
             AyurvedaAsanaYogaLaunchProbe.event("calendar-load-begin")
             // Retain automatic profile recovery on a reinstall: ask once, after
             // the UI is visible, then restore as soon as access is granted.
-            let calendarAccessGranted = await CalendarViewModel.shared.requestCalendarAccessIfNeeded()
+            // With the short onboarding the calendar is not asked for at launch:
+            // it is used here only if access was given before, and asked for on
+            // the welcome screen ("I have used the app before") or when the
+            // profile is saved.
+            let calendarNotAskedYet = EKEventStore.authorizationStatus(for: .event) == .notDetermined
+            let calendarAccessGranted = (FeatureFlags.newOnboarding && calendarNotAskedYet)
+                ? false
+                : await CalendarViewModel.shared.requestCalendarAccessIfNeeded()
             
             if calendarAccessGranted {
                 await CalendarViewModel.shared.ensureSharedShoppingListCalendarExists()

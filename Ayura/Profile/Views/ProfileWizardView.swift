@@ -1,4 +1,5 @@
 import SwiftUI
+import EventKit
 import SwiftData
 import PhotosUI
 
@@ -29,6 +30,8 @@ fileprivate struct WizardData {
 // Enum to define the steps of the wizard.
 fileprivate enum WizardStep: Int, Identifiable {
     case name, photo, birthday, gender, height, weight, meals, trainings, vitamins, minerals, allergens, constitution, summary
+    // The short first-run flow (FeatureFlags.newOnboarding).
+    case welcome, aboutYou, body
 
     var id: UUID { Self.stableIDs[rawValue] }
 
@@ -46,6 +49,9 @@ fileprivate enum WizardStep: Int, Identifiable {
         UUID(uuidString: "8FB0B362-856D-5722-8D47-F7991A8EF75E")!,
         UUID(uuidString: "284D50DA-2DE5-5107-A7C2-9728118077DE")!,
         UUID(uuidString: "0C4A33AA-0509-54AE-9AE3-0E79168C3A49")!,
+        UUID(uuidString: "5D1B6A52-7C1E-4B0A-9C59-1F2A7C0D4E11")!,
+        UUID(uuidString: "9A7E3C14-2B6F-4D85-8E21-6B3F0A9C5D22")!,
+        UUID(uuidString: "C2F4B8E6-1A3D-4F97-B6A4-7D5E2C1B8F33")!,
     ]
 
     var title: String {
@@ -63,6 +69,9 @@ fileprivate enum WizardStep: Int, Identifiable {
         case .allergens: "Any Allergies?"
         case .constitution: "Your traditional constitution"
         case .summary: "Confirm Your Details"
+        case .welcome: String(localized: "Welcome")
+        case .aboutYou: String(localized: "About you")
+        case .body: String(localized: "Height and weight")
         }
     }
     
@@ -81,6 +90,9 @@ fileprivate enum WizardStep: Int, Identifiable {
         case .allergens: "Select any allergies you have."
         case .constitution: "Choose your constitution or answer 12 questions."
         case .summary: "Please review your information."
+        case .welcome: String(localized: "Food, yoga and guided practices chosen for your constitution.")
+        case .aboutYou: String(localized: "Your age and sex set your nutritional needs.")
+        case .body: String(localized: "Used for your calorie and nutrient targets.")
         }
     }
 }
@@ -113,6 +125,7 @@ struct ProfileWizardView: View {
     }
     @FocusState private var focusedField: FocusableWizardField?
     @State private var showAlert = false
+    @State private var offerSettingsInAlert = false
     @State private var alertMessage = ""
     @State private var isSaving = false
     @State private var constitutionStepTitle = "Your traditional constitution"
@@ -236,7 +249,13 @@ struct ProfileWizardView: View {
     
     private var isImperial: Bool { GlobalState.measurementSystem == "Imperial" }
     
+    /// The first profile is made with the short flow when the flag is on.
+    private var isNewFlow: Bool { isInit && FeatureFlags.newOnboarding }
+
     private var stepsSequence: [WizardStep] {
+        if isNewFlow {
+            return [.welcome, .aboutYou, .body, .constitution, .allergens]
+        }
         var steps: [WizardStep] = [.name, .photo, .birthday, .gender]
         
         steps.append(contentsOf: [.height, .weight, .constitution])
@@ -268,13 +287,29 @@ struct ProfileWizardView: View {
     }
 
     private var displayedStepSubtitle: String {
-        currentStep == .constitution ? constitutionStepSubtitle : currentStep.subtitle
+        if isNewFlow, currentStep == .allergens {
+            return String(localized: "Select any you have, or leave it empty.")
+        }
+        return currentStep == .constitution ? constitutionStepSubtitle : currentStep.subtitle
+    }
+
+    private var isLastStep: Bool { currentStep == stepsSequence.last }
+
+    /// The welcome screen is not counted as a step.
+    private var stepNumberText: String {
+        isNewFlow
+            ? String(localized: "Step \(currentStepIndex) of \(totalSteps - 1)")
+            : String(localized: "Step \(currentStepIndex + 1) of \(totalSteps)")
     }
 
     private var isNextDisabled: Bool {
         switch currentStep {
-        case .name:
+        case .name, .aboutYou:
             return data.name.trimmingCharacters(in: .whitespaces).isEmpty
+        case .body:
+            let heightVal = UnitConversion.parseDecimal(data.height) ?? 0
+            let weightVal = UnitConversion.parseDecimal(data.weight) ?? 0
+            return heightVal <= 0 || weightVal <= 0
         case .height:
             let heightVal = UnitConversion.parseDecimal(data.height)
             return heightVal == nil || heightVal! <= 0
@@ -296,7 +331,7 @@ struct ProfileWizardView: View {
                     
                     VStack(spacing: 4) {
                         HStack {
-                            Text("Step \(currentStepIndex + 1) of \(totalSteps)")
+                            Text(stepNumberText)
                                 .font(.caption2)
                                 .fontWeight(.medium)
                             Spacer()
@@ -314,6 +349,7 @@ struct ProfileWizardView: View {
                     .foregroundColor(effectManager.currentGlobalAccentColor)
                     .padding(.bottom, 20)
                     .padding(.horizontal)
+                    .opacity(currentStep == .welcome ? 0 : 1)
 
                     VStack(spacing: 20) {
                         VStack(spacing: 16) {
@@ -344,6 +380,9 @@ struct ProfileWizardView: View {
                                 case .allergens: allergensStep
                                 case .constitution: constitutionStep
                                 case .summary: summaryStep
+                                case .welcome: welcomeStep
+                                case .aboutYou: aboutYouStep
+                                case .body: bodyStep
                                 }
                             }
                             .transition(.asymmetric(
@@ -369,10 +408,38 @@ struct ProfileWizardView: View {
                 }
             }
             .ignoresSafeArea(.container, edges: .bottom)
-            .alert("Error", isPresented: $showAlert) {
-                Button("OK", role: .cancel) {}
+            .alert(offerSettingsInAlert ? String(localized: "Calendar access") : String(localized: "Error"), isPresented: $showAlert) {
+                if offerSettingsInAlert {
+                    Button(String(localized: "Open Settings")) {
+                        offerSettingsInAlert = false
+                        if let url = URL(string: UIApplication.openSettingsURLString) {
+                            UIApplication.shared.open(url)
+                        }
+                    }
+                }
+                Button("OK", role: .cancel) { offerSettingsInAlert = false }
             } message: { Text(alertMessage) }
             .onAppear {
+                if isNewFlow, currentStep == .name {
+                    currentStep = .welcome
+                }
+                #if DEBUG
+                // For screenshots: `-wizardStartStep 2` opens the flow at that step.
+                if UserDefaults.standard.object(forKey: "wizardStartStep") != nil {
+                    let index = UserDefaults.standard.integer(forKey: "wizardStartStep")
+                    if stepsSequence.indices.contains(index) {
+                        if data.name.isEmpty { data.name = "Maya" }
+                        currentStep = stepsSequence[index]
+                    }
+                }
+                // For a check without taps: `-wizardAutoFinish YES` saves a default profile.
+                if isInit, UserDefaults.standard.bool(forKey: "wizardAutoFinish") {
+                    data.name = "Maya"
+                    data.height = composeHeightString(whole: isImperial ? 66 : 170, dec: 0)
+                    data.weight = composeWeightString(whole: isImperial ? 155 : 70, dec: 0)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 6) { saveProfile() }
+                }
+                #endif
                 if currentStep == .name {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                         focusedField = .name
@@ -418,7 +485,9 @@ struct ProfileWizardView: View {
             }
           
             Spacer()
-            Text("New Profile")
+            Text(isNewFlow
+                 ? (currentStep == .welcome ? "Ayurveda & Asana Yoga" : String(localized: "Your profile"))
+                 : String(localized: "New Profile"))
                 .font(.headline)
             Spacer()
             
@@ -450,13 +519,13 @@ struct ProfileWizardView: View {
             }
 
             Button(action: {
-                if currentStep == .summary {
+                if isLastStep {
                     saveProfile()
                 } else {
                     nextStep()
                 }
             }) {
-                Text(currentStep == .summary ? "Save Profile" : "Continue")
+                Text(isLastStep ? (isNewFlow ? String(localized: "Finish") : String(localized: "Save Profile")) : String(localized: "Continue"))
                     .frame(maxWidth: .infinity)
                     .contentShape(Rectangle())
             }
@@ -472,6 +541,202 @@ struct ProfileWizardView: View {
                     ? "profile-wizard-save"
                     : "profile-wizard-continue"
             )
+        }
+    }
+
+    // MARK: Short first-run flow
+
+    private func welcomePoint(_ symbol: String, _ title: String, _ detail: String) -> some View {
+        HStack(alignment: .top, spacing: 14) {
+            Image(systemName: symbol)
+                .font(.title2)
+                .frame(width: 34)
+            VStack(alignment: .leading, spacing: 3) {
+                Text(title).font(.headline)
+                Text(detail).font(.subheadline).opacity(0.8)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    @ViewBuilder private var welcomeStep: some View {
+        VStack(spacing: 22) {
+            Spacer(minLength: 0)
+            VStack(spacing: 20) {
+                welcomePoint(
+                    "leaf",
+                    String(localized: "Food that suits you"),
+                    String(localized: "Search 14,000 foods and see how each one affects vata, pitta and kapha.")
+                )
+                welcomePoint(
+                    "figure.mind.and.body",
+                    String(localized: "Yoga and guided practices"),
+                    String(localized: "900 poses and 60 sessions of meditation, breathing and rest.")
+                )
+                welcomePoint(
+                    "calendar",
+                    String(localized: "A plan for your day"),
+                    String(localized: "Meals, workouts and reminders in one place.")
+                )
+            }
+            .foregroundStyle(effectManager.currentGlobalAccentColor)
+
+            Text("Four short questions, about a minute.")
+                .font(.footnote)
+                .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.7))
+            Spacer(minLength: 0)
+
+            Button(action: nextStep) {
+                Text("Get started")
+                    .frame(maxWidth: .infinity)
+                    .contentShape(Rectangle())
+            }
+            .fontWeight(.bold)
+            .padding(.vertical, 12)
+            .glassCardStyle(cornerRadius: 20)
+            .foregroundStyle(effectManager.currentGlobalAccentColor)
+            .accessibilityIdentifier("profile-wizard-get-started")
+
+            Button(action: restoreFromCalendar) {
+                Text("I have used the app before")
+                    .font(.footnote.weight(.semibold))
+            }
+            .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
+            .accessibilityIdentifier("profile-wizard-restore")
+        }
+    }
+
+    @ViewBuilder private var aboutYouStep: some View {
+        VStack(spacing: 16) {
+            StyledLabeledPicker(label: String(localized: "Name"), isRequired: true) {
+                ConfigurableTextField(
+                    title: "",
+                    value: $data.name,
+                    type: .standard,
+                    placeholderColor: effectManager.currentGlobalAccentColor,
+                    textAlignment: .leading,
+                    focused: $focusedField,
+                    fieldIdentifier: .name
+                )
+                .font(.title3)
+                .accessibilityIdentifier("profile-wizard-name")
+            }
+
+            HStack {
+                Text("Birthday")
+                    .font(.subheadline.weight(.semibold))
+                Spacer()
+                DatePicker("", selection: $data.birthday, in: ...Date(), displayedComponents: .date)
+                    .datePickerStyle(.compact)
+                    .labelsHidden()
+                    .tint(effectManager.currentGlobalAccentColor)
+                    .environment(\.colorScheme, effectManager.appColorScheme)
+            }
+            .foregroundStyle(effectManager.currentGlobalAccentColor)
+
+            HStack(spacing: 12) {
+                ForEach(Gender.allCases) { gender in
+                    Button {
+                        withAnimation { data.gender = gender }
+                    } label: {
+                        VStack(spacing: 6) {
+                            Image(gender == .male ? "m" : "f")
+                                .resizable()
+                                .renderingMode(.template)
+                                .scaledToFit()
+                                .frame(height: 64)
+                            Text(gender == .male ? String(localized: "Male") : String(localized: "Female"))
+                                .font(.subheadline.weight(.semibold))
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 12)
+                        .contentShape(Rectangle())
+                        .glassCardStyle(cornerRadius: 18)
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                                .stroke(effectManager.currentGlobalAccentColor, lineWidth: data.gender == gender ? 1.5 : 0)
+                        }
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityIdentifier("profile-wizard-gender-\(gender.rawValue)")
+                }
+            }
+            .foregroundStyle(effectManager.currentGlobalAccentColor)
+
+            Spacer(minLength: 0)
+            navigationButtons
+        }
+    }
+
+    @ViewBuilder private var bodyStep: some View {
+        VStack(spacing: 14) {
+            StyledLabeledPicker(label: String(localized: "Height (\(isImperial ? "in" : "cm"))"), isFixedHeight: false, isRequired: true) {
+                HStack(spacing: 8) {
+                    InfiniteWheelPicker(values: heightWholeRange, selection: heightWholeBinding)
+                    Text(decimalSeparator).font(.title2.weight(.bold))
+                    InfiniteWheelPicker(values: isImperial ? decimalRangeInches : decimalRange, selection: heightDecimalBinding)
+                    Text(isImperial ? "in" : "cm").font(.headline).padding(.leading, 4)
+                }
+                .frame(height: 110)
+                .tint(effectManager.currentGlobalAccentColor)
+                .environment(\.colorScheme, effectManager.appColorScheme)
+            }
+            StyledLabeledPicker(label: String(localized: "Weight (\(isImperial ? "lbs" : "kg"))"), isFixedHeight: false, isRequired: true) {
+                HStack(spacing: 8) {
+                    Picker("Whole", selection: weightWholeBinding) {
+                        ForEach(weightWholeRange, id: \.self) { v in
+                            Text("\(v)").tag(v)
+                        }
+                    }
+                    .pickerStyle(.wheel)
+                    .labelsHidden()
+                    Text(decimalSeparator).font(.title2.weight(.bold))
+                    InfiniteWheelPicker(values: decimalRange, selection: weightDecimalBinding)
+                    Text(isImperial ? "lbs" : "kg").font(.headline).padding(.leading, 4)
+                }
+                .frame(height: 110)
+                .tint(effectManager.currentGlobalAccentColor)
+                .environment(\.colorScheme, effectManager.appColorScheme)
+            }
+            Spacer(minLength: 0)
+            navigationButtons
+        }
+        .onAppear {
+            if data.height.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                let defaultHeight = ageInYears < 2 ? (isImperial ? 25 : 60) : (isImperial ? 66 : 170)
+                data.height = composeHeightString(whole: defaultHeight, dec: 0)
+            }
+            if data.weight.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                let defaultWeight = ageInYears < 2 ? (isImperial ? 15 : 7) : (isImperial ? 155 : 70)
+                data.weight = composeWeightString(whole: defaultWeight, dec: 0)
+            }
+        }
+    }
+
+    /// A reinstall: profiles are kept in the person's calendars. Asking for the
+    /// calendar here, on request, replaces the prompt at launch.
+    private func restoreFromCalendar() {
+        Task { @MainActor in
+            isSaving = true
+            defer { isSaving = false }
+            guard await calVM.requestCalendarAccessIfNeeded() else {
+                alertMessage = String(localized: "Without calendar access an earlier profile cannot be restored. You can allow it in Settings, or start a new profile.")
+                showAlert = true
+                return
+            }
+            await calVM.ensureSharedShoppingListCalendarExists()
+            let existing = (try? modelContext.fetch(FetchDescriptor<Profile>())) ?? []
+            await calVM.reconstructProfilesFromCalendars(
+                existingProfileIDs: Set(existing.map { $0.id.uuidString }),
+                allVitamins: allVitamins,
+                allMinerals: allMinerals,
+                context: modelContext
+            )
+            let restored = (try? modelContext.fetch(FetchDescriptor<Profile>())) ?? []
+            if restored.isEmpty {
+                alertMessage = String(localized: "No earlier profile was found in your calendars.")
+                showAlert = true
+            }
         }
     }
 
@@ -844,6 +1109,12 @@ struct ProfileWizardView: View {
                 dissableText: true
             )
             Spacer()
+            if isNewFlow, EKEventStore.authorizationStatus(for: .event) == .notDetermined {
+                Text("When you finish, iOS asks for calendar access: your profile and daily plan are kept in your own calendar.")
+                    .font(.footnote)
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
+            }
             navigationButtons
         }
         .ignoresSafeArea(.keyboard, edges: .bottom) // ✅ ДОБАВЕНО
@@ -981,6 +1252,9 @@ struct ProfileWizardView: View {
             if currentIndex < stepsSequence.count - 1 {
                 currentStep = stepsSequence[currentIndex + 1]
             }
+        }
+        if currentStep == .aboutYou {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { focusedField = .name }
         }
         let simpleSteps: [WizardStep] = [.name, .height, .weight]
         if simpleSteps.contains(currentStep) {
@@ -1184,10 +1458,20 @@ struct ProfileWizardView: View {
             let chosenMinerals = allMinerals.filter { data.selectedMinIDs.contains($0.id) }
             let chosenAllergens = data.selectedAllergens.compactMap { Allergen(rawValue: $0) }
 
+            // The profile is kept in the person's own calendar, and the app only
+            // shows a profile that has one. The short flow asks here, at the end,
+            // after saying why, and offers Settings when access was refused.
             guard await calVM.requestCalendarAccessIfNeeded() else {
-                alertMessage = "Calendar access is required. Please grant permission in Settings."
+                alertMessage = isNewFlow
+                    ? String(localized: "Your profile and daily plan are kept in your own calendar, so the app needs calendar access to finish. You can allow it in Settings.")
+                    : "Calendar access is required. Please grant permission in Settings."
+                offerSettingsInAlert = isNewFlow
                 showAlert = true
                 return
+            }
+            if isNewFlow {
+                // What the launch does when access is already there.
+                await calVM.ensureSharedShoppingListCalendarExists()
             }
 
             do {
