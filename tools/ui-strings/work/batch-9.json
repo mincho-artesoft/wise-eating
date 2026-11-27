@@ -1,0 +1,367 @@
+[
+{
+"i": 1394,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Welcome",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .welcome: String(localized: \"Welcome\")",
+"above": "case .summary: \"Confirm Your Details\""
+},
+{
+"i": 1395,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "About you",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .aboutYou: String(localized: \"About you\")",
+"above": "case .welcome: String(localized: \"Welcome\")"
+},
+{
+"i": 1396,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Height and weight",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .body: String(localized: \"Height and weight\")",
+"above": "case .aboutYou: String(localized: \"About you\")"
+},
+{
+"i": 1397,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Food, yoga and guided practices chosen for your constitution.",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .welcome: String(localized: \"Food, yoga and guided practices chosen for your constitution.\")",
+"above": "case .summary: \"Please review your information.\""
+},
+{
+"i": 1398,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Your age and sex set your nutritional needs.",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .aboutYou: String(localized: \"Your age and sex set your nutritional needs.\")",
+"above": "case .welcome: String(localized: \"Food, yoga and guided practices chosen for your constitution.\")"
+},
+{
+"i": 1399,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Used for your calorie and nutrient targets.",
+"in": [
+"ProfileWizardView"
+],
+"code": "case .body: String(localized: \"Used for your calorie and nutrient targets.\")",
+"above": "case .aboutYou: String(localized: \"Your age and sex set your nutritional needs.\")"
+},
+{
+"i": 1400,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Select any you have, or leave it empty.",
+"in": [
+"ProfileWizardView"
+],
+"code": "return String(localized: \"Select any you have, or leave it empty.\")",
+"above": "private var displayedStepSubtitle: String {"
+},
+{
+"i": 1401,
+"k": "alert",
+"p": "onboarding-paywall",
+"s": "Calendar access",
+"in": [
+"ProfileWizardView"
+],
+"code": ".alert(offerSettingsInAlert ? String(localized: \"Calendar access\") : String(localized: \"Error\"), isPresented: $showAlert) {"
+},
+{
+"i": 1402,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Your profile",
+"in": [
+"ProfileWizardView"
+],
+"code": "? (currentStep == .welcome ? \"Ayurveda & Asana Yoga\" : String(localized: \"Your profile\"))"
+},
+{
+"i": 1403,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Finish",
+"in": [
+"ProfileWizardView"
+],
+"code": "Text(isLastStep ? (isNewFlow ? String(localized: \"Finish\") : String(localized: \"Save Profile\")) : String(localized: \"Continue\"))"
+},
+{
+"i": 1404,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Food that suits you",
+"in": [
+"ProfileWizardView"
+],
+"code": "String(localized: \"Food that suits you\"),",
+"above": "@ViewBuilder private var welcomeStep: some View {"
+},
+{
+"i": 1405,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Search 14,000 foods and see how each one affects vata, pitta and kapha.",
+"in": [
+"ProfileWizardView"
+],
+"code": "String(localized: \"Search 14,000 foods and see how each one affects vata, pitta and kapha.\")",
+"above": "@ViewBuilder private var welcomeStep: some View {"
+},
+{
+"i": 1406,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Yoga and guided practices",
+"in": [
+"ProfileWizardView"
+],
+"code": "String(localized: \"Yoga and guided practices\"),",
+"above": "@ViewBuilder private var welcomeStep: some View {"
+},
+{
+"i": 1407,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "900 poses and 60 sessions of meditation, breathing and rest.",
+"in": [
+"ProfileWizardView"
+],
+"code": "String(localized: \"900 poses and 60 sessions of meditation, breathing and rest.\")"
+},
+{
+"i": 1408,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "A plan for your day",
+"in": [
+"ProfileWizardView"
+],
+"code": "String(localized: \"A plan for your day\"),"
+},
+{
+"i": 1409,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Meals, workouts and reminders in one place.",
+"in": [
+"ProfileWizardView"
+],
+"code": "String(localized: \"Meals, workouts and reminders in one place.\")"
+},
+{
+"i": 1410,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Four short questions, about a minute.",
+"in": [
+"ProfileWizardView"
+],
+"code": "Text(\"Four short questions, about a minute.\")"
+},
+{
+"i": 1411,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Get started",
+"in": [
+"ProfileWizardView"
+],
+"code": "Text(\"Get started\")"
+},
+{
+"i": 1412,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "I have used the app before",
+"in": [
+"ProfileWizardView"
+],
+"code": "Text(\"I have used the app before\")"
+},
+{
+"i": 1413,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Without calendar access an earlier profile cannot be restored. You can allow it in Settings, or start a new profile.",
+"in": [
+"ProfileWizardView"
+],
+"code": "alertMessage = String(localized: \"Without calendar access an earlier profile cannot be restored. You can allow it in Settings, or start a new profile.\")",
+"above": "private func restoreFromCalendar() {"
+},
+{
+"i": 1414,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "No earlier profile was found in your calendars.",
+"in": [
+"ProfileWizardView"
+],
+"code": "alertMessage = String(localized: \"No earlier profile was found in your calendars.\")",
+"above": "let restored = (try? modelContext.fetch(FetchDescriptor<Profile>())) ?? []"
+},
+{
+"i": 1415,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "When you finish, iOS asks for calendar access: your profile and daily plan are kept in your own calendar.",
+"in": [
+"ProfileWizardView"
+],
+"code": "Text(\"When you finish, iOS asks for calendar access: your profile and daily plan are kept in your own calendar.\")"
+},
+{
+"i": 1416,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Your profile and daily plan are kept in your own calendar, so the app needs calendar access to finish. You can allow it in Settings.",
+"in": [
+"ProfileWizardView"
+],
+"code": "? String(localized: \"Your profile and daily plan are kept in your own calendar, so the app needs calendar access to finish. You can allow it in Settings.\")",
+"above": "let chosenAllergens = data.selectedAllergens.compactMap { Allergen(rawValue: $0) }"
+},
+{
+"i": 1417,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Keep the app calm",
+"in": [
+"PaywallView"
+],
+"code": "Text(\"Keep the app calm\")"
+},
+{
+"i": 1418,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Everything in the app is free to use. A plan removes the ads and supports the work.",
+"in": [
+"PaywallView"
+],
+"code": "Text(\"Everything in the app is free to use. A plan removes the ads and supports the work.\")",
+"above": ".font(.title.weight(.bold))"
+},
+{
+"i": 1419,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "No ads anywhere in the app",
+"in": [
+"PaywallView"
+],
+"code": "benefit(\"nosign\", String(localized: \"No ads anywhere in the app\"))"
+},
+{
+"i": 1420,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "More profiles for a family with the larger plans",
+"in": [
+"PaywallView"
+],
+"code": "benefit(\"person.2\", String(localized: \"More profiles for a family with the larger plans\"))"
+},
+{
+"i": 1421,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Cancel at any time in your Apple Account",
+"in": [
+"PaywallView"
+],
+"code": "benefit(\"arrow.uturn.backward\", String(localized: \"Cancel at any time in your Apple Account\"))"
+},
+{
+"i": 1422,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Loading prices…",
+"in": [
+"PaywallView"
+],
+"code": "Text(\"Loading prices…\").font(.footnote).opacity(0.7)"
+},
+{
+"i": 1423,
+"k": "button",
+"p": "onboarding-paywall",
+"s": "See all plans",
+"in": [
+"PaywallView"
+],
+"code": "Button(String(localized: \"See all plans\"), action: onSeeAllPlans)"
+},
+{
+"i": 1424,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Start Free Trial",
+"in": [
+"PaywallView"
+],
+"code": "? String(localized: \"Start Free Trial\")",
+"above": "if let product = selectedProduct {"
+},
+{
+"i": 1425,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "per year",
+"in": [
+"PaywallView"
+],
+"code": "Text(\"\\(product.displayPrice) \\(yearly ? String(localized: \"per year\") : String(localized: \"per month\")). Renews automatically until cancelled; cancel at least "
+},
+{
+"i": 1426,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "per month",
+"in": [
+"PaywallView"
+],
+"code": "Text(\"\\(product.displayPrice) \\(yearly ? String(localized: \"per year\") : String(localized: \"per month\")). Renews automatically until cancelled; cancel at least "
+},
+{
+"i": 1427,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "%@ %@. Renews automatically until cancelled; cancel at least 24 hours before the period ends. Payment is charged to your Apple Account.",
+"in": [
+"PaywallView"
+],
+"code": "Text(\"\\(product.displayPrice) \\(yearly ? String(localized: \"per year\") : String(localized: \"per month\")). Renews automatically until cancelled; cancel at least "
+},
+{
+"i": 1428,
+"k": "text",
+"p": "onboarding-paywall",
+"s": "Your current plan: %@",
+"in": [
+"PaywallView"
+],
+"code": "Text(\"Your current plan: \\(manager.subscriptionStatus.title)\")"
+}
+]

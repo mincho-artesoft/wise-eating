@@ -75,7 +75,8 @@ batches; item numbers go on from 678 and batches 0–3 are untouched.
 | 5 | 257 | calendar, shared views, exercise, fitness, food |
 | 6 | 215 | food search, health, live activity, main (tabs, permissions, notifications), meals, nodes, nutrients, practices, profile, settings, shopping list, storage, training plan, yoga |
 | 7 | 17 | Live Activity widget, subscription period words |
-| 8 | 12 | onboarding — **last, with batch 3, only when Mincho says so** |
+| 8 | 12 | onboarding (the earlier, 13-step variant) |
+| 9 | 35 | the new onboarding (five screens) and the new plan screen |
 
 Same procedure as batches 0–2, and the section "The second round" of the
 guide. `assemble.py` reads every batch that has an out file and keeps what a

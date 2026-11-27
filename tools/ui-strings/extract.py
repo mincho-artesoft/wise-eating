@@ -79,7 +79,8 @@ def code_line(source, line, key):
 
 items = []
 for key, where in places.items():
-    if key in catalogue and catalogue[key].get("localizations"):
+    # The 18 strings that were in the catalogue, translated, before this package.
+    if catalogue.get(key, {}).get("extractionState") == "manual":
         continue
     if not re.search(r"[^\W\d_]{2}", key) and key not in KEEP_SHORT:
         continue

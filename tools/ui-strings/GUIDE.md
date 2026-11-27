@@ -1,6 +1,6 @@
 # Translating the interface
 
-`work/batch-0.json` … `batch-8.json` hold 1,394 strings (about 5,100 words):
+`work/batch-0.json` … `batch-9.json` hold 1,429 strings (about 5,400 words):
 the buttons, titles, labels, messages and placeholders of the app, and the six
 texts iOS shows when it asks for a permission. Batches 0–3 are the first round,
 4–8 the second (text the app used to hold in plain values: option names, the
@@ -116,8 +116,9 @@ that it reads with any number ("days: %lld" rather than "%lld day").
 - Western digits. One translation per item; no notes, no alternatives.
 - A string that is only a name, a unit or a symbol in that language may stay
   as the English; do not leave a real word untranslated.
-- Batches 3 and 8 (`onboarding-paywall`) are translated last and only when
-  Mincho says so: those screens are about to be rewritten.
+- Batches 3, 8 and 9 (`onboarding-paywall`) are the first screens a person
+  sees and the plan screen: 3 and 8 the earlier variant, 9 the new one, which
+  is the one shown by default. They are translated when Mincho says so.
 
 ## The second round (batches 4–8)
 
