@@ -1,0 +1,74 @@
+[
+  {
+    "question": "Which has best described your build for most of your adult life?",
+    "vata": "Light or thin; hard to put on weight",
+    "pitta": "Medium or defined; changes with effort",
+    "kapha": "Solid or broad; gains easily"
+  },
+  {
+    "question": "Over the years, your weight has usually tended to?",
+    "vata": "Fluctuate, or stay low",
+    "pitta": "Hold steady with effort",
+    "kapha": "Climb, and come off slowly"
+  },
+  {
+    "question": "Your skin has generally felt?",
+    "vata": "Dry or rough and cool to touch",
+    "pitta": "Warm and quick to flush",
+    "kapha": "Soft, moist and cool"
+  },
+  {
+    "question": "Your hair has generally been?",
+    "vata": "Fine, dry and prone to frizz",
+    "pitta": "Fine and prone to early greying or thinning",
+    "kapha": "Thick, wavy and prone to oiliness"
+  },
+  {
+    "question": "Your appetite is usually?",
+    "vata": "Irregular — big some days, absent on others",
+    "pitta": "Strong; a late meal feels uncomfortable",
+    "kapha": "Steady; skipping a meal is usually easy"
+  },
+  {
+    "question": "After a heavy meal, you usually feel?",
+    "vata": "Gassy or bloated",
+    "pitta": "Warm, sometimes acidic",
+    "kapha": "Heavy and sleepy"
+  },
+  {
+    "question": "The weather you have usually felt best in is?",
+    "vata": "Warm and humid",
+    "pitta": "Cool and breezy",
+    "kapha": "Warm and dry"
+  },
+  {
+    "question": "Your energy through a typical day usually?",
+    "vata": "Comes in bursts, then dips",
+    "pitta": "Feels steady and driven",
+    "kapha": "Starts slowly, then lasts"
+  },
+  {
+    "question": "Your sleep on most nights is?",
+    "vata": "Light; you wake easily",
+    "pitta": "Moderate; you wake, then resettle",
+    "kapha": "Deep and long; waking is hard"
+  },
+  {
+    "question": "Your natural pace has usually been?",
+    "vata": "Quick; sitting still is difficult",
+    "pitta": "Purposeful and focused",
+    "kapha": "Unhurried and steady"
+  },
+  {
+    "question": "In conversation, you usually tend to be?",
+    "vata": "Fast and likely to jump between subjects",
+    "pitta": "Precise and eager to convince",
+    "kapha": "Measured and happy to listen"
+  },
+  {
+    "question": "Under pressure, you usually notice yourself becoming?",
+    "vata": "Scattered",
+    "pitta": "Sharp",
+    "kapha": "Quiet"
+  }
+]

@@ -308,9 +308,59 @@ Deploy steps and environment variables: see section 8 (filled in phase 2).
 4. Onboarding "Talk it through" + free grant (DeviceCheck / App Attest).
 5. Credits in the paywall. **STOP** with the App Store Connect list.
 
-## 8. Deploy steps and environment (phase 2)
+## 8. Deploy steps and environment (phase 2) — prepared, not done
 
-(filled in phase 2)
+Not deployed. Nothing below has been run on the server; it needs the owner's go-ahead.
+
+**What exists:** `server/assistant-backend/` (NestJS 11, Prisma 6, Postgres). Endpoints
+under `/api`: `devices/challenge`, `devices/register`, `wallet`, `grants/onboarding`,
+`realtime/client-secret`, `realtime/sessions/:id/usage`, `realtime/sessions/:id/end`,
+`reasoning`, `app-store/transactions`, `app-store/notifications`, `health/ready`.
+Migration `prisma/migrations/20261128120000_init`. Tests: `npm test` starts a
+throwaway Postgres in `.test-db/` (private port and socket, removed afterwards),
+applies the migration and runs 20 Jest tests with OpenAI, DeviceCheck and the App
+Store mocked (`global.fetch` replaced; no network). App Attest is tested with an
+openssl-made chain carrying Apple's nonce extension, and against Apple's real root.
+
+**Server-side rules enforced:** instructions and tools come only from
+`server/assistant-backend/assistant/` (the app picks a purpose); the tools file must
+equal the app's `assistant_tools.json` (test); a device token is needed for every
+paid call; 402 when credits are below `MIN_CREDITS_TO_START`; usage is idempotent per
+event; a per-minute floor is charged at the end of a voice session; one voice session
+per device; sessions older than `VOICE_SESSION_MAX_MINUTES` are swept; photos only for
+`purpose: photo`, JPEG ≤ 6 MB, sent to OpenAI with `store:false` and not saved.
+
+**Deploy steps (for later, with the owner):**
+1. On this Mac: `cd server/assistant-backend && npm ci && npm test`.
+2. Build the image here, not on the server:
+   `docker buildx build --platform linux/amd64 -t ayura-assistant-backend:<date> --load .`
+   then `docker save ayura-assistant-backend:<date> | gzip > /tmp/ayura-assistant-backend.tgz`.
+3. On the server: `df -h /` first (stop above 80 %). Copy the archive to
+   `/mnt/wonek-storagebox/server-archive/ayura-assistant/<YYYY-MM-DD>/`, `docker load`
+   from there, remove the archive from local disk.
+4. Database: on the shared Postgres container create a role and database
+   `ayura_assistant` (separate from the GPT Realtime Assistant database).
+5. Env file `/opt/ayura-assistant/.env` (root-only, mode 600) from `.env.example`;
+   the OpenAI key is typed there by the owner, never committed or sent in a message.
+6. Add the service to the compose file next to `realtime-assistant-backend`
+   (port 3020 internal), nginx `server_name` e.g. `ayura-api.wonek.com` with certbot;
+   the entrypoint runs `prisma migrate deploy`.
+7. `curl https://<host>/api/health/ready`; then set `AyuraAssistantBackendURL` in the app's
+   Release build settings.
+8. App Store Connect: App Store Server Notifications V2 URL →
+   `https://<host>/api/app-store/notifications`.
+
+**Environment variables** (`.env.example` lists them all): `DATABASE_URL`,
+`JWT_SECRET`, `OPENAI_API_KEY`, `OPENAI_REALTIME_MODEL` (gpt-realtime-2.1),
+`OPENAI_REALTIME_VOICE` (marin), `OPENAI_TRANSCRIPTION_MODEL` (gpt-4o-mini-transcribe),
+`OPENAI_REASONING_MODEL` (gpt-6.2-sol), `OPENAI_CLIENT_SECRET_SECONDS`,
+`CREDITS_PER_USD`, `ONBOARDING_GRANT_ENABLED`, `ONBOARDING_GRANT_CREDITS`,
+`MIN_CREDITS_TO_START`, `VOICE_FLOOR_CREDITS_PER_MINUTE`, `VOICE_SESSION_MAX_MINUTES`,
+`CREDITS_PACK_SMALL`, `CREDITS_PACK_LARGE`, `CREDITS_SUB_MONTHLY`, `CREDITS_SUB_YEARLY`,
+`APPLE_TEAM_ID`, `APPLE_BUNDLE_ID`, `APPLE_APP_APPLE_ID`, `APPLE_ENVIRONMENT`,
+`APP_ATTEST_REQUIRED`, `APP_ATTEST_ALLOW_DEVELOPMENT`, `DEVICECHECK_REQUIRED`,
+`APPLE_DEVICECHECK_KEY_ID`, `APPLE_DEVICECHECK_PRIVATE_KEY` (a DeviceCheck key from
+the Apple developer account), `ALLOW_UNVERIFIED_STOREKIT_JWS` (false in production).
 
 ## 9. Decisions for the owner
 

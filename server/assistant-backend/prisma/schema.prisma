@@ -1,0 +1,146 @@
+// Ayurveda & Asana Yoga assistant backend. Its own database: no accounts,
+// no email; an install is a Device identified by an anonymous install id,
+// an App Attest key and Apple's DeviceCheck bits.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Device {
+  id                  String   @id @default(cuid())
+  /// Random id the app keeps in the keychain (survives reinstall on most devices).
+  installId           String   @unique
+  /// App Attest key id (base64) once attested; null where App Attest is unavailable.
+  attestKeyId         String?  @unique
+  attestPublicKey     Bytes?
+  attestCounter       Int      @default(0)
+  attestedAt          DateTime?
+  /// UUID given to StoreKit purchases so server notifications map back here.
+  appAccountToken     String   @unique @default(uuid())
+  createdAt           DateTime @default(now())
+  lastSeenAt          DateTime @default(now())
+  blocked             Boolean  @default(false)
+
+  ledger              CreditLedgerEntry[]
+  usage               UsageEvent[]
+  sessions            RealtimeSession[]
+  transactions        AppStoreTransaction[]
+}
+
+/// One row per onboarding grant. The DeviceCheck bit set by the server is the
+/// first line of defence; these unique keys are the second.
+model OnboardingGrant {
+  id              String   @id @default(cuid())
+  deviceId        String   @unique
+  installId       String   @unique
+  /// SHA-256 of the App Attest key id, when there is one.
+  attestKeyHash   String?  @unique
+  deviceCheckBits String?
+  credits         Int
+  createdAt       DateTime @default(now())
+}
+
+enum LedgerDirection {
+  CREDIT
+  DEBIT
+}
+
+enum LedgerSource {
+  ONBOARDING_GRANT
+  CREDIT_PACK
+  SUBSCRIPTION_GRANT
+  USAGE
+  APP_STORE_REVERSAL
+  ADMIN_ADJUSTMENT
+}
+
+/// Amounts are thousandths of a credit, so metering can charge fractions.
+model CreditLedgerEntry {
+  id             String          @id @default(cuid())
+  deviceId       String
+  device         Device          @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  direction      LedgerDirection
+  source         LedgerSource
+  amountMilli    BigInt
+  idempotencyKey String          @unique
+  relatedId      String?
+  metadata       Json?
+  createdAt      DateTime        @default(now())
+
+  @@index([deviceId, createdAt])
+}
+
+enum UsageKind {
+  REALTIME_RESPONSE
+  REALTIME_TRANSCRIPTION
+  REALTIME_MINUTE_FLOOR
+  REASONING
+}
+
+model UsageEvent {
+  id                String    @id @default(cuid())
+  deviceId          String
+  device            Device    @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  kind              UsageKind
+  model             String
+  purpose           String
+  sessionId         String?
+  inputTextTokens   Int       @default(0)
+  inputAudioTokens  Int       @default(0)
+  inputImageTokens  Int       @default(0)
+  cachedInputTokens Int       @default(0)
+  outputTextTokens  Int       @default(0)
+  outputAudioTokens Int       @default(0)
+  costMicrosUSD     BigInt
+  chargedMilli      BigInt
+  idempotencyKey    String    @unique
+  createdAt         DateTime  @default(now())
+
+  @@index([deviceId, createdAt])
+}
+
+enum RealtimeSessionStatus {
+  ACTIVE
+  ENDED
+  EXPIRED
+}
+
+model RealtimeSession {
+  id              String                @id @default(cuid())
+  deviceId        String
+  device          Device                @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  purpose         String
+  model           String
+  status          RealtimeSessionStatus @default(ACTIVE)
+  secretExpiresAt DateTime?
+  /// Credits held back while the session runs, released at the end.
+  reservedMilli   BigInt                @default(0)
+  /// What the reported usage has charged so far.
+  chargedMilli    BigInt                @default(0)
+  startedAt       DateTime              @default(now())
+  endedAt         DateTime?
+
+  @@index([deviceId, status])
+}
+
+model AppStoreTransaction {
+  id                    String    @id @default(cuid())
+  deviceId              String?
+  device                Device?   @relation(fields: [deviceId], references: [id], onDelete: SetNull)
+  transactionId         String    @unique
+  originalTransactionId String
+  productId             String
+  kind                  String
+  environment           String
+  purchaseDate          DateTime?
+  expiresDate           DateTime?
+  revocationDate        DateTime?
+  createdAt             DateTime  @default(now())
+
+  @@index([originalTransactionId])
+}

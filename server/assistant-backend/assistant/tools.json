@@ -1,0 +1,168 @@
+[
+  {
+    "type": "function",
+    "name": "search_foods",
+    "description": "Search the app's food catalogue. Returns food_id, name, nutrients per 100 g and Ayurvedic effect (vata/pitta/kapha from -2 pacifies to +2 aggravates). Foods with the person's allergens are left out by default.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": { "type": "string", "description": "Food name or description, in the person's language or English." },
+        "limit": { "type": "integer", "minimum": 1, "maximum": 20 },
+        "filters": {
+          "type": "object",
+          "properties": {
+            "exclude_allergens": { "type": "boolean" },
+            "max_per_100g": { "type": "object", "description": "Nutrient key (protein, energy, sodium, totalSugar, totalFat, carbs) to a maximum per 100 g.", "additionalProperties": { "type": "number" } }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": ["query"],
+      "additionalProperties": false
+    }
+  },
+  {
+    "type": "function",
+    "name": "get_day",
+    "description": "What is logged for a day: meals, foods with grams, totals, and warnings against the person's constraints.",
+    "parameters": {
+      "type": "object",
+      "properties": { "date": { "type": "string", "description": "today, yesterday, or YYYY-MM-DD." } },
+      "additionalProperties": false
+    }
+  },
+  {
+    "type": "function",
+    "name": "log_food",
+    "description": "Propose adding foods to a meal. Nothing is written: the app shows a card with the app's own check, and the person confirms. Use food_id values from search_foods.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "meal": { "type": "string", "description": "The meal name from get_profile, or breakfast/lunch/dinner/snack." },
+        "date": { "type": "string", "description": "today, yesterday, or YYYY-MM-DD." },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "food_id": { "type": "string" },
+              "grams": { "type": "number", "minimum": 1, "maximum": 3000 }
+            },
+            "required": ["food_id", "grams"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["items"],
+      "additionalProperties": false
+    }
+  },
+  {
+    "type": "function",
+    "name": "remove_logged_food",
+    "description": "Propose removing a logged food from a meal; the person confirms.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "meal": { "type": "string" },
+        "date": { "type": "string" },
+        "food_id": { "type": "string" },
+        "food_name": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  {
+    "type": "function",
+    "name": "get_profile",
+    "description": "The person's age, sex, height, weight, Ayurvedic constitution, allergens, dietary constraints and meal names. No name or photo.",
+    "parameters": { "type": "object", "properties": {}, "additionalProperties": false }
+  },
+  {
+    "type": "function",
+    "name": "get_dietary_constraints",
+    "description": "The person's stored dietary constraints.",
+    "parameters": { "type": "object", "properties": {}, "additionalProperties": false }
+  },
+  {
+    "type": "function",
+    "name": "set_dietary_constraints",
+    "description": "Propose saving constraints the person stated (their own, from a doctor, a prescription or a lab report). The app shows them as an editable list and stores only what the person confirms. Never invent a limit.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": { "type": "string", "enum": ["nutrient_max", "nutrient_min", "exclude_food", "prefer_food"] },
+              "nutrient": { "type": "string", "description": "protein, energy, carbs, totalSugar, totalFat, saturatedFat, fiber, sodium, potassium, phosphorus, calcium, iron, cholesterol, vitaminK" },
+              "amount": { "type": "number" },
+              "unit": { "type": "string", "enum": ["g", "mg", "µg", "kcal"] },
+              "period": { "type": "string", "enum": ["day", "meal"] },
+              "food": { "type": "string", "description": "For exclude_food / prefer_food: one food word, e.g. tomato." },
+              "source": { "type": "string", "enum": ["self", "doctor", "prescription", "lab_report"] },
+              "note": { "type": "string" }
+            },
+            "required": ["kind"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["constraints"],
+      "additionalProperties": false
+    }
+  },
+  {
+    "type": "function",
+    "name": "create_recipe",
+    "description": "Propose creating a recipe with the app's own generator; it appears in the app's Generate tab.",
+    "parameters": { "type": "object", "properties": { "name": { "type": "string" } }, "required": ["name"], "additionalProperties": false }
+  },
+  {
+    "type": "function",
+    "name": "create_food",
+    "description": "Propose creating a food that is not in the catalogue; it appears in the app's Generate tab.",
+    "parameters": { "type": "object", "properties": { "name": { "type": "string" } }, "required": ["name"], "additionalProperties": false }
+  },
+  {
+    "type": "function",
+    "name": "create_meal_plan",
+    "description": "Propose a meal plan for 1 to 7 days, made by the app's generator with the stored constraints and allergies, then checked by the app.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "days": { "type": "integer", "minimum": 1, "maximum": 7 },
+        "notes": { "type": "array", "items": { "type": "string" }, "description": "Wishes for the plan, e.g. 'more protein at breakfast'." }
+      },
+      "required": ["days"],
+      "additionalProperties": false
+    }
+  },
+  {
+    "type": "function",
+    "name": "set_constitution",
+    "description": "Propose saving the constitution from the person's answers to the app's 12 questions, in order, one of vata/pitta/kapha each (the dosha of the option the person chose). Only after all 12 were asked and answered.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "answers": { "type": "array", "minItems": 12, "maxItems": 12, "items": { "type": "string", "enum": ["vata", "pitta", "kapha"] } }
+      },
+      "required": ["answers"],
+      "additionalProperties": false
+    }
+  },
+  {
+    "type": "function",
+    "name": "find_practice",
+    "description": "Find the app's guided practices (breathing, meditation, relaxation) by goal or name.",
+    "parameters": { "type": "object", "properties": { "query": { "type": "string" }, "limit": { "type": "integer", "minimum": 1, "maximum": 10 } }, "required": ["query"], "additionalProperties": false }
+  },
+  {
+    "type": "function",
+    "name": "find_pose",
+    "description": "Find yoga poses in the app by name, Sanskrit name or purpose.",
+    "parameters": { "type": "object", "properties": { "query": { "type": "string" }, "limit": { "type": "integer", "minimum": 1, "maximum": 10 } }, "required": ["query"], "additionalProperties": false }
+  }
+]
