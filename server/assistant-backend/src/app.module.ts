@@ -2,6 +2,9 @@ import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { AdminController, AdminPageController } from './admin/admin.controller';
+import { AdminGuard } from './admin/admin.guard';
+import { AdminService } from './admin/admin.service';
 import { AppStoreController } from './app-store/app-store.controller';
 import { AppStoreService } from './app-store/app-store.service';
 import { DeviceAuthGuard } from './auth/auth';
@@ -28,9 +31,11 @@ import { WalletService } from './wallet/wallet.service';
       skipIf: () => process.env.THROTTLE_DISABLED === 'true' && process.env.NODE_ENV !== 'production',
     }),
   ],
-  controllers: [DevicesController, RealtimeController, ReasoningController, AppStoreController, HealthController],
+  controllers: [AdminController, AdminPageController, DevicesController, RealtimeController, ReasoningController, AppStoreController, HealthController],
   providers: [
     WalletService,
+    AdminService,
+    AdminGuard,
     DevicesService,
     DeviceCheckClient,
     RealtimeService,

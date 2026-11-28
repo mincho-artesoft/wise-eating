@@ -55,6 +55,14 @@ describe('devices and the onboarding grant', () => {
     expect(res.body.message).toMatch(/already given on this device/);
   });
 
+  it('refuses a forged DeviceCheck token with 403 and gives nothing', async () => {
+    const { token } = await register(app);
+    const api = authed(app, token);
+    const res = await api.post('/api/grants/onboarding').send({ deviceCheckToken: 'forged-token' }).expect(403);
+    expect(res.body.message).toMatch(/not valid/);
+    expect((await api.get('/api/wallet')).body.wallet.credits).toBe(0);
+  });
+
   it('requires DeviceCheck when configured to', async () => {
     process.env.DEVICECHECK_REQUIRED = 'true';
     try {

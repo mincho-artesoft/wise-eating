@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ayurveda асистент · админ</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f6f5f2; --card: #ffffff; --ink: #1d1d1b; --muted: #6b6a66; --line: #e4e2dc;
+    --accent: #2f6f4f; --warn: #b26a00; --bad: #b3261e; --chip: #eef3ef;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #141513; --card: #1d1f1c; --ink: #ecebe6; --muted: #9b9a94; --line: #2e302c; --accent: #7fc39c; --warn: #e0a64a; --bad: #ff8a80; --chip: #233027; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); }
+  header { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding: 14px 20px; border-bottom: 1px solid var(--line); background: var(--card); position: sticky; top: 0; z-index: 2; }
+  header h1 { font-size: 16px; margin: 0 12px 0 0; }
+  main { padding: 18px 20px 60px; max-width: 1400px; margin: 0 auto; }
+  .muted { color: var(--muted); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+  .stat .v { font-size: 22px; font-weight: 650; font-variant-numeric: tabular-nums; }
+  .stat .l { color: var(--muted); font-size: 12px; }
+  h2 { font-size: 14px; margin: 26px 0 8px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th { font-weight: 600; font-size: 12px; color: var(--muted); background: var(--bg); }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tr:last-child td { border-bottom: 0; }
+  tr.click { cursor: pointer; } tr.click:hover td { background: var(--chip); }
+  .scroll { overflow-x: auto; }
+  .two { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { background: var(--chip); border-radius: 999px; padding: 3px 10px; font-size: 12px; }
+  .chip.off { color: var(--warn); } .chip.on { color: var(--accent); }
+  input, select, button { font: inherit; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: var(--ink); }
+  button { cursor: pointer; } button.primary { background: var(--accent); color: #fff; border-color: transparent; }
+  button.danger { color: var(--bad); }
+  .bad { color: var(--bad); } .warn { color: var(--warn); } .ok { color: var(--accent); }
+  #login { max-width: 420px; margin: 12vh auto; }
+  #login input { width: 100%; margin: 10px 0; }
+  dialog { border: 1px solid var(--line); border-radius: 14px; background: var(--bg); color: var(--ink); width: min(1000px, 96vw); max-height: 90vh; padding: 0; }
+  dialog .head { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: var(--card); border-bottom: 1px solid var(--line); position: sticky; top: 0; }
+  dialog .body { padding: 4px 16px 18px; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
+  .right { margin-left: auto; }
+</style>
+</head>
+<body>
+<section id="login" class="card" hidden>
+  <h1>Ayurveda асистент · админ</h1>
+  <p class="muted">Въведи админ ключа (ADMIN_API_KEYS от сървъра). Пази се само в този таб.</p>
+  <form id="loginForm"><input id="key" type="password" autocomplete="off" placeholder="Админ ключ"><button class="primary" type="submit">Вход</button></form>
+  <p id="loginError" class="bad"></p>
+</section>
+
+<div id="app" hidden>
+  <header>
+    <h1>Ayurveda асистент</h1>
+    <label>Период <select id="days"><option value="1">24 ч</option><option value="7" selected>7 дни</option><option value="30">30 дни</option><option value="90">90 дни</option><option value="365">година</option></select></label>
+    <label><input type="checkbox" id="auto" checked> обновявай на 30 с</label>
+    <span id="updated" class="muted"></span>
+    <button id="refresh">Обнови</button>
+    <button id="logout" class="right">Изход</button>
+  </header>
+  <main>
+    <div id="settings" class="chips"></div>
+    <h2>Обобщение</h2>
+    <div id="totals" class="grid"></div>
+
+    <div class="two">
+      <div><h2>Употреба по вид</h2><div class="scroll" id="byKind"></div></div>
+      <div><h2>По модел</h2><div class="scroll" id="byModel"></div></div>
+      <div><h2>По цел</h2><div class="scroll" id="byPurpose"></div></div>
+      <div><h2>Кредити по източник</h2><div class="scroll" id="bySource"></div></div>
+    </div>
+
+    <h2>Гласови сесии</h2><div class="scroll" id="sessions"></div>
+    <h2>Последна употреба</h2><div class="scroll" id="usage"></div>
+    <div class="two">
+      <div><h2>Покупки</h2><div class="scroll" id="purchases"></div></div>
+      <div><h2>Начални кредити</h2><div class="scroll" id="grants"></div></div>
+    </div>
+    <h2>Най-активни устройства</h2><div class="scroll" id="top"></div>
+
+    <h2>Устройства</h2>
+    <form id="searchForm" class="chips" style="margin-bottom:8px"><input id="search" placeholder="id, installId или appAccountToken"><button>Търси</button></form>
+    <div class="scroll" id="devices"></div>
+  </main>
+</div>
+
+<dialog id="detail">
+  <div class="head"><strong id="detailTitle">Устройство</strong><button id="closeDetail">Затвори</button></div>
+  <div class="body" id="detailBody"></div>
+</dialog>
+
+<script>
+(() => {
+  const API = '/api/admin';
+  const $ = (id) => document.getElementById(id);
+  let key = sessionStorage.getItem('ayuraAdminKey') || '';
+  let timer;
+
+  // Every value goes in as text, never as HTML.
+  function el(tag, attrs = {}, ...children) {
+    const node = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k === 'class') node.className = v;
+      else if (k.startsWith('on')) node.addEventListener(k.slice(2), v);
+      else node.setAttribute(k, v);
+    }
+    for (const c of children.flat()) node.append(c instanceof Node ? c : document.createTextNode(c ?? ''));
+    return node;
+  }
+  const fmtDate = (v) => v ? new Date(v).toLocaleString('bg-BG', { dateStyle: 'short', timeStyle: 'short' }) : '—';
+  const fmtNum = (v, d = 1) => (v ?? 0).toLocaleString('bg-BG', { maximumFractionDigits: d });
+  const fmtUSD = (v) => '$' + (v ?? 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+  const short = (id) => id ? String(id).slice(0, 10) + '…' : '—';
+
+  function table(columns, rows, onRow) {
+    if (!rows || !rows.length) return el('p', { class: 'muted' }, 'Няма записи.');
+    return el('table', {},
+      el('thead', {}, el('tr', {}, columns.map(c => el('th', { class: c.num ? 'num' : '' }, c.label)))),
+      el('tbody', {}, rows.map(r => el('tr', onRow ? { class: 'click', onclick: () => onRow(r) } : {},
+        columns.map(c => { const v = c.value(r); return el('td', { class: (c.num ? 'num ' : '') + (c.cls ? c.cls(r) : '') }, v instanceof Node ? v : String(v ?? '—')); })))));
+  }
+
+  async function api(path, options = {}) {
+    const res = await fetch(API + path, { ...options, headers: { 'X-Admin-Key': key, 'Content-Type': 'application/json', ...(options.headers || {}) } });
+    if (res.status === 401) { logout('Грешен ключ.'); throw new Error('unauthorized'); }
+    const body = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(body.message || res.statusText);
+    return body;
+  }
+
+  function stat(label, value, cls = '') {
+    return el('div', { class: 'card stat' }, el('div', { class: 'v ' + cls }, value), el('div', { class: 'l' }, label));
+  }
+
+  const usageCols = (first) => [
+    { label: first.label, value: first.value },
+    { label: 'Събития', num: true, value: r => fmtNum(r.events, 0) },
+    { label: 'Разход OpenAI', num: true, value: r => fmtUSD(r.costUSD) },
+    { label: 'Кредити', num: true, value: r => fmtNum(r.credits) },
+  ];
+
+  async function load() {
+    try {
+      const s = await api('/summary?days=' + $('days').value + '&limit=40');
+      const st = s.settings;
+      $('settings').replaceChildren(
+        el('span', { class: 'chip' }, 'глас: ' + st.realtimeModel),
+        el('span', { class: 'chip' }, 'разсъждение: ' + st.reasoningModel),
+        el('span', { class: 'chip' }, st.creditsPerUSD + ' кредита / $1'),
+        el('span', { class: 'chip ' + (st.openAIConfigured ? 'on' : 'off') }, st.openAIConfigured ? 'OpenAI ключ: да' : 'OpenAI ключ: НЯМА'),
+        el('span', { class: 'chip ' + (st.onboardingGrantEnabled ? 'on' : 'off') }, 'начални кредити: ' + (st.onboardingGrantEnabled ? st.onboardingGrantCredits : 'спрени')),
+        el('span', { class: 'chip ' + (st.deviceCheckRequired ? 'on' : 'off') }, 'DeviceCheck: ' + (st.deviceCheckRequired ? 'задължителен' : 'изключен')),
+        el('span', { class: 'chip ' + (st.appAttestRequired ? 'on' : 'off') }, 'App Attest: ' + (st.appAttestRequired ? 'задължителен' : 'по желание')),
+      );
+      const t = s.totals;
+      $('totals').replaceChildren(
+        stat('устройства (нови за периода)', fmtNum(t.devices, 0) + ' (' + fmtNum(t.newDevices, 0) + ')'),
+        stat('активни гласови сесии', fmtNum(t.activeSessions, 0), t.activeSessions ? 'ok' : ''),
+        stat('гласови сесии / минути', fmtNum(t.voiceSessions, 0) + ' / ' + fmtNum(t.voiceMinutes)),
+        stat('разход OpenAI', fmtUSD(t.costUSD)),
+        stat('изхарчени кредити', fmtNum(t.creditsCharged)),
+        stat('неизхарчени кредити (всички)', fmtNum(t.creditsOutstanding)),
+        stat('начални кредити (период / общо)', fmtNum(t.grantsInRange, 0) + ' / ' + fmtNum(t.grantsTotal, 0)),
+        stat('покупки за периода', fmtNum(t.purchasesInRange, 0)),
+      );
+      $('byKind').replaceChildren(table(usageCols({ label: 'Вид', value: r => r.kind }), s.usageByKind));
+      $('byModel').replaceChildren(table(usageCols({ label: 'Модел', value: r => r.model }), s.usageByModel));
+      $('byPurpose').replaceChildren(table(usageCols({ label: 'Цел', value: r => r.purpose }), s.usageByPurpose));
+      $('bySource').replaceChildren(table([
+        { label: 'Източник', value: r => r.source },
+        { label: 'Посока', value: r => r.direction === 'CREDIT' ? '+' : '−', cls: r => r.direction === 'CREDIT' ? 'ok' : 'warn' },
+        { label: 'Записи', num: true, value: r => fmtNum(r.entries, 0) },
+        { label: 'Кредити', num: true, value: r => fmtNum(r.credits) },
+      ], s.ledgerBySource));
+      $('sessions').replaceChildren(table([
+        { label: 'Начало', value: r => fmtDate(r.startedAt) },
+        { label: 'Устройство', value: r => short(r.deviceId), cls: () => 'mono' },
+        { label: 'Цел', value: r => r.purpose },
+        { label: 'Модел', value: r => r.model },
+        { label: 'Статус', value: r => r.status, cls: r => r.status === 'ACTIVE' ? 'ok' : '' },
+        { label: 'Минути', num: true, value: r => fmtNum(r.minutes) },
+        { label: 'Кредити', num: true, value: r => fmtNum(r.credits) },
+      ], s.recentSessions, r => openDevice(r.deviceId)));
+      $('usage').replaceChildren(table([
+        { label: 'Кога', value: r => fmtDate(r.at) },
+        { label: 'Устройство', value: r => short(r.deviceId), cls: () => 'mono' },
+        { label: 'Вид', value: r => r.kind },
+        { label: 'Цел', value: r => r.purpose },
+        { label: 'Модел', value: r => r.model },
+        { label: 'Текст вх/изх', num: true, value: r => fmtNum(r.tokens.textIn, 0) + ' / ' + fmtNum(r.tokens.textOut, 0) },
+        { label: 'Аудио вх/изх', num: true, value: r => fmtNum(r.tokens.audioIn, 0) + ' / ' + fmtNum(r.tokens.audioOut, 0) },
+        { label: 'Снимка', num: true, value: r => fmtNum(r.tokens.imageIn, 0) },
+        { label: 'Разход', num: true, value: r => fmtUSD(r.costUSD) },
+        { label: 'Кредити', num: true, value: r => fmtNum(r.credits, 2) },
+      ], s.recentUsage, r => openDevice(r.deviceId)));
+      $('purchases').replaceChildren(table([
+        { label: 'Кога', value: r => fmtDate(r.at) },
+        { label: 'Продукт', value: r => r.productId },
+        { label: 'Среда', value: r => r.environment },
+        { label: 'Върнат', value: r => r.revoked ? 'да' : '', cls: r => r.revoked ? 'bad' : '' },
+      ], s.recentPurchases, r => r.deviceId && openDevice(r.deviceId)));
+      $('grants').replaceChildren(table([
+        { label: 'Кога', value: r => fmtDate(r.at) },
+        { label: 'Устройство', value: r => short(r.deviceId), cls: () => 'mono' },
+        { label: 'Кредити', num: true, value: r => fmtNum(r.credits, 0) },
+        { label: 'DeviceCheck битове', value: r => r.deviceCheckBits ?? '—' },
+        { label: 'App Attest', value: r => r.attested ? 'да' : 'не' },
+      ], s.recentGrants, r => openDevice(r.deviceId)));
+      $('top').replaceChildren(table([
+        { label: 'Устройство', value: r => short(r.deviceId), cls: () => 'mono' },
+        { label: 'Събития', num: true, value: r => fmtNum(r.events, 0) },
+        { label: 'Разход', num: true, value: r => fmtUSD(r.costUSD) },
+        { label: 'Кредити', num: true, value: r => fmtNum(r.credits) },
+      ], s.topDevices, r => openDevice(r.deviceId)));
+      await loadDevices();
+      $('updated').textContent = 'обновено ' + new Date().toLocaleTimeString('bg-BG');
+    } catch (e) {
+      if (e.message !== 'unauthorized') $('updated').textContent = 'грешка: ' + e.message;
+    }
+  }
+
+  async function loadDevices() {
+    const q = $('search').value.trim();
+    const d = await api('/devices?limit=100' + (q ? '&search=' + encodeURIComponent(q) : ''));
+    $('devices').replaceChildren(el('p', { class: 'muted' }, 'Общо: ' + d.total), table([
+      { label: 'Последно', value: r => fmtDate(r.lastSeenAt) },
+      { label: 'Създадено', value: r => fmtDate(r.createdAt) },
+      { label: 'Устройство', value: r => r.id, cls: () => 'mono' },
+      { label: 'App Attest', value: r => r.attested ? 'да' : 'не' },
+      { label: 'Начални', value: r => r.welcomeCredits ? 'да' : '' },
+      { label: 'Блокирано', value: r => r.blocked ? 'да' : '', cls: r => r.blocked ? 'bad' : '' },
+      { label: 'Кредити', num: true, value: r => fmtNum(r.credits) },
+    ], d.devices, r => openDevice(r.id)));
+  }
+
+  async function openDevice(id) {
+    const d = await api('/devices/' + encodeURIComponent(id));
+    const dev = d.device;
+    const amount = el('input', { type: 'number', step: '1', placeholder: '+100 или -50', style: 'width:140px' });
+    const reason = el('input', { placeholder: 'причина', style: 'width:260px' });
+    const msg = el('span', { class: 'muted' });
+    $('detailTitle').textContent = 'Устройство ' + dev.id;
+    $('detailBody').replaceChildren(
+      el('div', { class: 'grid', style: 'margin-top:12px' },
+        stat('кредити', fmtNum(dev.credits)),
+        stat('създадено', fmtDate(dev.createdAt)),
+        stat('последно', fmtDate(dev.lastSeenAt)),
+        stat('App Attest', dev.attested ? 'да (' + fmtDate(dev.attestedAt) + ')' : 'не'),
+        stat('начални кредити', d.welcomeCredits ? d.welcomeCredits.credits + ' · ' + fmtDate(d.welcomeCredits.at) : 'не'),
+        stat('блокирано', dev.blocked ? 'да' : 'не', dev.blocked ? 'bad' : ''),
+      ),
+      el('p', { class: 'mono muted' }, 'installId ' + dev.installId + ' · appAccountToken ' + dev.appAccountToken),
+      el('h2', {}, 'Корекция на кредити'),
+      el('form', { class: 'chips', onsubmit: async (e) => {
+        e.preventDefault();
+        try {
+          const r = await api('/devices/' + encodeURIComponent(id) + '/credits', { method: 'POST', body: JSON.stringify({ credits: Number(amount.value), reason: reason.value }) });
+          msg.textContent = 'нов баланс: ' + fmtNum(r.credits); openDevice(id); load();
+        } catch (err) { msg.textContent = err.message; }
+      } }, amount, reason, el('button', { class: 'primary' }, 'Запиши'), msg),
+      el('p', {}, el('button', { class: dev.blocked ? '' : 'danger', onclick: async () => {
+        if (!confirm(dev.blocked ? 'Да се разблокира ли устройството?' : 'Да се блокира ли устройството? То няма да може да ползва онлайн асистента.')) return;
+        await api('/devices/' + encodeURIComponent(id) + '/block', { method: 'POST', body: JSON.stringify({ blocked: !dev.blocked }) });
+        openDevice(id); load();
+      } }, dev.blocked ? 'Разблокирай' : 'Блокирай')),
+      el('h2', {}, 'Кредитен регистър'),
+      el('div', { class: 'scroll' }, table([
+        { label: 'Кога', value: r => fmtDate(r.at) },
+        { label: '', value: r => r.direction === 'CREDIT' ? '+' : '−', cls: r => r.direction === 'CREDIT' ? 'ok' : 'warn' },
+        { label: 'Източник', value: r => r.source },
+        { label: 'Кредити', num: true, value: r => fmtNum(r.credits, 2) },
+        { label: 'Бележка', value: r => (r.metadata && (r.metadata.reason || r.metadata.productId || r.metadata.kind || r.metadata.purpose)) || '' },
+      ], d.ledger)),
+      el('h2', {}, 'Гласови сесии'),
+      el('div', { class: 'scroll' }, table([
+        { label: 'Начало', value: r => fmtDate(r.startedAt) },
+        { label: 'Край', value: r => fmtDate(r.endedAt) },
+        { label: 'Цел', value: r => r.purpose },
+        { label: 'Статус', value: r => r.status },
+        { label: 'Кредити', num: true, value: r => fmtNum(r.credits) },
+      ], d.sessions)),
+      el('h2', {}, 'Употреба'),
+      el('div', { class: 'scroll' }, table([
+        { label: 'Кога', value: r => fmtDate(r.at) },
+        { label: 'Вид', value: r => r.kind },
+        { label: 'Цел', value: r => r.purpose },
+        { label: 'Модел', value: r => r.model },
+        { label: 'Разход', num: true, value: r => fmtUSD(r.costUSD) },
+        { label: 'Кредити', num: true, value: r => fmtNum(r.credits, 2) },
+      ], d.usage)),
+      el('h2', {}, 'Покупки'),
+      el('div', { class: 'scroll' }, table([
+        { label: 'Кога', value: r => fmtDate(r.at) },
+        { label: 'Продукт', value: r => r.productId },
+        { label: 'Среда', value: r => r.environment },
+        { label: 'Транзакция', value: r => r.transactionId, cls: () => 'mono' },
+        { label: 'Върната', value: r => r.revoked ? 'да' : '' },
+      ], d.purchases)),
+    );
+    if (!$('detail').open) $('detail').showModal();
+  }
+
+  function schedule() {
+    clearInterval(timer);
+    if ($('auto').checked) timer = setInterval(() => { if (!$('detail').open) load(); }, 30000);
+  }
+
+  function logout(message) {
+    key = ''; sessionStorage.removeItem('ayuraAdminKey'); clearInterval(timer);
+    $('app').hidden = true; $('login').hidden = false; $('loginError').textContent = message || '';
+  }
+
+  function start() {
+    $('login').hidden = true; $('app').hidden = false; load(); schedule();
+  }
+
+  $('loginForm').addEventListener('submit', (e) => {
+    e.preventDefault(); key = $('key').value.trim(); $('key').value = '';
+    sessionStorage.setItem('ayuraAdminKey', key); start();
+  });
+  $('logout').addEventListener('click', () => logout());
+  $('refresh').addEventListener('click', load);
+  $('days').addEventListener('change', load);
+  $('auto').addEventListener('change', schedule);
+  $('searchForm').addEventListener('submit', (e) => { e.preventDefault(); loadDevices(); });
+  $('closeDetail').addEventListener('click', () => $('detail').close());
+
+  if (key) start(); else logout();
+})();
+</script>
+</body>
+</html>

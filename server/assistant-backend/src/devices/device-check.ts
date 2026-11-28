@@ -1,4 +1,4 @@
-import { Injectable, Logger, ServiceUnavailableException } from '@nestjs/common';
+import { ForbiddenException, Injectable, Logger, ServiceUnavailableException } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import { importPKCS8, SignJWT } from 'jose';
 import { config } from '../config';
@@ -43,6 +43,8 @@ export class DeviceCheckClient {
   async query(deviceToken: string): Promise<TwoBits> {
     const response = await this.call('query_two_bits', { device_token: deviceToken });
     const text = await response.text();
+    // Apple answers 400 for a token that is malformed, forged or not from this team.
+    if (response.status === 400) throw new ForbiddenException('The DeviceCheck token is not valid.');
     if (response.status !== 200) {
       this.logger.warn(`DeviceCheck query failed: ${response.status}`);
       throw new ServiceUnavailableException('DeviceCheck query failed.');
@@ -55,6 +57,7 @@ export class DeviceCheckClient {
 
   async update(deviceToken: string, bits: { bit0: boolean; bit1: boolean }): Promise<void> {
     const response = await this.call('update_two_bits', { device_token: deviceToken, bit0: bits.bit0, bit1: bits.bit1 });
+    if (response.status === 400) throw new ForbiddenException('The DeviceCheck token is not valid.');
     if (response.status !== 200) {
       this.logger.warn(`DeviceCheck update failed: ${response.status}`);
       throw new ServiceUnavailableException('DeviceCheck update failed.');

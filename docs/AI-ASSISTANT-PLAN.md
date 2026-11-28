@@ -366,6 +366,19 @@ without a DeviceCheck token is refused (403) and a forged token gets nothing.
 `APP_ATTEST_REQUIRED` stays false until a release built with the entitlement is live.
 Not yet tried: the grant, voice and a sandbox purchase from a real iPhone.
 
+**Admin** (image `20261128b`, deployed 2026-11-28): `https://ayura-api.wonek.com/api/admin`
+is a page that asks for the admin key (`ADMIN_API_KEYS` in the server env file,
+generated there; read it with
+`ssh -i ~/.ssh/punch-hetzner root@167.233.158.114 "grep ^ADMIN_API_KEYS= /opt/ayura-assistant/.env"`).
+It shows, for 1 day to a year: devices, active and past voice sessions and minutes,
+OpenAI cost and credits charged by kind, model and purpose, credits outstanding and
+by source, welcome-credit grants, purchases, the most active devices, and per device
+its ledger, usage, sessions and purchases, with credit corrections (with a reason)
+and blocking. The API is `/api/admin/{summary,devices,devices/:id,devices/:id/credits,
+devices/:id/block}` with the `X-Admin-Key` header (as LingoVela's
+`X-Realtime-Admin-Key`). No conversation content is stored, so none is shown.
+A forged or invalid DeviceCheck token now gets 403 instead of 503.
+
 To update later: build the image here, archive it to the Storage Box path above,
 `docker load`, then `docker rm -f ayura-assistant-backend` and the same `docker run`
 with the new tag; remove the old image once the new one is healthy.

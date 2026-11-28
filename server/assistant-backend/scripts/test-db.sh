@@ -17,4 +17,4 @@ export DATABASE_URL="postgresql://postgres@localhost:$port/ayura_test?host=$dir"
 export NODE_ENV=test
 cd "$here"
 npx prisma migrate deploy >/dev/null
-npx "$@"
+if [ "$1" = node ]; then shift; NODE_ENV=development node "$@"; else npx "$@"; fi

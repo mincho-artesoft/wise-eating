@@ -5,6 +5,7 @@ import request from 'supertest';
 
 export const TEAM_ID = 'TEAMID1234';
 export const BUNDLE_ID = 'com.example.ayura';
+export const ADMIN_KEY = 'test-admin-key-0123456789abcdef0123456789';
 
 const deviceCheckKey = generateKeyPairSync('ec', { namedCurve: 'P-256' }).privateKey.export({ format: 'pem', type: 'pkcs8' }).toString();
 
@@ -22,6 +23,7 @@ export function baseEnv() {
   process.env.CREDITS_PER_USD = '100';
   process.env.ONBOARDING_GRANT_CREDITS = '60';
   process.env.THROTTLE_DISABLED = 'true';
+  process.env.ADMIN_API_KEYS = ADMIN_KEY;
 }
 
 export interface FetchCall {
@@ -53,6 +55,9 @@ export class FakeNetwork {
         return json({ value: `ek_${randomUUID()}`, expires_at: Math.floor(Date.now() / 1000) + 120, session: { id: 'sess_1' } });
       }
       if (url.endsWith('/responses')) return json(this.responsesReply);
+      if (url.endsWith('_two_bits') && String(body?.device_token).startsWith('forged')) {
+        return new Response('Missing or incorrectly formatted device token payload', { status: 400 });
+      }
       if (url.endsWith('/query_two_bits')) {
         const b = this.bits.get(body.device_token);
         return b ? json({ ...b, last_update_time: '2026-11' }) : new Response('Failed to find bit state', { status: 200 });
