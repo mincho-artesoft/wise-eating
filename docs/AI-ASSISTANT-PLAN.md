@@ -144,7 +144,7 @@ and LiveVoiceTranslator).
 **Model ids used** (configurable by environment on the server, never chosen by the
 app): voice `gpt-realtime-2.1` (the owner's "GPT Realtime 2.1"; same id as all three
 reference projects), reasoning/vision `gpt-6.2-sol` (the owner's "GPT 6.2 Sol"; found on
-the models and pricing pages), cheaper fallback documented: `gpt-realtime-2.1-mini`.
+the models and pricing pages). `gpt-realtime-2.1-mini` is not used (owner: it works badly).
 
 ## 3. Architecture in the app
 
@@ -336,9 +336,30 @@ Deploy steps and environment variables: see section 8 (filled in phase 2).
    the plan screen; credit transactions are reported to the backend before they
    are finished. STOP: App Store Connect items listed in section 9.
 
-## 8. Deploy steps and environment (phase 2) — prepared, not done
+## 8. Deploy steps and environment (phase 2) — deployed 2026-11-28
 
-Not deployed. Nothing below has been run on the server; it needs the owner's go-ahead.
+Deployed on the owner's go-ahead, on the Germany server (`punch-eu`, 167.233.158.114):
+- image `ayura-assistant-backend:20261128`, built here for linux/amd64; the archive is
+  in `/mnt/wonek-storagebox/server-archive/ayura-assistant/2026-11-28/` (sha256
+  f8dcc177…2533);
+- container `ayura-assistant-backend` (`docker run --restart unless-stopped`,
+  network `wonek_wonek-net`, `127.0.0.1:3040`, memory limit 384 MB), env file
+  `/opt/ayura-assistant/.env` (root-only, 600);
+- database `ayura_assistant` with its own role on `wonek-postgres`; migration
+  `20261128120000_init` applied;
+- nginx `/etc/nginx/conf.d/ayura-assistant.conf` (HTTP + ACME for
+  `ayura-api.wonek.com`); `/opt/ayura-assistant/enable-https.sh` adds HTTPS once the
+  DNS record exists;
+- checked on the server: health 200, register → wallet, 402 without credits, 401
+  without token; the test device was deleted. Other services' health unchanged.
+
+Still missing: the DNS A record `ayura-api.wonek.com`, and `OPENAI_API_KEY` in the env
+file (empty; health reports `openAIConfigured:false`). Apple and App Store Connect
+work is in `docs/CODEX-ASSISTANT-APPLE-SETUP.md`.
+
+To update later: build the image here, archive it to the Storage Box path above,
+`docker load`, then `docker rm -f ayura-assistant-backend` and the same `docker run`
+with the new tag; remove the old image once the new one is healthy.
 
 **What exists:** `server/assistant-backend/` (NestJS 11, Prisma 6, Postgres). Endpoints
 under `/api`: `devices/challenge`, `devices/register`, `wallet`, `grants/onboarding`,
@@ -421,11 +442,12 @@ database on the shared Postgres; putting the OpenAI key into the server env file
 **Numbers to decide** (server environment, defaults in brackets):
 - `CREDITS_PER_USD` [100] — 1 credit = $0.01 of OpenAI cost; the margin lives here.
   At gpt-realtime-2.1 prices a voice minute costs about $0.08–0.12, i.e. ~10 credits.
-- `ONBOARDING_GRANT_CREDITS` [60] — about 5–6 voice minutes at the default rate; the
-  12-question talk takes roughly 4–6 minutes, so 60 is tight: choose 80–100, or
-  use `gpt-realtime-2.1-mini` (about a third of the price) for onboarding.
+- `ONBOARDING_GRANT_CREDITS` [60] — about 5–6 voice minutes with gpt-realtime-2.1
+  (the mini model is not used: it works badly); the 12-question talk takes
+  roughly 4–6 minutes, so 60 is tight.
 - Pack sizes [300 / 1500 credits] and prices (suggested 2.99 / 9.99).
-- Premium credits per month [500] / per year [6000].
+- Premium credits: decided, 500 a month (`CREDITS_SUB_MONTHLY=500`; yearly grants
+  `CREDITS_SUB_YEARLY=6000` at each yearly purchase/renewal).
 - `VOICE_FLOOR_CREDITS_PER_MINUTE` [3], `VOICE_SESSION_MAX_MINUTES` [20],
   `MIN_CREDITS_TO_START` [2].
 - A plan or recipe with gpt-6.2-sol costs about $0.02–0.06 (2–6 credits).
