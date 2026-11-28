@@ -158,10 +158,12 @@ export function priceFor(model: string): ModelPrice {
  * Credits per pack and per subscription period are owner decisions.
  */
 export const PRODUCTS: Readonly<Record<string, { kind: 'pack' | 'subscription'; credits: number }>> = {
-  'com.ayurveda.asanayoga.credits.small': { kind: 'pack', credits: Number(process.env.CREDITS_PACK_SMALL ?? 300) },
-  'com.ayurveda.asanayoga.credits.large': { kind: 'pack', credits: Number(process.env.CREDITS_PACK_LARGE ?? 1500) },
-  'com.ayurveda.asanayoga.assistant.monthly': { kind: 'subscription', credits: Number(process.env.CREDITS_SUB_MONTHLY ?? 500) },
-  'com.ayurveda.asanayoga.assistant.yearly': { kind: 'subscription', credits: Number(process.env.CREDITS_SUB_YEARLY ?? 6000) },
+  // Consumable credit packs (to be created in App Store Connect).
+  'ayurveda.asana.yoga.credits.small': { kind: 'pack', credits: Number(process.env.CREDITS_PACK_SMALL ?? 300) },
+  'ayurveda.asana.yoga.credits.large': { kind: 'pack', credits: Number(process.env.CREDITS_PACK_LARGE ?? 1500) },
+  // The existing Premium plans, which would include credits each period.
+  'ayurveda.asana.yoga.premium': { kind: 'subscription', credits: Number(process.env.CREDITS_SUB_MONTHLY ?? 500) },
+  'ayurveda.asana.yoga.premium.yearly': { kind: 'subscription', credits: Number(process.env.CREDITS_SUB_YEARLY ?? 6000) },
 };
 
 export const MILLI = 1000n;

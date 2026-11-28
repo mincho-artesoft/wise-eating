@@ -11,7 +11,38 @@
   },
   "identifier": "0C04BAA3",
   "nonRenewingSubscriptions": [],
-  "products": [],
+  "products": [
+    {
+      "displayPrice": "2.99",
+      "familyShareable": false,
+      "internalID": "A1C2E3D4",
+      "localizations": [
+        {
+          "description": "Credits for the online assistant",
+          "displayName": "AI credits (small)",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "ayurveda.asana.yoga.credits.small",
+      "referenceName": "AI credits small",
+      "type": "Consumable"
+    },
+    {
+      "displayPrice": "9.99",
+      "familyShareable": false,
+      "internalID": "A1C2E3D5",
+      "localizations": [
+        {
+          "description": "More credits for the online assistant",
+          "displayName": "AI credits (large)",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "ayurveda.asana.yoga.credits.large",
+      "referenceName": "AI credits large",
+      "type": "Consumable"
+    }
+  ],
   "settings": {
     "_applicationInternalID": "6800370073",
     "_askToBuyEnabled": false,

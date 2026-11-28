@@ -18,6 +18,7 @@ struct AssistantSheet: View {
     @StateObject private var voice = AssistantVoiceSession()
     @ObservedObject private var backend = AssistantBackendClient.shared
     @AppStorage("assistant.useOpenAI") private var useOpenAI = false
+    @State private var showCreditsFromBar = false
     @State private var draft = ""
     @State private var mode: InputMode?
     @State private var showConstraints = false
@@ -104,7 +105,11 @@ struct AssistantSheet: View {
             } label: { Text("Assistant") }
             .pickerStyle(.segmented)
             if useOpenAI {
-                AssistantCreditsBadge(credits: voice.credits ?? backend.wallet?.credits)
+                Button { showCreditsFromBar = true } label: {
+                    AssistantCreditsBadge(credits: voice.credits ?? backend.wallet?.credits)
+                }
+                .buttonStyle(.plain)
+                .sheet(isPresented: $showCreditsFromBar) { AssistantCreditsView() }
             }
         }
         .padding(.horizontal)
@@ -131,6 +136,7 @@ struct AssistantConversationView: View {
     @State private var showPhotoConsent = false
     @State private var showPhotoPicker = false
     @State private var photoItem: PhotosPickerItem?
+    @State private var showCredits = false
     @Binding var mode: AssistantSheet.InputMode?
     var textFocused: FocusState<Bool>.Binding
     let onMakeDayPlan: () -> Void
@@ -160,6 +166,14 @@ struct AssistantConversationView: View {
                         if session.isWorking {
                             ProgressView().padding(.vertical, 4)
                         }
+                        if session.needsCredits || voice.state == .ended(String(localized: "You are out of AI credits.")) {
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("The online assistant needs credits. The on-device assistant stays free.")
+                                    .font(.subheadline)
+                                Button { showCredits = true } label: { Text("Get credits") }
+                                    .buttonStyle(.borderedProminent)
+                            }
+                        }
                         Color.clear.frame(height: 1).id("bottom")
                     }
                     .padding()
@@ -181,6 +195,7 @@ struct AssistantConversationView: View {
             Text("The photo is sent to OpenAI to read the dietary restrictions in it. It is not stored on our server. You check every restriction before it is saved.")
         }
         .photosPicker(isPresented: $showPhotoPicker, selection: $photoItem, matching: .images)
+        .sheet(isPresented: $showCredits, onDismiss: { session.needsCredits = false }) { AssistantCreditsView() }
         .onChange(of: photoItem) { _, item in
             guard let item else { return }
             photoItem = nil
@@ -231,6 +246,15 @@ struct AssistantConversationView: View {
                 Text("Photos of a prescription or lab report need the online assistant; the on-device assistant cannot read documents.")
                     .font(.footnote)
                     .foregroundStyle(.secondary)
+            }
+            if AssistantOnboardingOffer.firstPlanRequested {
+                Button {
+                    AssistantOnboardingOffer.firstPlanRequested = false
+                    Task { await session.send(String(localized: "Make my first day plan for tomorrow, for my constitution, allergies and constraints.")) }
+                } label: {
+                    Label { Text("Make my first day plan") } icon: { Image(systemName: "sun.max") }
+                }
+                .buttonStyle(.borderedProminent)
             }
             Button(action: onMakeDayPlan) {
                 Label { Text("Make a plan for this day") } icon: { Image(systemName: "sparkles") }

@@ -88,6 +88,7 @@ export class AppStoreService {
   /** The app reports a purchase it just made. */
   async recordFromApp(device: Device, signedTransactionInfo: string) {
     const tx = await this.decodeTransaction(signedTransactionInfo);
+    if (!tx.productId || !PRODUCTS[tx.productId]) return { granted: 0, wallet: await this.wallet.view(device.id) };
     if (tx.bundleId && config.appleBundleId && tx.bundleId !== config.appleBundleId) throw new ForbiddenException('Wrong app.');
     if (tx.appAccountToken && tx.appAccountToken !== device.appAccountToken) {
       // Bought on another install of the same person: credit the device that bought it.
@@ -103,6 +104,8 @@ export class AppStoreService {
     const signedTx = note.data?.signedTransactionInfo;
     if (!signedTx) return { ok: true };
     const tx = await this.decodeTransaction(signedTx);
+    // The app's other plans (no ads, advanced) carry no credits.
+    if (!tx.productId || !PRODUCTS[tx.productId]) return { ok: true };
     const device = tx.appAccountToken
       ? await this.prisma.device.findUnique({ where: { appAccountToken: tx.appAccountToken } })
       : await this.deviceForOriginal(tx.originalTransactionId);

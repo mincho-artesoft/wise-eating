@@ -258,6 +258,17 @@ simulation; must always pass).
 - INT-1 keeps warm seed-version checks off the full 2,214-record decode path:
   `bundleSeedVersion()` decodes a one-field DTO from the authoritative bundle;
   actual seed/delta runs still perform the unchanged full decode and validation.
+- AI assistant, 2026-11-28 (`docs/AI-ASSISTANT-PLAN.md` is the full record):
+  the AI button opens Speak / Type / Photo (`FeatureFlags.voiceAssistant`). One set
+  of tools in `Ayura/AI/Assistant/Tools` (search, log/remove, day, profile,
+  constraints, create recipe/food/plan, constitution answers, practices, poses)
+  is driven by two engines: on-device (Foundation Models step + deterministic
+  readers, free) and OpenAI (`FeatureFlags.openAIAssistant` + the
+  `AYURA_ASSISTANT_BACKEND_URL` build setting; Realtime voice and gpt-6.2-sol
+  through `server/assistant-backend`, paid with credits). Every write is a card
+  the person confirms; `DietaryConstraintChecker` checks totals, constraints and
+  allergens outside the model. The backend is a separate NestJS service, not
+  deployed; App Store products are prepared, not created.
 
 ## 3. Fixed decisions (do not relitigate without the founder)
 
@@ -431,6 +442,7 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | MP-6b narration copy pass | ✅ COMPLETE — the repeated three-day MP-6 sample is confirmed as a narration fixture, not solver output. Five deterministic sentence frames rotate without adjacent repeats; balanced-agni and mixed-thermal noise is omitted; single tastes fold into the main sentence. A real production-solver seven-day sample over shipped catalogue inputs has 91 distinct food IDs and passes the two-day no-repeat check. All 125 tests, 25+2 goldens, 23/23 solver properties, Debug/Release, flag on/off smoke, two-call telemetry, tracked-size, and 1.543s launch gates pass. See `REPORT-MP6b.md` |
 | MP-7 culinary plausibility | ✅ COMPLETE — rev9 resolves one cached culinary role, readiness flag, and headword for all 14,484 canonical rows; 543 plain-catalogue rows are ineligible and 304 are not ready to eat. Solver meals now require anchors, cap roles/seasonings, and enforce role portions. G0 detects 21/21 known-bad meals; fixtures 71/71, G1/G1b, both G2c directions, G4 150/150, G5 30/30, and G6 +1.550713 pass. A real-catalogue profile replaced the withdrawn synthetic 150ms assumption: behavior-preserving compact role buckets reduce seven-day median to 641.588ms while all 30 plan hashes remain exact. Physical iPhone N=10 ABAB launch is 1.090s median and peak memory +10.281MiB paired vs MP-6b; role cache 44.735ms cold / 1.086ms cached; tracked max 82,726,160 bytes. See `REPORT-MP7.md` |
 | Catalogue/user-store separation | ✅ IMPLEMENTED / SIMULATOR VERIFIED — bundled foods, exercises, yoga, practices, Ayurveda, barcode data, and search cache mount from a versioned read-only catalogue; user profiles, authored foods/recipes, exercises/workouts, plans, logs, storage, lists, nodes, sessions, settings, and favorites remain in the writable store. The one-time migration is recovery-backed and batched; subsequent revisions atomically replace only the catalogue and take the state fast path without row preseeding. Store-UUID collision and SwiftData write routing are covered by executable smoke assertions and editor-exact probes for implicit food nutrition/photo graphs, recipes, exercises, workouts, Ayurveda, and cache writes. See `REPORT-CATALOG-SEPARATION.md` |
+| AI assistant (voice + prompt, two engines) | ✅ PHASES 1–5 IMPLEMENTED, NOT DEPLOYED — on-device engine, tools, constraints + checker, Siri intents; OpenAI Realtime/reasoning/photo engine; onboarding "Talk it through" with a one-time DeviceCheck-guarded grant; credit packs prepared. Second-Mac test runs green with golden search 0 changed; backend `npm test` 20/20 on a throwaway Postgres. Waiting for the owner: deploy, OpenAI key, App Attest/DeviceCheck keys, App Store Connect products and prices. See `docs/AI-ASSISTANT-PLAN.md` |
 | Expert review pass | ⏳ pending human reviewer: work aiDraft→reviewed, resolve reviewNotes, optional batch-31 top-up to 750 |
 | Later roadmap | media (yoga/meditation content), recommendation engine, dosha assessment — see ayurveda-data/RESTART-PLAN.md history |
 

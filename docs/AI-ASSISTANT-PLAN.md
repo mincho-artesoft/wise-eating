@@ -1,7 +1,8 @@
 # AI assistant: voice and prompt, on-device and OpenAI
 
-Status: plan written 2026-11-28 (phase 0). Each phase below adds a "Done" note
-when it lands. Owner decisions are collected in section 9.
+Status (2026-11-28): phases 0–5 implemented up to their stop points; nothing is
+deployed and no App Store product exists yet. Section 7 says what was checked per
+phase; section 9 lists what the owner has to decide or do.
 
 ## 1. What already exists in this app
 
@@ -298,15 +299,42 @@ WebRTC dependency in the app (not taken now).
 
 Deploy steps and environment variables: see section 8 (filled in phase 2).
 
-## 7. Phases
+## 7. Phases — what was done and how it was checked
 
-1. Tools, constraints, checker, assistant surface with the on-device engine, speech,
-   App Intents, tests. Build + tests on the second Mac.
-2. Backend in `server/assistant-backend`, migration, tests against a local Postgres
-   and mocked OpenAI/Apple. **STOP** before deploy / production DB / real key.
-3. OpenAI engine (Realtime + reasoning + photo + balance), behind `openAIAssistant`.
-4. Onboarding "Talk it through" + free grant (DeviceCheck / App Attest).
-5. Credits in the paywall. **STOP** with the App Store Connect list.
+1. **Tools, surface, on-device engine** (commit c0e2994). AI button → assistant sheet
+   (Speak / Type / Photo); on-device speech (`SFSpeechRecognizer`, app language,
+   on-device when supported); "I ate …" → search → card → confirm → logged into the
+   day's calendar meal, with undo; constraints store and Settings → Dietary
+   constraints; the deterministic checker; Siri: Log Food, What Did I Eat Today.
+   Checked: 17 unit tests in `Tests/Assistant/AssistantToolsTests.swift` (checker,
+   readers in English and Bulgarian, scope prompts, preview/confirm/undo, allergen
+   block, grams edit, spoken "да", the real catalogue) and the golden search run on
+   the second Mac: TEST SUCCEEDED, 0 changed. Not checked: speech recognition and Siri
+   on a device; the model-assisted reading with Apple Intelligence on (the tests use
+   the deterministic path).
+   Found on the way: some catalogue foods have no nutrients ("Egg bhurji" ranks
+   first for "egg"); the assistant prefers foods with nutrient data, and recipes take
+   their values from the food record.
+2. **Backend** (commit 31dd20f). See section 8. STOP respected: not deployed, no
+   production database touched, no real OpenAI key used.
+3. **OpenAI engine** (commit fea3676). Realtime voice over WebSocket with the same
+   tools; reasoning tool loop; photo consent and editable extracted constraints;
+   balance; out-of-credits path. Checked: builds and the test run on the second Mac
+   (green). Not checked: a live session against OpenAI and the backend (no device
+   or simulator runtime here, backend not deployed).
+4. **Onboarding bonus** — on the constitution step, "Talk it through with the
+   assistant (free)" appears only when the backend says the welcome credits are
+   available for this device; it claims them (DeviceCheck token + App Attest
+   assertion), then the voice asks the same 12 questions (server prompt generated
+   from `AyurvedaConstitution.swift`, test keeps them equal); `set_constitution`
+   fills the same answer array and the same scoring; the first day plan is
+   offered and made after the profile exists (Apple Intelligence) or from the
+   assistant sheet ("Make my first day plan").
+5. **Credits in the paywall** — `ayurveda.asana.yoga.credits.small/.large`
+   (consumables, in `Subscriptions.storekit` for local testing), Premium plans
+   carry credits server-side; AI credits screen with balance and packs; a line on
+   the plan screen; credit transactions are reported to the backend before they
+   are finished. STOP: App Store Connect items listed in section 9.
 
 ## 8. Deploy steps and environment (phase 2) — prepared, not done
 
@@ -362,6 +390,51 @@ per device; sessions older than `VOICE_SESSION_MAX_MINUTES` are swept; photos on
 `APPLE_DEVICECHECK_KEY_ID`, `APPLE_DEVICECHECK_PRIVATE_KEY` (a DeviceCheck key from
 the Apple developer account), `ALLOW_UNVERIFIED_STOREKIT_JWS` (false in production).
 
-## 9. Decisions for the owner
+## 9. Decisions and actions for the owner
 
-(collected through the phases)
+Nothing here has been done; each needs the owner.
+
+**Deploy (phase 2 stop):** go-ahead to deploy `server/assistant-backend` as in
+section 8; the host name (e.g. `ayura-api.wonek.com`); creating the `ayura_assistant`
+database on the shared Postgres; putting the OpenAI key into the server env file.
+
+**Apple developer account:**
+- Enable **App Attest** for the app's App ID, then add the entitlement
+  `com.apple.developer.devicecheck.appattest-environment = production` to
+  `Ayura/AyurvedaAsanaYoga.entitlements` (not added now: signing would fail until
+  the capability exists). Until then the app registers without App Attest, and the
+  server must run with `APP_ATTEST_REQUIRED=false`.
+- Create a **DeviceCheck key** (Certificates, IDs & Profiles → Keys) for
+  `APPLE_DEVICECHECK_KEY_ID` / `APPLE_DEVICECHECK_PRIVATE_KEY`.
+
+**App Store Connect (phase 5 stop):**
+- Create two consumable in-app purchases: `ayurveda.asana.yoga.credits.small` and
+  `ayurveda.asana.yoga.credits.large` (names, descriptions, prices, review screenshot).
+- Decide whether **Premium** (`ayurveda.asana.yoga.premium`, `.premium.yearly`)
+  includes credits, and how many; if not, remove them from the server catalogue.
+- App Store Server Notifications V2 URL → `https://<host>/api/app-store/notifications`
+  (check first that no other service already uses this app's notification URL).
+- App Privacy answers: audio (voice) and photos are sent to OpenAI as a processor
+  when the person uses the online assistant; DeviceCheck/App Attest identifiers.
+  Review notes: what the assistant does, that it is a wellness tool, not medical.
+
+**Numbers to decide** (server environment, defaults in brackets):
+- `CREDITS_PER_USD` [100] — 1 credit = $0.01 of OpenAI cost; the margin lives here.
+  At gpt-realtime-2.1 prices a voice minute costs about $0.08–0.12, i.e. ~10 credits.
+- `ONBOARDING_GRANT_CREDITS` [60] — about 5–6 voice minutes at the default rate; the
+  12-question talk takes roughly 4–6 minutes, so 60 is tight: choose 80–100, or
+  use `gpt-realtime-2.1-mini` (about a third of the price) for onboarding.
+- Pack sizes [300 / 1500 credits] and prices (suggested 2.99 / 9.99).
+- Premium credits per month [500] / per year [6000].
+- `VOICE_FLOOR_CREDITS_PER_MINUTE` [3], `VOICE_SESSION_MAX_MINUTES` [20],
+  `MIN_CREDITS_TO_START` [2].
+- A plan or recipe with gpt-6.2-sol costs about $0.02–0.06 (2–6 credits).
+
+**Then:** set `AYURA_ASSISTANT_BACKEND_URL` for the Release configuration (and a
+staging URL for Debug), run a device test of voice, photo, purchase (sandbox) and
+the onboarding grant; translate the new strings (`tools/ui-strings`).
+
+**Known limits:** with WebSocket + ephemeral key the client could send its own
+`session.update`; credits bound the cost and the per-minute floor bounds
+under-reporting (section 6). The keychain install id survives reinstalling but not
+erasing the phone; DeviceCheck covers that once configured.

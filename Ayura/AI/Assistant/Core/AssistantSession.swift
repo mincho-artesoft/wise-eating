@@ -17,6 +17,8 @@ final class AssistantSession: ObservableObject {
     @Published private(set) var lastUndo: AssistantUndo?
     @Published private(set) var isWorking = false
     @Published private(set) var engineKind: AssistantEngineKind
+    /// Set when the online assistant refused for lack of credits.
+    @Published var needsCredits = false
 
     let toolbox: AssistantToolbox
     private(set) var engine: AssistantEngine
@@ -66,6 +68,7 @@ final class AssistantSession: ObservableObject {
             let reply = try await engine.respond(to: AssistantTurn(text: trimmed, imageJPEG: imageJPEG), toolbox: toolbox)
             if !reply.text.isEmpty { messages.append(.init(role: .assistant, text: reply.text)) }
         } catch {
+            if let e = error as? AssistantBackendClient.BackendError, case .insufficientCredits = e { needsCredits = true }
             messages.append(.init(role: .notice, text: error.localizedDescription))
         }
     }

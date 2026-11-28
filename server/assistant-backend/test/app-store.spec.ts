@@ -32,7 +32,7 @@ describe('App Store credits', () => {
     const tx = {
       transactionId,
       originalTransactionId: transactionId,
-      productId: 'com.ayurveda.asanayoga.credits.small',
+      productId: 'ayurveda.asana.yoga.credits.small',
       bundleId: BUNDLE_ID,
       appAccountToken: body.appAccountToken,
       environment: 'Sandbox',
@@ -57,7 +57,7 @@ describe('App Store credits', () => {
     const api = authed(app, token);
     const original = randomUUID();
     for (const id of [original, randomUUID()]) {
-      const tx = { transactionId: id, originalTransactionId: original, productId: 'com.ayurveda.asanayoga.assistant.monthly', bundleId: BUNDLE_ID, appAccountToken: body.appAccountToken, environment: 'Sandbox' };
+      const tx = { transactionId: id, originalTransactionId: original, productId: 'ayurveda.asana.yoga.premium', bundleId: BUNDLE_ID, appAccountToken: body.appAccountToken, environment: 'Sandbox' };
       await request(app.getHttpServer())
         .post('/api/app-store/notifications')
         .send({ signedPayload: unsignedJWS({ notificationType: 'DID_RENEW', data: { environment: 'Sandbox', signedTransactionInfo: unsignedJWS(tx) } }) })
@@ -65,7 +65,12 @@ describe('App Store credits', () => {
     }
     expect((await api.get('/api/wallet')).body.wallet.credits).toBe(1000);
 
-    const foreign = { transactionId: randomUUID(), productId: 'com.ayurveda.asanayoga.credits.large', bundleId: 'com.other.app', environment: 'Sandbox' };
+    const foreign = { transactionId: randomUUID(), productId: 'ayurveda.asana.yoga.credits.large', bundleId: 'com.other.app', environment: 'Sandbox' };
     await api.post('/api/app-store/transactions').send({ signedTransactionInfo: unsignedJWS(foreign) }).expect(403);
+
+    // A plan without credits is accepted and grants nothing.
+    const noAds = { transactionId: randomUUID(), productId: 'ayurveda.asana.yoga.noads', bundleId: BUNDLE_ID, environment: 'Sandbox' };
+    const r = await api.post('/api/app-store/transactions').send({ signedTransactionInfo: unsignedJWS(noAds) }).expect(200);
+    expect(r.body.granted).toBe(0);
   });
 });

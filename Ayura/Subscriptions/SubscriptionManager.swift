@@ -196,6 +196,9 @@ class SubscriptionManager: ObservableObject {
             case .success(let verification):
                 let transaction = try checkVerified(verification)
                 await MainActor.run { register(transaction: transaction) }
+                // Premium includes AI credits; the server adds them (best effort here,
+                // renewals come through App Store Server Notifications).
+                _ = await AssistantCreditsStore.report(productID: transaction.productID, jws: verification.jwsRepresentation)
                 await transaction.finish()
                 await updatePurchasedStatus()
             case .userCancelled, .pending: break
@@ -214,6 +217,9 @@ class SubscriptionManager: ObservableObject {
                 do {
                     let tx = try await self.checkVerified(verification)
                     await MainActor.run { self.register(transaction: tx) }
+                    // AI credits are added by our server; a credit pack stays
+                    // unfinished until it has been reported, so it comes back.
+                    guard await AssistantCreditsStore.report(productID: tx.productID, jws: verification.jwsRepresentation) else { continue }
                     await tx.finish()
                     await self.updatePurchasedStatus()
                 } catch {

@@ -70,6 +70,8 @@ struct PaywallView: View {
                 .padding(16)
                 .glassCardStyle(cornerRadius: 20)
 
+                AssistantCreditsPaywallSection()
+
                 if manager.hasActiveSubscription {
                     activePlan
                 } else if selectedProduct != nil {
