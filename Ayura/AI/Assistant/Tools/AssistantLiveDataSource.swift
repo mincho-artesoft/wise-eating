@@ -145,6 +145,8 @@ final class AssistantLiveDataSource: AssistantDataSource {
 
     // MARK: Generators
 
+    var canGeneratePlans: Bool { GlobalState.isAppleIntelligenceAvailable }
+
     func startRecipe(named name: String) -> Bool {
         guard GlobalState.isAppleIntelligenceAvailable else { return false }
         return AIManager.shared.startRecipeGeneration(for: profileModel, recipeName: name, jobType: .recipeGeneration) != nil

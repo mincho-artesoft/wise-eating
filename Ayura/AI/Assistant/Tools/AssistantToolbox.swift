@@ -288,6 +288,9 @@ final class AssistantToolbox {
     private enum NamedKind { case recipe, food }
 
     private func createNamed(_ args: [String: Any], kind: NamedKind) -> [String: Any] {
+        guard data.canGeneratePlans else {
+            return ["error": "The app's own generator needs Apple Intelligence, which this device does not have."]
+        }
         let name = (args["name"] as? String ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
         guard !name.isEmpty, name.count <= 120 else { return ["error": "name is required"] }
         let action = AssistantPendingAction(
@@ -299,6 +302,9 @@ final class AssistantToolbox {
     }
 
     func createMealPlan(_ args: [String: Any]) -> [String: Any] {
+        guard data.canGeneratePlans else {
+            return ["error": "The app's own plan generator needs Apple Intelligence, which this device does not have. Build the plan instead: for each day and meal, search_foods and propose it with log_food and that date."]
+        }
         let days = min(max(Self.int(args["days"]) ?? 1, 1), 7)
         var notes = (args["notes"] as? [String] ?? []).map { String($0.prefix(200)) }
         if let note = args["note"] as? String, !note.isEmpty { notes.append(String(note.prefix(200))) }

@@ -67,6 +67,9 @@ protocol AssistantDataSource: AnyObject {
     func mergeConstraints(_ constraints: [DietaryConstraint])
     func saveConstitution(answers: [AyurvedaDosha])
 
+    /// Whether the app's own generators can run here (Apple Intelligence).
+    var canGeneratePlans: Bool { get }
+
     /// Starts the app's own generators; output appears in the Generate tab.
     func startRecipe(named name: String) -> Bool
     func startFood(named name: String) -> Bool

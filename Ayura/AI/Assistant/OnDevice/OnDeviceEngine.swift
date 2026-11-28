@@ -165,15 +165,19 @@ final class OnDeviceEngine: AssistantEngine {
         case .createRecipe, .createFood:
             let tool = step.intent == .createRecipe ? "create_recipe" : "create_food"
             let result = Self.object(await toolbox.call(tool, arguments: Self.args(["name": step.name ?? ""])))
-            return .init(text: result["status"] as? String == "needs_confirmation"
-                ? String(localized: "Confirm and the app will create it.")
-                : (result["error"] as? String ?? String(localized: "Tell me the name of the dish.")))
+            if result["status"] as? String == "needs_confirmation" {
+                return .init(text: String(localized: "Confirm and the app will create it."))
+            }
+            return .init(text: toolbox.data.canGeneratePlans
+                ? String(localized: "Tell me the name of the dish.")
+                : Self.needsAppleIntelligence)
 
         case .mealPlan:
             let result = Self.object(await toolbox.call("create_meal_plan", arguments: Self.args(["days": step.days ?? 1])))
-            return .init(text: result["status"] as? String == "needs_confirmation"
-                ? String(localized: "Confirm and the app will make the plan, checked against your constraints and allergies.")
-                : (result["error"] as? String ?? String(localized: "Something went wrong.")))
+            if result["status"] as? String == "needs_confirmation" {
+                return .init(text: String(localized: "Confirm and the app will make the plan, checked against your constraints and allergies."))
+            }
+            return .init(text: toolbox.data.canGeneratePlans ? String(localized: "Something went wrong.") : Self.needsAppleIntelligence)
 
         case .findPractice, .findPose:
             let tool = step.intent == .findPractice ? "find_practice" : "find_pose"
@@ -274,6 +278,10 @@ final class OnDeviceEngine: AssistantEngine {
         let warnings = day["warnings"] as? [String] ?? []
         if !warnings.isEmpty { text += " " + warnings.joined(separator: " ") }
         return text
+    }
+
+    static var needsAppleIntelligence: String {
+        String(localized: "Making plans and recipes on this device needs Apple Intelligence. The online assistant can make them.")
     }
 
     static func kcalPer100(of row: [String: Any]) -> Double {

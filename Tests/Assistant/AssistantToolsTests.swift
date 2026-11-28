@@ -53,6 +53,7 @@ nonisolated final class AssistantToolsTests: XCTestCase {
             return saved
         }
 
+        var canGeneratePlans: Bool { true }
         func constraints() -> [DietaryConstraint] { storedConstraints }
         func mergeConstraints(_ constraints: [DietaryConstraint]) { storedConstraints += constraints }
         func saveConstitution(answers: [AyurvedaDosha]) { constitution = answers }
@@ -334,6 +335,23 @@ nonisolated final class AssistantToolsTests: XCTestCase {
         XCTAssertEqual(Set(tools.compactMap { $0["name"] as? String }), Set(AssistantToolbox.Tool.allCases.map(\.rawValue)))
     }
 
+    // MARK: - Onboarding by voice
+
+    @MainActor func testVoiceConstitutionFillsTheQuestionnaireAnswers() async throws {
+        var received: [AyurvedaDosha]?
+        let data = AssistantOnboardingDataSource { received = $0 }
+        let box = AssistantToolbox(data: data)
+        let answers: [AyurvedaDosha] = [.vata, .vata, .pitta, .vata, .kapha, .vata, .pitta, .vata, .vata, .pitta, .vata, .kapha]
+        let json = answers.map { "\"\($0.rawValue)\"" }.joined(separator: ",")
+        let r = OnDeviceEngine.object(await box.call("set_constitution", arguments: "{\"answers\":[\(json)]}"))
+        XCTAssertEqual(r["status"] as? String, "needs_confirmation")
+        XCTAssertNil(received, "nothing before confirmation")
+        _ = await box.confirm(box.pending[0].id)
+        XCTAssertEqual(received, answers)
+        // Same scoring as the on-screen questionnaire.
+        XCTAssertEqual(r["result"] as? String, AyurvedaConstitutionResult.from(answers: answers).label)
+    }
+
     // MARK: - Real catalogue
 
     @MainActor func testSearchOnRealCatalogue() async throws {
@@ -374,6 +392,7 @@ final class CatalogueOnly: AssistantDataSource {
     func food(named name: String) async -> CompactFoodItem? { nil }
     func meals(on day: Date) async -> [AssistantMealRecord] { [] }
     func save(_ meal: AssistantMealRecord, on day: Date) async -> AssistantMealRecord? { nil }
+    var canGeneratePlans: Bool { false }
     func constraints() -> [DietaryConstraint] { [] }
     func mergeConstraints(_ constraints: [DietaryConstraint]) {}
     func saveConstitution(answers: [AyurvedaDosha]) {}

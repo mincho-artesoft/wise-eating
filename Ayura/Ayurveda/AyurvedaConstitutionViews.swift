@@ -189,6 +189,8 @@ struct AyurvedaConstitutionSetupView: View {
   )
   @State private var questionIndex = 0
   @State private var completedDraft: AyurvedaConstitutionDraft?
+  @StateObject private var voiceOffer = AssistantOnboardingOffer()
+  @State private var isTalkingItThrough = false
 
   init(
     method: AyurvedaConstitutionSetupMethod,
@@ -267,6 +269,25 @@ struct AyurvedaConstitutionSetupView: View {
     .foregroundStyle(effectManager.currentGlobalAccentColor)
     .onAppear(perform: publishHeader)
     .onChange(of: phase) { _, _ in publishHeader() }
+    .task {
+      if isEmbedded { await voiceOffer.check() }
+    }
+    .fullScreenCover(isPresented: $isTalkingItThrough) {
+      AssistantVoiceConstitutionView(
+        onComplete: { draft in
+          isTalkingItThrough = false
+          for (index, answer) in draft.questionnaireAnswers.enumerated() where index < questionnaireAnswers.count {
+            questionnaireAnswers[index] = answer
+          }
+          completedDraft = draft
+          phase = .result
+        },
+        onCancel: {
+          isTalkingItThrough = false
+          phase = .questionnaire
+        }
+      )
+    }
   }
 
   @ViewBuilder
@@ -380,6 +401,16 @@ struct AyurvedaConstitutionSetupView: View {
           phase = .questionnaire
         }
         .ayurvedaWizardNavigationButton()
+
+        // The onboarding bonus: the same twelve questions by voice, only while
+        // the free welcome credits are available for this device.
+        if isEmbedded, voiceOffer.isOffered {
+          Button("Talk it through with the assistant (free)") {
+            isTalkingItThrough = true
+          }
+          .ayurvedaWizardNavigationButton()
+          .accessibilityIdentifier("ayurveda-constitution-voice")
+        }
 
         if isEmbedded {
           HStack(spacing: 16) {

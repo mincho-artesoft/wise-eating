@@ -1509,6 +1509,12 @@ struct ProfileWizardView: View {
                 }
 
                 calVM.createOrUpdateCalendar(for: newProfile)
+                // The person accepted a first day plan in the voice
+                // conversation; the app's own generator makes it now.
+                if AssistantOnboardingOffer.firstPlanRequested, GlobalState.isAppleIntelligenceAvailable {
+                    AssistantOnboardingOffer.firstPlanRequested = false
+                    AIManager.shared.startPlanGeneration(for: newProfile, days: 1, meals: nil, jobType: .dailyMealPlan)
+                }
                 await calVM.createOrUpdateShoppingListCalendar(
                     for: newProfile,
                     context: writeContext
