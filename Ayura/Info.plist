@@ -248,6 +248,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>AyuraAssistantBackendURL</key>
+	<string>$(AYURA_ASSISTANT_BACKEND_URL)</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Ayurveda &amp; Asana Yoga listens when you tap the microphone, so you can tell the assistant what you ate.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>

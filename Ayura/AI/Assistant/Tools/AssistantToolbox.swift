@@ -380,6 +380,16 @@ final class AssistantToolbox {
             allergens: data.profile.allergens, isCompleteDay: false)
     }
 
+    /// The person unticked one extracted constraint before saving.
+    func removeConstraint(actionID: UUID, constraintID: UUID) {
+        guard let index = pending.firstIndex(where: { $0.id == actionID }),
+              case let .constraints(list) = pending[index].payload else { return }
+        let kept = list.filter { $0.id != constraintID }
+        if kept.isEmpty { pending.remove(at: index); return }
+        pending[index].payload = .constraints(kept)
+        pending[index].lines = kept.map { c in c.source == .selfReported ? c.summary : "\(c.summary) (\(c.source.displayName))" }
+    }
+
     func discard(_ id: UUID) {
         pending.removeAll { $0.id == id }
     }

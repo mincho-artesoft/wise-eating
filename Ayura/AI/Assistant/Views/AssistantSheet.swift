@@ -1,3 +1,4 @@
+import PhotosUI
 import SwiftData
 import SwiftUI
 
@@ -14,6 +15,9 @@ struct AssistantSheet: View {
 
     @StateObject private var holder = Holder()
     @StateObject private var speech = AssistantSpeechRecognizer()
+    @StateObject private var voice = AssistantVoiceSession()
+    @ObservedObject private var backend = AssistantBackendClient.shared
+    @AppStorage("assistant.useOpenAI") private var useOpenAI = false
     @State private var draft = ""
     @State private var mode: InputMode?
     @State private var showConstraints = false
@@ -34,6 +38,8 @@ struct AssistantSheet: View {
                     AssistantConversationView(
                         session: session,
                         speech: speech,
+                        voice: voice,
+                        online: onlineEnabled,
                         draft: $draft,
                         mode: $mode,
                         textFocused: $textFocused,
@@ -45,6 +51,11 @@ struct AssistantSheet: View {
             }
             .navigationTitle(Text("Assistant"))
             .navigationBarTitleDisplayMode(.inline)
+            .safeAreaInset(edge: .top) {
+                if AssistantBackendClient.isOpenAIAvailable {
+                    engineBar
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button { dismiss() } label: { Text("Close") }
@@ -66,9 +77,39 @@ struct AssistantSheet: View {
                 session.toolbox.now = { Self.moment(on: day) }
                 holder.session = session
                 holder.objectWillChange.send()
+                applyEngine()
             }
         }
-        .onDisappear { speech.stop() }
+        .onDisappear {
+            speech.stop()
+            Task { await voice.stop() }
+        }
+        .onChange(of: useOpenAI) { _, _ in applyEngine() }
+    }
+
+    private var onlineEnabled: Bool { AssistantBackendClient.isOpenAIAvailable && useOpenAI }
+
+    private func applyEngine() {
+        guard let session = holder.session else { return }
+        session.use(onlineEnabled ? OpenAIEngine() : OnDeviceEngine())
+        if onlineEnabled { Task { try? await backend.refreshWallet() } }
+    }
+
+    /// On-device (free) or OpenAI (credits), with the balance.
+    private var engineBar: some View {
+        HStack(spacing: 10) {
+            Picker(selection: $useOpenAI) {
+                Text("On device · free").tag(false)
+                Text("OpenAI · credits").tag(true)
+            } label: { Text("Assistant") }
+            .pickerStyle(.segmented)
+            if useOpenAI {
+                AssistantCreditsBadge(credits: voice.credits ?? backend.wallet?.credits)
+            }
+        }
+        .padding(.horizontal)
+        .padding(.vertical, 6)
+        .background(.bar)
     }
 
     /// Logging defaults to the day shown on the nutrition screen, at the
@@ -84,7 +125,12 @@ struct AssistantSheet: View {
 struct AssistantConversationView: View {
     @ObservedObject var session: AssistantSession
     @ObservedObject var speech: AssistantSpeechRecognizer
+    @ObservedObject var voice: AssistantVoiceSession
+    let online: Bool
     @Binding var draft: String
+    @State private var showPhotoConsent = false
+    @State private var showPhotoPicker = false
+    @State private var photoItem: PhotosPickerItem?
     @Binding var mode: AssistantSheet.InputMode?
     var textFocused: FocusState<Bool>.Binding
     let onMakeDayPlan: () -> Void
@@ -128,6 +174,26 @@ struct AssistantConversationView: View {
             Divider()
             inputBar
         }
+        .confirmationDialog(Text("Send a photo to OpenAI?"), isPresented: $showPhotoConsent, titleVisibility: .visible) {
+            Button { showPhotoPicker = true } label: { Text("Choose a photo") }
+            Button(role: .cancel) {} label: { Text("Cancel") }
+        } message: {
+            Text("The photo is sent to OpenAI to read the dietary restrictions in it. It is not stored on our server. You check every restriction before it is saved.")
+        }
+        .photosPicker(isPresented: $showPhotoPicker, selection: $photoItem, matching: .images)
+        .onChange(of: photoItem) { _, item in
+            guard let item else { return }
+            photoItem = nil
+            Task {
+                guard let data = try? await item.loadTransferable(type: Data.self),
+                      let jpeg = AssistantPhoto.jpeg(from: data) else { return }
+                await session.send(draft, imageJPEG: jpeg)
+                draft = ""
+            }
+        }
+        .onChange(of: voice.state) { _, new in
+            if case let .ended(reason?) = new { session.appendExternal(.notice, reason) }
+        }
         .onChange(of: speech.state) { old, new in
             // Recognition ended (the person stopped, or it finished): send it.
             if old == .listening, new != .listening {
@@ -147,19 +213,25 @@ struct AssistantConversationView: View {
             HStack(spacing: 12) {
                 choice(String(localized: "Speak"), systemImage: "mic.fill") {
                     mode = .speak
-                    Task { await speech.start() }
+                    startListening()
                 }
                 choice(String(localized: "Type"), systemImage: "keyboard") {
                     mode = .type
                     textFocused.wrappedValue = true
                 }
-                choice(String(localized: "Photo"), systemImage: "camera") {}
-                    .disabled(true)
-                    .opacity(0.45)
+                choice(String(localized: "Photo"), systemImage: "camera") { showPhotoConsent = true }
+                    .disabled(!online)
+                    .opacity(online ? 1 : 0.45)
             }
-            Text("Photos of a prescription or lab report need the online assistant; the on-device assistant cannot read documents.")
-                .font(.footnote)
-                .foregroundStyle(.secondary)
+            if online {
+                Text("Send a photo of a prescription, lab results or a note; I will list the dietary restrictions in it for you to check.")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            } else {
+                Text("Photos of a prescription or lab report need the online assistant; the on-device assistant cannot read documents.")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            }
             Button(action: onMakeDayPlan) {
                 Label { Text("Make a plan for this day") } icon: { Image(systemName: "sparkles") }
             }
@@ -185,19 +257,33 @@ struct AssistantConversationView: View {
     private var inputBar: some View {
         HStack(spacing: 8) {
             Button {
-                if speech.state == .listening {
+                if isListening {
                     speech.stop()
+                    Task { await voice.stop() }
                 } else {
                     mode = .speak
-                    Task { await speech.start() }
+                    startListening()
                 }
             } label: {
-                Image(systemName: speech.state == .listening ? "stop.circle.fill" : "mic.circle.fill")
+                Image(systemName: isListening ? "stop.circle.fill" : "mic.circle.fill")
                     .font(.system(size: 30))
             }
-            .accessibilityLabel(speech.state == .listening ? Text("Stop listening") : Text("Speak"))
+            .accessibilityLabel(isListening ? Text("Stop listening") : Text("Speak"))
 
-            if speech.state == .listening {
+            if online {
+                Button { showPhotoConsent = true } label: {
+                    Image(systemName: "camera.circle.fill").font(.system(size: 30))
+                }
+                .accessibilityLabel(Text("Send a photo"))
+            }
+
+            if voice.state == .live {
+                Text("Live conversation. Speak naturally; tap stop to end.")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundStyle(.secondary)
+            } else if voice.state == .connecting {
+                ProgressView().frame(maxWidth: .infinity, alignment: .leading)
+            } else if speech.state == .listening {
                 Text(speech.transcript.isEmpty ? String(localized: "Listening…") : speech.transcript)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundStyle(.secondary)
@@ -226,6 +312,16 @@ struct AssistantConversationView: View {
                 Text("Speech recognition is not available for this language right now.")
                     .font(.footnote).foregroundStyle(.red).offset(y: -24)
             }
+        }
+    }
+
+    private var isListening: Bool { speech.state == .listening || voice.state == .live || voice.state == .connecting }
+
+    private func startListening() {
+        if online {
+            Task { await voice.start(purpose: "assistant", session: session) }
+        } else {
+            Task { await speech.start() }
         }
     }
 

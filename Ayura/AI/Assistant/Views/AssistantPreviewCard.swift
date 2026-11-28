@@ -21,6 +21,26 @@ struct AssistantPreviewCard: View {
                 Text("About \(DietaryUnits.format(kcal.rounded())) kcal, \(DietaryUnits.format((protein * 10).rounded() / 10)) g protein")
                     .font(.footnote)
                     .foregroundStyle(.secondary)
+            } else if case let .constraints(list) = action.payload {
+                // Extracted constraints: the person keeps only what is right.
+                ForEach(list) { c in
+                    HStack {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(c.summary).font(.subheadline)
+                            if let note = c.note, !note.isEmpty {
+                                Text(note).font(.caption).foregroundStyle(.secondary)
+                            }
+                        }
+                        Spacer()
+                        Button { session.removeConstraint(actionID: action.id, constraintID: c.id) } label: {
+                            Image(systemName: "minus.circle")
+                        }
+                        .accessibilityLabel(Text("Remove"))
+                    }
+                }
+                Text("You can change these later in Settings → Dietary constraints.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
             } else {
                 ForEach(action.lines, id: \.self) { line in
                     Text(line).font(.subheadline)

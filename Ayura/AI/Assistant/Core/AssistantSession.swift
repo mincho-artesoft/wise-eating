@@ -93,6 +93,11 @@ final class AssistantSession: ObservableObject {
         sync()
     }
 
+    func removeConstraint(actionID: UUID, constraintID: UUID) {
+        toolbox.removeConstraint(actionID: actionID, constraintID: constraintID)
+        sync()
+    }
+
     func undoLast() async {
         guard let undo = lastUndo else { return }
         let ok = await toolbox.undo(undo)
