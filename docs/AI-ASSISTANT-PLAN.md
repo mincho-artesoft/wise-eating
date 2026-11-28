@@ -353,9 +353,18 @@ Deployed on the owner's go-ahead, on the Germany server (`punch-eu`, 167.233.158
 - checked on the server: health 200, register → wallet, 402 without credits, 401
   without token; the test device was deleted. Other services' health unchanged.
 
-Still missing: the DNS A record `ayura-api.wonek.com`, and `OPENAI_API_KEY` in the env
-file (empty; health reports `openAIConfigured:false`). Apple and App Store Connect
-work is in `docs/CODEX-ASSISTANT-APPLE-SETUP.md`.
+Since then (2026-11-28, Codex and this session): DNS `ayura-api.wonek.com` and HTTPS
+work; the OpenAI key is in the env file (health `openAIConfigured:true`); App Attest
+is enabled for the App ID and the entitlement plus
+`AYURA_ASSISTANT_BACKEND_URL=https://ayura-api.wonek.com` are in the project (583ae1a);
+App Store Server Notifications V2 point to `/api/app-store/notifications` (test
+notifications arrived); the two credit packs exist in App Store Connect as drafts
+(no review screenshots yet; App Store Connect refused a `bg` localization for them).
+DeviceCheck key `GYG7RW3732` is installed on the server; Apple accepts its signed
+requests; `DEVICECHECK_REQUIRED=true` and the welcome credits are on again: a grant
+without a DeviceCheck token is refused (403) and a forged token gets nothing.
+`APP_ATTEST_REQUIRED` stays false until a release built with the entitlement is live.
+Not yet tried: the grant, voice and a sandbox purchase from a real iPhone.
 
 To update later: build the image here, archive it to the Storage Box path above,
 `docker load`, then `docker rm -f ayura-assistant-backend` and the same `docker run`
