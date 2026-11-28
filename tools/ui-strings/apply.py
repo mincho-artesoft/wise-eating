@@ -85,6 +85,12 @@ for name, catalogue in (("Localizable.xcstrings", interface), ("InfoPlist.xcstri
                         ("../AyuraLiveActivityWidget/Localizable.xcstrings", widget)):
     if "--to" in sys.argv:
         name = name.replace("../", "")
-    (target / name).write_text(json.dumps(catalogue, ensure_ascii=False, indent=2,
-                                          separators=(",", ": ")) + "\n")
+    # Xcode rewrites a catalogue as `"key" : value` with no final newline when the
+    # project is opened; keep whichever form the file on disk has, so that the
+    # two do not reformat it back and forth.
+    existing = (target / name).read_text() if (target / name).exists() else ""
+    xcode_style = '"sourceLanguage" : ' in existing
+    text = json.dumps(catalogue, ensure_ascii=False, indent=2,
+                      separators=(",", " : ") if xcode_style else (",", ": "))
+    (target / name).write_text(text if xcode_style and not existing.endswith("\n") else text + "\n")
 print(f"{len(written)} languages written to {target}: {' '.join(written)}")
