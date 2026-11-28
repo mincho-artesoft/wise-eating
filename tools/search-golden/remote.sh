@@ -57,8 +57,9 @@ test)
         xcodebuild test -project 'Ayurveda & Asana Yoga.xcodeproj' -scheme YearlyReviewQA \
         -destination id=$id -derivedDataPath \$HOME/$DIR/dd \
         -only-testing:YearlyReviewTests/FoodSearchGoldenTests \
+        -only-testing:YearlyReviewTests/AssistantToolsTests \
         > \$HOME/$DIR/test.log 2>&1; rc=\$?; \
-        grep -E 'SEARCH_GOLDEN\||SEARCH_BINARY\||SEARCH_YOGA\||SEARCH_NAMES\||error:|Test Case|\*\* TEST' \$HOME/$DIR/test.log | tail -40; exit \$rc"
+        grep -E 'ASSISTANT_RECIPE\||SEARCH_GOLDEN\||SEARCH_BINARY\||SEARCH_YOGA\||SEARCH_NAMES\||error:|XCTAssert|Test Case|\*\* TEST' \$HOME/$DIR/test.log | tail -60; exit \$rc"
     ;;
 pull)
     mkdir -p "$here/out"

@@ -248,6 +248,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Ayurveda &amp; Asana Yoga listens when you tap the microphone, so you can tell the assistant what you ate.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Ayurveda &amp; Asana Yoga turns what you say to the assistant into text, on your device when possible.</string>
 	<key>NSCalendarsFullAccessUsageDescription</key>
 	<string>Ayurveda &amp; Asana Yoga reads and updates your calendar to save your meals, shopping lists, and workouts.</string>
 	<key>NSSupportsLiveActivities</key>

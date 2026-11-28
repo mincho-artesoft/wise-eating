@@ -15,6 +15,16 @@ enum FeatureFlags {
     /// the profile is created.
     static var newPaywall: Bool { isOn("newPaywall") }
 
+    /// The AI button offers Speak / Type / Photo: an assistant that logs what
+    /// was eaten, records dietary constraints and starts the app's generators.
+    /// Off: the AI button starts the day plan as before.
+    static var voiceAssistant: Bool { isOn("voiceAssistant") }
+
+    /// The paid OpenAI engine (Realtime voice, reasoning, photos), through our
+    /// backend. It also stays off while no backend URL is configured
+    /// (`AyuraAssistantBackendURL` in Info.plist, from a build setting).
+    static var openAIAssistant: Bool { isOn("openAIAssistant") }
+
     /// Set once a profile exists. With the new onboarding the consent form
     /// for ads waits for it, so that it does not cover the first screen.
     static var firstRunFinished: Bool {

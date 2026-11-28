@@ -22,6 +22,7 @@ struct SettingsView: View {
     @State private var notificationPermissionLoaded = false
     @State private var notificationsAuthorized = false
     @State private var showingImagePicker = false
+    @State private var constraintsProfileID: UUID?
     @State private var inputImage: UIImage?
     @State private var imageToReplace: UIImage?
     
@@ -39,6 +40,15 @@ struct SettingsView: View {
                         Label("Ad privacy choices", systemImage: "hand.raised")
                     }
                     .disabled(adsConsent.isPreparing)
+                    .padding(.horizontal)
+                }
+
+                if FeatureFlags.voiceAssistant, let profileID = AyurvedaConstitutionStore.activeProfileID ?? profiles.first?.id {
+                    Button {
+                        constraintsProfileID = profileID
+                    } label: {
+                        Label("Dietary constraints", systemImage: "list.bullet.clipboard")
+                    }
                     .padding(.horizontal)
                 }
 
@@ -173,6 +183,13 @@ struct SettingsView: View {
             )
         )
         .foregroundColor(effectManager.currentGlobalAccentColor)
+        .sheet(isPresented: Binding(
+            get: { constraintsProfileID != nil },
+            set: { if !$0 { constraintsProfileID = nil } })) {
+            if let id = constraintsProfileID {
+                NavigationStack { DietaryConstraintsView(profileID: id) }
+            }
+        }
         .sheet(isPresented: $showingImagePicker) {
             ImagePicker(selectedImage: $inputImage)
         }

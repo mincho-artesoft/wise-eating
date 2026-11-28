@@ -22,6 +22,7 @@ struct NutritionsDetailView: View {
     private let aiButtonPositionKey = "floatingAIButtonPosition"
     
     @State private var isShowingDailyAIGenerator = false
+    @State private var isShowingAssistant = false
     @State private var selectedNutrientID: String? = nil
     
     // --- Toast Notification State ---
@@ -275,7 +276,7 @@ struct NutritionsDetailView: View {
                 .overlay {
                     GeometryReader { geometry in
                         Group {
-                            if isAIButtonCurrentlyVisible && GlobalState.aiAvailability != .deviceNotEligible {
+                            if isAIButtonCurrentlyVisible && (FeatureFlags.voiceAssistant || GlobalState.aiAvailability != .deviceNotEligible) {
                                 AIButton(geometry: geometry)
                             }
                             if showAIGenerationToast {
@@ -485,6 +486,22 @@ struct NutritionsDetailView: View {
                 .zIndex(10)
             }
             
+            Color.clear
+                .frame(width: 0, height: 0)
+                .sheet(isPresented: $isShowingAssistant, onDismiss: {
+                    // The assistant writes the day through the calendar; read it back.
+                    loadMeals()
+                }) {
+                    AssistantSheet(
+                        profile: profile,
+                        day: chosenDate,
+                        onMakeDayPlan: {
+                            isShowingAssistant = false
+                            startDailyPlanFromAIButton()
+                        }
+                    )
+                }
+
             if isShowingDailyAIGenerator {
                 AIDailyMealGeneratorView(
                     profile: profile,
@@ -2931,6 +2948,17 @@ struct NutritionsDetailView: View {
         // 2. Snooze на рекламите
         NotificationCenter.default.post(name: .snoozeAds, object: nil)
 
+        // The assistant (speak / type / photo) replaces the direct day-plan
+        // generation; the plan is one of its choices.
+        if FeatureFlags.voiceAssistant {
+            isShowingAssistant = true
+            return
+        }
+
+        startDailyPlanFromAIButton()
+    }
+
+    private func startDailyPlanFromAIButton() {
         // 3. Проверка за наличност на AI (Apple Intelligence статус)
         guard ensureAIAvailableOrShowMessage() else { return }
         
